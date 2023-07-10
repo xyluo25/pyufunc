@@ -8,18 +8,30 @@
 import importlib
 import subprocess
 import sys
+import inspect
 
 
-def import_package(package_name: str, options: list = []) -> object:
+def import_package(package_name: str, options: list = ["--user"]) -> object:
     """import a python package, if not exist, install it and import it again.
+    This function can be used in any package to avoid too much pre-installation of dependencies.
+    In other words, this function will install the package only if it is needed.
+
+    Location:
+        The function defined in pyutilkit/utils.py.
 
     Args:
-        package_name (str): the package name
+        package_name (str): the package name, eg: "numpy" or "numpy==1.19.5".
         options (list, optional): the installation optional inputs,
-            eg: "--user",'--force-reinstall', '--ignore-installed'. Defaults to [].
+            eg: '--force-reinstall', '--ignore-installed'. Defaults to ["--user"].
 
     Returns:
         object: the imported package
+
+    Examples:
+        >>> numpy = import_package("numpy")
+            :Package numpy not existed in current env, install and re-import...
+        >>> numpy = import_package("numpy==1.19.5")
+            :Package numpy==1.19.5 not existed in current env, install and re-import...
     """
 
     try:
@@ -29,8 +41,9 @@ def import_package(package_name: str, options: list = []) -> object:
         # install package into current environment
         outputs = []
         try:
+            print(f"    :{package_name} not existed in current env, install and re-import...")
             all_args = [sys.executable, '-m', 'pip',
-                        'install', '--user', *options, package_name]
+                        'install', *options, package_name]
 
             result = subprocess.run(
                 all_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -51,3 +64,8 @@ def import_package(package_name: str, options: list = []) -> object:
 
         module = importlib.import_module(package_name)
     return module
+
+
+# list all user-defined functions in a module
+def list_functions(module):
+    return [[name, obj] for name, obj in inspect.getmembers(module) if inspect.isfunction(obj)]
