@@ -1,8 +1,8 @@
-# pyUtilKit
+# pyutilfunc
 
-Welcome to pyutilkit, your go-to Python package for a wide array of frequently used utility functions. Simplify your coding experience with this powerful toolkit, meticulously designed to enhance your productivity and streamline your development process. Whether you're a seasoned developer or just starting with Python, pyutilkit provides a curated collection of utilities that cater to your everyday programming needs.
+Welcome to pyutilfunc, your go-to Python package for a wide array of frequently used utility functions. Simplify your coding experience with this powerful toolkit, meticulously designed to enhance your productivity and streamline your development process. Whether you're a seasoned developer or just starting with Python, pyutilkit provides a curated collection of utilities that cater to your everyday programming needs.
 
-pyutilkit aims to bring together the most commonly used utility functions from different libraries and provide them in a single, cohesive package. By consolidating utility functions from multiple sources, pyutilkit simplifies the process of finding and integrating various utility libraries into your projects. It provides a centralized resource for accessing a diverse set of utility functions, ultimately saving time and effort.
+pyutilfunc aims to bring together the most commonly used utility functions from different libraries and provide them in a single, cohesive package. By consolidating utility functions from multiple sources, pyutilfunc simplifies the process of finding and integrating various utility libraries into your projects. It provides a centralized resource for accessing a diverse set of utility functions, ultimately saving time and effort.
 
 **Key Features:**
 
@@ -12,17 +12,17 @@ pyutilkit aims to bring together the most commonly used utility functions from d
 4. **Regular Updates and Maintenance:** Our team is dedicated to providing regular updates, ensuring that pyutilkit remains compatible with the latest Python releases and industry best practices. We actively welcome community feedback and continually refine the package to meet developers' evolving requirements.
 5. **Time and Effort Savings:** With pyutilkit, you can avoid reinventing the wheel by leveraging pre-existing, widely used utility functions. This saves you time and effort in writing custom utility functions and allows you to focus on the core aspects of your project.
 
-Let pyutilkit take care of the repetitive tasks while you focus on building remarkable Python applications. Empower your projects with the efficiency and elegance that comes with pyutilkit - your all-inclusive Python utility toolkit. Happy coding!
+Let pyutilfunc take care of the repetitive tasks while you focus on building remarkable Python applications. Empower your projects with the efficiency and elegance that comes with pyutilfunc - your all-inclusive Python utility toolkit. Happy coding!
 
 
-No Extra dependencies will be installed to your enviroment unless use some functions the need certain dependency, the function will automatically install required package when you use the function.
+No Extra dependencies will be installed to your enviroment unless use some functions that need certain dependency, the function will automatically install required package when you use the function.
 
 
 **Community and Support:**
 
 We welcome and encourage developers to contribute their valuable utility functions to pyutilkit by submitting pull requests on our GitHub repository, helping to enrich the package and benefit the wider Python community.
 
-Join the vibrant community of pyutilkit users for collaboration, support, and knowledge sharing. We welcome and encourage developers to contribute their valuable utility functions to pyutilkit by submitting pull requests on [our GitHub repository](https://github.com/xyluo25/pyUtilKit), helping to enrich the package and benefit the wider Python community. For further assistance, reach out to our dedicated support team via email: luoxiangyong01@gmail.com.
+Join the vibrant community of pyutilkit users for collaboration, support, and knowledge sharing. We welcome and encourage developers to contribute their valuable utility functions to pyutilkit by submitting pull requests on [our GitHub repository](https://github.com/xyluo25/pyutilfunc), helping to enrich the package and benefit the wider Python community. For further assistance, reach out to our dedicated support team via email: luoxiangyong01@gmail.com.
 
 **Comprehensive Overview of Utility Function-Related Packages**
 
