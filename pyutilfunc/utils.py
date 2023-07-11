@@ -5,10 +5,13 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
+import secrets
+import string
 import importlib
 import subprocess
 import sys
 import inspect
+import datetime
 
 
 def import_package(package_name: str, options: list = ["--user"]) -> object:
@@ -28,6 +31,8 @@ def import_package(package_name: str, options: list = ["--user"]) -> object:
         object: the imported package
 
     Examples:
+        >>> numpy = import_package("numpy")
+
         >>> numpy = import_package("numpy")
             :Package numpy not existed in current env, install and re-import...
         >>> numpy = import_package("numpy==1.19.5")
@@ -67,5 +72,61 @@ def import_package(package_name: str, options: list = ["--user"]) -> object:
 
 
 # list all user-defined functions in a module
-def list_functions(module):
+def get_user_defined_func(module: object) -> list:
+    print([[name, obj] for name, obj in inspect.getmembers(sys.modules[__name__]) if inspect.isfunction(obj)])
     return [[name, obj] for name, obj in inspect.getmembers(module) if inspect.isfunction(obj)]
+
+
+def func_running_time(func: object) -> object:
+    """A decorator to measure the time of a function or class method.
+    It is useful to use this function in test, debug, logging and running time measurement.
+
+    Location:
+        The function defined in pyutilkit/utils.py.
+
+    Args:
+        func (object): the function or class method to be measured.
+
+    Returns:
+        object: the decorated function or class method.
+
+    Examples:
+        >>> @func_running_time
+            def func():
+                print("main function...)
+                time.sleep(3)
+                return
+
+        >>> func()
+            INFO Begin to run function: func …
+            main function...
+            INFO Finished running function: func, total: 3s
+    """
+
+    def inner(*args, **kwargs):
+        print(f'INFO Begin to run function: {func.__name__} …')
+        time_start = datetime.datetime.now()
+        res = func(*args, **kwargs)
+        time_diff = datetime.datetime.now() - time_start
+        print(
+            f'INFO Finished running function: {func.__name__}, total: {time_diff.seconds}s')
+        print()
+        return res
+
+    return inner
+
+
+# TODO multiple processor decorator
+
+
+def generate_password(usr_name: str, pwd_len: int = 15) -> dict:
+    while True:
+        password = ''.join(
+            secrets.choice(string.printable) for _ in range(pwd_len)
+        )
+
+        if (any(c.islower() for c in password)
+                and any(c.isupper() for c in password)
+                and sum(c.isdigit() for c in password) >= 3):
+            break
+    return {usr_name: password}
