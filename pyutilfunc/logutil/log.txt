@@ -1,0 +1,23 @@
+2023-07-12 14:57:52,687 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 14:57:52,687 - add_numbers - INFO - Function add_numbers returned: 7
+2023-07-12 14:58:25,482 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 14:58:25,482 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 14:58:25,483 - add_numbers - INFO - Function add_numbers returned: 7
+2023-07-12 14:58:25,483 - add_numbers - INFO - Function add_numbers returned: 7
+2023-07-12 14:59:10,830 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 14:59:10,830 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 14:59:10,830 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 14:59:10,832 - add_numbers - INFO - Function add_numbers returned: 7
+2023-07-12 14:59:10,832 - add_numbers - INFO - Function add_numbers returned: 7
+2023-07-12 14:59:10,832 - add_numbers - INFO - Function add_numbers returned: 7
+2023-07-12 14:59:51,353 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 14:59:51,353 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 14:59:51,353 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 14:59:51,353 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 15:00:22,183 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 15:00:22,183 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 15:00:22,183 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 15:00:22,183 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 15:00:22,183 - add_numbers - INFO - Function add_numbers called with args: (3, 4), kwargs: {}
+2023-07-12 15:06:11,298 - divide_numbers - INFO - Function divide_numbers called with args: (10, 0), kwargs: {}
+2023-07-12 15:06:11,301 - divide_numbers - ERROR - Exception in function divide_numbers: division by zero

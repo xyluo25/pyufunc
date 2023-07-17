@@ -5,12 +5,16 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-
+from __future__ import absolute_import
+from pathlib import Path
 import logging
 import datetime
 import os
 import sys
+from functools import wraps
 
+from pyutilfunc.pathio.pathutils import path2linux
+from pyutilfunc.pkg_config import LOGGING_FOLDER
 
 import datetime
 import logging
@@ -25,7 +29,7 @@ from email.mime.text import MIMEText
 
 # sys.path.append(r"../../logs/")
 
-def log_writter(path:str=f"../../syslogs/",info:str="",warning:str="",error:str="",debug: str="",critical: set="") -> None:
+def log_writer1(path:str=f"../../syslogs/",info:str="",warning:str="",error:str="",debug: str="",critical: set="") -> None:
     """A function tool to track log info
 
     Args:
@@ -51,10 +55,10 @@ def log_writter(path:str=f"../../syslogs/",info:str="",warning:str="",error:str=
         raise Exception("Invalid input, critical type...")
 
 
-    __filename = os.path.join(path,"log_%s.log"%datetime.datetime.today().strftime("%Y_%m_%d"))
+    __filename = os.path.join(path,"log_%s.log"%datetime.datetime.today().strftime("%Y-%m-%d"))
 
     # datetime,python file name, logging level, message
-    logging.basicConfig(filename=__filename,format='%(asctime)s %(name)s %(levelname)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',level=logging.DEBUG)
+    logging.basicConfig(filename=__filename,format='%(asctime)s %(name)s %(levelname)s: %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p',level=logging.DEBUG)
 
     if info:
         logging.info(info)
@@ -66,6 +70,63 @@ def log_writter(path:str=f"../../syslogs/",info:str="",warning:str="",error:str=
         logging.debug(debug)
     if critical:
         logging.critical(critical)
+
+
+def print_and_log(*args, log_level="info", **kwargs):
+
+    kwargs_new = {}
+    kwargs_unknown = []
+    for key, value in kwargs.items():
+        # standard print kwargs
+        if key in ["sep", "end", "file", "flush"]:
+            kwargs_new[key] = value
+        # non-standard print kwargs
+        else:
+            kwargs_unknown.append(f"{key}={value}")
+
+    print(*args, kwargs_unknown, **kwargs_new)
+
+    if log_level.lower() == "info":
+        logging.info(*args)
+    elif log_level.lower() == "warning":
+        logging.warning(*args)
+    elif log_level.lower() == "error":
+        logging.error(*args)
+    elif log_level.lower() == "debug":
+        logging.debug(*args)
+    elif log_level.lower() == "critical":
+        logging.critical(*args)
+    else:
+        print(" :info, invalid log level, message will not be logged...")
+
+
+def log_writer(func, log_dir: str | Path = LOGGING_FOLDER) -> None:
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        # covert log_dir to absolute path for all OSes
+        log_dir_abs = path2linux(log_dir)
+
+        # create log folder if not exist
+        if not os.path.isdir(log_dir_abs):
+            os.makedirs(log_dir_abs, exist_ok=True)
+
+        # create log file using current date
+        __filename = path2linux(
+            os.path.join(log_dir_abs,
+                         f'{datetime.datetime.now().strftime("%Y_%m_%d")}.log'))
+
+        print("filename:", __filename)
+        logging.basicConfig(filename=__filename,
+                            format='%(asctime)s %(name)s %(levelname)s: %(message)s',
+                            datefmt='%m/%d/%Y %I:%M:%S %p',
+                            level=logging.DEBUG)
+
+        res = func(*args, **kwargs)
+
+        return res
+
+    return wrapper
 
 
 # this function will track error message from log file
@@ -165,6 +226,6 @@ class LogErrorAlert:
                 print('Successfully send the email')
 
         except Exception as e:
-            log_writter(error=str(e))
+            log_writer(error=str(e))
             print("error", e)
             exit(0)

@@ -4,5 +4,3 @@
 # Contact Info: luoxiangyong01@gmail.com
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
-
-from pyutilkit.pathio.pathutils import *
