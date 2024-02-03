@@ -12,7 +12,7 @@ from .pkg_config import *
 from .pkg_utils import *
 from .util_log import *
 
-from pyutilfunc.logutil.loga import Loga
+from pyufunc.util_log.loga import Loga
 
 
 if IS_LOG:

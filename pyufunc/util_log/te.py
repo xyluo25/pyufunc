@@ -11,9 +11,9 @@ from functools import partial, wraps
 import logging
 import datetime
 
-from pyutilfunc.pathio.pathutils import path2linux
-from pyutilfunc.pkg_config import LOGGING_FOLDER
-from pyutilfunc.logutil.log_config import LOG_FORMATTER
+from pyufunc.util_pathio.pathutils import path2linux
+from pyufunc.pkg_config import LOGGING_FOLDER
+from pyufunc.util_log.log_config import LOG_FORMATTER
 import os
 
 

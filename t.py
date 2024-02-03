@@ -9,10 +9,10 @@
 from __future__ import absolute_import
 from pathlib import Path
 
-import pyutilfunc as uf
-import pyutilfunc.pathio as pio
+import pyufunc as uf
+import pyufunc.util_pathio as pio
 
-from pyutilfunc.logutil.te import log_writer2
+from pyufunc.util_log.te import log_writer2
 import os
 
 
