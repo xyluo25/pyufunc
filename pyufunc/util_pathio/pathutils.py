@@ -220,7 +220,7 @@ def check_filename(filename: str | Path, suffix_num: int = 1) -> str:
     # if the file exist, return the file name with suffix number added by 1
     if os.path.exists(filename_abspath):
         filename_update = f"{file_without_suffix}({suffix_num}).{file_suffix}"
-        return validate_filename(filename_update, suffix_num + 1)
+        return check_filename(filename_update, suffix_num + 1)
 
     # if the file does not exist, return the same file name
     return filename_abspath
