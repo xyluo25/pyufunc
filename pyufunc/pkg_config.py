@@ -6,12 +6,12 @@
 ##############################################################
 
 import os
-from pyutilfunc.pathio.pathutils import path2linux
+from pyufunc.util_pathio.pathutils import path2linux
 
 
 # **** Package Info **** #
 _version = "0.0.1"
-_name = "pyutilfunc"
+_name = "pyufunc"
 _author = "Mr. Xiangyong Luo"
 _email = "luoxiangyong01@gmail.com"
 

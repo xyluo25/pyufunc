@@ -10,7 +10,7 @@ from __future__ import absolute_import
 
 from .pkg_config import *
 from .pkg_utils import *
-from .logutil import *
+from .util_log import *
 
 from pyutilfunc.logutil.loga import Loga
 

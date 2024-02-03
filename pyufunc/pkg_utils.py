@@ -133,7 +133,8 @@ def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
         list: a list of user-defined functions in the module.
 
     Examples:
-        >>> get_user_defined_func()
+        >>> import ufunc as uf
+        >>> uf.get_user_defined_func()
         ['func_running_time', 'generate_password', 'import_package', 'get_user_defined_func']
     """
 

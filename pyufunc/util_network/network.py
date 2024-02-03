@@ -24,6 +24,7 @@ def get_host_ip():
 
 computer_ip, computer_name = get_host_ip()
 
+
 def validate_url(url):
     import re
     if re.match(r'^https?:/{2}\w.+$', url):
