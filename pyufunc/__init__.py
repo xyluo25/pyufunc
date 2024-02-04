@@ -26,11 +26,12 @@ from .util_test import *  # test functions
 from .util_vis import *  # visualization functions
 
 # import package configurations and utilities
-from .pkg_config import *
+from .pkg_configs import *
 from .pkg_utils import *
 
 from pyufunc.util_log.loga import Loga
 
+print(f"pyufunc: {pkg_version}")
 
 if IS_LOG:
     print(f"    :Logging is enabled, please check the log file in folder: {LOGGING_FOLDER}")
@@ -74,5 +75,9 @@ __all__ = [
     # util_test
 
     # util_vis
+
+    # pkg_configs
+
+    # pkg_utils
 
 ]
