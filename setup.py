@@ -6,73 +6,61 @@
 ##############################################################
 
 
-from pathlib import Path
-from setuptools import setup, find_packages
-import os
 import pyufunc as uf
+import setuptools
 
+with open("README_pkg.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
-install_requires = [
-    'pymongo==4.3.3',
-    'tomorrow3==1.1.0',
-    'concurrent-log-handler==0.9.23',
-    'elasticsearch',
-    'kafka-python==2.0.2',
-    'requests',
-    'flask',
-    'python-json-logger==0.1.10',
-    'nb_filelock',
-    'service-identity',
-    'deprecated',
-    'chained_mode_time_tool',
-]
+try:
+    # if have requirements.txt file inside the folder
+    with open("requirements.txt", "r", encoding="utf-8") as f:
+        modules_needed = [i.strip() for i in f.readlines()]
+except Exception:
+    modules_needed = []
 
-if os.name == 'nt':
-    install_requires.append('pywin32')
+setuptools.setup(
+    name=uf.pkg_name,  # Replace with your own username
+    version=uf.pkg_version,
+    author=uf.pkg_author,
+    author_email=uf.pkg_email,
 
-setup(
-    name='nb_log',  #
-    version="9.7",
-    description=(
-        'very sharp color display,monkey patch bulitin print  and high-performance multiprocess safe roating file handler,other handlers includeing dintalk ,email,kafka,elastic and so on '
-    ),
-    keywords=["logging", "logger",
-              "multiprocess file handler", "color handler"],
+    keywords=["utility functions", "utility", "functions", "common functions", "common utility functions"]
+    description="A tool for generating zone-to-zone travel demand based on grid zones and gravity model",
+
+    long_description=long_description,
     long_description_content_type="text/markdown",
-    long_description=open("README.md", 'r', encoding='utf8').read(),
-    url='https://github.com/ydf0509/nb_log',
-    # data_files=[filepath],
-    author='bfzs',
-    author_email='ydf0509@sohu.com',
-    maintainer='ydf',
-    maintainer_email='ydf0509@sohu.com',
-    license='BSD License',
-    packages=find_packages(),
-    include_package_data=True,
-    platforms=["all"],
+    url="https://github.com/xyluo25/pyufunc",
+
     classifiers=[
-        'Development Status :: 4 - Beta',
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: Apache Software License",
         'Operating System :: OS Independent',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python',
         'Programming Language :: Python :: Implementation',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.10',
         'Topic :: Software Development :: Libraries'
     ],
-    install_requires=install_requires
+    python_requires='>=3.10',
+    install_requires=modules_needed,
+
+    packages=setuptools.find_packages(),
+    include_package_data=True,
+    package_data={'': ['*.txt', '*.xls', '*.xlsx', '*.csv'],
+                  "test_data": ['*.xls']},
+    project_urls={
+        'Homepage': "https://github.com/xyluo25/pyufunc",
+        # 'Documentation': 'https://github.com/asu-trans-ai-lab/grid2demand',
+        # 'Bug Tracker': '',
+        # 'Source Code': '',
+        # 'Download': '',
+        # 'Publication': '',
+        # 'Citation': '',
+        # 'License': '',
+        # 'Acknowledgement': '',
+        # 'FAQs': '',
+        # 'Contact': '',
+    },
+    platforms=["all"],
+    license='Apache License 2.0',
 )
-"""
-打包上传
-python setup.py sdist upload -r pypi
-
-
-
-python setup.py sdist & twine upload dist/nb_log-6.0.tar.gz
-python setup.py sdist & python -m  twine upload dist/nb_log-9.7.tar.gz
-
-twine upload dist/*
-
-
-python -m pip install nb_log --upgrade -i https://pypi.org/simple   # 及时的方式，不用等待 阿里云 豆瓣 同步
-"""
