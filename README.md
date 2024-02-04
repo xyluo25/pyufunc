@@ -14,7 +14,16 @@ pyufunc aims to bring together the most commonly used utility functions from dif
 
 Let pyufunc take care of the repetitive tasks while you focus on building remarkable Python applications. Empower your projects with the efficiency and elegance that comes with pyufunc - your all-inclusive Python utility toolkit. Happy coding!
 
-No Extra dependencies will be installed to your enviroment unless use some functions that need certain dependency, the function will automatically install required package when you use the function.
+No Extra dependencies will be installed to your environment unless use some functions that need certain dependency, the function will automatically install required package when you use the function.
+
+**Keywords Explanation**
+
+valid
+get
+check
+validate
+
+
 
 **Community and Support:**
 
@@ -29,3 +38,6 @@ Join the vibrant community of pyutilkit users for collaboration, support, and kn
 | pyutil       |                | File manipulation<br />string operations, <br />math functions, <br />data structure manipulation, <br />logging utilities |                      |           |          |  |  |
 |              |                |                                                                                                                            |                      |           |          |  |  |
 |              |                |                                                                                                                            |                      |           |          |  |  |
+
+ACKNOWLEDGMENT
+This open-source package is supported by Nations Science Foundation grant.

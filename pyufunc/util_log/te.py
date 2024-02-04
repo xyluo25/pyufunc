@@ -11,7 +11,7 @@ from functools import partial, wraps
 import logging
 import datetime
 
-from pyufunc.util_pathio.pathutils import path2linux
+from pyufunc.util_pathio._path import path2linux
 from pyufunc.pkg_config import LOGGING_FOLDER
 from pyufunc.util_log.log_config import LOG_FORMATTER
 import os

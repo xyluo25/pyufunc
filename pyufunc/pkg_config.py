@@ -6,7 +6,7 @@
 ##############################################################
 
 import os
-from pyufunc.util_pathio.pathutils import path2linux
+from pyufunc.util_pathio._path import path2linux
 
 
 # **** Package Info **** #

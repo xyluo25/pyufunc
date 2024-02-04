@@ -160,4 +160,8 @@ cython_debug/
 #.idea/
 
 *.mhtml
-.vscode/*
+*.vscode/*
+*/.vscode/*
+
+# for local testing
+te.py
