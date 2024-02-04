@@ -9,6 +9,7 @@
 from __future__ import absolute_import
 
 # import all modules
+from .util_ai import *  # machine learning functions
 from .util_common import *  # unclassified functions are here
 from .util_data_processing import *  # data processing functions including algorithms
 from .util_datetime import *  # datetime functions
@@ -23,8 +24,6 @@ from .util_optimization import *  # optimization functions
 from .util_pathio import *  # path and IO functions
 from .util_test import *  # test functions
 from .util_vis import *  # visualization functions
-from .util_fullstack import *  # web functions
-from .util_ai import *  # machine learning functions
 
 # import package configurations and utilities
 from .pkg_config import *
@@ -43,3 +42,37 @@ loga = Loga(
     do_write=True,  # write each log to file
     logfile="mylog.txt",  # custom path to logfile
 )
+
+
+__all__ = [
+    # util_ai
+
+    # util_common
+
+    # util_data_processing
+
+    # util_datetime
+
+    # util_fullstack
+
+    # util_geo
+
+    # util_git_pypi
+
+    # util_gui
+
+    # util_log
+
+    # util_network
+
+    # util_office
+
+    # util_optimization
+
+    # util_pathio
+
+    # util_test
+
+    # util_vis
+
+]

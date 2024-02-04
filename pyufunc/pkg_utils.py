@@ -138,6 +138,10 @@ def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
         ['func_running_time', 'generate_password', 'import_package', 'get_user_defined_func']
     """
 
+    # check if the model is a module
+    if not inspect.ismodule(module):
+        raise ValueError("The input is not a module.")
+
     # get all functions in the module
     func_all = [[name, obj] for name, obj in inspect.getmembers(
         module) if inspect.isfunction(obj)]
