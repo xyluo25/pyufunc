@@ -12,7 +12,7 @@ from __future__ import absolute_import
 from .util_common import *  # unclassified functions are here
 from .util_data_processing import *  # data processing functions including algorithms
 from .util_datetime import *  # datetime functions
-from .util_db import *  # database functions
+from .util_fullstack import *  # fullstack functions, including front end and back end
 from .util_geo import *  # geographic functions
 from .util_git_pypi import *  # git and pypi functions
 from .util_gui import *  # GUI functions
@@ -23,7 +23,7 @@ from .util_optimization import *  # optimization functions
 from .util_pathio import *  # path and IO functions
 from .util_test import *  # test functions
 from .util_vis import *  # visualization functions
-from .util_web import *  # web functions
+from .util_fullstack import *  # web functions
 from .util_ai import *  # machine learning functions
 
 # import package configurations and utilities

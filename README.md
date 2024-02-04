@@ -18,10 +18,11 @@ No Extra dependencies will be installed to your environment unless use some func
 
 **Keywords Explanation**
 
-valid
-get
-check
-validate
+valid_
+get_
+check_
+validate_
+is_    # return bool type
 
 
 
