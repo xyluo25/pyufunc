@@ -11,4 +11,14 @@ from ._path import (path2linux, path2uniform)
 from ._platform import *
 
 
-__all__ = ['path2linux', 'path2uniform']
+__all__ = [
+    # argparse
+
+    # io
+
+    # path
+    'path2linux', 'path2uniform',
+
+    # platform
+
+]
