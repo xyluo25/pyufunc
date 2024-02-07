@@ -25,7 +25,7 @@ setuptools.setup(
     author=uf.pkg_author,
     author_email=uf.pkg_email,
 
-    keywords=["utility functions", "utility", "functions", "common functions", "common utility functions"]
+    keywords=["utility functions", "utility", "functions", "common functions", "common utility functions"],
     description="A tool for generating zone-to-zone travel demand based on grid zones and gravity model",
 
     long_description=long_description,

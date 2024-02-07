@@ -6,6 +6,8 @@
 ##############################################################
 
 from pyufunc.util_pathio._path import path2linux
+import os
+import sys
 
 
 def get_file_size(filename: str, unit: str = "kb") -> str:

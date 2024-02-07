@@ -25,7 +25,7 @@ def check_platform() -> str:
     """
 
     import platform
-    return platform.system()
+    return "MacOS" if platform.system() == "Darwin" else platform.system()
 
 
 # Windows

@@ -19,7 +19,7 @@ def generate_password(pwd_len: int = 15, lowercase: bool = True,
     """Generate a random password with given length and character types.
 
     Location:
-        The function defined in pyutilfunc/utils.py.
+        The function defined in pyufunc/util_common/_password_generator.py.
 
     Args:
         pwd_len (int, optional): total length of password. Defaults to 15.

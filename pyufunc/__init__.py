@@ -29,7 +29,7 @@ from .util_vis import *  # visualization functions
 from .pkg_configs import *
 from .pkg_utils import *
 
-from pyufunc.util_log.loga import Loga
+# from pyufunc.util_log.loga import Loga
 
 print(f"pyufunc: {pkg_version}")
 
@@ -38,11 +38,11 @@ if IS_LOG:
     print("    :If you want to disable logging, please add pyutilfunc.IS_LOG = False in your code.")
 
 
-loga = Loga(
-    do_print=True,  # print each log to console
-    do_write=True,  # write each log to file
-    logfile="mylog.txt",  # custom path to logfile
-)
+# loga = Loga(
+#     do_print=True,  # print each log to console
+#     do_write=True,  # write each log to file
+#     logfile="mylog.txt",  # custom path to logfile
+# )
 
 
 __all__ = [

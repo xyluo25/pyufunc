@@ -13,6 +13,12 @@ import inspect
 import datetime
 from functools import wraps
 
+__all__ = ["import_package",
+           "func_running_time",
+           "get_user_defined_func",
+           "is_user_defined_func"]
+
+
 """TODO
 a decorator to run function in multiple processors
 a decorator to run function in multiple threads
@@ -122,9 +128,6 @@ def func_running_time(func: object) -> object:
 def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
     """list all user-defined functions in a module.
 
-    Location:
-        The function defined in pyutilfunc/utils.py
-
     Args:
         module (object, optional): the module name. Defaults to sys.modules[__name__].
 
@@ -137,21 +140,57 @@ def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
         ['func_running_time', 'generate_password', 'import_package', 'get_user_defined_func']
     """
 
-    # check if the model is a module
+    # Step 1: check if the model is a module
     if not inspect.ismodule(module):
         raise ValueError("The input is not a module.")
 
-    # get all functions in the module
-    func_all = [[name, obj] for name, obj in inspect.getmembers(
-        module) if inspect.isfunction(obj)]
+    # Step 2: list all attributes in the module
+    all_func = dir(module)
+    user_defined_func = []
+    # Step 3: filter the user-defined functions
+    for func_name in all_func:
+        obj = getattr(module, func_name)
+        if inspect.isfunction(obj):
+            user_defined_func.append(func_name)
+        # if inspect.ismodule(obj):
+        #     get_user_defined_func(obj, pre_defined_func)
 
-    # filter out the functions defined in the module
-    func_filtered = list(filter(lambda x: (
-        x[1].__module__ == module.__name__ and not x[0].startswith("__")), func_all))
-    return [func[0] for func in func_filtered]
+    return list(set(user_defined_func))
 
 
+def is_user_defined_func(func_obj: object) -> bool:
+    """Check if a function is user-defined.
 
+    Args:
+        func_obj (object): the function object.
 
+    Returns:
+        bool: True if the function is user-defined, False otherwise.
 
-__all__ = get_user_defined_func()
+    Examples:
+        >>> import ufunc as uf
+        >>> uf.is_user_defined_func(uf.func_running_time)
+        True
+
+        >>> uf.is_user_defined_func(os.path.join)
+        False
+    """
+
+    try:
+        # Try to get the file where the function is defined
+        func_file = inspect.getfile(func_obj)
+    except TypeError:
+        # This might happen if it's a built-in function or built-in method, which are not user-defined
+        return False
+    except Exception as e:
+        # Handle other possible exceptions, such as the function being a built-in method of a built-in type
+        print(f"Error determining if function is user-defined: {e}")
+        return False
+
+    # Check if the function is defined in the script's main file or a user-defined module
+    # This is a simple check and might need to be adjusted based on your project structure
+    if "site-packages" in func_file or "python" in func_file.lower():
+        # The function is likely imported from an installed package or the standard library
+        return False
+
+    return True  # The function is likely user-defined
