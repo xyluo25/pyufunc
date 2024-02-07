@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+Tutorial_PyPI.md
+.pypirc
 
 # C extensions
 *.so
