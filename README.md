@@ -86,8 +86,8 @@ We welcome and encourage developers to contribute their valuable utility functio
 
 Small improvements or fixes are always appreciated. If you are considering larger contributions to the source code, please contact us through email:
 
-- Xiangyong Luo: [luoxiangyong01@gmail.com](luoxiangyong01@gmail.com)
-- Dr. Xuesong Simon Zhou: [xzhou74@asu.edu](xzhou74@asu.edu)
+- Xiangyong Luo: [luoxiangyong01@gmail.com](mailto:luoxiangyong01@gmail.com)
+- Dr. Xuesong Simon Zhou: [xzhou74@asu.edu](mailto:xzhou74@asu.edu)
 
 Writing code isn't the only way to contribute to pyufunc. You can also:
 
@@ -114,4 +114,4 @@ For more information about the ways you can contribute to utdf2gmns, visit [Pyuf
 
 This open-source package is supported by National Science Foundation under grant no. TIP-2303748 titled, "CONNECT: Consortium of Open-source Planning Models for Next-generation Equitable and Efficient Communities and Transportation"
 
-Thank you to everyone who has contributed to the list of packages mentioned above. Your contributions have significantly enriched our open-source community. If any code violates your licensing agreements, please don't hesitate to [contact me](luoxiangyong01@gmail.com).
+Thank you to everyone who has contributed to the list of packages mentioned above. Your contributions have significantly enriched our open-source community. If any code violates your licensing agreements, please don't hesitate to [contact me](mailto:luoxiangyong01@gmail.com).
