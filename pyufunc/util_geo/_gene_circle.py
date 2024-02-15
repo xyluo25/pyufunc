@@ -125,7 +125,7 @@ def point_to_circle(center: list[float, float],
         [111.9356, 33.42434831528412]]}
 
     """
-
+    print(" :Info: the unit in point_to_circle is meter.")
     # the default earth radius in meters
     DEFAULT_EARTH_RADIUS = 6378137
 
