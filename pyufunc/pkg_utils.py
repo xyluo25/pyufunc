@@ -12,11 +12,14 @@ import sys
 import inspect
 import datetime
 from functools import wraps
+import copy
 
 __all__ = ["import_package",
            "func_running_time",
            "get_user_defined_func",
-           "is_user_defined_func"]
+           "is_user_defined_func",
+           "is_module_importable",
+           "requires"]
 
 
 """TODO
@@ -47,9 +50,9 @@ def import_package(package_name: str, options: list = ["--user"]) -> object:
         >>> numpy = import_package("numpy") # equal to "import numpy as numpy"
 
         >>> numpy = import_package("numpy")
-            :Package numpy not existed in current env, install and re-import...
+            :Package numpy not existed in current env, install the package first and import again...
         >>> numpy = import_package("numpy==1.19.5")
-            :Package numpy==1.19.5 not existed in current env, install and re-import...
+            :Package numpy==1.19.5 not existed in current env, install the package first and import again...
     """
 
     try:
@@ -59,7 +62,7 @@ def import_package(package_name: str, options: list = ["--user"]) -> object:
         # install package into current environment
         outputs = []
         try:
-            print(f"    :{package_name} not existed in current env, install and re-import...")
+            print(f"    :{package_name} not existed in current env, install the package first and import again...")
             all_args = [sys.executable, '-m', 'pip',
                         'install', *options, package_name]
 
@@ -74,6 +77,7 @@ def import_package(package_name: str, options: list = ["--user"]) -> object:
 
         # if install failed, print the error message
         except Exception as e:
+            print("    :Error: failed to install the package.")
             if len(outputs) == 2:
                 [print(output, end='') for output in outputs]
             else:
@@ -194,3 +198,73 @@ def is_user_defined_func(func_obj: object) -> bool:
         return False
 
     return True  # The function is likely user-defined
+
+
+def is_module_importable(module_name: str) -> bool:
+    """Safely import a module and return a boolean. If the module is not importable, return False.
+
+    Args:
+        modname (str): the module name to import.
+
+    Returns:
+        bool: True if the module is importable, False otherwise.
+
+    Note:
+        This function is useful to check if a module is installed in the current environment.
+
+    Examples:
+
+    """
+
+    try:
+        exec(f"import {module_name}")
+        is_importable = True
+    except ImportError:
+        is_importable = False
+
+    return is_importable
+
+
+def requires(*args, **kwargs) -> object:
+    """A decorator to wrap functions with extra dependencies. If the dependencies are not available, the function will not run.
+
+    Returns:
+        object: the decorated function.
+
+    Examples:
+        # Example 1: the function will not run if the dependencies are not available
+        >>> @requires("numpy", "pandas", "unknown_module")
+            def my_function():
+                return "I'm running!"
+        >>> my_function()
+            Error: missing dependencies: ['numpy', 'pandas'], please install them first.
+            not running the function: my_function
+
+        # Example 2: the function will run if the dependencies are available
+        >>> @requires("numpy", "pandas")
+            def my_function():
+                return "I'm running!"
+        >>> my_function()
+            "I'm running!"
+
+    """
+
+    v = kwargs.pop("verbose", True)
+    wanted = copy.deepcopy(args)
+
+    def inner(function):
+        available = [is_module_importable(arg) for arg in args]
+        if all(available):
+            return function
+        else:
+            def passer(*args, **kwargs):
+                if v:
+                    missing = [arg for i, arg in enumerate(wanted) if not available[i]]
+                    print(f"Error: missing dependencies: {missing}, please install them first.")
+                    print(f"not running the function: {function.__name__}")
+                else:
+                    pass
+
+            return passer
+
+    return inner
