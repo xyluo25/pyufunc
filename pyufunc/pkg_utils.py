@@ -30,7 +30,7 @@ a decorator to run function in multiple threads
 """
 
 
-def import_package(package_name: str, options: list = ["--user"]) -> object:
+def import_package(pkg_name: str, options: list = ["--user"]) -> object:
     """import a python package, if not exist, install it and import it again.
     This function can be used in any package to avoid too much pre-installation of dependencies.
     In other words, this function will install the package only if it is needed.
@@ -57,14 +57,14 @@ def import_package(package_name: str, options: list = ["--user"]) -> object:
 
     try:
         # import package from current environment
-        module = importlib.import_module(package_name)
+        module = importlib.import_module(pkg_name)
     except ImportError:
         # install package into current environment
         outputs = []
         try:
-            print(f"    :{package_name} not existed in current env, install the package first and import again...")
+            print(f"    :{pkg_name} not existed in current env, install the package first and import again...")
             all_args = [sys.executable, '-m', 'pip',
-                        'install', *options, package_name]
+                        'install', *options, pkg_name]
 
             result = subprocess.run(
                 all_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -85,7 +85,7 @@ def import_package(package_name: str, options: list = ["--user"]) -> object:
             return
 
         # import package from current environment after installation
-        module = importlib.import_module(package_name)
+        module = importlib.import_module(pkg_name)
     return module
 
 
