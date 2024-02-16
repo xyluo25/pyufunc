@@ -178,30 +178,54 @@ def check_files_existence(filenames: list[str | Path], path_to_dir: str | Path =
     return False
 
 
-def check_filename(filename: str | Path, suffix_num: int = 1) -> str:
+def check_filename(filename: str | Path) -> bool:
     """validate the filename, if the file exists, add a suffix number to the file name, and return the new file name
     if the file does not exist, return the original file name
 
     This function is extremely useful when you want to save a file, but not sure if the file already exists.
 
     Location:
-        pyufunc/pathio/pathutils.py
+        pyufunc/util_pathio/_path.py
 
     Args:
         filename (str | Path): the filename to be validated
-        suffix_num (int, optional): the integer number to be added to the end of filename. Defaults to 1.
+
+    Returns:
+        bool: True if the file exists, otherwise False
+
+    Examples:
+        >>> import pyufunc as uf
+        >>> uf.check_filename('./test.txt')
+        False
+
+    """
+
+    # convert the path to standard linux path
+    filename_abspath = path2linux(os.path.abspath(filename))
+
+    # if the file exist, return True, otherwise False
+    if os.path.exists(filename_abspath):
+        return True
+    return False
+
+
+def generate_unique_filename(filename: str | Path, suffix_num: int = 1) -> str:
+    """generate a unique filename by adding a suffix number to the end of the filename
+
+    This function is extremely useful when you want to save a file, but not sure if the file already exists.
+
+    Location:
+        pyufunc/util_pathio/_path.py
+
+    Args:
+        filename (str | Path): the filename to be validated
 
     Returns:
         str: validated filename
 
     Examples:
         >>> import pyufunc as uf
-        >>> uf.validate_filename('./test.txt')
-        >>> # file not exist, return the same absolute file name
-        'C:/Users/Administrator/Desktop/test/test.txt'
-
-        >>> uf.validate_filename('./test.txt')
-        >>> # file exist, return the file name with suffix number added by 1
+        >>> uf.generate_unique_filename('./test.txt')
         'C:/Users/Administrator/Desktop/test/test(1).txt'
 
     """
@@ -217,10 +241,9 @@ def check_filename(filename: str | Path, suffix_num: int = 1) -> str:
     if "(" in file_without_suffix:
         file_without_suffix = file_without_suffix.split("(")[0]
 
-    # if the file exist, return the file name with suffix number added by 1
+    # if the file does not exist, return the same file name
     if os.path.exists(filename_abspath):
         filename_update = f"{file_without_suffix}({suffix_num}).{file_suffix}"
-        return check_filename(filename_update, suffix_num + 1)
+        return generate_unique_filename(filename_update, suffix_num + 1)
 
-    # if the file does not exist, return the same file name
     return filename_abspath
