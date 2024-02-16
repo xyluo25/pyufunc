@@ -43,7 +43,7 @@ pkg_dt_fmt_seq = {
 }
 
 # **** pyufunc prefix keywords **** #
-ufunc_prefix_keywords = {
+ufunc_keywords = {
     "non-keywords": [],
     "show": [],
     "get": [],

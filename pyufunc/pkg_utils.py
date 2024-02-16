@@ -13,27 +13,7 @@ import inspect
 import datetime
 from functools import wraps
 import copy
-from itertools import chain
 
-from pyufunc.pkg_configs import ufunc_prefix_keywords as ufunc_keywords
-
-# import local modules
-from pyufunc import (util_ai,
-                     util_common,
-                     util_data_processing,
-                     util_datetime,
-                     util_fullstack,
-                     util_geo,
-                     util_git_pypi,
-                     util_gui,
-                     util_img,
-                     util_log,
-                     util_network,
-                     util_office,
-                     util_optimization,
-                     util_pathio,
-                     util_test,
-                     util_vis)
 
 # specify the available utility functions for importing all
 __all__ = ["import_package",
@@ -41,32 +21,7 @@ __all__ = ["import_package",
            "get_user_defined_func",
            "is_user_defined_func",
            "is_module_importable",
-           "requires",
-           "show_util_func_by_category",
-           "show_util_func_by_keywords"]
-
-# specify the available utility functions by category
-ufunc_category = {
-    "util_ai": util_ai.__all__,
-    "util_common": util_common.__all__,
-    "util_data_processing": util_data_processing.__all__,
-    "util_datetime": util_datetime.__all__,
-    "util_fullstack": util_fullstack.__all__,
-    "util_geo": util_geo.__all__,
-    "util_git_pypi": util_git_pypi.__all__,
-    "util_gui": util_gui.__all__,
-    "util_img": util_img.__all__,
-    "util_log": util_log.__all__,
-    "util_network": util_network.__all__,
-    "util_office": util_office.__all__,
-    "util_optimization": util_optimization.__all__,
-    "util_pathio": util_pathio.__all__,
-    "util_test": util_test.__all__,
-    "util_vis": util_vis.__all__,
-    "pkg_utils": __all__
-}
-
-
+           "requires"]
 
 """TODO
 a decorator to run function in multiple processors
@@ -330,83 +285,3 @@ def requires(*args, **kwargs) -> object:
             return passer
 
     return inner
-
-
-def show_util_func_by_category() -> None:
-    """show all available utility functions in pyufunc by category or by prefix keywords.
-
-    Examples:
-        >>> import pyufunc as uf
-        >>> uf.show_utility_func_by_category()
-        Available utility functions in pyufunc:
-
-        -- util_common:
-           ** show_supported_docstring_header
-           ** show_google_docstring_style
-           ** show_numpy_docstring_style
-           ** generate_password
-
-        -- util_datetime:
-           ** fmt_dt_to_str
-           ** fmt_dt
-           ** list_all_timezones
-           ** get_timezone
-           ** cvt_dt_to_tz
-           ** get_time_diff_in_unit
-
-    """
-
-    # print all available utility functions
-    print("Available utility functions in pyufunc:")
-
-    def print_func(func_list: list):
-        for func in func_list:
-            print(f"   ** {func}")
-
-    for util_category in ufunc_category:
-        if ufunc_category[util_category]:
-            print(f"-- {util_category}:")
-            print_func(ufunc_category[util_category])
-            print()
-
-
-def show_util_func_by_keywords() -> None:
-    """show all available utility functions in pyufunc by prefix keywords.
-
-    Examples:
-        >>> import pyufunc as uf
-        >>> uf.show_utility_func_by_keywords()
-        Available utility functions in pyufunc:
-
-        -- non-keywords:
-           ** point_to_circle_on_unit_radius
-           ** path2linux
-           ** path2uniform
-           ** import_package
-           ** func_running_time
-           ** requires
-
-        -- show:
-           ** show_numpy_docstring_style
-           ** show_available_utility_func
-    """
-
-    for func_str in list(chain.from_iterable(ufunc_category.values())):
-        prefix = func_str.split("_")[0]
-        if prefix in ufunc_keywords:
-            ufunc_keywords[prefix].append(func_str)
-        else:
-            ufunc_keywords["non-keywords"].append(func_str)
-
-    # print all available utility functions
-    print("Available utility functions in pyufunc:")
-
-    def print_func(func_list: list):
-        for func in func_list:
-            print(f"   ** {func}")
-
-    for keyword in ufunc_keywords:
-        if ufunc_keywords[keyword]:
-            print(f"-- {keyword}:")
-            print_func(ufunc_keywords[keyword])
-            print()

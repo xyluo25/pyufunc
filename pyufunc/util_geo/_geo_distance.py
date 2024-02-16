@@ -14,6 +14,7 @@ from typing import Union, Iterable
 import functools
 
 from pyufunc.util_geo._geo_circle import point_to_circle_on_unit_radius
+from pyufunc.pkg_utils import func_running_time
 
 
 def proj_point_to_line(point: Point, line: LineString) -> Point:
@@ -229,6 +230,7 @@ def get_coordinates_from_geom(geom_obj: BaseGeometry) -> np.ndarray:
     return coords
 
 
+@func_running_time
 def find_closest_points(pts: BaseGeometry,
                         geom_obj: BaseGeometry,
                         radius: float,
@@ -246,6 +248,16 @@ def find_closest_points(pts: BaseGeometry,
 
     Returns:
         dict: the closest points for each point within the radius constraint
+
+    Example:
+        >>> from shapely.geometry import Point, MultiPoint
+        >>> pts = MultiPoint([(1, 1), (2, 2), (3, 3)])
+        >>> geom = Point(1, 1)
+        >>> find_closest_points(pts, geom, 2)
+        {POINT (1 1): [POINT (1 1), POINT (2 2): [POINT (1 1)], POINT (3 3): []}
+
+        >>> find_closest_points(pts, geom, 1, k_closest=2)
+        {POINT (1 1): [POINT (1 1), POINT (2 2): [POINT (1 1)], POINT (3 3): []}
     """
 
     # TDD: Test-Driven Development, check data types of input arguments
@@ -256,6 +268,9 @@ def find_closest_points(pts: BaseGeometry,
         "The input pts should be a shapely.geometry.base.BaseGeometry object. object.")
     assert isinstance(radius, (float, int)), "The input radius should be a float, int, or None object."
     assert isinstance(k_closest, int), "The input is_closest_only should be an int object."
+
+    if k_closest < 0:
+        raise ValueError("The input k_closest should be a non-negative integer.")
 
     # get the coordinates of the starting point / points
     pts_coords = get_coordinates_from_geom(pts)
@@ -273,5 +288,18 @@ def find_closest_points(pts: BaseGeometry,
     for coord, pt_buffer in zip(pts_coords, pts_coords_buffer):
         # find the intersection between the buffer and the geometry object
         intersected_pts = pt_buffer.intersection(geom_pts)
+
+        # coord point
+        pt = Point(coord)
+
+        if intersected_pts.is_empty:
+            closest_points[pt] = []
+        elif isinstance(intersected_pts, Point):
+            closest_points[pt] = [intersected_pts]
+        else:
+            closest_points[pt] = sorted(intersected_pts.geoms, key=functools.partial(calc_distance_on_unit_sphere, pt))
+
+    if k_closest > 0:
+        closest_points = {k: v[:k_closest] for k, v in closest_points.items()}
 
     return closest_points

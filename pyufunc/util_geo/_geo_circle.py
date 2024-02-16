@@ -78,7 +78,8 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
 
 def point_to_circle_on_unit_radius(point: Union[Point, Iterable[float]],
                                    radius: float,
-                                   options={"edges": 32, "bearing": 0, "direction": 1}) -> dict:
+                                   options: dict = {"edges": 32, "bearing": 0, "direction": 1},
+                                   verbose: bool = False) -> dict:
     """ the function to generate a polygon by the center point and radius
 
     Args:
@@ -88,6 +89,7 @@ def point_to_circle_on_unit_radius(point: Union[Point, Iterable[float]],
             edges (int, optional): the edges of the polygon. Defaults to 32.
             bearing (float, optional): the bearing of the polygon. Defaults to 0.
             direction (int, optional): the direction of the polygon. Defaults to 1.
+        verbose (bool, optional): print the log information. Defaults to False.
 
     Returns:
         dict: the polygon in geojson format
@@ -136,7 +138,8 @@ def point_to_circle_on_unit_radius(point: Union[Point, Iterable[float]],
     assert isinstance(radius, (int, float)), "the radius should be a number"
     assert isinstance(options, dict), "the options should be a dictionary"
 
-    print(" :Info: the unit in point_to_circle_on_unit_radius is meter, please convert the unit if necessary.")
+    if verbose:
+        print(" :Info: the unit in point_to_circle_on_unit_radius is meter, please convert the unit if necessary.")
 
     # convert point to shapely.geometry.Point
     if not isinstance(point, Point):

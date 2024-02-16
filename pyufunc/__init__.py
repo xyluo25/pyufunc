@@ -7,6 +7,7 @@
 
 # import modules with same name from different folder in python
 from __future__ import absolute_import
+from itertools import chain
 
 # import all modules
 from .util_ai import *  # machine learning functions
@@ -17,6 +18,7 @@ from .util_fullstack import *  # fullstack functions, including front end and ba
 from .util_geo import *  # geographic functions
 from .util_git_pypi import *  # git and pypi functions
 from .util_gui import *  # GUI functions
+from .util_img import *  # image functions
 from .util_log import *  # logging functions
 from .util_network import *  # network functions
 from .util_office import *  # office functions
@@ -29,55 +31,105 @@ from .util_vis import *  # visualization functions
 from .pkg_configs import *
 from .pkg_utils import *
 
-# from pyufunc.util_log.loga import Loga
+# **** specify the available utility functions by category **** #
+ufunc_category = {
+    "util_ai": util_ai.__all__,
+    "util_common": util_common.__all__,
+    "util_data_processing": util_data_processing.__all__,
+    "util_datetime": util_datetime.__all__,
+    "util_fullstack": util_fullstack.__all__,
+    "util_geo": util_geo.__all__,
+    "util_git_pypi": util_git_pypi.__all__,
+    "util_gui": util_gui.__all__,
+    "util_img": util_img.__all__,
+    "util_log": util_log.__all__,
+    "util_network": util_network.__all__,
+    "util_office": util_office.__all__,
+    "util_optimization": util_optimization.__all__,
+    "util_pathio": util_pathio.__all__,
+    "util_test": util_test.__all__,
+    "util_vis": util_vis.__all__,
+    "pkg_utils": pkg_utils.__all__ + ["show_util_func_by_category", "show_util_func_by_keywords"],
+}
 
-print(f"pyufunc: {pkg_version}")
 
-if IS_LOG:
-    print(f"    :Logging is enabled, please check the log file in folder: {LOGGING_FOLDER}")
-    print("    :If you want to disable logging, please add pyutilfunc.IS_LOG = False in your code.")
+def show_util_func_by_category() -> None:
+    """show all available utility functions in pyufunc by category or by prefix keywords.
+
+    Examples:
+        >>> import pyufunc as uf
+        >>> uf.show_utility_func_by_category()
+        Available utility functions in pyufunc:
+
+        -- util_common:
+           ** show_supported_docstring_header
+           ** show_google_docstring_style
+           ** show_numpy_docstring_style
+           ** generate_password
+
+        -- util_datetime:
+           ** fmt_dt_to_str
+           ** fmt_dt
+           ** list_all_timezones
+           ** get_timezone
+           ** cvt_dt_to_tz
+           ** get_time_diff_in_unit
+
+    """
+
+    # print all available utility functions
+    print("Available utility functions in pyufunc:")
+
+    def _print_func(func_list: list):
+        for func in func_list:
+            print(f"   ** {func}")
+
+    for util_category in ufunc_category:
+        if ufunc_category[util_category]:
+            print(f"-- {util_category}:")
+            _print_func(ufunc_category[util_category])
+            print()
 
 
-# loga = Loga(
-#     do_print=True,  # print each log to console
-#     do_write=True,  # write each log to file
-#     logfile="mylog.txt",  # custom path to logfile
-# )
+def show_util_func_by_keywords() -> None:
+    """show all available utility functions in pyufunc by prefix keywords.
 
+    Examples:
+        >>> import pyufunc as uf
+        >>> uf.show_utility_func_by_keywords()
+        Available utility functions in pyufunc:
 
-__all__ = [
-    # util_ai
+        -- non-keywords:
+           ** point_to_circle_on_unit_radius
+           ** path2linux
+           ** path2uniform
+           ** import_package
+           ** func_running_time
+           ** requires
 
-    # util_common
+        -- show:
+           ** show_numpy_docstring_style
+           ** show_available_utility_func
+    """
 
-    # util_data_processing
+    for func_str in list(chain.from_iterable(ufunc_category.values())):
+        prefix = func_str.split("_")[0]
+        if prefix in ufunc_keywords:
+            ufunc_keywords[prefix].append(func_str)
+        else:
+            ufunc_keywords["non-keywords"].append(func_str)
 
-    # util_datetime
+    # print all available utility functions
+    print("Available utility functions in pyufunc:")
 
-    # util_fullstack
+    def _print_func(func_list: list):
+        for func in func_list:
+            print(f"   ** {func}")
 
-    # util_geo
+    for keyword in ufunc_keywords:
+        if ufunc_keywords[keyword]:
+            print(f"-- {keyword}:")
+            _print_func(ufunc_keywords[keyword])
+            print()
 
-    # util_git_pypi
-
-    # util_gui
-
-    # util_log
-
-    # util_network
-
-    # util_office
-
-    # util_optimization
-
-    # util_pathio
-
-    # util_test
-
-    # util_vis
-
-    # pkg_configs
-
-    # pkg_utils
-
-]
+__all__ = list(chain(*ufunc_category.values()))
