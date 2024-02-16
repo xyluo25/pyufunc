@@ -9,7 +9,7 @@ Module pathio
 .. toctree::
    :maxdepth: 2
 
-.. automodule:: pyutilkit.pathio.pathutils
+.. automodule:: pyufunc.pathio.pathutils
    :members:
    :undoc-members:
    :show-inheritance:
@@ -17,7 +17,7 @@ Module pathio
 
 Module utils
 --------------------
-.. automodule:: pyutilkit.utils
+.. automodule:: pyufunc.utils
    :members:
    :undoc-members:
    :show-inheritance:

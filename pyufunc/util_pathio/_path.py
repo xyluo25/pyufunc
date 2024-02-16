@@ -29,7 +29,7 @@ def path2linux(path: str | Path) -> str:
     As an alternative, you can use path2uniform, which is the same as path2linux.
 
     Location:
-        pyutilkit/pathio/pathutils.py
+        pyufunc/pathio/pathutils.py
 
     Args:
         path (str | Path): _description_
@@ -38,10 +38,10 @@ def path2linux(path: str | Path) -> str:
         str: a unified linux path
 
     Examples:
-        >>> import pyutilkit as uk
-        >>> uk.path2linux('C:\\Users\\Administrator\\Desktop\\test\\test.txt')
+        >>> import pyufunc as uf
+        >>> uf.path2linux('C:\\Users\\Administrator\\Desktop\\test\\test.txt')
         'C:/Users/Administrator/Desktop/test/test.txt'
-        >>> uk.path2linux('./test.txt')
+        >>> uf.path2linux('./test.txt')
         'C:/Users/Administrator/Desktop/test/test.txt'
     """
 
@@ -62,7 +62,7 @@ def path2uniform(path: str | Path) -> str:
         source: https://github.com/mikeqfu/pyhelpers (GNU)
 
     Location:
-        pyutilkit/pathio/pathutils.py
+        pyufunc/pathio/pathutils.py
 
     Args:
         path (str | Path): the path to be converted
@@ -71,10 +71,10 @@ def path2uniform(path: str | Path) -> str:
         str: a uniform path
 
     Examples:
-        >>> import pyutilkit as uk
-        >>> uk.path2linux('C:\\Users\\Administrator\\Desktop\\test\\test.txt')
+        >>> import pyufunc as uf
+        >>> uf.path2linux('C:\\Users\\Administrator\\Desktop\\test\\test.txt')
         'C:/Users/Administrator/Desktop/test/test.txt'
-        >>> uk.path2linux('./test.txt')
+        >>> uf.path2linux('./test.txt')
         'C:/Users/Administrator/Desktop/test/test.txt'
     """
 
@@ -91,7 +91,7 @@ def get_filenames_by_ext(path_to_dir: str | Path, file_ext="csv", incl_subdir: b
     """Get a list of filenames in a folder by file extension
 
     Location:
-        pyutilkit/pathio/pathutils.py
+        pyufunc/pathio/pathutils.py
 
     References:
         https://github.com/mikeqfu/pyhelpers (GNU)
@@ -105,8 +105,8 @@ def get_filenames_by_ext(path_to_dir: str | Path, file_ext="csv", incl_subdir: b
         list[str]: a list of filenames with absolute paths
 
     Examples:
-        >>> import pyutilkit as uk
-        >>> uk.get_filenames_by_ext('./', 'py')
+        >>> import pyufunc as uf
+        >>> uf.get_filenames_by_ext('./', 'py')
         ['C:/Users/Administrator/Desktop/test/test.py']
 
     """
@@ -133,7 +133,7 @@ def check_files_existence(filenames: list[str | Path], path_to_dir: str | Path =
     """Check if provided list of files exist in the given directory
 
     Location:
-        pyutilkit/pathio/pathutils.py
+        pyufunc/pathio/pathutils.py
 
     References:
         https://github.com/xyluo25/utdf2gmns (Apache)
@@ -148,8 +148,8 @@ def check_files_existence(filenames: list[str | Path], path_to_dir: str | Path =
         bool: True if all files exist in the given directory, otherwise False
 
     Examples:
-        >>> import pyutilkit as uk
-        >>> uk.check_files_existence(['./test.py', './test.txt'])
+        >>> import pyufunc as uf
+        >>> uf.check_files_existence(['./test.py', './test.txt'])
         False
     """
 
@@ -185,7 +185,7 @@ def check_filename(filename: str | Path, suffix_num: int = 1) -> str:
     This function is extremely useful when you want to save a file, but not sure if the file already exists.
 
     Location:
-        pyutilkit/pathio/pathutils.py
+        pyufunc/pathio/pathutils.py
 
     Args:
         filename (str | Path): the filename to be validated
@@ -195,12 +195,12 @@ def check_filename(filename: str | Path, suffix_num: int = 1) -> str:
         str: validated filename
 
     Examples:
-        >>> import pyutilkit as uk
-        >>> uk.validate_filename('./test.txt')
+        >>> import pyufunc as uf
+        >>> uf.validate_filename('./test.txt')
         >>> # file not exist, return the same absolute file name
         'C:/Users/Administrator/Desktop/test/test.txt'
 
-        >>> uk.validate_filename('./test.txt')
+        >>> uf.validate_filename('./test.txt')
         >>> # file exist, return the file name with suffix number added by 1
         'C:/Users/Administrator/Desktop/test/test(1).txt'
 

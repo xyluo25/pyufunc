@@ -7,8 +7,10 @@
 
 
 import math
+from typing import Iterable, Union
+from shapely.geometry import Point
 
-__all__ = ["point_to_circle"]
+__all__ = ["point_to_circle_on_unit_radius",]
 
 
 # convert degrees to radians
@@ -45,11 +47,11 @@ def to_degrees(angle_in_radians: float) -> float:
     return (angle_in_radians * 180) / math.pi
 
 
-def offset(point: list[float, float], distance: float, earth_radius: float, bearing: float) -> list:
+def _offset(point: Point, distance: float, earth_radius: float, bearing: float) -> list:
     """ the function to calculate the new longitude and latitude by the distance and bearing from the original point
 
     Args:
-        point (list[float, float]): the point of longitude and latitude in format [longitude, latitude]
+        point (shapely.geometry.Point): the point of longitude and latitude in format POINT (longitude, latitude)
         distance (float): the distance from the original point, unit is meter
         earth_radius (float): the earth radius, unit is meter
         bearing (float): the bearing from the original point, unit is radians
@@ -58,9 +60,12 @@ def offset(point: list[float, float], distance: float, earth_radius: float, bear
         list: the new longitude and latitude in degree format [longitude, latitude]
     """
 
+    # TDD, test driven development: input validation
+    assert isinstance(point, Point), "the point should be a shapely.geometry.Point"
+
     # convert longitude and latitude to radians
-    lon1 = to_radians(point[0])
-    lat1 = to_radians(point[1])
+    lon1 = to_radians(point.x)
+    lat1 = to_radians(point.y)
 
     d_by_r = distance / earth_radius
 
@@ -71,13 +76,13 @@ def offset(point: list[float, float], distance: float, earth_radius: float, bear
     return [to_degrees(lon), to_degrees(lat)]
 
 
-def point_to_circle(center: list[float, float],
-                    radius: float,
-                    options={"edges": 32, "bearing": 0, "direction": 1}) -> dict:
-    """ the function to generate a polygon by the center and radius
+def point_to_circle_on_unit_radius(point: Union[Point, Iterable[float]],
+                                   radius: float,
+                                   options={"edges": 32, "bearing": 0, "direction": 1}) -> dict:
+    """ the function to generate a polygon by the center point and radius
 
     Args:
-        center (list[float, float]): the center point with format [longitude, latitude]
+        point (shapely.geometry.Point, Iterable[float]): the center point with format [longitude, latitude]
         radius (float): the radius of the circle, unit is meter
         options (dict, optional): set the circle options. Defaults to {"edges": 32, "bearing": 0, "direction": 1}.
             edges (int, optional): the edges of the polygon. Defaults to 32.
@@ -125,7 +130,18 @@ def point_to_circle(center: list[float, float],
         [111.9356, 33.42434831528412]]}
 
     """
-    print(" :Info: the unit in point_to_circle is meter.")
+
+    # TDD, test driven development: input validation
+    assert isinstance(point, (Point, Iterable)), "the point should be a shapely.geometry.Point or a list of longitude and latitude"
+    assert isinstance(radius, (int, float)), "the radius should be a number"
+    assert isinstance(options, dict), "the options should be a dictionary"
+
+    print(" :Info: the unit in point_to_circle_on_unit_radius is meter, please convert the unit if necessary.")
+
+    # convert point to shapely.geometry.Point
+    if not isinstance(point, Point):
+        point = Point(point)
+
     # the default earth radius in meters
     DEFAULT_EARTH_RADIUS = 6378137
 
@@ -137,7 +153,7 @@ def point_to_circle(center: list[float, float],
     start = to_radians(bearing)
     coordinates = []
     for i in range(edges):
-        coordinates.append(offset(center, radius, earth_radius, start + (direction * 2 * math.pi * -i) / edges))
+        coordinates.append(_offset(point, radius, earth_radius, start + (direction * 2 * math.pi * -i) / edges))
     coordinates.append(coordinates[0])
 
     return {"type": "Polygon", "coordinates": coordinates}

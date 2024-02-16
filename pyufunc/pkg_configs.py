@@ -41,3 +41,20 @@ pkg_dt_fmt_seq = {
     9 : "%H:%M:%S",  # "HH:MM:SS", 11:11:11
     10 : "%H:%M:%S.%f",  # "HH:MM:SS.MS", 11:11:11.123456
 }
+
+# **** pyufunc prefix keywords **** #
+ufunc_prefix_keywords = {
+    "non-keywords": [],
+    "show": [],
+    "get": [],
+    "is": [],
+    "check": [],
+    "validate": [],
+    "find": [],
+    "calc": [],
+    "fmt": [],
+    "cvt": [],
+    "list": [],
+    "generate": [],
+    "proj": [],
+}

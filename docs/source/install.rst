@@ -2,7 +2,7 @@
 Installation
 ============
 
-pip install pyutilkit
+pip install pyufunc
 
 
 

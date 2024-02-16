@@ -15,7 +15,7 @@ sys.path.insert(0, str(home_dir))
 
 
 # -- Project information -----------------------------------------------------
-project = 'pyUtilKit Guide'
+project = 'pyufunc Guide'
 copyright = '2023-, Xiangyong Luo'
 author = 'Xiangyong Luo'
 
