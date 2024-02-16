@@ -167,3 +167,5 @@ cython_debug/
 
 # for local testing
 te.py
+
+*/syslogs/*
