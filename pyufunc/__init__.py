@@ -78,15 +78,15 @@ def show_util_func_by_category() -> None:
     """
 
     # print all available utility functions
-    print("Available utility functions in pyufunc:")
+    print("Available utility functions in pyUFunc:")
 
     def _print_func(func_list: list):
         for func in func_list:
-            print(f"   ** {func}")
+            print(f"  - {func}")
 
     for util_category in ufunc_category:
         if ufunc_category[util_category]:
-            print(f"-- {util_category}:")
+            print(f"- {util_category}:")
             _print_func(ufunc_category[util_category])
             print()
 
@@ -120,15 +120,15 @@ def show_util_func_by_keywords() -> None:
             ufunc_keywords["non-keywords"].append(func_str)
 
     # print all available utility functions
-    print("Available utility functions in pyufunc:")
+    print("Available utility functions in pyUFunc:")
 
     def _print_func(func_list: list):
         for func in func_list:
-            print(f"   ** {func}")
+            print(f"  - {func}")
 
     for keyword in ufunc_keywords:
         if ufunc_keywords[keyword]:
-            print(f"-- {keyword}:")
+            print(f"- {keyword}:")
             _print_func(ufunc_keywords[keyword])
             print()
 
