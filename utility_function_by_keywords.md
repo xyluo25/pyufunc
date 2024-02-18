@@ -14,6 +14,8 @@ This methodical approach empowers developers to efficiently identify the functio
 
 Available utility functions in pyufunc:
 
+Note: we may not update available functions in time, please run: pyufunc.show_util_func_by_keyword to check latest available functions.
+
 - non-keywords:
   - point_to_circle_on_unit_radius
   - gmns_geo

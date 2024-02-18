@@ -8,6 +8,8 @@ The categories outlined in this document span a wide range of functionalities, e
 
 Available utility functions in PyUFunc
 
+Note: we may not update available functions in time, please run: pyufunc.show_util_func_by_category to check latest available functions.
+
 - util_common:
   - show_supported_docstring_header
   - show_google_docstring_style
