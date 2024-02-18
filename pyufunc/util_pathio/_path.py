@@ -5,14 +5,6 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-"""functions in this module
-    path2linux
-    path2uniform
-    get_filenames_by_ext
-    check_files_existence
-    check_filename
-"""
-
 
 from __future__ import absolute_import
 from pathlib import Path
