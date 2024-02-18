@@ -10,7 +10,7 @@ from pyufunc.util_pathio._path import path2linux
 
 
 # **** Package Info **** #
-pkg_version = "0.1.8"
+pkg_version = "0.1.9"
 pkg_name = "pyufunc"
 pkg_author = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
 pkg_email = "luoxiangyong01@gmail.com, xzhou74@asu.edu"
