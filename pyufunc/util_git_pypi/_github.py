@@ -21,7 +21,7 @@ import shutil
 from pathlib import Path
 from pyufunc.pkg_utils import requires, import_package
 
-path_user_agent_strings = Path(__file__).parent.parent.joinpath("static/user-agent-strings.json")
+path_user_agent_strings = Path(__file__).parent.joinpath("static/user-agent-strings.json")
 
 with open(path_user_agent_strings, mode='r', encoding='utf-8') as f:
     _web_agent_str = f.read()
