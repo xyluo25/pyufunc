@@ -12,7 +12,9 @@ from ._path import (path2linux,
                     path2uniform,
                     get_filenames_by_ext,
                     check_files_existence,
-                    check_filename)
+                    check_filename,
+                    generate_unique_filename
+                    )
 from ._platform import (check_platform,
                         is_windows,
                         is_linux,
@@ -32,6 +34,7 @@ __all__ = [
     "get_filenames_by_ext",
     "check_files_existence",
     "check_filename",
+    "generate_unique_filename",
 
     # platform
     "check_platform",
