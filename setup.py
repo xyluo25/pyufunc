@@ -26,7 +26,7 @@ setuptools.setup(
     author_email=uf.pkg_email,
 
     keywords=["utility functions", "utility", "functions", "common functions", "common utility functions"],
-    description="A tool for generating zone-to-zone travel demand based on grid zones and gravity model",
+    description="PyUFunc consolidates frequently used utility functions from various libraries into one cohesive package",
 
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -46,21 +46,21 @@ setuptools.setup(
 
     packages=setuptools.find_packages(),
     include_package_data=True,
-    package_data={'': ['*.txt', '*.xls', '*.xlsx', '*.csv'],
-                  "test_data": ['*.xls']},
+    package_data={'': ['*.txt', '*.xls', '*.xlsx', '*.csv', '.json'],
+                  "static": ['*.xls']},
     project_urls={
         'Homepage': "https://github.com/xyluo25/pyufunc",
-        # 'Documentation': 'https://github.com/asu-trans-ai-lab/grid2demand',
+        'Documentation': 'https://github.com/xyluo25/pyufunc',
         # 'Bug Tracker': '',
         # 'Source Code': '',
         # 'Download': '',
         # 'Publication': '',
         # 'Citation': '',
-        # 'License': '',
+        'License': 'MIT License',
         # 'Acknowledgement': '',
         # 'FAQs': '',
-        # 'Contact': '',
+        'Contact': 'luoxiangyong01@gmail.com',
     },
     platforms=["all"],
-    license='Apache License 2.0',
+    license='MIT License',
 )

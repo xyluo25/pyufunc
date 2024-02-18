@@ -209,7 +209,6 @@ class LogErrorAlert:
             self.error_tracker()
             message = "\n".join(self.mail_text_list)
 
-            a
             # the default length is 2, and more errors occur if len greater than 3
             if len(message) >= 3:
                 part1 = MIMEText(message, 'plain')

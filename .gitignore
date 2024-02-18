@@ -169,3 +169,8 @@ cython_debug/
 te.py
 
 */syslogs/*
+*/source/*
+*/sources/*
+*/source_tes/*
+setup.py
+*/syslogs/*

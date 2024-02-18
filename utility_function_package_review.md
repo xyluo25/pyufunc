@@ -21,3 +21,8 @@ Updating...
 |    pyutil    |                | File manipulation<br />string operations, <br /><br />math functions, <br /><br />data structure manipulation, <br /><br />logging utilities<br /> |                      |
 |              |                |                                                                                                                                                    |                      |
 |              |                |                                                                                                                                                    |                      |
+
+pyhelpers
+pyutilator -  @print_return_value @print_kwargs @print_args
+pyutil 3.3.6
+common-pyutil 0.8.7
