@@ -7,10 +7,10 @@
 
 from pyufunc.util_pathio._path import path2linux
 import os
-import sys
+from pathlib import Path
 
 
-def get_file_size(filename: str, unit: str = "kb") -> str:
+def get_file_size(filename: str | Path, unit: str = "kb") -> str:
     """Get the size of a file in the specified unit.
 
     Args:
@@ -21,7 +21,10 @@ def get_file_size(filename: str, unit: str = "kb") -> str:
         str: _description_
     """
 
-    import os
+    # TDD, Test Driven Development: validate the input
+    assert isinstance(filename, (str, Path)), f"filename must be a string or Path, not {type(filename)}"
+    assert isinstance(unit, str), f"unit must be a string, not {type(unit)}"
+    assert unit.lower() in ['kb', 'mb', 'gb', 'tb'], f"unit must be one of 'kb', 'mb', 'gb', 'tb', not {unit}"
 
     # format the filename to linux path
     filename = path2linux(filename)
@@ -29,8 +32,9 @@ def get_file_size(filename: str, unit: str = "kb") -> str:
     filename_short = os.path.basename(filename)
 
     # Check if the file exists
-    if not os.path.isfile(filename):
-        return f"File {filename_short} does not found, please check the file path and try again"
+    assert os.path.isfile(filename), f"File {filename_short} does not found, please check the file path and try again"
+    # if not os.path.isfile(filename):
+    #     return f"File {filename_short} does not found, please check the file path and try again"
 
     # Get the file size in bytes
     size_bytes = os.path.getsize(filename)
@@ -59,7 +63,10 @@ def get_dir_size(directory: str, unit: str = "kb") -> str:
         str: the size of the directory in the specified unit.
     """
 
-    import os
+    # TDD, Test Driven Development: validate the input
+    assert isinstance(directory, str), f"directory must be a string, not {type(directory)}"
+    assert isinstance(unit, str), f"unit must be a string, not {type(unit)}"
+    assert unit.lower() in ['kb', 'mb', 'gb', 'tb'], f"unit must be one of 'kb', 'mb', 'gb', 'tb', not {unit}"
 
     # format the directory to linux path
     directory = path2linux(directory)
@@ -67,8 +74,9 @@ def get_dir_size(directory: str, unit: str = "kb") -> str:
     directory_short = os.path.basename(directory)
 
     # Check if the directory exists
-    if not os.path.isdir(directory):
-        return f"Directory {directory_short} does not found, please check the directory path and try again"
+    assert os.path.isdir(directory), f"Directory {directory_short} does not found, please check the directory path and try again"
+    # if not os.path.isdir(directory):
+    #     return f"Directory {directory_short} does not found, please check the directory path and try again"
 
     # Get the size of the directory in bytes
     size_bytes = sum([os.path.getsize(os.path.join(directory, file)) for file in os.listdir(directory)])
