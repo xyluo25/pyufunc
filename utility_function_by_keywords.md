@@ -14,7 +14,11 @@ This methodical approach empowers developers to efficiently identify the functio
 
 Available utility functions in pyufunc:
 
-Note: we may not update available functions in time, please run: pyufunc.show_util_func_by_keyword to check latest available functions.
+Note: we may not update available functions in time, please run code below to check latest available functions.
+
+```python
+pyufunc.show_util_func_by_keyword()
+```
 
 - non-keywords:
   - point_to_circle_on_unit_radius
