@@ -10,7 +10,7 @@ This document is designed to serve as an invaluable resource for developers, off
 
 This methodical approach empowers developers to efficiently identify the functions that best match their current requirements, thereby enhancing their coding workflow and productivity. Whether tackling complex algorithmic challenges or implementing basic functionality, this guide aims to be an essential companion, fostering a deeper understanding and more effective use of utility functions in software development projects.
 
-## Existing Utility Functions by Category
+## Existing Utility Functions by Keywords
 
 Available utility functions in pyufunc:
 

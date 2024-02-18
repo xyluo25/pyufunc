@@ -4,7 +4,7 @@ This document serves as a curated compendium of existing utility functions, meti
 
 The categories outlined in this document span a wide range of functionalities, each category is accompanied by a brief description, followed by a list of utility functions that fall under its umbrella, this comprehensive approach aims to arm developers with a robust toolkit, enabling them to select the most appropriate utility functions for their specific needs. Whether you are working on a complex application requiring advanced data manipulation or a simple project needing basic string operations, this guide endeavors to provide a valuable resource that enhances your development process and leads to more efficient, effective, and elegant coding solutions.
 
-## Existing Utility Functions by keywords
+## Existing Utility Functions by Category
 
 Available utility functions in PyUFunc
 
