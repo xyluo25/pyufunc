@@ -24,6 +24,29 @@ No Extra dependencies will be installed to your environment unless use some func
 
 - [utility_function_by_keywords.md](https://github.com/xyluo25/pyUtilKit/blob/main/utility_function_by_keywords.md)
 
+## Quick Tutorial
+
+### Install pyufunc
+
+`pip install pyufunc` or `conda install pyufunc`
+
+### Import package
+
+`import pyufunc as uf`
+
+### General Use
+
+```python
+import pyufunc as uf
+
+# show all available utility functions by category
+uf.show_util_func_by_category()
+
+# show all available utility functions by keywords
+uf.show_util_func_by_keyword()
+
+```
+
 ## Community and Support
 
 We welcome and encourage developers to contribute their valuable utility functions to pyufunc by submitting pull requests on [PyUFunc GitHub repository](https://github.com/xyluo25/pyufunc), helping to enrich the package and benefit the wider Python community.
