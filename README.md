@@ -28,11 +28,23 @@ No Extra dependencies will be installed to your environment unless use some func
 
 ### Install pyufunc
 
-`pip install pyufunc` or `conda install pyufunc`
+pip install
+
+```python
+pip install pyufunc
+```
+
+conda install
+
+```python
+conda install pyufunc
+```
 
 ### Import package
 
-`import pyufunc as uf`
+```python
+import pyufunc as uf
+```
 
 ### General Use
 
