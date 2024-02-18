@@ -31,43 +31,43 @@ from .util_vis import *  # visualization functions
 from .pkg_configs import *
 from .pkg_utils import *
 
-import pyufunc.util_ai as util_ai
-import pyufunc.util_common as util_common
-import pyufunc.util_data_processing as util_data_processing
-import pyufunc.util_datetime as util_datetime
-import pyufunc.util_fullstack as util_fullstack
-import pyufunc.util_geo as util_geo
-import pyufunc.util_git_pypi as util_git_pypi
-import pyufunc.util_gui as util_gui
-import pyufunc.util_img as util_img
-import pyufunc.util_log as util_log
-import pyufunc.util_network as util_network
-import pyufunc.util_office as util_office
-import pyufunc.util_optimization as util_optimization
-import pyufunc.util_pathio as util_pathio
-import pyufunc.util_test as util_test
-import pyufunc.util_vis as util_vis
-import pyufunc.pkg_utils as pkg_utils
+import pyufunc.util_ai as __util_ai
+import pyufunc.util_common as __util_common
+import pyufunc.util_data_processing as __util_data_processing
+import pyufunc.util_datetime as __util_datetime
+import pyufunc.util_fullstack as __util_fullstack
+import pyufunc.util_geo as __util_geo
+import pyufunc.util_git_pypi as __util_git_pypi
+import pyufunc.util_gui as __util_gui
+import pyufunc.util_img as __util_img
+import pyufunc.util_log as __util_log
+import pyufunc.util_network as __util_network
+import pyufunc.util_office as __util_office
+import pyufunc.util_optimization as __util_optimization
+import pyufunc.util_pathio as __util_pathio
+import pyufunc.util_test as __util_test
+import pyufunc.util_vis as __util_vis
+import pyufunc.pkg_utils as __pkg_utils
 
 # **** specify the available utility functions by category **** #
 ufunc_category = {
-    "util_ai"             : util_ai.__all__,
-    "util_common"         : util_common.__all__,
-    "util_data_processing": util_data_processing.__all__,
-    "util_datetime"       : util_datetime.__all__,
-    "util_fullstack"      : util_fullstack.__all__,
-    "util_geo"            : util_geo.__all__,
-    "util_git_pypi"       : util_git_pypi.__all__,
-    "util_gui"            : util_gui.__all__,
-    "util_img"            : util_img.__all__,
-    "util_log"            : util_log.__all__,
-    "util_network"        : util_network.__all__,
-    "util_office"         : util_office.__all__,
-    "util_optimization"   : util_optimization.__all__,
-    "util_pathio"         : util_pathio.__all__,
-    "util_test"           : util_test.__all__,
-    "util_vis"            : util_vis.__all__,
-    "pkg_utils"           : pkg_utils.__all__ + ["show_util_func_by_category", "show_util_func_by_keywords"],
+    "util_ai"             : __util_ai.__all__,
+    "util_common"         : __util_common.__all__,
+    "util_data_processing": __util_data_processing.__all__,
+    "util_datetime"       : __util_datetime.__all__,
+    "util_fullstack"      : __util_fullstack.__all__,
+    "util_geo"            : __util_geo.__all__,
+    "util_git_pypi"       : __util_git_pypi.__all__,
+    "util_gui"            : __util_gui.__all__,
+    "util_img"            : __util_img.__all__,
+    "util_log"            : __util_log.__all__,
+    "util_network"        : __util_network.__all__,
+    "util_office"         : __util_office.__all__,
+    "util_optimization"   : __util_optimization.__all__,
+    "util_pathio"         : __util_pathio.__all__,
+    "util_test"           : __util_test.__all__,
+    "util_vis"            : __util_vis.__all__,
+    "pkg_utils"           : __pkg_utils.__all__ + ["show_util_func_by_category", "show_util_func_by_keywords"],
 }
 
 
