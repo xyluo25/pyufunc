@@ -10,7 +10,7 @@ import zoneinfo
 import datetime
 
 
-def list_all_timezones() -> set:
+def list_all_timezones(region_name: str = "*") -> set:
     """this function is used to list all available timezones
 
     Returns:
@@ -30,6 +30,15 @@ def list_all_timezones() -> set:
         ...}
 
     """
+    if region_name != "*":
+        zoneinfo_set = zoneinfo.available_timezones()
+        zoneinfo_region_set = []
+        for i in zoneinfo_set:
+            if region_name.lower() in i.lower():
+                zoneinfo_region_set.append(i)
+        print("Listing timezones in the region: ", region_name)
+        return zoneinfo_region_set
+    print("Listing all timezones...")
     return zoneinfo.available_timezones()
 
 

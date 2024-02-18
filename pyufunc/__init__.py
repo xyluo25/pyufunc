@@ -31,6 +31,24 @@ from .util_vis import *  # visualization functions
 from .pkg_configs import *
 from .pkg_utils import *
 
+import pyufunc.util_ai as util_ai
+import pyufunc.util_common as util_common
+import pyufunc.util_data_processing as util_data_processing
+import pyufunc.util_datetime as util_datetime
+import pyufunc.util_fullstack as util_fullstack
+import pyufunc.util_geo as util_geo
+import pyufunc.util_git_pypi as util_git_pypi
+import pyufunc.util_gui as util_gui
+import pyufunc.util_img as util_img
+import pyufunc.util_log as util_log
+import pyufunc.util_network as util_network
+import pyufunc.util_office as util_office
+import pyufunc.util_optimization as util_optimization
+import pyufunc.util_pathio as util_pathio
+import pyufunc.util_test as util_test
+import pyufunc.util_vis as util_vis
+import pyufunc.pkg_utils as pkg_utils
+
 # **** specify the available utility functions by category **** #
 ufunc_category = {
     "util_ai"             : util_ai.__all__,

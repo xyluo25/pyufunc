@@ -9,7 +9,7 @@
 import pyufunc as uf
 import setuptools
 
-with open("README_pkg.md", "r", encoding="utf-8") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 try:
@@ -34,11 +34,13 @@ setuptools.setup(
 
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: MIT License",
         'Operating System :: OS Independent',
         'Intended Audience :: Developers',
         'Programming Language :: Python :: Implementation',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
         'Topic :: Software Development :: Libraries'
     ],
     python_requires='>=3.10',
@@ -46,20 +48,21 @@ setuptools.setup(
 
     packages=setuptools.find_packages(),
     include_package_data=True,
-    package_data={'': ['*.txt', '*.xls', '*.xlsx', '*.csv', '.json'],
-                  "static": ['*.xls']},
+    # package_dir={'': 'pyufunc'},
+    package_data={'': ["*.json", "*.txt"],
+                  },
     project_urls={
-        'Homepage': "https://github.com/xyluo25/pyufunc",
-        'Documentation': 'https://github.com/xyluo25/pyufunc',
-        # 'Bug Tracker': '',
+        'Homepage': 'https://github.com/xyluo25/pyufunc',
+        # 'Documentation': 'https://github.com/xyluo25/pyufunc',
+        'Bug Tracker': 'https://github.com/xyluo25/pyufunc/issues',
         # 'Source Code': '',
         # 'Download': '',
         # 'Publication': '',
         # 'Citation': '',
-        'License': 'MIT License',
+        'License': 'https://github.com/xyluo25/pyufunc/blob/main/LICENSE',
         # 'Acknowledgement': '',
         # 'FAQs': '',
-        'Contact': 'luoxiangyong01@gmail.com',
+        'Contact': 'https://github.com/xyluo25',
     },
     platforms=["all"],
     license='MIT License',
