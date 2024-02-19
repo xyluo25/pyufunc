@@ -570,7 +570,7 @@ def github_file_downloader(repo_url: str, output_dir: str | None = None, flatten
     return GitHubFileDownloader(repo_url, flatten_files=flatten, output_dir=output_dir).download()
 
 
-def get_github_status(usr_name: str, repo_name: str) -> dict:
+def github_get_status(usr_name: str, repo_name: str) -> dict:
     """Fetches GitHub repository status including stars, forks, issues, and pull requests.
 
     Args:
