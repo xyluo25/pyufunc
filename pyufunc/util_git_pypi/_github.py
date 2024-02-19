@@ -28,44 +28,6 @@ with open(path_user_agent_strings, mode='r', encoding='utf-8') as f:
 _USER_AGENT_STRINGS = json.loads(_web_agent_str)
 
 
-def init_requests_session(url: str,
-                          max_retries: int = 5,
-                          backoff_factor: float = 0.1,
-                          retry_status: str = 'default',
-                          **kwargs) -> requests.Session:
-    """Initialize a session for making HTTP requests.
-
-    Args:
-        url (_type_): a valid URL
-        max_retries (int, optional): maximum number of retries. Defaults to 5.
-        backoff_factor (float, optional): ``backoff_factor`` of `urllib3.util.retry.Retry`_. Defaults to 0.1.
-        retry_status (str, optional): a list of HTTP status codes that force to retry downloading,
-            inherited from ``status_forcelist`` of `urllib3.util.retry.Retry`_;
-            when ``retry_status='default'``, the list defaults to ``[429, 500, 502, 503, 504]``.
-            Defaults to 'default'.
-
-    Returns:
-        requests.Session:
-    """
-
-    if retry_status == 'default':
-        codes_for_retries = [429, 500, 502, 503, 504]
-    else:
-        codes_for_retries = copy.copy(retry_status)
-
-    kwargs.update({'backoff_factor': backoff_factor, 'status_forcelist': codes_for_retries})
-    retries = urllib3.util.retry.Retry(total=max_retries, **kwargs)
-
-    session = requests.Session()
-
-    # noinspection HttpUrlsUsage
-    session.mount(
-        prefix='https://' if url.startswith('https:') else 'http://',
-        adapter=requests.adapters.HTTPAdapter(max_retries=retries))
-
-    return session
-
-
 class _FakeUserAgentParser(html.parser.HTMLParser):
 
     def __init__(self, browser_name):
@@ -103,293 +65,6 @@ class _FakeUserAgentParser(html.parser.HTMLParser):
             self.data.append(data.strip())
 
 
-def _user_agent_strings(browser_names: list = None, dump_dat: bool = True) -> dict:
-    """Get a dictionary of user-agent strings for popular browsers.
-
-    Args:
-        browser_names (list, optional): names of a list of popular browsers. Defaults to None.
-        dump_dat (bool, optional): _description_. Defaults to True.
-
-    Returns:
-        dict: a dictionary of user-agent strings for popular browsers
-    """
-
-    if browser_names is None:
-        browser_names_ = ['Chrome', 'Firefox', 'Safari', 'Edge', 'Internet Explorer', 'Opera']
-    else:
-        browser_names_ = browser_names.copy()
-
-    resource_url = 'https://useragentstring.com/pages/useragentstring.php'
-
-    user_agent_strings = {}
-    for browser_name in browser_names_:
-        # url = resource_url.replace('useragentstring.php', browser_name.replace(" ", "+") + '/')
-        url = resource_url + f'?name={browser_name.replace(" ", "+")}'
-        response = requests.get(url=url)
-        fua_parser = _FakeUserAgentParser(browser_name=browser_name)
-        fua_parser.feed(response.text)
-        user_agent_strings[browser_name] = list(set(fua_parser.data))
-
-    if dump_dat and all(user_agent_strings.values()):
-        path_to_uas = importlib.resources.files(__package__).joinpath("data/user-agent-strings.json")
-        with path_to_uas.open(mode='w') as f:
-            f.write(json.dumps(user_agent_strings, indent=4))
-
-    return user_agent_strings
-
-
-def load_user_agent_strings(shuffled: bool = False, flattened: bool = False, update: bool = False, verbose: bool = False) -> list:
-    """
-    Load user-agent strings of popular browsers.
-
-    The current version collects a partially comprehensive list of user-agent strings for
-    `Chrome`_, `Firefox`_, `Safari`_, `Edge`_, `Internet Explorer`_ and `Opera`_.
-
-    Args:
-        shuffled (bool, optional): whether to shuffle the user-agent strings of each browser. Defaults to False.
-        flattened (bool, optional): whether to flatten the user-agent strings of all browsers into a single list.
-            Defaults to False.
-        update (bool, optional): whether to update the backup data of user-agent strings. Defaults to False.
-        verbose (bool, optional): whether to print relevant information in console. Defaults to False.
-
-    Returns:
-        list: a list of user-agent strings of popular browsers
-
-    See also:
-        .. _`Chrome`: https://useragentstring.com/pages/useragentstring.php?name=Chrome
-        .. _`Firefox`: https://useragentstring.com/pages/useragentstring.php?name=Firefox
-        .. _`Safari`: https://useragentstring.com/pages/useragentstring.php?name=Safari
-        .. _`Edge`: https://useragentstring.com/pages/useragentstring.php?name=Edge
-        .. _`Internet Explorer`: https://useragentstring.com/pages/useragentstring.php?name=Internet+Explorer
-        .. _`Opera`: https://useragentstring.com/pages/useragentstring.php?name=Opera
-
-
-    Notes:
-        The order of the elements in ``uas_list`` may be different every time we run the example
-        as ``shuffled=True``.
-    """
-
-    if not update:
-        # path_to_json = pkg_resources.resource_filename(__name__, "data\\user-agent-strings.json")
-        # json_in = open(path_to_json, mode='r')
-        # user_agent_strings = json.loads(json_in.read())
-        user_agent_strings = _USER_AGENT_STRINGS.copy()
-
-    else:
-        if verbose:
-            print("Updating the backup data of user-agent strings", end=" ... ")
-
-        try:
-            user_agent_strings = _user_agent_strings(dump_dat=True)
-
-            importlib.reload(sys.modules.get('pyhelpers._cache'))
-
-            if verbose:
-                print("Done.")
-
-        except Exception as e:
-            if verbose:
-                print(f"Failed. {e}")
-            user_agent_strings = load_user_agent_strings(update=False, verbose=False)
-
-    if shuffled:
-        for browser_name, ua_str in user_agent_strings.items():
-            random.shuffle(ua_str)
-            user_agent_strings.update({browser_name: ua_str})
-
-    if flattened:
-        user_agent_strings = [x for v in user_agent_strings.values() for x in v]
-
-    return user_agent_strings
-
-
-def get_user_agent_string(fancy: str = None, **kwargs) -> str:
-    """
-    Get a random user-agent string of a certain browser.
-
-    Args:
-        fancy (str, optional): a name of a popular browser. Defaults to None.
-        kwargs: [optional] parameters of the function
-
-    Returns:
-        str: a random user-agent string of a certain browser
-
-
-    Notes:
-        In the above examples, the returned user-agent string is random and may be different
-        every time of running the function.
-    """
-
-    if fancy is not None:
-        browser_names = {'Chrome', 'Firefox', 'Safari', 'Edge', 'Internet Explorer', 'Opera'}
-        assert fancy in browser_names, f"`fancy` must be one of {browser_names}."
-
-        kwargs.update({'flattened': False})
-        user_agent_strings_ = load_user_agent_strings(**kwargs)
-
-        user_agent_strings = user_agent_strings_[fancy]
-
-    else:
-        kwargs.update({'flattened': True})
-        user_agent_strings = load_user_agent_strings(**kwargs)
-
-    user_agent_string = secrets.choice(user_agent_strings)
-
-    return user_agent_string
-
-
-def fake_requests_headers(randomized: bool = True, **kwargs) -> dict:
-    """
-    Make a fake HTTP headers for `requests.get
-    <https://requests.readthedocs.io/en/master/user/advanced/#request-and-response-objects>`_.
-
-    Args:
-        randomized (bool, optional): whether to use a random user-agent string. Defaults to True.
-        kwargs: [optional] parameters of the function :func:`pyhelpers.ops.get_user_agent_string`
-
-    Returns:
-        dict: a fake HTTP headers for `requests.get`
-
-    Notes:
-        - ``fake_headers_1`` may also be different every time we run the example.
-          This is because the returned result is randomly chosen from a limited set of candidate
-          user-agent strings, even though ``randomized`` is (by default) set to be ``False``.
-        - By setting ``randomized=True``, the function returns a random result from among
-          all available user-agent strings of several popular browsers.
-    """
-
-    if not randomized:
-        kwargs.update({'fancy': 'Chrome'})
-
-    user_agent_string = get_user_agent_string(**kwargs)
-
-    fake_headers = {'user-agent': user_agent_string}
-
-    return fake_headers
-
-
-@requires('tqdm')
-def _download_file_from_url(response, path_to_file):
-    """
-    Download an object from a valid URL (and save it as a file).
-
-    """
-
-    # import tqdm if it is available, otherwise, install and import it
-    tqdm_ = import_package('tqdm')
-
-    file_size = int(response.headers.get('content-length'))  # Total size in bytes
-
-    unit_divisor = 1024
-    block_size = unit_divisor ** 2
-    chunk_size = block_size if file_size >= block_size else unit_divisor
-
-    total_iter = file_size // chunk_size
-
-    pg_args = {
-        'desc': f'"{path_to_file}"',
-        'total': total_iter,
-        'unit': 'B',
-        'unit_scale': True,
-        'unit_divisor': unit_divisor,
-    }
-    with tqdm_.tqdm(**pg_args) as progress:
-
-        contents = response.iter_content(chunk_size=chunk_size, decode_unicode=True)
-
-        with open(file=path_to_file, mode='wb') as f:
-            written = 0
-            for data in contents:
-                if data:
-                    try:
-                        f.write(data)
-                    except TypeError:
-                        f.write(data.encode())
-                    progress.update(len(data))
-                    written += len(data)
-
-    if file_size != 0 and written != file_size:
-        print("ERROR! Something went wrong!")
-
-
-def download_file_from_url(url: str,
-                           path_to_file: str,
-                           if_exists: str = 'replace',
-                           max_retries: str = 5,
-                           random_header: bool = True,
-                           verbose: bool =  False,
-                           requests_session_args=None,
-                           fake_headers_args: dict = None,
-                           **kwargs):
-    """
-    Download an object available at a valid URL.
-
-    See also:
-        [`OPS-DFFU-1`_] and [`OPS-DFFU-2`_].
-
-        .. _OPS-DFFU-1: https://stackoverflow.com/questions/37573483/
-        .. _OPS-DFFU-2: https://stackoverflow.com/questions/15431044/
-
-    Args:
-        url (str): a valid URL
-        path_to_file (str): a path to the file to be saved
-        if_exists (str, optional): whether to replace or skip the file if it already exists.
-            Defaults to 'replace'.
-        max_retries (str, optional): maximum number of retries. Defaults to 5.
-        random_header (bool, optional): whether to use a random user-agent string. Defaults to True.
-        verbose (bool, optional): whether to print relevant information in console. Defaults to False.
-        requests_session_args (dict, optional): parameters of the function
-        fake_headers_args (dict, optional): parameters of the function
-        kwargs: [optional] parameters of the function :func:`requests.Session.get`
-
-    .. _`requests.Session.get()`:
-        https://docs.python-requests.org/en/master/_modules/requests/sessions/#Session.get
-
-    Notes:
-
-        - When ``verbose=True``, the function requires `tqdm`_.
-
-        .. _`tqdm`: https://pypi.org/project/tqdm/
-    """
-
-    path_to_dir = os.path.dirname(path_to_file)
-    if path_to_dir == "":
-        path_to_file_ = os.path.join(os.getcwd(), path_to_file)
-        path_to_dir = os.path.dirname(path_to_file_)
-    else:
-        path_to_file_ = copy.copy(path_to_file)
-
-    if os.path.exists(path_to_file_) and if_exists != 'replace':
-        if verbose:
-            print(f"The destination already has a file named \"{os.path.basename(path_to_file_)}\". "
-                  f"The download is cancelled.")
-
-    else:
-        if requests_session_args is None:
-            requests_session_args = {}
-        session = init_requests_session(url=url, max_retries=max_retries, **requests_session_args)
-
-        if fake_headers_args is None:
-            fake_headers_args = {}
-        fake_headers = fake_requests_headers(randomized=random_header, **fake_headers_args)
-
-        # Streaming, so we can iterate over the response
-        with session.get(url=url, stream=True, headers=fake_headers, **kwargs) as response:
-
-            if not os.path.exists(path_to_dir):
-                os.makedirs(path_to_dir)
-
-            if verbose:
-                _download_file_from_url(response=response, path_to_file=path_to_file_)
-
-            else:
-                with open(file=path_to_file_, mode='wb') as f:
-                    shutil.copyfileobj(fsrc=response.raw, fdst=f)
-
-                if os.stat(path=path_to_file_).st_size == 0:
-                    print("ERROR! Something went wrong! Check if the URL is downloadable.")
-
-
 class GitHubFileDownloader:
     """
     Download files on GitHub from a given repository URL.
@@ -424,20 +99,21 @@ class GitHubFileDownloader:
         try:
             self.api_url, self.download_dirs = self.create_url(self.repo_url)
         except Exception as e:
-            raise ValueError(f"Error: the input URL is not valid. {e}")
+            raise ValueError(f"Error: the input URL is not valid. {e}") from e
 
         # Initialize the total number of files under the given directory
         self.total_files = 0
 
         # Set user agent in default
         opener = urllib.request.build_opener()
-        opener.addheaders = list(fake_requests_headers().items())
+        opener.addheaders = list(self.fake_requests_headers().items())
         urllib.request.install_opener(opener)
 
     @staticmethod
     def create_url(url):
         """
-        From the given url, produce a URL that is compatible with GitHub's REST API. It can handle ``blob`` or tree paths.
+        From the given url, produce a URL that is compatible with GitHub's REST API.
+        It can handle ``blob`` or tree paths.
 
         Args:
             url (str): a URL of a GitHub repository to download from
@@ -467,6 +143,328 @@ class GitHubFileDownloader:
             f'contents/{download_paths}?ref={branch[2]}')
 
         return api_url, download_paths
+
+    def init_requests_session(self, url: str,
+                              max_retries: int = 5,
+                              backoff_factor: float = 0.1,
+                              retry_status: str = 'default',
+                              **kwargs) -> requests.Session:
+        """Initialize a session for making HTTP requests.
+
+        Args:
+            url (_type_): a valid URL
+            max_retries (int, optional): maximum number of retries. Defaults to 5.
+            backoff_factor (float, optional): ``backoff_factor`` of `urllib3.util.retry.Retry`_. Defaults to 0.1.
+            retry_status (str, optional): a list of HTTP status codes that force to retry downloading,
+                inherited from ``status_forcelist`` of `urllib3.util.retry.Retry`_;
+                when ``retry_status='default'``, the list defaults to ``[429, 500, 502, 503, 504]``.
+                Defaults to 'default'.
+
+        Returns:
+            requests.Session:
+        """
+
+        if retry_status == 'default':
+            codes_for_retries = [429, 500, 502, 503, 504]
+        else:
+            codes_for_retries = copy.copy(retry_status)
+
+        kwargs.update({'backoff_factor': backoff_factor, 'status_forcelist': codes_for_retries})
+        retries = urllib3.util.retry.Retry(total=max_retries, **kwargs)
+
+        session = requests.Session()
+
+        # noinspection HttpUrlsUsage
+        session.mount(
+            prefix='https://' if url.startswith('https:') else 'http://',
+            adapter=requests.adapters.HTTPAdapter(max_retries=retries))
+
+        return session
+
+    def _user_agent_strings(self, browser_names: list = None, dump_dat: bool = True) -> dict:
+        """Get a dictionary of user-agent strings for popular browsers.
+
+        Args:
+            browser_names (list, optional): names of a list of popular browsers. Defaults to None.
+            dump_dat (bool, optional): _description_. Defaults to True.
+
+        Returns:
+            dict: a dictionary of user-agent strings for popular browsers
+        """
+
+        if browser_names is None:
+            browser_names_ = ['Chrome', 'Firefox', 'Safari', 'Edge', 'Internet Explorer', 'Opera']
+        else:
+            browser_names_ = browser_names.copy()
+
+        resource_url = 'https://useragentstring.com/pages/useragentstring.php'
+
+        user_agent_strings = {}
+        for browser_name in browser_names_:
+            # url = resource_url.replace('useragentstring.php', browser_name.replace(" ", "+") + '/')
+            url = resource_url + f'?name={browser_name.replace(" ", "+")}'
+            response = requests.get(url=url)
+            fua_parser = _FakeUserAgentParser(browser_name=browser_name)
+            fua_parser.feed(response.text)
+            user_agent_strings[browser_name] = list(set(fua_parser.data))
+
+        if dump_dat and all(user_agent_strings.values()):
+            path_to_uas = importlib.resources.files(__package__).joinpath("data/user-agent-strings.json")
+            with path_to_uas.open(mode='w') as f:
+                f.write(json.dumps(user_agent_strings, indent=4))
+
+        return user_agent_strings
+
+    def load_user_agent_strings(self,
+                                shuffled: bool = False,
+                                flattened: bool = False,
+                                update: bool = False,
+                                verbose: bool = False) -> list:
+        """
+        Load user-agent strings of popular browsers.
+
+        The current version collects a partially comprehensive list of user-agent strings for
+        `Chrome`_, `Firefox`_, `Safari`_, `Edge`_, `Internet Explorer`_ and `Opera`_.
+
+        Args:
+            shuffled (bool, optional): whether to shuffle the user-agent strings of each browser. Defaults to False.
+            flattened (bool, optional): whether to flatten the user-agent strings of all browsers into a single list.
+                Defaults to False.
+            update (bool, optional): whether to update the backup data of user-agent strings. Defaults to False.
+            verbose (bool, optional): whether to print relevant information in console. Defaults to False.
+
+        Returns:
+            list: a list of user-agent strings of popular browsers
+
+        See also:
+            .. _`Chrome`: https://useragentstring.com/pages/useragentstring.php?name=Chrome
+            .. _`Firefox`: https://useragentstring.com/pages/useragentstring.php?name=Firefox
+            .. _`Safari`: https://useragentstring.com/pages/useragentstring.php?name=Safari
+            .. _`Edge`: https://useragentstring.com/pages/useragentstring.php?name=Edge
+            .. _`Internet Explorer`: https://useragentstring.com/pages/useragentstring.php?name=Internet+Explorer
+            .. _`Opera`: https://useragentstring.com/pages/useragentstring.php?name=Opera
+
+
+        Notes:
+            The order of the elements in ``uas_list`` may be different every time we run the example
+            as ``shuffled=True``.
+        """
+
+        if not update:
+            # path_to_json = pkg_resources.resource_filename(__name__, "data\\user-agent-strings.json")
+            # json_in = open(path_to_json, mode='r')
+            # user_agent_strings = json.loads(json_in.read())
+            user_agent_strings = _USER_AGENT_STRINGS.copy()
+
+        else:
+            if verbose:
+                print("Updating the backup data of user-agent strings", end=" ... ")
+
+            try:
+                user_agent_strings = self._user_agent_strings(dump_dat=True)
+
+                importlib.reload(sys.modules.get('pyhelpers._cache'))
+
+                if verbose:
+                    print("Done.")
+
+            except Exception as e:
+                if verbose:
+                    print(f"Failed. {e}")
+                user_agent_strings = self.load_user_agent_strings(update=False, verbose=False)
+
+        if shuffled:
+            for browser_name, ua_str in user_agent_strings.items():
+                random.shuffle(ua_str)
+                user_agent_strings.update({browser_name: ua_str})
+
+        if flattened:
+            user_agent_strings = [x for v in user_agent_strings.values() for x in v]
+
+        return user_agent_strings
+
+    def get_user_agent_string(self, fancy: str = None, **kwargs) -> str:
+        """
+        Get a random user-agent string of a certain browser.
+
+        Args:
+            fancy (str, optional): a name of a popular browser. Defaults to None.
+            kwargs: [optional] parameters of the function
+
+        Returns:
+            str: a random user-agent string of a certain browser
+
+
+        Notes:
+            In the above examples, the returned user-agent string is random and may be different
+            every time of running the function.
+        """
+
+        if fancy is not None:
+            browser_names = {'Chrome', 'Firefox', 'Safari', 'Edge', 'Internet Explorer', 'Opera'}
+            assert fancy in browser_names, f"`fancy` must be one of {browser_names}."
+
+            kwargs['flattened'] = False
+            user_agent_strings_ = self.load_user_agent_strings(**kwargs)
+
+            user_agent_strings = user_agent_strings_[fancy]
+
+        else:
+            kwargs['flattened'] = True
+            user_agent_strings = self.load_user_agent_strings(**kwargs)
+
+        user_agent_string = secrets.choice(user_agent_strings)
+
+        return user_agent_string
+
+    def fake_requests_headers(self, randomized: bool = True, **kwargs) -> dict:
+        """
+        Make a fake HTTP headers for `requests.get
+        <https://requests.readthedocs.io/en/master/user/advanced/#request-and-response-objects>`_.
+
+        Args:
+            randomized (bool, optional): whether to use a random user-agent string. Defaults to True.
+            kwargs: [optional] parameters of the function :func:`pyhelpers.ops.get_user_agent_string`
+
+        Returns:
+            dict: a fake HTTP headers for `requests.get`
+
+        Notes:
+            - ``fake_headers_1`` may also be different every time we run the example.
+            This is because the returned result is randomly chosen from a limited set of candidate
+            user-agent strings, even though ``randomized`` is (by default) set to be ``False``.
+            - By setting ``randomized=True``, the function returns a random result from among
+            all available user-agent strings of several popular browsers.
+        """
+
+        if not randomized:
+            kwargs['fancy'] = 'Chrome'
+
+        user_agent_string = self.get_user_agent_string(**kwargs)
+
+        fake_headers = {'user-agent': user_agent_string}
+
+        return fake_headers
+
+    @requires('tqdm')
+    def _download_file_from_url(self, response, path_to_file):
+        """
+        Download an object from a valid URL (and save it as a file).
+
+        """
+
+        # import tqdm if it is available, otherwise, install and import it
+        tqdm_ = import_package('tqdm')
+
+        file_size = int(response.headers.get('content-length'))  # Total size in bytes
+
+        unit_divisor = 1024
+        block_size = unit_divisor ** 2
+        chunk_size = block_size if file_size >= block_size else unit_divisor
+
+        total_iter = file_size // chunk_size
+
+        pg_args = {
+            'desc': f'"{path_to_file}"',
+            'total': total_iter,
+            'unit': 'B',
+            'unit_scale': True,
+            'unit_divisor': unit_divisor,
+        }
+        with tqdm_.tqdm(**pg_args) as progress:
+
+            contents = response.iter_content(chunk_size=chunk_size, decode_unicode=True)
+
+            with open(file=path_to_file, mode='wb') as f:
+                written = 0
+                for data in contents:
+                    if data:
+                        try:
+                            f.write(data)
+                        except TypeError:
+                            f.write(data.encode())
+                        progress.update(len(data))
+                        written += len(data)
+
+        if file_size != 0 and written != file_size:
+            print("ERROR! Something went wrong!")
+
+    def download_file_from_url(self, url: str,
+                               path_to_file: str,
+                               if_exists: str = 'replace',
+                               max_retries: str = 5,
+                               random_header: bool = True,
+                               verbose: bool = False,
+                               requests_session_args=None,
+                               fake_headers_args: dict = None,
+                               **kwargs):
+        """
+        Download an object available at a valid URL.
+
+        See also:
+            [`OPS-DFFU-1`_] and [`OPS-DFFU-2`_].
+
+            .. _OPS-DFFU-1: https://stackoverflow.com/questions/37573483/
+            .. _OPS-DFFU-2: https://stackoverflow.com/questions/15431044/
+
+        Args:
+            url (str): a valid URL
+            path_to_file (str): a path to the file to be saved
+            if_exists (str, optional): whether to replace or skip the file if it already exists.
+                Defaults to 'replace'.
+            max_retries (str, optional): maximum number of retries. Defaults to 5.
+            random_header (bool, optional): whether to use a random user-agent string. Defaults to True.
+            verbose (bool, optional): whether to print relevant information in console. Defaults to False.
+            requests_session_args (dict, optional): parameters of the function
+            fake_headers_args (dict, optional): parameters of the function
+            kwargs: [optional] parameters of the function :func:`requests.Session.get`
+
+        .. _`requests.Session.get()`:
+            https://docs.python-requests.org/en/master/_modules/requests/sessions/#Session.get
+
+        Notes:
+
+            - When ``verbose=True``, the function requires `tqdm`_.
+
+            .. _`tqdm`: https://pypi.org/project/tqdm/
+        """
+
+        path_to_dir = os.path.dirname(path_to_file)
+        if path_to_dir == "":
+            path_to_file_ = os.path.join(os.getcwd(), path_to_file)
+            path_to_dir = os.path.dirname(path_to_file_)
+        else:
+            path_to_file_ = copy.copy(path_to_file)
+
+        if os.path.exists(path_to_file_) and if_exists != 'replace':
+            if verbose:
+                print(f"The destination already has a file named: {os.path.basename(path_to_file_)}, \
+                      the download is cancelled.")
+
+        else:
+            if requests_session_args is None:
+                requests_session_args = {}
+            session = self.init_requests_session(url=url, max_retries=max_retries, **requests_session_args)
+
+            if fake_headers_args is None:
+                fake_headers_args = {}
+            fake_headers = self.fake_requests_headers(randomized=random_header, **fake_headers_args)
+
+            # Streaming, so we can iterate over the response
+            with session.get(url=url, stream=True, headers=fake_headers, **kwargs) as response:
+
+                if not os.path.exists(path_to_dir):
+                    os.makedirs(path_to_dir)
+
+                if verbose:
+                    self._download_file_from_url(response=response, path_to_file=path_to_file_)
+
+                else:
+                    with open(file=path_to_file_, mode='wb') as f:
+                        shutil.copyfileobj(fsrc=response.raw, fdst=f)
+
+                    if os.stat(path=path_to_file_).st_size == 0:
+                        print("ERROR! Something went wrong! Check if the URL is downloadable.")
 
     def download_single_file(self, file_url: str, dir_out: str):
         # Download the file
@@ -570,3 +568,42 @@ def github_file_downloader(repo_url: str, output_dir: str | None = None, flatten
     """
 
     return GitHubFileDownloader(repo_url, flatten_files=flatten, output_dir=output_dir).download()
+
+
+def get_github_status(usr_name: str, repo_name: str) -> dict:
+    """Fetches GitHub repository status including stars, forks, issues, and pull requests.
+
+    Args:
+        usr_name (str): the github username
+        repo_name (str): repository name
+
+    Returns:
+        dict: a dictionary containing the status of the repository
+    """
+    # Base URL for GitHub API
+    base_url = "https://api.github.com/repos"
+
+    # Construct the URL for the repository
+    repo_url = f"{base_url}/{usr_name}/{repo_name}"
+
+    # Make the request to GitHub API
+    repo_response = requests.get(repo_url)
+    repo_data = repo_response.json()
+
+    # Extracting necessary information
+    stars = repo_data.get('stargazers_count', 0)
+    forks = repo_data.get('forks_count', 0)
+    issues = repo_data.get('open_issues_count', 0)
+
+    # Fetching pull requests is a bit different, need to count open PRs specifically
+    prs_url = f"{repo_url}/pulls?state=open"
+    prs_response = requests.get(prs_url)
+    prs_data = prs_response.json()
+    pull_requests = len(prs_data)  # Assuming all PRs are returned, might need pagination for large numbers
+
+    return {
+        "stars": stars,
+        "forks": forks,
+        "issues": issues,
+        "pull_requests": pull_requests
+    }
