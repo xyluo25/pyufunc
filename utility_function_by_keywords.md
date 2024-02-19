@@ -64,6 +64,7 @@ pyufunc.show_util_func_by_keyword()
 - find:
   - find_closest_point
   - find_closest_points
+  - find_k_nearest_points
 
 - calc:
   - calc_distance_on_unit_sphere
@@ -95,3 +96,6 @@ pyufunc.show_util_func_by_keyword()
 
 - pypi:
   - pypi_downloads
+
+- create:
+  - create_circle_at_point_with_radius

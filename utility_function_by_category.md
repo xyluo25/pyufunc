@@ -35,12 +35,13 @@ pyufunc.show_util_func_by_category()
   - get_time_diff_in_unit
 
 - util_geo:
-  - point_to_circle_on_unit_radius
+  - create_circle_at_point_with_radius
   - proj_point_to_line
   - calc_distance_on_unit_sphere
   - find_closest_point
   - get_coordinates_from_geom
   - find_closest_points
+  - find_k_nearest_points
   - gmns_geo
 
 - util_git_pypi:
