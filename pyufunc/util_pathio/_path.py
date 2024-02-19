@@ -79,7 +79,7 @@ def path2uniform(path: str | Path) -> str:
         return str(path).replace("\\", "/")
 
 
-def get_filenames_by_ext(path_to_dir: str | Path, file_ext="csv", incl_subdir: bool = False) -> list[str]:
+def get_filenames_by_ext(path_to_dir: str | Path, file_ext: str | list = "csv", incl_subdir: bool = False) -> list[str]:
     """Get a list of filenames in a folder by file extension
 
     Location:
@@ -90,7 +90,7 @@ def get_filenames_by_ext(path_to_dir: str | Path, file_ext="csv", incl_subdir: b
 
     Args:
         path_to_dir (str | Path): the path to the folder
-        file_ext (str, optional): the file extension to be specified. Defaults to "csv".
+        file_ext (str | list | tuple, optional): the file extension to be specified. Defaults to "csv".
         incl_subdir (bool, optional): Whether to traverse all files inside sub folder. Defaults to False.
 
     Returns:
@@ -103,18 +103,27 @@ def get_filenames_by_ext(path_to_dir: str | Path, file_ext="csv", incl_subdir: b
 
     """
 
+    # convert file extension to tuple
+    if isinstance(file_ext, str):
+        file_ext = (file_ext,)
+    if isinstance(file_ext, (list, tuple)):
+        file_ext = tuple(file_ext)
+
+    if not file_ext:
+        file_ext = ("*",)
+
     if incl_subdir:
         files_list = []
         for root, _, files in os.walk(path_to_dir):
             files_list.extend([os.path.join(root, file) for file in files])
 
-        if file_ext in {None, "*", "all"}:
+        if file_ext[0] in {None, "*", "all"}:
             return [path2linux(file) for file in files_list]
 
         return [path2linux(file) for file in files_list if file.endswith(file_ext)]
 
     # Files in the first layer of the folder
-    if file_ext in {None, "*", "all"}:
+    if file_ext[0] in {None, "*", "all"}:
         return [path2linux(os.path.join(path_to_dir, file)) for file in os.listdir(path_to_dir)]
 
     return [path2linux(os.path.join(path_to_dir, file)) for file in os.listdir(path_to_dir)
