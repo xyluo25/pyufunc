@@ -71,8 +71,11 @@ ufunc_category = {
 }
 
 
-def show_util_func_by_category() -> None:
+def show_util_func_by_category(verbose: bool = False) -> None:
     """show all available utility functions in pyufunc by category or by prefix keywords.
+
+    Args:
+        verbose (bool, optional): whether to return string information. Defaults to False.
 
     Examples:
         >>> import pyufunc as uf
@@ -95,22 +98,23 @@ def show_util_func_by_category() -> None:
 
     """
 
-    # print all available utility functions
-    print("Available utility functions in pyUFunc:")
-
-    def _print_func(func_list: list):
-        for func in func_list:
-            print(f"  - {func}")
+    res_str = "Available utility functions in pyUFunc:\n"
 
     for util_category in ufunc_category:
         if ufunc_category[util_category]:
-            print(f"- {util_category}:")
-            _print_func(ufunc_category[util_category])
-            print()
+            res_str += f"\n- {util_category}:\n"
+            for func in ufunc_category[util_category]:
+                res_str += f"  - {func}\n"
+
+    print(res_str)
+    return res_str if verbose else None
 
 
-def show_util_func_by_keywords() -> None:
+def show_util_func_by_keywords(verbose: bool = False) -> None:
     """show all available utility functions in pyufunc by prefix keywords.
+
+    Args:
+        verbose (bool, optional): whether to return string information. Defaults to False.
 
     Examples:
         >>> import pyufunc as uf
@@ -137,17 +141,14 @@ def show_util_func_by_keywords() -> None:
         else:
             ufunc_keywords["non-keywords"].append(func_str)
 
-    # print all available utility functions
-    print("Available utility functions in pyUFunc:")
-
-    def _print_func(func_list: list):
-        for func in func_list:
-            print(f"  - {func}")
+    res_str = "Available utility functions in pyUFunc:\n"
 
     for keyword in ufunc_keywords:
         if ufunc_keywords[keyword]:
-            print(f"- {keyword}:")
-            _print_func(ufunc_keywords[keyword])
-            print()
+            res_str += f"\n- {keyword}:\n"
+            for func in ufunc_keywords[keyword]:
+                res_str += f"  - {func}\n"
+    print(res_str)
+    return res_str if verbose else None
 
 __all__ = list(chain(*ufunc_category.values()))

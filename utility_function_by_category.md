@@ -6,13 +6,12 @@ The categories outlined in this document span a wide range of functionalities, e
 
 ## Existing Utility Functions by Category
 
-Available utility functions in PyUFunc
-
 Note: we may not update available functions in time, please run code below to check latest available functions.
 
 ```python
 pyufunc.show_util_func_by_category()
 ```
+Available utility functions in pyUFunc:
 
 - util_common:
   - show_supported_docstring_header
@@ -47,6 +46,7 @@ pyufunc.show_util_func_by_category()
 - util_git_pypi:
   - github_file_downloader
   - pypi_downloads
+  - github_get_status
 
 - util_network:
   - get_host_ip
@@ -60,6 +60,7 @@ pyufunc.show_util_func_by_category()
   - get_filenames_by_ext
   - check_files_existence
   - check_filename
+  - generate_unique_filename
   - check_platform
   - is_windows
   - is_linux

@@ -98,4 +98,85 @@ pyufunc.show_util_func_by_keyword()
   - pypi_downloads
 
 - create:
+  - create_circle_at_point_with_radiusAvailable utility functions in pyUFunc:
+
+- non-keywords:
+  - gmns_geo
+  - path2linux
+  - path2uniform
+  - import_package
+  - func_running_time
+  - requires
+
+- show:
+  - show_supported_docstring_header
+  - show_google_docstring_style
+  - show_numpy_docstring_style
+  - show_util_func_by_category
+  - show_util_func_by_keywords
+
+- get:
+  - get_timezone
+  - get_time_diff_in_unit
+  - get_coordinates_from_geom
+  - get_host_ip
+  - get_file_size
+  - get_dir_size
+  - get_filenames_by_ext
+  - get_user_defined_func
+
+- generate:
+  - generate_password
+  - generate_unique_filename
+
+- create:
   - create_circle_at_point_with_radius
+
+- find:
+  - find_closest_point
+  - find_closest_points
+  - find_k_nearest_points
+
+- calc:
+  - calc_distance_on_unit_sphere
+
+- check:
+  - check_files_existence
+  - check_filename
+  - check_platform
+
+- validate:
+  - validate_url
+
+- list:
+  - list_all_timezones
+
+- split:
+  - split_dict_by_chunk
+  - split_list_by_equal_sublist
+  - split_list_by_fixed_length
+
+- fmt:
+  - fmt_dt_to_str
+  - fmt_dt
+
+- cvt:
+  - cvt_int_to_alpha
+  - cvt_dt_to_tz
+
+- is:
+  - is_windows
+  - is_linux
+  - is_mac
+  - is_user_defined_func
+  - is_module_importable
+
+- proj:
+  - proj_point_to_line
+
+- github:
+  - github_file_downloader
+  - github_get_status
+
+- pypi:
+  - pypi_downloads
