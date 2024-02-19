@@ -13,7 +13,7 @@ import copy
 from typing import Union, Iterable
 import functools
 
-from pyufunc.util_geo._geo_circle import point_to_circle_on_unit_radius
+from pyufunc.util_geo._geo_circle import create_circle_at_point_with_radius
 from pyufunc.pkg_utils import func_running_time
 
 
@@ -72,15 +72,17 @@ def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
         162.66049633957005
 
     Note:
-        - This function is modified from the original code available at: https://pyhelpers.readthedocs.io/en/latest/index.html.
-        - It assumes the earth is perfectly spherical and returns the distance based on each point's longitude and latitude.
+        - This function is modified from the original code available at:
+            https://pyhelpers.readthedocs.io/en/latest/index.html.
+        - It assumes the earth is perfectly spherical and returns the distance
+            based on each point's longitude and latitude.
 
     """
 
     # TDD: Test-Driven Development, check data types of input arguments
-    assert isinstance(pt1, (Point, tuple, list, np.ndarray)), "The input pt1 should be a shapely.Point, tuple, list, or np.array object."
-    assert isinstance(pt2, (Point, tuple, list, np.ndarray)), "The input pt2 should be a shapely.Point, tuple, list, or np.array object."
-    assert unit in ["meter", "km", "mile"], "The input unit should be in 'meter', 'km', or 'mile'."
+    assert isinstance(pt1, (Point, tuple, list, np.ndarray)), "pt1 should be a shapely.Point, tuple, list, or np.array."
+    assert isinstance(pt2, (Point, tuple, list, np.ndarray)), "pt2 should be a shapely.Point, tuple, list, or np.array."
+    assert unit in {"meter", "km", "mile"}, "The input unit should be in 'meter', 'km', or 'mile'."
 
     # the default earth radius in meters
     EARTH_RADIUS = {"meter": 6378137, "km": 6371.0, "mile": 3960.0}
@@ -143,7 +145,8 @@ def find_closest_point(pt: Point, pts: MultiPoint, k_closest: int = 1) -> list:
         [POINT (1 1), POINT (2 2), POINT (3 3)]
 
     Note:
-        - This function is modified from the original code available at: https://pyhelpers.readthedocs.io/en/latest/index.html.
+        - This function is modified from the original code available at:
+            https://pyhelpers.readthedocs.io/en/latest/index.html.
         - The function return the close point but not distance.
         - Because of unit issue, the distance can be calculated by calc_distance_on_unit_sphere.
     """
@@ -163,7 +166,7 @@ def find_closest_point(pt: Point, pts: MultiPoint, k_closest: int = 1) -> list:
     return points_in_order
 
 
-def get_coordinates_from_geom(geom_obj: BaseGeometry) -> np.ndarray:
+def get_coordinates_from_geom(geom_obj: shapely.geometry) -> np.ndarray:
     """Get the coordinates from a geometry object.
 
     Args:
@@ -194,7 +197,8 @@ def get_coordinates_from_geom(geom_obj: BaseGeometry) -> np.ndarray:
                [0., 0.]])
 
     Note:
-        - This function is modified from the original code available at: https://pyhelpers.readthedocs.io/en/latest/index.html.
+        - This function is modified from the original code available at:
+            https://pyhelpers.readthedocs.io/en/latest/index.html.
         - It returns the coordinates of the geometry object in the format of numpy.ndarray.
     """
 
@@ -217,31 +221,34 @@ def get_coordinates_from_geom(geom_obj: BaseGeometry) -> np.ndarray:
             coords = np.concatenate(temp)
 
         elif geom_type.startswith('Multi'):
-            if 'Polygon' in geom_type:
-                coords = np.vstack([np.array(x.exterior.coords) for x in geom_obj.geoms])
-            else:
-                coords = np.vstack([np.array(x.coords) for x in geom_obj.geoms])
+            coords = (
+                np.vstack(
+                    [np.array(x.exterior.coords) for x in geom_obj.geoms]
+                )
+                if 'Polygon' in geom_type
+                else np.vstack([np.array(x.coords) for x in geom_obj.geoms])
+            )
+        elif 'Polygon' in geom_type:
+            coords = np.array(geom_obj.exterior.coords)
         else:
-            if 'Polygon' in geom_type:
-                coords = np.array(geom_obj.exterior.coords)
-            else:
-                coords = np.array(geom_obj.coords)
+            coords = np.array(geom_obj.coords)
 
     return coords
 
 
 @func_running_time
-def find_closest_points(pts: BaseGeometry,
-                        geom_obj: BaseGeometry,
+def find_closest_points(pts: shapely.geometry,
+                        geom_obj: shapely.geometry,
                         radius: float,
                         k_closest: int = 0) -> dict:
     """Find the closest points from a list of points to a geometry object (points) within a given radius.
 
+    Note:
+        This is equivalent to function: find_k_nearest_points.
+
     Args:
-        pts (Union[Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection]):
-            the point or points to start with
-        geom_obj (Union[Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection]):
-            the geometry object to be searched
+        pts (shapely.geometry): the list of points to start with
+        geom_obj (shapely.geometry): the geometry object to be projected to
         radius (float): search radius for each target point. Unit in meters.
         k_closest (int): k closest points for each starting point within the radius constraint.
             If k_closest is 0, return all points within the radius. Defaults to 0.
@@ -267,7 +274,7 @@ def find_closest_points(pts: BaseGeometry,
     assert isinstance(geom_obj, typing_set), (
         "The input pts should be a shapely.geometry.base.BaseGeometry object. object.")
     assert isinstance(radius, (float, int)), "The input radius should be a float, int, or None object."
-    assert isinstance(k_closest, int), "The input is_closest_only should be an int object."
+    assert isinstance(k_closest, int), "The input k_closest should be an int object."
 
     if k_closest < 0:
         raise ValueError("The input k_closest should be a non-negative integer.")
@@ -276,7 +283,8 @@ def find_closest_points(pts: BaseGeometry,
     pts_coords = get_coordinates_from_geom(pts)
 
     # create a buffer for each starting point with the given radius in meters
-    pts_coords_buffer = [Polygon(point_to_circle_on_unit_radius(coord, radius)["coordinates"]) for coord in pts_coords]
+    pts_coords_buffer = [Polygon(create_circle_at_point_with_radius(coord, radius)["coordinates"])
+                         for coord in pts_coords]
 
     # get the coordinates of the geometry object and create a multipoint object for the geometry object
     geom_pts_coords = get_coordinates_from_geom(geom_obj)
@@ -301,5 +309,70 @@ def find_closest_points(pts: BaseGeometry,
 
     if k_closest > 0:
         closest_points = {k: v[:k_closest] for k, v in closest_points.items()}
+
+    return closest_points
+
+
+def find_k_nearest_points(pts: shapely.geometry, geom_obj: shapely.geometry, radius: float, k_nearest: int = 0) -> dict:
+    """Find the k nearest points from a list of points to a geometry object (points) within a given radius.
+    Note:
+        This is equivalent to function: find_closest_points.
+
+    Args:
+        pts (shapely.geometry): the list of points to start with
+        geom_obj (shapely.geometry): the geometry object to be projected to
+        radius (float): search radius for each target point. Unit in meters.
+        k_nearest (int, optional): the k nearest points within radius. If it's 0, return all points within the radius.
+            Defaults to 0.
+
+    Raises:
+        ValueError: The input k_nearest should be a non-negative integer.
+
+    Returns:
+        dict: the k nearest points for each point within the radius constraint
+    """
+
+    # TDD: Test-Driven Development, check data types of input arguments
+    typing_set = (Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection)
+    assert isinstance(pts, typing_set), (
+        "The input pts should be a shapely.geometry.base.BaseGeometry object.")
+    assert isinstance(geom_obj, typing_set), (
+        "The input pts should be a shapely.geometry.base.BaseGeometry object. object.")
+    assert isinstance(radius, (float, int)), "The input radius should be a float, int, or None object."
+    assert isinstance(k_nearest, int), "The input k_nearest should be an int object."
+
+    if k_nearest < 0:
+        raise ValueError("The input k_nearest should be a non-negative integer.")
+
+    # get the coordinates of the starting point / points
+    pts_coords = get_coordinates_from_geom(pts)
+
+    # create a buffer for each starting point with the given radius in meters
+    pts_coords_buffer = [Polygon(create_circle_at_point_with_radius(coord, radius)["coordinates"])
+                         for coord in pts_coords]
+
+    # get the coordinates of the geometry object and create a multipoint object for the geometry object
+    geom_pts_coords = get_coordinates_from_geom(geom_obj)
+    geom_pts = MultiPoint(geom_pts_coords)
+
+    # find the closest points for each starting point within the buffer
+    closest_points = {}
+
+    for coord, pt_buffer in zip(pts_coords, pts_coords_buffer):
+        # find the intersection between the buffer and the geometry object
+        intersected_pts = pt_buffer.intersection(geom_pts)
+
+        # coord point
+        pt = Point(coord)
+
+        if intersected_pts.is_empty:
+            closest_points[pt] = []
+        elif isinstance(intersected_pts, Point):
+            closest_points[pt] = [intersected_pts]
+        else:
+            closest_points[pt] = sorted(intersected_pts.geoms, key=functools.partial(calc_distance_on_unit_sphere, pt))
+
+    if k_nearest > 0:
+        closest_points = {k: v[:k_nearest] for k, v in closest_points.items()}
 
     return closest_points

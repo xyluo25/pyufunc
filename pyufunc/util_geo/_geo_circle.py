@@ -10,8 +10,6 @@ import math
 from typing import Iterable, Union
 from shapely.geometry import Point
 
-__all__ = ["point_to_circle_on_unit_radius",]
-
 
 # convert degrees to radians
 def to_radians(angle_in_degrees: float) -> float:
@@ -76,10 +74,10 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
     return [to_degrees(lon), to_degrees(lat)]
 
 
-def point_to_circle_on_unit_radius(point: Union[Point, Iterable[float]],
-                                   radius: float,
-                                   options: dict = {"edges": 32, "bearing": 0, "direction": 1},
-                                   verbose: bool = False) -> dict:
+def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
+                                       radius: float,
+                                       options: dict = {"edges": 32, "bearing": 0, "direction": 1},
+                                       verbose: bool = False) -> dict:
     """ the function to generate a polygon by the center point and radius
 
     Args:
