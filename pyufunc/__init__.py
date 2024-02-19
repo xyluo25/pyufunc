@@ -71,11 +71,11 @@ ufunc_category = {
 }
 
 
-def show_util_func_by_category(verbose: bool = False) -> None:
+def show_util_func_by_category(verbose: bool = True) -> None:
     """show all available utility functions in pyufunc by category or by prefix keywords.
 
     Args:
-        verbose (bool, optional): whether to return string information. Defaults to False.
+        verbose (bool, optional): whether to print out information. Defaults to True.
 
     Examples:
         >>> import pyufunc as uf
@@ -106,15 +106,17 @@ def show_util_func_by_category(verbose: bool = False) -> None:
             for func in ufunc_category[util_category]:
                 res_str += f"  - {func}\n"
 
-    print(res_str)
-    return res_str if verbose else None
+    if verbose:
+        print(res_str)
+        return None
+    return res_str
 
 
-def show_util_func_by_keywords(verbose: bool = False) -> None:
+def show_util_func_by_keywords(verbose: bool = True) -> None:
     """show all available utility functions in pyufunc by prefix keywords.
 
     Args:
-        verbose (bool, optional): whether to return string information. Defaults to False.
+        verbose (bool, optional): whether to print string information. Defaults to True.
 
     Examples:
         >>> import pyufunc as uf
@@ -148,7 +150,9 @@ def show_util_func_by_keywords(verbose: bool = False) -> None:
             res_str += f"\n- {keyword}:\n"
             for func in ufunc_keywords[keyword]:
                 res_str += f"  - {func}\n"
-    print(res_str)
-    return res_str if verbose else None
+    if verbose:
+        print(res_str)
+        return None
+    return res_str
 
 __all__ = list(chain(*ufunc_category.values()))
