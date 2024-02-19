@@ -69,7 +69,7 @@ def import_package(pkg_name: str, options: list = ["--user"]) -> object:
         # install package onto current environment
         outputs = []
         try:
-            print(f"  :{pkg_name} not existed in current env, install the package first and import again...")
+            print(f"  :{pkg_name} not existed in current env, install them automatically...")
             all_args = [sys.executable, '-m', 'pip',
                         'install', *options, pkg_name]
 
@@ -87,9 +87,9 @@ def import_package(pkg_name: str, options: list = ["--user"]) -> object:
             print("  :Info: failed to install the package. please install it manually.")
             print(f"  :Use pip or conda to install it, e.g. 'pip install {pkg_name}'. ")
             if len(outputs) == 2:
-                [print(output, end='') for output in outputs]
+                [print(f"  :{output}", end='') for output in outputs]
             else:
-                print(e)
+                print(f"  :{e}")
             return
 
         # import package from current environment after installation
@@ -97,6 +97,7 @@ def import_package(pkg_name: str, options: list = ["--user"]) -> object:
     return module
 
 
+# decorator without arguments
 def func_running_time(func: object) -> object:
     """A decorator to measure the time of a function or class method.
     It is useful to use this function in test, debug, logging and running time measurement.
@@ -236,6 +237,7 @@ def is_module_importable(module_name: str) -> bool:
     return is_importable
 
 
+# decorator with extra arguments
 def requires(*args, **kwargs) -> object:
     """A decorator to wrap functions with extra dependencies.
     If the dependencies are not available, the function will not run.
@@ -243,9 +245,19 @@ def requires(*args, **kwargs) -> object:
     Returns:
         object: the decorated function.
 
+    Note:
+        user can parse the verbose and auto_install options to control the behavior of the decorator.
+        verbose: print the error message if the dependencies are not available. Default is True.
+        auto_install: install the missing dependencies automatically. Default is True.
+
+        eg: @requires("numpy", "pandas", verbose=False, auto_install=False)
+        eg: @requires("numpy", "pandas", verbose=True, auto_install=True)
+        eg: @requires("numpy", "pandas", verbose=True, auto_install=False)
+        eg: @requires("numpy", "pandas", verbose=False, auto_install=True)
+
     Examples:
         # Example 1: the function will not run if the dependencies are not available
-        >>> @requires("numpy", "pandas", "unknown_module")
+        >>> @requires("numpy", "pandas", "unknown_module", verbose=True, auto_install=False)
             def my_function():
                 return "I'm running!"
         >>> my_function()
@@ -253,7 +265,7 @@ def requires(*args, **kwargs) -> object:
             not running the function: my_function
 
         # Example 2: the function will run if the dependencies are available
-        >>> @requires("numpy", "pandas")
+        >>> @requires("numpy", "pandas", verbose=True, auto_install=True)
             def my_function():
                 return "I'm running!"
         >>> my_function()
@@ -263,7 +275,8 @@ def requires(*args, **kwargs) -> object:
 
     # Step 1: get the verbose option, default is True
     # the verbose option is used to print the error message
-    v = kwargs.get("verbose", True)
+    verbose = kwargs.get("verbose", True)
+    auto_install = kwargs.get("auto_install", True)
 
     # Step 2: get the required dependencies
     wanted = copy.deepcopy(args)
@@ -272,16 +285,23 @@ def requires(*args, **kwargs) -> object:
         available = [is_module_importable(arg) for arg in args]
         if all(available):
             return function
-        else:
-            def passer(*args, **kwargs):
-                if v:
-                    missing = [arg for i, arg in enumerate(wanted) if not available[i]]
-                    print(f"  :Error: missing dependencies: {missing}, please install them first.")
-                    print(f"  :Use pip or conda to install it, e.g. 'pip install {missing}'. ")
-                    assert False, f"Missing required dependencies, not running the function: {function.__name__}"
-                else:
-                    pass
 
-            return passer
+        # install missing dependencies
+        missing_modules = [arg for i, arg in enumerate(wanted) if not available[i]]
+        if auto_install:
+            print(f"  :Info: missing dependencies: {missing_modules}, install them automatically...")
+            for module in missing_modules:
+                import_package(module)
+            available = [is_module_importable(arg) for arg in args]
+            if all(available):
+                return function
+
+        def passer(*args, **kwargs):
+            if verbose:
+                print(f"  :Error: missing dependencies: {missing_modules}, please install them first.")
+                print(f"  :Use pip or conda to install it, e.g. 'pip install {missing_modules}'. ")
+                assert False, f"Missing required dependencies, not running the function: {function.__name__}"
+
+        return passer
 
     return inner
