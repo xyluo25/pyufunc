@@ -39,27 +39,29 @@ def split_list_by_equal_sublist(lst: list, num_of_sub: int) -> Generator:
     assert isinstance(num_of_sub, int), "num_of_sub should be an integer"
     assert num_of_sub > 0, "num_of_sub should be a positive integer"
 
-    if num_of_sub > len(lst):
-        return lst
-
-    sub_size, mod_value = divmod(len(lst), num_of_sub)
-    # equally split the list
-    if mod_value == 0:
-        for i in range(0, len(lst), sub_size):
-            yield lst[i:i + sub_size]
-
-    # split the list with the mod value
+    if num_of_sub >= len(lst):
+        print(f"  num_of_sub: {num_of_sub} is greater than or equal to the length of lst: {len(lst)}")
+        print(f"  Return the original list: {lst}")
+        yield from lst
     else:
-        mod_value_count = 0
-        for i in range(num_of_sub):
-            if mod_value_count < mod_value:
-                yield lst[i * (sub_size + 1):(i + 1) * (sub_size + 1)]
-                mod_value_count += 1
-            else:
-                yield lst[i * sub_size + mod_value:(i + 1) * sub_size + mod_value]
+        sub_size, mod_value = divmod(len(lst), num_of_sub)
+        # equally split the list
+        if mod_value == 0:
+            for i in range(0, len(lst), sub_size):
+                yield lst[i:i + sub_size]
+
+        # split the list with the mod value
+        else:
+            mod_value_count = 0
+            for i in range(num_of_sub):
+                if mod_value_count < mod_value:
+                    yield lst[i * (sub_size + 1):(i + 1) * (sub_size + 1)]
+                    mod_value_count += 1
+                else:
+                    yield lst[i * sub_size + mod_value:(i + 1) * sub_size + mod_value]
 
 
-def split_list_by_fixed_length(lst: list, fix_length: int) -> Generator:
+def split_list_by_fixed_length(lst: list, fixed_length: int) -> Generator:
     """Split a list into sublist of the same specified length
 
     See Also:
@@ -88,8 +90,8 @@ def split_list_by_fixed_length(lst: list, fix_length: int) -> Generator:
 
     # TDD, Test-Driven Development: validate inputs
     assert isinstance(lst, list), "lst should be a list"
-    assert isinstance(fix_length, int), "fix_length should be an integer"
-    assert fix_length > 0, "fix_length should be a positive integer"
+    assert isinstance(fixed_length, int), "fixed_length should be an integer"
+    assert fixed_length > 0, "fixed_length should be a positive integer"
 
-    for i in range(0, len(lst), fix_length):
-        yield lst[i:i + fix_length]
+    for i in range(0, len(lst), fixed_length):
+        yield lst[i:i + fixed_length]
