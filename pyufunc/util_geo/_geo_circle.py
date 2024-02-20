@@ -4,11 +4,14 @@
 # Contact Info: luoxiangyong01@gmail.com
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
-
-
+from __future__ import annotations
 import math
-from typing import Iterable, Union
-from shapely.geometry import Point
+from typing import Iterable, Union, TYPE_CHECKING
+from pyufunc.pkg_utils import requires
+
+#  https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
+if TYPE_CHECKING:
+    from shapely.geometry import Point
 
 
 # convert degrees to radians
@@ -58,6 +61,8 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
         list: the new longitude and latitude in degree format [longitude, latitude]
     """
 
+    from shapely.geometry import Point
+
     # TDD, test driven development: input validation
     assert isinstance(point, Point), "the point should be a shapely.geometry.Point"
 
@@ -74,6 +79,7 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
     return [to_degrees(lon), to_degrees(lat)]
 
 
+@requires("shapely")
 def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
                                        radius: float,
                                        options: dict = {"edges": 32, "bearing": 0, "direction": 1},
@@ -130,6 +136,8 @@ def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
         [111.9356, 33.42434831528412]]}
 
     """
+    # import shapely.geometry.Point
+    from shapely.geometry import Point
 
     # TDD, test driven development: input validation
     assert isinstance(point, (Point, Iterable)), "the point should be a shapely.geometry.Point or a list of longitude and latitude"
@@ -155,6 +163,8 @@ def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
     coordinates = []
     for i in range(edges):
         coordinates.append(_offset(point, radius, earth_radius, start + (direction * 2 * math.pi * -i) / edges))
+
+    # convert nested level 3 to level 2
     coordinates.append(coordinates[0])
 
     return {"type": "Polygon", "coordinates": coordinates}

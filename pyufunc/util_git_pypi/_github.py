@@ -4,7 +4,7 @@
 # Contact Info: luoxiangyong01@gmail.com
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
-
+from __future__ import annotations
 import contextlib
 import re
 import os
@@ -12,7 +12,6 @@ import urllib.request
 import json
 import sys
 import html.parser
-import requests
 import urllib3
 import copy
 import importlib
@@ -20,6 +19,7 @@ import secrets
 import random
 import shutil
 from pathlib import Path
+from typing import TYPE_CHECKING
 from pyufunc.pkg_utils import requires, import_package
 
 path_user_agent_strings = Path(__file__).parent.joinpath("static/user-agent-strings.json")
@@ -27,6 +27,11 @@ path_user_agent_strings = Path(__file__).parent.joinpath("static/user-agent-stri
 with open(path_user_agent_strings, mode='r', encoding='utf-8') as f:
     _web_agent_str = f.read()
 _USER_AGENT_STRINGS = json.loads(_web_agent_str)
+
+#  https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
+if TYPE_CHECKING:
+    import requests
+    from requests import Session
 
 
 class _FakeUserAgentParser(html.parser.HTMLParser):
@@ -66,6 +71,7 @@ class _FakeUserAgentParser(html.parser.HTMLParser):
             self.data.append(data.strip())
 
 
+@requires('requests')
 class GitHubFileDownloader:
     """
     Download files on GitHub from a given repository URL.
@@ -111,7 +117,7 @@ class GitHubFileDownloader:
         urllib.request.install_opener(opener)
 
     @staticmethod
-    def create_url(url):
+    def create_url(url: str) -> tuple[str, str]:
         """
         From the given url, produce a URL that is compatible with GitHub's REST API.
         It can handle ``blob`` or tree paths.
@@ -120,7 +126,7 @@ class GitHubFileDownloader:
             url (str): a URL of a GitHub repository to download from
 
         Returns:
-            str: a URL that is compatible with GitHub's REST API
+            tuple: a tuple of two strings, the first string is the API URL, and the second string is the download path
 
         """
 
@@ -143,13 +149,13 @@ class GitHubFileDownloader:
             f'{url[: branch.start()].replace("github.com", "api.github.com/repos", 1)}/'
             f'contents/{download_paths}?ref={branch[2]}')
 
-        return api_url, download_paths
+        return (api_url, download_paths)
 
     def init_requests_session(self, url: str,
                               max_retries: int = 5,
                               backoff_factor: float = 0.1,
                               retry_status: str = 'default',
-                              **kwargs) -> requests.Session:
+                              **kwargs) -> Session:
         """Initialize a session for making HTTP requests.
 
         Args:
@@ -571,6 +577,7 @@ def github_file_downloader(repo_url: str, output_dir: str | None = None, flatten
     return GitHubFileDownloader(repo_url, flatten_files=flatten, output_dir=output_dir).download()
 
 
+@requires('requests')
 def github_get_status(usr_name, repo_name=None) -> list[dict]:
     """
     Fetches GitHub repository status including stars, forks, issues, and pull requests.

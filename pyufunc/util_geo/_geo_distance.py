@@ -4,19 +4,23 @@
 # Contact Info: luoxiangyong01@gmail.com
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
-
-import shapely
-from shapely.geometry import Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection
-from shapely.geometry.base import BaseGeometry
-import numpy as np
+from __future__ import annotations
 import copy
-from typing import Union, Iterable
+from typing import Union, Iterable, TYPE_CHECKING
 import functools
-
 from pyufunc.util_geo._geo_circle import create_circle_at_point_with_radius
-from pyufunc.pkg_utils import func_running_time
+from pyufunc.pkg_utils import func_running_time, requires
+
+# https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
+if TYPE_CHECKING:
+    import shapely
+    from shapely.geometry import (Point, MultiPoint, LineString, MultiLineString,
+                                  Polygon, MultiPolygon, GeometryCollection)
+
+    import numpy as np
 
 
+@requires("shapely")
 def proj_point_to_line(point: Point, line: LineString) -> Point:
     """Project a point to a line.
 
@@ -41,6 +45,8 @@ def proj_point_to_line(point: Point, line: LineString) -> Point:
         POINT (0.5 0.5)
     """
 
+    from shapely.geometry import Point, LineString
+
     # TDD: Test-Driven Development, check data types of input arguments
     assert isinstance(point, Point), "The input point should be a shapely.Point object."
     assert isinstance(line, LineString), "The input line should be a shapely.LineString object."
@@ -51,6 +57,7 @@ def proj_point_to_line(point: Point, line: LineString) -> Point:
     return projected_point
 
 
+@requires("shapely", "numpy")
 def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
                                  pt2: Union[Point, tuple, list, np.array],
                                  unit: str = 'km') -> float:
@@ -79,6 +86,10 @@ def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
 
     """
 
+    # import required modules
+    from shapely.geometry import Point
+    import numpy as np
+
     # TDD: Test-Driven Development, check data types of input arguments
     assert isinstance(pt1, (Point, tuple, list, np.ndarray)), "pt1 should be a shapely.Point, tuple, list, or np.array."
     assert isinstance(pt2, (Point, tuple, list, np.ndarray)), "pt2 should be a shapely.Point, tuple, list, or np.array."
@@ -93,9 +104,9 @@ def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
     # Convert latitude and longitude to spherical coordinates in radians.
     degrees_to_radians = np.pi / 180.0
 
-    if not all(isinstance(x, shapely.geometry.Point) for x in (pt1, pt2)):
+    if not all(isinstance(x, Point) for x in (pt1, pt2)):
         try:
-            pt1_, pt2_ = map(shapely.geometry.Point, (pt1, pt2))
+            pt1_, pt2_ = map(Point, (pt1, pt2))
         except Exception as e:
             print(e)
             return None
@@ -123,6 +134,7 @@ def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
     return arc_length
 
 
+@requires("shapely")
 def find_closest_point(pt: Point, pts: MultiPoint, k_closest: int = 1) -> list:
     """Find the closest point from a list of reference points.
 
@@ -151,6 +163,10 @@ def find_closest_point(pt: Point, pts: MultiPoint, k_closest: int = 1) -> list:
         - Because of unit issue, the distance can be calculated by calc_distance_on_unit_sphere.
     """
 
+    # import required modules
+    from shapely.geometry import Point, MultiPoint
+    import shapely
+
     # TDD: Test-Driven Development, check data types of input arguments
     assert isinstance(pt, Point), "The input pt should be a shapely.Point object."
     assert isinstance(pts, MultiPoint), "The input pts should be a shapely.MultiPoint object."
@@ -166,7 +182,9 @@ def find_closest_point(pt: Point, pts: MultiPoint, k_closest: int = 1) -> list:
     return points_in_order
 
 
-def get_coordinates_from_geom(geom_obj: shapely.geometry) -> np.ndarray:
+@requires("shapely")
+def get_coordinates_from_geom(geom_obj: Union[Point, MultiPoint, LineString, MultiLineString,
+                                              Polygon, MultiPolygon, GeometryCollection]) -> np.ndarray:
     """Get the coordinates from a geometry object.
 
     Args:
@@ -202,8 +220,14 @@ def get_coordinates_from_geom(geom_obj: shapely.geometry) -> np.ndarray:
         - It returns the coordinates of the geometry object in the format of numpy.ndarray.
     """
 
+    # import required modules
+    from shapely.geometry import (Point, MultiPoint, LineString, MultiLineString,
+                                  Polygon, MultiPolygon, GeometryCollection)
+    import numpy as np
+
     # TDD: Test-Driven Development, check data types of input arguments
-    assert isinstance(geom_obj, BaseGeometry), (
+    typing_list = (Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection)
+    assert isinstance(geom_obj, typing_list), (
         "The input geom_obj should be a shapely.geometry.base.BaseGeometry object.")
 
     if isinstance(geom_obj, np.ndarray):
@@ -213,7 +237,6 @@ def get_coordinates_from_geom(geom_obj: shapely.geometry) -> np.ndarray:
         coords = np.array(geom_obj)
 
     else:
-        assert isinstance(geom_obj, shapely.geometry.base.BaseGeometry)
         geom_type = geom_obj.geom_type
 
         if 'Collection' in geom_type:
@@ -236,9 +259,12 @@ def get_coordinates_from_geom(geom_obj: shapely.geometry) -> np.ndarray:
     return coords
 
 
+@requires("shapely")
 @func_running_time
-def find_closest_points(pts: shapely.geometry,
-                        geom_obj: shapely.geometry,
+def find_closest_points(pts: Union[Point, MultiPoint, LineString, MultiLineString,
+                                   Polygon, MultiPolygon, GeometryCollection],
+                        geom_obj: Union[Point, MultiPoint, LineString, MultiLineString,
+                                        Polygon, MultiPolygon, GeometryCollection],
                         radius: float,
                         k_closest: int = 0) -> dict:
     """Find the closest points from a list of points to a geometry object (points) within a given radius.
@@ -266,6 +292,10 @@ def find_closest_points(pts: shapely.geometry,
         >>> find_closest_points(pts, geom, 1, k_closest=2)
         {POINT (1 1): [POINT (1 1), POINT (2 2): [POINT (1 1)], POINT (3 3): []}
     """
+
+    # import required modules
+    from shapely.geometry import (Point, MultiPoint, LineString, MultiLineString,
+                                  Polygon, MultiPolygon, GeometryCollection)
 
     # TDD: Test-Driven Development, check data types of input arguments
     typing_set = (Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection)
@@ -313,7 +343,13 @@ def find_closest_points(pts: shapely.geometry,
     return closest_points
 
 
-def find_k_nearest_points(pts: shapely.geometry, geom_obj: shapely.geometry, radius: float, k_nearest: int = 0) -> dict:
+@requires("shapely")
+def find_k_nearest_points(pts: Union[Point, MultiPoint, LineString, MultiLineString,
+                                     Polygon, MultiPolygon, GeometryCollection],
+                          geom_obj: Union[Point, MultiPoint, LineString, MultiLineString,
+                                          Polygon, MultiPolygon, GeometryCollection],
+                          radius: float,
+                          k_nearest: int = 0) -> dict:
     """Find the k nearest points from a list of points to a geometry object (points) within a given radius.
     Note:
         This is equivalent to function: find_closest_points.
@@ -331,6 +367,10 @@ def find_k_nearest_points(pts: shapely.geometry, geom_obj: shapely.geometry, rad
     Returns:
         dict: the k nearest points for each point within the radius constraint
     """
+
+    # import required modules
+    from shapely.geometry import (Point, MultiPoint, LineString, MultiLineString,
+                                  Polygon, MultiPolygon, GeometryCollection)
 
     # TDD: Test-Driven Development, check data types of input arguments
     typing_set = (Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection)
