@@ -11,6 +11,7 @@ Note: we may not update available functions in time, please run code below to ch
 ```python
 pyufunc.show_util_func_by_category()
 ```
+
 Available utility functions in pyUFunc:
 
 - util_common:
@@ -69,6 +70,7 @@ Available utility functions in pyUFunc:
 - pkg_utils:
   - import_package
   - func_running_time
+  - func_time
   - get_user_defined_func
   - is_user_defined_func
   - is_module_importable
