@@ -42,10 +42,7 @@ def split_list_by_equal_sublist(lst: list, num_of_sub: int) -> Generator:
     if num_of_sub > len(lst):
         return lst
 
-    #  get the size of each sub-list and the mod value
-    sub_size = len(lst) // num_of_sub
-    mod_value = len(lst) % num_of_sub
-
+    sub_size, mod_value = divmod(len(lst), num_of_sub)
     # equally split the list
     if mod_value == 0:
         for i in range(0, len(lst), sub_size):
