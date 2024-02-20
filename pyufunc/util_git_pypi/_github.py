@@ -5,6 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
+import contextlib
 import re
 import os
 import urllib.request
@@ -570,40 +571,84 @@ def github_file_downloader(repo_url: str, output_dir: str | None = None, flatten
     return GitHubFileDownloader(repo_url, flatten_files=flatten, output_dir=output_dir).download()
 
 
-def github_get_status(usr_name: str, repo_name: str) -> dict:
-    """Fetches GitHub repository status including stars, forks, issues, and pull requests.
+def github_get_status(usr_name, repo_name=None) -> list[dict]:
+    """
+    Fetches GitHub repository status including stars, forks, issues, and pull requests.
+    If the repository is forked, also fetches the star count of the original repository.
+    If repo_name is not specified, returns details for all repositories under the user.
 
-    Args:
-        usr_name (str): the github username
-        repo_name (str): repository name
+    Parameters:
+    - usr_name: Username of the repository owner
+    - repo_name: Name of the repository (optional)
 
     Returns:
-        dict: a dictionary containing the status of the repository
+    A list of dictionaries with details for each repository.
     """
-    # Base URL for GitHub API
-    base_url = "https://api.github.com/repos"
 
-    # Construct the URL for the repository
-    repo_url = f"{base_url}/{usr_name}/{repo_name}"
+    print(f"  Collecting {usr_name} GitHub repository status...")
+    base_url = "https://api.github.com/users"
+    repo_details = []
 
-    # Make the request to GitHub API
-    repo_response = requests.get(repo_url)
-    repo_data = repo_response.json()
+    def get_repo_info(repo_url):
+        """
+        Helper function to fetch repository information including the star count of the original repository if forked.
+        """
 
-    # Extracting necessary information
-    stars = repo_data.get('stargazers_count', 0)
-    forks = repo_data.get('forks_count', 0)
-    issues = repo_data.get('open_issues_count', 0)
+        repo_response = requests.get(repo_url)
+        repo = repo_response.json()
+        repo_url = repo['url']  # Using the URL directly from the repo data
+        prs_count = get_pull_requests_count(repo_url)
+        repo_info = {
+            "name": repo['name'],
+            "stars": repo.get('stargazers_count', 0),
+            "forks": repo.get('forks_count', 0),
+            "issues": repo.get('open_issues_count', 0),
+            "pull_requests": prs_count,
+            "original_stars": None  # Default value
+        }
 
-    # Fetching pull requests is a bit different, need to count open PRs specifically
-    prs_url = f"{repo_url}/pulls?state=open"
-    prs_response = requests.get(prs_url)
-    prs_data = prs_response.json()
-    pull_requests = len(prs_data)  # Assuming all PRs are returned, might need pagination for large numbers
+        if repo['fork']:
+            # Fetch the original repository's star count
+            with contextlib.suppress(Exception):
+                original_repo_url = repo['source']['url']
+                original_repo_response = requests.get(original_repo_url)
+                original_repo_data = original_repo_response.json()
+                repo_info['original_stars'] = original_repo_data.get('stargazers_count', 0)
+        return repo_info
 
-    return {
-        "stars": stars,
-        "forks": forks,
-        "issues": issues,
-        "pull_requests": pull_requests
-    }
+    def get_pull_requests_count(repo_url):
+        """
+        Helper function to fetch the count of open pull requests for a repository.
+
+        Parameters:
+        - repo_url: URL of the repository
+
+        Returns:
+        The count of open pull requests.
+        """
+        prs_url = f"{repo_url}/pulls?state=open"
+        prs_response = requests.get(prs_url)
+        prs_data = prs_response.json()
+        return len(prs_data)
+
+    if repo_name:
+        try:
+            # Fetch details for a specific repository
+            repo_url = f"https://api.github.com/repos/{usr_name}/{repo_name}"
+            repo_details.append(get_repo_info(repo_url))
+        except Exception as e:
+            print(f"Error: {e}")
+    else:
+        # Fetch all repositories for the user
+        try:
+            user_repos_url = f"{base_url}/{usr_name}/repos?page=1&per_page=1000"
+            repos_response = requests.get(user_repos_url)
+            repos_data = repos_response.json()
+            repo_url_all = [repo['url'] for repo in repos_data]
+
+            for repo_url_single in repo_url_all:
+                repo_details.append(get_repo_info(repo_url_single))
+        except Exception as e:
+            print(f"Error: {e}")
+
+    return repo_details
