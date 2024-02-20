@@ -14,7 +14,7 @@ PyUFunc aims to bring together the most commonly used utility functions from dif
 
 Let pyufunc take care of the repetitive tasks while you focus on building remarkable Python applications. Empower your projects with the efficiency and elegance that comes with pyufunc - your all-inclusive Python utility toolkit. Happy coding!
 
-🚀️ **No Extra dependencies will be installed to your environment unless use some functions that need certain dependency, the function will automatically install required package when you run the function.**
+🚀️ **No Extra dependencies will be installed to your environment unless use of functions that need certain dependency, the function will automatically install required package when you run it.**
 
 ## Existing Utility Functions Categorized by Functionality
 
