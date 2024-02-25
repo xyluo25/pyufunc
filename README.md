@@ -49,13 +49,13 @@ import pyufunc as uf
 ### General use (show existing utility functions)
 
 ```python
-import pyufunc as uf
+import pyufunc as pf
 
 # show all available utility functions by category
-uf.show_util_func_by_category()
+pf.show_util_func_by_category()
 
 # show all available utility functions by keywords
-uf.show_util_func_by_keyword()
+pf.show_util_func_by_keyword()
 
 ```
 
