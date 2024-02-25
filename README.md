@@ -43,7 +43,7 @@ conda install pyufunc
 ### Import package
 
 ```python
-import pyufunc as uf
+import pyufunc as pf
 ```
 
 ### General use (show existing utility functions)
