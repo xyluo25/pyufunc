@@ -1,4 +1,4 @@
-# PyUFunc
+# pyufunc
 
 Welcome to pyufunc, your go-to Python package for a wide array of frequently used utility functions. Simplify your coding experience with this powerful toolkit, meticulously designed to enhance your productivity and streamline your development process. Whether you're a seasoned developer or just starting with Python, pyufunc provides a curated collection of utilities that cater to your everyday programming needs.
 
@@ -6,9 +6,9 @@ PyUFunc aims to bring together the most commonly used utility functions from dif
 
 ## Key Features
 
-1. **Robust Collection of Utility Functions:** pyufunc offers a versatile assortment of utility functions, carefully crafted and thoroughly tested to meet industry standards. The package covers diverse domains, including data manipulation, file handling, string operations, mathematical functions, and much more.
-2. **Intuitive and Easy-to-Use:** Simplicity is at the core of pyufunc's design. Every utility function is thoughtfully documented, making it easy for developers of all skill levels to integrate them seamlessly into their projects. Whether you're working on a small script or a large-scale application, pyufunc enhances your code without adding complexity.
-3. **Modularity and Extensibility:** pyufunc is structured with modularity in mind. Each utility function is a standalone entity, allowing you to cherry-pick the ones you need without introducing unnecessary dependencies. Furthermore, the package is designed to be extensible, making it effortless to contribute your own utility functions and enrich the community.
+1. **Intuitive and Easy-to-Use:** Simplicity is at the core of pyufunc's design. Every utility function is thoughtfully documented, making it easy for developers of all skill levels to integrate them seamlessly into their projects. Whether you're working on a small script or a large-scale application, pyufunc enhances your code without adding complexity.
+2. **Modularity and Extensibility:** pyufunc is structured with modularity in mind. Each utility function is a standalone entity, allowing you to cherry-pick the ones you need without introducing unnecessary dependencies. Furthermore, the package is designed to be extensible, making it effortless to contribute your own utility functions and enrich the community.
+3. **Robust Collection of Utility Functions:** pyufunc offers a versatile assortment of utility functions, carefully crafted and thoroughly tested to meet industry standards. The package covers diverse domains, including data manipulation, file handling, string operations, mathematical functions, and much more.
 4. **Regular Updates and Maintenance:** Our team is dedicated to providing regular updates, ensuring that pyufunc remains compatible with the latest Python releases and industry best practices. We actively welcome community feedback and continually refine the package to meet developers' evolving requirements.
 5. **Time and Effort Savings:** With pyufunc, you can avoid reinventing the wheel by leveraging pre-existing, widely used utility functions. This saves you time and effort in writing custom utility functions and allows you to focus on the core aspects of your project.
 
