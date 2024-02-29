@@ -36,7 +36,7 @@ Available utility functions in pyUFunc:
   - show_docstring_google
   - show_docstring_numpy
   - show_util_func_by_category
-  - show_util_func_by_keywords
+  - show_util_func_by_keyword
 
 - get:
   - get_timezone

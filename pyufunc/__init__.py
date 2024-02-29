@@ -67,7 +67,7 @@ ufunc_category = {
     "util_pathio"         : __util_pathio.__all__,
     "util_test"           : __util_test.__all__,
     "util_vis"            : __util_vis.__all__,
-    "pkg_utils"           : __pkg_utils.__all__ + ["show_util_func_by_category", "show_util_func_by_keywords"],
+    "pkg_utils"           : __pkg_utils.__all__ + ["show_util_func_by_category", "show_util_func_by_keyword"],
 }
 
 
@@ -112,7 +112,7 @@ def show_util_func_by_category(verbose: bool = True) -> None:
     return res_str
 
 
-def show_util_func_by_keywords(verbose: bool = True) -> None:
+def show_util_func_by_keyword(verbose: bool = True) -> None:
     """show all available utility functions in pyufunc by prefix keywords.
 
     Args:

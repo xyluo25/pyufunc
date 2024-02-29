@@ -75,4 +75,4 @@ Available utility functions in pyUFunc:
   - is_module_importable
   - requires
   - show_util_func_by_category
-  - show_util_func_by_keywords
+  - show_util_func_by_keyword
