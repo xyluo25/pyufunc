@@ -17,12 +17,13 @@ import copy
 
 # specify the available utility functions for importing all
 __all__ = ["import_package",
+           "requires",
            "func_running_time",
            "func_time",
            "get_user_defined_func",
            "is_user_defined_func",
            "is_module_importable",
-           "requires"]
+           ]
 
 """TODO
 a decorator to run function in multiple processors
