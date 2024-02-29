@@ -24,7 +24,7 @@ Let pyufunc take care of the repetitive tasks while you focus on building remark
 
 ## Existing Utility Functions Categorized by Keywords
 
-- [utility_function_by_keywords.md](https://github.com/xyluo25/pyufunc/blob/ef276657dae379265ef52df015abe5a647fc44b4/utility_function_by_keyword.md)
+- [utility_function_by_keyword.md](https://github.com/xyluo25/pyufunc/blob/ef276657dae379265ef52df015abe5a647fc44b4/utility_function_by_keyword.md)
 
 ## Quick Tutorial
 
