@@ -26,3 +26,5 @@ pyhelpers
 pyutilator -  @print_return_value @print_kwargs @print_args
 pyutil 3.3.6
 common-pyutil 0.8.7
+imutils
+mxnet
