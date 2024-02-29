@@ -28,7 +28,6 @@ Available utility functions in pyUFunc:
 
 - util_datetime:
   - fmt_dt_to_str
-  - fmt_dt
   - list_all_timezones
   - get_timezone
   - cvt_dt_to_tz

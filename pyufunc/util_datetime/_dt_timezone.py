@@ -32,11 +32,10 @@ def list_all_timezones(region_name: str = "*") -> set:
     """
     if region_name != "*":
         zoneinfo_set = zoneinfo.available_timezones()
-        zoneinfo_region_set = []
-        for i in zoneinfo_set:
-            if region_name.lower() in i.lower():
-                zoneinfo_region_set.append(i)
-        print("Listing timezones in the region: ", region_name)
+        zoneinfo_region_set = [
+            i for i in zoneinfo_set if region_name.lower() in i.lower()
+        ]
+        print(f"Listing timezones in the region: {region_name}")
         return zoneinfo_region_set
     print("Listing all timezones...")
     return zoneinfo.available_timezones()
@@ -58,7 +57,7 @@ def get_timezone() -> str:
 
 #  convert current datetime to another timezone datetime
 def cvt_dt_to_tz(dt: datetime = datetime.datetime.now(),
-                             timezone: str = "UTC") -> datetime:
+                 timezone: str = "UTC") -> datetime:
     """this function is used to convert datetime to another timezone datetime
 
     Args:
@@ -69,8 +68,8 @@ def cvt_dt_to_tz(dt: datetime = datetime.datetime.now(),
         datetime: the converted datetime
 
     Example:
-        >>> from pyufunc import convert_dt_to_another_tz
-        >>> convert_dt_to_another_tz(datetime.datetime.now(), "Asia/Shanghai")
+        >>> from pyufunc import cvt_dt_to_tz
+        >>> cvt_dt_to_tz(datetime.datetime.now(), "Asia/Shanghai")
         datetime.datetime(2024, 2, 6, 14, 10, 0, 0, tzinfo=zoneinfo.ZoneInfo(key='Asia/Shanghai'))
 
     """

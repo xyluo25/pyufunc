@@ -81,7 +81,6 @@ Available utility functions in pyUFunc:
 
 - fmt:
   - fmt_dt_to_str
-  - fmt_dt
 
 - cvt:
   - cvt_int_to_alpha
