@@ -20,7 +20,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc:
+Available utility functions in pyUFunc (53):
 
 - non-keywords:
   - gmns_geo
@@ -62,6 +62,14 @@ Available utility functions in pyUFunc:
 
 - calc:
   - calc_distance_on_unit_sphere
+
+- group:
+  - group_dt_yearly
+  - group_dt_monthly
+  - group_dt_weekly
+  - group_dt_daily
+  - group_dt_hourly
+  - group_dt_minutely
 
 - check:
   - check_files_existence

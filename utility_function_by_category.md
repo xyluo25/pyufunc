@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc:
+Available utility functions in pyUFunc (53):
 
 - util_common:
   - show_docstring_headers
@@ -32,6 +32,12 @@ Available utility functions in pyUFunc:
   - get_timezone
   - cvt_dt_to_tz
   - get_time_diff_in_unit
+  - group_dt_yearly
+  - group_dt_monthly
+  - group_dt_weekly
+  - group_dt_daily
+  - group_dt_hourly
+  - group_dt_minutely
 
 - util_geo:
   - create_circle_at_point_with_radius

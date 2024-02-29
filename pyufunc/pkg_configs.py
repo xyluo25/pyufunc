@@ -51,6 +51,7 @@ ufunc_keywords = {
     "create"      : [],
     "find"        : [],
     "calc"        : [],
+    "group"       : [],
     "check"       : [],
     "validate"    : [],
     "list"        : [],
@@ -60,6 +61,6 @@ ufunc_keywords = {
     "is"          : [],
     "proj"        : [],
     "github"      : [],
-    "pypi"        : [],
+    "pypi"        : []
 
 }

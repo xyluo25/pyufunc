@@ -98,13 +98,17 @@ def show_util_func_by_category(verbose: bool = True) -> None:
 
     """
 
-    res_str = "Available utility functions in pyUFunc:\n"
-
+    res_str_head = "Available utility functions in pyUFunc"
+    res_str_by_category = ""
+    ufunc_count = 0
     for util_category in ufunc_category:
         if ufunc_category[util_category]:
-            res_str += f"\n- {util_category}:\n"
+            res_str_by_category += f"\n- {util_category}:\n"
             for func in ufunc_category[util_category]:
-                res_str += f"  - {func}\n"
+                res_str_by_category += f"  - {func}\n"
+                ufunc_count += 1
+
+    res_str = res_str_head + f" ({ufunc_count}):\n" + res_str_by_category
 
     if verbose:
         print(res_str)
@@ -143,13 +147,19 @@ def show_util_func_by_keyword(verbose: bool = True) -> None:
         else:
             ufunc_keywords["non-keywords"].append(func_str)
 
-    res_str = "Available utility functions in pyUFunc:\n"
+    res_str_head = "Available utility functions in pyUFunc"
+    res_str_by_keyword = ""
+    ufunc_count = 0
 
     for keyword in ufunc_keywords:
         if ufunc_keywords[keyword]:
-            res_str += f"\n- {keyword}:\n"
+            res_str_by_keyword += f"\n- {keyword}:\n"
             for func in ufunc_keywords[keyword]:
-                res_str += f"  - {func}\n"
+                res_str_by_keyword += f"  - {func}\n"
+                ufunc_count += 1
+
+    res_str = res_str_head + f" ({ufunc_count}):\n" + res_str_by_keyword
+
     if verbose:
         print(res_str)
         return None
