@@ -6,14 +6,14 @@
 ##############################################################
 
 
-from ._google_numpy_docstring import (show_supported_docstring_header,
-                                      show_google_docstring_style,
-                                      show_numpy_docstring_style
+from ._google_numpy_docstring import (show_docstring_headers,
+                                      show_docstring_google,
+                                      show_docstring_numpy
                                       )
 
 from ._password_generator import generate_password
 
-__all__ = ["show_supported_docstring_header",
-           "show_google_docstring_style",
-           "show_numpy_docstring_style",
+__all__ = ["show_docstring_headers",
+           "show_docstring_google",
+           "show_docstring_numpy",
            "generate_password"]

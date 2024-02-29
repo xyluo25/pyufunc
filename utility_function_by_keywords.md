@@ -32,9 +32,9 @@ Available utility functions in pyUFunc:
   - requires
 
 - show:
-  - show_supported_docstring_header
-  - show_google_docstring_style
-  - show_numpy_docstring_style
+  - show_docstring_headers
+  - show_docstring_google
+  - show_docstring_numpy
   - show_util_func_by_category
   - show_util_func_by_keywords
 

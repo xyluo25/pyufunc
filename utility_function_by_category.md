@@ -15,9 +15,9 @@ pyufunc.show_util_func_by_category()
 Available utility functions in pyUFunc:
 
 - util_common:
-  - show_supported_docstring_header
-  - show_google_docstring_style
-  - show_numpy_docstring_style
+  - show_docstring_headers
+  - show_docstring_google
+  - show_docstring_numpy
   - generate_password
 
 - util_data_processing:

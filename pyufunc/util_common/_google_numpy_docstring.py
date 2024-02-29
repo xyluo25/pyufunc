@@ -6,7 +6,7 @@
 ##############################################################
 
 
-def show_supported_docstring_header() -> None:
+def show_docstring_headers() -> None:
     """Show supported docstring header.
 
     See Also:
@@ -48,7 +48,7 @@ def show_supported_docstring_header() -> None:
     return None
 
 
-def show_google_docstring_style() -> None:
+def show_docstring_google() -> None:
     """Show google docstring style.
 
     References:
@@ -78,7 +78,7 @@ def show_google_docstring_style() -> None:
     return None
 
 
-def show_numpy_docstring_style() -> None:
+def show_docstring_numpy() -> None:
     """Show numpy docstring style.
 
     References:
