@@ -6,8 +6,12 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
+# GMNS: General Modeling Network Specification
 
 from dataclasses import dataclass, field, asdict
+
+
+__all__ = ['Node', 'Link', 'POI', 'Zone', 'Agent']
 
 
 @dataclass

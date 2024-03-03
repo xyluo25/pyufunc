@@ -1,8 +1,0 @@
-============
-Installation
-============
-
-pip install pyufunc
-
-
-
