@@ -20,16 +20,16 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (53):
+Available utility functions in pyUFunc (52):
 
 - non-keywords:
   - gmns_geo
   - path2linux
   - path2uniform
   - import_package
+  - requires
   - func_running_time
   - func_time
-  - requires
 
 - show:
   - show_docstring_headers
@@ -57,7 +57,6 @@ Available utility functions in pyUFunc (53):
 
 - find:
   - find_closest_point
-  - find_closest_points
   - find_k_nearest_points
 
 - calc:

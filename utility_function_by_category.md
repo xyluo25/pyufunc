@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (53):
+Available utility functions in pyUFunc (52):
 
 - util_common:
   - show_docstring_headers
@@ -45,7 +45,6 @@ Available utility functions in pyUFunc (53):
   - calc_distance_on_unit_sphere
   - find_closest_point
   - get_coordinates_from_geom
-  - find_closest_points
   - find_k_nearest_points
   - gmns_geo
 
@@ -74,11 +73,11 @@ Available utility functions in pyUFunc (53):
 
 - pkg_utils:
   - import_package
+  - requires
   - func_running_time
   - func_time
   - get_user_defined_func
   - is_user_defined_func
   - is_module_importable
-  - requires
   - show_util_func_by_category
   - show_util_func_by_keyword

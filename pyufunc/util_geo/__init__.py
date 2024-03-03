@@ -11,7 +11,6 @@ from pyufunc.util_geo._geo_distance import (proj_point_to_line,
                                             calc_distance_on_unit_sphere,
                                             find_closest_point,
                                             get_coordinates_from_geom,
-                                            find_closest_points,
                                             find_k_nearest_points,
                                             )
 
@@ -22,6 +21,5 @@ __all__ = ['create_circle_at_point_with_radius',
            'calc_distance_on_unit_sphere',
            'find_closest_point',
            'get_coordinates_from_geom',
-           'find_closest_points',
            'find_k_nearest_points',
            "gmns_geo"]
