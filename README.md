@@ -1,6 +1,6 @@
 # pyufunc
 
-<img src="https://github.com/xyluo25/pyufunc/blob/e5a89b2eade3301bab60a9cc78092b8074b27025/docs/_static/img/pyufunc_icon.jpg" >
+<img src="https://github.com/xyluo25/pyufunc/blob/main/docs/_static/img/pyufunc_icon.jpg" >
 
 Welcome to pyufunc, your go-to Python package for a wide array of frequently used utility functions. Simplify your coding experience with this powerful toolkit, meticulously designed to enhance your productivity and streamline your development process. Whether you're a seasoned developer or just starting with Python, pyufunc provides a curated collection of utilities that cater to your everyday programming needs.
 
@@ -20,11 +20,11 @@ Let pyufunc take care of the repetitive tasks while you focus on building remark
 
 ## Existing Utility Functions Categorized by Functionality
 
-- [utility_function_by_category.md](https://github.com/xyluo25/pyufunc/blob/ef276657dae379265ef52df015abe5a647fc44b4/utility_function_by_category.md)
+- [utility_function_by_category.md](https://github.com/xyluo25/pyufunc/blob/main/utility_function_by_category.md)
 
 ## Existing Utility Functions Categorized by Keywords
 
-- [utility_function_by_keyword.md](https://github.com/xyluo25/pyufunc/blob/ef276657dae379265ef52df015abe5a647fc44b4/utility_function_by_keyword.md)
+- [utility_function_by_keyword.md](https://github.com/xyluo25/pyufunc/blob/main/utility_function_by_keyword.md)
 
 ## Quick Tutorial
 
@@ -84,7 +84,7 @@ For more information about the ways you can contribute to pyufunc, visit [PyUFun
 
 ## Comprehensive Review of Utility Function Packages
 
-- [utility_function_package_review.md](https://github.com/xyluo25/pyufunc/blob/8f829fcf37e7a7f40d2ee24e07ef8b43d1e4edee/utility_function_package_review.md)
+- [utility_function_package_review.md](https://github.com/xyluo25/pyufunc/blob/main/utility_function_package_review.md)
 
 ## ACKNOWLEDGMENT
 
