@@ -77,6 +77,8 @@ class GitHubFileDownloader:
     Download files on GitHub from a given repository URL.
     """
 
+    import requests
+
     def __init__(self, repo_url: str, flatten_files: bool = False, output_dir: str | None = None) -> None:
         """
         Initialize a GitHubFileDownloader object.
@@ -584,13 +586,26 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
     If the repository is forked, also fetches the star count of the original repository.
     If repo_name is not specified, returns details for all repositories under the user.
 
-    Parameters:
-    - usr_name: Username of the repository owner
-    - repo_name: Name of the repository (optional)
+    Args:
+        usr_name (str): GitHub username
+        repo_name (str, optional): Name of the repository. Defaults to None.
 
     Returns:
-    A list of dictionaries with details for each repository.
+        list: A list of dictionaries containing the status of the repositories.
+
+    Example:
+        >>> from pyufunc import github_get_status
+        >>> github_get_status("xyluo25", "pyufunc")
+        [{'name': 'pyufunc',
+        'stars': 1,
+        'forks': 0,
+        'issues': 0,
+        'pull_requests': 0,
+        'original_stars': None}]
+
     """
+
+    import requests
 
     print(f"  Collecting {usr_name} GitHub repository status...")
     base_url = "https://api.github.com/users"
