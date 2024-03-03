@@ -94,9 +94,6 @@ Intro to pyufunc
 
                 PyUFunc aims to bring together the most commonly used utility functions from different libraries and provide them in a single, cohesive package. By consolidating utility functions from multiple sources, pyufunc simplifies the process of finding and integrating various utility libraries into your projects. It provides a centralized resource for accessing a diverse set of utility functions, ultimately saving time and effort.
 
-.. image:: ../_static/schemas/01_table_dataframe.svg
-   :align: center
-
 .. raw:: html
                     <div class="d-flex flex-row">
                         <span class="badge gs-badge-link">
