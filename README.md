@@ -1,6 +1,6 @@
 # pyufunc
 
-<img src="https://github.com/xyluo25/pyufunc/blob/main/docs/_static/img/pyufunc_icon.jpg" >
+<img src="https://github.com/xyluo25/pyufunc/blob/main/docs/static/img/pyufunc_icon.jpg" >
 
 Welcome to pyufunc, your go-to Python package for a wide array of frequently used utility functions. Simplify your coding experience with this powerful toolkit, meticulously designed to enhance your productivity and streamline your development process. Whether you're a seasoned developer or just starting with Python, pyufunc provides a curated collection of utilities that cater to your everyday programming needs.
 
