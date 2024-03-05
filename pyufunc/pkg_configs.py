@@ -51,6 +51,7 @@ ufunc_keywords = {
     "create"      : [],
     "find"        : [],
     "calc"        : [],
+    "run"         : [],
     "group"       : [],
     "check"       : [],
     "validate"    : [],

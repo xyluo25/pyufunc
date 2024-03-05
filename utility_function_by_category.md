@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (52):
+Available utility functions in pyUFunc (53):
 
 - util_common:
   - show_docstring_headers
@@ -76,6 +76,7 @@ Available utility functions in pyUFunc (52):
   - requires
   - func_running_time
   - func_time
+  - run_parallel
   - get_user_defined_func
   - is_user_defined_func
   - is_module_importable
