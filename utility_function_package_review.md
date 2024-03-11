@@ -23,6 +23,7 @@ Updating...
 |              |                |                                                                                                                                                    |                      |
 
 psutil
+gputil
 pyhelpers
 pyutilator -  @print_return_value @print_kwargs @print_args
 pyutil 3.3.6

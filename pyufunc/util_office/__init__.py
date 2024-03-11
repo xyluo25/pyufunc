@@ -5,5 +5,6 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
+from ._email import is_valid_email
 
-__all__ = []
+__all__ = ["is_valid_email"]
