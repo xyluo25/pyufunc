@@ -80,9 +80,12 @@ def send_email(send_from: str,
         - User can add verbose = True in the kwargs. If verbose is True, the function will print the email sending status.
         - If you are using gmail, you need to generate an app password for the smtp_password: https://support.google.com/accounts/answer/185833?hl=en
 
-
     Returns:
         bool: True if the email is sent successfully, False otherwise
+
+    Examples:
+        >>> from pyufunc import send_email
+        >>> send_email(send_from="", send_to="", subject="", message="", smtp_user="", smtp_password="", file_path="", cc="", bcc="")
     """
 
     # TDD, Test Driven Development, check inputs
