@@ -6,6 +6,7 @@ These are the changes in pyufunc 0.1.9. See :ref:`release` for a full changelog
 including other versions of pyufunc.
 
 .. ---------------------------------------------------------------------------
+
 Enhancements
 ~~~~~~~~~~~~
 -

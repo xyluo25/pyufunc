@@ -5,13 +5,18 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-
-import pyufunc as uf
+from pathlib import Path
+import sys
 import os
+
+root = Path(__file__).resolve().parents[3]
+sys.path = [str(root)] + sys.path
+
+import pyufunc as pf
 
 # Get all the modules in the pyufunc package
 category_lst = []
-for module_lst in uf.ufunc_category.values():
+for module_lst in pf.ufunc_category.values():
     if module_lst:
         for module in module_lst:
             category_lst.append(module)

@@ -5,12 +5,10 @@ util_office
 ================
 .. currentmodule:: pyufunc
 
-Updating...
+Email
 ~~~~~~~~~~~
 .. autosummary::
    :toctree: api/
 
-
-
-
-
+   is_valid_email
+   send_email

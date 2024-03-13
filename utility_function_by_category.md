@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (53):
+Available utility functions in pyUFunc (55):
 
 - util_common:
   - show_docstring_headers
@@ -56,6 +56,10 @@ Available utility functions in pyUFunc (53):
 - util_network:
   - get_host_ip
   - validate_url
+
+- util_office:
+  - is_valid_email
+  - send_email
 
 - util_pathio:
   - get_file_size

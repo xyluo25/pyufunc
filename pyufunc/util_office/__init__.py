@@ -5,6 +5,9 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-from ._email import is_valid_email
+from ._email import is_valid_email, send_email
 
-__all__ = ["is_valid_email"]
+__all__ = [
+    "is_valid_email",
+    "send_email"
+]

@@ -20,10 +20,11 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (53):
+Available utility functions in pyUFunc (55):
 
 - non-keywords:
   - gmns_geo
+  - send_email
   - path2linux
   - path2uniform
   - import_package
@@ -97,6 +98,7 @@ Available utility functions in pyUFunc (53):
   - cvt_dt_to_tz
 
 - is:
+  - is_valid_email
   - is_windows
   - is_linux
   - is_mac
