@@ -8,6 +8,8 @@
 from pyufunc.util_pathio._path import path2linux
 import os
 from pathlib import Path
+import uuid
+import sys
 
 
 def get_file_size(filename: str | Path, unit: str = "kb") -> str:
@@ -107,6 +109,106 @@ def get_dir_size(directory: str, unit: str = "kb") -> str:
     # return the size in kb by default
     return f"Directory size: {directory_short} {size_bytes / 1024} kb"
 
+
+def create_tempfile(base_dir: str = "./", ext: str = "txt") -> str:
+    """Create a temporary file with the specified size.
+
+    Args:
+        base_dir (str, optional): The directory to create the file in. Defaults to "./".
+        ext (str, optional): The extension of the file. Defaults to "txt".
+
+    Returns:
+        str: The path to the created file.
+
+    Example:
+        >>> from pyufunc import create_tempfile
+        >>> create_tempfile(base_dir="./", ext="txt", size_in_kb=1)
+        './file.txt'
+    """
+
+    # TDD, Test Driven Development: validate the input
+    assert isinstance(base_dir, str), f"base_dir must be a string, not {type(base_dir)}"
+    assert isinstance(ext, str), f"ext must be a string, not {type(ext)}"
+
+    # check extension include the dot
+    if not ext.startswith("."):
+        ext = f".{ext}"
+
+    # format the base_dir to linux path
+    base_dir = path2linux(base_dir)
+
+    # Create the temporary directory if it does not exist
+    os.makedirs(base_dir, exist_ok=True)
+
+    # Create the temporary file
+    file_path = os.path.join(base_dir, f"tmpfile_{str(uuid.uuid4())}{ext}")
+
+    # Create the file
+    with open(file_path, "w") as f:
+        f.write("")  # write an empty string to the file
+
+    # return the path to the created file
+    return file_path
+
+
+def remove_file(filename: str | Path) -> None:
+    """Remove a file from the filesystem.
+
+    Args:
+        filename (str): The filename of the file to remove.
+
+    Returns:
+        None
+
+    Example:
+        >>> from pyufunc import remove_file
+        >>> remove_file("file.txt")
+    """
+
+    # TDD, Test Driven Development: validate the input
+    assert isinstance(filename, (str, Path)), f"filename must be a string or Path, not {type(filename)}"
+
+    # format the filename to linux path
+    filename = path2linux(filename)
+
+    filename_short = os.path.basename(filename)
+
+    # Check if the file exists
+    if not os.path.isfile(filename):
+        print(f"File {filename_short} does not found, please check the file path and try again")
+        return None
+
+    # Remove the file
+    os.remove(filename)
+    return None
+
+
+def add_dir_to_env(path_dir: str | Path = os.getcwd()) -> None:
+    """Add a directory to the PATH environment variable.
+
+    Args:
+        path_dir (str | Path): The directory to add to the PATH.
+            Defaults to the current working directory.
+
+    Returns:
+        None
+
+    Example:
+        >>> from pyufunc import add_dir_to_env
+        >>> add_dir_to_env("/path/to/directory")
+    """
+
+    # TDD, Test Driven Development: validate the input
+    assert isinstance(path_dir, (str, Path)), f"path_dir must be a string or Path, not {type(path_dir)}"
+
+    # format the path_dir to linux path
+    path_dir = path2linux(path_dir)
+
+    # Add the directory to the PATH environment variable
+    os.environ["PATH"] += os.pathsep + path_dir
+    sys.path.append(path_dir)
+
+    return None
 
 # def write_yaml_file(func=None, *, log_dir: str | Path = LOGGING_FOLDER, ):
 #     import yaml
