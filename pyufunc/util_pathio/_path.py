@@ -79,17 +79,17 @@ def path2uniform(path: str | Path) -> str:
         return str(path).replace("\\", "/")
 
 
-def get_filenames_by_ext(path_to_dir: str | Path, file_ext: str | list = "csv", incl_subdir: bool = False) -> list[str]:
+def get_filenames_by_ext(dir_path: str | Path, file_ext: str | list = "csv", incl_subdir: bool = False) -> list[str]:
     """Get a list of filenames in a folder by file extension
 
     Location:
-        pyufunc/pathio/pathutils.py
+        pyufunc/pathio/_path.py
 
     References:
         https://github.com/mikeqfu/pyhelpers (GNU)
 
     Args:
-        path_to_dir (str | Path): the path to the folder
+        dir_path (str | Path): the path to the folder
         file_ext (str | list | tuple, optional): the file extension to be specified. Defaults to "csv".
         incl_subdir (bool, optional): Whether to traverse all files inside sub folder. Defaults to False.
 
@@ -114,7 +114,7 @@ def get_filenames_by_ext(path_to_dir: str | Path, file_ext: str | list = "csv", 
 
     if incl_subdir:
         files_list = []
-        for root, _, files in os.walk(path_to_dir):
+        for root, _, files in os.walk(dir_path):
             files_list.extend([os.path.join(root, file) for file in files])
 
         if file_ext[0] in {None, "*", "all"}:
@@ -124,17 +124,17 @@ def get_filenames_by_ext(path_to_dir: str | Path, file_ext: str | list = "csv", 
 
     # Files in the first layer of the folder
     if file_ext[0] in {None, "*", "all"}:
-        return [path2linux(os.path.join(path_to_dir, file)) for file in os.listdir(path_to_dir)]
+        return [path2linux(os.path.join(dir_path, file)) for file in os.listdir(dir_path)]
 
-    return [path2linux(os.path.join(path_to_dir, file)) for file in os.listdir(path_to_dir)
+    return [path2linux(os.path.join(dir_path, file)) for file in os.listdir(dir_path)
             if file.endswith(file_ext)]
 
 
-def check_files_existence(filenames: list[str | Path], path_to_dir: str | Path = "", incl_subdir: bool = False) -> bool:
+def check_files_existence(filenames: list[str | Path], dir_path: str | Path = "", incl_subdir: bool = False) -> bool:
     """Check if provided list of files exist in the given directory
 
     Location:
-        pyufunc/pathio/pathutils.py
+        pyufunc/pathio/_path.py
 
     References:
         https://github.com/xyluo25/utdf2gmns (Apache)
@@ -142,8 +142,8 @@ def check_files_existence(filenames: list[str | Path], path_to_dir: str | Path =
 
     Args:
         filenames (list[str  |  Path]): a list of filenames to be checked
-        path_to_dir (str | Path, optional): the given directory. Defaults to "".
-            if path_to_dir is not given, use the current working directory
+        dir_path (str | Path, optional): the given directory. Defaults to "".
+            if dir_path is not given, use the current working directory
 
     Returns:
         bool: True if all files exist in the given directory, otherwise False
@@ -154,12 +154,13 @@ def check_files_existence(filenames: list[str | Path], path_to_dir: str | Path =
         False
     """
 
-    # if path_to_dir is not given, use the current working directory
-    if not path_to_dir:
-        path_to_dir = path2linux(Path.cwd().absolute())
+    # if dir_path is not given, use the current working directory
+    if not dir_path:
+        dir_path = path2linux(Path.cwd().absolute())
 
     # get all filenames in the given directory
-    filenames_in_dir = get_filenames_by_ext(path_to_dir, file_ext="*", incl_subdir=incl_subdir)
+    filenames_in_dir = get_filenames_by_ext(
+        dir_path, file_ext="*", incl_subdir=incl_subdir)
 
     # format the input check filenames
     filenames = [path2linux(filename) for filename in filenames]
