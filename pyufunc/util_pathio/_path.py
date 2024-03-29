@@ -159,7 +159,7 @@ def check_files_existence(filenames: list[str | Path], path_to_dir: str | Path =
         path_to_dir = path2linux(Path.cwd().absolute())
 
     # get all filenames in the given directory
-    filenames_in_dir = get_filenames_by_ext(path_to_dir, file_ext=None, incl_subdir=incl_subdir)
+    filenames_in_dir = get_filenames_by_ext(path_to_dir, file_ext="*", incl_subdir=incl_subdir)
 
     # format the input check filenames
     filenames = [path2linux(filename) for filename in filenames]
@@ -180,10 +180,7 @@ def check_files_existence(filenames: list[str | Path], path_to_dir: str | Path =
 
 
 def check_filename(filename: str | Path) -> bool:
-    """validate the filename, if the file exists, add a suffix number to the file name, and return the new file name
-    if the file does not exist, return the original file name
-
-    This function is extremely useful when you want to save a file, but not sure if the file already exists.
+    """validate the filename, if the file exists, return True, otherwise False
 
     Location:
         pyufunc/util_pathio/_path.py
@@ -205,9 +202,7 @@ def check_filename(filename: str | Path) -> bool:
     filename_abspath = path2linux(os.path.abspath(filename))
 
     # if the file exist, return True, otherwise False
-    if os.path.exists(filename_abspath):
-        return True
-    return False
+    return bool(os.path.exists(filename_abspath))
 
 
 def generate_unique_filename(filename: str | Path, suffix_num: int = 1) -> str:

@@ -24,7 +24,12 @@ def get_file_size(filename: str | Path, unit: str = "kb") -> str:
     # TDD, Test Driven Development: validate the input
     assert isinstance(filename, (str, Path)), f"filename must be a string or Path, not {type(filename)}"
     assert isinstance(unit, str), f"unit must be a string, not {type(unit)}"
-    assert unit.lower() in ['kb', 'mb', 'gb', 'tb'], f"unit must be one of 'kb', 'mb', 'gb', 'tb', not {unit}"
+    assert unit.lower() in {
+        'kb',
+        'mb',
+        'gb',
+        'tb',
+    }, f"unit must be one of 'kb', 'mb', 'gb', 'tb', not {unit}"
 
     # format the filename to linux path
     filename = path2linux(filename)
@@ -66,7 +71,12 @@ def get_dir_size(directory: str, unit: str = "kb") -> str:
     # TDD, Test Driven Development: validate the input
     assert isinstance(directory, str), f"directory must be a string, not {type(directory)}"
     assert isinstance(unit, str), f"unit must be a string, not {type(unit)}"
-    assert unit.lower() in ['kb', 'mb', 'gb', 'tb'], f"unit must be one of 'kb', 'mb', 'gb', 'tb', not {unit}"
+    assert unit.lower() in {
+        'kb',
+        'mb',
+        'gb',
+        'tb',
+    }, f"unit must be one of 'kb', 'mb', 'gb', 'tb', not {unit}"
 
     # format the directory to linux path
     directory = path2linux(directory)
@@ -79,7 +89,10 @@ def get_dir_size(directory: str, unit: str = "kb") -> str:
     #     return f"Directory {directory_short} does not found, please check the directory path and try again"
 
     # Get the size of the directory in bytes
-    size_bytes = sum([os.path.getsize(os.path.join(directory, file)) for file in os.listdir(directory)])
+    size_bytes = sum(
+        os.path.getsize(os.path.join(directory, file))
+        for file in os.listdir(directory)
+    )
 
     # Convert the size to the specified unit
     if unit.lower() == 'kb':
