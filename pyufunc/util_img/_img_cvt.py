@@ -4,10 +4,15 @@
 # Contact Info: luoxiangyong01@gmail.com
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
-
-
-from PIL import Image
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import io
+
+# https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
+if TYPE_CHECKING:
+    # check the support version of python
+    # https://pillow.readthedocs.io/en/stable/installation.html
+    from PIL import Image
 
 
 def cvt_img_to_bytes(img_path: str) -> bytes:

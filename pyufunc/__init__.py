@@ -67,7 +67,9 @@ ufunc_category = {
     "util_pathio"         : __util_pathio.__all__,
     "util_test"           : __util_test.__all__,
     "util_vis"            : __util_vis.__all__,
-    "pkg_utils"           : __pkg_utils.__all__ + ["show_util_func_by_category", "show_util_func_by_keyword"],
+    "pkg_utils"           : __pkg_utils.__all__ + ["show_util_func_by_category",
+                                                   "show_util_func_by_keyword",
+                                                   "find_func_by_keyword"],
 }
 
 
@@ -164,5 +166,43 @@ def show_util_func_by_keyword(verbose: bool = True) -> None:
         print(res_str)
         return None
     return res_str
+
+
+def find_func_by_keyword(keyword: str, verbose: bool = True) -> list:
+    """find all available utility functions in pyufunc by keyword.
+
+    Args:
+        keyword (str): the keyword
+        verbose (bool, optional): whether to print string information. Defaults to True.
+
+    Returns:
+        list: if verbose is True, print the result string; otherwise return the result list.
+
+    Examples:
+        >>> import pyufunc as uf
+        >>> uf.find_func_by_keyword("show")
+        Available functions by keyword: show
+           - show_numpy_docstring_style
+           - show_available_utility_func
+           ...
+    """
+
+    res_str_by_keyword = ""
+    res_str_lst = []
+    ufunc_count = 0
+
+    for func_str in list(chain.from_iterable(ufunc_category.values())):
+        if keyword.lower() in func_str.lower():
+            res_str_by_keyword += f"  \n{ufunc_count + 1}. {func_str}\n"
+            res_str_lst.append(func_str)
+            ufunc_count += 1
+
+    if verbose:
+        res_str_head = f"Available functions by keyword: {keyword}"
+        res_str = res_str_head + f" ({ufunc_count}):\n" + res_str_by_keyword
+
+        print(res_str)
+        return ""
+    return res_str_lst
 
 __all__ = list(chain(*ufunc_category.values()))
