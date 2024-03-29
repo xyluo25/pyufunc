@@ -174,7 +174,7 @@ def check_files_existence(filenames: list[str | Path], path_to_dir: str | Path =
         return True
 
     err_prt_dat = [filenames_short[i] for i in range(len(filenames_short)) if not mask[i]]
-    err_msg = f"Error: Required files are not satisfied, missing files are: {err_prt_dat}"
+    err_msg = f"Error: files existence are not satisfied, missing files are: {err_prt_dat}"
     print(err_msg)
     return False
 
