@@ -7,7 +7,11 @@
 
 from ._argparse import *
 from ._io import (get_file_size,
-                  get_dir_size)
+                  get_dir_size,
+                  create_tempfile,
+                  remove_file,
+                  add_dir_to_env
+                  )
 from ._path import (path2linux,
                     path2uniform,
                     get_filenames_by_ext,
@@ -27,6 +31,9 @@ __all__ = [
     # io
     "get_file_size",
     "get_dir_size",
+    "create_tempfile",
+    "remove_file",
+    "add_dir_to_env",
 
     # path
     'path2linux',
