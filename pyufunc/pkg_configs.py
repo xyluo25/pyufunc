@@ -61,7 +61,7 @@ pkg_datetime_fmt = {
 }
 
 # ############### Function Keywords Configuration ############### #
-ufunc_keywords = {
+FUNC_KEYWORD = {
     "non-keywords": [],
     "show"        : [],
     "get"         : [],

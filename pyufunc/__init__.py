@@ -29,6 +29,7 @@ from .util_vis import *  # visualization functions
 
 # import package configurations and utilities
 from .pkg_configs import *
+from .pkg_configs import FUNC_KEYWORD
 from .pkg_utils import *
 
 import pyufunc.util_ai as __util_ai
@@ -50,7 +51,7 @@ import pyufunc.util_vis as __util_vis
 import pyufunc.pkg_utils as __pkg_utils
 
 # **** specify the available utility functions by category **** #
-ufunc_category = {
+FUNC_CATEGORY = {
     "util_ai"             : __util_ai.__all__,
     "util_common"         : __util_common.__all__,
     "util_data_processing": __util_data_processing.__all__,
@@ -102,15 +103,15 @@ def show_util_func_by_category(verbose: bool = True) -> None:
 
     res_str_head = "Available utility functions in pyUFunc"
     res_str_by_category = ""
-    ufunc_count = 0
-    for util_category in ufunc_category:
-        if ufunc_category[util_category]:
+    func_count = 0
+    for util_category in FUNC_CATEGORY:
+        if FUNC_CATEGORY[util_category]:
             res_str_by_category += f"\n- {util_category}:\n"
-            for func in ufunc_category[util_category]:
+            for func in FUNC_CATEGORY[util_category]:
                 res_str_by_category += f"  - {func}\n"
-                ufunc_count += 1
+                func_count += 1
 
-    res_str = res_str_head + f" ({ufunc_count}):\n" + res_str_by_category
+    res_str = res_str_head + f" ({func_count}):\n" + res_str_by_category
 
     if verbose:
         print(res_str)
@@ -126,7 +127,7 @@ def show_util_func_by_keyword(verbose: bool = True) -> None:
 
     Examples:
         >>> import pyufunc as uf
-        >>> uf.show_utility_func_by_keywords()
+        >>> uf.show_utility_func_by_keyword()
         Available utility functions in pyufunc:
 
         -- non-keywords:
@@ -142,25 +143,25 @@ def show_util_func_by_keyword(verbose: bool = True) -> None:
            ** show_available_utility_func
     """
 
-    for func_str in list(chain.from_iterable(ufunc_category.values())):
+    for func_str in list(chain.from_iterable(FUNC_CATEGORY.values())):
         prefix = func_str.split("_")[0]
-        if prefix in ufunc_keywords:
-            ufunc_keywords[prefix].append(func_str)
+        if prefix in FUNC_KEYWORD:
+            FUNC_KEYWORD[prefix].append(func_str)
         else:
-            ufunc_keywords["non-keywords"].append(func_str)
+            FUNC_KEYWORD["non-keywords"].append(func_str)
 
     res_str_head = "Available utility functions in pyUFunc"
     res_str_by_keyword = ""
-    ufunc_count = 0
+    func_count = 0
 
-    for keyword in ufunc_keywords:
-        if ufunc_keywords[keyword]:
+    for keyword in FUNC_KEYWORD:
+        if FUNC_KEYWORD[keyword]:
             res_str_by_keyword += f"\n- {keyword}:\n"
-            for func in ufunc_keywords[keyword]:
+            for func in FUNC_KEYWORD[keyword]:
                 res_str_by_keyword += f"  - {func}\n"
-                ufunc_count += 1
+                func_count += 1
 
-    res_str = res_str_head + f" ({ufunc_count}):\n" + res_str_by_keyword
+    res_str = res_str_head + f" ({func_count}):\n" + res_str_by_keyword
 
     if verbose:
         print(res_str)
@@ -189,20 +190,20 @@ def find_func_by_keyword(keyword: str, verbose: bool = True) -> list:
 
     res_str_by_keyword = ""
     res_str_lst = []
-    ufunc_count = 0
+    func_count = 0
 
-    for func_str in list(chain.from_iterable(ufunc_category.values())):
+    for func_str in list(chain.from_iterable(FUNC_CATEGORY.values())):
         if keyword.lower() in func_str.lower():
-            res_str_by_keyword += f"  \n{ufunc_count + 1}. {func_str}\n"
+            res_str_by_keyword += f"  \n{func_count + 1}. {func_str}\n"
             res_str_lst.append(func_str)
-            ufunc_count += 1
+            func_count += 1
 
     if verbose:
         res_str_head = f"Available functions by keyword: {keyword}"
-        res_str = res_str_head + f" ({ufunc_count}):\n" + res_str_by_keyword
+        res_str = res_str_head + f" ({func_count}):\n" + res_str_by_keyword
 
         print(res_str)
         return ""
     return res_str_lst
 
-__all__ = list(chain(*ufunc_category.values()))
+__all__ = list(chain(*FUNC_CATEGORY.values()))
