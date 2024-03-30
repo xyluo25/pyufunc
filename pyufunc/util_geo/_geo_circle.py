@@ -7,7 +7,7 @@
 from __future__ import annotations
 import math
 from typing import Iterable, Union, TYPE_CHECKING
-from pyufunc.pkg_utils import requires
+from pyufunc.pkg_utils import requires, import_package
 
 #  https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
@@ -79,7 +79,7 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
     return [to_degrees(lon), to_degrees(lat)]
 
 
-@requires("shapely")
+@requires("shapely", verbose=False)
 def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
                                        radius: float,
                                        options: dict = {"edges": 32, "bearing": 0, "direction": 1},
@@ -137,6 +137,7 @@ def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
 
     """
     # import shapely.geometry.Point
+    import_package("shapely", verbose=False)
     from shapely.geometry import Point
 
     # TDD, test driven development: input validation
@@ -160,10 +161,15 @@ def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
     direction = options["direction"]
 
     start = to_radians(bearing)
-    coordinates = []
-    for i in range(edges):
-        coordinates.append(_offset(point, radius, earth_radius, start + (direction * 2 * math.pi * -i) / edges))
-
+    coordinates = [
+        _offset(
+            point,
+            radius,
+            earth_radius,
+            start + (direction * 2 * math.pi * -i) / edges,
+        )
+        for i in range(edges)
+    ]
     # convert nested level 3 to level 2
     coordinates.append(coordinates[0])
 

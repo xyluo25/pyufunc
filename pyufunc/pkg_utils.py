@@ -14,7 +14,7 @@ import datetime
 from functools import wraps
 import copy
 from multiprocessing import Pool
-from typing import Iterable, Callable, Iterator
+from typing import Iterable, Callable, Iterator, Union
 import os
 
 
@@ -31,47 +31,87 @@ __all__ = [
 ]
 
 
-def import_package(pkg_name: str, options: list = ["--user"]) -> object:
+def import_package(pkg_name: Union[str, tuple, list],
+                   options: list = ["--user"],
+                   verbose: bool = True) -> object:
     """import a python package, if not exist, install the package and import it again.
     This function can be used in any package to avoid too much pre-installation of dependencies.
     In other words, this function will install the package only if it is needed.
 
     Location:
-        The function defined in pyufunc/utils.py.
+        The function defined in pyufunc/pkg_utils.py.
 
     Args:
-        package_name (str): the package name, eg: "numpy" or "numpy==1.19.5".
+        package_name (str): the package name, it can be a string or tuple or list.
+            if it's a string, it's the package name for both installation and import.
+            if it's a tuple or list, it has two elements:
+                first element is the package name, for pip or conda installation
+                second element is the package name, for import the package
+            eg: "numpy" or "numpy==1.19.5".
+            eg. ("pillow", "PIL"),
+            eg. ["pillow==8.3.1", "PIL"]
+            eg. ["opencv-python", "cv2"]
         options (list, optional): the installation optional inputs,
             eg: '--force-reinstall', '--ignore-installed'. Defaults to ["--user"].
+        verbose (bool, optional): print the error message if the package is not available.
+            Defaults to True.
 
     Returns:
         object: the imported package
 
+    Note:
+        if the module name different from import name
+        eg. module name is 'pillow', import name is 'PIL'
+        please use tuple or list to specify the module name and import name
+        e.g. import_package(('pillow', 'PIL'))
+
     Examples:
         >>> numpy = import_package("numpy") # equal to "import numpy as numpy"
-
-        >>> numpy = import_package("numpy")
-            :Package numpy not existed in current env, install the package first and import again...
-
-        >>> numpy = import_package("numpy==1.19.5")
-            :Package numpy==1.19.5 not existed in current env, install the package first and import again...
-
         >>> np = import_package("numpy")  # equal to "import numpy as np"
+
+        # not existed
+        >>> numpy = import_package("numpy")
+            :numpy not existed in current env, installing...
+
+        # specify the version
+        >>> numpy = import_package("numpy==1.19.5")
+            :Package numpy==1.19.5 not existed in current env, installing...
+
+        # different name for installation and import
+        >>> PIL = import_package(("pillow", "PIL"))
+        >>> cv2 = import_package(["opencv-python", "cv2"])
+        >>> cv2 = import_package(["opencv-python", "cv2"], options=["--force-reinstall"])
+        >>> cv2 = import_package(["opencv-python==4.9.0.80", "cv2"])
     """
 
     # TDD, test-driven development: check inputs
-    assert isinstance(pkg_name, str), "The input package name should be a string."
+    assert isinstance(pkg_name, (str, tuple, list)), "The input pkg_name should be a string or tuple or list."
+
+    # Step 1: check if the package name is a string
+    if isinstance(pkg_name, str):
+        module_name = pkg_name
+        import_name = pkg_name
+
+    elif isinstance(pkg_name, (tuple, list)) and len(pkg_name) == 2:
+        module_name = pkg_name[0]
+        import_name = pkg_name[1]
+
+    else:
+        raise ValueError("The input pkg_name should be a string, tuple or list with two elements.")
 
     try:
         # import package from current environment
-        module = importlib.import_module(pkg_name)
+        module = importlib.import_module(import_name)
     except Exception:
-        # install package onto current environment
+
+        if verbose:
+            print(f"  :installing {module_name}...")
+
+        # install package to current environment
         outputs = []
         try:
-            print(f"  :{pkg_name} not existed in current env, install them automatically...")
             all_args = [sys.executable, '-m', 'pip',
-                        'install', *options, pkg_name]
+                        'install', *options, module_name]
 
             result = subprocess.run(
                 all_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -84,19 +124,25 @@ def import_package(pkg_name: str, options: list = ["--user"]) -> object:
 
         # if install failed, print the error message
         except Exception as e:
-            print("  :Info: failed to install the package. please install it manually.")
-            print(f"  :Use pip or conda to install it, e.g. 'pip install {pkg_name}'. ")
-            if len(outputs) == 2:
-                [print(f"  :{output}", end='') for output in outputs]
-            else:
-                print(f"  :{e}")
-            return
+            print(f"  :Info: failed to install {module_name}. please install it manually.")
+
+            if verbose:
+                if len(outputs) == 2:
+                    [print(f"  :{output}", end='') for output in outputs]
+                else:
+                    print(f"  :{e}")
+            return None
 
         # import package from current environment after installation
         try:
-            module = importlib.import_module(pkg_name)
+            module = importlib.import_module(import_name)
+
+            if verbose:
+                print(f"  :{module_name} has been installed successfully.")
+
         except Exception:
             return None
+
     return module
 
 
@@ -300,6 +346,9 @@ def requires(*args, **kwargs) -> object:
                 first element is the module name, for pip or conda installation
                 second element is the module name, for import the module
         **kwargs: the optional arguments, including verbose and auto_install.
+            verbose (bool, optional): print the processing message. Defaults to True.
+            auto_install (bool, optional): install the missing dependencies automatically.
+                Defaults to False.
 
     Returns:
         object: the decorated function.
@@ -309,17 +358,18 @@ def requires(*args, **kwargs) -> object:
         verbose: print the error message if the dependencies are not available. Default is True.
         auto_install: install the missing dependencies automatically. Default is True.
 
-        eg: @requires("numpy", "pandas", verbose=False, auto_install=False)
+        eg: @requires("numpy", "pandas", verbose=False)
         eg: @requires("numpy", "pandas", verbose=True, auto_install=True)
-        eg: @requires("numpy", "pandas", verbose=True, auto_install=False)
         eg: @requires("numpy", "pandas", verbose=False, auto_install=True)
         eg: @requires(("pillow", "PIL"), "pandas", verbose=True, auto_install=True)
 
     Examples:
+
         # Example 1: the function will not run if the dependencies are not available
         >>> @requires("numpy", "pandas", "unknown_module", verbose=True, auto_install=False)
             def my_function():
                 return "I'm running!"
+
         >>> my_function()
             Error: missing dependencies: ['numpy', 'pandas'], please install them first.
             not running the function: my_function
@@ -333,15 +383,20 @@ def requires(*args, **kwargs) -> object:
 
     """
 
-    # Step 1: get the verbose option, default is True
+    # get the verbose option, default is True
     # the verbose option is used to print the error message
     verbose = kwargs.get("verbose", True)
-    auto_install = kwargs.get("auto_install", True)
+    auto_install = kwargs.get("auto_install", False)
+    args_requires = copy.deepcopy(args)
 
-    # # Step 2: get the required dependencies
-    # wanted = copy.deepcopy(args)
+    # test
+    # print("args: ", args)
+    # print("kwargs: ", kwargs)
+    # print("verbose: ", verbose)
+    # print("auto_install: ", auto_install)
+    # print()
 
-    # Step 3: check if the dependencies have different names
+    # check if the dependencies have different names
     # if the argument are not strings, it's tuple or list
     # first element is the module name, for pip or conda installation
     # second element is the module name, for import the module
@@ -363,21 +418,30 @@ def requires(*args, **kwargs) -> object:
         if all(available):
             return function
 
-        # install missing dependencies
-        missing_modules = [arg for i, arg in enumerate(arg_module_name) if not available[i]]
+        # get missing dependencies
+        missing_pkg_name = [arg for i, arg in enumerate(args) if not available[i]]
+        missing_module_name = [arg for i, arg in enumerate(arg_module_name) if not available[i]]
+        missing_import_name = [arg for i, arg in enumerate(arg_import_name) if not available[i]]
+
+        # install the missing dependencies
         if auto_install:
-            print(f"  :Info: missing dependencies: {missing_modules}, install them automatically...")
-            for module in missing_modules:
-                import_package(module)
-            available = [is_module_importable(arg) for arg in arg_import_name]
+            if verbose:
+                print(f"  :Info: installing {",".join(missing_module_name)}...")
+            for pkg_name in missing_pkg_name:
+                import_package(pkg_name, verbose=verbose)
+            available = [is_module_importable(arg) for arg in missing_import_name]
             if all(available):
                 return function
 
         def passer(*args, **kwargs):
             if verbose:
-                print(f"  :Error: missing dependencies: {missing_modules}, please install them first.")
-                print(f"  :Use pip or conda to install it, e.g. 'pip install {missing_modules}'. ")
-                assert False, f"Missing required dependencies, not running the function: {function.__name__}"
+                print(f"  :{function.__name__} missing dependency {','.join(missing_module_name)}")
+                print("  :please install manually.")
+
+            if verbose and not auto_install:
+                print("  :You can set auto_install=True to install the package automatically,")
+                print(f"  :eg. @requires{args_requires}" + ", auto_install=True)\n")
+            return function(*args, **kwargs)
 
         return passer
 

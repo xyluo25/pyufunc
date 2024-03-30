@@ -9,7 +9,7 @@ import copy
 from typing import Union, Iterable, TYPE_CHECKING
 import functools
 from pyufunc.util_geo._geo_circle import create_circle_at_point_with_radius
-from pyufunc.pkg_utils import func_running_time, requires
+from pyufunc.pkg_utils import func_running_time, requires, import_package
 
 # https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
@@ -20,7 +20,7 @@ if TYPE_CHECKING:
     import numpy as np
 
 
-@requires("shapely")
+@requires("shapely", verbose=False)
 def proj_point_to_line(point: Point, line: LineString) -> Point:
     """Project a point to a line.
 
@@ -45,6 +45,7 @@ def proj_point_to_line(point: Point, line: LineString) -> Point:
         POINT (0.5 0.5)
     """
 
+    import_package("shapely", verbose=False)
     from shapely.geometry import Point, LineString
 
     # TDD: Test-Driven Development, check data types of input arguments
@@ -57,7 +58,7 @@ def proj_point_to_line(point: Point, line: LineString) -> Point:
     return projected_point
 
 
-@requires("shapely", "numpy")
+@requires("shapely", "numpy", verbose=False)
 def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
                                  pt2: Union[Point, tuple, list, np.array],
                                  unit: str = 'km') -> float:
@@ -87,6 +88,8 @@ def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
     """
 
     # import required modules
+    import_package("shapely", verbose=False)
+    import_package("numpy", verbose=False)
     from shapely.geometry import Point
     import numpy as np
 
@@ -134,7 +137,7 @@ def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
     return arc_length
 
 
-@requires("shapely")
+@requires("shapely", verbose=False)
 def find_closest_point(pt: Point, pts: MultiPoint, k_closest: int = 1) -> list:
     """Find the closest point from a list of reference points.
 
@@ -164,6 +167,7 @@ def find_closest_point(pt: Point, pts: MultiPoint, k_closest: int = 1) -> list:
     """
 
     # import required modules
+    import_package("shapely", verbose=False)
     from shapely.geometry import Point, MultiPoint
     import shapely
 
@@ -182,7 +186,7 @@ def find_closest_point(pt: Point, pts: MultiPoint, k_closest: int = 1) -> list:
     return points_in_order
 
 
-@requires("shapely")
+@requires("shapely", verbose=False)
 def get_coordinates_from_geom(geom_obj: Union[Point, MultiPoint, LineString, MultiLineString,
                                               Polygon, MultiPolygon, GeometryCollection]) -> np.ndarray:
     """Get the coordinates from a geometry object.
@@ -221,6 +225,7 @@ def get_coordinates_from_geom(geom_obj: Union[Point, MultiPoint, LineString, Mul
     """
 
     # import required modules
+    import_package("shapely", verbose=False)
     from shapely.geometry import (Point, MultiPoint, LineString, MultiLineString,
                                   Polygon, MultiPolygon, GeometryCollection)
     import numpy as np
@@ -259,7 +264,7 @@ def get_coordinates_from_geom(geom_obj: Union[Point, MultiPoint, LineString, Mul
     return coords
 
 
-@requires("shapely")
+@requires("shapely", verbose=False)
 @func_running_time
 def find_k_nearest_points(pts: Union[Point, MultiPoint, LineString, MultiLineString,
                                      Polygon, MultiPolygon, GeometryCollection],
@@ -284,6 +289,7 @@ def find_k_nearest_points(pts: Union[Point, MultiPoint, LineString, MultiLineStr
     """
 
     # import required modules
+    import_package("shapely", verbose=False)
     from shapely.geometry import (Point, MultiPoint, LineString, MultiLineString,
                                   Polygon, MultiPolygon, GeometryCollection)
 
