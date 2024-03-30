@@ -20,11 +20,13 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (55):
+Available utility functions in pyUFunc (71):
 
 - non-keywords:
   - gmns_geo
   - send_email
+  - remove_file
+  - add_dir_to_env
   - path2linux
   - path2uniform
   - import_package
@@ -55,10 +57,12 @@ Available utility functions in pyUFunc (55):
 
 - create:
   - create_circle_at_point_with_radius
+  - create_tempfile
 
 - find:
   - find_closest_point
   - find_k_nearest_points
+  - find_func_by_keyword
 
 - calc:
   - calc_distance_on_unit_sphere
@@ -85,6 +89,13 @@ Available utility functions in pyUFunc (55):
 - list:
   - list_all_timezones
 
+- img:
+  - img_translate
+  - img_rotate
+  - img_rotate_bound
+  - img_resize
+  - img_show
+
 - split:
   - split_dict_by_chunk
   - split_list_by_equal_sublist
@@ -96,8 +107,15 @@ Available utility functions in pyUFunc (55):
 - cvt:
   - cvt_int_to_alpha
   - cvt_dt_to_tz
+  - cvt_img_to_bytes
+  - cvt_PIL_img_to_bytes
+  - cvt_img_bytes_to_PIL_img
+  - cvt_img_PIL_to_CV
+  - cvt_img_CV_to_PIL
 
 - is:
+  - is_PIL_img
+  - is_CV_img
   - is_valid_email
   - is_windows
   - is_linux

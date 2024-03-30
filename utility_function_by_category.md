@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (55):
+Available utility functions in pyUFunc (71):
 
 - util_common:
   - show_docstring_headers
@@ -53,6 +53,20 @@ Available utility functions in pyUFunc (55):
   - pypi_downloads
   - github_get_status
 
+- util_img:
+  - cvt_img_to_bytes
+  - cvt_PIL_img_to_bytes
+  - cvt_img_bytes_to_PIL_img
+  - is_PIL_img
+  - is_CV_img
+  - cvt_img_PIL_to_CV
+  - cvt_img_CV_to_PIL
+  - img_translate
+  - img_rotate
+  - img_rotate_bound
+  - img_resize
+  - img_show
+
 - util_network:
   - get_host_ip
   - validate_url
@@ -64,6 +78,9 @@ Available utility functions in pyUFunc (55):
 - util_pathio:
   - get_file_size
   - get_dir_size
+  - create_tempfile
+  - remove_file
+  - add_dir_to_env
   - path2linux
   - path2uniform
   - get_filenames_by_ext
@@ -86,3 +103,4 @@ Available utility functions in pyUFunc (55):
   - is_module_importable
   - show_util_func_by_category
   - show_util_func_by_keyword
+  - find_func_by_keyword
