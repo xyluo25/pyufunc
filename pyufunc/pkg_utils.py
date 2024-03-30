@@ -47,10 +47,10 @@ def import_package(pkg_name: Union[str, tuple, list],
             if it's a tuple or list, it has two elements:
                 first element is the package name, for pip or conda installation
                 second element is the package name, for import the package
-            eg: "numpy" or "numpy==1.19.5".
-            eg. ("pillow", "PIL"),
-            eg. ["pillow==8.3.1", "PIL"]
-            eg. ["opencv-python", "cv2"]
+            eg: "numpy" or "numpy==1.19.5";
+            eg: ("pillow", "PIL");
+            eg: ["pillow==8.3.1", "PIL"];
+            eg: ["opencv-python", "cv2"];
         options (list, optional): the installation optional inputs,
             eg: '--force-reinstall', '--ignore-installed'. Defaults to ["--user"].
         verbose (bool, optional): print the error message if the package is not available.

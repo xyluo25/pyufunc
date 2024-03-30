@@ -1,7 +1,6 @@
 pyufunc.cvt\_img\_PIL\_to\_CV
 =============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: cvt_img_PIL_to_CV
-

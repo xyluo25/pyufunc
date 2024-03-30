@@ -1,7 +1,6 @@
 pyufunc.check\_platform
 =======================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: check_platform
-

@@ -28,6 +28,3 @@ img operations
    img_rotate_bound
    img_resize
    img_show
-
-
-

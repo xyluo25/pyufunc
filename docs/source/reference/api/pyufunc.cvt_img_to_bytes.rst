@@ -1,7 +1,6 @@
 pyufunc.cvt\_img\_to\_bytes
 ===========================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: cvt_img_to_bytes
-

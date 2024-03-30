@@ -1,7 +1,6 @@
 pyufunc.group\_dt\_yearly
 =========================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: group_dt_yearly
-

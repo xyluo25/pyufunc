@@ -1,7 +1,6 @@
 pyufunc.is\_user\_defined\_func
 ===============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: is_user_defined_func
-

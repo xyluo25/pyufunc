@@ -1,7 +1,6 @@
 pyufunc.proj\_point\_to\_line
 =============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: proj_point_to_line
-

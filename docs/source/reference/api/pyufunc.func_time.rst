@@ -1,7 +1,6 @@
 pyufunc.func\_time
 ==================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: func_time
-

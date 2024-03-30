@@ -33,9 +33,9 @@ io
 platform
 ~~~~~~~~
 .. autosummary::
-    :toctree: api/
+   :toctree: api/
 
-    check_platform
-    is_windows
-    is_linux
-    is_mac
+   check_platform
+   is_windows
+   is_linux
+   is_mac

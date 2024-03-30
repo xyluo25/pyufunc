@@ -1,7 +1,6 @@
 pyufunc.is\_valid\_email
 ========================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: is_valid_email
-

@@ -1,7 +1,6 @@
 pyufunc.cvt\_int\_to\_alpha
 ===========================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: cvt_int_to_alpha
-

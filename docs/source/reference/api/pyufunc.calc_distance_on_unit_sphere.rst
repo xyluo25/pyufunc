@@ -1,7 +1,6 @@
 pyufunc.calc\_distance\_on\_unit\_sphere
 ========================================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: calc_distance_on_unit_sphere
-

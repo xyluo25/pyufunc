@@ -38,6 +38,6 @@ __all__ = [
     "img_rotate",
     "img_rotate_bound",
     "img_resize",
-    "img_show"
+    "img_show",
 
 ]

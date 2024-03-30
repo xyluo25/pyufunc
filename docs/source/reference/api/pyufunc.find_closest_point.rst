@@ -1,7 +1,6 @@
 pyufunc.find\_closest\_point
 ============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: find_closest_point
-
