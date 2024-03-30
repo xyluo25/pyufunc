@@ -9,7 +9,7 @@ import os
 from pyufunc.util_pathio._path import path2linux
 
 # ############## Package Configurations ############## #
-pkg_version = "0.2.4"
+pkg_version = "0.2.5"
 pkg_name = "pyufunc"
 pkg_author = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
 pkg_email = "luoxiangyong01@gmail.com, xzhou74@asu.edu"
