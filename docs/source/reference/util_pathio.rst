@@ -26,6 +26,9 @@ io
 
    get_file_size
    get_dir_size
+   create_tempfile
+   remove_file
+   add_dir_to_env
 
 platform
 ~~~~~~~~

@@ -16,7 +16,7 @@ import pyufunc as pf
 
 # Get all the modules in the pyufunc package
 category_lst = []
-for module_lst in pf.ufunc_category.values():
+for module_lst in pf.FUNC_CATEGORY.values():
     if module_lst:
         for module in module_lst:
             category_lst.append(module)

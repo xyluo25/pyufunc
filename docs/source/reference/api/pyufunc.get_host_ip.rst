@@ -1,6 +1,7 @@
-pyufunc.get\_host\_ip
-=====================
+pyufunc.gethost\_ip
+===================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: get_host_ip
+

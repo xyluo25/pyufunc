@@ -1,6 +1,7 @@
-pyufunc.path2linux
-==================
+pyufunc.path2lin
+================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: path2linux
+

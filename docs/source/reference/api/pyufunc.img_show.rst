@@ -1,7 +1,7 @@
-pyufunc.islinux
+pyufunc.imgshow
 ===============
 
 .. automodule:: pyufunc
 
-.. autofunction:: is_linux
+.. autofunction:: img_show
 

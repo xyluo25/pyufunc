@@ -1,6 +1,7 @@
-pyufunc.show\_docstring\_headers
-================================
+pyufunc.showdocstring\_headers
+==============================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: show_docstring_headers
+

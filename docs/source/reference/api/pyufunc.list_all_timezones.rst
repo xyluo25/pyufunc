@@ -1,6 +1,7 @@
-pyufunc.list\_all\_timezones
-============================
+pyufunc.listall\_timezones
+==========================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: list_all_timezones
+

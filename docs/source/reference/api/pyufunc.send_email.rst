@@ -1,6 +1,7 @@
-pyufunc.send\_email
-===================
+pyufunc.sendemail
+=================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: send_email
+

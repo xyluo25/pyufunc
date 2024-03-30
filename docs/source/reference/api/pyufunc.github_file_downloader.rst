@@ -1,6 +1,7 @@
-pyufunc.github\_file\_downloader
-================================
+pyufunc.githubfile\_downloader
+==============================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: github_file_downloader
+

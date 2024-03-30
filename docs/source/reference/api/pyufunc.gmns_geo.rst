@@ -1,33 +1,5 @@
-pyufunc.gmns\_geo
-=================
+pyufunc.gmnsgeo
+===============
 
 .. automodule:: pyufunc.gmns_geo
-
-   
-   
-   
-
-   
-   
-   
-
-   
-   
-   .. rubric:: Classes
-
-   .. autosummary::
-   
-      Agent
-      Link
-      Node
-      POI
-      Zone
-   
-   
-
-   
-   
-   
-
-
 

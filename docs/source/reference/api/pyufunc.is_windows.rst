@@ -1,6 +1,7 @@
-pyufunc.is\_windows
-===================
+pyufunc.iswindows
+=================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: is_windows
+

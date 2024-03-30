@@ -1,6 +1,7 @@
-pyufunc.show\_docstring\_numpy
-==============================
+pyufunc.showdocstring\_numpy
+============================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: show_docstring_numpy
+

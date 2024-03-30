@@ -1,6 +1,7 @@
-pyufunc.cvt\_dt\_to\_tz
-=======================
+pyufunc.cvtdt\_to\_tz
+=====================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: cvt_dt_to_tz
+

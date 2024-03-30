@@ -1,6 +1,7 @@
-pyufunc.github\_get\_status
-===========================
+pyufunc.githubget\_status
+=========================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: github_get_status
+

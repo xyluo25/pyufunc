@@ -1,6 +1,7 @@
-pyufunc.get\_dir\_size
-======================
+pyufunc.getdir\_size
+====================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: get_dir_size
+

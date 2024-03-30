@@ -1,6 +1,7 @@
-pyufunc.path2uniform
-====================
+pyufunc.path2unifo
+==================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: path2uniform
+

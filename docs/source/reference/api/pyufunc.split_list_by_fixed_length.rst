@@ -1,6 +1,7 @@
-pyufunc.split\_list\_by\_fixed\_length
-======================================
+pyufunc.splitlist\_by\_fixed\_length
+====================================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: split_list_by_fixed_length
+

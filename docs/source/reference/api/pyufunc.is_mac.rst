@@ -1,6 +1,7 @@
-pyufunc.is\_mac
-===============
+pyufunc.ismac
+=============
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: is_mac
+
