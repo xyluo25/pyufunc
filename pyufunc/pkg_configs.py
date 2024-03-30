@@ -74,13 +74,14 @@ FUNC_KEYWORD = {
     "check"       : [],
     "validate"    : [],
     "list"        : [],
+    "img"         : [],
     "split"       : [],
     "fmt"         : [],
     "cvt"         : [],
     "is"          : [],
     "proj"        : [],
     "github"      : [],
-    "pypi"        : []
+    "pypi"        : [],
 }
 
 # ############### Email Configuration ############### #

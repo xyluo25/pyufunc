@@ -65,7 +65,7 @@ def import_package(pkg_name: str, options: list = ["--user"]) -> object:
     try:
         # import package from current environment
         module = importlib.import_module(pkg_name)
-    except ImportError:
+    except Exception:
         # install package onto current environment
         outputs = []
         try:
@@ -93,7 +93,10 @@ def import_package(pkg_name: str, options: list = ["--user"]) -> object:
             return
 
         # import package from current environment after installation
-        module = importlib.import_module(pkg_name)
+        try:
+            module = importlib.import_module(pkg_name)
+        except Exception:
+            return None
     return module
 
 
@@ -290,6 +293,14 @@ def requires(*args, **kwargs) -> object:
     """A decorator to wrap functions with extra dependencies.
     If the dependencies are not available, the function will not run.
 
+    Args:
+        *args: the required dependencies to run the function.
+            if argument is a string, it's the module name for pip or conda installation.
+            if argument is a tuple or list, it has two elements:
+                first element is the module name, for pip or conda installation
+                second element is the module name, for import the module
+        **kwargs: the optional arguments, including verbose and auto_install.
+
     Returns:
         object: the decorated function.
 
@@ -302,6 +313,7 @@ def requires(*args, **kwargs) -> object:
         eg: @requires("numpy", "pandas", verbose=True, auto_install=True)
         eg: @requires("numpy", "pandas", verbose=True, auto_install=False)
         eg: @requires("numpy", "pandas", verbose=False, auto_install=True)
+        eg: @requires(("pillow", "PIL"), "pandas", verbose=True, auto_install=True)
 
     Examples:
         # Example 1: the function will not run if the dependencies are not available
@@ -326,21 +338,38 @@ def requires(*args, **kwargs) -> object:
     verbose = kwargs.get("verbose", True)
     auto_install = kwargs.get("auto_install", True)
 
-    # Step 2: get the required dependencies
-    wanted = copy.deepcopy(args)
+    # # Step 2: get the required dependencies
+    # wanted = copy.deepcopy(args)
+
+    # Step 3: check if the dependencies have different names
+    # if the argument are not strings, it's tuple or list
+    # first element is the module name, for pip or conda installation
+    # second element is the module name, for import the module
+    arg_module_name = []
+    arg_import_name = []
+    for arg in args:
+        if isinstance(arg, str):
+            arg_module_name.append(arg)
+            arg_import_name.append(arg)
+        elif isinstance(arg, (tuple, list)) and len(arg) == 2:
+            arg_module_name.append(arg[0])
+            arg_import_name.append(arg[1])
+        else:
+            raise ValueError("The input arguments should be strings or tuple with two elements.")
 
     def inner(function):
-        available = [is_module_importable(arg) for arg in args]
+        # check if the dependencies are available
+        available = [is_module_importable(arg) for arg in arg_import_name]
         if all(available):
             return function
 
         # install missing dependencies
-        missing_modules = [arg for i, arg in enumerate(wanted) if not available[i]]
+        missing_modules = [arg for i, arg in enumerate(arg_module_name) if not available[i]]
         if auto_install:
             print(f"  :Info: missing dependencies: {missing_modules}, install them automatically...")
             for module in missing_modules:
                 import_package(module)
-            available = [is_module_importable(arg) for arg in args]
+            available = [is_module_importable(arg) for arg in arg_import_name]
             if all(available):
                 return function
 
