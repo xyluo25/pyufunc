@@ -123,7 +123,7 @@ def cvt_img_CV_to_PIL(img: np.ndarray) -> Image.Image:
     """
     # import necessary models
     import_package(("opencv-python", "cv2"), verbose=False)
-    impot_package(("pillow", "PIL"), verbose=False)
+    import_package(("pillow", "PIL"), verbose=False)
     import cv2
     from PIL import Image
 

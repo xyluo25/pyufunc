@@ -426,7 +426,7 @@ def requires(*args, **kwargs) -> object:
         # install the missing dependencies
         if auto_install:
             if verbose:
-                print(f"  :Info: installing {",".join(missing_module_name)}...")
+                print(f"  :Info: installing {','.join(missing_module_name)}...")
             for pkg_name in missing_pkg_name:
                 import_package(pkg_name, verbose=verbose)
             available = [is_module_importable(arg) for arg in missing_import_name]
