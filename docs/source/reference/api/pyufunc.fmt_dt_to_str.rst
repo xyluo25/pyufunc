@@ -1,5 +1,5 @@
-pyufunc.fmtdt\_to\_str
-======================
+pyufunc.fmt\_dt\_to\_str
+========================
 
 .. automodule:: pyufunc
 

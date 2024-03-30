@@ -1,5 +1,5 @@
-pyufunc.imgshow
-===============
+pyufunc.img\_show
+=================
 
 .. automodule:: pyufunc
 

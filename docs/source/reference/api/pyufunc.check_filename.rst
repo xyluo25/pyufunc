@@ -1,5 +1,5 @@
-pyufunc.checkfilename
-=====================
+pyufunc.check\_filename
+=======================
 
 .. automodule:: pyufunc
 

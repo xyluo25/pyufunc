@@ -1,5 +1,5 @@
-pyufunc.importpackage
-=====================
+pyufunc.import\_package
+=======================
 
 .. automodule:: pyufunc
 

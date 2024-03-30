@@ -1,5 +1,5 @@
-pyufunc.getfilenames\_by\_ext
-=============================
+pyufunc.get\_filenames\_by\_ext
+===============================
 
 .. automodule:: pyufunc
 

@@ -70,7 +70,7 @@ FUNC_CATEGORY = {
     "util_vis"            : __util_vis.__all__,
     "pkg_utils"           : __pkg_utils.__all__ + ["show_util_func_by_category",
                                                    "show_util_func_by_keyword",
-                                                   "find_func_by_keyword"],
+                                                   "find_util_func_by_keyword"],
 }
 
 
@@ -169,7 +169,7 @@ def show_util_func_by_keyword(verbose: bool = True) -> None:
     return res_str
 
 
-def find_func_by_keyword(keyword: str, verbose: bool = True) -> list:
+def find_util_func_by_keyword(keyword: str, verbose: bool = True) -> list:
     """find all available utility functions in pyufunc by keyword.
 
     Args:

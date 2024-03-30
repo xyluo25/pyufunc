@@ -1,5 +1,5 @@
-pyufunc.checkfiles\_existence
-=============================
+pyufunc.check\_files\_existence
+===============================
 
 .. automodule:: pyufunc
 

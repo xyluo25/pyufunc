@@ -1,5 +1,5 @@
-pyufunc.groupdt\_monthly
-========================
+pyufunc.group\_dt\_monthly
+==========================
 
 .. automodule:: pyufunc
 

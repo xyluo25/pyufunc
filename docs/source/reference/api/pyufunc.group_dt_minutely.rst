@@ -1,5 +1,5 @@
-pyufunc.groupdt\_minutely
-=========================
+pyufunc.group\_dt\_minutely
+===========================
 
 .. automodule:: pyufunc
 

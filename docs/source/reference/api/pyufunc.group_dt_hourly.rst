@@ -1,5 +1,5 @@
-pyufunc.groupdt\_hourly
-=======================
+pyufunc.group\_dt\_hourly
+=========================
 
 .. automodule:: pyufunc
 

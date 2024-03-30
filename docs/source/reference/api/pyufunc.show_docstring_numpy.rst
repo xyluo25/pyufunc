@@ -1,5 +1,5 @@
-pyufunc.showdocstring\_numpy
-============================
+pyufunc.show\_docstring\_numpy
+==============================
 
 .. automodule:: pyufunc
 

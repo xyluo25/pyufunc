@@ -1,5 +1,5 @@
-pyufunc.createcircle\_at\_point\_with\_radius
-=============================================
+pyufunc.create\_circle\_at\_point\_with\_radius
+===============================================
 
 .. automodule:: pyufunc
 

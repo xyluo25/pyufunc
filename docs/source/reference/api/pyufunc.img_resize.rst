@@ -1,5 +1,5 @@
-pyufunc.imgresize
-=================
+pyufunc.img\_resize
+===================
 
 .. automodule:: pyufunc
 

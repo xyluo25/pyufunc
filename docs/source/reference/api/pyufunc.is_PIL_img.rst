@@ -1,5 +1,5 @@
-pyufunc.isPIL\_img
-==================
+pyufunc.is\_PIL\_img
+====================
 
 .. automodule:: pyufunc
 

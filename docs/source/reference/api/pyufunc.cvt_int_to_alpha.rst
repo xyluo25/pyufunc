@@ -1,5 +1,5 @@
-pyufunc.cvtint\_to\_alpha
-=========================
+pyufunc.cvt\_int\_to\_alpha
+===========================
 
 .. automodule:: pyufunc
 

@@ -1,5 +1,5 @@
-pyufunc.functime
-================
+pyufunc.func\_time
+==================
 
 .. automodule:: pyufunc
 

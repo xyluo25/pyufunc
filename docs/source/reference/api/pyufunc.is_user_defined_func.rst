@@ -1,5 +1,5 @@
-pyufunc.isuser\_defined\_func
-=============================
+pyufunc.is\_user\_defined\_func
+===============================
 
 .. automodule:: pyufunc
 

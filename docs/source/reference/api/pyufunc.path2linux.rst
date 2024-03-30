@@ -1,5 +1,5 @@
-pyufunc.path2lin
-================
+pyufunc.path2linux
+==================
 
 .. automodule:: pyufunc
 

@@ -1,5 +1,5 @@
-pyufunc.isvalid\_email
-======================
+pyufunc.is\_valid\_email
+========================
 
 .. automodule:: pyufunc
 

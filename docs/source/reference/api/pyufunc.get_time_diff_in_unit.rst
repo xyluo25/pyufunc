@@ -1,5 +1,5 @@
-pyufunc.gettime\_diff\_in\_unit
-===============================
+pyufunc.get\_time\_diff\_in\_unit
+=================================
 
 .. automodule:: pyufunc
 

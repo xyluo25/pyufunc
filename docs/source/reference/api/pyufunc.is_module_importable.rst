@@ -1,5 +1,5 @@
-pyufunc.ismodule\_importable
-============================
+pyufunc.is\_module\_importable
+==============================
 
 .. automodule:: pyufunc
 

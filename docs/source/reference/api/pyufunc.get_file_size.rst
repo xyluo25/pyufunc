@@ -1,5 +1,5 @@
-pyufunc.getfile\_size
-=====================
+pyufunc.get\_file\_size
+=======================
 
 .. automodule:: pyufunc
 

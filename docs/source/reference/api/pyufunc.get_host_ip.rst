@@ -1,5 +1,5 @@
-pyufunc.gethost\_ip
-===================
+pyufunc.get\_host\_ip
+=====================
 
 .. automodule:: pyufunc
 

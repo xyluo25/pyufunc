@@ -1,5 +1,5 @@
-pyufunc.funcrunning\_time
-=========================
+pyufunc.func\_running\_time
+===========================
 
 .. automodule:: pyufunc
 

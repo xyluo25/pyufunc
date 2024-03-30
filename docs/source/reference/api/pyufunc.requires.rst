@@ -1,5 +1,5 @@
-pyufunc.requir
-==============
+pyufunc.requires
+================
 
 .. automodule:: pyufunc
 

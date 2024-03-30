@@ -1,5 +1,5 @@
-pyufunc.generatepassword
-========================
+pyufunc.generate\_password
+==========================
 
 .. automodule:: pyufunc
 

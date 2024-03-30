@@ -1,5 +1,5 @@
-pyufunc.iswindows
-=================
+pyufunc.is\_windows
+===================
 
 .. automodule:: pyufunc
 

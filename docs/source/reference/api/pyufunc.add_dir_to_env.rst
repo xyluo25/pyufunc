@@ -1,5 +1,5 @@
-pyufunc.adddir\_to\_env
-=======================
+pyufunc.add\_dir\_to\_env
+=========================
 
 .. automodule:: pyufunc
 

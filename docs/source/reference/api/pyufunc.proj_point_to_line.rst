@@ -1,5 +1,5 @@
-pyufunc.projpoint\_to\_line
-===========================
+pyufunc.proj\_point\_to\_line
+=============================
 
 .. automodule:: pyufunc
 

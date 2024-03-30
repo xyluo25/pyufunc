@@ -1,5 +1,5 @@
-pyufunc.cvtdt\_to\_tz
-=====================
+pyufunc.cvt\_dt\_to\_tz
+=======================
 
 .. automodule:: pyufunc
 

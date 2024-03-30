@@ -1,5 +1,5 @@
-pyufunc.showdocstring\_google
-=============================
+pyufunc.show\_docstring\_google
+===============================
 
 .. automodule:: pyufunc
 

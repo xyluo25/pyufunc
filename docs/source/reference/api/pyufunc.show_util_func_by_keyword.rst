@@ -1,5 +1,5 @@
-pyufunc.showutil\_func\_by\_keyword
-===================================
+pyufunc.show\_util\_func\_by\_keyword
+=====================================
 
 .. automodule:: pyufunc
 

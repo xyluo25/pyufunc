@@ -1,5 +1,5 @@
-pyufunc.isCV\_img
-=================
+pyufunc.is\_CV\_img
+===================
 
 .. automodule:: pyufunc
 

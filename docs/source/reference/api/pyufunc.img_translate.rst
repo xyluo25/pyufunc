@@ -1,5 +1,5 @@
-pyufunc.imgtranslate
-====================
+pyufunc.img\_translate
+======================
 
 .. automodule:: pyufunc
 

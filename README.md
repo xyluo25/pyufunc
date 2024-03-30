@@ -60,7 +60,7 @@ pf.show_util_func_by_category()
 pf.show_util_func_by_keyword()
 
 # show all available functions by keyword in func_name
-pf.find_func_by_keyword("show")
+pf.find_util_func_by_keyword("show")
 
 ```
 

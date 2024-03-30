@@ -1,5 +1,5 @@
-pyufunc.runparallel
-===================
+pyufunc.run\_parallel
+=====================
 
 .. automodule:: pyufunc
 

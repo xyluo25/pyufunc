@@ -1,5 +1,5 @@
-pyufunc.githubfile\_downloader
-==============================
+pyufunc.github\_file\_downloader
+================================
 
 .. automodule:: pyufunc
 

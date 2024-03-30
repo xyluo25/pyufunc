@@ -1,5 +1,5 @@
-pyufunc.imgrotate
-=================
+pyufunc.img\_rotate
+===================
 
 .. automodule:: pyufunc
 

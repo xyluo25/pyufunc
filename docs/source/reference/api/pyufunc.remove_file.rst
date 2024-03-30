@@ -1,5 +1,5 @@
-pyufunc.removefile
-==================
+pyufunc.remove\_file
+====================
 
 .. automodule:: pyufunc
 

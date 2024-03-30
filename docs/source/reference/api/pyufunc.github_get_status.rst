@@ -1,5 +1,5 @@
-pyufunc.githubget\_status
-=========================
+pyufunc.github\_get\_status
+===========================
 
 .. automodule:: pyufunc
 

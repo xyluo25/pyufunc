@@ -1,5 +1,5 @@
-pyufunc.splitlist\_by\_equal\_sublist
-=====================================
+pyufunc.split\_list\_by\_equal\_sublist
+=======================================
 
 .. automodule:: pyufunc
 

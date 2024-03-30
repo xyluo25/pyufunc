@@ -1,5 +1,5 @@
-pyufunc.findclosest\_point
-==========================
+pyufunc.find\_closest\_point
+============================
 
 .. automodule:: pyufunc
 

@@ -1,5 +1,5 @@
-pyufunc.createtempfile
-======================
+pyufunc.create\_tempfile
+========================
 
 .. automodule:: pyufunc
 

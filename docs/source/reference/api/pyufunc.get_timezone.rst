@@ -1,5 +1,5 @@
-pyufunc.gettimezone
-===================
+pyufunc.get\_timezone
+=====================
 
 .. automodule:: pyufunc
 

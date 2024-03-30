@@ -1,5 +1,5 @@
-pyufunc.ismac
-=============
+pyufunc.is\_mac
+===============
 
 .. automodule:: pyufunc
 

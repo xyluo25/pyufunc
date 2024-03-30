@@ -1,5 +1,5 @@
-pyufunc.splitlist\_by\_fixed\_length
-====================================
+pyufunc.split\_list\_by\_fixed\_length
+======================================
 
 .. automodule:: pyufunc
 

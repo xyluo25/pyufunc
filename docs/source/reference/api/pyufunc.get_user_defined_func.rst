@@ -1,5 +1,5 @@
-pyufunc.getuser\_defined\_func
-==============================
+pyufunc.get\_user\_defined\_func
+================================
 
 .. automodule:: pyufunc
 

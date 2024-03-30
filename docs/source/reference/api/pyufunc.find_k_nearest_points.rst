@@ -1,5 +1,5 @@
-pyufunc.findk\_nearest\_points
-==============================
+pyufunc.find\_k\_nearest\_points
+================================
 
 .. automodule:: pyufunc
 

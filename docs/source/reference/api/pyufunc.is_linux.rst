@@ -1,5 +1,5 @@
-pyufunc.islinux
-===============
+pyufunc.is\_linux
+=================
 
 .. automodule:: pyufunc
 

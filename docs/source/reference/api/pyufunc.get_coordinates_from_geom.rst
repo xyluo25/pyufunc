@@ -1,5 +1,5 @@
-pyufunc.getcoordinates\_from\_geom
-==================================
+pyufunc.get\_coordinates\_from\_geom
+====================================
 
 .. automodule:: pyufunc
 

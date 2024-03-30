@@ -1,5 +1,5 @@
-pyufunc.splitdict\_by\_chunk
-============================
+pyufunc.split\_dict\_by\_chunk
+==============================
 
 .. automodule:: pyufunc
 

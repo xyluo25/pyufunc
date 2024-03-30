@@ -31,15 +31,11 @@ for file in os.listdir(api_folder):
 for module in category_lst:
     file_name = f"api/pyufunc.{module}.rst"
 
+    heading_message = "pyufunc." + module
+
     with open(file_name, "w", encoding="utf-8") as f:
-        heading_message = "pyufunc." + module
 
-        heading_message_split = heading_message.split("_")
-        heading_message_new = heading_message_split[0]
-        for i in range(1, len(heading_message_split)):
-            heading_message_new += heading_message_split[i] + "\\" + "_"
-
-        heading_message_new = heading_message_new[:-2]
+        heading_message_new = heading_message.replace("_", "\\_")
         heading_dashes = "=" * len(heading_message_new)
 
         f.write(heading_message_new + "\n")
@@ -54,4 +50,4 @@ for module in category_lst:
 
         f.close()
 
-print("Successfully updated API documentation!")
+print(f"Successfully updated {len(category_lst)} API documentations!")

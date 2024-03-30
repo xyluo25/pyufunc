@@ -1,5 +1,5 @@
-pyufunc.showdocstring\_headers
-==============================
+pyufunc.show\_docstring\_headers
+================================
 
 .. automodule:: pyufunc
 

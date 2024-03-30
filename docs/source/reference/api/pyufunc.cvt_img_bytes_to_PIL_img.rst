@@ -1,5 +1,5 @@
-pyufunc.cvtimg\_bytes\_to\_PIL\_img
-===================================
+pyufunc.cvt\_img\_bytes\_to\_PIL\_img
+=====================================
 
 .. automodule:: pyufunc
 

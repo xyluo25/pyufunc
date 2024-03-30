@@ -1,5 +1,5 @@
-pyufunc.generateunique\_filename
-================================
+pyufunc.generate\_unique\_filename
+==================================
 
 .. automodule:: pyufunc
 

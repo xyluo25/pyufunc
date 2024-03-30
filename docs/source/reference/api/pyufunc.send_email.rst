@@ -1,5 +1,5 @@
-pyufunc.sendemail
-=================
+pyufunc.send\_email
+===================
 
 .. automodule:: pyufunc
 
