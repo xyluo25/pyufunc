@@ -341,12 +341,13 @@ def requires(*args, **kwargs) -> object:
 
     Args:
         *args: the required dependencies to run the function.
-            if argument is a string, it's the module name for pip or conda installation.
+            if argument is a string, module and import are the same.
             if argument is a tuple or list, it has two elements:
-                first element is the module name, for pip or conda installation
-                second element is the module name, for import the module
+                first element is the module name, for pip or conda installation;
+                second element is the import name, for import the module;
         **kwargs: the optional arguments, including verbose and auto_install.
-            verbose (bool, optional): print the processing message. Defaults to True.
+            verbose (bool, optional): print the processing message.
+                Defaults to True.
             auto_install (bool, optional): install the missing dependencies automatically.
                 Defaults to False.
 
@@ -355,8 +356,10 @@ def requires(*args, **kwargs) -> object:
 
     Note:
         user can parse the verbose and auto_install options to control the behavior of the decorator.
-        verbose: print the error message if the dependencies are not available. Default is True.
-        auto_install: install the missing dependencies automatically. Default is True.
+        verbose: print the error message if the dependencies are not available.
+            Default is True.
+        auto_install: install the missing dependencies automatically.
+            Default is True.
 
         eg: @requires("numpy", "pandas", verbose=False)
         eg: @requires("numpy", "pandas", verbose=True, auto_install=True)
