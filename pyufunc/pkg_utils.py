@@ -179,12 +179,12 @@ def func_running_time(func: object) -> object:
 
     @wraps(func)
     def inner(*args, **kwargs):
-        print(f'  :INFO: begin to run function: {func.__name__} …')
+        # print(f'  :INFO: begin to run function: {func.__name__} …')
         time_start = datetime.datetime.now()
         res = func(*args, **kwargs)
         time_diff = datetime.datetime.now() - time_start
         print(
-            f'  :INFO: finished running function: {func.__name__}, total: {time_diff.seconds}s')
+            f'  :INFO: finished function: {func.__name__}, total: {time_diff.seconds}s')
         print()
         return res
 
@@ -223,12 +223,12 @@ def func_time(func: object) -> object:
 
     @wraps(func)
     def inner(*args, **kwargs):
-        print(f'  :INFO: begin to run function: {func.__name__} …')
+        # print(f'  :INFO: begin to run function: {func.__name__} …')
         time_start = datetime.datetime.now()
         res = func(*args, **kwargs)
         time_diff = datetime.datetime.now() - time_start
         print(
-            f'  :INFO: finished running function: {func.__name__}, total: {time_diff.seconds}s')
+            f'  :INFO: finished function: {func.__name__}, total: {time_diff.seconds}s')
         print()
         return res
 
