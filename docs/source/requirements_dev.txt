@@ -36,3 +36,5 @@ sphinxext-opengraph
 nbsphinx
 numpydoc
 pydata_sphinx_theme
+pillow
+opencv-python
