@@ -114,7 +114,7 @@ def show_util_func_by_category(verbose: bool = True) -> None:
                 res_str_by_category += f"  - {func}\n"
                 func_count += 1
 
-    res_str = res_str_head + f" ({func_count}):\n" + res_str_by_category
+    res_str = f"{res_str_head} ({func_count}):\n{res_str_by_category}"
 
     if verbose:
         print(res_str)
@@ -164,7 +164,7 @@ def show_util_func_by_keyword(verbose: bool = True) -> None:
                 res_str_by_keyword += f"  - {func}\n"
                 func_count += 1
 
-    res_str = res_str_head + f" ({func_count}):\n" + res_str_by_keyword
+    res_str = f"{res_str_head} ({func_count}):\n{res_str_by_keyword}"
 
     if verbose:
         print(res_str)
@@ -203,7 +203,7 @@ def find_util_func_by_keyword(keyword: str, verbose: bool = True) -> list:
 
     if verbose:
         res_str_head = f"Available functions by keyword: {keyword}"
-        res_str = res_str_head + f" ({func_count}):\n" + res_str_by_keyword
+        res_str = f"{res_str_head} ({func_count}):\n{res_str_by_keyword}"
 
         print(res_str)
         return ""
