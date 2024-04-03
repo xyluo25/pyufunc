@@ -10,6 +10,7 @@ methods. All classes and functions exposed in ``pyufunc.*`` namespace are public
 The following subpackages are public.
 
 - ``pyufunc.util_ai``: AI related utility functions.
+- ``pyufunc.util_algorithm``: Algorithm utility functions.
 - ``pyufunc.util_common``: Common unclasified utility functions.
 - ``pyufunc.util_data_processing``: Data processing utility functions.
 - ``pyufunc.util_datetime``: Date and time utility functions.
@@ -36,6 +37,7 @@ The following subpackages are public.
    :maxdepth: 3
 
    util_ai
+   util_algorithm
    util_common
    util_data_processing
    util_datetime

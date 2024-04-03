@@ -18,9 +18,7 @@ import pyufunc as pf
 category_lst = []
 for module_lst in pf.FUNC_CATEGORY.values():
     if module_lst:
-        for module in module_lst:
-            category_lst.append(module)
-
+        category_lst.extend(iter(module_lst))
 # remove all documents in the api folder
 api_folder = "api"
 for file in os.listdir(api_folder):
@@ -31,7 +29,7 @@ for file in os.listdir(api_folder):
 for module in category_lst:
     file_name = f"api/pyufunc.{module}.rst"
 
-    heading_message = "pyufunc." + module
+    heading_message = f"pyufunc.{module}"
 
     with open(file_name, "w", encoding="utf-8") as f:
 
@@ -43,10 +41,10 @@ for module in category_lst:
 
         # if gmns_geo is in the module name, then it is a subpackage
         if "gmns_geo" in file_name:
-            f.write(".. automodule:: pyufunc." + module + "\n\n")
+            f.write(f".. automodule:: pyufunc.{module}" + "\n\n")
         else:
             f.write(".. automodule:: pyufunc\n\n")
-            f.write(".. autofunction:: " + module + "\n\n")
+            f.write(f".. autofunction:: {module}" + "\n\n")
 
         f.close()
 
