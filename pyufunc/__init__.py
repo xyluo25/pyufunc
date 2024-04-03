@@ -11,6 +11,7 @@ from itertools import chain
 
 # import all modules
 from .util_ai import *  # machine learning functions
+from .util_algo import *  # algorithm functions
 from .util_common import *  # unclassified functions are here
 from .util_data_processing import *  # data processing functions including algorithms
 from .util_datetime import *  # datetime functions
@@ -33,6 +34,7 @@ from .pkg_configs import FUNC_KEYWORD
 from .pkg_utils import *
 
 import pyufunc.util_ai as __util_ai
+import pyufunc.util_algo as __util_algo
 import pyufunc.util_common as __util_common
 import pyufunc.util_data_processing as __util_data_processing
 import pyufunc.util_datetime as __util_datetime
@@ -53,6 +55,7 @@ import pyufunc.pkg_utils as __pkg_utils
 # **** specify the available utility functions by category **** #
 FUNC_CATEGORY = {
     "util_ai"             : __util_ai.__all__,
+    "util_algo"           : __util_algo.__all__,
     "util_common"         : __util_common.__all__,
     "util_data_processing": __util_data_processing.__all__,
     "util_datetime"       : __util_datetime.__all__,
