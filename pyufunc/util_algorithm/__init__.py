@@ -5,5 +5,15 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
+from ._sort import (
+    quick_sort,
+    selection_sort,
+    bubble_sort,
+)
 
-__all__ = []
+__all__ = [
+    # _sort.py
+    "quick_sort",
+    "selection_sort",
+    "bubble_sort",
+]

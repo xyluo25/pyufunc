@@ -174,3 +174,4 @@ te.py
 setup.py
 */syslogs/*
 update_md.py
+*_build/*
