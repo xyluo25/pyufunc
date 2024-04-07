@@ -44,9 +44,11 @@ def import_package(pkg_name: Union[str, tuple, list],
     Args:
         package_name (str): the package name, it can be a string or tuple or list.
             if it's a string, it's the package name for both installation and import.
+
             if it's a tuple or list, it has two elements:
-                first element is the package name, for pip or conda installation
-                second element is the package name, for import the package
+                first element is the package name, for pip or conda installation;
+                second element is the package name, for import the package;
+
             eg: "numpy" or "numpy==1.19.5";
             eg: ("pillow", "PIL");
             eg: ["pillow==8.3.1", "PIL"];
@@ -71,11 +73,14 @@ def import_package(pkg_name: Union[str, tuple, list],
 
         # not existed
         >>> numpy = import_package("numpy")
-            :numpy not existed in current env, installing...
+
+        :numpy not existed in current env, installing...
 
         # specify the version
+
         >>> numpy = import_package("numpy==1.19.5")
-            :Package numpy==1.19.5 not existed in current env, installing...
+
+        :Package numpy==1.19.5 not existed in current env, installing...
 
         # different name for installation and import
         >>> PIL = import_package(("pillow", "PIL"))
@@ -110,8 +115,7 @@ def import_package(pkg_name: Union[str, tuple, list],
         # install package to current environment
         outputs = []
         try:
-            all_args = [sys.executable, '-m', 'pip',
-                        'install', *options, module_name]
+            all_args = [sys.executable, '-m', 'pip', 'install', *options, module_name]
 
             result = subprocess.run(
                 all_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -299,18 +303,14 @@ def is_user_defined_func(func_obj: object) -> bool:
 
     # Check if the function is defined in the script's main file or a user-defined module
     # This is a simple check and might need to be adjusted based on your project structure
-    if "site-packages" in func_file or "python" in func_file.lower():
-        # The function is likely imported from an installed package or the standard library
-        return False
-
-    return True  # The function is likely user-defined
+    return "site-packages" not in func_file and "python" not in func_file.lower()
 
 
 def is_module_importable(module_name: str) -> bool:
     """Safely import a module and return a boolean. If the module is not importable, return False.
 
     Args:
-        modname (str): the module name to import.
+        module_name (str): the module name to import.
 
     Returns:
         bool: True if the module is importable, False otherwise.
@@ -319,7 +319,11 @@ def is_module_importable(module_name: str) -> bool:
         This function is useful to check if a module is installed in the current environment.
 
     Examples:
-
+        >>> from pyufunc import is_module_importable
+        >>> is_module_importable("numpy")
+        True
+        >>> is_module_importable("unknown_module")
+        False
     """
 
     # TDD, test-driven development: check inputs
@@ -346,8 +350,7 @@ def requires(*args, **kwargs) -> object:
                 first element is the module name, for pip or conda installation;
                 second element is the import name, for import the module;
         **kwargs: the optional arguments, including verbose and auto_install.
-            verbose (bool, optional): print the processing message.
-                Defaults to True.
+            verbose (bool, optional): print the processing message. Defaults to True.
             auto_install (bool, optional): install the missing dependencies automatically.
                 Defaults to False.
 
@@ -358,6 +361,7 @@ def requires(*args, **kwargs) -> object:
         user can parse the verbose and auto_install options to control the behavior of the decorator.
         verbose: print the error message if the dependencies are not available.
             Default is True.
+
         auto_install: install the missing dependencies automatically.
             Default is True.
 
@@ -369,20 +373,23 @@ def requires(*args, **kwargs) -> object:
     Examples:
 
         # Example 1: the function will not run if the dependencies are not available
+
         >>> @requires("numpy", "pandas", "unknown_module", verbose=True, auto_install=False)
             def my_function():
-                return "I'm running!"
+               return "I'm running!"
 
         >>> my_function()
-            Error: missing dependencies: ['numpy', 'pandas'], please install them first.
-            not running the function: my_function
+        Error: missing dependencies: ['numpy', 'pandas'], please install them first.
+        not running the function: my_function
 
         # Example 2: the function will run if the dependencies are available
+
         >>> @requires("numpy", "pandas", verbose=True, auto_install=True)
             def my_function():
                 return "I'm running!"
+
         >>> my_function()
-            "I'm running!"
+        "I'm running!"
 
     """
 
