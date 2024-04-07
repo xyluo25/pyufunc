@@ -160,15 +160,23 @@ def heap_sort():
     pass
 
 
+def bucket_sort():
+    pass
+
+
+def cycle_sort():
+    pass
+
+
+def cocktail_sort():
+    pass
+
+
 def counting_sort():
     pass
 
 
 def radix_sort():
-    pass
-
-
-def bucket_sort():
     pass
 
 
@@ -189,14 +197,6 @@ def comb_sort():
 
 
 def pigeonhole_sort():
-    pass
-
-
-def cycle_sort():
-    pass
-
-
-def cocktail_sort():
     pass
 
 
