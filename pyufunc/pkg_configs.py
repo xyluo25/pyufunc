@@ -82,6 +82,8 @@ FUNC_KEYWORD = {
     "proj"        : [],
     "github"      : [],
     "pypi"        : [],
+    "error"       : [],
+    "sort"        : [],
 }
 
 # ############### Email Configuration ############### #

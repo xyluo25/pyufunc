@@ -148,9 +148,15 @@ def show_util_func_by_keyword(verbose: bool = True) -> None:
     """
 
     for func_str in list(chain.from_iterable(FUNC_CATEGORY.values())):
+        # get the prefix and suffix of the function name
         prefix = func_str.split("_")[0]
+        suffix = func_str.split("_")[-1]
+
+        # if the prefix is not in FUNC_KEYWORD, add it
         if prefix in FUNC_KEYWORD:
             FUNC_KEYWORD[prefix].append(func_str)
+        elif suffix in FUNC_KEYWORD:
+            FUNC_KEYWORD[suffix].append(func_str)
         else:
             FUNC_KEYWORD["non-keywords"].append(func_str)
 
@@ -161,7 +167,9 @@ def show_util_func_by_keyword(verbose: bool = True) -> None:
     for keyword in FUNC_KEYWORD:
         if FUNC_KEYWORD[keyword]:
             res_str_by_keyword += f"\n- {keyword}:\n"
-            for func in FUNC_KEYWORD[keyword]:
+
+            # add unique function names to the string
+            for func in set(FUNC_KEYWORD[keyword]):
                 res_str_by_keyword += f"  - {func}\n"
                 func_count += 1
 
