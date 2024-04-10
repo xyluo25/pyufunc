@@ -5,7 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-from ._error_measure import (mean_absolute_error,
+from ._error_measurement import (mean_absolute_error,
                              mean_squared_error,
                              root_mean_squared_error,
                              mean_squared_log_error,
