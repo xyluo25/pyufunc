@@ -20,49 +20,50 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (71):
+Available utility functions in pyUFunc (81):
 
 - non-keywords:
-  - gmns_geo
-  - send_email
-  - remove_file
   - add_dir_to_env
-  - path2linux
   - path2uniform
   - import_package
-  - requires
-  - func_running_time
+  - send_email
   - func_time
+  - gmns_geo
+  - path2linux
+  - func_running_time
+  - requires
+  - r2_score
+  - remove_file
 
 - show:
-  - show_docstring_headers
-  - show_docstring_google
   - show_docstring_numpy
-  - show_util_func_by_category
+  - show_docstring_headers
   - show_util_func_by_keyword
+  - show_docstring_google
+  - show_util_func_by_category
 
 - get:
-  - get_timezone
-  - get_time_diff_in_unit
   - get_coordinates_from_geom
   - get_host_ip
+  - get_time_diff_in_unit
   - get_file_size
+  - get_timezone
   - get_dir_size
   - get_filenames_by_ext
   - get_user_defined_func
 
 - generate:
-  - generate_password
   - generate_unique_filename
+  - generate_password
 
 - create:
-  - create_circle_at_point_with_radius
   - create_tempfile
+  - create_circle_at_point_with_radius
 
 - find:
-  - find_closest_point
   - find_k_nearest_points
-  - find_func_by_keyword
+  - find_closest_point
+  - find_util_func_by_keyword
 
 - calc:
   - calc_distance_on_unit_sphere
@@ -71,12 +72,12 @@ Available utility functions in pyUFunc (71):
   - run_parallel
 
 - group:
-  - group_dt_yearly
-  - group_dt_monthly
-  - group_dt_weekly
-  - group_dt_daily
   - group_dt_hourly
   - group_dt_minutely
+  - group_dt_weekly
+  - group_dt_yearly
+  - group_dt_monthly
+  - group_dt_daily
 
 - check:
   - check_files_existence
@@ -90,11 +91,11 @@ Available utility functions in pyUFunc (71):
   - list_all_timezones
 
 - img:
-  - img_translate
   - img_rotate
-  - img_rotate_bound
+  - img_translate
   - img_resize
   - img_show
+  - img_rotate_bound
 
 - split:
   - split_dict_by_chunk
@@ -105,22 +106,22 @@ Available utility functions in pyUFunc (71):
   - fmt_dt_to_str
 
 - cvt:
-  - cvt_int_to_alpha
-  - cvt_dt_to_tz
-  - cvt_img_to_bytes
   - cvt_PIL_img_to_bytes
-  - cvt_img_bytes_to_PIL_img
+  - cvt_int_to_alpha
+  - cvt_img_to_bytes
+  - cvt_dt_to_tz
   - cvt_img_PIL_to_CV
   - cvt_img_CV_to_PIL
+  - cvt_img_bytes_to_PIL_img
 
 - is:
+  - is_mac
   - is_PIL_img
   - is_CV_img
-  - is_valid_email
-  - is_windows
   - is_linux
-  - is_mac
   - is_user_defined_func
+  - is_windows
+  - is_valid_email
   - is_module_importable
 
 - proj:
@@ -132,3 +133,16 @@ Available utility functions in pyUFunc (71):
 
 - pypi:
   - pypi_downloads
+
+- error:
+  - mean_absolute_percentage_error
+  - root_mean_squared_error
+  - mean_percentage_error
+  - mean_absolute_error
+  - mean_squared_error
+  - mean_squared_log_error
+
+- sort:
+  - selection_sort
+  - quick_sort
+  - bubble_sort
