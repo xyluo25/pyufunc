@@ -101,8 +101,7 @@ def merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
 
     # if print out the running time
     if verbose:
-        print(f"Running time of merge_sort: O(n log n): {
-              len(array) * math.log2(len(array))}")
+        print(f"Running time of merge_sort: O(n log n): {len(array) * math.log2(len(array))}")
 
     # merge the sorted left and right parts
     return merge(left, right)
