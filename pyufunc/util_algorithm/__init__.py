@@ -7,15 +7,20 @@
 
 from ._sort import (
     quick_sort,
+    merge_sort,
+    heap_sort,
     selection_sort,
+    insertion_sort,
     bubble_sort,
-    heap_sort
+
 )
 
 __all__ = [
     # _sort.py
     "quick_sort",
-    "selection_sort",
-    "bubble_sort",
+    "merge_sort",
     "heap_sort",
+    "selection_sort",
+    "insertion_sort",
+    "bubble_sort",
 ]
