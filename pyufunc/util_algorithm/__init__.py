@@ -9,6 +9,7 @@ from ._sort import (
     quick_sort,
     selection_sort,
     bubble_sort,
+    heap_sort
 )
 
 __all__ = [
@@ -16,4 +17,5 @@ __all__ = [
     "quick_sort",
     "selection_sort",
     "bubble_sort",
+    "heap_sort",
 ]

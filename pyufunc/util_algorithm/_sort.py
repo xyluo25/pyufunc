@@ -7,6 +7,7 @@
 
 
 from typing import Iterable
+import math
 
 
 def quick_sort(array: Iterable, verbose: bool = False) -> Iterable:
@@ -243,14 +244,59 @@ def merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
 
     # if print out the running time
     if verbose:
-        print("Running time of merge_sort: O(n log n)")
+        print(f"Running time of merge_sort: O(n log n): {len(array) * math.log2(len(array))}")
 
     # merge the sorted left and right parts
     return merge(left, right)
 
 
-def heap_sort():
-    pass
+def heap_sort(array: Iterable, verbose: bool = False) -> Iterable:
+
+    # TDD: Test-Driven Development
+    # check if the input is iterable or not
+    if not isinstance(array, Iterable):
+        raise ValueError("Input should be iterable")
+
+    # heapify the array with subtree rooted at index i of the array
+    def heapify(array: Iterable, arr_len: int, i: int) -> None:
+
+        # initialize the largest as root from beginning
+        largest = i  # the root index
+        left = 2 * i + 1  # left child
+        right = 2 * i + 2  # right child
+
+        # if left child exists and is value is greater than root
+        # then update the largest index
+        if left < arr_len and array[i] < array[left]:
+            largest = left
+
+        # if right child exists and is value is greater than root
+        # then update the largest index
+        if right < arr_len and array[largest] < array[right]:
+            largest = right
+
+        # if the largest index changed from the initial root index
+        # then swap the root and the largest index
+        if largest != i:
+            array[i], array[largest] = array[largest], array[i]
+            heapify(array, arr_len, largest)
+
+    # get the length of the array
+    n = len(array)
+
+    # build a max heap
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(array, n, i)
+
+    # extract elements one by one
+    for i in range(n - 1, 0, -1):
+        array[i], array[0] = array[0], array[i]
+        heapify(array, i, 0)
+
+    if verbose:
+        print(f"Running time of heap_sort: O(n log n): {n * math.log2(n)}")
+
+    return array
 
 
 def bucket_sort():
