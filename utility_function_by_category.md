@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (81):
+Available utility functions in pyUFunc (90):
 
 - util_ai:
   - mean_absolute_error
@@ -25,6 +25,9 @@ Available utility functions in pyUFunc (81):
 
 - util_algorithm:
   - bubble_sort
+  - heap_sort
+  - insertion_sort
+  - merge_sort
   - quick_sort
   - selection_sort
 
@@ -56,6 +59,12 @@ Available utility functions in pyUFunc (81):
 - util_geo:
   - calc_distance_on_unit_sphere
   - create_circle_at_point_with_radius
+  - cvt_baidu09_to_gcj02
+  - cvt_baidu09_to_wgs84
+  - cvt_gcj02_to_baidu09
+  - cvt_gcj02_to_wgs84
+  - cvt_wgs84_to_baidu09
+  - cvt_wgs84_to_gcj02
   - find_closest_point
   - find_k_nearest_points
   - get_coordinates_from_geom
@@ -68,15 +77,15 @@ Available utility functions in pyUFunc (81):
   - pypi_downloads
 
 - util_img:
-  - cvt_img_bytes_to_PIL_img
-  - cvt_img_CV_to_PIL
-  - cvt_img_PIL_to_CV
-  - cvt_img_to_bytes
-  - cvt_PIL_img_to_bytes
+  - img_bytes_to_PIL
+  - img_CV_to_PIL
+  - img_PIL_to_bytes
+  - img_PIL_to_CV
   - img_resize
   - img_rotate
   - img_rotate_bound
   - img_show
+  - img_to_bytes
   - img_translate
   - is_CV_img
   - is_PIL_img
