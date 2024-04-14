@@ -75,7 +75,7 @@ def is_CV_img(img: Any) -> bool:
 
 
 @requires("numpy", ("opencv-python", "cv2"), ("pillow", "PIL"), verbose=False)
-def cvt_img_PIL_to_CV(img: Image.Image) -> np.ndarray:
+def img_PIL_to_CV(img: Image.Image) -> np.ndarray:
     """Convert PIL image to CV image
 
     Args:
@@ -105,7 +105,7 @@ def cvt_img_PIL_to_CV(img: Image.Image) -> np.ndarray:
 
 
 @requires("numpy", ("opencv-python", "cv2"), ("pillow", "PIL"), verbose=False)
-def cvt_img_CV_to_PIL(img: np.ndarray) -> Image.Image:
+def img_CV_to_PIL(img: np.ndarray) -> Image.Image:
     """Convert CV image to PIL image
 
     Args:

@@ -15,7 +15,7 @@ if TYPE_CHECKING:
     from PIL import Image
 
 
-def cvt_img_to_bytes(img_path: str) -> bytes:
+def img_to_bytes(img_path: str) -> bytes:
     """Convert image to bytes
 
     Args:
@@ -38,7 +38,7 @@ def cvt_img_to_bytes(img_path: str) -> bytes:
     return img_b
 
 
-def cvt_PIL_img_to_bytes(img: Image) -> bytes:
+def img_PIL_to_bytes(img: Image) -> bytes:
     """Convert PIL image to bytes
 
     Args:
@@ -62,7 +62,7 @@ def cvt_PIL_img_to_bytes(img: Image) -> bytes:
         return bytes("", encoding='utf-8')
 
 
-def cvt_img_bytes_to_PIL_img(img_b: bytes) -> Image:
+def img_bytes_to_PIL(img_b: bytes) -> Image:
     """Convert image bytes to PIL image
 
     Args:
