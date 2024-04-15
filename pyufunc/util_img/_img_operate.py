@@ -179,7 +179,7 @@ def img_translate(img: Union[np.ndarray, str, Image.Image],
     # check if the input image is a PIL image
     # if it is a PIL image, convert it to a CV image
     if isinstance(img, Image.Image):
-        img = cvt_img_PIL_to_CV(img)
+        img = img_PIL_to_CV(img)
 
     # get the height and width of image
     height, width = img.shape[:2]
@@ -246,7 +246,7 @@ def img_rotate(img: Union[np.ndarray, str, Image.Image],
 
     # check if the input image is a PIL image
     if isinstance(img, Image.Image):
-        img = cvt_img_PIL_to_CV(img)
+        img = img_PIL_to_CV(img)
 
     # get the height and width of image
     height, width = img.shape[:2]
@@ -326,7 +326,7 @@ def img_rotate_bound(img: Union[np.ndarray, str, Image.Image],
 
     # check if the input image is a PIL image
     if isinstance(img, Image.Image):
-        img = cvt_img_PIL_to_CV(img)
+        img = img_PIL_to_CV(img)
 
     # get the height and width of image
     height, width = img.shape[:2]
@@ -409,7 +409,7 @@ def img_resize(img: Union[np.ndarray, str, Image.Image],
 
     # check if the input image is a PIL image
     if isinstance(img, Image.Image):
-        img = cvt_img_PIL_to_CV(img)
+        img = img_PIL_to_CV(img)
 
     # set the default interpolation method
     if inter is None:
@@ -485,13 +485,13 @@ def img_show(img: Union[str, np.ndarray, Image.Image],
 
     # check if the input image is a PIL image
     if isinstance(img, Image.Image):
-        img_cv = cvt_img_PIL_to_CV(img)
+        img_cv = img_PIL_to_CV(img)
         img_pil = img
 
     # check if the input image is a CV image
     if isinstance(img, np.ndarray):
         img_cv = img
-        img_pil = cvt_img_CV_to_PIL(img)
+        img_pil = img_CV_to_PIL(img)
 
     if is_PIL_show:
         if verbose:
