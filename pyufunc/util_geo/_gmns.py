@@ -31,6 +31,8 @@ class Node:
         activity_type: The activity type of the node. provided from osm2gmns such as motoway, residential, ...
         activity_location_tab: The activity location tab of the node.
         geometry: The geometry of the node. based on wkt format.
+        as_dict: The method to convert the node to a dictionary.
+        to_networkx: The method to convert the node to a networkx node tuple format. (id, attr_dict)
     """
     id: int = 0
     x_coord: float = 0
@@ -46,6 +48,11 @@ class Node:
 
     def as_dict(self):
         return asdict(self)
+
+    def to_networkx(self) -> tuple:
+        # covert to networkx node
+        # networkx.add_nodes_from([(id, attr_dict), ])
+        return (self.id, self.as_dict())
 
 
 @dataclass
@@ -65,6 +72,9 @@ class Link:
         link_type: The type of the link.
         link_type_name: The name of the link type.
         geometry: The geometry of the link. based on wkt format.
+        as_dict: The method to convert the link to a dictionary.
+        to_networkx: The method to convert the link to a networkx edge tuple format. (from_node_id, to_node_id, attr_dict)
+
     """
 
     id: int = 0
@@ -86,6 +96,11 @@ class Link:
     def as_dict(self):
         return asdict(self)
 
+    def to_networkx(self) -> tuple:
+        # convert to networkx edge
+        # networkx.add_edges_from([(from_node_id, to_node_id, attr_dict), ])
+        return (self.from_node_id, self.to_node_id, self.as_dict())
+
 
 @dataclass
 class POI:
@@ -100,6 +115,8 @@ class POI:
         poi_type: The type of the POI. Default is empty string
         geometry: The polygon of the POI. based on wkt format. Default is empty string
         zone_id: The zone ID. mapping from zone
+        as_dict: The method to convert the POI to a dictionary.
+        to_networkx: The method to convert the POI to a networkx node tuple format. (id, attr_dict)
     """
 
     id: int = 0
@@ -114,6 +131,11 @@ class POI:
 
     def as_dict(self):
         return asdict(self)
+
+    def to_networkx(self) -> tuple:
+        # convert to networkx node
+        # networkx.add_nodes_from([(id, attr_dict), ])
+        return (self.id, self.as_dict())
 
 
 @dataclass
@@ -137,6 +159,7 @@ class Zone:
         production_fixed: The fixed production of the zone (implement different models).
         attraction_fixed: The fixed attraction of the zone (implement different models).
         geometry: The geometry of the zone. based on wkt format
+        as_dict: The method to convert the zone to a dictionary.
     """
 
     id: int = 0
@@ -184,6 +207,7 @@ class Agent:
 
         geometry: The geometry of the agent. based on wkt format. default = ''
         departure_time: The departure time of the agent. unit is second. default = 0
+        as_dict: The method to convert the agent to a dictionary.
     """
 
     id: int = 0
