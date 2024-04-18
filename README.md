@@ -16,7 +16,7 @@ PyUFunc aims to bring together the most commonly used utility functions from dif
 
 Let pyufunc take care of the repetitive tasks while you focus on building remarkable Python applications. Empower your projects with the efficiency and elegance that comes with pyufunc - your all-inclusive Python utility toolkit. Happy coding!
 
-🚀️ **No Extra dependencies will be installed to your environment unless use of functions that need certain dependency, the function will automatically install required package when you run it.**
+🚀️ **No dependencies will be installed to your environment unless use of functions that need certain dependency, the function will automatically install required package when you run it.**
 
 ## Existing Utility Functions Categorized by Functionality
 
@@ -88,6 +88,11 @@ For more information about the ways you can contribute to pyufunc, visit [PyUFun
 ## Comprehensive Review of Utility Function Packages
 
 - [utility_function_package_review.md](https://github.com/xyluo25/pyufunc/blob/main/utility_function_package_review.md)
+
+## Citing pyufunc
+
+If you use pyufunc in your research please use the following BibTeX entry:
+Luo, X. and Zhou, X. (2024, February 18). PYUFUNC. Retrieved from https://github.com/xyluo25/pyufunc
 
 ## ACKNOWLEDGMENT
 
