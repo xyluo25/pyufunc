@@ -89,7 +89,7 @@ For more information about the ways you can contribute to pyufunc, visit [PyUFun
 
 - [utility_function_package_review.md](https://github.com/xyluo25/pyufunc/blob/main/utility_function_package_review.md)
 
-## Citing pyufunc
+## How to Cite
 
 If you use pyufunc in your research please use the following BibTeX entry:
 Luo, X. and Zhou, X. (2024, February 18). PYUFUNC. Retrieved from https://github.com/xyluo25/pyufunc
