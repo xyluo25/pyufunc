@@ -15,7 +15,7 @@ from ._io import (get_file_size,
 from ._path import (path2linux,
                     path2uniform,
                     get_filenames_by_ext,
-                    check_files_existence,
+                    check_files_in_dir,
                     check_filename,
                     generate_unique_filename
                     )
@@ -39,7 +39,7 @@ __all__ = [
     'path2linux',
     'path2uniform',
     "get_filenames_by_ext",
-    "check_files_existence",
+    "check_files_in_dir",
     "check_filename",
     "generate_unique_filename",
 

@@ -130,7 +130,7 @@ def get_filenames_by_ext(dir_path: str | Path, file_ext: str | list = "csv", inc
             if file.endswith(file_ext)]
 
 
-def check_files_existence(filenames: list[str | Path], dir_path: str | Path = "", incl_subdir: bool = False) -> bool:
+def check_files_in_dir(filenames: list[str | Path], dir_path: str | Path = "", incl_subdir: bool = False) -> bool:
     """Check if provided list of files exist in the given directory
 
     Location:
