@@ -8,7 +8,7 @@
 
 import datetime
 from typing import Union
-from pyufunc.pkg_configs import pkg_datetime_fmt
+from pyufunc.pkg_configs import config_datetime_fmt
 
 
 def fmt_dt_to_str(dt: Union[datetime.datetime, str] = datetime.datetime.now(),
@@ -20,7 +20,7 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = datetime.datetime.now(),
         format_seq (int): the format of the datetime. Defaults to 0 ("%Y-%m-%d %H:%M:%S").
 
     See Also:
-        pyufunc.pkg_configs.pkg_datetime_fmt : pre-defined datetime string formats
+        pyufunc.pkg_configs.config_datetime_fmt : pre-defined datetime string formats
 
     Returns:
         str : the formatted datetime string
@@ -40,12 +40,12 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = datetime.datetime.now(),
         dt = datetime.datetime.strptime(dt, "%Y-%m-%d %H:%M:%S")
 
     # pre-defined datetime string formats: pyufunc.pkg_configs.pkg_dt_fmt_seq
-    if format_seq not in pkg_datetime_fmt:
+    if format_seq not in config_datetime_fmt:
         print("The format_seq is not valid. use format_seq = 0 as the default format: %Y-%m-%d %H:%M:%S")
-        return dt.strftime(pkg_datetime_fmt[1])
+        return dt.strftime(config_datetime_fmt[1])
 
     try:
-        return dt.strftime(pkg_datetime_fmt[format_seq])
+        return dt.strftime(config_datetime_fmt[format_seq])
     except Exception as e:
         print(e)
         print("Cannot convert the datetime to the specified format. return the original datetime.")

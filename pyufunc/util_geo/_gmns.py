@@ -93,13 +93,14 @@ class Link:
     from_biway: int = 1
     is_link: bool = True
 
+
     def as_dict(self):
         return asdict(self)
 
     def to_networkx(self) -> tuple:
         # convert to networkx edge
         # networkx.add_edges_from([(from_node_id, to_node_id, attr_dict), ])
-        return (self.from_node_id, self.to_node_id, self.as_dict())
+        return (self.from_node_id, self.to_node_id, {**self.as_dict(), **{"weight": self.length}})
 
 
 @dataclass

@@ -30,7 +30,7 @@ from .util_vis import *  # visualization functions
 
 # import package configurations and utilities
 from .pkg_configs import *
-from .pkg_configs import FUNC_KEYWORD
+from .pkg_configs import config_FUNC_KEYWORD as FUNC_KEYWORD
 from .pkg_utils import *
 
 # prepare FUNC_CATEGORY for show_util_func_by_category

@@ -22,8 +22,13 @@ from pyufunc.util_geo._coordinate_coversion import (
     cvt_baidu09_to_gcj02,
 )
 
-
+# GMNS: General Modeling Network Specification
 import pyufunc.util_geo._gmns as gmns_geo
+from pyufunc.util_geo._gmns import Node as GMNSNode
+from pyufunc.util_geo._gmns import Link as GMNSLink
+from pyufunc.util_geo._gmns import POI as GMNSPOI
+from pyufunc.util_geo._gmns import Zone as GMNSZone
+from pyufunc.util_geo._gmns import Agent as GMNSAgent
 
 __all__ = [
     # geo_circle
@@ -35,7 +40,14 @@ __all__ = [
     'find_closest_point',
     'get_coordinates_from_geom',
     'find_k_nearest_points',
+
+    # gmns
     "gmns_geo",
+    "GMNSNode",
+    "GMNSLink",
+    "GMNSPOI",
+    "GMNSZone",
+    "GMNSAgent",
 
     # coordinate conversion
     "cvt_wgs84_to_baidu09",

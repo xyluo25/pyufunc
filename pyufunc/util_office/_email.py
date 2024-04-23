@@ -19,7 +19,7 @@ from email import encoders
 # For guessing MIME type based on file name extension
 import mimetypes
 
-from pyufunc.pkg_configs import email_config
+from pyufunc.pkg_configs import config_email
 from pyufunc.util_pathio._path import path2linux
 
 
@@ -137,7 +137,7 @@ def send_email(send_from: str,
 
     # get email configurations from send_from
     email_from_domain = send_from.split("@")[-1]
-    email_config_domain = email_config.get(email_from_domain.lower())
+    email_config_domain = config_email.get(email_from_domain.lower())
     if not email_config_domain:
         raise ValueError(f"Unknown email provider: {email_from_domain}")
 
