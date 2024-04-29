@@ -31,4 +31,20 @@ gmns_geo
     :toctree: api/
 
     gmns_geo
+    GMNSAgent
+    GMNSNode
+    GMNSLink
+    GMNSPOI
+    GMNSZone
 
+Coordinate Conversation
+~~~~~~~~~~~~~~~~~~~~~~~
+.. autosummary::
+    :toctree: api/
+
+    cvt_wgs84_to_baidu09
+    cvt_wgs84_to_gcj02
+    cvt_gcj02_to_wgs84
+    cvt_gcj02_to_baidu09
+    cvt_baidu09_to_wgs84
+    cvt_baidu09_to_gcj02
