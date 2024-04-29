@@ -20,13 +20,19 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (90):
+Available utility functions in pyUFunc (96):
 
 - non-keywords:
   - add_dir_to_env
+  - end_of_life
   - func_running_time
   - func_time
   - gmns_geo
+  - GMNSAgent
+  - GMNSLink
+  - GMNSNode
+  - GMNSPOI
+  - GMNSZone
   - import_package
   - path2linux
   - path2uniform
@@ -81,7 +87,7 @@ Available utility functions in pyUFunc (90):
 
 - check:
   - check_filename
-  - check_files_existence
+  - check_files_in_dir
   - check_platform
 
 - validate:

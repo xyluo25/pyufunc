@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (90):
+Available utility functions in pyUFunc (96):
 
 - util_ai:
   - mean_absolute_error
@@ -69,6 +69,11 @@ Available utility functions in pyUFunc (90):
   - find_k_nearest_points
   - get_coordinates_from_geom
   - gmns_geo
+  - GMNSAgent
+  - GMNSLink
+  - GMNSNode
+  - GMNSPOI
+  - GMNSZone
   - proj_point_to_line
 
 - util_git_pypi:
@@ -101,7 +106,7 @@ Available utility functions in pyUFunc (90):
 - util_pathio:
   - add_dir_to_env
   - check_filename
-  - check_files_existence
+  - check_files_in_dir
   - check_platform
   - create_tempfile
   - generate_unique_filename
@@ -116,6 +121,7 @@ Available utility functions in pyUFunc (90):
   - remove_file
 
 - pkg_utils:
+  - end_of_life
   - find_util_func_by_keyword
   - func_running_time
   - func_time
