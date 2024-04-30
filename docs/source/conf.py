@@ -125,7 +125,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "LinkedIn",
-            "url": "www.linkedin.com/in/xiangyong-roy-luo",
+            "url": "https://www.linkedin.com/in/xiangyong-roy-luo/",
             "icon": "fab fa-linkedin",
         }
     ],
