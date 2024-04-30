@@ -1,0 +1,36 @@
+
+What's new in 0.2.6 (Month April, 2024)
+---------------------------------------
+
+These are the changes in pyufunc 0.2.6. See :ref:`release` for a full changelog
+including other versions of pyufunc.
+
+.. ---------------------------------------------------------------------------
+
+Enhancements
+~~~~~~~~~~~~
+- Add `pyufunc.bubble_sort` as a new function to sort a list of numbers using the bubble sort algorithm
+- Add `pyufunc.insertion_sort` as a new function to sort a list of numbers using the insertion sort algorithm
+- Add `pyufunc.heap_sort` as a new function to sort a list of numbers using the heap sort algorithm
+- Add `pyufunc.quick_sort` as a new function to sort a list of numbers using the quick sort algorithm
+- Add `pyufunc.merge_sort` as a new function to sort a list of numbers using the merge sort algorithm
+- Add `pyufunc.selection_sort` as a new function to sort a list of numbers using the selection sort algorithm
+- Add `pyufunc.GMNSAgent` as a new data class to represent an agent in the GMNS format
+- Add `pyufunc.GMNSLink` as a new data class to represent a link in the GMNS format
+- Add `pyufunc.GMNSNode` as a new data class to represent a node in the GMNS format
+- Add `pyufunc.GMNSPOI` as a new data class to represent a point of interest in the GMNS format
+- Add `pyufunc.GMNSZone` as a new data class to represent a zone in the GMNS format
+- Add `pyufunc.end_of_life` as a new decorator to mark a function as deprecated
+
+
+.. ---------------------------------------------------------------------------
+
+Bug fixes
+~~~~~~~~~
+-
+-
+
+Contributors
+~~~~~~~~~~~~
+-
+-
