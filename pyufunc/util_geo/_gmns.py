@@ -231,3 +231,5 @@ class Agent:
 
     def as_dict(self):
         return asdict(self)
+
+# todo: read node, link and zone

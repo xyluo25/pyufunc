@@ -92,6 +92,7 @@ For more information about the ways you can contribute to pyufunc, visit [PyUFun
 ## How to Cite
 
 If you use pyufunc in your work and research, please use the following entry:
+
 Luo, X. and Zhou, X. (2024, February 18). PYUFUNC. Retrieved from https://github.com/xyluo25/pyufunc
 
 ## ACKNOWLEDGMENT
