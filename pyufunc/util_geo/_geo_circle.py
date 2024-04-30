@@ -84,7 +84,7 @@ def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
                                        radius: float,
                                        options: dict = {"edges": 32, "bearing": 0, "direction": 1},
                                        verbose: bool = False) -> dict:
-    """ the function to generate a polygon by the center point and radius
+    """Generate a polygon by the center point and radius
 
     Args:
         point (shapely.geometry.Point, Iterable[float]): the center point with format [longitude, latitude]

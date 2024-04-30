@@ -22,7 +22,7 @@ if TYPE_CHECKING:
 
 @requires("shapely", verbose=False)
 def proj_point_to_line(point: Point, line: LineString) -> Point:
-    """Project a point to a line.
+    """Project a point to a line and return the projected point on the line.
 
     See Also:
         - pyhelper.geo.project_point_to_line: https://pyhelpers.readthedocs.io/en/latest/index.html
@@ -52,10 +52,7 @@ def proj_point_to_line(point: Point, line: LineString) -> Point:
     assert isinstance(point, Point), "The input point should be a shapely.Point object."
     assert isinstance(line, LineString), "The input line should be a shapely.LineString object."
 
-    # get the coordinates of the point
-    projected_point = line.interpolate(line.project(point))
-
-    return projected_point
+    return line.interpolate(line.project(point))
 
 
 @requires("shapely", "numpy", verbose=False)
@@ -131,10 +128,7 @@ def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
     # distance = rho * arc length
 
     cosine = (np.sin(phi1) * np.sin(phi2) * np.cos(theta1 - theta2) + np.cos(phi1) * np.cos(phi2))
-    arc_length = np.arccos(cosine) * earth_radius
-
-    # To multiply arc by the radius of the earth in a set of units to get length.
-    return arc_length
+    return np.arccos(cosine) * earth_radius
 
 
 @requires("shapely", verbose=False)
@@ -181,8 +175,8 @@ def find_closest_point(pt: Point, pts: MultiPoint, k_closest: int = 1) -> list:
     # closest_point = min(pts.geoms, key=functools.partial(shapely.geometry.Point.distance, pt))
 
     if k_closest < len(points_in_order):
-        closest_point = points_in_order[:k_closest]
-        return closest_point
+        return points_in_order[:k_closest]
+
     return points_in_order
 
 
