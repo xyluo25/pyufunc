@@ -1,7 +1,6 @@
 pyufunc.mean\_percentage\_error
 ===============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: mean_percentage_error
-

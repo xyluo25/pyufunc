@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=cb850272"></script>
+    <script src="../_static/documentation_options.js?v=fc7d8818"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -49,8 +49,8 @@
     <link rel="icon" href="../_static/pyufunc_logo_icon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="util_common" href="util_common.html" />
-    <link rel="prev" title="util_ai" href="util_ai.html" />
+    <link rel="next" title="pyufunc.bubble_sort" href="api/pyufunc.bubble_sort.html" />
+    <link rel="prev" title="pyufunc.root_mean_squared_error" href="api/pyufunc.root_mean_squared_error.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -406,7 +406,15 @@ document.write(`
     
     <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="util_ai.html">util_ai</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">util_algorithm</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">util_algorithm</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.bubble_sort.html">pyufunc.bubble_sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.heap_sort.html">pyufunc.heap_sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.insertion_sort.html">pyufunc.insertion_sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.merge_sort.html">pyufunc.merge_sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.quick_sort.html">pyufunc.quick_sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.selection_sort.html">pyufunc.selection_sort</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="util_common.html">util_common</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_data_processing.html">util_data_processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_datetime.html">util_datetime</a></li>
@@ -485,10 +493,28 @@ document.write(`
                   
   <section id="util-algorithm">
 <span id="api-util-algo"></span><h1>util_algorithm<a class="headerlink" href="#util-algorithm" title="Link to this heading">#</a></h1>
-<section id="updating">
-<h2>Updating…<a class="headerlink" href="#updating" title="Link to this heading">#</a></h2>
+<section id="sorting-algorithm">
+<h2>Sorting Algorithm<a class="headerlink" href="#sorting-algorithm" title="Link to this heading">#</a></h2>
 <table class="autosummary longtable table autosummary">
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.bubble_sort.html#pyufunc.bubble_sort" title="pyufunc.bubble_sort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bubble_sort</span></code></a>(array[, verbose])</p></td>
+<td><p>Sort the input array using bubble sort algorithm.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.heap_sort.html#pyufunc.heap_sort" title="pyufunc.heap_sort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">heap_sort</span></code></a>(array[, verbose])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.insertion_sort.html#pyufunc.insertion_sort" title="pyufunc.insertion_sort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insertion_sort</span></code></a>(array[, verbose])</p></td>
+<td><p>Sort the input array using insertion sort algorithm.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.merge_sort.html#pyufunc.merge_sort" title="pyufunc.merge_sort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_sort</span></code></a>(array[, verbose])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.quick_sort.html#pyufunc.quick_sort" title="pyufunc.quick_sort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quick_sort</span></code></a>(array[, verbose])</p></td>
+<td><p>Sort the input array using quick sort algorithm.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.selection_sort.html#pyufunc.selection_sort" title="pyufunc.selection_sort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">selection_sort</span></code></a>(array[, verbose])</p></td>
+<td><p>Sort the input array using selection sort algorithm.</p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -505,20 +531,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="util_ai.html"
+       href="api/pyufunc.root_mean_squared_error.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">util_ai</p>
+        <p class="prev-next-title">pyufunc.root_mean_squared_error</p>
       </div>
     </a>
     <a class="right-next"
-       href="util_common.html"
+       href="api/pyufunc.bubble_sort.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">util_common</p>
+        <p class="prev-next-title">pyufunc.bubble_sort</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -540,7 +566,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating">Updating…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-algorithm">Sorting Algorithm</a></li>
 </ul>
   </nav></div>
 

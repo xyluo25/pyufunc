@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../../_static/documentation_options.js?v=cb850272"></script>
+    <script src="../../_static/documentation_options.js?v=fc7d8818"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -431,6 +431,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.is_user_defined_func.html">pyufunc.is_user_defined_func</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">pyufunc.is_module_importable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.run_parallel.html">pyufunc.run_parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.end_of_life.html">pyufunc.end_of_life</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pkg_configs.html">pkg_configs</a></li>
@@ -504,7 +505,7 @@ document.write(`
 <dd><p>Safely import a module and return a boolean. If the module is not importable, return False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>modname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – the module name to import.</p>
+<dd class="field-odd"><p><strong>module_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – the module name to import.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if the module is importable, False otherwise.</p>
@@ -517,7 +518,14 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>This function is useful to check if a module is installed in the current environment.</p>
 </div>
-<p>Examples:</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyufunc</span> <span class="kn">import</span> <span class="n">is_module_importable</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_module_importable</span><span class="p">(</span><span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_module_importable</span><span class="p">(</span><span class="s2">&quot;unknown_module&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>

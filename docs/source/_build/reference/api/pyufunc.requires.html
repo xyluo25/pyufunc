@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../../_static/documentation_options.js?v=cb850272"></script>
+    <script src="../../_static/documentation_options.js?v=fc7d8818"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -431,6 +431,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.is_user_defined_func.html">pyufunc.is_user_defined_func</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.is_module_importable.html">pyufunc.is_module_importable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.run_parallel.html">pyufunc.run_parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.end_of_life.html">pyufunc.end_of_life</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pkg_configs.html">pkg_configs</a></li>
@@ -515,14 +516,11 @@ second element is the import name, for import the module;</p>
 </div></blockquote>
 </p></li>
 <li><p><strong>**kwargs</strong> – <p>the optional arguments, including verbose and auto_install.
-verbose (bool, optional): print the processing message.</p>
+verbose (bool, optional): print the processing message. Defaults to True.
+auto_install (bool, optional): install the missing dependencies automatically.</p>
 <blockquote>
-<div><p>Defaults to True.</p>
+<div><p>Defaults to False.</p>
 </div></blockquote>
-<dl class="simple">
-<dt>auto_install (bool, optional): install the missing dependencies automatically.</dt><dd><p>Defaults to False.</p>
-</dd>
-</dl>
 </p></li>
 </ul>
 </dd>
@@ -550,29 +548,25 @@ eg: &#64;requires(“numpy”, “pandas”, verbose=False, auto_install=True)
 eg: &#64;requires((“pillow”, “PIL”), “pandas”, verbose=True, auto_install=True)</p>
 </div>
 <p class="rubric">Examples</p>
-<p># Example 1: the function will not run if the dependencies are not available
-&gt;&gt;&gt; &#64;requires(“numpy”, “pandas”, “unknown_module”, verbose=True, auto_install=False)</p>
-<blockquote>
-<div><dl class="simple">
-<dt>def my_function():</dt><dd><p>return “I’m running!”</p>
-</dd>
-</dl>
-</div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_function</span><span class="p">()</span>
-<span class="go">    Error: missing dependencies: [&#39;numpy&#39;, &#39;pandas&#39;], please install them first.</span>
-<span class="go">    not running the function: my_function</span>
+<p># Example 1: the function will not run if the dependencies are not available</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@requires</span><span class="p">(</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;pandas&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown_module&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">auto_install</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">    def my_function():</span>
+<span class="go">       return &quot;I&#39;m running!&quot;</span>
 </pre></div>
 </div>
-<p># Example 2: the function will run if the dependencies are available
-&gt;&gt;&gt; &#64;requires(“numpy”, “pandas”, verbose=True, auto_install=True)</p>
-<blockquote>
-<div><dl class="simple">
-<dt>def my_function():</dt><dd><p>return “I’m running!”</p>
-</dd>
-</dl>
-</div></blockquote>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_function</span><span class="p">()</span>
-<span class="go">    &quot;I&#39;m running!&quot;</span>
+<span class="go">Error: missing dependencies: [&#39;numpy&#39;, &#39;pandas&#39;], please install them first.</span>
+<span class="go">not running the function: my_function</span>
+</pre></div>
+</div>
+<p># Example 2: the function will run if the dependencies are available</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@requires</span><span class="p">(</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;pandas&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">auto_install</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">    def my_function():</span>
+<span class="go">        return &quot;I&#39;m running!&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_function</span><span class="p">()</span>
+<span class="go">&quot;I&#39;m running!&quot;</span>
 </pre></div>
 </div>
 </dd></dl>

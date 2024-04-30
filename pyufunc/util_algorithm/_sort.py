@@ -52,6 +52,27 @@ def quick_sort(array: Iterable, verbose: bool = False) -> Iterable:
 
 
 def merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
+    """Sort the input array using merge sort algorithm.
+
+    Args:
+        array (Iterable): iterable object to be sorted.
+        verbose (bool, optional): whether to print out running time. Defaults to False.
+
+    Raises:
+        ValueError: Input should be iterable.
+
+    Returns:
+        Iterable: sorted array
+
+    Example:
+        >>> from pyufunc import merge_sort
+        >>> merge_sort([3, 6, 8, 10, 1, 2, 1])
+        [1, 1, 2, 3, 6, 8, 10]
+        >>> merge_sort([3, 6, 8, 10, 1, 2, 1], verbose=True)
+        Running time of merge_sort: O(n log n): 29.0
+        [1, 1, 2, 3, 6, 8, 10]
+
+    """
 
     # TDD: Test-Driven Development
     # check if the input is iterable or not
@@ -108,6 +129,26 @@ def merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
 
 
 def heap_sort(array: Iterable, verbose: bool = False) -> Iterable:
+    """Sort the input array using heap sort algorithm.
+
+    Args:
+        array (Iterable): iterable object to be sorted.
+        verbose (bool, optional): Whether to print out running time. Defaults to False.
+
+    Raises:
+        ValueError: Input should be iterable.
+
+    Returns:
+        Iterable: sorted array
+
+    Example:
+        >>> from pyufunc import heap_sort
+        >>> heap_sort([3, 6, 8, 10, 1, 2, 1])
+        [1, 1, 2, 3, 6, 8, 10]
+        >>> heap_sort([3, 6, 8, 10, 1, 2, 1], verbose=True)
+        Running time of heap_sort: O(n log n): 29.0
+        [1, 1, 2, 3, 6, 8, 10]
+    """
 
     # TDD: Test-Driven Development
     # check if the input is iterable or not

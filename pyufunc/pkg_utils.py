@@ -540,6 +540,7 @@ def end_of_life(func: object = None, **kwargs) -> object:
             if argument is a tuple or list, it has two elements:
                 first element is the module name, for pip or conda installation;
                 second element is the import name, for import the module;
+
         **kwargs: the optional arguments, including message.
             message (str, optional): the additional message to the users.
 
@@ -562,6 +563,7 @@ def end_of_life(func: object = None, **kwargs) -> object:
             :Warning: my_func is deprecated and will be removed in the future.
             :Please use the new function instead.
         I'm running!
+
     """
 
     # kwargs from decorator

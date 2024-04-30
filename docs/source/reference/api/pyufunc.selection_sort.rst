@@ -1,7 +1,6 @@
 pyufunc.selection\_sort
 =======================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: selection_sort
-

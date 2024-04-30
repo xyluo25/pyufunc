@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../../_static/documentation_options.js?v=cb850272"></script>
+    <script src="../../_static/documentation_options.js?v=fc7d8818"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -49,6 +49,8 @@
     <link rel="icon" href="../../_static/pyufunc_logo_icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyufunc.mean_squared_error" href="pyufunc.mean_squared_error.html" />
+    <link rel="prev" title="pyufunc.mean_absolute_percentage_error" href="pyufunc.mean_absolute_percentage_error.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -155,7 +157,7 @@
                     </li>
                 
 
-                    <li class="nav-item">
+                    <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="../index.html">
                         API reference
                       </a>
@@ -283,9 +285,7 @@ document.write(`
       
       
       
-        
-      
-      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -312,7 +312,7 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item">
+                    <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="../index.html">
                         API reference
                       </a>
@@ -400,6 +400,46 @@ document.write(`
     
   </div>
   
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../util_ai.html">util_ai</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.mean_absolute_error.html">pyufunc.mean_absolute_error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.mean_absolute_percentage_error.html">pyufunc.mean_absolute_percentage_error</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pyufunc.mean_percentage_error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.mean_squared_error.html">pyufunc.mean_squared_error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.mean_squared_log_error.html">pyufunc.mean_squared_log_error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.r2_score.html">pyufunc.r2_score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.root_mean_squared_error.html">pyufunc.root_mean_squared_error</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../util_algorithm.html">util_algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_common.html">util_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_data_processing.html">util_data_processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_datetime.html">util_datetime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_fullstack.html">util_fullstack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_geo.html">util_geo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_git_pypi.html">util_git_pypi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_gui.html">util_gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_img.html">util_img</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_log.html">util_log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_network.html">util_network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_office.html">util_office</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_optimization.html">util_optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_pathio.html">util_pathio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_test.html">util_test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_vis.html">util_vis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pkg_utils.html">pkg_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pkg_configs.html">pkg_configs</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
@@ -432,6 +472,12 @@ document.write(`
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../util_ai.html" class="nav-link">util_ai</a></li>
+    
     <li class="breadcrumb-item active" aria-current="page">pyufunc.mean...</li>
   </ul>
 </nav>
@@ -449,8 +495,29 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-pyufunc">
-<span id="pyufunc-mean-percentage-error"></span><h1>pyufunc.mean_percentage_error<a class="headerlink" href="#module-pyufunc" title="Link to this heading">#</a></h1>
+  <section id="pyufunc-mean-percentage-error">
+<h1>pyufunc.mean_percentage_error<a class="headerlink" href="#pyufunc-mean-percentage-error" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyufunc.mean_percentage_error">
+<span class="sig-prename descclassname"><span class="pre">pyufunc.</span></span><span class="sig-name descname"><span class="pre">mean_percentage_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyufunc.mean_percentage_error" title="Link to this definition">#</a></dt>
+<dd><p>Calculate mean percentage error between y_true and y_pred
+:param y_true: Iterable, The true values
+:param y_pred: Iterable, The predicted values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float, The mean percentage error</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyufunc</span> <span class="kn">import</span> <span class="n">mean_percentage_error</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean_percentage_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="go">0.08134920634920635</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -463,6 +530,24 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="pyufunc.mean_absolute_percentage_error.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pyufunc.mean_absolute_percentage_error</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pyufunc.mean_squared_error.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyufunc.mean_squared_error</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -472,6 +557,18 @@ document.write(`
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyufunc.mean_percentage_error"><code class="docutils literal notranslate"><span class="pre">mean_percentage_error()</span></code></a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

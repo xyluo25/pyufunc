@@ -1,7 +1,6 @@
 pyufunc.bubble\_sort
 ====================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: bubble_sort
-

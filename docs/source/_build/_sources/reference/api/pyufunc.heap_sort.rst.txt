@@ -1,7 +1,6 @@
 pyufunc.heap\_sort
 ==================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: heap_sort
-

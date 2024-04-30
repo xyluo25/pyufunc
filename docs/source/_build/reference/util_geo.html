@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=cb850272"></script>
+    <script src="../_static/documentation_options.js?v=fc7d8818"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -419,6 +419,17 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.proj_point_to_line.html">pyufunc.proj_point_to_line</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.create_circle_at_point_with_radius.html">pyufunc.create_circle_at_point_with_radius</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.gmns_geo.html">pyufunc.gmns_geo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.GMNSAgent.html">pyufunc.GMNSAgent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.GMNSNode.html">pyufunc.GMNSNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.GMNSLink.html">pyufunc.GMNSLink</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.GMNSPOI.html">pyufunc.GMNSPOI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.GMNSZone.html">pyufunc.GMNSZone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.cvt_wgs84_to_baidu09.html">pyufunc.cvt_wgs84_to_baidu09</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.cvt_wgs84_to_gcj02.html">pyufunc.cvt_wgs84_to_gcj02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.cvt_gcj02_to_wgs84.html">pyufunc.cvt_gcj02_to_wgs84</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.cvt_gcj02_to_baidu09.html">pyufunc.cvt_gcj02_to_baidu09</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.cvt_baidu09_to_wgs84.html">pyufunc.cvt_baidu09_to_wgs84</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.cvt_baidu09_to_gcj02.html">pyufunc.cvt_baidu09_to_gcj02</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="util_git_pypi.html">util_git_pypi</a></li>
@@ -533,6 +544,46 @@ document.write(`
 <tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.gmns_geo.html#module-pyufunc.gmns_geo" title="pyufunc.gmns_geo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gmns_geo</span></code></a></p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.GMNSAgent.html#pyufunc.GMNSAgent" title="pyufunc.GMNSAgent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GMNSAgent</span></code></a></p></td>
+<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.GMNSNode.html#pyufunc.GMNSNode" title="pyufunc.GMNSNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GMNSNode</span></code></a></p></td>
+<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.GMNSLink.html#pyufunc.GMNSLink" title="pyufunc.GMNSLink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GMNSLink</span></code></a></p></td>
+<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Link</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.GMNSPOI.html#pyufunc.GMNSPOI" title="pyufunc.GMNSPOI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GMNSPOI</span></code></a></p></td>
+<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">POI</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.GMNSZone.html#pyufunc.GMNSZone" title="pyufunc.GMNSZone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GMNSZone</span></code></a></p></td>
+<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Zone</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="coordinate-conversation">
+<h2>Coordinate Conversation<a class="headerlink" href="#coordinate-conversation" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.cvt_wgs84_to_baidu09.html#pyufunc.cvt_wgs84_to_baidu09" title="pyufunc.cvt_wgs84_to_baidu09"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cvt_wgs84_to_baidu09</span></code></a>(wgs84_lng, wgs84_lat)</p></td>
+<td><p>Convert coordinate from WGS84 to Baidu09.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.cvt_wgs84_to_gcj02.html#pyufunc.cvt_wgs84_to_gcj02" title="pyufunc.cvt_wgs84_to_gcj02"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cvt_wgs84_to_gcj02</span></code></a>(wgs84_lng, wgs84_lat)</p></td>
+<td><p>Convert coordinate from WGS84 to GCJ02.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.cvt_gcj02_to_wgs84.html#pyufunc.cvt_gcj02_to_wgs84" title="pyufunc.cvt_gcj02_to_wgs84"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cvt_gcj02_to_wgs84</span></code></a>(gcj_lng, gcj_lat)</p></td>
+<td><p>Convert coordinate from GCJ02 to WGS84.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.cvt_gcj02_to_baidu09.html#pyufunc.cvt_gcj02_to_baidu09" title="pyufunc.cvt_gcj02_to_baidu09"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cvt_gcj02_to_baidu09</span></code></a>(gcj_lng, gcj_lat)</p></td>
+<td><p>Convert coordinate from GCJ02 to Baidu09.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.cvt_baidu09_to_wgs84.html#pyufunc.cvt_baidu09_to_wgs84" title="pyufunc.cvt_baidu09_to_wgs84"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cvt_baidu09_to_wgs84</span></code></a>(baidu_lng, baidu_lat)</p></td>
+<td><p>Convert coordinate from Baidu09 to WGS84.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.cvt_baidu09_to_gcj02.html#pyufunc.cvt_baidu09_to_gcj02" title="pyufunc.cvt_baidu09_to_gcj02"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cvt_baidu09_to_gcj02</span></code></a>(baidu_lng, baidu_lat)</p></td>
+<td><p>Convert coordinate from Baidu09 to GCJ02.</p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -587,6 +638,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geo-distance">geo_distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geo-circle">geo_circle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gmns-geo">gmns_geo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-conversation">Coordinate Conversation</a></li>
 </ul>
   </nav></div>
 

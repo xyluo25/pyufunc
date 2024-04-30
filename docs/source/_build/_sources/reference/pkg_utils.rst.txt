@@ -18,3 +18,4 @@ Utilities
    is_user_defined_func
    is_module_importable
    run_parallel
+   end_of_life

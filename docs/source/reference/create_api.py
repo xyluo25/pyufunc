@@ -19,6 +19,7 @@ category_lst = []
 for module_lst in pf.FUNC_CATEGORY.values():
     if module_lst:
         category_lst.extend(iter(module_lst))
+
 # remove all documents in the api folder
 api_folder = "api"
 for file in os.listdir(api_folder):

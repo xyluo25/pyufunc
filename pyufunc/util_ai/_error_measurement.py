@@ -14,9 +14,15 @@ if TYPE_CHECKING:
 @requires("numpy", verbose=False)
 def mean_absolute_error(y_true: Iterable, y_pred: Iterable) -> float:
     """Calculate mean absolute error between y_true and y_pred
+
     Args:
         y_true: Iterable, The true values
         y_pred: Iterable, The predicted values
+
+    Raises:
+        TypeError: If y_true or y_pred is not an iterable object
+        TypeError: Input should be an iterable object
+
     Returns:
         float, The mean absolute error
 
@@ -46,9 +52,15 @@ def mean_absolute_error(y_true: Iterable, y_pred: Iterable) -> float:
 @requires("numpy", verbose=False)
 def mean_squared_error(y_true: Iterable, y_pred: Iterable) -> float:
     """Calculate mean squared error between y_true and y_pred
+
     Args:
         y_true: Iterable, The true values
         y_pred: Iterable, The predicted values
+
+    Raises:
+        TypeError: If y_true or y_pred is not an iterable object
+        TypeError: Input should be an iterable object
+
     Returns:
         float, The mean squared error
 
@@ -78,9 +90,15 @@ def mean_squared_error(y_true: Iterable, y_pred: Iterable) -> float:
 @requires("numpy", verbose=False)
 def mean_squared_log_error(y_true: Iterable, y_pred: Iterable) -> float:
     """Calculate mean squared log error between y_true and y_pred
+
     Args:
         y_true: Iterable, The true values
         y_pred: Iterable, The predicted values
+
+    Raises:
+        TypeError: If y_true or y_pred is not an iterable object
+        TypeError: Input should be an iterable object
+
     Returns:
         float, The mean squared log error
 
@@ -110,9 +128,15 @@ def mean_squared_log_error(y_true: Iterable, y_pred: Iterable) -> float:
 @requires("numpy", verbose=False)
 def root_mean_squared_error(y_true: Iterable, y_pred: Iterable) -> float:
     """Calculate root mean squared error between y_true and y_pred
+
     Args:
         y_true: Iterable, The true values
         y_pred: Iterable, The predicted values
+
+    Raises:
+        TypeError: If y_true or y_pred is not an iterable object
+        TypeError: Input should be an iterable object
+
     Returns:
         float, The root mean squared error
 
@@ -142,11 +166,17 @@ def root_mean_squared_error(y_true: Iterable, y_pred: Iterable) -> float:
 @requires("numpy", verbose=False)
 def mean_absolute_percentage_error(y_true: Iterable, y_pred: Iterable) -> float:
     """Calculate mean absolute percentage error between y_true and y_pred
+
     Args:
         y_true: Iterable, The true values
         y_pred: Iterable, The predicted values
+
     Returns:
         float, The mean absolute percentage error
+
+    Raises:
+        TypeError: If y_true or y_pred is not an iterable object
+        TypeError: Input should be an iterable object
 
     Example:
         >>> from pyufunc import mean_absolute_percentage_error
@@ -174,9 +204,15 @@ def mean_absolute_percentage_error(y_true: Iterable, y_pred: Iterable) -> float:
 @requires("numpy", verbose=False)
 def mean_percentage_error(y_true: Iterable, y_pred: Iterable) -> float:
     """Calculate mean percentage error between y_true and y_pred
+
     Args:
         y_true: Iterable, The true values
         y_pred: Iterable, The predicted values
+
+    Raises:
+        TypeError: If y_true or y_pred is not an iterable object
+        TypeError: Input should be an iterable object
+
     Returns:
         float, The mean percentage error
 
@@ -206,9 +242,15 @@ def mean_percentage_error(y_true: Iterable, y_pred: Iterable) -> float:
 @requires("numpy", verbose=False)
 def r2_score(y_true: Iterable, y_pred: Iterable) -> float:
     """Calculate R^2 (coefficient of determination) regression score function.
+
     Args:
         y_true: Iterable, The true values
         y_pred: Iterable, The predicted values
+
+    Raises:
+        TypeError: If y_true or y_pred is not an iterable object
+        TypeError: Input should be an iterable object
+
     Returns:
         float, The R^2 score
 

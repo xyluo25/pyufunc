@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=cb850272"></script>
+    <script src="../_static/documentation_options.js?v=fc7d8818"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -509,13 +509,30 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="util_ai.html">util_ai</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_ai.html#error-measurement">Error Measurement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_ai.html#error-measurement">Error Measurement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_absolute_error.html">pyufunc.mean_absolute_error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_absolute_percentage_error.html">pyufunc.mean_absolute_percentage_error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_percentage_error.html">pyufunc.mean_percentage_error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_squared_error.html">pyufunc.mean_squared_error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_squared_log_error.html">pyufunc.mean_squared_log_error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.r2_score.html">pyufunc.r2_score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.root_mean_squared_error.html">pyufunc.root_mean_squared_error</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="util_ai.html#open-cv">open_cv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="util_ai.html#prtorch">prtorch</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="util_algorithm.html">util_algorithm</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_algorithm.html#updating">Updating…</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_algorithm.html#sorting-algorithm">Sorting Algorithm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.bubble_sort.html">pyufunc.bubble_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.heap_sort.html">pyufunc.heap_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.insertion_sort.html">pyufunc.insertion_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.merge_sort.html">pyufunc.merge_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.quick_sort.html">pyufunc.quick_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.selection_sort.html">pyufunc.selection_sort</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="util_common.html">util_common</a><ul>
@@ -592,6 +609,20 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 </li>
 <li class="toctree-l2"><a class="reference internal" href="util_geo.html#gmns-geo">gmns_geo</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_geo.html">pyufunc.gmns_geo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.GMNSAgent.html">pyufunc.GMNSAgent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.GMNSNode.html">pyufunc.GMNSNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.GMNSLink.html">pyufunc.GMNSLink</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.GMNSPOI.html">pyufunc.GMNSPOI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.GMNSZone.html">pyufunc.GMNSZone</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_geo.html#coordinate-conversation">Coordinate Conversation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_wgs84_to_baidu09.html">pyufunc.cvt_wgs84_to_baidu09</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_wgs84_to_gcj02.html">pyufunc.cvt_wgs84_to_gcj02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_gcj02_to_wgs84.html">pyufunc.cvt_gcj02_to_wgs84</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_gcj02_to_baidu09.html">pyufunc.cvt_gcj02_to_baidu09</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_baidu09_to_wgs84.html">pyufunc.cvt_baidu09_to_wgs84</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_baidu09_to_gcj02.html">pyufunc.cvt_baidu09_to_gcj02</a></li>
 </ul>
 </li>
 </ul>
@@ -614,16 +645,16 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 </li>
 <li class="toctree-l1"><a class="reference internal" href="util_img.html">util_img</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="util_img.html#img-conversion">img conversion</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_img_to_bytes.html">pyufunc.cvt_img_to_bytes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_PIL_img_to_bytes.html">pyufunc.cvt_PIL_img_to_bytes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_img_bytes_to_PIL_img.html">pyufunc.cvt_img_bytes_to_PIL_img</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_to_bytes.html">pyufunc.img_to_bytes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_PIL_to_bytes.html">pyufunc.img_PIL_to_bytes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_bytes_to_PIL.html">pyufunc.img_bytes_to_PIL</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="util_img.html#img-operations">img operations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.is_PIL_img.html">pyufunc.is_PIL_img</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.is_CV_img.html">pyufunc.is_CV_img</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_img_PIL_to_CV.html">pyufunc.cvt_img_PIL_to_CV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_img_CV_to_PIL.html">pyufunc.cvt_img_CV_to_PIL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_PIL_to_CV.html">pyufunc.img_PIL_to_CV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_CV_to_PIL.html">pyufunc.img_CV_to_PIL</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_translate.html">pyufunc.img_translate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_rotate.html">pyufunc.img_rotate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_rotate_bound.html">pyufunc.img_rotate_bound</a></li>
@@ -662,7 +693,7 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.path2linux.html">pyufunc.path2linux</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.path2uniform.html">pyufunc.path2uniform</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_filenames_by_ext.html">pyufunc.get_filenames_by_ext</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.check_files_existence.html">pyufunc.check_files_existence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.check_files_in_dir.html">pyufunc.check_files_in_dir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.check_filename.html">pyufunc.check_filename</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.generate_unique_filename.html">pyufunc.generate_unique_filename</a></li>
 </ul>
@@ -702,6 +733,7 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.is_user_defined_func.html">pyufunc.is_user_defined_func</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.is_module_importable.html">pyufunc.is_module_importable</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.run_parallel.html">pyufunc.run_parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.end_of_life.html">pyufunc.end_of_life</a></li>
 </ul>
 </li>
 </ul>

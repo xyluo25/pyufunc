@@ -1,7 +1,6 @@
 pyufunc.insertion\_sort
 =======================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: insertion_sort
-

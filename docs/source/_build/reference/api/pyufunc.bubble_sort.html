@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../../_static/documentation_options.js?v=cb850272"></script>
+    <script src="../../_static/documentation_options.js?v=fc7d8818"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -49,6 +49,8 @@
     <link rel="icon" href="../../_static/pyufunc_logo_icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyufunc.heap_sort" href="pyufunc.heap_sort.html" />
+    <link rel="prev" title="util_algorithm" href="../util_algorithm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -155,7 +157,7 @@
                     </li>
                 
 
-                    <li class="nav-item">
+                    <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="../index.html">
                         API reference
                       </a>
@@ -283,9 +285,7 @@ document.write(`
       
       
       
-        
-      
-      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -312,7 +312,7 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item">
+                    <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="../index.html">
                         API reference
                       </a>
@@ -400,6 +400,45 @@ document.write(`
     
   </div>
   
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../util_ai.html">util_ai</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../util_algorithm.html">util_algorithm</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pyufunc.bubble_sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.heap_sort.html">pyufunc.heap_sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.insertion_sort.html">pyufunc.insertion_sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.merge_sort.html">pyufunc.merge_sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.quick_sort.html">pyufunc.quick_sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.selection_sort.html">pyufunc.selection_sort</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../util_common.html">util_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_data_processing.html">util_data_processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_datetime.html">util_datetime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_fullstack.html">util_fullstack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_geo.html">util_geo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_git_pypi.html">util_git_pypi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_gui.html">util_gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_img.html">util_img</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_log.html">util_log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_network.html">util_network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_office.html">util_office</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_optimization.html">util_optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_pathio.html">util_pathio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_test.html">util_test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_vis.html">util_vis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pkg_utils.html">pkg_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pkg_configs.html">pkg_configs</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
@@ -432,6 +471,12 @@ document.write(`
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../util_algorithm.html" class="nav-link">util_algorithm</a></li>
+    
     <li class="breadcrumb-item active" aria-current="page">pyufunc.bubble_sort</li>
   </ul>
 </nav>
@@ -449,8 +494,40 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-pyufunc">
-<span id="pyufunc-bubble-sort"></span><h1>pyufunc.bubble_sort<a class="headerlink" href="#module-pyufunc" title="Link to this heading">#</a></h1>
+  <section id="pyufunc-bubble-sort">
+<h1>pyufunc.bubble_sort<a class="headerlink" href="#pyufunc-bubble-sort" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyufunc.bubble_sort">
+<span class="sig-prename descclassname"><span class="pre">pyufunc.</span></span><span class="sig-name descname"><span class="pre">bubble_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyufunc.bubble_sort" title="Link to this definition">#</a></dt>
+<dd><p>Sort the input array using bubble sort algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>Iterable</em>) – iterable object to be sorted.</p></li>
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – whether to print out running time. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – Input should be iterable.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sorted array</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Iterable</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyufunc</span> <span class="kn">import</span> <span class="n">bubble_sort</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bubble_sort</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">[1, 1, 2, 3, 6, 8, 10]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bubble_sort</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">Running time of bubble_sort: O(n^2)</span>
+<span class="go">[1, 1, 2, 3, 6, 8, 10]</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -463,6 +540,24 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../util_algorithm.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">util_algorithm</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pyufunc.heap_sort.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyufunc.heap_sort</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -472,6 +567,18 @@ document.write(`
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyufunc.bubble_sort"><code class="docutils literal notranslate"><span class="pre">bubble_sort()</span></code></a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

@@ -1,7 +1,6 @@
 pyufunc.quick\_sort
 ===================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: quick_sort
-
