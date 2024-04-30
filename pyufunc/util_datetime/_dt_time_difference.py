@@ -13,7 +13,7 @@ from typing import Union
 def get_time_diff_in_unit(start_time: Union[datetime.datetime, str],
                           end_time: Union[datetime.datetime, str],
                           unit: str = "seconds") -> float:
-    """this function is used to calculate the time difference between two datetime objects/strings
+    """Calculate the time difference between two datetime objects/strings
 
     Args:
         start_time (Union[datetime.datetime, str]): datetime object or string

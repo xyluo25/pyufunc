@@ -11,7 +11,7 @@ import datetime
 
 
 def list_all_timezones(region_name: str = "*") -> set:
-    """this function is used to list all available timezones
+    """List all available timezones
 
     Returns:
         set : a set of all available timezones
@@ -42,7 +42,7 @@ def list_all_timezones(region_name: str = "*") -> set:
 
 
 def get_timezone() -> str:
-    """this function is used to check the current timezone
+    """Check the current timezone
 
     Returns:
         str : the current timezone
@@ -58,7 +58,7 @@ def get_timezone() -> str:
 #  convert current datetime to another timezone datetime
 def cvt_dt_to_tz(dt: datetime = datetime.datetime.now(),
                  timezone: str = "UTC") -> datetime:
-    """this function is used to convert datetime to another timezone datetime
+    """Convert datetime to another timezone datetime
 
     Args:
         dt (datetime, optional): the datetime to be converted. Defaults to datetime.datetime.now().
