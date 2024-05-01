@@ -154,10 +154,10 @@ Available utility functions in pyUFunc (96):
   - mean_squared_log_error
   - root_mean_squared_error
 
-- sort:
-  - bubble_sort
-  - heap_sort
-  - insertion_sort
-  - merge_sort
-  - quick_sort
-  - selection_sort
+- algo:
+  - algo_bubble_sort
+  - algo_heap_sort
+  - algo_insertion_sort
+  - algo_merge_sort
+  - algo_quick_sort
+  - algo_selection_sort

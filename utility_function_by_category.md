@@ -24,15 +24,24 @@ Available utility functions in pyUFunc (96):
   - root_mean_squared_error
 
 - util_algorithm:
-  - bubble_sort
-  - heap_sort
-  - insertion_sort
-  - merge_sort
-  - quick_sort
-  - selection_sort
+  - algo_bubble_sort
+  - algo_heap_sort
+  - algo_insertion_sort
+  - algo_merge_sort
+  - algo_quick_sort
+  - algo_selection_sort
 
 - util_common:
+  - end_of_life
+  - func_running_time
+  - func_time
   - generate_password
+  - get_user_defined_func
+  - import_package
+  - is_module_importable
+  - is_user_defined_func
+  - requires
+  - run_parallel
   - show_docstring_google
   - show_docstring_headers
   - show_docstring_numpy
@@ -121,15 +130,6 @@ Available utility functions in pyUFunc (96):
   - remove_file
 
 - pkg_utils:
-  - end_of_life
   - find_util_func_by_keyword
-  - func_running_time
-  - func_time
-  - get_user_defined_func
-  - import_package
-  - is_module_importable
-  - is_user_defined_func
-  - requires
-  - run_parallel
   - show_util_func_by_category
   - show_util_func_by_keyword
