@@ -49,7 +49,7 @@
     <link rel="icon" href="../_static/pyufunc_logo_icon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="pyufunc.import_package" href="api/pyufunc.import_package.html" />
+    <link rel="next" title="pyufunc.show_util_func_by_category" href="api/pyufunc.show_util_func_by_category.html" />
     <link rel="prev" title="util_vis" href="util_vis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -423,15 +423,9 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_vis.html">util_vis</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">pkg_utils</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.import_package.html">pyufunc.import_package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.func_running_time.html">pyufunc.func_running_time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.func_time.html">pyufunc.func_time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.requires.html">pyufunc.requires</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.get_user_defined_func.html">pyufunc.get_user_defined_func</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.is_user_defined_func.html">pyufunc.is_user_defined_func</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.is_module_importable.html">pyufunc.is_module_importable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.run_parallel.html">pyufunc.run_parallel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.end_of_life.html">pyufunc.end_of_life</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.show_util_func_by_category.html">pyufunc.show_util_func_by_category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.show_util_func_by_keyword.html">pyufunc.show_util_func_by_keyword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.find_util_func_by_keyword.html">pyufunc.find_util_func_by_keyword</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pkg_configs.html">pkg_configs</a></li>
@@ -500,32 +494,14 @@ document.write(`
 <h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading">#</a></h2>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.import_package.html#pyufunc.import_package" title="pyufunc.import_package"><code class="xref py py-obj docutils literal notranslate"><span class="pre">import_package</span></code></a>(pkg_name[, options, verbose])</p></td>
-<td><p>import a python package, if not exist, install the package and import it again.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.show_util_func_by_category.html#pyufunc.show_util_func_by_category" title="pyufunc.show_util_func_by_category"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show_util_func_by_category</span></code></a>([verbose])</p></td>
+<td><p>show all available utility functions in pyufunc by category or by prefix keywords.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.func_running_time.html#pyufunc.func_running_time" title="pyufunc.func_running_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">func_running_time</span></code></a>(func)</p></td>
-<td><p>A decorator to measure the time of a function or class method.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.show_util_func_by_keyword.html#pyufunc.show_util_func_by_keyword" title="pyufunc.show_util_func_by_keyword"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show_util_func_by_keyword</span></code></a>([verbose])</p></td>
+<td><p>show all available utility functions in pyufunc by prefix keywords.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.func_time.html#pyufunc.func_time" title="pyufunc.func_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">func_time</span></code></a>(func)</p></td>
-<td><p>A decorator to measure the time of a function or class method.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.requires.html#pyufunc.requires" title="pyufunc.requires"><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires</span></code></a>(*args, **kwargs)</p></td>
-<td><p>A decorator to wrap functions with extra dependencies.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.get_user_defined_func.html#pyufunc.get_user_defined_func" title="pyufunc.get_user_defined_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_user_defined_func</span></code></a>([module])</p></td>
-<td><p>list all user-defined functions in a module.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.is_user_defined_func.html#pyufunc.is_user_defined_func" title="pyufunc.is_user_defined_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_user_defined_func</span></code></a>(func_obj)</p></td>
-<td><p>Check if a function is user-defined.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.is_module_importable.html#pyufunc.is_module_importable" title="pyufunc.is_module_importable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_module_importable</span></code></a>(module_name)</p></td>
-<td><p>Safely import a module and return a boolean.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.run_parallel.html#pyufunc.run_parallel" title="pyufunc.run_parallel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_parallel</span></code></a>(func, iterable[, ...])</p></td>
-<td><p>Run a function in parallel with multiple processors.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.end_of_life.html#pyufunc.end_of_life" title="pyufunc.end_of_life"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_of_life</span></code></a>([func])</p></td>
-<td><p>A decorator to mark the end of life of a function or class method.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.find_util_func_by_keyword.html#pyufunc.find_util_func_by_keyword" title="pyufunc.find_util_func_by_keyword"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_util_func_by_keyword</span></code></a>(keyword[, verbose])</p></td>
+<td><p>find all available utility functions in pyufunc by keyword.</p></td>
 </tr>
 </tbody>
 </table>
@@ -552,11 +528,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="api/pyufunc.import_package.html"
+       href="api/pyufunc.show_util_func_by_category.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pyufunc.import_package</p>
+        <p class="prev-next-title">pyufunc.show_util_func_by_category</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

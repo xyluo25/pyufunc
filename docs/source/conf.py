@@ -7,13 +7,19 @@
 #
 # All configuration values have a default; values that are commented out
 # serve to show the default.
+from __future__ import absolute_import
 import inspect
 import logging
 import os
 import sys
 import warnings
-import pyufunc
 import jinja2
+from pathlib import Path
+
+root = Path(__file__).resolve().parents[2]
+sys.path = [str(root)] + sys.path
+
+import pyufunc
 
 logger = logging.getLogger(__name__)
 

@@ -3,13 +3,17 @@
 ===========
 pkg_configs
 ===========
-.. currentmodule:: pyufunc
-
+.. currentmodule:: pyufunc.pkg_configs
 configurations
 ~~~~~~~~~~~~~~
 .. autosummary::
-   :toctree: api/
 
-   show_util_func_by_category
-   show_util_func_by_keyword
-   find_util_func_by_keyword
+   pkg_version,
+   pkg_name,
+   pkg_author,
+   pkg_email,
+   config_FUNC_KEYWORD,
+   config_logging,
+   config_datetime_fmt,
+   config_email,
+   config_gmns,

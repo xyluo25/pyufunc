@@ -4,7 +4,7 @@
 # Contact Info: luoxiangyong01@gmail.com
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
-
+from __future__ import absolute_import
 from pathlib import Path
 import sys
 import os
@@ -16,7 +16,7 @@ import pyufunc as pf
 
 # Get all the modules in the pyufunc package
 category_lst = []
-for module_lst in pf.FUNC_CATEGORY.values():
+for module_lst in pf.config_FUNC_CATEGORY.values():
     if module_lst:
         category_lst.extend(iter(module_lst))
 

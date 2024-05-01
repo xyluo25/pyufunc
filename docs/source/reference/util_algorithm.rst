@@ -11,10 +11,9 @@ Sorting Algorithm
 .. autosummary::
     :toctree: api/
 
-    bubble_sort
-    heap_sort
-    insertion_sort
-    merge_sort
-    quick_sort
-    selection_sort
-
+    algo_bubble_sort
+    algo_heap_sort
+    algo_insertion_sort
+    algo_merge_sort
+    algo_quick_sort
+    algo_selection_sort

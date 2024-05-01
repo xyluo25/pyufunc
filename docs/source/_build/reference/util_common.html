@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="pyufunc.show_docstring_headers" href="api/pyufunc.show_docstring_headers.html" />
-    <link rel="prev" title="pyufunc.selection_sort" href="api/pyufunc.selection_sort.html" />
+    <link rel="prev" title="util_algorithm" href="util_algorithm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -412,6 +412,15 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.show_docstring_google.html">pyufunc.show_docstring_google</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.show_docstring_numpy.html">pyufunc.show_docstring_numpy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.generate_password.html">pyufunc.generate_password</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.requires.html">pyufunc.requires</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.func_running_time.html">pyufunc.func_running_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.func_time.html">pyufunc.func_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.run_parallel.html">pyufunc.run_parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.end_of_life.html">pyufunc.end_of_life</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.import_package.html">pyufunc.import_package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.get_user_defined_func.html">pyufunc.get_user_defined_func</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.is_user_defined_func.html">pyufunc.is_user_defined_func</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.is_module_importable.html">pyufunc.is_module_importable</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="util_data_processing.html">util_data_processing</a></li>
@@ -517,6 +526,68 @@ document.write(`
 </tbody>
 </table>
 </section>
+<section id="decorator-requires">
+<h2>decorator - requires<a class="headerlink" href="#decorator-requires" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.requires.html#pyufunc.requires" title="pyufunc.requires"><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires</span></code></a>(*args, **kwargs)</p></td>
+<td><p>A decorator to wrap functions with extra dependencies.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="decorator-func-running-time">
+<h2>decorator - func running time<a class="headerlink" href="#decorator-func-running-time" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.func_running_time.html#pyufunc.func_running_time" title="pyufunc.func_running_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">func_running_time</span></code></a>(func)</p></td>
+<td><p>A decorator to measure the time of a function or class method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.func_time.html#pyufunc.func_time" title="pyufunc.func_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">func_time</span></code></a>(func)</p></td>
+<td><p>A decorator to measure the time of a function or class method.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="decorator-run-parallel">
+<h2>decorator - run parallel<a class="headerlink" href="#decorator-run-parallel" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.run_parallel.html#pyufunc.run_parallel" title="pyufunc.run_parallel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_parallel</span></code></a>(func, iterable[, ...])</p></td>
+<td><p>Run a function in parallel with multiple processors.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="decorator-end-of-life">
+<h2>decorator - end of life<a class="headerlink" href="#decorator-end-of-life" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.end_of_life.html#pyufunc.end_of_life" title="pyufunc.end_of_life"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_of_life</span></code></a>([func])</p></td>
+<td><p>A decorator to mark the end of life of a function or class method.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-import">
+<h2>module import<a class="headerlink" href="#module-import" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.import_package.html#pyufunc.import_package" title="pyufunc.import_package"><code class="xref py py-obj docutils literal notranslate"><span class="pre">import_package</span></code></a>(pkg_name[, options, verbose])</p></td>
+<td><p>import a python package, if not exist, install the package and import it again.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.get_user_defined_func.html#pyufunc.get_user_defined_func" title="pyufunc.get_user_defined_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_user_defined_func</span></code></a>([module])</p></td>
+<td><p>list all user-defined functions in a module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.is_user_defined_func.html#pyufunc.is_user_defined_func" title="pyufunc.is_user_defined_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_user_defined_func</span></code></a>(func_obj)</p></td>
+<td><p>Check if a function is user-defined.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.is_module_importable.html#pyufunc.is_module_importable" title="pyufunc.is_module_importable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_module_importable</span></code></a>(module_name)</p></td>
+<td><p>Safely import a module and return a boolean.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 
 
@@ -530,12 +601,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="api/pyufunc.selection_sort.html"
+       href="util_algorithm.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">pyufunc.selection_sort</p>
+        <p class="prev-next-title">util_algorithm</p>
       </div>
     </a>
     <a class="right-next"
@@ -567,6 +638,11 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstring-style">docstring style</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#password-generator">password_generator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decorator-requires">decorator - requires</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decorator-func-running-time">decorator - func running time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decorator-run-parallel">decorator - run parallel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decorator-end-of-life">decorator - end of life</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-import">module import</a></li>
 </ul>
   </nav></div>
 

@@ -54,4 +54,3 @@ The following subpackages are public.
    util_test
    util_vis
    pkg_utils
-   pkg_configs
