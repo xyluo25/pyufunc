@@ -66,7 +66,7 @@ pf.find_util_func_by_keyword("show")
 
 ## Community and Support
 
-We welcome and encourage developers to contribute their valuable utility functions to pyufunc by submitting pull requests on [PyUFunc GitHub Repository](https://github.com/xyluo25/pyufunc), helping to enrich the package and benefit the wider Python community.
+We welcome and encourage developers to contribute their valuable utility functions to pyufunc by submitting pull requests on [Pyufunc GitHub Repository](https://github.com/xyluo25/pyufunc), helping to enrich the package and benefit the wider Python community.
 
 Small improvements or fixes are always appreciated. If you are considering larger contributions to the source code, please contact us through email:
 
@@ -83,7 +83,7 @@ Writing code isn't the only way to contribute to pyufunc. You can also:
 - help with outreach and onboard new contributors
 - write grant proposals and help with other fundraising efforts
 
-For more information about the ways you can contribute to pyufunc, visit [PyUFunc GitHub](https://github.com/xyluo25/pyufunc). If you' re unsure where to start or how your skills fit in, reach out! You can ask by opening a new issue or leaving a comment on a relevant issue that is already open on GitHub.
+For more information about the ways you can contribute to pyufunc, visit [Pyufunc GitHub](https://github.com/xyluo25/pyufunc). If you' re unsure where to start or how your skills fit in, reach out! You can ask by opening a new issue or leaving a comment on a relevant issue that is already open on GitHub.
 
 ## Comprehensive Review of Utility Function Packages
 
