@@ -48,7 +48,7 @@ def algo_quick_sort(array: Iterable, verbose: bool = False) -> Iterable:
     if verbose:
         print("Running time of quick_sort: O(n log n)")
 
-    return quick_sort(left) + middle + quick_sort(right)
+    return algo_quick_sort(left) + middle + algo_quick_sort(right)
 
 
 def algo_merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
@@ -117,8 +117,8 @@ def algo_merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
     right = array[mid:]
 
     # recursively sort the left and right parts
-    left = merge_sort(left)
-    right = merge_sort(right)
+    left = algo_merge_sort(left)
+    right = algo_merge_sort(right)
 
     # if print out the running time
     if verbose:
