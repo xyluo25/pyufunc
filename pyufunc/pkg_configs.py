@@ -4,15 +4,54 @@
 # Contact Info: luoxiangyong01@gmail.com
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
-
+from __future__ import absolute_import
 import os
 from pyufunc.util_pathio._path import path2linux
+
+__all__ = [
+    "pkg_version",
+    "pkg_name",
+    "pkg_author",
+    "pkg_email",
+    "config_FUNC_KEYWORD",
+    "config_logging",
+    "config_datetime_fmt",
+    "config_email",
+    "config_gmns",
+]
 
 # ############## Package Configurations ############## #
 pkg_version = "0.2.6"
 pkg_name = "pyufunc"
 pkg_author = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
 pkg_email = "luoxiangyong01@gmail.com, xzhou74@asu.edu"
+
+# ############### Function Keywords Configuration ############### #
+config_FUNC_KEYWORD = {
+    "non-keywords": [],
+    "show"        : [],
+    "get"         : [],
+    "generate"    : [],
+    "create"      : [],
+    "find"        : [],
+    "calc"        : [],
+    "run"         : [],
+    "group"       : [],
+    "check"       : [],
+    "validate"    : [],
+    "list"        : [],
+    "img"         : [],
+    "split"       : [],
+    "fmt"         : [],
+    "cvt"         : [],
+    "is"          : [],
+    "proj"        : [],
+    "github"      : [],
+    "pypi"        : [],
+    "error"       : [],
+    "algo"        : [],
+}
+
 
 # ############## Logging Configurations ############## #
 config_logging = {
@@ -58,32 +97,6 @@ config_datetime_fmt = {
 
     9 : "%H:%M:%S",  # "HH:MM:SS", 11:11:11
     10 : "%H:%M:%S.%f",  # "HH:MM:SS.MS", 11:11:11.123456
-}
-
-# ############### Function Keywords Configuration ############### #
-config_FUNC_KEYWORD = {
-    "non-keywords": [],
-    "show"        : [],
-    "get"         : [],
-    "generate"    : [],
-    "create"      : [],
-    "find"        : [],
-    "calc"        : [],
-    "run"         : [],
-    "group"       : [],
-    "check"       : [],
-    "validate"    : [],
-    "list"        : [],
-    "img"         : [],
-    "split"       : [],
-    "fmt"         : [],
-    "cvt"         : [],
-    "is"          : [],
-    "proj"        : [],
-    "github"      : [],
-    "pypi"        : [],
-    "error"       : [],
-    "sort"        : [],
 }
 
 # ############### Email Configuration ############### #

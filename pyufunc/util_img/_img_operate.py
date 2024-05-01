@@ -16,7 +16,7 @@ if TYPE_CHECKING:
     import cv2
     from PIL import Image
 
-from pyufunc.pkg_utils import requires, import_package
+from pyufunc.util_common import requires, import_package
 
 
 @requires(("pillow", "PIL"), verbose=False)

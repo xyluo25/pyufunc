@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     import pandas as pd
 
-from pyufunc.pkg_utils import requires, func_running_time, import_package
+from pyufunc.util_common import requires, func_running_time, import_package
 
 
 @requires("pandas", verbose=False)

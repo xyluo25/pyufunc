@@ -5,76 +5,70 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-# import modules with same name from different folder in python
-from __future__ import absolute_import
-from itertools import chain
-
 # import all modules
-from .util_ai import *  # machine learning functions
-from .util_algorithm import *  # algorithm functions
-from .util_common import *  # unclassified functions are here
-from .util_data_processing import *  # data processing functions including algorithms
-from .util_datetime import *  # datetime functions
-from .util_fullstack import *  # fullstack functions, including front end and back end
-from .util_geo import *  # geographic functions
-from .util_git_pypi import *  # git and pypi functions
-from .util_gui import *  # GUI functions
-from .util_img import *  # image functions
-from .util_log import *  # logging functions
-from .util_network import *  # network functions
-from .util_office import *  # office functions
-from .util_optimization import *  # optimization functions
-from .util_pathio import *  # path and IO functions
-from .util_test import *  # test functions
-from .util_vis import *  # visualization functions
+from .util_ai import *  # machine learning functions  # noqa: F403
+from .util_algorithm import *  # algorithm functions  # noqa: F403
+from .util_common import *  # unclassified functions are here  # noqa: F403
+from .util_data_processing import *  # data processing functions including algorithms  # noqa: F403
+from .util_datetime import *  # datetime functions  # noqa: F403
+from .util_fullstack import *  # fullstack functions, including front end and back end  # noqa: F403
+from .util_geo import *  # geographic functions  # noqa: F403
+from .util_git_pypi import *  # git and pypi functions  # noqa: F403
+from .util_gui import *  # GUI functions    # noqa: F403
+from .util_img import *  # image functions   # noqa: F403
+from .util_log import *  # logging functions    # noqa: F403
+from .util_network import *  # network functions    # noqa: F403
+from .util_office import *  # office functions  # noqa: F403
+from .util_optimization import *  # optimization functions  # noqa: F403
+from .util_pathio import *  # path and IO functions  # noqa: F403
+from .util_test import *  # test functions  # noqa: F403
+from .util_vis import *  # visualization functions  # noqa: F403
 
 # import package configurations and utilities
-from .pkg_configs import *
-from .pkg_configs import config_FUNC_KEYWORD as FUNC_KEYWORD
-from .pkg_utils import *
+from .pkg_configs import *  # noqa: F403
+from .pkg_configs import config_FUNC_KEYWORD
 
-# prepare FUNC_CATEGORY for show_util_func_by_category
-import pyufunc.util_ai as __util_ai
-import pyufunc.util_algorithm as __util_algo
-import pyufunc.util_common as __util_common
-import pyufunc.util_data_processing as __util_data_processing
-import pyufunc.util_datetime as __util_datetime
-import pyufunc.util_fullstack as __util_fullstack
-import pyufunc.util_geo as __util_geo
-import pyufunc.util_git_pypi as __util_git_pypi
-import pyufunc.util_gui as __util_gui
-import pyufunc.util_img as __util_img
-import pyufunc.util_log as __util_log
-import pyufunc.util_network as __util_network
-import pyufunc.util_office as __util_office
-import pyufunc.util_optimization as __util_optimization
-import pyufunc.util_pathio as __util_pathio
-import pyufunc.util_test as __util_test
-import pyufunc.util_vis as __util_vis
-import pyufunc.pkg_utils as __pkg_utils
+from pyufunc import util_ai
+from pyufunc import util_algorithm
+from pyufunc import util_common
+from pyufunc import util_data_processing
+from pyufunc import util_datetime
+from pyufunc import util_fullstack
+from pyufunc import util_geo
+from pyufunc import util_git_pypi
+from pyufunc import util_gui
+from pyufunc import util_img
+from pyufunc import util_log
+from pyufunc import util_network
+from pyufunc import util_office
+from pyufunc import util_optimization
+from pyufunc import util_pathio
+from pyufunc import util_test
+from pyufunc import util_vis
+import itertools
 
 # specify the available utility functions by category
-FUNC_CATEGORY = {
-    "util_ai"             : __util_ai.__all__,
-    "util_algorithm"      : __util_algo.__all__,
-    "util_common"         : __util_common.__all__,
-    "util_data_processing": __util_data_processing.__all__,
-    "util_datetime"       : __util_datetime.__all__,
-    "util_fullstack"      : __util_fullstack.__all__,
-    "util_geo"            : __util_geo.__all__,
-    "util_git_pypi"       : __util_git_pypi.__all__,
-    "util_gui"            : __util_gui.__all__,
-    "util_img"            : __util_img.__all__,
-    "util_log"            : __util_log.__all__,
-    "util_network"        : __util_network.__all__,
-    "util_office"         : __util_office.__all__,
-    "util_optimization"   : __util_optimization.__all__,
-    "util_pathio"         : __util_pathio.__all__,
-    "util_test"           : __util_test.__all__,
-    "util_vis"            : __util_vis.__all__,
-    "pkg_utils"           : __pkg_utils.__all__ + ["show_util_func_by_category",
-                                                   "show_util_func_by_keyword",
-                                                   "find_util_func_by_keyword"],
+config_FUNC_CATEGORY = {
+    "util_ai": util_ai.__all__,
+    "util_algorithm": util_algorithm.__all__,
+    "util_common": util_common.__all__,
+    "util_data_processing": util_data_processing.__all__,
+    "util_datetime": util_datetime.__all__,
+    "util_fullstack": util_fullstack.__all__,
+    "util_geo": util_geo.__all__,
+    "util_git_pypi": util_git_pypi.__all__,
+    "util_gui": util_gui.__all__,
+    "util_img": util_img.__all__,
+    "util_log": util_log.__all__,
+    "util_network": util_network.__all__,
+    "util_office": util_office.__all__,
+    "util_optimization": util_optimization.__all__,
+    "util_pathio": util_pathio.__all__,
+    "util_test": util_test.__all__,
+    "util_vis": util_vis.__all__,
+    "pkg_utils": ["show_util_func_by_category",
+                  "show_util_func_by_keyword",
+                  "find_util_func_by_keyword"],
 }
 
 
@@ -108,10 +102,10 @@ def show_util_func_by_category(verbose: bool = True) -> None:
     res_str_head = "Available utility functions in pyUFunc"
     res_str_by_category = ""
     func_count = 0
-    for util_category in FUNC_CATEGORY:
-        if FUNC_CATEGORY[util_category]:
+    for util_category in config_FUNC_CATEGORY:
+        if config_FUNC_CATEGORY[util_category]:
             res_str_by_category += f"\n- {util_category}:\n"
-            for func in sorted(FUNC_CATEGORY[util_category], key=str.lower):
+            for func in sorted(config_FUNC_CATEGORY[util_category], key=str.lower):
                 res_str_by_category += f"  - {func}\n"
                 func_count += 1
 
@@ -147,30 +141,31 @@ def show_util_func_by_keyword(verbose: bool = True) -> None:
            ** show_available_utility_func
     """
 
-    all_func_str = sorted(list(chain.from_iterable(FUNC_CATEGORY.values())), key=str.lower)
+    all_func_str = sorted(list(itertools.chain.from_iterable(
+        config_FUNC_CATEGORY.values())), key=str.lower)
     for func_str in all_func_str:
         # get the prefix and suffix of the function name
         prefix = func_str.split("_")[0]
         suffix = func_str.split("_")[-1]
 
         # if the prefix is not in FUNC_KEYWORD, add it
-        if prefix in FUNC_KEYWORD and func_str not in FUNC_KEYWORD[prefix]:
-            FUNC_KEYWORD[prefix].append(func_str)
-        elif suffix in FUNC_KEYWORD and func_str not in FUNC_KEYWORD[suffix]:
-            FUNC_KEYWORD[suffix].append(func_str)
+        if prefix in config_FUNC_KEYWORD and func_str not in config_FUNC_KEYWORD[prefix]:
+            config_FUNC_KEYWORD[prefix].append(func_str)
+        elif suffix in config_FUNC_KEYWORD and func_str not in config_FUNC_KEYWORD[suffix]:
+            config_FUNC_KEYWORD[suffix].append(func_str)
         else:
-            FUNC_KEYWORD["non-keywords"].append(func_str)
+            config_FUNC_KEYWORD["non-keywords"].append(func_str)
 
     res_str_head = "Available utility functions in pyUFunc"
     res_str_by_keyword = ""
     func_count = 0
 
-    for keyword in FUNC_KEYWORD:
-        if FUNC_KEYWORD[keyword]:
+    for keyword in config_FUNC_KEYWORD:
+        if config_FUNC_KEYWORD[keyword]:
             res_str_by_keyword += f"\n- {keyword}:\n"
 
             # add unique function names to the string
-            for func in FUNC_KEYWORD[keyword]:
+            for func in config_FUNC_KEYWORD[keyword]:
                 res_str_by_keyword += f"  - {func}\n"
                 func_count += 1
 
@@ -205,7 +200,7 @@ def find_util_func_by_keyword(keyword: str, verbose: bool = True) -> list:
     res_str_lst = []
     func_count = 0
 
-    for func_str in list(chain.from_iterable(FUNC_CATEGORY.values())):
+    for func_str in list(itertools.chain.from_iterable(config_FUNC_CATEGORY.values())):
         if keyword.lower() in func_str.lower():
             res_str_by_keyword += f"  \n{func_count + 1}. {func_str}\n"
             res_str_lst.append(func_str)
@@ -218,5 +213,3 @@ def find_util_func_by_keyword(keyword: str, verbose: bool = True) -> list:
         print(res_str)
         return ""
     return res_str_lst
-
-__all__ = list(chain(*FUNC_CATEGORY.values()))

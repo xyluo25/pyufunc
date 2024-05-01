@@ -6,7 +6,7 @@
 ##############################################################
 from __future__ import annotations
 from typing import TYPE_CHECKING, Iterable
-from pyufunc.pkg_utils import requires, import_package
+from pyufunc.util_common import requires, import_package
 if TYPE_CHECKING:
     import numpy as np
 

@@ -6,21 +6,21 @@
 ##############################################################
 
 from ._sort import (
-    quick_sort,
-    merge_sort,
-    heap_sort,
-    selection_sort,
-    insertion_sort,
-    bubble_sort,
+    algo_quick_sort,
+    algo_merge_sort,
+    algo_heap_sort,
+    algo_selection_sort,
+    algo_insertion_sort,
+    algo_bubble_sort,
 
 )
 
 __all__ = [
     # _sort.py
-    "quick_sort",
-    "merge_sort",
-    "heap_sort",
-    "selection_sort",
-    "insertion_sort",
-    "bubble_sort",
+    "algo_quick_sort",
+    "algo_merge_sort",
+    "algo_heap_sort",
+    "algo_selection_sort",
+    "algo_insertion_sort",
+    "algo_bubble_sort",
 ]

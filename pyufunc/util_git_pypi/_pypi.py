@@ -5,7 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-from pyufunc.pkg_utils import requires
+from pyufunc.util_common import requires
 
 
 @requires("requests", "bs4")

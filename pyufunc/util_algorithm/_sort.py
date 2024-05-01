@@ -10,7 +10,7 @@ from typing import Iterable
 import math
 
 
-def quick_sort(array: Iterable, verbose: bool = False) -> Iterable:
+def algo_quick_sort(array: Iterable, verbose: bool = False) -> Iterable:
     """Sort the input array using quick sort algorithm.
 
     Args:
@@ -51,7 +51,7 @@ def quick_sort(array: Iterable, verbose: bool = False) -> Iterable:
     return quick_sort(left) + middle + quick_sort(right)
 
 
-def merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
+def algo_merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
     """Sort the input array using merge sort algorithm.
 
     Args:
@@ -128,7 +128,7 @@ def merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
     return merge(left, right)
 
 
-def heap_sort(array: Iterable, verbose: bool = False) -> Iterable:
+def algo_heap_sort(array: Iterable, verbose: bool = False) -> Iterable:
     """Sort the input array using heap sort algorithm.
 
     Args:
@@ -197,7 +197,7 @@ def heap_sort(array: Iterable, verbose: bool = False) -> Iterable:
     return array
 
 
-def selection_sort(array: Iterable, verbose: bool = False) -> Iterable:
+def algo_selection_sort(array: Iterable, verbose: bool = False) -> Iterable:
     """Sort the input array using selection sort algorithm.
 
     Args:
@@ -242,7 +242,7 @@ def selection_sort(array: Iterable, verbose: bool = False) -> Iterable:
     return array
 
 
-def insertion_sort(array: Iterable, verbose: bool = False) -> Iterable:
+def algo_insertion_sort(array: Iterable, verbose: bool = False) -> Iterable:
     """Sort the input array using insertion sort algorithm.
 
     Args:
@@ -287,7 +287,7 @@ def insertion_sort(array: Iterable, verbose: bool = False) -> Iterable:
     return array
 
 
-def bubble_sort(array: Iterable, verbose: bool = False) -> Iterable:
+def algo_bubble_sort(array: Iterable, verbose: bool = False) -> Iterable:
     """Sort the input array using bubble sort algorithm.
 
     Args:

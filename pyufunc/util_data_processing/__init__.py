@@ -6,7 +6,7 @@
 ##############################################################
 
 from ._dict import split_dict_by_chunk
-from ._common import cvt_int_to_alpha
+from ._int_to_alpha import cvt_int_to_alpha
 from ._list import split_list_by_equal_sublist, split_list_by_fixed_length
 
 __all__ = [
