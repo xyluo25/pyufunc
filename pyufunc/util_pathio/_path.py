@@ -21,7 +21,7 @@ def path2linux(path: str | Path) -> str:
     As an alternative, you can use path2uniform, which is the same as path2linux.
 
     Location:
-        pyufunc/pathio/pathutils.py
+        pyufunc/util_pathio/_path.py
 
     Args:
         path (str | Path): _description_
@@ -54,7 +54,7 @@ def path2uniform(path: str | Path) -> str:
         source: https://github.com/mikeqfu/pyhelpers (GNU)
 
     Location:
-        pyufunc/pathio/pathutils.py
+        pyufunc/util_pathio/_path.py
 
     Args:
         path (str | Path): the path to be converted
@@ -83,7 +83,7 @@ def get_filenames_by_ext(dir_path: str | Path, file_ext: str | list = "csv", inc
     """Get a list of filenames in a folder by file extension
 
     Location:
-        pyufunc/pathio/_path.py
+        pyufunc/util_pathio/_path.py
 
     References:
         https://github.com/mikeqfu/pyhelpers (GNU)
@@ -134,7 +134,7 @@ def check_files_in_dir(filenames: list[str | Path], dir_path: str | Path = "", i
     """Check if provided list of files exist in the given directory
 
     Location:
-        pyufunc/pathio/_path.py
+        pyufunc/util_pathio/_path.py
 
     References:
         https://github.com/xyluo25/utdf2gmns (Apache)
@@ -186,6 +186,9 @@ def check_filename(filename: str | Path) -> bool:
     Location:
         pyufunc/util_pathio/_path.py
 
+    See Also:
+        check_file_existence
+
     Args:
         filename (str | Path): the filename to be validated
 
@@ -206,6 +209,34 @@ def check_filename(filename: str | Path) -> bool:
     return bool(os.path.exists(filename_abspath))
 
 
+def check_file_existence(filename: str | Path) -> bool:
+    """validate the filename, if the file exists, return True, otherwise False
+
+    Location:
+        pyufunc/util_pathio/_path.py
+
+    See Also:
+        check_filename
+
+    Args:
+        filename (str | Path): the filename to be validated
+
+    Returns:
+        bool: True if the file exists, otherwise False
+
+    Examples:
+        >>> import pyufunc as uf
+        >>> uf.check_filename('./test.txt')
+        False
+    """
+
+    # convert the path to standard linux path
+    filename_abspath = path2linux(os.path.abspath(filename))
+
+    # if the file exist, return True, otherwise False
+    return bool(os.path.exists(filename_abspath))
+
+
 def generate_unique_filename(filename: str | Path, suffix_num: int = 1) -> str:
     """generate a unique filename by adding a suffix number to the end of the filename
 
@@ -213,6 +244,52 @@ def generate_unique_filename(filename: str | Path, suffix_num: int = 1) -> str:
 
     Location:
         pyufunc/util_pathio/_path.py
+
+    See Also:
+        create_unique_filename
+
+    Args:
+        filename (str | Path): the filename to be validated
+
+    Returns:
+        str: validated filename
+
+    Examples:
+        >>> import pyufunc as uf
+        >>> uf.generate_unique_filename('./test.txt')
+        'C:/Users/Administrator/Desktop/test/test(1).txt'
+
+    """
+
+    # convert the path to standard linux path
+    filename_abspath = path2linux(os.path.abspath(filename))
+
+    # get the file suffix
+    file_suffix = filename_abspath.split(".")[-1]
+    file_without_suffix = filename_abspath[:-len(file_suffix) - 1]
+
+    # remove the suffix if the file name contains "("
+    if "(" in file_without_suffix:
+        file_without_suffix = file_without_suffix.split("(")[0]
+
+    # if the file does not exist, return the same file name
+    if os.path.exists(filename_abspath):
+        filename_update = f"{file_without_suffix}({suffix_num}).{file_suffix}"
+        return generate_unique_filename(filename_update, suffix_num + 1)
+
+    return filename_abspath
+
+
+def create_unique_filename(filename: str | Path, suffix_num: int = 1) -> str:
+    """generate a unique filename by adding a suffix number to the end of the filename
+
+    This function is extremely useful when you want to save a file, but not sure if the file already exists.
+
+    Location:
+        pyufunc/util_pathio/_path.py
+
+    See Also:
+        generate_unique_filename
 
     Args:
         filename (str | Path): the filename to be validated

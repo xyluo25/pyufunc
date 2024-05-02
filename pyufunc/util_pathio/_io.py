@@ -5,7 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-from pyufunc.util_pathio._path import path2linux
+from pyufunc.util_pathio._path import path2linux, check_file_existence
 import os
 from pathlib import Path
 import uuid
@@ -209,6 +209,73 @@ def add_dir_to_env(path_dir: str | Path = os.getcwd()) -> None:
     sys.path.append(path_dir)
 
     return None
+
+
+def pickle_save(obj: object, filename: str | Path, base_dir: str = os.getcwd()) -> None:
+    """Save an object to a file using the pickle module.
+
+    The object could be a function, a class, a list, dictionary, a string, an int, float, tuple, set, or any other object that can be pickled.
+
+    Args:
+        obj: The object to save.
+        filename (str | Path): The filename to save the object to.
+        base_dir (str, optional): The directory to save the file in. Defaults to the current working directory.
+
+    Raises:
+        AssertionError: filename must be a string or Path, not {type(filename)}
+
+    Returns:
+        None
+
+    Example:
+        >>> from pyufunc import pickle_save
+        >>> pickle_save(obj, "file.pkl")
+    """
+    import pickle
+
+    # TDD, Test Driven Development: validate the input
+    assert isinstance(filename, (str, Path)), f"filename must be a string or Path, not {type(filename)}"
+
+    # format the filename to linux path
+    filename = path2linux(filename)
+
+    # Create the directory if it does not exist
+    os.makedirs(base_dir, exist_ok=True)
+
+    file_path = os.path.join(base_dir, filename)
+
+    # Save the object to the file
+    with open(file_path, "wb") as f:
+        pickle.dump(obj, f)
+
+    return None
+
+
+def pickle_load(filename: str | Path) -> object:
+    """Load an object from a file using the pickle module.
+
+    Args:
+        filename (str | Path): The filename to load the object from.
+
+    Returns:
+        object: _description_
+    """
+
+    import pickle
+
+    # check file existence
+    if not check_file_existence(filename):
+        raise FileNotFoundError(f"File {filename} does not found, please check the file path and try again")
+
+    # format the filename to linux path
+    filename = path2linux(filename)
+
+    # Load the object from the file
+    with open(filename, "rb") as f:
+        obj = pickle.load(f)
+
+    return obj
+
 
 # def write_yaml_file(func=None, *, log_dir: str | Path = LOGGING_FOLDER, ):
 #     import yaml

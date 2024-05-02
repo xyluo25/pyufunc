@@ -10,14 +10,18 @@ from ._io import (get_file_size,
                   get_dir_size,
                   create_tempfile,
                   remove_file,
-                  add_dir_to_env
+                  add_dir_to_env,
+                  pickle_save,
+                  pickle_load,
                   )
 from ._path import (path2linux,
                     path2uniform,
                     get_filenames_by_ext,
                     check_files_in_dir,
                     check_filename,
-                    generate_unique_filename
+                    check_file_existence,
+                    generate_unique_filename,
+                    create_unique_filename
                     )
 from ._platform import (check_platform,
                         is_windows,
@@ -34,6 +38,8 @@ __all__ = [
     "create_tempfile",
     "remove_file",
     "add_dir_to_env",
+    "pickle_save",
+    "pickle_load",
 
     # path
     'path2linux',
@@ -41,7 +47,9 @@ __all__ = [
     "get_filenames_by_ext",
     "check_files_in_dir",
     "check_filename",
+    "check_file_existence",
     "generate_unique_filename",
+    "create_unique_filename",
 
     # platform
     "check_platform",
