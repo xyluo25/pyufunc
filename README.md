@@ -16,7 +16,9 @@ Pyufunc aims to bring together the most commonly used utility functions from dif
 
 Let pyufunc take care of the repetitive tasks while you focus on building remarkable Python applications. Empower your projects with the efficiency and elegance that comes with pyufunc - your all-inclusive Python utility toolkit. Happy coding!
 
-🚀️ **No dependencies will be installed to your environment unless use of functions that need certain dependency, the function will automatically install required package when you run it.**
+🚀️ **No dependencies will be installed to your coding environment unless use of functions that need certain dependency**
+
+🚀️ **Don't worry! the function will automatically install required package when you use it.**
 
 ## Existing Utility Functions Categorized by Functionality
 
@@ -64,6 +66,12 @@ pf.find_util_func_by_keyword("show")
 
 ```
 
+🎉️ 🎉️
+
+**If you discover useful functions that you believe should be included in the package for broader use, or if you have suggestions for additional utility functions, please share your comments here: https://github.com/xyluo25/pyufunc/issues.**
+
+🎉️ 🎉️
+
 ## Community and Support
 
 We welcome and encourage developers to contribute their valuable utility functions to pyufunc by submitting pull requests on [Pyufunc GitHub Repository](https://github.com/xyluo25/pyufunc), helping to enrich the package and benefit the wider Python community.
@@ -93,7 +101,7 @@ For more information about the ways you can contribute to pyufunc, visit [Pyufun
 
 If you use pyufunc in your work and research, please use the following entry:
 
-Luo, X. and Zhou, X. (2024, February 18). PYUFUNC. Retrieved from https://github.com/xyluo25/pyufunc
+Luo, X.Y. and Zhou, X.S. (2024, February 18). pyufunc: A powerful toolkit of Python utility functions. Retrieved from https://github.com/xyluo25/pyufunc
 
 ## ACKNOWLEDGMENT
 
