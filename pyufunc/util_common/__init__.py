@@ -23,6 +23,7 @@ from ._decorator_dependency_requires import requires
 from ._decorator_func_time import func_running_time, func_time
 from ._decorator_run_parallel import run_parallel
 from ._decorator_end_of_life import end_of_life
+from ._count_code_size import count_lines_of_code
 
 
 __all__ = ["show_docstring_headers",
@@ -38,5 +39,6 @@ __all__ = ["show_docstring_headers",
            "is_module_importable",
            "get_user_defined_func",
            "is_user_defined_func",
+           "count_lines_of_code"
 
            ]
