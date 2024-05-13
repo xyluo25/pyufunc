@@ -28,7 +28,7 @@ from .util_test import *  # test functions  # noqa: F403
 from .util_vis import *  # visualization functions  # noqa: F403
 
 # import package configurations and utilities
-from .pkg_configs import *  # noqa: F403
+# from .pkg_configs import *  # noqa: F403
 from .pkg_configs import config_FUNC_KEYWORD
 
 from pyufunc import util_ai
