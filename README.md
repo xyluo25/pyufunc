@@ -22,11 +22,11 @@ Let pyufunc take care of the repetitive tasks while you focus on building remark
 
 ## Existing Utility Functions Categorized by Functionality
 
-- [utility_function_by_category.md](https://github.com/xyluo25/pyufunc/blob/main/utility_function_by_category.md)
+- [utility_function_by_category.md](https://github.com/xyluo25/pyufunc/blob/main/docs/md_files/utility_function_by_category.md)
 
 ## Existing Utility Functions Categorized by Keywords
 
-- [utility_function_by_keyword.md](https://github.com/xyluo25/pyufunc/blob/main/utility_function_by_keyword.md)
+- [utility_function_by_keyword.md](https://github.com/xyluo25/pyufunc/blob/main/docs/md_files/utility_function_by_keyword.md)
 
 ## Quick Tutorial
 
@@ -95,7 +95,7 @@ For more information about the ways you can contribute to pyufunc, visit [Pyufun
 
 ## Comprehensive Review of Utility Function Packages
 
-- [utility_function_package_review.md](https://github.com/xyluo25/pyufunc/blob/main/utility_function_package_review.md)
+- [utility_function_package_review.md](https://github.com/xyluo25/pyufunc/blob/main/docs/md_files/utility_function_pkg_review.md)
 
 ## How to Cite
 
