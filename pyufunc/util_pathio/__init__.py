@@ -27,7 +27,10 @@ from ._path import (path2linux,
 from ._platform import (check_platform,
                         is_windows,
                         is_linux,
-                        is_mac)
+                        is_mac,
+                        get_terminal_width,
+                        get_terminal_height,
+                        )
 
 
 __all__ = [
@@ -57,6 +60,8 @@ __all__ = [
     "check_platform",
     "is_windows",
     "is_linux",
-    "is_mac"
+    "is_mac",
+    "get_terminal_width",
+    "get_terminal_height",
 
 ]

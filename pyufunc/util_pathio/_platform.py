@@ -86,3 +86,41 @@ def is_mac() -> bool:
 
     import platform
     return platform.system() == "Darwin"
+
+
+def get_terminal_width() -> int:
+    """get the terminal width
+
+    Returns:
+        int: the terminal width
+
+    Example:
+        >>> from pyufunc import get_terminal_width
+        >>> get_terminal_width()
+        80
+
+        >>> get_terminal_width()
+        120
+    """
+
+    import shutil
+    return shutil.get_terminal_size().columns
+
+
+def get_terminal_height() -> int:
+    """get the terminal height
+
+    Returns:
+        int: the terminal height
+
+    Example:
+        >>> from pyufunc import get_terminal_height
+        >>> get_terminal_height()
+        24
+
+        >>> get_terminal_height()
+        32
+    """
+
+    import shutil
+    return shutil.get_terminal_size().lines
