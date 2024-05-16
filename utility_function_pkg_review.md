@@ -33,6 +33,6 @@ mxnet
 dateutil
 
 //  https://github.com/TBM13/tbm13-utils
-https://github.com/Nivratti/nb_utils
+// https://github.com/Nivratti/nb_utils
 https://github.com/iwasakishuto/Python-Charmers
 https://github.com/Nevergiveupp/python-in-action
