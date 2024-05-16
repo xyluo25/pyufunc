@@ -88,6 +88,63 @@ def get_filenames_by_ext(dir_path: str | Path, file_ext: str | list = "csv", inc
     References:
         https://github.com/mikeqfu/pyhelpers (GNU)
 
+    See Also:
+        get_files_by_ext
+
+    Args:
+        dir_path (str | Path): the path to the folder
+        file_ext (str | list | tuple, optional): the file extension to be specified. Defaults to "csv".
+        incl_subdir (bool, optional): Whether to traverse all files inside sub folder. Defaults to False.
+
+    Returns:
+        list[str]: a list of filenames with absolute paths
+
+    Examples:
+        >>> import pyufunc as uf
+        >>> uf.get_filenames_by_ext('./', 'py')
+        ['C:/Users/Administrator/Desktop/test/test.py']
+
+    """
+
+    # convert file extension to tuple
+    if isinstance(file_ext, str):
+        file_ext = (file_ext,)
+    if isinstance(file_ext, (list, tuple)):
+        file_ext = tuple(file_ext)
+
+    if not file_ext:
+        file_ext = ("*",)
+
+    if incl_subdir:
+        files_list = []
+        for root, _, files in os.walk(dir_path):
+            files_list.extend([os.path.join(root, file) for file in files])
+
+        if file_ext[0] in {None, "*", "all"}:
+            return [path2linux(file) for file in files_list]
+
+        return [path2linux(file) for file in files_list if file.endswith(file_ext)]
+
+    # Files in the first layer of the folder
+    if file_ext[0] in {None, "*", "all"}:
+        return [path2linux(os.path.join(dir_path, file)) for file in os.listdir(dir_path)]
+
+    return [path2linux(os.path.join(dir_path, file)) for file in os.listdir(dir_path)
+            if file.endswith(file_ext)]
+
+
+def get_files_by_ext(dir_path: str | Path, file_ext: str | list = "csv", incl_subdir: bool = False) -> list[str]:
+    """Get a list of filenames in a folder by file extension
+
+    Location:
+        pyufunc/util_pathio/_path.py
+
+    References:
+        https://github.com/mikeqfu/pyhelpers (GNU)
+
+    See Also:
+        get_filenames_by_ext
+
     Args:
         dir_path (str | Path): the path to the folder
         file_ext (str | list | tuple, optional): the file extension to be specified. Defaults to "csv".
