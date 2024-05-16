@@ -120,6 +120,8 @@ config_datetime_fmt = {
     31: "%m/%Y",  # "MM/YYYY", 07/2023
     32: "%m-%Y",  # "MM-YYYY", 07-2023
 
+    "default": "%Y-%m-%d",
+
 }
 
 # ############### Email Configuration ############### #

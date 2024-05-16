@@ -20,8 +20,8 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
     """Format datetime to datetime string
 
     Args:
-        dt (datetime): the datetime to be formatted. Defaults to datetime.datetime.now().
-        format_seq (int): the format of the datetime. Defaults to 0 ("%Y-%m-%d %H:%M:%S").
+        dt (datetime, str): the datetime to be formatted. Defaults to datetime.datetime.now().
+        dt_fmt (int): the format of the datetime. Defaults ("%Y-%m-%d %H:%M:%S").
 
     See Also:
         pyufunc.pkg_configs.config_datetime_fmt : pre-defined datetime string formats
@@ -32,14 +32,19 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
     Example:
         >>> from pyufunc import fmt_dt_to_str
         >>> fmt_dt_to_str()
-        '2024-02-06 11:11:11'
+        '2024-02-06'
 
-        >>> fmt_dt_to_str("2024-02-06 11:11:11", 1)
-        The input datetime is not a datetime object. return the original datetime string.
+        >>> fmt_dt_to_str(df_fmt="%Y/%m/%d %H:%M:%S")
+        '2024/02/06 00:00:00'
 
-        >>> fmt_dt_to_str(datetime.datetime.now(), 20)
-        The format_seq is not valid. use format_seq = 1 as the default format: %Y-%m-%d %H:%M:%S
-        '2024-02-06 11:11:11'
+        >>> fmt_dt_to_str("2024-02-06", df_fmt="%Y/%m/%d")
+        '2024/02/06'
+
+        >>> fmt_dt_to_str("2024-02-06", df_fmt="%Y/%m/%d %H:%M:%S")
+        '2024/02/06 00:00:00'
+
+        >>> fmt_dt_to_str(datetime.datetime.now(), "%Y/%m/%d %H:%M:%S")
+        '2024/02/06 11:11:11'
     """
     import_package(("python-dateutil", "dateutil"))
     import dateutil
@@ -66,10 +71,10 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
     # check if the input format is valid
     if not isinstance(dt_fmt, str):
         # use default format
-        dt_fmt = config_datetime_fmt[0]
+        dt_fmt = config_datetime_fmt[0]  # "%Y-%m-%d"
 
     if dt_fmt not in config_datetime_fmt.values():
-        dt_fmt = config_datetime_fmt[0]
+        dt_fmt = config_datetime_fmt[0]  # "%Y-%m-%d"
 
     print("type dt", type(dt))
     try:
@@ -86,7 +91,6 @@ def fmt_str_to_dt(dt_str: str) -> datetime.datetime:
 
     Args:
         dt_str (str): the datetime string to be formatted.
-        format_seq (int): the format of the datetime. Defaults to 0 ("%Y-%m-%d %H:%M:%S").
 
     See Also:
         pyufunc.pkg_configs.config_datetime_fmt : pre-defined datetime string formats
@@ -98,8 +102,6 @@ def fmt_str_to_dt(dt_str: str) -> datetime.datetime:
         >>> from pyufunc import fmt_str_to_dt
         >>> fmt_str_to_dt("2024-02-06 11:11:11")
         datetime.datetime(2024, 2, 6, 11, 11, 11)
-
-        >>> fmt_str_to_dt("2024-02-06 11:11:11", 20)
 
     """
     # import dateutil
