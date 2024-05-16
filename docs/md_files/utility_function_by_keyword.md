@@ -20,10 +20,15 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (96):
+Available utility functions in pyUFunc (111):
 
 - non-keywords:
+  - add_date_in_filename
   - add_dir_to_env
+  - count_lines_of_code
+  - delete_dict_keys
+  - dict_delete_keys
+  - dict_split_by_chunk
   - end_of_life
   - func_running_time
   - func_time
@@ -36,6 +41,8 @@ Available utility functions in pyUFunc (96):
   - import_package
   - path2linux
   - path2uniform
+  - pickle_load
+  - pickle_save
   - r2_score
   - remove_file
   - requires
@@ -53,18 +60,23 @@ Available utility functions in pyUFunc (96):
   - get_dir_size
   - get_file_size
   - get_filenames_by_ext
+  - get_files_by_ext
   - get_host_ip
+  - get_terminal_height
+  - get_terminal_width
   - get_time_diff_in_unit
   - get_timezone
   - get_user_defined_func
 
 - generate:
+  - generate_dir_with_date
   - generate_password
   - generate_unique_filename
 
 - create:
   - create_circle_at_point_with_radius
   - create_tempfile
+  - create_unique_filename
 
 - find:
   - find_closest_point
@@ -86,6 +98,7 @@ Available utility functions in pyUFunc (96):
   - group_dt_yearly
 
 - check:
+  - check_file_existence
   - check_filename
   - check_files_in_dir
   - check_platform
@@ -115,6 +128,7 @@ Available utility functions in pyUFunc (96):
 
 - fmt:
   - fmt_dt_to_str
+  - fmt_str_to_dt
 
 - cvt:
   - cvt_baidu09_to_gcj02
@@ -128,6 +142,7 @@ Available utility functions in pyUFunc (96):
 
 - is:
   - is_CV_img
+  - is_float
   - is_linux
   - is_mac
   - is_module_importable

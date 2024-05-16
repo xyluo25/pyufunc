@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (96):
+Available utility functions in pyUFunc (111):
 
 - util_ai:
   - mean_absolute_error
@@ -32,6 +32,7 @@ Available utility functions in pyUFunc (96):
   - algo_selection_sort
 
 - util_common:
+  - count_lines_of_code
   - end_of_life
   - func_running_time
   - func_time
@@ -48,6 +49,10 @@ Available utility functions in pyUFunc (96):
 
 - util_data_processing:
   - cvt_int_to_alpha
+  - delete_dict_keys
+  - dict_delete_keys
+  - dict_split_by_chunk
+  - is_float
   - split_dict_by_chunk
   - split_list_by_equal_sublist
   - split_list_by_fixed_length
@@ -55,6 +60,7 @@ Available utility functions in pyUFunc (96):
 - util_datetime:
   - cvt_dt_to_tz
   - fmt_dt_to_str
+  - fmt_str_to_dt
   - get_time_diff_in_unit
   - get_timezone
   - group_dt_daily
@@ -104,6 +110,10 @@ Available utility functions in pyUFunc (96):
   - is_CV_img
   - is_PIL_img
 
+- util_log:
+  - add_date_in_filename
+  - generate_dir_with_date
+
 - util_network:
   - get_host_ip
   - validate_url
@@ -114,19 +124,26 @@ Available utility functions in pyUFunc (96):
 
 - util_pathio:
   - add_dir_to_env
+  - check_file_existence
   - check_filename
   - check_files_in_dir
   - check_platform
   - create_tempfile
+  - create_unique_filename
   - generate_unique_filename
   - get_dir_size
   - get_file_size
   - get_filenames_by_ext
+  - get_files_by_ext
+  - get_terminal_height
+  - get_terminal_width
   - is_linux
   - is_mac
   - is_windows
   - path2linux
   - path2uniform
+  - pickle_load
+  - pickle_save
   - remove_file
 
 - pkg_utils:

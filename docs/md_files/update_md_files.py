@@ -5,7 +5,18 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 from __future__ import absolute_import
-import pyufunc as uf
+from pathlib import Path
+import os
+
+try:
+    import pyufunc as pf
+except ImportError:
+    current_path = Path(os.path.abspath(__file__)).parent
+    root_path = Path(os.path.abspath(__file__)).parent.parent.parent
+    print("root_path: ", root_path)
+    os.chdir(root_path)
+    import pyufunc as pf
+    os.chdir(current_path)
 
 
 def update_util_func_by_keywords_md(path_keyword: str) -> None:
@@ -15,7 +26,7 @@ def update_util_func_by_keywords_md(path_keyword: str) -> None:
 
     util_func_starting = keyword.find("Available utility functions in pyUFunc")
 
-    keyword_new = keyword[:util_func_starting] + uf.show_util_func_by_keyword(False)
+    keyword_new = keyword[:util_func_starting] + pf.show_util_func_by_keyword(False)
 
     with open(path_keyword, "w", encoding="utf-8") as f_new:
         f_new.write(keyword_new)
@@ -30,7 +41,7 @@ def update_util_func_by_category_md(path_category: str) -> None:
 
     util_func_starting = category.find("Available utility functions in pyUFunc")
 
-    category_new = category[:util_func_starting] + uf.show_util_func_by_category(False)
+    category_new = category[:util_func_starting] + pf.show_util_func_by_category(False)
 
     with open(path_category, "w", encoding="utf-8") as f_new:
         f_new.write(category_new)
@@ -40,7 +51,7 @@ def update_util_func_by_category_md(path_category: str) -> None:
 
 if __name__ == "__main__":
     path_category = "./utility_function_by_category.md"
-    path_keyword = "./utility_function_by_keyword.md"
+    path_keyword = "./utility_function_by_keyword.md"\
 
     update_util_func_by_keywords_md(path_keyword)
     update_util_func_by_category_md(path_category)

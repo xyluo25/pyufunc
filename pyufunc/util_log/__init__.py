@@ -7,11 +7,11 @@
 
 from ._log_dir import (
     add_date_in_filename,
-    generate_log_dir_with_date
+    generate_dir_with_date
 )
 
 __all__ = [
     # _log_dir
     "add_date_in_filename",
-    "generate_log_dir_with_date"
+    "generate_dir_with_date"
 ]
