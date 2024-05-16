@@ -85,14 +85,14 @@ def requires(*args, **kwargs) -> object:
     # if the argument are not strings, it's tuple or list
     # first element is the module name, for pip or conda installation
     # second element is the module name, for import the module
-    arg_module_name = []
+    arg_install_name = []
     arg_import_name = []
     for arg in args:
         if isinstance(arg, str):
-            arg_module_name.append(arg)
+            arg_install_name.append(arg)
             arg_import_name.append(arg)
         elif isinstance(arg, (tuple, list)) and len(arg) == 2:
-            arg_module_name.append(arg[0])
+            arg_install_name.append(arg[0])
             arg_import_name.append(arg[1])
         else:
             raise ValueError("The input arguments should be strings or tuple with two elements.")
@@ -104,14 +104,17 @@ def requires(*args, **kwargs) -> object:
             return function
 
         # get missing dependencies
+
+        # missing_pkg_name include str, tuple, or list from input args
         missing_pkg_name = [arg for i, arg in enumerate(args) if not available[i]]
-        missing_module_name = [arg for i, arg in enumerate(arg_module_name) if not available[i]]
+
+        missing_install_name = [arg for i, arg in enumerate(arg_install_name) if not available[i]]
         missing_import_name = [arg for i, arg in enumerate(arg_import_name) if not available[i]]
 
         # install the missing dependencies
         if auto_install:
             if verbose:
-                print(f"  :Info: installing {','.join(missing_module_name)}...")
+                print(f"  :Info: installing {','.join(missing_install_name)}...")
             for pkg_name in missing_pkg_name:
                 import_package(pkg_name, verbose=verbose)
             available = [is_module_importable(arg) for arg in missing_import_name]
@@ -120,7 +123,7 @@ def requires(*args, **kwargs) -> object:
 
         def passer(*args, **kwargs):
             if verbose:
-                print(f"  :{function.__name__} missing dependency {','.join(missing_module_name)}")
+                print(f"  :{function.__name__} missing dependency {','.join(missing_install_name)}")
                 print("  :please install manually.")
 
             if verbose and not auto_install:
