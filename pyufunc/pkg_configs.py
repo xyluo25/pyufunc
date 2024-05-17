@@ -6,7 +6,42 @@
 ##############################################################
 from __future__ import absolute_import
 import os
-from pyufunc.util_pathio._path import path2linux
+from pathlib import Path
+
+
+def __path2linux(path: str | Path) -> str:
+    """convert path to linux path for all OSes
+
+    Windows is smart enough to handle all paths from other OSes, but for other OSes, they can not handle windows paths.
+    linux paths are friendly to all OSes, Finally, we use linux paths in all OSes.
+
+    Besides, the reason not use normalize_path or unify_path or path2uniform but path2linux is that: the author is a big fan of Linux.
+    As an alternative, you can use path2uniform, which is the same as path2linux.
+
+    Location:
+        pyufunc/util_pathio/_path.py
+
+    Args:
+        path (str | Path): _description_
+
+    Returns:
+        str: a unified linux path
+
+    Examples:
+        >>> import pyufunc as uf
+        >>> uf.path2linux('C:\\Users\\Administrator\\Desktop\\test\\test.txt')
+        'C:/Users/Administrator/Desktop/test/test.txt'
+        >>> uf.path2linux('./test.txt')
+        'C:/Users/Administrator/Desktop/test/test.txt'
+    """
+
+    # the absolute path
+    path = os.path.abspath(path)
+
+    try:
+        return path.replace("\\", "/")
+    except Exception:
+        return str(path).replace("\\", "/")
 
 __all__ = [
     "pkg_version",
@@ -59,7 +94,7 @@ config_logging = {
     "is_log": True,
 
     # logging default folder
-    "log_folder": path2linux(os.path.join(os.getcwd(), "syslogs")),
+    "log_folder": __path2linux(os.path.join(os.getcwd(), "syslogs")),
 
     # logging
     "log_level": "DEBUG",
@@ -169,6 +204,30 @@ config_gmns = {
     # specify required fields for node.csv and poi.csv and zone.csv (optional)
     "node_required_fields": ["node_id", "x_coord", "y_coord",
                              "activity_type", "is_boundary", "poi_id"],
-    "poi_required_fields": ["poi_id", "building", "centroid", "area", "geometry"],
+    "poi_required_fields" : ["poi_id", "building", "centroid", "area", "geometry"],
     "link_required_fields": ["link_id", "from_node_id", "to_node_id", "length", "lanes"],
+}
+
+
+# ############### Color initialization ############### #
+config_color = {
+    "ACCENT"        : ('\x1b[01m', '\x1b[01m'),
+    "BLACK"         : ('\x1b[30m', '\x1b[40m'),
+    "RED"           : ('\x1b[31m', '\x1b[41m'),
+    "GREEN"         : ('\x1b[32m', '\x1b[42m'),
+    "YELLOW"        : ('\x1b[33m', '\x1b[43m'),
+    "BLUE"          : ('\x1b[34m', '\x1b[44m'),
+    "MAGENTA"       : ('\x1b[35m', '\x1b[45m'),
+    "CYAN"          : ('\x1b[36m', '\x1b[46m'),
+    "WHITE"         : ('\x1b[37m', '\x1b[47m'),
+    "DEFAULT"       : ('\x1b[39m', '\x1b[49m'),
+    "GRAY"          : ('\x1b[90m', '\x1b[100m'),
+    "BRIGHT_RED"    : ('\x1b[91m', '\x1b[101m'),
+    "BRIGHT_GREEN"  : ('\x1b[92m', '\x1b[102m'),
+    "BRIGHT_YELLOW" : ('\x1b[93m', '\x1b[103m'),
+    "BRIGHT_BLUE"   : ('\x1b[94m', '\x1b[104m'),
+    "BRIGHT_MAGENTA": ('\x1b[95m', '\x1b[105m'),
+    "BRIGHT_CYAN"   : ('\x1b[96m', '\x1b[106m'),
+    "BRIGHT_WHITE"  : ('\x1b[97m', '\x1b[107m'),
+    # "END"           : ('\x1b[0m',  '\x1b[0m'),
 }

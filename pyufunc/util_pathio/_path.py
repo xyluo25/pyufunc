@@ -9,6 +9,9 @@
 from __future__ import absolute_import
 from pathlib import Path
 import os
+import re
+from typing import Callable, Union
+from pyufunc.pkg_configs import config_color
 
 
 def path2linux(path: str | Path) -> str:
@@ -378,3 +381,163 @@ def create_unique_filename(filename: str | Path, suffix_num: int = 1) -> str:
         return generate_unique_filename(filename_update, suffix_num + 1)
 
     return filename_abspath
+
+
+def show_dir_in_tree(dir_name: Union[str, Path],
+                     pattern: str="**/*",
+                     *,
+                     show_all=False,
+                     max_level=-1,
+                     **kwargs) -> None:
+    """list contents of directories in a tree-like format.
+
+    Args:
+        *args/**kwargs  : Argments for ``root = Path(*args, **kwargs)``
+        pattern (str)   : Argments for ``root.glob(pattern)``
+        show_all (bool) : Whether not to ignore entries starting with .
+        max_level (int) : Max display depth of the directory tree.
+
+    """
+
+    def _toCOLOR_create(color: str = "") -> Callable[[str, bool], str]:
+        color = color.upper()
+
+        def _enable_vts() -> bool:
+            """Enable Virtual Terminal Sequences (ANSI escape sequences) in Windows10."""
+            INVALID_HANDLE_VALUE = -1
+            # STD_INPUT_HANDLE     = -10
+            STD_OUTPUT_HANDLE = -11
+            # STD_ERROR_HANDLE     = -12
+            ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004
+            # ENABLE_LVB_GRID_WORLDWIDE = 0x0010
+            try:
+                from ctypes import windll, wintypes, byref
+                from functools import reduce
+                hOut = windll.kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
+                if hOut == INVALID_HANDLE_VALUE:
+                    return False
+                dwMode = wintypes.DWORD()
+                if windll.kernel32.GetConsoleMode(hOut, byref(dwMode)) == 0:
+                    return False
+                dwMode.value |= ENABLE_VIRTUAL_TERMINAL_PROCESSING  # ENABLE_LVB_GRID_WORLDWIDE
+                if windll.kernel32.SetConsoleMode(hOut, dwMode) == 0:
+                    return False
+            except Exception:
+                return False
+            return True
+
+        __WINDOWS_VTS_SETUP__ = _enable_vts() if os.name == "nt" else True
+
+        if __WINDOWS_VTS_SETUP__ and (color in config_color.keys()):
+            charcode = config_color[color]
+            def func(x, is_bg=False): return f"{charcode[is_bg]}{str(x)}\x1b[0m"
+            func.__doc__ = f"""Convert the output color to {color}
+
+            Args:
+                x (str)      : string
+                is_bg (bool) : Whether to change the background color or not.
+
+            Examples:
+                >>> from pycharmers.utils import to{color}
+                >>> print(to{color}("hoge"), is_bg=False)
+                {func('hoge', is_bg=False)}
+                >>> print(to{color}("hoge"), is_bg=True)
+                {func('hoge', is_bg=True)}
+            """
+        else:
+            def func(x, is_bg=False): return str(x)
+            func.__doc__ = "Convert to string."
+        return func
+
+    class Tree:
+        def __init__(self, filepaths=[], show_all=False, max_level=-1):
+            """Initialize Tree class.
+            Args:
+                filepaths (list): Filepaths which is to be printed.
+                show_all (bool) : Whether not to ignore entries starting with .
+                max_level (int) : Max display depth of the directory tree.
+            """
+            self.filepaths = filepaths
+            self.show_all = show_all
+            self.max_level = max_level
+
+        def _init(self):
+            self.num_directories = 0
+            self.num_files = 0
+
+        def register(self, path):
+            if os.path.isdir(path):
+                self.num_directories += 1
+            else:
+                self.num_files += 1
+
+        @staticmethod
+        def pathjoin(dir_name: str, *filename: str) -> str:
+            """Join two or more pathname components, inserting '/' as needed, and remove './' at the begining."""
+            return re.sub(pattern=r"^\.\/", repl="", string=os.path.join(dir_name, *filename))
+
+        def run(self, dirname):
+            """Run ``tree`` command.
+
+            Args:
+                dirname: path to root directory .
+            """
+            self._init()
+            print(_toCOLOR_create(color="BLUE")(dirname))
+            self.walk(dirname=dirname, depth=1, print_prefix="")
+            print(f"\n{_toCOLOR_create(color='GREEN')(self.num_directories)} directories, {_toCOLOR_create(color='GREEN')(self.num_files)} files.")
+
+        def walk(self, dirname, depth=1, print_prefix=""):
+            """Print filecontens in ``dirname`` recursively.
+
+            Args:
+                dirname (str)      : path to current directory.
+                depth (int)        : current depth.
+                print_prefix (str) : Prefix for clean output.
+            """
+            filenames = sorted(
+                [
+                    fn
+                    for fn in os.listdir(dirname)
+                    if len(self.filepaths) != 0 and any(
+                        fp.startswith(self.pathjoin(dirname, fn))
+                        for fp in self.filepaths
+                    )
+                ]
+            )
+            num_filenames = len(filenames)
+
+            prefixes = ("├── ", "│   ")
+            for i, fn in enumerate(filenames):
+                if fn[0] == "." and (not self.show_all):
+                    continue
+                abspath = os.path.join(dirname, fn)
+                # Remember the file contents.
+                self.register(abspath)
+                # Update prefixes for the last entries.
+                if i == num_filenames - 1:
+                    prefixes = ("└── ", "    ")
+                # Print and walk recursively.
+                if os.path.isdir(abspath):
+                    fn = _toCOLOR_create("BLUE")(fn)
+                print(print_prefix + prefixes[0] + fn)
+                if os.path.isdir(abspath) and depth != self.max_level:
+                    self.walk(dirname=abspath, depth=depth + 1,
+                              print_prefix=print_prefix + prefixes[1])
+
+    # check inputs
+    if not isinstance(dir_name, (str, Path)):
+        raise ValueError("dir_name should be a string or Path object.")
+
+    if not isinstance(pattern, str):
+        raise ValueError("pattern should be a string.")
+
+    # check pattern
+    if "**/*" not in pattern:
+        pattern = f"**/*{pattern}"
+
+    args = (dir_name, )
+    root = Path(*args, **kwargs)
+    filepaths = [str(p) for p in root.glob(pattern)]
+    tree = Tree(filepaths=filepaths, show_all=show_all, max_level=max_level)
+    tree.run(str(root))

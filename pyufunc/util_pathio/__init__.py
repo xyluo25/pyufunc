@@ -22,7 +22,8 @@ from ._path import (path2linux,
                     check_filename,
                     check_file_existence,
                     generate_unique_filename,
-                    create_unique_filename
+                    create_unique_filename,
+                    show_dir_in_tree,
                     )
 from ._platform import (check_platform,
                         is_windows,
@@ -55,6 +56,7 @@ __all__ = [
     "check_file_existence",
     "generate_unique_filename",
     "create_unique_filename",
+    "show_dir_in_tree",
 
     # platform
     "check_platform",
