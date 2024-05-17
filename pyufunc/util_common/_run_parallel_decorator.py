@@ -10,7 +10,7 @@ from __future__ import absolute_import
 from multiprocessing import Pool
 from typing import Iterable, Callable, Iterator
 import os
-from pyufunc.util_common._decorator_func_time import func_running_time
+from pyufunc.util_common._func_time_decorator import func_running_time
 
 
 @func_running_time

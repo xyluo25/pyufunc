@@ -14,31 +14,50 @@ from ._google_numpy_docstring import (show_docstring_headers,
 from ._password_generator import generate_password
 
 from ._import_package import (
-    is_module_importable,
     import_package,
+    is_module_importable,
     get_user_defined_func,
+    get_user_defined_module,
+    get_user_imported_module,
     is_user_defined_func)
 
-from ._decorator_dependency_requires import requires
-from ._decorator_func_time import func_running_time, func_time
-from ._decorator_run_parallel import run_parallel
-from ._decorator_end_of_life import end_of_life
+from ._dependency_requires_decorator import requires
+from ._func_time_decorator import func_running_time, func_time
+from ._run_parallel_decorator import run_parallel
+from ._end_of_life_decorator import end_of_life
 from ._count_code_size import count_lines_of_code
 
 
-__all__ = ["show_docstring_headers",
-           "show_docstring_google",
-           "show_docstring_numpy",
-           "generate_password",
-           "requires",
-           "func_running_time",
-           "func_time",
-           "run_parallel",
-           "end_of_life",
-           "import_package",
-           "is_module_importable",
-           "get_user_defined_func",
-           "is_user_defined_func",
-           "count_lines_of_code"
+__all__ = [
+    # _google_numpy_docstring
+    "show_docstring_headers",
+    "show_docstring_google",
+    "show_docstring_numpy",
 
-           ]
+    # _password_generator
+    "generate_password",
+
+    # _import_package
+    "import_package",
+    "is_module_importable",
+    "get_user_defined_func",
+    "get_user_defined_module",
+    "get_user_imported_module",
+    "is_user_defined_func",
+
+    # _decorator_dependency_requires
+    "requires",
+
+    # _decorator_func_time
+    "func_running_time",
+    "func_time",
+
+    # _decorator_run_parallel
+    "run_parallel",
+
+    # _decorator_end_of_life
+    "end_of_life",
+
+    # _count_code_size
+    "count_lines_of_code"
+]

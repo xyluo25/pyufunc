@@ -11,6 +11,10 @@ import subprocess
 import sys
 import inspect
 from typing import Union
+import re
+import pathlib
+from collections import defaultdict
+from pyufunc.util_data_processing._str import str_strip
 
 
 def import_package(pkg_name: Union[str, tuple, list],
@@ -162,7 +166,7 @@ def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
         # if inspect.ismodule(obj):
         #     get_user_defined_func(obj, pre_defined_func)
 
-    return list(set(user_defined_func))
+    return sorted(list(set(user_defined_func)))
 
 
 def is_user_defined_func(func_obj: object) -> bool:
@@ -229,3 +233,65 @@ def is_module_importable(module_name: str) -> bool:
         is_importable = False
 
     return is_importable
+
+
+def get_user_defined_module(obj: object,
+                            predicate: callable = lambda x: inspect.isfunction(x) or inspect.isclass(x)):
+    """Get only defined members.
+
+    Args:
+        obj (object)         : module.
+        predicate (callable) : Only return members that satisfy a given ``predicate`` .
+
+    Returns:
+        dict : ``{"member name" : "member object"}``
+
+    Examples:
+        >>> from pycharmers.utils import inspect_utils, get_defined_members
+        >>> get_defined_members(inspect_utils)
+        {
+            'get_defined_members': <function pycharmers.utils.inspect_utils.get_defined_members(obj, predicate=<function <lambda> at 0x14227fca0>)>,
+            'get_imported_members': <function pycharmers.utils.inspect_utils.get_imported_members(obj)>
+        }
+    """
+
+    imported_members_lst = get_user_imported_module(obj).values()
+    imported_members = [element for sublist in imported_members_lst for element in sublist]
+
+    res = {name: member for name, member in inspect.getmembers(obj,
+                                                               predicate=predicate) if name not in imported_members}
+    return dict(sorted(res.items()))
+
+
+def get_user_imported_module(obj: object) -> dict:
+    """Get import members.
+
+    Args:
+        obj (object) : module.
+
+    Returns
+        dict : ``{ "module" : ["import members"]}``
+
+    Examples:
+        >>> from pyufunc import get_user_imported_module
+        >>> get_user_imported_module(json)
+        defaultdict(list,
+            {'.decoder': ['JSONDecoder', 'JSONDecodeError'],
+             '.encoder': ['JSONEncoder'],
+             '': ['codecs']})
+    """
+
+    if not inspect.ismodule(obj):
+        raise ValueError("The input obj should be an importable module.")
+
+    if isinstance(obj, pathlib.PosixPath):
+        obj = str(obj)
+    elif not isinstance(obj, str):
+        obj = inspect.getfile(obj)
+    with open(obj, mode="r") as f:
+        file_contents = "".join(f.readlines())
+    imported_members = defaultdict(list)
+    for m, v_wb, v_nb in re.findall(pattern=r"(?:^|(?<=\n))(?:from\s+(.+?)\s+)?import\s+(?:\(((?:.|\s)*?)\)|((?:(?<!\()(?:.|\s))*?))\n", string=file_contents):
+        imported_members[m].extend(
+            [str_strip(v) for v in (v_wb + v_nb).split(" as ")[0].split(",")])
+    return imported_members

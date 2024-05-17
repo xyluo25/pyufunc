@@ -12,6 +12,7 @@ from ._dict import (split_dict_by_chunk,
 from ._int_to_alpha import cvt_int_to_alpha
 from ._list import split_list_by_equal_sublist, split_list_by_fixed_length
 from ._float import is_float
+from ._str import str_strip
 
 __all__ = [
     # _dict
@@ -28,5 +29,8 @@ __all__ = [
     "split_list_by_fixed_length",
 
     # _float
-    "is_float"
+    "is_float",
+
+    # _str
+    "str_strip"
 ]
