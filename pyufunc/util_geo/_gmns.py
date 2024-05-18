@@ -33,6 +33,8 @@ class Node:
         geometry: The geometry of the node. based on wkt format.
         as_dict: The method to convert the node to a dictionary.
         to_networkx: The method to convert the node to a networkx node tuple format. (id, attr_dict)
+        _zone_id: store the zone_id for the node, default = -1,
+            to be assigned if field zone_id exists in the node.csv and it is not empty
     """
     id: int = 0
     x_coord: float = 0
@@ -45,9 +47,11 @@ class Node:
     activity_type: str = ''
     activity_location_tab: str = ''
     geometry: str = ''
+    _zone_id: int = -1
 
     def as_dict(self):
         return asdict(self)
+        # return self.__dict__
 
     def to_networkx(self) -> tuple:
         # covert to networkx node
@@ -93,9 +97,9 @@ class Link:
     from_biway: int = 1
     is_link: bool = True
 
-
     def as_dict(self):
         return asdict(self)
+        # return self.__dict__
 
     def to_networkx(self) -> tuple:
         # convert to networkx edge
@@ -128,10 +132,11 @@ class POI:
     poi_type: str = ''
     trip_rate: dict = field(default_factory=dict)
     geometry: str = ''
-    zone_id: int = 0
+    zone_id: int = -1
 
     def as_dict(self):
         return asdict(self)
+        # return self.__dict__
 
     def to_networkx(self) -> tuple:
         # convert to networkx node
@@ -182,6 +187,7 @@ class Zone:
 
     def as_dict(self):
         return asdict(self)
+        # return self.__dict__
 
 
 @dataclass
@@ -231,5 +237,6 @@ class Agent:
 
     def as_dict(self):
         return asdict(self)
+        # return self.__dict__
 
 # todo: read node, link and zone

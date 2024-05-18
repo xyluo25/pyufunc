@@ -202,12 +202,12 @@ config_email = {
 # ############### GMNS: General Modeling Network Specification configuration #
 config_gmns = {
     # specify required fields for node.csv and poi.csv and zone.csv (optional)
-    "node_required_fields": ["node_id", "x_coord", "y_coord",
-                             "activity_type", "is_boundary", "poi_id"],
-    "poi_required_fields" : ["poi_id", "building", "centroid", "area", "geometry"],
-    "link_required_fields": ["link_id", "from_node_id", "to_node_id", "length", "lanes"],
+    "node_fields": ["node_id", "x_coord", "y_coord",
+                    "activity_type", "is_boundary", "poi_id"],
+    "poi_fields": ["poi_id", "building", "centroid", "area", "geometry"],
+    "zone_geometry_fields": ["zone_id", "geometry"],
+    "zone_centroid_fields": ["zone_id", "x_coord", "y_coord"],
 }
-
 
 # ############### Color initialization ############### #
 config_color = {
