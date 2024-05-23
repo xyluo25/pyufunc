@@ -5,11 +5,6 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-
-"""
-@loga: automated logging for Python
-"""
-
 from __future__ import annotations
 
 from collections.abc import Callable, Generator, Mapping, Set
@@ -22,16 +17,10 @@ import pathlib
 import sys
 import time
 import traceback
+from contextlib import suppress
 from types import MappingProxyType
 from typing import Any, Literal, TypedDict, TypeVar
 import uuid
-
-# you don't need graylog installed
-try:
-    import graypy
-except ModuleNotFoundError:
-    graypy = None
-
 
 EMPTY_MAP: MappingProxyType = MappingProxyType({})
 
@@ -48,11 +37,11 @@ DEFAULT_FORMS: Mapping[CallableEvent, str] = {
 }
 
 # Miscellaneous constants
-LOG_LEVEL = logging.DEBUG  # Log level used for loga decoration logs
+LOG_LEVEL = logging.DEBUG  # Log level used for logDecorator decoration logs
 LOG_THRESHOLD = logging.DEBUG  # Only log when log level is this or higher
 MAX_DICT_OBSCURATION_DEPTH = 5
 OBSCURED_STRING = "********"
-# Callables with an attribute of this name set to True will not be logged by loga
+# Callables with an attribute of this name set to True will not be logged by logDecorator
 NO_LOGS_ATTR_NAME = "_do_not_log_this_callable"
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S %Z"
 
@@ -106,46 +95,43 @@ class LocalLogFormatter(logging.Formatter):
         return msg
 
 
-class Loga:
+class LogDecorator:
     """A class for logging."""
 
-    def __init__(
-        self,
-        *,  # Reject positional arguments
-        called: str | None = DEFAULT_FORMS["called"],
-        returned: str | None = DEFAULT_FORMS["returned"],
-        returned_none: str | None = DEFAULT_FORMS["returned_none"],
-        errored: str | None = DEFAULT_FORMS["errored"],
-        facility: str = "loga",
-        graylog_address: tuple[str, int] | None = None,
-        do_print: bool = False,
-        do_write: bool = False,
-        truncation: int = 7500,
-        msg_truncation: int = 7500,
-        trace_truncation: int = 15000,
-        raise_logging_errors: bool = True,
-        logfile: str = "./logs/logs.txt",
-        private_data: Set[str] = frozenset(),
-        log_if_graylog_disabled: bool = True,
-    ) -> None:
-        """Initializes a Loga object.
+    def __init__(self,
+                 *,  # Reject positional arguments
+                 proj_name: str = "my_log",
+                 logfile: str = "./logs/logs.txt",
+                 do_print: bool = False,
+                 do_write: bool = False,
+                 called: str | None = DEFAULT_FORMS["called"],
+                 returned: str | None = DEFAULT_FORMS["returned"],
+                 returned_none: str | None = DEFAULT_FORMS["returned_none"],
+                 errored: str | None = DEFAULT_FORMS["errored"],
+                 truncation: int = 7500,
+                 msg_truncation: int = 7500,
+                 trace_truncation: int = 15000,
+                 raise_logging_errors: bool = True,
+                 private_data: Set[str] = frozenset()) -> None:
+        """Initialize the LogDecorator object.
 
-        On instantiation, pass in a dictionary containing the config.
-        Currently accepted config values are:
-        - facility: name of the app the log is coming from
-        - graylog_address: A tuple (ip, port). Address for graylog.
-        - logfile: path to a file to which logs will be written
-        - do_print: print logs to console
-        - do_write: write logs to file
-        - truncation: truncate value of log data fields to this length
-        - msg_truncation: truncate value of log messages to this length
-        - trace_truncation: truncate value of log data fields "trace" and "traceback"
-            to this length
-        - private_data: key names that should be filtered out of logging
-        - raise_logging_errors: should stdlib `log` call errors be suppressed or no?
-        - log_if_graylog_disabled: boolean value, should a warning log be made when
-            failing to connect to graylog
+        Args:
+            proj_name (str, optional): name of your running project. Defaults to "my_log".
+            logfile (str, optional): the log filename. Defaults to "./logs/logs.txt".
+            do_print (bool, optional): whether to print in console. Defaults to False.
+            do_write (bool, optional): whether it write in logfile. Defaults to False.
+            called (str | None, optional): _description_. Defaults to DEFAULT_FORMS["called"].
+            returned (str | None, optional): _description_. Defaults to DEFAULT_FORMS["returned"].
+            returned_none (str | None, optional): _description_. Defaults to DEFAULT_FORMS["returned_none"].
+            errored (str | None, optional): _description_. Defaults to DEFAULT_FORMS["errored"].
+            truncation (int, optional): truncate value of log data fields to this length. Defaults to 7500.
+            msg_truncation (int, optional): truncate value of log messages to this length. Defaults to 7500.
+            trace_truncation (int, optional): truncate value of log data fields "trace" and "traceback"
+        to this length. Defaults to 15000.
+            raise_logging_errors (bool, optional): should stdlib `log` call errors be suppressed or no?. Defaults to True.
+            private_data (Set[str], optional): key names that should be filtered out of logging. Defaults to frozenset().
         """
+
         self._stopped = False
         self._allow_errors = True
         self._msg_forms: dict[CallableEvent, str | None] = {
@@ -159,7 +145,7 @@ class Loga:
         self._trace_truncation = trace_truncation
         self._raise_logging_errors = raise_logging_errors
         self._private_data = private_data
-        self._logger = logging.getLogger(facility)
+        self._logger = logging.getLogger(proj_name)
         self._logger.setLevel(LOG_THRESHOLD)
 
         if do_write:
@@ -176,13 +162,10 @@ class Loga:
             print_handler.setFormatter(LocalLogFormatter())
             self._logger.addHandler(print_handler)
 
-        self._add_graylog_handler(
-            graylog_address, log_if_disabled=log_if_graylog_disabled)
-
     def __call__(self, class_or_func: CallableOrType) -> CallableOrType:
-        """Make Loga object itself a decorator.
+        """Make LogD object itself a decorator.
 
-        Allow decorating either a class or a method/function, so @loga
+        Allow decorating either a class or a method/function, so @logDecorator
         can be used on both classes and functions.
         """
         if isinstance(class_or_func, type):
@@ -201,23 +184,18 @@ class Loga:
 
     @staticmethod
     def _best_returned_none(returned: str | None, returned_none: str | None) -> str | None:
-        """Resolve the format for a log message, when a function returns None.
+        """Resolve the format for a log message, when a function returns None."""
 
-        If the user has their own msg format for 'returned' logs, but
-        not one for 'returned_none', we should use theirs over loga's
-        default.
-        """
         # if the user explicitly doesn't want logs for returns, set to none
         if not returned_none or not returned:
             return None
+
         # if they provided their own, use that
         if returned_none != DEFAULT_FORMS["returned_none"]:
             return returned_none
+
         # if the user just used the defaults, use those
-        if returned == DEFAULT_FORMS["returned"]:
-            return returned_none
-        # the switch: use the user provided returned for returned_none
-        return returned
+        return returned_none if returned == DEFAULT_FORMS["returned"] else returned
 
     @staticmethod
     def _can_decorate(candidate: Callable, name: str | None = None) -> bool:
@@ -226,33 +204,27 @@ class Loga:
         Don't decorate python magic methods.
         """
         name = name or getattr(candidate, "__name__", None)
-        if not name:
-            return False
-        if name.startswith("__") and name.endswith("__"):
-            return False
-        return True
+        return not name.startswith("__") or not name.endswith("__") if name else False
 
     def _decorate_all_methods(self, cls: type, just_errors: bool = False) -> type:
         """Decorate all viable methods in a class."""
         members = inspect.getmembers(cls)
-        members = [(k, v) for k, v in members if callable(v)
-                   and self._can_decorate(v, name=k)]
+        members = [(k, v) for k, v in members if callable(v) and self._can_decorate(v, name=k)]
+
         for name, candidate in members:
             deco = self._logme(candidate, just_errors=just_errors)
             # somehow, decorating classmethods as staticmethods is the only way
             # to make everything work properly. we should find out why, some day
             if isinstance(vars(cls)[name], (staticmethod, classmethod)):
                 deco = staticmethod(deco)
-            try:
+
+            with suppress(AttributeError):
                 setattr(cls, name, deco)
-            # AttributeError happens if we can't write, as with __dict__
-            except AttributeError:
-                pass
         return cls
 
     @contextmanager
     def pause(self, allow_errors: bool = True) -> Generator[None, None, None]:
-        """A context manager that prevents loga from logging in that context.
+        """A context manager that prevents log from logging in that context.
 
         By default, errors will still make it through, unless
         allow_errors==False
@@ -266,7 +238,7 @@ class Loga:
             self._allow_errors, self._stopped = original
 
     def stop(self, allow_errors: bool = True) -> None:
-        """Stop loga from logging.
+        """Stop logDecorator from logging.
 
         By default still log raised exceptions.
         """
@@ -280,9 +252,9 @@ class Loga:
 
     @staticmethod
     def ignore(function: Callable) -> Callable:
-        """A decorator that will override Loga class decorator.
+        """A decorator that will override logDecorator class decorator.
 
-        If a class is decorated with @loga, logging can still be
+        If a class is decorated with @logDecorator, logging can still be
         disabled for certain methods using this decorator.
         """
         setattr(function, NO_LOGS_ATTR_NAME, True)
@@ -299,7 +271,7 @@ class Loga:
     def _logme(self, function: Callable, just_errors: bool = False) -> Callable:
         """A decorator for automated input/output logging.
 
-        Used by @loga and @loga.errors decorators. Makes a log when a
+        Used by @logDecorator and @logDecorator.errors decorators. Makes a log when a
         callable is called, returns, or raises. If `just_errors` is
         True, only logs when a callable raises.
         """
@@ -388,25 +360,28 @@ class Loga:
         format_strings["call_signature"] = signature.format(**format_strings)
         return format_strings
 
-    def listen_to(loga_self, facility: str) -> None:
-        """Listen to logs from another logger and make loga log them.
+    def listen_to(self, logDecorator_self, proj_name: str) -> None:
+        """Listen to logs from another logger and make logDecorator log them.
 
         This method can hook the logger up to anything else that logs
         using the Python logging module (i.e. another logger) and steals
         its logs. This can be useful for instance for logging logs of a
-        library using a shared Loga configuration.
+        library using a shared logDecorator configuration.
         """
 
-        class LogaHandler(logging.Handler):
-            def emit(handler_self, record: logging.LogRecord) -> None:
+
+
+        class logDecoratorHandler(logging.Handler):
+            def emit(self, record: logging.LogRecord) -> None:
                 extra = {k: v for k, v in vars(
                     record).items() if k not in LOG_RECORD_ATTRS}
-                extra["sublogger"] = facility
-                loga_self.log(record.levelno, record.msg, extra)
+                extra["sublogger"] = proj_name
+                logDecorator_self.log(record.levelno, record.msg, extra)
 
-        other_logger = logging.getLogger(facility)
+
+        other_logger = logging.getLogger(proj_name)
         other_logger.setLevel(LOG_THRESHOLD)
-        other_logger.addHandler(LogaHandler())
+        other_logger.addHandler(logDecoratorHandler())
 
     @staticmethod
     def _params_to_dict(function: Callable, *args: Any, **kwargs: Any) -> Mapping[str, Any] | None:
@@ -516,24 +491,8 @@ class Loga:
             self._stopped = original_state
 
     def add_custom_log_data(self) -> dict[str, str]:
-        """An overwritable method useful for adding custom log data."""
+        """An over writable method useful for adding custom log data."""
         return {}
-
-    def _add_graylog_handler(self, address: tuple[str, int] | None, log_if_disabled: bool) -> None:
-        if not graypy:
-            if address:
-                raise ValueError(
-                    "Misconfiguration: Graylog configured but graypy not installed")
-            return
-
-        if not address:
-            if log_if_disabled:
-                self.warning(
-                    "Graypy installed, but Graylog not configured! Disabling it")
-            return
-
-        handler = graypy.GELFUDPHandler(*address, debugging_fields=False)
-        self._logger.addHandler(handler)
 
     def _force_string_and_truncate(
         self, obj: Any, truncate: int | None, use_repr: bool = False
@@ -597,17 +556,12 @@ class Loga:
         return self._string_params(no_protected, use_repr=use_repr)
 
     def sanitise_msg(self, msg: str) -> str:
-        """Overwritable method to clean or alter log messages."""
+        """Over writable method to clean or alter log messages."""
         return msg
 
     def log(self, level: int, msg: str, extra: Mapping = EMPTY_MAP, safe: bool = False) -> None:
-        """Main logging method, called both in auto logs and manually by user.
+        """Main logging method, called both in auto logs and manually by user."""
 
-        level: int, priority of log
-        msg: string to log
-        extra: dict of extra fields to log
-        safe: do we need to sanitise extra?
-        """
         # don't log in a stopped state
         if self._stopped:
             return
@@ -621,7 +575,7 @@ class Loga:
 
         msg = self._truncate(msg, self._msg_truncation)
 
-        extra.update({"log_level": str(level), "loga": "True"})
+        extra.update({"log_level": str(level), "logDecorator": "True"})
 
         try:
             self._logger.log(level, msg, extra=extra)
@@ -648,9 +602,6 @@ class Loga:
         return self.log(logging.CRITICAL, msg, extra=extra, safe=safe)
 
 
-
-
 if __name__ == "__main__":
     # Run this file to test the logger
     print(1)
-

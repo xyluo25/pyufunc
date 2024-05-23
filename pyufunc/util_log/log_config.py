@@ -31,4 +31,4 @@ LOG_FORMATTER = {
         "%Y-%m-%d %H:%M:%S"),  # 对5改进，带进程和线程显示的日志模板。
 }
 
-FORMATTER_KIND = 3  # 如果get_logger不指定日志模板，则默认选择第几个模板
+FORMATTER_KIND = 3  # 如果get_logger不指定日志模板，则默认选择第几个模板+

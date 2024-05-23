@@ -91,7 +91,7 @@ def generate_dir_with_date(root_dir: str = "",
                            date: str | datetime.datetime = "",
                            *,
                            date_fmt: str = "%Y-%m-%d",
-                           year_month_fmt: str = "%Y-%B",
+                           year_month_fmt: str = "%Y-%m",
                            exist_ok: bool = True) -> str:
     """Generate directory with date
 
@@ -107,6 +107,11 @@ def generate_dir_with_date(root_dir: str = "",
 
     Returns:
         str: directory string created with date
+
+    Example:
+        >>> from pyufunc import generate_dir_with_date
+        >>> generate_dir_with_date()
+        "/home/user/2024-05/2024-05-16"
     """
 
     # check root directory

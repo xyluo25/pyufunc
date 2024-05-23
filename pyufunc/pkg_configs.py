@@ -109,36 +109,26 @@ config_logging = {
 # ############### Date Time Format Configuration ############### #
 config_datetime_fmt = {
 
-    # 0 "YYYY-MM-DD", 2023-07-09
-    # 1 "YYYY-MM-DD HH:MM:SS", 2023-07-09 11:11:11
-    # 2 "YYYY-MM-DD HH:MM:SS.MS", 2023-07-09 11:11:11.123456
-    0 : "%Y-%m-%d",
-    1 : "%Y-%m-%d %H:%M:%S",
+    0: "%Y-%m-%d",  # 0 "YYYY-MM-DD", 2023-07-09
+    1: "%Y-%m-%d %H:%M:%S",  # 1 "YYYY-MM-DD HH:MM:SS", 2023-07-09 11:11:11
     2 : "%Y-%m-%d %H:%M:%S.%f",
+    # 2 "YYYY-MM-DD HH:MM:SS.MS", 2023-07-09 11:11:11.123456
 
-    # 3 "YYYY/MM/DD", 2023/07/09
-    # 4 "YYYY/MM/DD HH:MM:SS", 2023/07/09 11:11:11
-    # 5 "YYYY/MM/DD HH:MM:SS.MS", 2023/07/09 11:11:11.123456
-    3: "%Y/%m/%d",
-    4: "%Y/%m/%d %H:%M:%S",
+    3: "%Y/%m/%d",  # 3 "YYYY/MM/DD", 2023/07/09
+    4: "%Y/%m/%d %H:%M:%S",  # 4 "YYYY/MM/DD HH:MM:SS", 2023/07/09 11:11:11
     5: "%Y/%m/%d %H:%M:%S.%f",
+    # 5 "YYYY/MM/DD HH:MM:SS.MS", 2023/07/09 11:11:11.123456
 
-    # 6 "MM/DD/YYYY", 07/09/2023
-    # 7 "MM/DD/YYYY HH:MM:SS", 07/09/2023 11:11:11
-    # 8 "MM/DD/YYYY HH:MM:SS.MS", 07/09/2023 11:11:11.123456
-    6 : "%m/%d/%Y",
-    7 : "%m/%d/%Y %H:%M:%S",
+    6: "%m/%d/%Y",  # 6 "MM/DD/YYYY", 07/09/2023
+    7: "%m/%d/%Y %H:%M:%S",  # 7 "MM/DD/YYYY HH:MM:SS", 07/09/2023 11:11:11
     8 : "%m/%d/%Y %H:%M:%S.%f",
+    # 8 "MM/DD/YYYY HH:MM:SS.MS", 07/09/2023 11:11:11.123456
 
-    # 9 "DD/MM/YYYY", 09/07/2023
-    # 10 "DD/MM/YYYY HH:MM:SS", 09/07/2023 11:11:11
-    # 11 "DD/MM/YYYY HH:MM:SS.MS", 09/07/2023 11:11:11.123456
-    9 : "%d/%m/%Y",
-    10 : "%d/%m/%Y %H:%M:%S",
+    9: "%d/%m/%Y",  # 9 "DD/MM/YYYY", 09/07/2023
+    10: "%d/%m/%Y %H:%M:%S",  # 10 "DD/MM/YYYY HH:MM:SS", 09/07/2023 11:11:11
     11 : "%d/%m/%Y %H:%M:%S.%f",
+    # 11 "DD/MM/YYYY HH:MM:SS.MS", 09/07/2023 11:11:11.123456
 
-    # 12 "HH:MM:SS", 11:11:11
-    # 13 "HH:MM:SS.MS", 11:11:11.123456
     12 : "%H:%M:%S",  # "HH:MM:SS", 11:11:11
     13 : "%H:%M:%S.%f",  # "HH:MM:SS.MS", 11:11:11.123456
 
@@ -155,8 +145,12 @@ config_datetime_fmt = {
     31: "%m/%Y",  # "MM/YYYY", 07/2023
     32: "%m-%Y",  # "MM-YYYY", 07-2023
 
-    "default": "%Y-%m-%d",
+    33: "%Y-%m-%d %Z",  # "YYYY-MM-DD %Z", 2023-07-09 UTC
+    34: "%Y-%m-%d %H:%M:%S %Z",  # "YYYY-MM-DD HH:MM:SS %Z", 2023-07-09 11:11:11 UTC
+    35: "%Y/%m/%d %Z",  # "YYYY/MM/DD %Z", 23/07/09 UTC
+    36: "%Y/%m/%d %H:%M:%S %Z",  # "YYYY/MM/DD HH:MM:SS %Z", 23/07/09 11:11:11 UTC
 
+    "default": "%Y-%m-%d",
 }
 
 # ############### Email Configuration ############### #

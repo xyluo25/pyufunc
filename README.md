@@ -6,6 +6,12 @@ Welcome to pyufunc, your go-to Python package for a wide array of frequently use
 
 Pyufunc aims to bring together the most commonly used utility functions from different libraries and provide them in a single, cohesive package. By consolidating utility functions from multiple sources, pyufunc simplifies the process of finding and integrating various utility libraries into your projects. It provides a centralized resource for accessing a diverse set of utility functions, ultimately saving time and effort.
 
+🎉️ 🎉️
+
+**If you discover useful functions that you believe should be included in the package for broader use, or if you have suggestions for additional utility functions, please share your comments here: https://github.com/xyluo25/pyufunc/issues.**
+
+🎉️ 🎉️
+
 ## Key Features
 
 1. **Intuitive and Easy-to-Use:** Simplicity is at the core of pyufunc's design. Every utility function is thoughtfully documented, making it easy for developers of all skill levels to integrate them seamlessly into their projects. Whether you're working on a small script or a large-scale application, pyufunc enhances your code without adding complexity.
@@ -65,12 +71,6 @@ pf.show_util_func_by_keyword()
 pf.find_util_func_by_keyword("show")
 
 ```
-
-🎉️ 🎉️
-
-**If you discover useful functions that you believe should be included in the package for broader use, or if you have suggestions for additional utility functions, please share your comments here: https://github.com/xyluo25/pyufunc/issues.**
-
-🎉️ 🎉️
 
 ## Community and Support
 
