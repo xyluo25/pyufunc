@@ -87,7 +87,6 @@ config_FUNC_KEYWORD = {
     "algo"        : [],
 }
 
-
 # ############## Logging Configurations ############## #
 config_logging = {
     # system logging

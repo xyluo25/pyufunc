@@ -44,12 +44,6 @@ pip install
 pip install pyufunc
 ```
 
-conda install
-
-```python
-conda install pyufunc
-```
-
 ### Import package
 
 ```python
@@ -101,10 +95,10 @@ For more information about the ways you can contribute to pyufunc, visit [Pyufun
 
 If you use pyufunc in your work and research, please use the following entry:
 
-Luo, X.Y. and Zhou, X.S. (2024, February 18). pyufunc: A powerful toolkit of Python utility functions. Retrieved from https://github.com/xyluo25/pyufunc
+- Luo, X.Y. and Zhou, X.S. (2024, February 18). pyufunc: A powerful toolkit of Python utility functions. Retrieved from https://github.com/xyluo25/pyufunc
 
 ## ACKNOWLEDGMENT
 
 This open-source package is supported by National Science Foundation under grant no. TIP-2303748 titled, "[POSE: Phase II: CONNECT: Consortium of Open-source Planning Models for Next-generation Equitable and Efficient Communities and Transportation](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2303748&HistoricalAwards=false)"
 
-Thank you to everyone who has contributed to the list of packages mentioned above. Your contributions have significantly enriched our open-source community. If any code violates your licensing agreements, please don't hesitate to [Contact developers](mailto:luoxiangyong01@gmail.com).
+Thank you to everyone who has contributed to the list of packages mentioned above. Your contributions have significantly enriched our open-source community. If any code violates your licensing agreements, please don't hesitate to [Contact Developers](mailto:luoxiangyong01@gmail.com).
