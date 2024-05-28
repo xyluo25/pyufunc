@@ -7,6 +7,11 @@
 from __future__ import absolute_import
 import os
 from pathlib import Path
+import logging
+import socket
+
+computer_name = socket.gethostname()
+computer_ip = socket.gethostbyname(computer_name)
 
 
 def __path2linux(path: str | Path) -> str:
@@ -93,13 +98,38 @@ config_logging = {
     "is_log": True,
 
     # logging default folder
-    "log_folder": __path2linux(os.path.join(os.getcwd(), "syslogs")),
+    "log_folder": __path2linux(os.path.join(os.getcwd(), "logs")),
 
     # logging
     "log_level": "DEBUG",
 
     # default log format
-    "log_fmt": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "log_fmt": {
+        1: logging.Formatter(
+            '%(asctime)s - %(name)s - %(filename)s - %(funcName)s - %(lineno)d - %(levelname)s - %(message)s',
+            "%Y-%m-%d %H:%M:%S"),
+        2: logging.Formatter(
+            '%(asctime)s - %(name)s - [ File "%(pathname)s", line %(lineno)d, in %(funcName)s ] - %(levelname)s - %(message)s',
+            "%Y-%m-%d %H:%M:%S"),
+        3: logging.Formatter(
+            '%(asctime)s - %(name)s - "%(filename)s" - %(funcName)s - %(lineno)d - %(levelname)s - %(message)s - File "%(pathname)s", line %(lineno)d ',
+            "%Y-%m-%d %H:%M:%S"),
+        4: logging.Formatter(
+            '%(asctime)s - %(name)s - "%(pathname)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s',
+            "%Y-%m-%d %H:%M:%S"),  # the default log format
+        5: logging.Formatter('%(name)s - %(asctime)-15s - %(filename)s - %(lineno)d - %(levelname)s: %(message)s',
+                             "%Y-%m-%d %H:%M:%S"),
+        6: logging.Formatter('%(asctime)s - %(name)s - "%(filename)s:%(lineno)d" - %(levelname)s - %(message)s',
+                             "%Y-%m-%d %H:%M:%S"),
+        7: logging.Formatter(
+            '[p%(process)d_t%(thread)d] %(asctime)s - %(name)s - "%(pathname)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s',
+            "%Y-%m-%d %H:%M:%S"),  # include process and thread
+        8: logging.Formatter(
+            '[p%(process)d_t%(thread)d] %(asctime)s - %(name)s - "%(filename)s:%(lineno)d" - %(levelname)s - %(message)s',
+            "%Y-%m-%d %H:%M:%S"),
+        9: logging.Formatter(
+            f'%(asctime)s-({computer_ip},{computer_name})-[p%(process)d_t%(thread)d] - %(name)s - "%(filename)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s', "%Y-%m-%d %H:%M:%S"),
+    },
 
     # default log date format
     "log_datefmt": "%Y-%m-%d %H:%M:%S",
