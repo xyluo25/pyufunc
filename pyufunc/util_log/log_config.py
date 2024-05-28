@@ -14,8 +14,7 @@ from pythonjsonlogger.jsonlogger import JsonFormatter
 class JsonFormatterJumpAble(JsonFormatter):
     def add_fields(self, log_record, record, message_dict):
         # log_record['jump_click']   = f"""File '{record.__dict__.get('pathname')}', line {record.__dict__.get('lineno')}"""
-        log_record[f"{record.__dict__.get('pathname')}:{
-            record.__dict__.get('lineno')}"] = ''  # 加个能点击跳转的字段。
+        log_record[f"{record.__dict__.get('pathname')}:{record.__dict__.get('lineno')}"] = ''  # 加个能点击跳转的字段。
         log_record['ip'] = computer_ip
         log_record['host_name'] = computer_name
         super().add_fields(log_record, record, message_dict)
