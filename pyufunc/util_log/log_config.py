@@ -8,7 +8,11 @@
 ##############################################################
 
 import logging
-from pythonjsonlogger.jsonlogger import JsonFormatter
+from .pythonjsonlogger.jsonlogger import JsonFormatter
+import socket
+
+computer_name = socket.gethostname()
+computer_ip = socket.gethostbyname(computer_name)
 
 
 class JsonFormatterJumpAble(JsonFormatter):
