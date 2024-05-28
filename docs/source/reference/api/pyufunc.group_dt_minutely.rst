@@ -1,6 +1,7 @@
 pyufunc.group\_dt\_minutely
 ===========================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: group_dt_minutely
+

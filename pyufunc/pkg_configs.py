@@ -58,6 +58,7 @@ __all__ = [
     "config_datetime_fmt",
     "config_email",
     "config_gmns",
+    "config_color",
 ]
 
 # ############## Package Configurations ############## #

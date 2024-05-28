@@ -1,6 +1,7 @@
 pyufunc.group\_dt\_weekly
 =========================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: group_dt_weekly
+

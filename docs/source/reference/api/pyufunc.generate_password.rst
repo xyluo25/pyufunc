@@ -1,6 +1,7 @@
 pyufunc.generate\_password
 ==========================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: generate_password
+

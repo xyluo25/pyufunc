@@ -128,8 +128,8 @@ class KuaiLogger:
 
         if self.level > level:
             return
-        print("msg:", msg)
-        print("args:", args)
+        # print("msg:", msg)
+        # print("args:", args)
         msg = str(msg) + str(args)
         format_kwargs = self._build_format_kwargs(level, msg, stacklevel)
         # print(self._formatter_template)
@@ -204,11 +204,35 @@ class KuaiLogger:
 
 
 # noinspection PyPep8
-def get_logger(name, level=logging.DEBUG,
-               is_add_stream_handler=True, is_add_file_handler=False, is_add_json_file_handler=False,
-               log_path=None, json_log_path=None, log_filename=None,
-               max_bytes=1000 * 1000 * 1000, back_count=10,
-               formatter_template='{asctime} - {host} - "{pathname}:{lineno}" - {funcName} - {name} - {levelname} - {message}'):
+def get_logger(name: str,
+               level: logging = logging.WARNING,
+               is_add_stream_handler: bool = True,
+               is_add_file_handler: bool = False,
+               is_add_json_file_handler: bool = False,
+               log_path: str = "",
+               json_log_path: str = "",
+               log_filename: str = "",
+               max_bytes: int = 1000 * 1000 * 1000,
+               back_count: int = 10,
+               formatter_template: str = '{asctime} - {host} - "{pathname}:{lineno}" - {funcName} - {name} - {levelname} - {message}'):
+    """log logger function to write log.
+
+    Args:
+        name (str): logger name
+        level: logging level
+        is_add_stream_handler (bool, optional): whether to add stream handler. Defaults to True.
+        is_add_file_handler (bool, optional): whether to add file handler. Defaults to False.
+        is_add_json_file_handler (bool, optional): whether to add json file handler. Defaults to False.
+        log_path (str, optional): log file path. Defaults to "".
+        json_log_path (str, optional): json log file path. Defaults to "".
+        log_filename (str, optional): log file name. Defaults to "".
+        max_bytes (int, optional): max bytes of log file. Defaults to 1000 * 1000 * 1000.
+        back_count (int, optional): back count of log file. Defaults to 10.
+        formatter_template (str, optional): formatter template. Defaults to '{asctime} - {host} - "{pathname}:{lineno}" - {funcName} - {name} - {levelname} - {message}'.
+
+    Returns:
+        _type_: logger object
+    """
     print("get_logger adopted from kuai_log and please refer to kuai_log for more information.")
     local_params = copy.copy(locals())
     if name in logger_name__logger_obj_map:

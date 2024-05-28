@@ -1,6 +1,7 @@
 pyufunc.is\_module\_importable
 ==============================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: is_module_importable
+
