@@ -11,6 +11,7 @@ from functools import partial
 from pyufunc.util_log._lg_datetime import aware_now
 from pyufunc.util_log._lg_stream import OsStream
 from pyufunc.util_log._lg_rotate_file_writer import OsFileWriter
+from pyufunc.pkg_configs import config_logging, config_datetime_fmt
 
 #  adopted from kuai_log
 
@@ -33,9 +34,6 @@ class FormatterFieldEnum(Enum):
     # click_line = 'click_line'
 
 
-logger_name__logger_obj_map = {}
-
-
 # noinspection PyPep8
 class KuaiLogger:
 
@@ -43,11 +41,18 @@ class KuaiLogger:
     # current_timezone = get_localzone().zone
     host = socket.gethostname()
 
-    def __init__(self, name, level=logging.DEBUG,
-                 is_add_stream_handler=True, is_add_file_handler=False, is_add_json_file_handler=False,
-                 log_path=None, json_log_path=None, log_filename=None,
-                 max_bytes=1000 * 1000 * 1000, back_count=10,
-                 formatter_template='{asctime} - {host} - "{pathname}:{lineno}" - {funcName} - {name} - {levelname} - {message}', ):
+    def __init__(self,
+                 name,
+                 level=logging.WARNING,
+                 is_add_stream_handler=False,
+                 is_add_file_handler=False,
+                 is_add_json_file_handler=False,
+                 log_path=None,
+                 json_log_path=None,
+                 log_filename=None,
+                 max_bytes=1000 * 1000 * 1000,
+                 back_count=10,
+                 formatter_template=config_logging["log_fmt"][4]):
 
         self.name = name
         self.level = level
@@ -118,12 +123,12 @@ class KuaiLogger:
         if FormatterFieldEnum.asctime.value in self._need_fields:
             # format_kwargs[FormatterFieldEnum.asctime.value] = datetime.datetime.now().strftime(
             #     f"%Y-%m-%d %H:%M:%S.%f {self.current_timezone}")
-            format_kwargs[FormatterFieldEnum.asctime.value] = aware_now()
+            format_kwargs[FormatterFieldEnum.asctime.value] = config_datetime_fmt[34]
         if FormatterFieldEnum.host.value in self._need_fields:
             format_kwargs[FormatterFieldEnum.host.value] = self.host
         return format_kwargs
 
-    def log(self, level, msg, args="", exc_info=None, extra=None, stack_info=False, stacklevel=3):
+    def log(self, level, msg, args="", exc_info=None, extra=None, stack_info=False, stacklevel=1):
         # def _log(self, level, msg, args, exc_info=None, extra=None, stack_info=False):
 
         if self.level > level:
@@ -206,7 +211,7 @@ class KuaiLogger:
 # noinspection PyPep8
 def get_logger(name: str,
                level: logging = logging.WARNING,
-               is_add_stream_handler: bool = True,
+               is_add_stream_handler: bool = False,
                is_add_file_handler: bool = False,
                is_add_json_file_handler: bool = False,
                log_path: str = "",
@@ -214,7 +219,7 @@ def get_logger(name: str,
                log_filename: str = "",
                max_bytes: int = 1000 * 1000 * 1000,
                back_count: int = 10,
-               formatter_template: str = '{asctime} - {host} - "{pathname}:{lineno}" - {funcName} - {name} - {levelname} - {message}'):
+               formatter_template: str = config_logging["log_fmt"][4]):
     """log logger function to write log.
 
     Args:
@@ -235,16 +240,18 @@ def get_logger(name: str,
     """
     print("get_logger adopted from kuai_log and please refer to kuai_log for more information.")
     local_params = copy.copy(locals())
-    if name in logger_name__logger_obj_map:
+    print("local_params:", local_params)
+    if name in config_logging["log_name"]:
         print(f'Namespace {name} already exists.')
-        logger = logger_name__logger_obj_map[name]
+        logger = config_logging["log_name"][name]
         logger.level = level
     else:
         logger = KuaiLogger(**local_params)
-        logger_name__logger_obj_map[name] = logger
+        config_logging["log_name"][name] = logger
     raw_logger = logging.getLogger(name)
     raw_logger.setLevel(level)
     raw_logger.handlers = []
-    raw_logger._log = logger.log  # 这是对logging包的日志记录,转移到kuai_log来记录.
-    raw_logger.log = partial(logger.log, stacklevel=2)
+    raw_logger._log = logger.log
+    raw_logger.log = partial(logger.log, stacklevel=3)
     return logger
+    # return raw_logger

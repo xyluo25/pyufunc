@@ -19,8 +19,9 @@ from ._log_dir import (
     generate_dir_with_date
 )
 
-from ._lg_logger import get_logger as log_logger
+# from ._lg_logger import get_logger as log_logger
 from ._log_writer import log_writer
+from ._log_loguru import log_logger
 
 __all__ = [
     # _log_dir
@@ -28,8 +29,11 @@ __all__ = [
     "generate_dir_with_date",
 
     # _logger
-    "log_logger",
+    # "log_logger",
 
     # _log_writer
     "log_writer",
+
+    # _log_loguru
+    "log_logger",
 ]

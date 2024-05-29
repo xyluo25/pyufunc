@@ -95,41 +95,34 @@ config_FUNC_KEYWORD = {
 
 # ############## Logging Configurations ############## #
 config_logging = {
-    # system logging
-    "is_log": True,
+    # log name
+    "log_name": {},
 
     # logging default folder
     "log_folder": __path2linux(os.path.join(os.getcwd(), "logs")),
 
     # logging
-    "log_level": "DEBUG",
+    "log_level": "WARNING",
 
     # default log format
     "log_fmt": {
-        1: logging.Formatter(
-            '%(asctime)s - %(name)s - %(filename)s - %(funcName)s - %(lineno)d - %(levelname)s - %(message)s',
-            "%Y-%m-%d %H:%M:%S"),
-        2: logging.Formatter(
-            '%(asctime)s - %(name)s - [ File "%(pathname)s", line %(lineno)d, in %(funcName)s ] - %(levelname)s - %(message)s',
-            "%Y-%m-%d %H:%M:%S"),
-        3: logging.Formatter(
-            '%(asctime)s - %(name)s - "%(filename)s" - %(funcName)s - %(lineno)d - %(levelname)s - %(message)s - File "%(pathname)s", line %(lineno)d ',
-            "%Y-%m-%d %H:%M:%S"),
-        4: logging.Formatter(
-            '%(asctime)s - %(name)s - "%(pathname)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s',
-            "%Y-%m-%d %H:%M:%S"),  # the default log format
-        5: logging.Formatter('%(name)s - %(asctime)-15s - %(filename)s - %(lineno)d - %(levelname)s: %(message)s',
-                             "%Y-%m-%d %H:%M:%S"),
-        6: logging.Formatter('%(asctime)s - %(name)s - "%(filename)s:%(lineno)d" - %(levelname)s - %(message)s',
-                             "%Y-%m-%d %H:%M:%S"),
-        7: logging.Formatter(
-            '[p%(process)d_t%(thread)d] %(asctime)s - %(name)s - "%(pathname)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s',
-            "%Y-%m-%d %H:%M:%S"),  # include process and thread
-        8: logging.Formatter(
-            '[p%(process)d_t%(thread)d] %(asctime)s - %(name)s - "%(filename)s:%(lineno)d" - %(levelname)s - %(message)s',
-            "%Y-%m-%d %H:%M:%S"),
-        9: logging.Formatter(
-            f'%(asctime)s-({computer_ip},{computer_name})-[p%(process)d_t%(thread)d] - %(name)s - "%(filename)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s', "%Y-%m-%d %H:%M:%S"),
+        1: '%(asctime)s - %(name)s - %(filename)s - %(funcName)s - %(lineno)d - %(levelname)s - %(message)s',
+
+        2: '%(asctime)s - %(name)s - [ File "%(pathname)s", line %(lineno)d, in %(funcName)s ] - %(levelname)s - %(message)s',
+
+        3: '%(asctime)s - %(name)s - "%(filename)s" - %(funcName)s - %(lineno)d - %(levelname)s - %(message)s - File "%(pathname)s", line %(lineno)d ',
+
+        4: '%(asctime)s - %(name)s - "%(pathname)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s',  # the default log format
+
+        5: '%(name)s - %(asctime)-15s - %(filename)s - %(lineno)d - %(levelname)s: %(message)s',
+
+        6: '%(asctime)s - %(name)s - "%(filename)s:%(lineno)d" - %(levelname)s - %(message)s',
+
+        7: '[p%(process)d_t%(thread)d] %(asctime)s - %(name)s - "%(pathname)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s',  # include process and thread
+
+        8: '[p%(process)d_t%(thread)d] %(asctime)s - %(name)s - "%(filename)s:%(lineno)d" - %(levelname)s - %(message)s',
+
+        9: f'%(asctime)s-({computer_ip},{computer_name})-[p%(process)d_t%(thread)d] - %(name)s - "%(filename)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s',
     },
 
     # default log date format
