@@ -1,7 +1,6 @@
 pyufunc.import\_package
 =======================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: import_package
-

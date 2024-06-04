@@ -1,7 +1,6 @@
 pyufunc.validate\_url
 =====================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: validate_url
-

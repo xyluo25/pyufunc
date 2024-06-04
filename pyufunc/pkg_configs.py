@@ -62,7 +62,7 @@ __all__ = [
 ]
 
 # ############## Package Configurations ############## #
-pkg_version = "0.2.6"
+pkg_version = "0.2.7"
 pkg_name = "pyufunc"
 pkg_author = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
 pkg_email = "luoxiangyong01@gmail.com, xzhou74@asu.edu"

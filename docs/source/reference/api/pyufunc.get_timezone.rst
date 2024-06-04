@@ -1,7 +1,6 @@
 pyufunc.get\_timezone
 =====================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: get_timezone
-

@@ -1,7 +1,6 @@
 pyufunc.generate\_unique\_filename
 ==================================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: generate_unique_filename
-

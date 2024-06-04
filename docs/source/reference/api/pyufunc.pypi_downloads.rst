@@ -1,7 +1,6 @@
 pyufunc.pypi\_downloads
 =======================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: pypi_downloads
-

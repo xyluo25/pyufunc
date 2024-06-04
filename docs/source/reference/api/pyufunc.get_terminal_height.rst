@@ -1,7 +1,6 @@
 pyufunc.get\_terminal\_height
 =============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: get_terminal_height
-

@@ -1,7 +1,6 @@
 pyufunc.timeout
 ===============
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: timeout
-

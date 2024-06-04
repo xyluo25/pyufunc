@@ -1,7 +1,6 @@
 pyufunc.run\_parallel
 =====================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: run_parallel
-

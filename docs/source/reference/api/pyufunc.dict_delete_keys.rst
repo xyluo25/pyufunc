@@ -1,7 +1,6 @@
 pyufunc.dict\_delete\_keys
 ==========================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: dict_delete_keys
-

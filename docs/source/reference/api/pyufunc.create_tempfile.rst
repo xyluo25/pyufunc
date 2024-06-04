@@ -1,7 +1,6 @@
 pyufunc.create\_tempfile
 ========================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: create_tempfile
-

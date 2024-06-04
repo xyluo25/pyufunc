@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=fc7d8818"></script>
+    <script src="../_static/documentation_options.js?v=58050c01"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -49,7 +49,7 @@
     <link rel="icon" href="../_static/pyufunc_logo_icon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="util_network" href="util_network.html" />
+    <link rel="next" title="pyufunc.add_date_in_filename" href="api/pyufunc.add_date_in_filename.html" />
     <link rel="prev" title="pyufunc.img_show" href="api/pyufunc.img_show.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -415,7 +415,13 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="util_git_pypi.html">util_git_pypi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_gui.html">util_gui</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_img.html">util_img</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">util_log</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">util_log</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.add_date_in_filename.html">pyufunc.add_date_in_filename</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.generate_dir_with_date.html">pyufunc.generate_dir_with_date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.log_writer.html">pyufunc.log_writer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.log_logger.html">pyufunc.log_logger</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="util_network.html">util_network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_office.html">util_office</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_optimization.html">util_optimization</a></li>
@@ -423,7 +429,6 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_vis.html">util_vis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pkg_utils.html">pkg_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pkg_configs.html">pkg_configs</a></li>
 </ul>
 
     
@@ -485,10 +490,36 @@ document.write(`
                   
   <section id="util-log">
 <span id="api-util-log"></span><h1>util_log<a class="headerlink" href="#util-log" title="Link to this heading">#</a></h1>
-<section id="updating">
-<h2>Updating…<a class="headerlink" href="#updating" title="Link to this heading">#</a></h2>
+<section id="log-dir">
+<h2>log_dir<a class="headerlink" href="#log-dir" title="Link to this heading">#</a></h2>
 <table class="autosummary longtable table autosummary">
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.add_date_in_filename.html#pyufunc.add_date_in_filename" title="pyufunc.add_date_in_filename"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_date_in_filename</span></code></a>(filename[, date, ...])</p></td>
+<td><p>Add date str in filename</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.generate_dir_with_date.html#pyufunc.generate_dir_with_date" title="pyufunc.generate_dir_with_date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_dir_with_date</span></code></a>([root_dir, date, ...])</p></td>
+<td><p>Generate directory with date</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="log-writer">
+<h2>log_writer<a class="headerlink" href="#log-writer" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.log_writer.html#pyufunc.log_writer" title="pyufunc.log_writer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log_writer</span></code></a>([func, log_dir, log_formatter])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="log-logger">
+<h2>log_logger<a class="headerlink" href="#log-logger" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.log_logger.html#pyufunc.log_logger" title="pyufunc.log_logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log_logger</span></code></a>([log_file])</p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -514,11 +545,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="util_network.html"
+       href="api/pyufunc.add_date_in_filename.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">util_network</p>
+        <p class="prev-next-title">pyufunc.add_date_in_filename</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -540,7 +571,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating">Updating…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-dir">log_dir</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-writer">log_writer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-logger">log_logger</a></li>
 </ul>
   </nav></div>
 
@@ -578,7 +611,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023-, Xiangyong Luo.
+      © Copyright 2023 - 2024 , Xiangyong Luo.
       <br/>
     
   </p>

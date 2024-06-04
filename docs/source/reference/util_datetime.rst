@@ -12,6 +12,7 @@ formatting datetime
    :toctree: api/
 
    fmt_dt_to_str
+   fmt_str_to_dt
 
 timezone conversion
 ~~~~~~~~~~~~~~~~~~~

@@ -1,7 +1,6 @@
 pyufunc.get\_coordinates\_from\_geom
 ====================================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: get_coordinates_from_geom
-
