@@ -51,7 +51,7 @@ def update_util_func_by_category_md(path_category: str) -> None:
 
 if __name__ == "__main__":
     path_category = "./utility_function_by_category.md"
-    path_keyword = "./utility_function_by_keyword.md"\
+    path_keyword = "./utility_function_by_keyword.md"
 
     update_util_func_by_keywords_md(path_keyword)
     update_util_func_by_category_md(path_category)

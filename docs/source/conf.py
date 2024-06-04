@@ -30,7 +30,7 @@ sys.path.insert(0, os.path.abspath("./sphinxext"))
 
 # General information about the project.
 project = "pyufunc"
-copyright = '2023-, Xiangyong Luo'
+copyright = '2023 - <script>document.write(/\d{4}/.exec(Date())[0])</script>, Xiangyong Luo'
 author = 'Xiangyong Luo'
 version = str(pyufunc.pkg_version)
 release = version
