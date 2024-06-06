@@ -21,6 +21,7 @@ def path2linux(path: str | Path) -> str:
     linux paths are friendly to all OSes, Finally, we use linux paths in all OSes.
 
     Besides, the reason not use normalize_path or unify_path or path2uniform but path2linux is that: the author is a big fan of Linux.
+
     As an alternative, you can use path2uniform, which is the same as path2linux.
 
     Location:
@@ -384,7 +385,7 @@ def create_unique_filename(filename: str | Path, suffix_num: int = 1) -> str:
 
 
 def show_dir_in_tree(dir_name: Union[str, Path],
-                     pattern: str="**/*",
+                     pattern: str = "**/*",
                      *,
                      show_all=False,
                      max_level=-1,
