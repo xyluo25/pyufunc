@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=fc7d8818"></script>
+    <script src="../_static/documentation_options.js?v=58050c01"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="pyufunc.fmt_dt_to_str" href="api/pyufunc.fmt_dt_to_str.html" />
-    <link rel="prev" title="pyufunc.cvt_int_to_alpha" href="api/pyufunc.cvt_int_to_alpha.html" />
+    <link rel="prev" title="pyufunc.str_strip" href="api/pyufunc.str_strip.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -411,6 +411,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="util_data_processing.html">util_data_processing</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">util_datetime</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.fmt_dt_to_str.html">pyufunc.fmt_dt_to_str</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.fmt_str_to_dt.html">pyufunc.fmt_str_to_dt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.list_all_timezones.html">pyufunc.list_all_timezones</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.get_timezone.html">pyufunc.get_timezone</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.cvt_dt_to_tz.html">pyufunc.cvt_dt_to_tz</a></li>
@@ -436,7 +437,6 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_vis.html">util_vis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pkg_utils.html">pkg_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pkg_configs.html">pkg_configs</a></li>
 </ul>
 
     
@@ -502,8 +502,11 @@ document.write(`
 <h2>formatting datetime<a class="headerlink" href="#formatting-datetime" title="Link to this heading">#</a></h2>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.fmt_dt_to_str.html#pyufunc.fmt_dt_to_str" title="pyufunc.fmt_dt_to_str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fmt_dt_to_str</span></code></a>([dt, format_seq])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.fmt_dt_to_str.html#pyufunc.fmt_dt_to_str" title="pyufunc.fmt_dt_to_str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fmt_dt_to_str</span></code></a>([dt, dt_fmt])</p></td>
 <td><p>Format datetime to datetime string</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.fmt_str_to_dt.html#pyufunc.fmt_str_to_dt" title="pyufunc.fmt_str_to_dt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fmt_str_to_dt</span></code></a>(dt_str)</p></td>
+<td><p>Format datetime string to datetime</p></td>
 </tr>
 </tbody>
 </table>
@@ -513,13 +516,13 @@ document.write(`
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.list_all_timezones.html#pyufunc.list_all_timezones" title="pyufunc.list_all_timezones"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_all_timezones</span></code></a>([region_name])</p></td>
-<td><p>this function is used to list all available timezones</p></td>
+<td><p>List all available timezones</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.get_timezone.html#pyufunc.get_timezone" title="pyufunc.get_timezone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_timezone</span></code></a>()</p></td>
-<td><p>this function is used to check the current timezone</p></td>
+<td><p>Check the current timezone</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.cvt_dt_to_tz.html#pyufunc.cvt_dt_to_tz" title="pyufunc.cvt_dt_to_tz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cvt_dt_to_tz</span></code></a>([dt, timezone])</p></td>
-<td><p>this function is used to convert datetime to another timezone datetime</p></td>
+<td><p>Convert datetime to another timezone datetime</p></td>
 </tr>
 </tbody>
 </table>
@@ -529,7 +532,7 @@ document.write(`
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.get_time_diff_in_unit.html#pyufunc.get_time_diff_in_unit" title="pyufunc.get_time_diff_in_unit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_time_diff_in_unit</span></code></a>(start_time, end_time)</p></td>
-<td><p>this function is used to calculate the time difference between two datetime objects/strings</p></td>
+<td><p>Calculate the time difference between two datetime objects/strings</p></td>
 </tr>
 </tbody>
 </table>
@@ -572,12 +575,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="api/pyufunc.cvt_int_to_alpha.html"
+       href="api/pyufunc.str_strip.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">pyufunc.cvt_int_to_alpha</p>
+        <p class="prev-next-title">pyufunc.str_strip</p>
       </div>
     </a>
     <a class="right-next"
@@ -648,7 +651,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023-, Xiangyong Luo.
+      © Copyright 2023 - 2024 , Xiangyong Luo.
       <br/>
     
   </p>

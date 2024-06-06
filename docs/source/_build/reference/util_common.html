@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=fc7d8818"></script>
+    <script src="../_static/documentation_options.js?v=58050c01"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="pyufunc.show_docstring_headers" href="api/pyufunc.show_docstring_headers.html" />
-    <link rel="prev" title="util_algorithm" href="util_algorithm.html" />
+    <link rel="prev" title="pyufunc.algo_selection_sort" href="api/pyufunc.algo_selection_sort.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -419,8 +419,13 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.end_of_life.html">pyufunc.end_of_life</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.import_package.html">pyufunc.import_package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.get_user_defined_func.html">pyufunc.get_user_defined_func</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.get_user_defined_module.html">pyufunc.get_user_defined_module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.get_user_imported_module.html">pyufunc.get_user_imported_module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.is_user_defined_func.html">pyufunc.is_user_defined_func</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.is_module_importable.html">pyufunc.is_module_importable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.count_lines_of_code.html">pyufunc.count_lines_of_code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.timeout.html">pyufunc.timeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.timeout_linux.html">pyufunc.timeout_linux</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="util_data_processing.html">util_data_processing</a></li>
@@ -438,7 +443,6 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_vis.html">util_vis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pkg_utils.html">pkg_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pkg_configs.html">pkg_configs</a></li>
 </ul>
 
     
@@ -579,11 +583,40 @@ document.write(`
 <tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.get_user_defined_func.html#pyufunc.get_user_defined_func" title="pyufunc.get_user_defined_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_user_defined_func</span></code></a>([module])</p></td>
 <td><p>list all user-defined functions in a module.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.get_user_defined_module.html#pyufunc.get_user_defined_module" title="pyufunc.get_user_defined_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_user_defined_module</span></code></a>(obj[, predicate])</p></td>
+<td><p>Get only defined members.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.get_user_imported_module.html#pyufunc.get_user_imported_module" title="pyufunc.get_user_imported_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_user_imported_module</span></code></a>(obj)</p></td>
+<td><p>Get import members.</p></td>
+</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.is_user_defined_func.html#pyufunc.is_user_defined_func" title="pyufunc.is_user_defined_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_user_defined_func</span></code></a>(func_obj)</p></td>
 <td><p>Check if a function is user-defined.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.is_module_importable.html#pyufunc.is_module_importable" title="pyufunc.is_module_importable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_module_importable</span></code></a>(module_name)</p></td>
 <td><p>Safely import a module and return a boolean.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="count-code-lines">
+<h2>count code lines<a class="headerlink" href="#count-code-lines" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.count_lines_of_code.html#pyufunc.count_lines_of_code" title="pyufunc.count_lines_of_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_lines_of_code</span></code></a>(package_path, *[, ext, ...])</p></td>
+<td><p>Counts the number of lines of code in a Python package.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="time-out-function">
+<h2>time out function<a class="headerlink" href="#time-out-function" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.timeout.html#pyufunc.timeout" title="pyufunc.timeout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeout</span></code></a>(seconds)</p></td>
+<td><p>A decorator to set the timeout for the function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.timeout_linux.html#pyufunc.timeout_linux" title="pyufunc.timeout_linux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeout_linux</span></code></a>(timeout)</p></td>
+<td><p>A decorator to set the timeout for the function on linux system.</p></td>
 </tr>
 </tbody>
 </table>
@@ -601,12 +634,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="util_algorithm.html"
+       href="api/pyufunc.algo_selection_sort.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">util_algorithm</p>
+        <p class="prev-next-title">pyufunc.algo_selection_sort</p>
       </div>
     </a>
     <a class="right-next"
@@ -643,6 +676,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decorator-run-parallel">decorator - run parallel</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decorator-end-of-life">decorator - end of life</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-import">module import</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#count-code-lines">count code lines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-out-function">time out function</a></li>
 </ul>
   </nav></div>
 
@@ -680,7 +715,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023-, Xiangyong Luo.
+      © Copyright 2023 - 2024 , Xiangyong Luo.
       <br/>
     
   </p>

@@ -20,7 +20,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (111):
+Available utility functions in pyUFunc (119):
 
 - non-keywords:
   - add_date_in_filename
@@ -39,6 +39,8 @@ Available utility functions in pyUFunc (111):
   - GMNSPOI
   - GMNSZone
   - import_package
+  - log_logger
+  - log_writer
   - path2linux
   - path2uniform
   - pickle_load
@@ -47,8 +49,12 @@ Available utility functions in pyUFunc (111):
   - remove_file
   - requires
   - send_email
+  - str_strip
+  - timeout
+  - timeout_linux
 
 - show:
+  - show_dir_in_tree
   - show_docstring_google
   - show_docstring_headers
   - show_docstring_numpy
@@ -67,6 +73,8 @@ Available utility functions in pyUFunc (111):
   - get_time_diff_in_unit
   - get_timezone
   - get_user_defined_func
+  - get_user_defined_module
+  - get_user_imported_module
 
 - generate:
   - generate_dir_with_date

@@ -6,7 +6,7 @@
 ##############################################################
 
 
-import pyufunc as uf
+import pyufunc as pf
 import setuptools
 
 with open("README.md", "r", encoding="utf-8") as fh:
@@ -20,10 +20,10 @@ except Exception:
     modules_needed = []
 
 setuptools.setup(
-    name=uf.pkg_name,  # Replace with your own username
-    version=uf.pkg_version,
-    author=uf.pkg_author,
-    author_email=uf.pkg_email,
+    name=pf.pkg_name,  # Replace with your own username
+    version=pf.pkg_version,
+    author=pf.pkg_author,
+    author_email=pf.pkg_email,
 
     keywords=["utility functions", "utility", "functions", "common functions", "common utility functions"],
     description="PyUFunc consolidates frequently used utility functions from various libraries into one cohesive package",

@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../../_static/documentation_options.js?v=fc7d8818"></script>
+    <script src="../../_static/documentation_options.js?v=58050c01"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -49,7 +49,7 @@
     <link rel="icon" href="../../_static/pyufunc_logo_icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pyufunc.cvt_int_to_alpha" href="pyufunc.cvt_int_to_alpha.html" />
+    <link rel="next" title="pyufunc.dict_split_by_chunk" href="pyufunc.dict_split_by_chunk.html" />
     <link rel="prev" title="pyufunc.split_list_by_fixed_length" href="pyufunc.split_list_by_fixed_length.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -412,7 +412,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.split_list_by_equal_sublist.html">pyufunc.split_list_by_equal_sublist</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.split_list_by_fixed_length.html">pyufunc.split_list_by_fixed_length</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">pyufunc.split_dict_by_chunk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.dict_split_by_chunk.html">pyufunc.dict_split_by_chunk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.delete_dict_keys.html">pyufunc.delete_dict_keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.dict_delete_keys.html">pyufunc.dict_delete_keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.cvt_int_to_alpha.html">pyufunc.cvt_int_to_alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.is_float.html">pyufunc.is_float</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.str_strip.html">pyufunc.str_strip</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../util_datetime.html">util_datetime</a></li>
@@ -429,7 +434,6 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="../util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_vis.html">util_vis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pkg_utils.html">pkg_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pkg_configs.html">pkg_configs</a></li>
 </ul>
 
     
@@ -496,36 +500,33 @@ document.write(`
 <h1>pyufunc.split_dict_by_chunk<a class="headerlink" href="#pyufunc-split-dict-by-chunk" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyufunc.split_dict_by_chunk">
-<span class="sig-prename descclassname"><span class="pre">pyufunc.</span></span><span class="sig-name descname"><span class="pre">split_dict_by_chunk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pair_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyufunc.split_dict_by_chunk" title="Link to this definition">#</a></dt>
-<dd><p>Split dictionary into chunks</p>
+<span class="sig-prename descclassname"><span class="pre">pyufunc.</span></span><span class="sig-name descname"><span class="pre">split_dict_by_chunk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyufunc.split_dict_by_chunk" title="Link to this definition">#</a></dt>
+<dd><p>Split dictionary into a list of chunks</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dictionary</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – the input dictionary with key-value pairs</p></li>
 <li><p><strong>chunk_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the size of each chunk</p></li>
-<li><p><strong>pair_val</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>, </em><em>optional</em>) – the return value associate with each chunk dictionary. Defaults to [].</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a generator of the list including a chunk value and the pair value: [chunk_dict, pair_val]</p>
+<dd class="field-even"><p>a list of the chunk_dict</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Generator</p>
-</dd>
-<dt class="field-even">Yields<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>Iterator[list]</em> – a generator of the list including a chunk value and the pair value: [chunk_dict, pair_val]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a></p>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>dict_split_by_chunk</p>
+</div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyufunc</span> <span class="k">as</span> <span class="nn">uf</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pair_val</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">uf</span><span class="o">.</span><span class="n">split_dict_by_chunk</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="n">pair_val</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-<span class="go">[{&#39;a&#39;: 1, &#39;b&#39;: 2}]</span>
-<span class="go">[{&#39;c&#39;: 3, &#39;d&#39;: 4}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">uf</span><span class="o">.</span><span class="n">split_dict_by_chunk</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span>
+<span class="go">[{&#39;a&#39;: 1, &#39;b&#39;: 2}, {&#39;c&#39;: 3, &#39;d&#39;: 4}]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -552,11 +553,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="pyufunc.cvt_int_to_alpha.html"
+       href="pyufunc.dict_split_by_chunk.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pyufunc.cvt_int_to_alpha</p>
+        <p class="prev-next-title">pyufunc.dict_split_by_chunk</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -616,7 +617,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023-, Xiangyong Luo.
+      © Copyright 2023 - 2024 , Xiangyong Luo.
       <br/>
     
   </p>

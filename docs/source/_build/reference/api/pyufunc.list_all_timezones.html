@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../../_static/documentation_options.js?v=fc7d8818"></script>
+    <script src="../../_static/documentation_options.js?v=58050c01"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="pyufunc.get_timezone" href="pyufunc.get_timezone.html" />
-    <link rel="prev" title="pyufunc.fmt_dt_to_str" href="pyufunc.fmt_dt_to_str.html" />
+    <link rel="prev" title="pyufunc.fmt_str_to_dt" href="pyufunc.fmt_str_to_dt.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -411,6 +411,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="../util_data_processing.html">util_data_processing</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../util_datetime.html">util_datetime</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.fmt_dt_to_str.html">pyufunc.fmt_dt_to_str</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.fmt_str_to_dt.html">pyufunc.fmt_str_to_dt</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">pyufunc.list_all_timezones</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.get_timezone.html">pyufunc.get_timezone</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.cvt_dt_to_tz.html">pyufunc.cvt_dt_to_tz</a></li>
@@ -436,7 +437,6 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="../util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_vis.html">util_vis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pkg_utils.html">pkg_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pkg_configs.html">pkg_configs</a></li>
 </ul>
 
     
@@ -504,7 +504,7 @@ document.write(`
 <dl class="py function">
 <dt class="sig sig-object py" id="pyufunc.list_all_timezones">
 <span class="sig-prename descclassname"><span class="pre">pyufunc.</span></span><span class="sig-name descname"><span class="pre">list_all_timezones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyufunc.list_all_timezones" title="Link to this definition">#</a></dt>
-<dd><p>this function is used to list all available timezones</p>
+<dd><p>List all available timezones</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>a set of all available timezones</p>
@@ -542,12 +542,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="pyufunc.fmt_dt_to_str.html"
+       href="pyufunc.fmt_str_to_dt.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">pyufunc.fmt_dt_to_str</p>
+        <p class="prev-next-title">pyufunc.fmt_str_to_dt</p>
       </div>
     </a>
     <a class="right-next"
@@ -615,7 +615,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023-, Xiangyong Luo.
+      © Copyright 2023 - 2024 , Xiangyong Luo.
       <br/>
     
   </p>

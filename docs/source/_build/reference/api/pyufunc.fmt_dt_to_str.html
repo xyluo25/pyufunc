@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../../_static/documentation_options.js?v=fc7d8818"></script>
+    <script src="../../_static/documentation_options.js?v=58050c01"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -49,7 +49,7 @@
     <link rel="icon" href="../../_static/pyufunc_logo_icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pyufunc.list_all_timezones" href="pyufunc.list_all_timezones.html" />
+    <link rel="next" title="pyufunc.fmt_str_to_dt" href="pyufunc.fmt_str_to_dt.html" />
     <link rel="prev" title="util_datetime" href="../util_datetime.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -411,6 +411,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="../util_data_processing.html">util_data_processing</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../util_datetime.html">util_datetime</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">pyufunc.fmt_dt_to_str</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.fmt_str_to_dt.html">pyufunc.fmt_str_to_dt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.list_all_timezones.html">pyufunc.list_all_timezones</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.get_timezone.html">pyufunc.get_timezone</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.cvt_dt_to_tz.html">pyufunc.cvt_dt_to_tz</a></li>
@@ -436,7 +437,6 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="../util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_vis.html">util_vis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pkg_utils.html">pkg_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pkg_configs.html">pkg_configs</a></li>
 </ul>
 
     
@@ -503,13 +503,13 @@ document.write(`
 <h1>pyufunc.fmt_dt_to_str<a class="headerlink" href="#pyufunc-fmt-dt-to-str" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyufunc.fmt_dt_to_str">
-<span class="sig-prename descclassname"><span class="pre">pyufunc.</span></span><span class="sig-name descname"><span class="pre">fmt_dt_to_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">datetime.datetime(2024,</span> <span class="pre">5,</span> <span class="pre">1,</span> <span class="pre">15,</span> <span class="pre">19,</span> <span class="pre">5,</span> <span class="pre">60718)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_seq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyufunc.fmt_dt_to_str" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pyufunc.</span></span><span class="sig-name descname"><span class="pre">fmt_dt_to_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt_fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyufunc.fmt_dt_to_str" title="Link to this definition">#</a></dt>
 <dd><p>Format datetime to datetime string</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dt</strong> (<em>datetime</em><em>, </em><em>optional</em>) – the datetime to be formatted. Defaults to datetime.datetime.now().</p></li>
-<li><p><strong>format_seq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the format of the datetime. Defaults to 0 (“%Y-%m-%d %H:%M:%S”).</p></li>
+<li><p><strong>dt</strong> (<em>datetime</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – the datetime to be formatted. Defaults to datetime.datetime.now().</p></li>
+<li><p><strong>dt_fmt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the format of the datetime. Defaults (“%Y-%m-%d %H:%M:%S”).</p></li>
 </ul>
 </dd>
 </dl>
@@ -528,10 +528,23 @@ document.write(`
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyufunc</span> <span class="kn">import</span> <span class="n">fmt_dt_to_str</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fmt_dt_to_str</span><span class="p">()</span>
-<span class="go">&#39;2024-02-06 11:11:11&#39;</span>
+<span class="go">&#39;2024-02-06&#39;</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fmt_dt_to_str</span><span class="p">(</span><span class="s2">&quot;2024-02-06 11:11:11&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fmt_dt_to_str</span><span class="p">(</span><span class="n">df_fmt</span><span class="o">=</span><span class="s2">&quot;%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+<span class="go">&#39;2024/02/06 00:00:00&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fmt_dt_to_str</span><span class="p">(</span><span class="s2">&quot;2024-02-06&quot;</span><span class="p">,</span> <span class="n">df_fmt</span><span class="o">=</span><span class="s2">&quot;%Y/%m/</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">&#39;2024/02/06&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fmt_dt_to_str</span><span class="p">(</span><span class="s2">&quot;2024-02-06&quot;</span><span class="p">,</span> <span class="n">df_fmt</span><span class="o">=</span><span class="s2">&quot;%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+<span class="go">&#39;2024/02/06 00:00:00&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fmt_dt_to_str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="s2">&quot;%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+<span class="go">&#39;2024/02/06 11:11:11&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -558,11 +571,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="pyufunc.list_all_timezones.html"
+       href="pyufunc.fmt_str_to_dt.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pyufunc.list_all_timezones</p>
+        <p class="prev-next-title">pyufunc.fmt_str_to_dt</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -622,7 +635,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023-, Xiangyong Luo.
+      © Copyright 2023 - 2024 , Xiangyong Luo.
       <br/>
     
   </p>

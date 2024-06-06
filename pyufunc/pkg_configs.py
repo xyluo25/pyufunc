@@ -7,6 +7,11 @@
 from __future__ import absolute_import
 import os
 from pathlib import Path
+import logging
+import socket
+
+computer_name = socket.gethostname()
+computer_ip = socket.gethostbyname(computer_name)
 
 
 def __path2linux(path: str | Path) -> str:
@@ -53,10 +58,11 @@ __all__ = [
     "config_datetime_fmt",
     "config_email",
     "config_gmns",
+    "config_color",
 ]
 
 # ############## Package Configurations ############## #
-pkg_version = "0.2.6"
+pkg_version = "0.2.7"
 pkg_name = "pyufunc"
 pkg_author = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
 pkg_email = "luoxiangyong01@gmail.com, xzhou74@asu.edu"
@@ -87,23 +93,66 @@ config_FUNC_KEYWORD = {
     "algo"        : [],
 }
 
-
 # ############## Logging Configurations ############## #
 config_logging = {
-    # system logging
-    "is_log": True,
+    # log name
+    "log_name": {},
 
     # logging default folder
-    "log_folder": __path2linux(os.path.join(os.getcwd(), "syslogs")),
+    "log_folder": __path2linux(os.path.join(os.getcwd(), "logs")),
 
     # logging
-    "log_level": "DEBUG",
+    "log_level": "WARNING",
 
     # default log format
-    "log_fmt": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "log_fmt": {
+        1: '%(asctime)s - %(name)s - %(filename)s - %(funcName)s - %(lineno)d - %(levelname)s - %(message)s',
+
+        2: '%(asctime)s - %(name)s - [ File "%(pathname)s", line %(lineno)d, in %(funcName)s ] - %(levelname)s - %(message)s',
+
+        3: '%(asctime)s - %(name)s - "%(filename)s" - %(funcName)s - %(lineno)d - %(levelname)s - %(message)s - File "%(pathname)s", line %(lineno)d ',
+
+        4: '%(asctime)s - %(name)s - "%(pathname)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s',  # the default log format
+
+        5: '%(name)s - %(asctime)-15s - %(filename)s - %(lineno)d - %(levelname)s: %(message)s',
+
+        6: '%(asctime)s - %(name)s - "%(filename)s:%(lineno)d" - %(levelname)s - %(message)s',
+
+        7: '[p%(process)d_t%(thread)d] %(asctime)s - %(name)s - "%(pathname)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s',  # include process and thread
+
+        8: '[p%(process)d_t%(thread)d] %(asctime)s - %(name)s - "%(filename)s:%(lineno)d" - %(levelname)s - %(message)s',
+
+        9: f'%(asctime)s-({computer_ip},{computer_name})-[p%(process)d_t%(thread)d] - %(name)s - "%(filename)s:%(lineno)d" - %(funcName)s - %(levelname)s - %(message)s',
+    },
 
     # default log date format
     "log_datefmt": "%Y-%m-%d %H:%M:%S",
+
+    # default log attributes
+    "log_attrs": (
+        "args",
+        "asctime",
+        "created",
+        "exc_info",
+        "exc_text",
+        "filename",
+        "funcName",
+        "levelname",
+        "levelno",
+        "lineno",
+        "module",
+        "msecs",
+        "message",
+        "msg",
+        "name",
+        "pathname",
+        "process",
+        "processName",
+        "relativeCreated",
+        "stack_info",
+        "thread",
+        "threadName"),
+
 }
 
 # ############### Date Time Format Configuration ############### #

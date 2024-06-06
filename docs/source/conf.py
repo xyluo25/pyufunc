@@ -13,8 +13,8 @@ import logging
 import os
 import sys
 import warnings
-import jinja2
 from pathlib import Path
+import datetime
 
 root = Path(__file__).resolve().parents[2]
 sys.path = [str(root)] + sys.path
@@ -30,7 +30,7 @@ sys.path.insert(0, os.path.abspath("./sphinxext"))
 
 # General information about the project.
 project = "pyufunc"
-copyright = '2023-, Xiangyong Luo'
+copyright = f'2023 - {datetime.datetime.now().year} , Xiangyong Luo'
 author = 'Xiangyong Luo'
 version = str(pyufunc.pkg_version)
 release = version

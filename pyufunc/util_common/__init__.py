@@ -26,6 +26,7 @@ from ._func_time_decorator import func_running_time, func_time
 from ._run_parallel_decorator import run_parallel
 from ._end_of_life_decorator import end_of_life
 from ._count_code_size import count_lines_of_code
+from ._time_out import timeout, timeout_linux
 
 
 __all__ = [
@@ -59,5 +60,9 @@ __all__ = [
     "end_of_life",
 
     # _count_code_size
-    "count_lines_of_code"
+    "count_lines_of_code",
+
+    # _time_out
+    "timeout",
+    "timeout_linux",
 ]

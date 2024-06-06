@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (111):
+Available utility functions in pyUFunc (119):
 
 - util_ai:
   - mean_absolute_error
@@ -38,6 +38,8 @@ Available utility functions in pyUFunc (111):
   - func_time
   - generate_password
   - get_user_defined_func
+  - get_user_defined_module
+  - get_user_imported_module
   - import_package
   - is_module_importable
   - is_user_defined_func
@@ -46,6 +48,8 @@ Available utility functions in pyUFunc (111):
   - show_docstring_google
   - show_docstring_headers
   - show_docstring_numpy
+  - timeout
+  - timeout_linux
 
 - util_data_processing:
   - cvt_int_to_alpha
@@ -56,6 +60,7 @@ Available utility functions in pyUFunc (111):
   - split_dict_by_chunk
   - split_list_by_equal_sublist
   - split_list_by_fixed_length
+  - str_strip
 
 - util_datetime:
   - cvt_dt_to_tz
@@ -113,6 +118,8 @@ Available utility functions in pyUFunc (111):
 - util_log:
   - add_date_in_filename
   - generate_dir_with_date
+  - log_logger
+  - log_writer
 
 - util_network:
   - get_host_ip
@@ -145,6 +152,7 @@ Available utility functions in pyUFunc (111):
   - pickle_load
   - pickle_save
   - remove_file
+  - show_dir_in_tree
 
 - pkg_utils:
   - find_util_func_by_keyword

@@ -91,7 +91,6 @@ def generate_dir_with_date(root_dir: str = "",
                            date: str | datetime.datetime = "",
                            *,
                            date_fmt: str = "%Y-%m-%d",
-                           year_month_fmt: str = "%Y-%m",
                            exist_ok: bool = True) -> str:
     """Generate directory with date
 
@@ -99,7 +98,6 @@ def generate_dir_with_date(root_dir: str = "",
         root_dir (str, optional): specify root dir, if not specified, use current dir. Defaults to "".
         date (str | datetime.datetime, optional): specify the date. if not specified, use current date. Defaults to "".
         date_fmt (str, optional): date format. Defaults to "%Y-%m-%d".
-        year_month_fmt (str, optional): year and month format. Defaults to "%Y-%B".
         exist_ok (bool, optional): whether is create direct is it's exist. Defaults to True.
 
     Raises:
@@ -128,13 +126,6 @@ def generate_dir_with_date(root_dir: str = "",
     if not isinstance(date_fmt, str):
         date_fmt = config_datetime_fmt[0]  # "%Y-%m-%d"
 
-    # check year_month format
-    if not year_month_fmt:
-        year_month_fmt = config_datetime_fmt[29]  # "%Y-%m"
-
-    if not isinstance(year_month_fmt, str):
-        year_month_fmt = config_datetime_fmt[29]  # "%Y-%m"
-
     # create date instance
     if date:
         # convert input date as date_str
@@ -147,12 +138,15 @@ def generate_dir_with_date(root_dir: str = "",
     else:
         date_ist = datetime.datetime.now()
 
-    # get current month and year
-    current_month_year = date_ist.strftime(year_month_fmt)
+    # convert date to date_str
     date_str = date_ist.strftime(date_fmt)
 
+    # get current month and year
+    c_year = str(date_ist.year)
+    c_month = str(date_ist.month)
+
     # generate log directory
-    log_dir = os.path.join(root_dir, *[current_month_year, date_str])
+    log_dir = os.path.join(root_dir, *[c_year, c_month, date_str])
     log_dir_standard = path2linux(log_dir)
 
     # make recursive directory

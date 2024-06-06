@@ -59,5 +59,22 @@ module import
 
    import_package
    get_user_defined_func
+   get_user_defined_module
+   get_user_imported_module
    is_user_defined_func
    is_module_importable
+
+count code lines
+~~~~~~~~~~~~~~~~
+.. autosummary::
+   :toctree: api/
+
+   count_lines_of_code
+
+time out function
+~~~~~~~~~~~~~~~~~
+.. autosummary::
+   :toctree: api/
+
+   timeout
+   timeout_linux

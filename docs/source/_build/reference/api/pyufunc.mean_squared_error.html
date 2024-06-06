@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../../_static/documentation_options.js?v=fc7d8818"></script>
+    <script src="../../_static/documentation_options.js?v=58050c01"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -432,7 +432,6 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="../util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_vis.html">util_vis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pkg_utils.html">pkg_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pkg_configs.html">pkg_configs</a></li>
 </ul>
 
     
@@ -500,10 +499,20 @@ document.write(`
 <dl class="py function">
 <dt class="sig sig-object py" id="pyufunc.mean_squared_error">
 <span class="sig-prename descclassname"><span class="pre">pyufunc.</span></span><span class="sig-name descname"><span class="pre">mean_squared_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyufunc.mean_squared_error" title="Link to this definition">#</a></dt>
-<dd><p>Calculate mean squared error between y_true and y_pred
-:param y_true: Iterable, The true values
-:param y_pred: Iterable, The predicted values</p>
+<dd><p>Calculate mean squared error between y_true and y_pred</p>
 <dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> – Iterable, The true values</p></li>
+<li><p><strong>y_pred</strong> – Iterable, The predicted values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – If y_true or y_pred is not an iterable object</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – Input should be an iterable object</p></li>
+</ul>
+</dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float, The mean squared error</p>
 </dd>
@@ -604,7 +613,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023-, Xiangyong Luo.
+      © Copyright 2023 - 2024 , Xiangyong Luo.
       <br/>
     
   </p>

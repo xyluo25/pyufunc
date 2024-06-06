@@ -20,6 +20,9 @@ dictionary manipulation
    :toctree: api/
 
    split_dict_by_chunk
+   dict_split_by_chunk
+   delete_dict_keys
+   dict_delete_keys
 
 common data processing
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -27,3 +30,5 @@ common data processing
     :toctree: api/
 
     cvt_int_to_alpha
+    is_float
+    str_strip

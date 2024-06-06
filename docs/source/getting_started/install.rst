@@ -15,18 +15,10 @@ recommended installation method for most users.
 Python version support
 ----------------------
 
-Officially Python 3.9, 3.10, 3.11 and 3.12.
+Officially Python 3.9 or higher.
 
 Installing pyufunc
 ------------------
-
-
-Installing with Anaconda
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-    conda install pyufunc
 
 
 Installing from PyPI
