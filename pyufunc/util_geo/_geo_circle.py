@@ -90,9 +90,13 @@ def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
         point (shapely.geometry.Point, Iterable[float]): the center point with format [longitude, latitude]
         radius (float): the radius of the circle, unit is meter
         options (dict, optional): set the circle options. Defaults to {"edges": 32, "bearing": 0, "direction": 1}.
+
             edges (int, optional): the edges of the polygon. Defaults to 32.
+
             bearing (float, optional): the bearing of the polygon. Defaults to 0.
+
             direction (int, optional): the direction of the polygon. Defaults to 1.
+
         verbose (bool, optional): print the log information. Defaults to False.
 
     Returns:

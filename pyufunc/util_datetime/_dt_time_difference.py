@@ -19,7 +19,9 @@ def get_time_diff_in_unit(start_time: Union[datetime.datetime, str],
         start_time (Union[datetime.datetime, str]): datetime object or string
         end_time (Union[datetime.datetime, str]): datetime object or string
         unit (str, optional): time unit to be calculated. Defaults to "seconds".
+
             Candidates: ["seconds", "minutes", "hours", "days", "second", "minute",
+
             "hour", "day", "week", "weeks", "month", "months", "year", "years"]
 
     Returns:

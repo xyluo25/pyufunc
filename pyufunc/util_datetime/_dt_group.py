@@ -282,7 +282,9 @@ def group_dt_minutely(df: pd.DataFrame, interval: int = 1, col: list = ["datetim
         df (pd.DataFrame): input DataFrame with datetime and value columns
         interval (int, optional): the time interval to groupby. Defaults to 1.
         col (list, optional): specify input column names.
+
             if your input column name is not same as default col name, use your own col name.
+
             e.g. ["your_datetime_col_name", "your_value_col_name"]. Defaults to ["datetime", "value"].
 
     Returns:

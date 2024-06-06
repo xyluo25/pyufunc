@@ -9,7 +9,7 @@ import re
 
 
 def str_strip(string: str) -> str:
-    """Convert all consecutive whitespace  characters to `' '` (half-width whitespace),
+    """Convert all consecutive whitespace characters to `' '` (half-width whitespace),
     then return a copy of the string with leading and trailing whitespace removed.
 
     Args:
