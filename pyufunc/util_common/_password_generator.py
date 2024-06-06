@@ -27,7 +27,8 @@ def generate_password(pwd_len: int = 15, lowercase: bool = True,
         uppercase (bool, optional): whether to include uppercase in password. Defaults to True.
         digit (bool, optional): whether to include digits in password. Defaults to True.
         special_char (bool, optional): whether to include special character in password. Defaults to True.
-        config (_type_, optional): Defaults to {"num_lowercase": 1, "num_uppercase": 1, "num_digit": 1, "num_special_char": 1}.
+        config (_type_, optional): Defaults to {"num_lowercase": 1, "num_uppercase": 1,
+                                                "num_digit": 1, "num_special_char": 1}.
 
     Raises:
         ValueError: if the total length of password in config is longer than the password length.

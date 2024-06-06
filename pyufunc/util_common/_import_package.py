@@ -29,18 +29,19 @@ def import_package(pkg_name: Union[str, tuple, list],
 
     Args:
         package_name (str): the package name, it can be a string or tuple or list.
-            if it's a string, it's the package name for both installation and import.
+            - if it's a string, it's the package name for both installation and import.
 
-            if it's a tuple or list, it has two elements:
-                first element is the package name, for pip or conda installation;
-                second element is the package name, for import the package;
+            - if it's a tuple or list, it has two elements:
+                - first element is the package name, for pip or conda installation;
+                - second element is the package name, for import the package;
 
-            eg: "numpy" or "numpy==1.19.5";
-            eg: ("pillow", "PIL");
-            eg: ["pillow==8.3.1", "PIL"];
-            eg: ["opencv-python", "cv2"];
-        options (list, optional): the installation optional inputs,
-            eg: '--force-reinstall', '--ignore-installed'. Defaults to ["--user"].
+            - eg: "numpy" or "numpy==1.19.5";
+            - eg: ("pillow", "PIL");
+            - eg: ["pillow==8.3.1", "PIL"];
+            - eg: ["opencv-python", "cv2"];
+
+        options (list, optional): the installation optional inputs.
+            - eg: '--force-reinstall', '--ignore-installed'. Defaults to ["--user"].
         verbose (bool, optional): print the error message if the package is not available.
             Defaults to True.
 
@@ -48,16 +49,18 @@ def import_package(pkg_name: Union[str, tuple, list],
         object: the imported package
 
     Note:
-        if the module name different from import name
-        eg. module name is 'pillow', import name is 'PIL'
-        please use tuple or list to specify the module name and import name
-        e.g. import_package(('pillow', 'PIL'))
+        - if the module name different from import name
+            eg. module name is 'pillow', import name is 'PIL'
+
+        - please use tuple or list to specify the module name and import name
+            e.g. import_package(('pillow', 'PIL'))
 
     Examples:
         >>> numpy = import_package("numpy") # equal to "import numpy as numpy"
         >>> np = import_package("numpy")  # equal to "import numpy as np"
 
         # not existed
+
         >>> numpy = import_package("numpy")
 
         :numpy not existed in current env, installing...
@@ -69,6 +72,7 @@ def import_package(pkg_name: Union[str, tuple, list],
         :Package numpy==1.19.5 not existed in current env, installing...
 
         # different name for installation and import
+
         >>> PIL = import_package(("pillow", "PIL"))
         >>> cv2 = import_package(["opencv-python", "cv2"])
         >>> cv2 = import_package(["opencv-python", "cv2"], options=["--force-reinstall"])

@@ -15,12 +15,15 @@ def end_of_life(func: object = None, **kwargs) -> object:
 
     Args:
         *args: the required dependencies to run the function.
-            if argument is a string, module and import are the same.
-            if argument is a tuple or list, it has two elements:
-                first element is the module name, for pip or conda installation;
-                second element is the import name, for import the module;
+
+            - if argument is a string, module and import are the same.
+
+            - if argument is a tuple or list, it has two elements:
+                - first element is the module name, for pip or conda installation;
+                - second element is the import name, for import the module;
 
         **kwargs: the optional arguments, including message.
+
             message (str, optional): the additional message to the users.
 
     Returns:

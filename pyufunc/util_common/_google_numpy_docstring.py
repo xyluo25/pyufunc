@@ -11,6 +11,7 @@ def show_docstring_headers() -> None:
 
     See Also:
         show_google_docstring_style
+
         show_numpy_docstring_style
 
     References:

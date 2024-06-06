@@ -20,7 +20,7 @@ def func_running_time(func: object) -> object:
         and we keep both of them for compatibility.
 
     Location:
-        The function defined in pyufunc/utils.py.
+        The function defined in pyufunc.util_common._func_time_decorator.py.
 
     Args:
         func (object): the function or class method to be measured.
@@ -63,7 +63,7 @@ def func_time(func: object) -> object:
         We keep both of them for compatibility.
 
     Location:
-        The function defined in pyufunc/utils.py.
+        The function defined in pyufunc.util_common._func_time_decorator.py.
 
     Args:
         func (object): the function or class method to be measured.

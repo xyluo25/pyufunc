@@ -30,11 +30,11 @@ def run_parallel(func: Callable, iterable: Iterable,
 
     Raises:
         TypeError: If the input function is not callable,
-            or if chunksize or num_processes are not integers,
-            or if iterable is not an Iterable.
+            - or if chunksize or num_processes are not integers,
+            - or if iterable is not an Iterable.
 
         TypeError: if the input iterable is not an Iterable
-            The input iterable should be an Iterable.
+            - The input iterable should be an Iterable.
         TypeError: if the input number of processors is not an integer
         TypeError: if the input chunksize should be an integer
         ValueError: if the input number of processors is not greater than 0
