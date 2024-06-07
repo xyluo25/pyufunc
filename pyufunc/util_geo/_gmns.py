@@ -18,7 +18,7 @@ __all__ = ['Node', 'Link', 'POI', 'Zone', 'Agent']
 class Node:
     """A node in the network.
 
-    Attributes:
+    Args:
         id: The node ID.
         x_coord: The x coordinate of the node.
         y_coord: The y coordinate of the node.
@@ -63,7 +63,7 @@ class Node:
 class Link:
     """A link in the network.
 
-    Attributes:
+    Args:
         id: The link ID.
         name: The name of the link.
         from_node_id: The from node ID of the link.
@@ -111,7 +111,7 @@ class Link:
 class POI:
     """A POI in the network.
 
-    Attributes:
+    Args:
         id: The POI ID.
         x_coord: The x coordinate of the POI.
         y_coord: The y coordinate of the POI.
@@ -148,7 +148,7 @@ class POI:
 class Zone:
     """A zone in the network.
 
-    Attributes:
+    Args:
         id: The zone ID.
         name: The name of the zone.
         centroid_x: The centroid x coordinate of the zone.
@@ -194,7 +194,7 @@ class Zone:
 class Agent:
     """An agent in the network.
 
-    Attributes:
+    Args:
         id: The agent ID. default = 0
         agent_type: The agent type. default = ''
         o_zone_id: The origin zone ID. default = 0
