@@ -250,6 +250,7 @@ config_gmns = {
     "poi_fields": ["poi_id", "building", "centroid", "area", "geometry"],
     "zone_geometry_fields": ["zone_id", "geometry"],
     "zone_centroid_fields": ["zone_id", "x_coord", "y_coord"],
+    "data_chunk_size": 1000,  # number of rows to read in each chunk
 }
 
 # ############### Color initialization ############### #
