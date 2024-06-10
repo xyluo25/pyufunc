@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (119):
+Available utility functions in pyUFunc (123):
 
 - util_ai:
   - mean_absolute_error
@@ -89,6 +89,10 @@ Available utility functions in pyUFunc (119):
   - find_k_nearest_points
   - get_coordinates_from_geom
   - gmns_geo
+  - gmns_read_link
+  - gmns_read_node
+  - gmns_read_poi
+  - gmns_read_zone
   - GMNSAgent
   - GMNSLink
   - GMNSNode

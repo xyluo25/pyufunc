@@ -20,7 +20,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (119):
+Available utility functions in pyUFunc (123):
 
 - non-keywords:
   - add_date_in_filename
@@ -32,12 +32,6 @@ Available utility functions in pyUFunc (119):
   - end_of_life
   - func_running_time
   - func_time
-  - gmns_geo
-  - GMNSAgent
-  - GMNSLink
-  - GMNSNode
-  - GMNSPOI
-  - GMNSZone
   - import_package
   - log_logger
   - log_writer
@@ -184,3 +178,15 @@ Available utility functions in pyUFunc (119):
   - algo_merge_sort
   - algo_quick_sort
   - algo_selection_sort
+
+- gmns:
+  - gmns_geo
+  - gmns_read_link
+  - gmns_read_node
+  - gmns_read_poi
+  - gmns_read_zone
+  - GMNSAgent
+  - GMNSLink
+  - GMNSNode
+  - GMNSPOI
+  - GMNSZone

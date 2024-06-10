@@ -144,8 +144,11 @@ def show_util_func_by_keyword(verbose: bool = True) -> None:
            ** show_available_utility_func
     """
 
+    # get all function names with lower case
     all_func_str = sorted(list(itertools.chain.from_iterable(
         config_FUNC_CATEGORY.values())), key=str.lower)
+
+    # get the prefix and suffix of the function name and add them to the corresponding list
     for func_str in all_func_str:
         # get the prefix and suffix of the function name
         prefix = func_str.split("_")[0]
@@ -156,6 +159,10 @@ def show_util_func_by_keyword(verbose: bool = True) -> None:
             config_FUNC_KEYWORD[prefix].append(func_str)
         elif suffix in config_FUNC_KEYWORD and func_str not in config_FUNC_KEYWORD[suffix]:
             config_FUNC_KEYWORD[suffix].append(func_str)
+
+        # add gmns to the keyword list
+        elif "gmns" in func_str.lower() and func_str not in config_FUNC_KEYWORD["gmns"]:
+            config_FUNC_KEYWORD["gmns"].append(func_str)
         else:
             config_FUNC_KEYWORD["non-keywords"].append(func_str)
 
