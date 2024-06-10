@@ -1,6 +1,7 @@
 pyufunc.mean\_absolute\_error
 =============================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: mean_absolute_error
+

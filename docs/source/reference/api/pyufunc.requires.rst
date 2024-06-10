@@ -1,6 +1,7 @@
 pyufunc.requires
 ================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: requires
+

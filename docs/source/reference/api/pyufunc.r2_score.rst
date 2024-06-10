@@ -1,6 +1,7 @@
 pyufunc.r2\_score
 =================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: r2_score
+

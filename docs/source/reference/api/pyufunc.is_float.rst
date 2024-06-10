@@ -1,6 +1,7 @@
 pyufunc.is\_float
 =================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: is_float
+

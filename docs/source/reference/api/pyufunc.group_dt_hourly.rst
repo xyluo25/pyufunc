@@ -1,6 +1,7 @@
 pyufunc.group\_dt\_hourly
 =========================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: group_dt_hourly
+

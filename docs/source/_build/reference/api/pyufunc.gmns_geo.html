@@ -424,6 +424,10 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.GMNSLink.html">pyufunc.GMNSLink</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.GMNSPOI.html">pyufunc.GMNSPOI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.GMNSZone.html">pyufunc.GMNSZone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.gmns_read_node.html">pyufunc.gmns_read_node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.gmns_read_link.html">pyufunc.gmns_read_link</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.gmns_read_poi.html">pyufunc.gmns_read_poi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.gmns_read_zone.html">pyufunc.gmns_read_zone</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.cvt_wgs84_to_baidu09.html">pyufunc.cvt_wgs84_to_baidu09</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.cvt_wgs84_to_gcj02.html">pyufunc.cvt_wgs84_to_gcj02</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.cvt_gcj02_to_wgs84.html">pyufunc.cvt_gcj02_to_wgs84</a></li>
@@ -507,6 +511,29 @@ document.write(`
                   
   <section id="module-pyufunc.gmns_geo">
 <span id="pyufunc-gmns-geo"></span><h1>pyufunc.gmns_geo<a class="headerlink" href="#module-pyufunc.gmns_geo" title="Link to this heading">#</a></h1>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_link</span></code>([link_file, cpu_cores, verbose])</p></td>
+<td><p>Read link.csv file and return a dict of Links.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_node</span></code>([node_file, cpu_cores, verbose])</p></td>
+<td><p>Read node.csv file and return a dict of nodes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_poi</span></code>([poi_file, cpu_cores, verbose])</p></td>
+<td><p>Read poi.csv file and return a dict of POIs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_zone</span></code>([zone_file, cpu_cores, verbose])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_zone_by_centroid</span></code>([zone_file, ...])</p></td>
+<td><p>Read zone.csv file and return a dict of Zones.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_zone_by_geometry</span></code>([zone_file, ...])</p></td>
+<td><p>Read zone.csv file and return a dict of Zones.</p></td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Classes</p>
 <table class="autosummary longtable table autosummary">
 <tbody>

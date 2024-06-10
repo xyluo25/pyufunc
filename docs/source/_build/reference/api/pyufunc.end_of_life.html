@@ -515,16 +515,22 @@ It’s useful to use this function to remind users to avoid using the deprecated
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>*args</strong> – <p>the required dependencies to run the function.
-if argument is a string, module and import are the same.
-if argument is a tuple or list, it has two elements:</p>
-<blockquote>
-<div><p>first element is the module name, for pip or conda installation;
-second element is the import name, for import the module;</p>
-</div></blockquote>
+<li><p><strong>*args</strong> – <p>the required dependencies to run the function.</p>
+<ul>
+<li><p>if argument is a string, module and import are the same.</p></li>
+<li><dl class="simple">
+<dt>if argument is a tuple or list, it has two elements:</dt><dd><ul>
+<li><p>first element is the module name, for pip or conda installation;</p></li>
+<li><p>second element is the import name, for import the module;</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </p></li>
-<li><p><strong>**kwargs</strong> – the optional arguments, including message.
-message (str, optional): the additional message to the users.</p></li>
+<li><p><strong>**kwargs</strong> – <p>the optional arguments, including message.</p>
+<p>message (str, optional): the additional message to the users.</p>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

@@ -1,6 +1,7 @@
 pyufunc.show\_dir\_in\_tree
 ===========================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: show_dir_in_tree
+

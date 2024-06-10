@@ -839,6 +839,30 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 @func_time
 @requires("pandas")
 def read_zone(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Zone]:
+    """Read zone.csv file and return a dict of Zones.
+
+    Args:
+        zone_file (str, optional): the input zone file path. Defaults to "".
+        cpu_cores (int, optional): number of cpu cores for parallel processing. Defaults to -1.
+        verbose (bool, optional): print processing information. Defaults to False.
+
+    Raises:
+        FileNotFoundError: Error: File {zone_file} does not exist.
+        ValueError: Error: cpu_cores must be an integer greater than 0.
+        Exception: Error: Failed to read {zone_file}.
+
+    Returns:
+        dict: a dict of Zones.
+
+    Examples:
+        >>> from pyufunc import gmns_read_zone
+        >>> zone_dict = gmns_read_zone(zone_file = r"../dataset/ASU/zone.csv")
+        >>> zone_dict[1]
+        Zone(id=1, name='1', centroid_x=0.0, centroid_y=0.0, centroid='POINT (0 0)', x_max=0.0,
+        x_min=0.0, y_max=0.0, y_min=0.0, node_id_list=[], poi_id_list=[],
+        production=0, attraction=0, production_fixed=0, attraction_fixed=0,
+        geometry='POLYGON ((0 0, 1 1, 1 0, 0 0))')
+    """
 
     import_package("pandas", verbose=False)
     import pandas as pd

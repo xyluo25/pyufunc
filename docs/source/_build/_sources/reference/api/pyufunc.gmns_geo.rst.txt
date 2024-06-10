@@ -9,6 +9,17 @@ pyufunc.gmns\_geo
 
    
    
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      read_link
+      read_node
+      read_poi
+      read_zone
+      read_zone_by_centroid
+      read_zone_by_geometry
+   
    
 
    

@@ -36,6 +36,10 @@ gmns_geo
     GMNSLink
     GMNSPOI
     GMNSZone
+    gmns_read_node
+    gmns_read_link
+    gmns_read_poi
+    gmns_read_zone
 
 Coordinate Conversation
 ~~~~~~~~~~~~~~~~~~~~~~~

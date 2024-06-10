@@ -516,19 +516,21 @@ If the dependencies are not available, the function will not run.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>*args</strong> – <p>the required dependencies to run the function.
-if argument is a string, module and import are the same.
-if argument is a tuple or list, it has two elements:</p>
+- if argument is a string, module and import are the same.
+- if argument is a tuple or list, it has two elements:</p>
 <blockquote>
-<div><p>first element is the module name, for pip or conda installation;
-second element is the import name, for import the module;</p>
+<div><ul>
+<li><p>first element is the module name, for pip or conda installation;</p></li>
+<li><p>second element is the import name, for import the module;</p></li>
+</ul>
 </div></blockquote>
 </p></li>
-<li><p><strong>**kwargs</strong> – <p>the optional arguments, including verbose and auto_install.
-verbose (bool, optional): print the processing message. Defaults to True.
-auto_install (bool, optional): install the missing dependencies automatically.</p>
-<blockquote>
-<div><p>Defaults to False.</p>
-</div></blockquote>
+<li><p><strong>**kwargs</strong> – <p>the optional arguments, including verbose and auto_install.</p>
+<p>verbose (bool, optional): print the processing message. Defaults to True.</p>
+<dl class="simple">
+<dt>auto_install (bool, optional): install the missing dependencies automatically.</dt><dd><p>Defaults to False.</p>
+</dd>
+</dl>
 </p></li>
 </ul>
 </dd>
@@ -541,19 +543,13 @@ auto_install (bool, optional): install the missing dependencies automatically.</
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>user can parse the verbose and auto_install options to control the behavior of the decorator.
-verbose: print the error message if the dependencies are not available.</p>
-<blockquote>
-<div><p>Default is True.</p>
-</div></blockquote>
-<dl class="simple">
-<dt>auto_install: install the missing dependencies automatically.</dt><dd><p>Default is True.</p>
-</dd>
-</dl>
-<p>eg: &#64;requires(“numpy”, “pandas”, verbose=False)
-eg: &#64;requires(“numpy”, “pandas”, verbose=True, auto_install=True)
-eg: &#64;requires(“numpy”, “pandas”, verbose=False, auto_install=True)
-eg: &#64;requires((“pillow”, “PIL”), “pandas”, verbose=True, auto_install=True)</p>
+<p>user can parse the verbose and auto_install options to control the behavior of the decorator.</p>
+<p>verbose: print the error message if the dependencies are not available. Default is True.</p>
+<p>auto_install: install the missing dependencies automatically. Default is True.</p>
+<p>eg: &#64;requires(“numpy”, “pandas”, verbose=False)</p>
+<p>eg: &#64;requires(“numpy”, “pandas”, verbose=True, auto_install=True)</p>
+<p>eg: &#64;requires(“numpy”, “pandas”, verbose=False, auto_install=True)</p>
+<p>eg: &#64;requires((“pillow”, “PIL”), “pandas”, verbose=True, auto_install=True)</p>
 </div>
 <p class="rubric">Examples</p>
 <p># Example 1: the function will not run if the dependencies are not available</p>

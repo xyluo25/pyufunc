@@ -424,6 +424,10 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.GMNSLink.html">pyufunc.GMNSLink</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.GMNSPOI.html">pyufunc.GMNSPOI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.GMNSZone.html">pyufunc.GMNSZone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.gmns_read_node.html">pyufunc.gmns_read_node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.gmns_read_link.html">pyufunc.gmns_read_link</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.gmns_read_poi.html">pyufunc.gmns_read_poi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyufunc.gmns_read_zone.html">pyufunc.gmns_read_zone</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.cvt_wgs84_to_baidu09.html">pyufunc.cvt_wgs84_to_baidu09</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.cvt_wgs84_to_gcj02.html">pyufunc.cvt_wgs84_to_gcj02</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.cvt_gcj02_to_wgs84.html">pyufunc.cvt_gcj02_to_wgs84</a></li>
@@ -516,10 +520,11 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>point</strong> (<em>shapely.geometry.Point</em><em>, </em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em>) – the center point with format [longitude, latitude]</p></li>
 <li><p><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – the radius of the circle, unit is meter</p></li>
-<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – set the circle options. Defaults to {“edges”: 32, “bearing”: 0, “direction”: 1}.
-edges (int, optional): the edges of the polygon. Defaults to 32.
-bearing (float, optional): the bearing of the polygon. Defaults to 0.
-direction (int, optional): the direction of the polygon. Defaults to 1.</p></li>
+<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – <p>set the circle options. Defaults to {“edges”: 32, “bearing”: 0, “direction”: 1}.</p>
+<p>edges (int, optional): the edges of the polygon. Defaults to 32.</p>
+<p>bearing (float, optional): the bearing of the polygon. Defaults to 0.</p>
+<p>direction (int, optional): the direction of the polygon. Defaults to 1.</p>
+</p></li>
 <li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – print the log information. Defaults to False.</p></li>
 </ul>
 </dd>

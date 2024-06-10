@@ -1,6 +1,7 @@
 pyufunc.img\_to\_bytes
 ======================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: img_to_bytes
+
