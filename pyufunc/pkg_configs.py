@@ -91,6 +91,7 @@ config_FUNC_KEYWORD = {
     "pypi"        : [],
     "error"       : [],
     "algo"        : [],
+    "gmns"        : [],
 }
 
 # ############## Logging Configurations ############## #
