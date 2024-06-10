@@ -31,8 +31,10 @@ from pyufunc.util_geo._gmns import Zone as GMNSZone
 from pyufunc.util_geo._gmns import Agent as GMNSAgent
 from pyufunc.util_geo._gmns import read_node as gmns_read_node
 from pyufunc.util_geo._gmns import read_poi as gmns_read_poi
-from pyufunc.util_geo._gmns import read_zone_by_geometry as gmns_read_zone_by_geometry
-from pyufunc.util_geo._gmns import read_zone_by_centroid as gmns_read_zone_by_centroid
+from pyufunc.util_geo._gmns import read_link as gmns_read_link
+# from pyufunc.util_geo._gmns import read_zone_by_geometry as gmns_read_zone_by_geometry
+# from pyufunc.util_geo._gmns import read_zone_by_centroid as gmns_read_zone_by_centroid
+from pyufunc.util_geo._gmns import read_zone as gmns_read_zone
 
 __all__ = [
     # geo_circle
@@ -54,8 +56,10 @@ __all__ = [
     "GMNSAgent",
     "gmns_read_node",
     "gmns_read_poi",
-    "gmns_read_zone_by_geometry",
-    "gmns_read_zone_by_centroid",
+    "gmns_read_link",
+    # "gmns_read_zone_by_geometry",
+    # "gmns_read_zone_by_centroid",
+    "gmns_read_zone",
 
     # coordinate conversion
     "cvt_wgs84_to_baidu09",

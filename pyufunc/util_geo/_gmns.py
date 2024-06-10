@@ -22,7 +22,7 @@ if TYPE_CHECKING:
     import shapely
 
 __all__ = ['Node', 'Link', 'POI', 'Zone', 'Agent',
-           'read_node', 'read_poi', 'read_zone_by_geometry', 'read_zone_by_centroid']
+           'read_node', 'read_poi', 'read_link', 'read_zone']
 
 
 @dataclass
@@ -57,6 +57,7 @@ class Node:
     poi_id: int = -1
     activity_type: str = ''
     activity_location_tab: str = ''
+    ctrl_type: str = ''
     geometry: str = ''
     _zone_id: int = -1
 
@@ -105,7 +106,7 @@ class Link:
     link_type_name: str = ""
     geometry: str = ""
     allowed_uses: str = ""
-    from_biway: int = 1
+    from_biway: int = -1
     is_link: bool = True
 
     def as_dict(self):
@@ -253,6 +254,7 @@ class Agent:
 # todo: read node, link and zone
 
 
+@requires("shapely")
 def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
     """Create Node from df_node.
 
@@ -262,10 +264,14 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
     Returns:
         dict[int, Node]: a dict of nodes.{node_id: Node}
     """
+
+    import_package("shapely", verbose=False)
+    import shapely
+
     # Reset index to avoid index error
     df_node = df_node.reset_index(drop=True)
 
-    print("df_node: ", df_node.head())
+    print(df_node.head())
 
     node_dict = {}
     for i in range(len(df_node)):
@@ -306,10 +312,11 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
             )
             node_dict[df_node.loc[i, 'node_id']] = node
         except Exception as e:
-            print(f"  : Unable to create node: {df_node.loc[i, 'node_id']}, error: {e}")
+            print(f"  : Unable to create node: {df_node.loc[i, 'node_id']}, error: {e}", flush=True)
     return node_dict
 
 
+@requires("shapely")
 def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     """Create POI from df_poi.
 
@@ -319,6 +326,9 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     Returns:
         dict[int, POI]: a dict of POIs.{poi_id: POI}
     """
+
+    import_package("shapely", verbose=False)
+    import shapely
 
     df_poi = df_poi.reset_index(drop=True)
     poi_dict = {}
@@ -339,10 +349,52 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
             )
             poi_dict[df_poi.loc[i, 'poi_id']] = poi
         except Exception as e:
-            print(f"  : Unable to create poi: {df_poi.loc[i, 'poi_id']}, error: {e}")
+            print(f"  : Unable to create poi: {df_poi.loc[i, 'poi_id']}, error: {e}", flush=True)
     return poi_dict
 
 
+def _create_link_from_dataframe(df_link: pd.DataFrame) -> dict[int, Zone]:
+    """Create Link from df_link.
+
+    Args:
+        df_link (pd.DataFrame): dataframe of link from link.csv
+
+    Returns:
+        dict[int, Zone]: a dict of Link.{link_id: Link}
+    """
+
+    try:
+        df_link = df_link.reset_index(drop=True)
+        link_dict = {}
+
+        for i in range(len(df_link)):
+            try:
+                link = Link(
+                    id=df_link.loc[i, 'link_id'],
+                    name=df_link.loc[i, 'name'],
+                    from_node_id=df_link.loc[i, 'from_node_id'],
+                    to_node_id=df_link.loc[i, 'to_node_id'],
+                    length=df_link.loc[i, 'length'],
+                    lanes=df_link.loc[i, 'lanes'],
+                    dir_flag=df_link.loc[i, 'dir_flag'],
+                    free_speed=df_link.loc[i, 'free_speed'],
+                    capacity=df_link.loc[i, 'capacity'],
+                    link_type=df_link.loc[i, 'link_type'],
+                    link_type_name=df_link.loc[i, 'link_type_name'],
+                    geometry=df_link.loc[i, 'geometry'],
+                    allowed_uses=df_link.loc[i, 'allowed_uses'],
+                    from_biway=df_link.loc[i, 'from_biway'],
+                )
+                link_dict[df_link.loc[i, 'link_id']] = link
+            except Exception as e:
+                print(f"  : Unable to create link: {df_link.loc[i, 'link_id']}, error: {e}", flush=True)
+        return link_dict
+    except Exception as e:
+        print(f"  : Unable to create link: {e}", flush=True)
+        return {}
+
+
+@requires("shapely")
 def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, Zone]:
     """Create Zone from df_zone.
 
@@ -352,6 +404,10 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
     Returns:
         dict[int, Zone]: a dict of Zones.{zone_id: Zone}
     """
+
+    import_package("shapely", verbose=False)
+    import shapely
+
     df_zone = df_zone.reset_index(drop=True)
     zone_dict = {}
 
@@ -385,10 +441,11 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
 
             zone_dict[zone_id] = zone
         except Exception as e:
-            print(f"  : Unable to create zone: {zone_id}, error: {e}")
+            print(f"  : Unable to create zone: {zone_id}, error: {e}", flush=True)
     return zone_dict
 
 
+@requires("shapely")
 def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, Zone]:
     """Create Zone from df_zone.
 
@@ -398,6 +455,10 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
     Returns:
         dict[int, Zone]: a dict of Zones.{zone_id: Zone}
     """
+
+    import_package("shapely", verbose=False)
+    import shapely
+
     df_zone = df_zone.reset_index(drop=True)
     zone_dict = {}
 
@@ -426,14 +487,14 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
 
             zone_dict[zone_id] = zone
         except Exception as e:
-            print(f"  : Unable to create zone: {zone_id}, error: {e}")
+            print(f"  : Unable to create zone: {zone_id}, error: {e}", flush=True)
     return zone_dict
 
 
 # main functions for reading node, poi, zone files and network
 
 @func_time
-@requires("pandas", "shapely")
+@requires("pandas")
 def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Node]:
     """Read node.csv file and return a dict of nodes.
 
@@ -459,9 +520,7 @@ def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
     """
 
     import_package("pandas", verbose=False)
-    import_package("shapely", verbose=False)
     import pandas as pd
-    import shapely
 
     if verbose:
         print("  :Running on parallel processing, make sure you are running under if __name__ == '__main__': \n")
@@ -494,9 +553,12 @@ def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
         print(f"  : Parallel creating Nodes using Pool with {cpu_cores} CPUs. Please wait...")
     node_dict_final = {}
 
+    results = []
     # Parallel processing using Pool
     with Pool(cpu_cores) as pool:
-        results = pool.map(_create_node_from_dataframe, df_node_chunk)
+        results = pool.map(_create_node_from_dataframe, df_node_chunk, chunksize=chunk_size)
+    # for df_node in df_node_chunk:
+    #     results.append(_create_node_from_dataframe(df_node))
 
     for node_dict in results:
         node_dict_final.update(node_dict)
@@ -507,7 +569,7 @@ def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
 
 
 @func_time
-@requires("pandas", "shapely")
+@requires("pandas")
 def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: POI]:
     """Read poi.csv file and return a dict of POIs.
 
@@ -533,9 +595,7 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
 
     """
     import_package("pandas", verbose=False)
-    import_package("shapely", verbose=False)
     import pandas as pd
-    import shapely
 
     # convert path to linux path
     poi_file = path2linux(poi_file)
@@ -574,7 +634,81 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
 
 
 @func_time
-@requires("pandas", "shapely")
+@requires("pandas")
+def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Link]:
+    """Read link.csv file and return a dict of Links.
+
+    Args:
+        link_file (str): The link.csv file path. default is "".
+        cpu_cores (int, optional): number of cpu cores for parallel processing. Defaults to -1.
+        verbose (bool, optional): print processing information. Defaults to False.
+
+    Raises:
+        FileNotFoundError: File: {link_file} does not exist.
+        ValueError: cpu_cores should be integer, but got {type(cpu_cores)}
+
+    Returns:
+        dict: A dict of Links.
+
+    Examples:
+        >>> from pyufunc import gmns_read_link
+        >>> link_dict = gmns_read_link(link_file = r"../dataset/ASU/link.csv")
+        >>> link_dict[1]
+        Link(id=1, name='A', from_node_id=1, to_node_id=2, length=0.0, lanes=1, dir_flag=1, free_speed=0.0, capacity=0.0, link_type=1, link_type_name='motorway', geometry='LINESTRING (0 0, 1 1)')
+    """
+
+    # import pandas as pd
+    import_package("pandas", verbose=False)
+    import pandas as pd
+
+    # convert path to linux path
+    link_file = path2linux(link_file)
+
+    # check link file
+    if not os.path.exists(link_file):
+        raise FileNotFoundError(f"File: {link_file} does not exist.")
+
+    # check cpu_cores
+    if not isinstance(cpu_cores, int):
+        raise ValueError(f"cpu_cores should be integer, but got {type(cpu_cores)}")
+
+    if cpu_cores == -1:
+        cpu_cores = config_gmns["set_cpu_cores"]
+
+    # Read link.csv with specified columns and chunksize for iterations
+    link_required_cols = config_gmns["link_fields"]
+    chunk_size = config_gmns["data_chunk_size"]
+
+    print("columns: ", link_required_cols)
+    if verbose:
+        print(f"  : Reading link.csv with specified columns: {link_required_cols} \
+                    \n    and chunksize {chunk_size} for iterations...")
+    try:
+        df_link_chunk = pd.read_csv(
+            link_file, usecols=link_required_cols, chunksize=chunk_size, encoding='utf-8')
+    except Exception:
+        df_link_chunk = pd.read_csv(
+            link_file, usecols=link_required_cols, chunksize=chunk_size, encoding='latin-1')
+
+    # Parallel processing using Pool
+    if verbose:
+        print(f"  : Parallel creating POIs using Pool with {cpu_cores} CPUs. Please wait...")
+    poi_dict_final = {}
+
+    with Pool(cpu_cores) as pool:
+        results = pool.map(_create_link_from_dataframe, df_link_chunk)
+
+    for poi_dict in results:
+        poi_dict_final.update(poi_dict)
+
+    if verbose:
+        print(f"  : Successfully loaded poi.csv: {len(poi_dict_final)} POIs loaded.")
+
+    return poi_dict_final
+
+
+# @func_time
+@requires("pandas")
 def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
@@ -592,9 +726,7 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
     """
 
     import_package("pandas", verbose=False)
-    import_package("shapely", verbose=False)
     import pandas as pd
-    import shapely
 
     # convert path to linux path
     zone_file = path2linux(zone_file)
@@ -639,8 +771,8 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
     return zone_dict_final
 
 
-@func_time
-@requires("pandas", "shapely")
+# @func_time
+@requires("pandas")
 def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
@@ -658,9 +790,7 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
     """
 
     import_package("pandas", verbose=False)
-    import_package("shapely", verbose=False)
     import pandas as pd
-    import shapely
 
     # convert path to linux path
     zone_file = path2linux(zone_file)
@@ -704,3 +834,42 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
         print(f"  : Successfully loaded zone.csv: {len(zone_dict_final)} Zones loaded.")
 
     return zone_dict_final
+
+
+@func_time
+@requires("pandas")
+def read_zone(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Zone]:
+
+    import_package("pandas", verbose=False)
+    import pandas as pd
+
+    # check zone_file, geometry or centroid?
+    if not os.path.exists(zone_file):
+        raise FileNotFoundError(f"Error: File {zone_file} does not exist.")
+
+    # check inputs of cpu_cores
+    if not isinstance(cpu_cores, int):
+        raise ValueError("Error: cpu_cores must be an integer greater than 0.")
+
+    # check available cpu cores
+    if cpu_cores == -1:
+        cpu_cores = config_gmns["set_cpu_cores"]
+
+    # load zone file column names
+    zone_columns = []
+    try:
+        # 1 row, reduce memory and time
+        zone_df = pd.read_csv(zone_file, nrows=1)
+        zone_columns = zone_df.columns
+    except Exception as e:
+        raise Exception(f"Error: Failed to read {zone_file}.") from e
+
+    # update geometry or centroid
+    if set(config_gmns.get("zone_geometry_fields")).issubset(set(zone_columns)):
+        zone_dict = read_zone_by_geometry(zone_file, cpu_cores, verbose)
+    elif set(config_gmns.get("zone_centroid_fields")).issubset(set(zone_columns)):
+        zone_dict = read_zone_by_centroid(zone_file, cpu_cores, verbose)
+    else:
+        zone_dict = {}
+        print(f"Error: No valid zone fields in {zone_file}.", flush=True)
+    return zone_dict
