@@ -1,7 +1,6 @@
 pyufunc.gmns\_read\_link
 ========================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: gmns_read_link
-

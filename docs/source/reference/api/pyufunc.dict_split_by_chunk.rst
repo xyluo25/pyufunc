@@ -1,7 +1,6 @@
 pyufunc.dict\_split\_by\_chunk
 ==============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: dict_split_by_chunk
-

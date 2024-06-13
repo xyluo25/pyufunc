@@ -1,7 +1,6 @@
 pyufunc.pickle\_save
 ====================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: pickle_save
-

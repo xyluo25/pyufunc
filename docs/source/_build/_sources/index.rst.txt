@@ -109,7 +109,7 @@ programming language.
 
 
     getting_started/index
-    user_guide/index
+    how_to_guide/index
     reference/index
     development/index
     whatsnew/index

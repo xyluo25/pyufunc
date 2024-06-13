@@ -1,7 +1,6 @@
 pyufunc.get\_user\_imported\_module
 ===================================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: get_user_imported_module
-

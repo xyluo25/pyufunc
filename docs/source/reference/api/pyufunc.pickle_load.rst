@@ -1,7 +1,6 @@
 pyufunc.pickle\_load
 ====================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: pickle_load
-

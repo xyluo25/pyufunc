@@ -1,7 +1,6 @@
 pyufunc.count\_lines\_of\_code
 ==============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: count_lines_of_code
-

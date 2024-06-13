@@ -1,7 +1,6 @@
 pyufunc.remove\_file
 ====================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: remove_file
-

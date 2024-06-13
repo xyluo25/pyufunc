@@ -1,7 +1,6 @@
 pyufunc.algo\_merge\_sort
 =========================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: algo_merge_sort
-

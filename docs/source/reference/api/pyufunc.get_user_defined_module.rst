@@ -1,7 +1,6 @@
 pyufunc.get\_user\_defined\_module
 ==================================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: get_user_defined_module
-

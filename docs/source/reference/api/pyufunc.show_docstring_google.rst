@@ -1,7 +1,6 @@
 pyufunc.show\_docstring\_google
 ===============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: show_docstring_google
-

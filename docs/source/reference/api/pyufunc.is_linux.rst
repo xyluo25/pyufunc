@@ -1,7 +1,6 @@
 pyufunc.is\_linux
 =================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: is_linux
-

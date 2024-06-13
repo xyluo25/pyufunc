@@ -1,10 +1,10 @@
 .. _user_guide:
 
-==========
-User Guide
-==========
+============
+How-to guide
+============
 
-The User Guide covers all of pyufunc by categories.
+The How-to Guide covers all of utility functions by categories.
 Further information on any specific method can be obtained in the
 :ref:`api`.
 

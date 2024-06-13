@@ -1,7 +1,6 @@
 pyufunc.is\_CV\_img
 ===================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: is_CV_img
-

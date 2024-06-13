@@ -1,7 +1,6 @@
 pyufunc.img\_translate
 ======================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: img_translate
-
