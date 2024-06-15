@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (123):
+Available utility functions in pyUFunc (125):
 
 - util_ai:
   - mean_absolute_error
@@ -106,7 +106,9 @@ Available utility functions in pyUFunc (123):
   - pypi_downloads
 
 - util_img:
+  - img_bytes_to_CV
   - img_bytes_to_PIL
+  - img_CV_to_bytes
   - img_CV_to_PIL
   - img_PIL_to_bytes
   - img_PIL_to_CV

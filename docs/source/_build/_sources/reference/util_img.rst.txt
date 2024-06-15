@@ -12,7 +12,9 @@ img conversion
 
    img_to_bytes
    img_PIL_to_bytes
+   img_CV_to_bytes
    img_bytes_to_PIL
+   img_bytes_to_CV
 
 img operations
 ~~~~~~~~~~~~~~

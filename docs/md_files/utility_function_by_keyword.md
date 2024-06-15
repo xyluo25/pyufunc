@@ -20,7 +20,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (123):
+Available utility functions in pyUFunc (125):
 
 - non-keywords:
   - add_date_in_filename
@@ -112,7 +112,9 @@ Available utility functions in pyUFunc (123):
   - list_all_timezones
 
 - img:
+  - img_bytes_to_CV
   - img_bytes_to_PIL
+  - img_CV_to_bytes
   - img_CV_to_PIL
   - img_PIL_to_bytes
   - img_PIL_to_CV

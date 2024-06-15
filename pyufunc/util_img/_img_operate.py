@@ -32,7 +32,7 @@ def is_PIL_img(img: Any) -> bool:
     Example:
         >>> import cv2
         >>> from PIL import Image
-        >>> from pyufunc import is_pil_image
+        >>> from pyufunc import is_PIL_image
         >>> img_cv = cv2.imread('test.jpg')
         >>> img_pil = Image.open('test.jpg')
         >>> print(is_pil_image(img_cv))
@@ -59,7 +59,7 @@ def is_CV_img(img: Any) -> bool:
     Example:
         >>> import cv2
         >>> from PIL import Image
-        >>> from pyufunc import is_cv_image
+        >>> from pyufunc import is_CV_image
         >>> img_cv = cv2.imread('test.jpg')
         >>> img_pil = Image.open('test.jpg')
         >>> print(is_cv_image(img_cv))
@@ -87,7 +87,7 @@ def img_PIL_to_CV(img: Image.Image) -> np.ndarray:
     Example:
         >>> import cv2
         >>> from PIL import Image
-        >>> from pyufunc import cvt_img_PIL_to_CV
+        >>> from pyufunc import img_PIL_to_CV
         >>> img_pil = Image.open('test.jpg')
         >>> img_cv = cvt_img_PIL_to_CV(img_pil)
 
@@ -117,7 +117,7 @@ def img_CV_to_PIL(img: np.ndarray) -> Image.Image:
     Example:
         >>> import cv2
         >>> from PIL import Image
-        >>> from pyufunc import cvt_img_CV_to_PIL
+        >>> from pyufunc import img_CV_to_PIL
         >>> img_cv = cv2.imread('test.jpg')
         >>> img_pil = cvt_img_CV_to_PIL(img_cv)
     """
@@ -449,7 +449,7 @@ def img_show(img: Union[str, np.ndarray, Image.Image],
     """Show image in a window from image path or image array or PIL image object
 
     Args:
-        img (Union[str, np.ndarray, Image.Image]): image path or image array or PIL image object
+        img (Union[str, np.ndarray, Image.Image]): image path or OpenCV image array or PIL image object
         is_PIL_show (bool, optional): if True, show the image as a PIL image, default is False
             else, show the image as a CV image
 
