@@ -8,7 +8,9 @@
 from ._img_cvt import (
     img_to_bytes,
     img_PIL_to_bytes,
+    img_CV_to_bytes,
     img_bytes_to_PIL,
+    img_bytes_to_CV
 )
 
 from ._img_operate import (
@@ -27,7 +29,9 @@ __all__ = [
     # _img_cvt
     "img_to_bytes",
     "img_PIL_to_bytes",
+    "img_CV_to_bytes",
     "img_bytes_to_PIL",
+    "img_bytes_to_CV",
 
     # _img_rotate
     "is_PIL_img",
