@@ -12,7 +12,6 @@ import urllib.request
 import json
 import sys
 import html.parser
-import urllib3
 import copy
 import importlib
 import secrets
@@ -32,6 +31,7 @@ _USER_AGENT_STRINGS = json.loads(_web_agent_str)
 if TYPE_CHECKING:
     import requests
     from requests import Session
+    import urllib3
 
 
 class _FakeUserAgentParser(html.parser.HTMLParser):
@@ -76,8 +76,10 @@ class GitHubFileDownloader:
     """
     Download files on GitHub from a given repository URL.
     """
-
+    import_package('requests', verbose=False)
+    import_package("urllib3", verbose=False)
     import requests
+    import urllib3
 
     def __init__(self, repo_url: str, flatten_files: bool = False, output_dir: str | None = None) -> None:
         """

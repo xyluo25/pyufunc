@@ -35,6 +35,7 @@ from pyufunc.util_geo._gmns import read_link as gmns_read_link
 # from pyufunc.util_geo._gmns import read_zone_by_geometry as gmns_read_zone_by_geometry
 # from pyufunc.util_geo._gmns import read_zone_by_centroid as gmns_read_zone_by_centroid
 from pyufunc.util_geo._gmns import read_zone as gmns_read_zone
+from pyufunc.util_geo._get_osm_place import get_osm_place
 
 __all__ = [
     # geo_circle
@@ -68,5 +69,8 @@ __all__ = [
     "cvt_gcj02_to_wgs84",
     "cvt_baidu09_to_wgs84",
     "cvt_baidu09_to_gcj02",
+
+    # find osm place
+    "get_osm_place",
 
 ]

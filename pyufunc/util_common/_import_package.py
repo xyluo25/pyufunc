@@ -130,11 +130,13 @@ def import_package(pkg_name: Union[str, tuple, list],
         # import package from current environment after installation
         try:
             module = importlib.import_module(import_name)
+            globals()[import_name] = importlib.import_module(import_name)
 
             if verbose:
                 print(f"  :{module_name} has been installed successfully.")
 
         except Exception:
+            print(f"  :Info: failed to import {module_name}.")
             return None
 
     return module

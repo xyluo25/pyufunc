@@ -7,13 +7,13 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 import io
+import numpy as np
 
 # https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
     # check the support version of python
     # https://pillow.readthedocs.io/en/stable/installation.html
     from PIL import Image
-    import numpy as np
     import cv2
 
 from pyufunc.util_common._dependency_requires_decorator import requires
@@ -69,7 +69,7 @@ def img_PIL_to_bytes(img: Image) -> bytes:
         return bytes("", encoding='utf-8')
 
 
-@requires(("pillow", "PIL"))
+@requires(("pillow", "PIL"), verbose=False)
 def img_bytes_to_PIL(img_b: bytes) -> Image:
     """Convert image bytes to PIL image
 
