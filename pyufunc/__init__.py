@@ -6,7 +6,7 @@
 ##############################################################
 
 # Specify Python version to be used
-print("pyufunc supports Python 3.10 or higher.\n")
+# print("pyufunc supports Python 3.10 or higher.\n")
 
 # import all modules
 from .util_ai import *  # machine learning functions  # noqa: F403
