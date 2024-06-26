@@ -51,7 +51,6 @@ class OSMPlaceFinder:
     import shapely
     import requests
 
-
     def __init__(self, place: str, verbose: bool = False):
 
         self.place = place
@@ -623,10 +622,7 @@ class OSMPlaceFinder:
             response_json: dict[str, Any] | list[dict[str, Any]] = response.json()
         except JSONDecodeError as e:  # pragma: no cover
             msg = f"{domain!r} responded: {response.status_code} {response.reason} {response.text}"
-            if response.ok:
-                raise ValueError(msg) from e
             raise ValueError(msg) from e
-
         # log any remarks if they exist
         if isinstance(response_json, dict) and "remark" in response_json:  # pragma: no cover
             msg = f"{domain!r} remarked: {response_json['remark']!r}"
@@ -643,20 +639,39 @@ class OSMPlaceFinder:
 
 @requires("shapely", "requests", "urllib", verbose=False)
 def get_osm_place(place: str, verbose: bool = False) -> dict:
-    """
-    Geocode a place query to a GeoDataFrame.
+    """Geocode a place name to dictionary of its attributes and geometry from OpenStreetMap.
 
-    Parameters
-    ----------
-    place
-        The place name or query string to geocode.
-    verbose
-        Whether to print out information about the geocoding process.
+    Args:
+        place (str): The place of interest to geocode from OpenStreetMap.
+        verbose (bool, optional): whether to print out processing details. Defaults to False.
 
-    Returns
-    -------
-    dict
-        Dictionary with the geocoding result.
+    Note:
+        You can also manually get place of interest from OpenStreetMap
+        https://www.openstreetmap.org/ by searching the place name in the search bar.
+
+    Returns:
+        dict: dictionary of the place's attributes and geometry from OpenStreetMap.
+
+    Example:
+        >>> from pyufunc import get_osm_place
+        >>> get_osm_place("Arizona State University, AZ, USA")
+        {'bbox_north': '33.4329786',
+        'bbox_south': '33.4102062',
+        'bbox_east': '-111.9092447',
+        'bbox_west': '-111.9411651',
+        'place_id': 318528634,
+        'osm_type': 'relation',
+        'osm_id': 3444656,
+        'lat': '33.4213174',
+        'lon': '-111.93316305413154',
+        'class': 'amenity',
+        'type': 'university',
+        'place_rank': 30,
+        'importance': 0.5547365758311374,
+        'addresstype': 'amenity',
+        'name': 'Arizona State University',
+        'display_name': 'Arizona State University, 1151, South Forest Avenue, Tempe Junction, Tempe, Maricopa County, Arizona, 85281, United States',
+        'geometry': <MULTIPOLYGON (((-111.941 33.424, -111.941 33.424, -111.941 33.424, -111.941...>}
     """
 
     import_package("shapely", verbose=False)
@@ -665,6 +680,5 @@ def get_osm_place(place: str, verbose: bool = False) -> dict:
     import requests
     globals()["requests"] = importlib.import_module("requests")
     globals()["shapely"] = importlib.import_module("shapely")
-
 
     return OSMPlaceFinder(place, verbose).get_osm_place(place, None, False)
