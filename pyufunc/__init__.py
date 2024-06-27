@@ -7,7 +7,7 @@
 import sys
 
 
-def check_python_version():
+def check_python_version() -> None:
     # Split the version string and convert to tuple of integers
     version_tuple = tuple(map(int, sys.version.split()[0].split('.')))
 
@@ -17,6 +17,8 @@ def check_python_version():
             raise EnvironmentError("Python version 3.10 or higher is required.")
     except Exception:
         print("pyufunc supports Python 3.10 or higher.")
+    return None
+check_python_version()
 
 # Specify Python version to be used
 # print("pyufunc supports Python 3.10 or higher.\n")
