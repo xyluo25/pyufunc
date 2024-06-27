@@ -4,9 +4,22 @@
 # Contact Info: luoxiangyong01@gmail.com
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
+import sys
+
+
+def check_python_version():
+    # Split the version string and convert to tuple of integers
+    version_tuple = tuple(map(int, sys.version.split()[0].split('.')))
+
+    # Check if the version is greater than 3.10
+    try:
+        if version_tuple < (3, 10):
+            raise EnvironmentError("Python version 3.10 or higher is required.")
+    except Exception:
+        print("pyufunc supports Python 3.10 or higher.")
 
 # Specify Python version to be used
-print("pyufunc supports Python 3.10 or higher.\n")
+# print("pyufunc supports Python 3.10 or higher.\n")
 
 # import all modules
 from .util_ai import *  # machine learning functions  # noqa: F403
