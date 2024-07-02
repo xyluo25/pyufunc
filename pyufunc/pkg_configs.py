@@ -6,47 +6,16 @@
 ##############################################################
 from __future__ import absolute_import
 import os
-from pathlib import Path
-import logging
 import socket
 
 computer_name = socket.gethostname()
 computer_ip = socket.gethostbyname(computer_name)
 
-
-def __path2linux(path: str | Path) -> str:
-    """convert path to linux path for all OSes
-
-    Windows is smart enough to handle all paths from other OSes, but for other OSes, they can not handle windows paths.
-    linux paths are friendly to all OSes, Finally, we use linux paths in all OSes.
-
-    Besides, the reason not use normalize_path or unify_path or path2uniform but path2linux is that: the author is a big fan of Linux.
-    As an alternative, you can use path2uniform, which is the same as path2linux.
-
-    Location:
-        pyufunc/util_pathio/_path.py
-
-    Args:
-        path (str | Path): _description_
-
-    Returns:
-        str: a unified linux path
-
-    Examples:
-        >>> import pyufunc as uf
-        >>> uf.path2linux('C:\\Users\\Administrator\\Desktop\\test\\test.txt')
-        'C:/Users/Administrator/Desktop/test/test.txt'
-        >>> uf.path2linux('./test.txt')
-        'C:/Users/Administrator/Desktop/test/test.txt'
-    """
-
-    # the absolute path
-    path = os.path.abspath(path)
-
-    try:
-        return path.replace("\\", "/")
-    except Exception:
-        return str(path).replace("\\", "/")
+# ############## Package Configurations ############## #
+pkg_version = "0.3.2"
+pkg_name = "pyufunc"
+pkg_author = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
+pkg_email = "luoxiangyong01@gmail.com, xzhou74@asu.edu"
 
 __all__ = [
     "pkg_version",
@@ -60,12 +29,6 @@ __all__ = [
     "config_gmns",
     "config_color",
 ]
-
-# ############## Package Configurations ############## #
-pkg_version = "0.3.1"
-pkg_name = "pyufunc"
-pkg_author = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
-pkg_email = "luoxiangyong01@gmail.com, xzhou74@asu.edu"
 
 # ############### Function Keywords Configuration ############### #
 config_FUNC_KEYWORD = {
@@ -99,11 +62,11 @@ config_logging = {
     # log name
     "log_name": {},
 
-    # logging default folder
-    "log_folder": __path2linux(os.path.join(os.getcwd(), "logs")),
-
     # logging
     "log_level": "WARNING",
+
+    # log folder
+    "log_folder": "logs",
 
     # default log format
     "log_fmt": {
