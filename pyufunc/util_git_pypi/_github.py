@@ -160,6 +160,7 @@ class GitHubFileDownloader:
                               backoff_factor: float = 0.1,
                               retry_status: str = 'default',
                               **kwargs) -> Session:
+        # sourcery skip: dict-assign-update-to-union
         """Initialize a session for making HTTP requests.
 
         Args:
@@ -180,7 +181,8 @@ class GitHubFileDownloader:
         else:
             codes_for_retries = copy.copy(retry_status)
 
-        kwargs.update({'backoff_factor': backoff_factor, 'status_forcelist': codes_for_retries})
+        kwargs.update({'backoff_factor': backoff_factor,
+                       'status_forcelist': codes_for_retries})
         retries = urllib3.util.retry.Retry(total=max_retries, **kwargs)
 
         session = requests.Session()

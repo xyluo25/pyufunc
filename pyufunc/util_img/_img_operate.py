@@ -456,7 +456,6 @@ def img_show(img: Union[str, np.ndarray, Image.Image],
     import_package(("opencv-python", "cv2"), verbose=False)
     import_package(("pillow", "PIL"), verbose=False)
     from PIL import Image
-    import numpy as np
 
     # TDD, Test-Driven Development
     # check if the input image is a string

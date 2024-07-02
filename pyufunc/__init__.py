@@ -5,23 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 import sys
-
-
-def check_python_version() -> tuple:
-    # Split the version string and convert to tuple of integers
-    version_tuple = tuple(map(int, sys.version.split()[0].split('.')))
-
-    # Check if the version is greater than 3.10
-    try:
-        if version_tuple < (3, 10):
-            raise EnvironmentError("Python version 3.10 or higher is required.")
-    except Exception:
-        print("pyufunc supports Python 3.10 or higher.")
-    return version_tuple
-check_python_version()
-
-# Specify Python version to be used
-# print("pyufunc supports Python 3.10 or higher.\n")
+import itertools
 
 # import all modules
 from .util_ai import *  # machine learning functions  # noqa: F403
@@ -63,7 +47,23 @@ from pyufunc import util_optimization
 from pyufunc import util_pathio
 from pyufunc import util_test
 from pyufunc import util_vis
-import itertools
+
+
+def check_python_version(min_version: str = "3.10") -> tuple:
+    # Split the version string and convert to tuple of integers
+    version_tuple = tuple(map(int, sys.version.split()[0].split('.')))
+
+    # Check if the version is greater than or equal to the minimum version required
+    major, minor = min_version.split(".")
+    try:
+        if version_tuple < (int(major), int(minor)):
+            raise EnvironmentError(
+                f"Python version {min_version} or higher is required.")
+    except Exception:
+        print(f"pyufunc supports Python {min_version} or higher.")
+    return version_tuple
+
+check_python_version()
 
 # specify the available utility functions by category
 config_FUNC_CATEGORY = {
@@ -238,3 +238,6 @@ def find_util_func_by_keyword(keyword: str, verbose: bool = True) -> list:
         print(res_str)
         return ""
     return res_str_lst
+
+
+__all__ = list(config_FUNC_CATEGORY.values())

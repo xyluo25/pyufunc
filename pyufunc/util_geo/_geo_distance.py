@@ -10,14 +10,13 @@ from typing import Union, Iterable, TYPE_CHECKING
 import functools
 from pyufunc.util_geo._geo_circle import create_circle_at_point_with_radius
 from pyufunc.util_common import func_running_time, requires, import_package
+import numpy as np
 
 # https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
     import shapely
     from shapely.geometry import (Point, MultiPoint, LineString, MultiLineString,
                                   Polygon, MultiPolygon, GeometryCollection)
-
-    import numpy as np
 
 
 @requires("shapely", verbose=False)
@@ -55,7 +54,7 @@ def proj_point_to_line(point: Point, line: LineString) -> Point:
     return line.interpolate(line.project(point))
 
 
-@requires("shapely", "numpy", verbose=False)
+@requires("shapely", verbose=False)
 def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
                                  pt2: Union[Point, tuple, list, np.array],
                                  unit: str = 'km') -> float:
@@ -86,9 +85,7 @@ def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
 
     # import required modules
     import_package("shapely", verbose=False)
-    import_package("numpy", verbose=False)
     from shapely.geometry import Point
-    import numpy as np
 
     # TDD: Test-Driven Development, check data types of input arguments
     assert isinstance(pt1, (Point, tuple, list, np.ndarray)), "pt1 should be a shapely.Point, tuple, list, or np.array."
@@ -222,7 +219,6 @@ def get_coordinates_from_geom(geom_obj: Union[Point, MultiPoint, LineString, Mul
     import_package("shapely", verbose=False)
     from shapely.geometry import (Point, MultiPoint, LineString, MultiLineString,
                                   Polygon, MultiPolygon, GeometryCollection)
-    import numpy as np
 
     # TDD: Test-Driven Development, check data types of input arguments
     typing_list = (Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection)

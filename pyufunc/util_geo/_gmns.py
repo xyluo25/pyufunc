@@ -17,8 +17,9 @@ from pyufunc.util_common._dependency_requires_decorator import requires
 from pyufunc.util_common._import_package import import_package
 from pyufunc.pkg_configs import config_gmns
 
+import pandas as pd
+
 if TYPE_CHECKING:
-    import pandas as pd
     import shapely
 
 __all__ = ['Node', 'Link', 'POI', 'Zone', 'Agent',
@@ -494,7 +495,6 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
 # main functions for reading node, poi, zone files and network
 
 @func_time
-@requires("pandas")
 def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Node]:
     """Read node.csv file and return a dict of nodes.
 
@@ -518,9 +518,6 @@ def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
         >>> node_dict = read_node(node_file = r"../dataset/ASU/node.csv")
         FileNotFoundError: File: ../dataset/ASU/node.csv does not exist.
     """
-
-    import_package("pandas", verbose=False)
-    import pandas as pd
 
     if verbose:
         print("  :Running on parallel processing, make sure you are running under if __name__ == '__main__': \n")
@@ -569,7 +566,6 @@ def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
 
 
 @func_time
-@requires("pandas")
 def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: POI]:
     """Read poi.csv file and return a dict of POIs.
 
@@ -594,8 +590,6 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
         FileNotFoundError: File: ../dataset/ASU/poi.csv does not exist.
 
     """
-    import_package("pandas", verbose=False)
-    import pandas as pd
 
     # convert path to linux path
     poi_file = path2linux(poi_file)
@@ -634,7 +628,6 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
 
 
 @func_time
-@requires("pandas")
 def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Link]:
     """Read link.csv file and return a dict of Links.
 
@@ -656,10 +649,6 @@ def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
         >>> link_dict[1]
         Link(id=1, name='A', from_node_id=1, to_node_id=2, length=0.0, lanes=1, dir_flag=1, free_speed=0.0, capacity=0.0, link_type=1, link_type_name='motorway', geometry='LINESTRING (0 0, 1 1)')
     """
-
-    # import pandas as pd
-    import_package("pandas", verbose=False)
-    import pandas as pd
 
     # convert path to linux path
     link_file = path2linux(link_file)
@@ -708,7 +697,6 @@ def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
 
 
 # @func_time
-@requires("pandas")
 def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
@@ -724,9 +712,6 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
     Returns:
         _type_: _description_
     """
-
-    import_package("pandas", verbose=False)
-    import pandas as pd
 
     # convert path to linux path
     zone_file = path2linux(zone_file)
@@ -772,7 +757,6 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
 
 # @func_time
-@requires("pandas")
 def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
@@ -788,9 +772,6 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
     Returns:
         dict: a dict of Zones.
     """
-
-    import_package("pandas", verbose=False)
-    import pandas as pd
 
     # convert path to linux path
     zone_file = path2linux(zone_file)
@@ -837,7 +818,6 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
 
 @func_time
-@requires("pandas")
 def read_zone(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
@@ -863,9 +843,6 @@ def read_zone(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
         production=0, attraction=0, production_fixed=0, attraction_fixed=0,
         geometry='POLYGON ((0 0, 1 1, 1 0, 0 0))')
     """
-
-    import_package("pandas", verbose=False)
-    import pandas as pd
 
     # check zone_file, geometry or centroid?
     if not os.path.exists(zone_file):
