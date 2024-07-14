@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools", "wheel", "twine"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyufunc"
+version = "0.3.3"
+description = "pyufunc consolidates frequently used utility functions into one cohesive package"
+authors = [
+    {name = "Xiangyong Luo", email = "luoxiangyong01@gmail.com"},
+    {name = "Xuesong Simon Zhou", email = "xzhou74@asu.com"},
+]
+maintainers = [
+    {name = "Xiangyong Luo", email = "luoxiangyong01@gmail.com"},
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    'Intended Audience :: Developers',
+    "Operating System :: OS Independent",
+    'Topic :: Software Development :: Libraries'
+]
+
+readme = {file = 'README.md', content-type='text/markdown'}
+license = {file = 'LICENSE', content-type='text/plain'}
+# license = {text = "Apache License"}
+
+requires-python = ">=3.10"
+keywords = ["pyufunc", "utility functions", "utility-library", "python-utilities", "python-utils", "utility", "functions", "common functions", "common utility functions"]
+
+dynamic = ["dependencies"]
+
+[project.urls]
+"Homepage" = 'https://github.com/xyluo25/pyufunc'
+'Bug Tracker' = 'https://github.com/xyluo25/pyufunc/issues'
+'License' = 'https://github.com/xyluo25/pyufunc/blob/main/LICENSE'
+'Contact' = 'https://github.com/xyluo25'
+
+# Documentation = 'https://github.com/xyluo25/grid2demand'
+# Bug_Tracker = 'https://github.com/xyluo25/grid2demand/issues'
+# Repository = "https://github.com/xyluo25/grid2demand"
+# Download = "https://www.pepy.tech/projects/pyufunc"
+
+#         # 'Publication': '',
+#         # 'Citation': '',
+#         # 'Acknowledgement': '',
+#         # 'FAQs': '',
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+# optional-dependencies = {file = ["requirements_dev.txt"]}
+
+[tool.setuptools]
+py-modules = []
+package-data = {'pyufunc' = ['*.txt', '*.xls', '*.xlsx', '*.csv'], "test_data" = ['*.xls']}
+
+# [tool.setuptools.packages.find]
+# where = ["pyufunc"]
+
+# [tool.setuptools.package-data]
+# pyufunc = ['*.txt', '*.xls', '*.xlsx', '*.csv']
