@@ -5,26 +5,48 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-import contextlib
 import socket
+import re
 
 
-def get_host_ip():
-    ip = ''
-    host_name = ''
-    # noinspection PyBroadException
-    with contextlib.suppress(Exception):
-        sc = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        sc.connect(('8.8.8.8', 80))
-        ip = sc.getsockname()[0]
-        host_name = socket.gethostname()
-        sc.close()
-    return ip, host_name
+def get_host_name() -> str:
+    """Get the computer name.
+
+    Returns:
+        str: computer name.
+
+    Examples:
+        >>> import pyufunc as pf
+        >>> pf.get_computer_name()
+        'Xiangyong-PC'
+
+    """
+    return socket.gethostname()
 
 
-computer_ip, computer_name = get_host_ip()
+def get_host_ip() -> str:
+    """Get the computer IP address.
+
+    Returns:
+        str: computer IP address.
+
+    Examples:
+        >>> import pyufunc as pf
+        >>> pf.get_computer_ip()
+        '10.155.33.252'
+
+    """
+    computer_name = get_host_name()
+    return socket.gethostbyname(computer_name)
 
 
-def validate_url(url):
-    import re
+def validate_url(url: str) -> bool:
+    """Validate the URL.
+
+    Args:
+        url (str): the URL to validate.
+
+    Returns:
+        bool: True if the URL is valid, False otherwise.
+    """
     return bool(re.match(r'^https?:/{2}\w.+$', url))
