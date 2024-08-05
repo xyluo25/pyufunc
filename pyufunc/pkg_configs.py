@@ -55,6 +55,7 @@ config_FUNC_KEYWORD = {
     "error"       : [],
     "algo"        : [],
     "gmns"        : [],
+    "pytest"      : [],
 }
 
 # ############## Logging Configurations ############## #

@@ -21,7 +21,7 @@ except Exception:
 
 setuptools.setup(
     name="pyufunc",
-    version="0.3.3",
+    # version="0.3.3",
     author="Xiangyong Luo, Dr.Xuesong Simon Zhou",
     author_email="luoxiangyong01@gmail.com",
 

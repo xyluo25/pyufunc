@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyufunc"
-version = "0.3.3"
+version = "0.3.4rc1"
 description = "pyufunc consolidates frequently used utility functions into one cohesive package"
 authors = [
     {name = "Xiangyong Luo", email = "luoxiangyong01@gmail.com"},
