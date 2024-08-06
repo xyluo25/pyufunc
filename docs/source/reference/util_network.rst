@@ -13,4 +13,5 @@ network
 
    get_host_ip
    validate_url
+   get_host_name
 

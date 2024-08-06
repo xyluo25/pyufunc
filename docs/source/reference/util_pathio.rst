@@ -35,8 +35,8 @@ io
    add_dir_to_env
    pickle_save
    pickle_load
-   find_duplicated_files
-   remove_duplicated_files
+   find_duplicate_files
+   remove_duplicate_files
 
 platform
 ~~~~~~~~
@@ -54,4 +54,5 @@ argparse
 ~~~~~~~~
 .. autosummary::
    :toctree: api/
+
    with_argparse

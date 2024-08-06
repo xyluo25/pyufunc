@@ -1,7 +1,6 @@
 pyufunc.pytest\_show\_skip\_xfail
 =================================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: pytest_show_skip_xfail
-

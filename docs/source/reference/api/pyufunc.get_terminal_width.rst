@@ -1,7 +1,6 @@
 pyufunc.get\_terminal\_width
 ============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: get_terminal_width
-

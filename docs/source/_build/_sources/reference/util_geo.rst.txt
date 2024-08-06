@@ -40,6 +40,7 @@ gmns_geo
     gmns_read_link
     gmns_read_poi
     gmns_read_zone
+    get_osm_place
 
 Coordinate Conversation
 ~~~~~~~~~~~~~~~~~~~~~~~

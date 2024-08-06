@@ -5,7 +5,7 @@ util_test
 ================
 .. currentmodule:: pyufunc
 
-Updating...
+Pytest
 ~~~~~~~~~~~
 .. autosummary::
    :toctree: api/

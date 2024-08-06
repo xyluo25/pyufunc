@@ -35,6 +35,8 @@ io
    add_dir_to_env
    pickle_save
    pickle_load
+   find_duplicate_files
+   remove_duplicate_files
 
 platform
 ~~~~~~~~
@@ -47,3 +49,10 @@ platform
    is_mac
    get_terminal_width
    get_terminal_height
+
+argparse
+~~~~~~~~
+.. autosummary::
+   :toctree: api/
+
+   with_argparse

@@ -1,7 +1,6 @@
 pyufunc.get\_file\_size
 =======================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: get_file_size
-

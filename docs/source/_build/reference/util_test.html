@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=b01fafc3"></script>
+    <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -49,7 +49,7 @@
     <link rel="icon" href="../_static/pyufunc_logo_icon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="util_vis" href="util_vis.html" />
+    <link rel="next" title="pyufunc.pytest_show_naming_convention" href="api/pyufunc.pytest_show_naming_convention.html" />
     <link rel="prev" title="pyufunc.get_terminal_height" href="api/pyufunc.get_terminal_height.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -420,7 +420,17 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="util_office.html">util_office</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_optimization.html">util_optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_pathio.html">util_pathio</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">util_test</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">util_test</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.pytest_show_naming_convention.html">pyufunc.pytest_show_naming_convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.pytest_show_assert.html">pyufunc.pytest_show_assert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.pytest_show_raise.html">pyufunc.pytest_show_raise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.pytest_show_warning.html">pyufunc.pytest_show_warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.pytest_show_fixture.html">pyufunc.pytest_show_fixture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.pytest_show_parametrize.html">pyufunc.pytest_show_parametrize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.pytest_show_database.html">pyufunc.pytest_show_database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.pytest_show_skip_xfail.html">pyufunc.pytest_show_skip_xfail</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="util_vis.html">util_vis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pkg_utils.html">pkg_utils</a></li>
 </ul>
@@ -484,10 +494,34 @@ document.write(`
                   
   <section id="util-test">
 <span id="api-util-test"></span><h1>util_test<a class="headerlink" href="#util-test" title="Link to this heading">#</a></h1>
-<section id="updating">
-<h2>Updating…<a class="headerlink" href="#updating" title="Link to this heading">#</a></h2>
+<section id="pytest">
+<h2>Pytest<a class="headerlink" href="#pytest" title="Link to this heading">#</a></h2>
 <table class="autosummary longtable table autosummary">
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.pytest_show_naming_convention.html#pyufunc.pytest_show_naming_convention" title="pyufunc.pytest_show_naming_convention"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytest_show_naming_convention</span></code></a>()</p></td>
+<td><p>Show pytest naming convention.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.pytest_show_assert.html#pyufunc.pytest_show_assert" title="pyufunc.pytest_show_assert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytest_show_assert</span></code></a>()</p></td>
+<td><p>Show pytest assert.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.pytest_show_raise.html#pyufunc.pytest_show_raise" title="pyufunc.pytest_show_raise"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytest_show_raise</span></code></a>()</p></td>
+<td><p>Show pytest raise.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.pytest_show_warning.html#pyufunc.pytest_show_warning" title="pyufunc.pytest_show_warning"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytest_show_warning</span></code></a>()</p></td>
+<td><p>Show pytest warning.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.pytest_show_fixture.html#pyufunc.pytest_show_fixture" title="pyufunc.pytest_show_fixture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytest_show_fixture</span></code></a>()</p></td>
+<td><p>Show pytest fixture.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.pytest_show_parametrize.html#pyufunc.pytest_show_parametrize" title="pyufunc.pytest_show_parametrize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytest_show_parametrize</span></code></a>()</p></td>
+<td><p>Show pytest parametrize.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.pytest_show_database.html#pyufunc.pytest_show_database" title="pyufunc.pytest_show_database"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytest_show_database</span></code></a>()</p></td>
+<td><p>Show pytest database connection and testing</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.pytest_show_skip_xfail.html#pyufunc.pytest_show_skip_xfail" title="pyufunc.pytest_show_skip_xfail"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytest_show_skip_xfail</span></code></a>()</p></td>
+<td><p>Show pytest skip and xfail.</p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -513,11 +547,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="util_vis.html"
+       href="api/pyufunc.pytest_show_naming_convention.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">util_vis</p>
+        <p class="prev-next-title">pyufunc.pytest_show_naming_convention</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -539,7 +573,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating">Updating…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytest">Pytest</a></li>
 </ul>
   </nav></div>
 

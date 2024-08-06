@@ -1,7 +1,6 @@
 pyufunc.pytest\_show\_fixture
 =============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: pytest_show_fixture
-

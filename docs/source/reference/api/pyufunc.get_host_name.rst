@@ -1,7 +1,6 @@
 pyufunc.get\_host\_name
 =======================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: get_host_name
-

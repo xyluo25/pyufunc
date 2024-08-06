@@ -1,7 +1,6 @@
 pyufunc.remove\_duplicate\_files
 ================================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: remove_duplicate_files
-

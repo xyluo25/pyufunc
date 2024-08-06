@@ -12,3 +12,11 @@ Email
 
    is_valid_email
    send_email
+
+
+Printer
+~~~~~~~
+.. autosummary::
+   :toctree: api/
+
+   printer_file

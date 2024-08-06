@@ -1,7 +1,6 @@
 pyufunc.gmns\_read\_zone
 ========================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: gmns_read_zone
-

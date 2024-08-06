@@ -1,7 +1,6 @@
 pyufunc.str\_strip
 ==================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: str_strip
-

@@ -1,7 +1,6 @@
 pyufunc.with\_argparse
 ======================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: with_argparse
-

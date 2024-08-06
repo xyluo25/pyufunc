@@ -1,7 +1,6 @@
 pyufunc.find\_k\_nearest\_points
 ================================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: find_k_nearest_points
-

@@ -1,7 +1,6 @@
 pyufunc.is\_PIL\_img
 ====================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: is_PIL_img
-

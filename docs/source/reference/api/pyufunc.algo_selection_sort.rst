@@ -1,7 +1,6 @@
 pyufunc.algo\_selection\_sort
 =============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: algo_selection_sort
-

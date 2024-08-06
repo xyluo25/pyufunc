@@ -1,7 +1,6 @@
 pyufunc.img\_resize
 ===================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: img_resize
-

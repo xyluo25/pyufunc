@@ -1,7 +1,6 @@
 pyufunc.printer\_file
 =====================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: printer_file
-

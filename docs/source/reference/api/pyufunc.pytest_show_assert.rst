@@ -1,7 +1,6 @@
 pyufunc.pytest\_show\_assert
 ============================
 
-.. automodule:: pyufunc
+.. currentmodule:: pyufunc
 
 .. autofunction:: pytest_show_assert
-

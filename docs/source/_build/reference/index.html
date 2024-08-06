@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=b01fafc3"></script>
+    <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -658,6 +658,7 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_read_link.html">pyufunc.gmns_read_link</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_read_poi.html">pyufunc.gmns_read_poi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_read_zone.html">pyufunc.gmns_read_zone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_osm_place.html">pyufunc.get_osm_place</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="util_geo.html#coordinate-conversation">Coordinate Conversation</a><ul>
@@ -730,6 +731,7 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 <li class="toctree-l2"><a class="reference internal" href="util_network.html#network">network</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_host_ip.html">pyufunc.get_host_ip</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.validate_url.html">pyufunc.validate_url</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_host_name.html">pyufunc.get_host_name</a></li>
 </ul>
 </li>
 </ul>
@@ -738,6 +740,10 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 <li class="toctree-l2"><a class="reference internal" href="util_office.html#email">Email</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.is_valid_email.html">pyufunc.is_valid_email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.send_email.html">pyufunc.send_email</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_office.html#printer">Printer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.printer_file.html">pyufunc.printer_file</a></li>
 </ul>
 </li>
 </ul>
@@ -768,6 +774,8 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.add_dir_to_env.html">pyufunc.add_dir_to_env</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pickle_save.html">pyufunc.pickle_save</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pickle_load.html">pyufunc.pickle_load</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.find_duplicate_files.html">pyufunc.find_duplicate_files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.remove_duplicate_files.html">pyufunc.remove_duplicate_files</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="util_pathio.html#platform">platform</a><ul>
@@ -779,10 +787,24 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_terminal_height.html">pyufunc.get_terminal_height</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="util_pathio.html#argparse">argparse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.with_argparse.html">pyufunc.with_argparse</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="util_test.html">util_test</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_test.html#updating">Updating…</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_test.html#pytest">Pytest</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pytest_show_naming_convention.html">pyufunc.pytest_show_naming_convention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pytest_show_assert.html">pyufunc.pytest_show_assert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pytest_show_raise.html">pyufunc.pytest_show_raise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pytest_show_warning.html">pyufunc.pytest_show_warning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pytest_show_fixture.html">pyufunc.pytest_show_fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pytest_show_parametrize.html">pyufunc.pytest_show_parametrize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pytest_show_database.html">pyufunc.pytest_show_database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pytest_show_skip_xfail.html">pyufunc.pytest_show_skip_xfail</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="util_vis.html">util_vis</a><ul>
