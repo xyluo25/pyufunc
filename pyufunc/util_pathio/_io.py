@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import uuid
 import sys
+import hashlib
 
 
 def get_file_size(filename: str | Path, unit: str = "kb") -> str:
@@ -276,6 +277,64 @@ def pickle_load(filename: str | Path) -> object:
 
     return obj
 
+
+def calculate_file_hash(file_path: str, block_size: int = 65536) -> str:
+    """Calculate the hash of a file using the MD5 algorithm.
+
+    Args:
+        file_path (str): The path to the file to calculate the hash of.
+        block_size (int): block hash size to avoid over memory. Defaults to 65536.
+
+    Returns:
+        str: The hash of the file.
+    """
+    hash_alg = hashlib.md5()
+    with open(file_path, 'rb') as file:
+        for block in iter(lambda: file.read(block_size), b''):
+            hash_alg.update(block)
+    return hash_alg.hexdigest()
+
+
+def find_duplicate_files(root_folder: str) -> list:
+    """Find duplicate files in a directory and its subdirectories.
+
+    Args:
+        root_folder (str): The root folder to search for duplicate files in.
+
+    Returns:
+        list: A list of duplicate files
+
+    """
+    file_hashes = {}
+    duplicates = []
+
+    for dirpath, _, filenames in os.walk(root_folder):
+        for filename in filenames:
+            file_path = os.path.join(dirpath, filename)
+            file_hash = calculate_file_hash(file_path)
+
+            if file_hash in file_hashes:
+                duplicates.append(file_path)
+            else:
+                file_hashes[file_hash] = file_path
+
+    return duplicates
+
+
+def remove_duplicate_files(root_folder: str) -> None:
+    """Remove duplicate files in a directory and its subdirectories.
+
+    Args:
+        root_folder (str): The root folder to search for duplicate files in.
+
+    Returns:
+        None
+    """
+    duplicates = find_duplicate_files(root_folder)
+
+    for duplicate in duplicates:
+        os.remove(duplicate)
+        print(f'Removed duplicate file: {duplicate}')
 
 # def write_yaml_file(func=None, *, log_dir: str | Path = LOGGING_FOLDER, ):
 #     import yaml

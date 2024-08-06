@@ -5,7 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-from ._argparse import *
+from ._argparse import with_argparse
 from ._io import (get_file_size,
                   get_dir_size,
                   create_tempfile,
@@ -13,6 +13,8 @@ from ._io import (get_file_size,
                   add_dir_to_env,
                   pickle_save,
                   pickle_load,
+                  find_duplicate_files,
+                  remove_duplicate_files,
                   )
 from ._path import (path2linux,
                     path2uniform,
@@ -36,6 +38,7 @@ from ._platform import (check_platform,
 
 __all__ = [
     # argparse
+    "with_argparse",
 
     # io
     "get_file_size",
@@ -45,6 +48,8 @@ __all__ = [
     "add_dir_to_env",
     "pickle_save",
     "pickle_load",
+    "find_duplicate_files",
+    "remove_duplicate_files",
 
     # path
     'path2linux',
