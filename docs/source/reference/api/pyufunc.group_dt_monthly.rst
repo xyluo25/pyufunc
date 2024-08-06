@@ -1,6 +1,7 @@
 pyufunc.group\_dt\_monthly
 ==========================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: group_dt_monthly
+

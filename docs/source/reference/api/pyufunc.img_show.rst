@@ -1,6 +1,7 @@
 pyufunc.img\_show
 =================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: img_show
+

@@ -1,6 +1,7 @@
 pyufunc.mean\_squared\_log\_error
 =================================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: mean_squared_log_error
+

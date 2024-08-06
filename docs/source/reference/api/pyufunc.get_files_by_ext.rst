@@ -1,6 +1,7 @@
 pyufunc.get\_files\_by\_ext
 ===========================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: get_files_by_ext
+

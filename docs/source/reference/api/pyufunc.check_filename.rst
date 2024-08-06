@@ -1,6 +1,7 @@
 pyufunc.check\_filename
 =======================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: check_filename
+

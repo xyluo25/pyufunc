@@ -1,6 +1,7 @@
 pyufunc.split\_list\_by\_equal\_sublist
 =======================================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: split_list_by_equal_sublist
+

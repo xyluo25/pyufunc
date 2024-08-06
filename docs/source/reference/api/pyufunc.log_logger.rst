@@ -1,6 +1,7 @@
 pyufunc.log\_logger
 ===================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: log_logger
+

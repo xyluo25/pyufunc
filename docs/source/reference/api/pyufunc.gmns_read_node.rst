@@ -1,6 +1,7 @@
 pyufunc.gmns\_read\_node
 ========================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: gmns_read_node
+

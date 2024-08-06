@@ -1,6 +1,7 @@
 pyufunc.end\_of\_life
 =====================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: end_of_life
+

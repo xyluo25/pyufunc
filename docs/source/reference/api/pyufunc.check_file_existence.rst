@@ -1,6 +1,7 @@
 pyufunc.check\_file\_existence
 ==============================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: check_file_existence
+

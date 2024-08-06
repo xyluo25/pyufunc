@@ -1,6 +1,7 @@
 pyufunc.img\_rotate
 ===================
 
-.. currentmodule:: pyufunc
+.. automodule:: pyufunc
 
 .. autofunction:: img_rotate
+
