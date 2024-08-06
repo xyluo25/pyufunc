@@ -1,4 +1,4 @@
-## Message From PyUFunc Developers
+## Message From pyufunc Developers
 
 This document serves as a curated compendium of existing utility functions, meticulously organized by keywords to facilitate ease of navigation and application for developers across various disciplines. By categorizing these functions, we aim to provide a structured overview that not only simplifies the discovery process but also encourages the exploration of new methods and techniques that may have been previously overlooked. This categorization is intended to serve as a bridge, connecting developers with the tools they need to optimize their code, improve functionality, and innovate within their projects.
 
@@ -12,9 +12,10 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (125):
+Available utility functions in pyUFunc (139):
 
 - util_ai:
+
   - mean_absolute_error
   - mean_absolute_percentage_error
   - mean_percentage_error
@@ -22,16 +23,16 @@ Available utility functions in pyUFunc (125):
   - mean_squared_log_error
   - r2_score
   - root_mean_squared_error
-
 - util_algorithm:
+
   - algo_bubble_sort
   - algo_heap_sort
   - algo_insertion_sort
   - algo_merge_sort
   - algo_quick_sort
   - algo_selection_sort
-
 - util_common:
+
   - count_lines_of_code
   - end_of_life
   - func_running_time
@@ -50,8 +51,8 @@ Available utility functions in pyUFunc (125):
   - show_docstring_numpy
   - timeout
   - timeout_linux
-
 - util_data_processing:
+
   - cvt_int_to_alpha
   - delete_dict_keys
   - dict_delete_keys
@@ -61,8 +62,8 @@ Available utility functions in pyUFunc (125):
   - split_list_by_equal_sublist
   - split_list_by_fixed_length
   - str_strip
-
 - util_datetime:
+
   - cvt_dt_to_tz
   - fmt_dt_to_str
   - fmt_str_to_dt
@@ -75,8 +76,8 @@ Available utility functions in pyUFunc (125):
   - group_dt_weekly
   - group_dt_yearly
   - list_all_timezones
-
 - util_geo:
+
   - calc_distance_on_unit_sphere
   - create_circle_at_point_with_radius
   - cvt_baidu09_to_gcj02
@@ -88,6 +89,7 @@ Available utility functions in pyUFunc (125):
   - find_closest_point
   - find_k_nearest_points
   - get_coordinates_from_geom
+  - get_osm_place
   - gmns_geo
   - gmns_read_link
   - gmns_read_node
@@ -99,13 +101,13 @@ Available utility functions in pyUFunc (125):
   - GMNSPOI
   - GMNSZone
   - proj_point_to_line
-
 - util_git_pypi:
+
   - github_file_downloader
   - github_get_status
   - pypi_downloads
-
 - util_img:
+
   - img_bytes_to_CV
   - img_bytes_to_PIL
   - img_CV_to_bytes
@@ -120,22 +122,24 @@ Available utility functions in pyUFunc (125):
   - img_translate
   - is_CV_img
   - is_PIL_img
-
 - util_log:
+
   - add_date_in_filename
   - generate_dir_with_date
   - log_logger
   - log_writer
-
 - util_network:
+
   - get_host_ip
+  - get_host_name
   - validate_url
-
 - util_office:
-  - is_valid_email
-  - send_email
 
+  - is_valid_email
+  - printer_file
+  - send_email
 - util_pathio:
+
   - add_dir_to_env
   - check_file_existence
   - check_filename
@@ -143,6 +147,7 @@ Available utility functions in pyUFunc (125):
   - check_platform
   - create_tempfile
   - create_unique_filename
+  - find_duplicate_files
   - generate_unique_filename
   - get_dir_size
   - get_file_size
@@ -157,10 +162,22 @@ Available utility functions in pyUFunc (125):
   - path2uniform
   - pickle_load
   - pickle_save
+  - remove_duplicate_files
   - remove_file
   - show_dir_in_tree
+  - with_argparse
+- util_test:
 
+  - pytest_show_assert
+  - pytest_show_database
+  - pytest_show_fixture
+  - pytest_show_naming_convention
+  - pytest_show_parametrize
+  - pytest_show_raise
+  - pytest_show_skip_xfail
+  - pytest_show_warning
 - pkg_utils:
+
   - find_util_func_by_keyword
   - show_util_func_by_category
   - show_util_func_by_keyword

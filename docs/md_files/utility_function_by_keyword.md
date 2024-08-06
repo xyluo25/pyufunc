@@ -4,7 +4,7 @@
  *  Author/Copyright: Mr. Xiangyong Luo
 -->
 
-## Message From PyUFunc Developers
+## Message From pyufunc Developers
 
 This document is designed to serve as an invaluable resource for developers, offering an extensive list of existing utility functions organized by keywords. The use of keywords for organization purposes aims to streamline the search process, enabling developers to quickly and efficiently find the specific functions they need to enhance their projects. Utility functions play a crucial role in software development, providing pre-built solutions to common problems and tasks, thereby saving time and reducing the complexity of coding from scratch. By presenting these functions in a keyword-centric format, we facilitate a more intuitive and user-friendly approach to accessing a vast repository of tools, ensuring that developers can leverage the full potential of utility functions to optimize their code, improve performance, and innovate within their applications.
 
@@ -20,9 +20,10 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (125):
+Available utility functions in pyUFunc (139):
 
 - non-keywords:
+
   - add_date_in_filename
   - add_dir_to_env
   - count_lines_of_code
@@ -39,29 +40,34 @@ Available utility functions in pyUFunc (125):
   - path2uniform
   - pickle_load
   - pickle_save
+  - printer_file
   - r2_score
+  - remove_duplicate_files
   - remove_file
   - requires
   - send_email
   - str_strip
   - timeout
   - timeout_linux
-
+  - with_argparse
 - show:
+
   - show_dir_in_tree
   - show_docstring_google
   - show_docstring_headers
   - show_docstring_numpy
   - show_util_func_by_category
   - show_util_func_by_keyword
-
 - get:
+
   - get_coordinates_from_geom
   - get_dir_size
   - get_file_size
   - get_filenames_by_ext
   - get_files_by_ext
   - get_host_ip
+  - get_host_name
+  - get_osm_place
   - get_terminal_height
   - get_terminal_width
   - get_time_diff_in_unit
@@ -69,49 +75,50 @@ Available utility functions in pyUFunc (125):
   - get_user_defined_func
   - get_user_defined_module
   - get_user_imported_module
-
 - generate:
+
   - generate_dir_with_date
   - generate_password
   - generate_unique_filename
-
 - create:
+
   - create_circle_at_point_with_radius
   - create_tempfile
   - create_unique_filename
-
 - find:
+
   - find_closest_point
+  - find_duplicate_files
   - find_k_nearest_points
   - find_util_func_by_keyword
-
 - calc:
+
   - calc_distance_on_unit_sphere
-
 - run:
-  - run_parallel
 
+  - run_parallel
 - group:
+
   - group_dt_daily
   - group_dt_hourly
   - group_dt_minutely
   - group_dt_monthly
   - group_dt_weekly
   - group_dt_yearly
-
 - check:
+
   - check_file_existence
   - check_filename
   - check_files_in_dir
   - check_platform
-
 - validate:
+
   - validate_url
-
 - list:
-  - list_all_timezones
 
+  - list_all_timezones
 - img:
+
   - img_bytes_to_CV
   - img_bytes_to_PIL
   - img_CV_to_bytes
@@ -124,17 +131,17 @@ Available utility functions in pyUFunc (125):
   - img_show
   - img_to_bytes
   - img_translate
-
 - split:
+
   - split_dict_by_chunk
   - split_list_by_equal_sublist
   - split_list_by_fixed_length
-
 - fmt:
+
   - fmt_dt_to_str
   - fmt_str_to_dt
-
 - cvt:
+
   - cvt_baidu09_to_gcj02
   - cvt_baidu09_to_wgs84
   - cvt_dt_to_tz
@@ -143,8 +150,8 @@ Available utility functions in pyUFunc (125):
   - cvt_int_to_alpha
   - cvt_wgs84_to_baidu09
   - cvt_wgs84_to_gcj02
-
 - is:
+
   - is_CV_img
   - is_float
   - is_linux
@@ -154,34 +161,34 @@ Available utility functions in pyUFunc (125):
   - is_user_defined_func
   - is_valid_email
   - is_windows
-
 - proj:
-  - proj_point_to_line
 
+  - proj_point_to_line
 - github:
+
   - github_file_downloader
   - github_get_status
-
 - pypi:
-  - pypi_downloads
 
+  - pypi_downloads
 - error:
+
   - mean_absolute_error
   - mean_absolute_percentage_error
   - mean_percentage_error
   - mean_squared_error
   - mean_squared_log_error
   - root_mean_squared_error
-
 - algo:
+
   - algo_bubble_sort
   - algo_heap_sort
   - algo_insertion_sort
   - algo_merge_sort
   - algo_quick_sort
   - algo_selection_sort
-
 - gmns:
+
   - gmns_geo
   - gmns_read_link
   - gmns_read_node
@@ -192,3 +199,13 @@ Available utility functions in pyUFunc (125):
   - GMNSNode
   - GMNSPOI
   - GMNSZone
+- pytest:
+
+  - pytest_show_assert
+  - pytest_show_database
+  - pytest_show_fixture
+  - pytest_show_naming_convention
+  - pytest_show_parametrize
+  - pytest_show_raise
+  - pytest_show_skip_xfail
+  - pytest_show_warning
