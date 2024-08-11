@@ -10,7 +10,9 @@ from ._dict import (split_dict_by_chunk,
                     delete_dict_keys,
                     dict_delete_keys)
 from ._int_to_alpha import cvt_int_to_alpha
-from ._list import split_list_by_equal_sublist, split_list_by_fixed_length
+from ._list import (split_list_by_equal_sublist,
+                    split_list_by_fixed_length,
+                    flat_nested_list)
 from ._float import is_float
 from ._str import str_strip
 
@@ -27,6 +29,7 @@ __all__ = [
     # _list
     "split_list_by_equal_sublist",
     "split_list_by_fixed_length",
+    "flat_nested_list",
 
     # _float
     "is_float",

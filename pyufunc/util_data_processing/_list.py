@@ -6,6 +6,7 @@
 ##############################################################
 
 from typing import Generator
+import itertools
 
 
 def split_list_by_equal_sublist(lst: list, num_of_sub: int) -> Generator:
@@ -95,3 +96,22 @@ def split_list_by_fixed_length(lst: list, fixed_length: int) -> Generator:
 
     for i in range(0, len(lst), fixed_length):
         yield lst[i:i + fixed_length]
+
+
+def flat_nested_list(nest_lst: list) -> list:
+    """Flatten a nested list.
+
+    Args:
+        nest_lst (list): a nested list
+
+    Examples:
+        >>> import pyufunc as pf
+        >>> nest_lst = [[1, 2, 3], [4, 5], [6, 7, 8]]
+        >>> pf.flat_nested_list(nest_lst)
+        [1, 2, 3, 4, 5, 6, 7, 8]
+
+    Returns:
+        list: a flat list
+    """
+
+    return list(itertools.chain(*nest_lst))
