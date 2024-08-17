@@ -24,7 +24,70 @@ def str_strip(string: str) -> str:
         'hoge'
         >>> str_strip(" ho    ge   ")
         'ho ge'
-        >>> str_strip("  ho    g　e")
+        >>> str_strip("  ho    g e")
         'ho g e'
     """
-    return re.sub(pattern=r"[\s 　]+", repl=" ", string=str(string)).strip()
+    return re.sub(pattern=r"[\s  ]+", repl=" ", string=str(string)).strip()
+
+
+def cvt_str_to_int(string: str) -> int:
+    """Convert a string to an integer.
+
+    Args:
+        string (str) : string
+
+    Returns:
+        int : integer
+
+    Example:
+        >>> from pyufunc import cvt_str_to_int
+        >>> cvt_str_to_int("123")
+        123
+        >>> cvt_str_to_int("123.0")
+        123
+        >>> cvt_str_to_int("123.9")
+        123
+    """
+
+    # TDD
+    if not isinstance(string, str):
+        raise TypeError("The input must be a string.")
+
+    try:
+        return int(re.sub(pattern=r"\.\d+", repl="", string=string))
+    except ValueError:
+        try:
+            return int(float(string))
+        except Exception as e:
+            raise Exception(f"Error: {e}") from e
+    except Exception as e:
+        raise Exception(f"Error: {e}") from e
+
+
+def cvt_str_to_float(string: str) -> float:
+    """Convert a string to a float.
+
+    Args:
+        string (str) : string
+
+    Returns:
+        float : float
+
+    Example:
+        >>> from pyufunc import cvt_str_to_float
+        >>> cvt_str_to_float("123")
+        123.0
+        >>> cvt_str_to_float("123.0")
+        123.0
+        >>> cvt_str_to_float("123.9")
+        123.9
+    """
+
+    # TDD
+    if not isinstance(string, str):
+        raise TypeError("The input must be a string.")
+
+    try:
+        return float(string)
+    except Exception as e:
+        raise Exception(f"Error: {e}") from e
