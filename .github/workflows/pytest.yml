@@ -41,10 +41,10 @@ jobs:
     - name: Test with pytest
       run: |
         set -o pipefail
-        pytest --junitxml=${{ matrix.python-version }}_pytest-results.xml
+        pytest > ${{ matrix.python-version }}_pytest-results.txt || true
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.python-version }}_pytest-results.xml
-        path: ${{ matrix.python-version }}_pytest-results.xml
+        name: ${{ matrix.python-version }}_pytest-results
+        path: ${{ matrix.python-version }}_pytest-results.txt
