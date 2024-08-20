@@ -22,7 +22,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up Python 3.10
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: "3.10"
 
@@ -43,32 +43,16 @@ jobs:
     - name: Test with pytest
       run: |
         set -o pipefail
-        pytest --junitxml=pytest_310.xml
+        pytest
+
+    - name: Pytest Summary
+      uses: dariocurr/pytest-summary@main
+      with:
+        output: pytest_310_summary.md
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: pytest_310
-        path: pytest_310.xml
-
-    - name: Surface failing tests
+        name: pytest_310_summary
+        path: pytest_310_summary.md
       if: always()
-      uses: pmeier/pytest-results-action@main
-      with:
-        # A list of JUnit XML files, directories containing the former, and wildcard
-        # patterns to process.
-        # See @actions/glob for supported patterns.
-        path: pytest_310.xml
-
-        # (Optional) Add a summary of the results at the top of the report
-        summary: true
-
-        # (Optional) Select which results should be included in the report.
-        # Follows the same syntax as `pytest -r`
-        display-options: fEX
-
-        # (Optional) Fail the workflow if no JUnit XML was found.
-        fail-on-empty: fail
-
-        # (Optional) Title of the test results section in the workflow summary
-        title: Pytest results
