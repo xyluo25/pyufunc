@@ -695,8 +695,7 @@ def _create_link_from_dataframe(df_link: pd.DataFrame) -> dict[int, Zone]:
                 )
                 link_dict[df_link.loc[i, 'link_id']] = link
             except Exception as e:
-                print(f"  : Unable to create link: {
-                      df_link.loc[i, 'link_id']}, error: {e}", flush=True)
+                print(f"  : Unable to create link: {df_link.loc[i, 'link_id']}, error: {e}", flush=True)
         return link_dict
     except Exception as e:
         print(f"  : Unable to create link: {e}", flush=True)
