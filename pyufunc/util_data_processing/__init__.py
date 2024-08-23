@@ -16,6 +16,8 @@ from ._list import (split_list_by_equal_sublist,
 from ._float import is_float
 from ._str import str_strip
 
+from ._dataclass import create_dataclass, merge_dataclass, extend_dataclass
+
 __all__ = [
     # _dict
     "split_dict_by_chunk",
@@ -35,5 +37,10 @@ __all__ = [
     "is_float",
 
     # _str
-    "str_strip"
+    "str_strip",
+
+    # dataclass
+    "create_dataclass",
+    "merge_dataclass",
+    "extend_dataclass"
 ]
