@@ -295,15 +295,13 @@ class DataclassDictWrapper:
         if hasattr(self._instance, key):
             return getattr(self._instance, key)
         else:
-            raise KeyError(f"Key {key} not found in {
-                           self._instance.__class__.__name__}")
+            raise KeyError(f"Key {key} not found in {self._instance.__class__.__name__}")
 
     def __setitem__(self, key, value):
         if hasattr(self._instance, key):
             setattr(self._instance, key, value)
         else:
-            raise KeyError(f"Key {key} not found in {
-                           self._instance.__class__.__name__}")
+            raise KeyError(f"Key {key} not found in {self._instance.__class__.__name__}")
 
     def __getattr__(self, item):
         return getattr(self._instance, item)
