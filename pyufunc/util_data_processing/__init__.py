@@ -16,7 +16,11 @@ from ._list import (split_list_by_equal_sublist,
 from ._float import is_float
 from ._str import str_strip
 
-from ._dataclass import create_dataclass, merge_dataclass, extend_dataclass
+from ._dataclass import (create_dataclass,
+                         create_dataclass_from_dict,
+                         merge_dataclass,
+                         extend_dataclass,
+                         dataclass_dict_access)
 
 __all__ = [
     # _dict
@@ -41,6 +45,8 @@ __all__ = [
 
     # dataclass
     "create_dataclass",
+    "create_dataclass_from_dict",
     "merge_dataclass",
-    "extend_dataclass"
+    "extend_dataclass",
+    "dataclass_dict_access",
 ]

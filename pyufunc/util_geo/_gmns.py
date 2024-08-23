@@ -9,7 +9,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 import os
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field, asdict, fields
 from multiprocessing import Pool
 from pyufunc.util_common._func_time_decorator import func_time
 from pyufunc.util_pathio._path import path2linux
@@ -62,9 +62,20 @@ class Node:
     geometry: str = ''
     _zone_id: int = -1
 
-    def as_dict(self):
-        return asdict(self)
-        # return self.__dict__
+    def __getitem__(self, key):
+        if hasattr(self, key):
+            return getattr(self, key)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def __setitem__(self, key, value):
+        if hasattr(self, key):
+            setattr(self, key, value)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def to_dict(self):
+        return {f.name: getattr(self, f.name) for f in fields(self)}
 
     def to_networkx(self) -> tuple:
         # covert to networkx node
@@ -110,9 +121,20 @@ class Link:
     from_biway: int = -1
     is_link: bool = True
 
-    def as_dict(self):
-        return asdict(self)
-        # return self.__dict__
+    def __getitem__(self, key):
+        if hasattr(self, key):
+            return getattr(self, key)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def __setitem__(self, key, value):
+        if hasattr(self, key):
+            setattr(self, key, value)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def to_dict(self):
+        return {f.name: getattr(self, f.name) for f in fields(self)}
 
     def to_networkx(self) -> tuple:
         # convert to networkx edge
@@ -147,9 +169,20 @@ class POI:
     geometry: str = ''
     zone_id: int = -1
 
-    def as_dict(self):
-        return asdict(self)
-        # return self.__dict__
+    def __getitem__(self, key):
+        if hasattr(self, key):
+            return getattr(self, key)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def __setitem__(self, key, value):
+        if hasattr(self, key):
+            setattr(self, key, value)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def to_dict(self):
+        return {f.name: getattr(self, f.name) for f in fields(self)}
 
     def to_networkx(self) -> tuple:
         # convert to networkx node
@@ -198,9 +231,20 @@ class Zone:
     attraction_fixed: float = 0
     geometry: str = ''
 
-    def as_dict(self):
-        return asdict(self)
-        # return self.__dict__
+    def __getitem__(self, key):
+        if hasattr(self, key):
+            return getattr(self, key)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def __setitem__(self, key, value):
+        if hasattr(self, key):
+            setattr(self, key, value)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def to_dict(self):
+        return {f.name: getattr(self, f.name) for f in fields(self)}
 
 
 @dataclass
@@ -248,9 +292,20 @@ class Agent:
     geometry: str = ''
     departure_time: int = 0  # unit is second
 
-    def as_dict(self):
-        return asdict(self)
-        # return self.__dict__
+    def __getitem__(self, key):
+        if hasattr(self, key):
+            return getattr(self, key)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def __setitem__(self, key, value):
+        if hasattr(self, key):
+            setattr(self, key, value)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def to_dict(self):
+        return {f.name: getattr(self, f.name) for f in fields(self)}
 
 # todo: read node, link and zone
 

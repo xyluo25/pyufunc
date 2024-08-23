@@ -7,7 +7,50 @@
 '''
 
 from dataclasses import dataclass, field, fields, make_dataclass, MISSING, is_dataclass
-from typing import Any, List, Tuple, Type, Union
+from typing import Any, List, Tuple, Type, Union, Dict
+
+
+def create_dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
+    """
+    Creates a dataclass with attributes and values based on the given dictionary.
+    The dataclass will also support dictionary-like access via __getitem__ and __setitem__.
+
+    Args:
+        name (str): The name of the dataclass to create.
+        data (Dict[str, Any]): A dictionary where keys are attribute names and values are attribute values.
+
+    Returns:
+        Type: A dataclass with fields and values corresponding to the dictionary.
+    """
+    # Define a method for __getitem__ for dictionary-like access
+
+    def __getitem__(self, key):
+        if hasattr(self, key):
+            return getattr(self, key)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    # Define a method for __setitem__ for dictionary-like assignment
+    def __setitem__(self, key, value):
+        if hasattr(self, key):
+            setattr(self, key, value)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    # Extract fields and their types from the dictionary
+    fields = [(key, type(value), field(default=value))
+              for key, value in data.items()]
+
+    # Create the dataclass dynamically
+    DataClass = make_dataclass(
+        cls_name=name,
+        fields=fields,
+        bases=(),
+        namespace={'__getitem__': __getitem__, '__setitem__': __setitem__}
+    )
+
+    # Instantiate the dataclass with the values from the dictionary
+    return DataClass(**data)
 
 
 def create_dataclass(class_name: str, attributes: List[Union[Tuple[str, Type, Any], Tuple[str, Any]]]) -> Type:
@@ -39,6 +82,19 @@ def create_dataclass(class_name: str, attributes: List[Union[Tuple[str, Type, An
         >>> print(instance.attribute_three)
         0.0
     """
+
+    def __getitem__(self, key):
+        if hasattr(self, key):
+            return getattr(self, key)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    # Define a method for __setitem__ for dictionary-like assignment
+    def __setitem__(self, key, value):
+        if hasattr(self, key):
+            setattr(self, key, value)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
     processed_attributes = []
 
     for attr in attributes:
@@ -49,7 +105,8 @@ def create_dataclass(class_name: str, attributes: List[Union[Tuple[str, Type, An
             # Name, type, and default value provided
             processed_attributes.append((attr[0], attr[1], attr[2]))
 
-    return make_dataclass(class_name, processed_attributes)
+    return make_dataclass(class_name, processed_attributes,
+                          namespace={'__getitem__': __getitem__, '__setitem__': __setitem__})
 
 
 def merge_dataclass(dataclass_one: Type[Any], dataclass_two: Type[Any],
@@ -168,3 +225,48 @@ def extend_dataclass(
         fields=all_fields,
         bases=(base_dataclass,),
     )
+
+
+def dataclass_dict_access(dataclass_instance: Any) -> Any:
+    """Wrap a dataclass instance to provide dictionary-like access.
+
+    Args:
+        dataclass_instance (Any): An instance of a dataclass.
+
+    Returns:
+        Any: A wrapper object that provides dictionary-like access to the dataclass instance.
+    """
+    return DataclassDictWrapper(dataclass_instance)
+
+
+class DataclassDictWrapper:
+    """Wrapper class that provides dictionary-like access to a dataclass instance.
+    """
+
+    def __init__(self, dataclass_instance):
+        if not is_dataclass(dataclass_instance):
+            raise ValueError("Provided instance is not a dataclass")
+        self._instance = dataclass_instance
+
+    def __getitem__(self, key):
+        if hasattr(self._instance, key):
+            return getattr(self._instance, key)
+        else:
+            raise KeyError(f"Key {key} not found in {
+                           self._instance.__class__.__name__}")
+
+    def __setitem__(self, key, value):
+        if hasattr(self._instance, key):
+            setattr(self._instance, key, value)
+        else:
+            raise KeyError(f"Key {key} not found in {
+                           self._instance.__class__.__name__}")
+
+    def __getattr__(self, item):
+        return getattr(self._instance, item)
+
+    def __setattr__(self, key, value):
+        if key == "_instance":
+            super().__setattr__(key, value)
+        else:
+            setattr(self._instance, key, value)
