@@ -210,16 +210,15 @@ config_email = {
 # ############### GMNS: General Modeling Network Specification configuration #
 config_gmns = {
     # specify required fields for node.csv and poi.csv and zone.csv (optional)
-    "node_fields": ["node_id", "x_coord", "y_coord",
-                    "activity_type", "is_boundary", "poi_id", "ctrl_type"],
-    "poi_fields": ["poi_id", "building", "centroid", "area", "geometry"],
-    "link_fields": ["link_id", "name", "from_node_id", "to_node_id", "dir_flag",
-                    "length", "lanes", "free_speed", "capacity", "link_type", "link_type_name",
-                    "geometry", "allowed_uses", "from_biway"],
+    "node_fields": ["node_id", "x_coord", "y_coord", "activity_type"],
+    "poi_fields": ["poi_id", "building", "amenity", "centroid", "area", "geometry"],
+    "link_fields": ["link_id", "name", "from_node_id", "to_node_id", "length", "lanes",
+                    "free_speed", "free_speed_raw", "capacity", "link_type", "facility_type",
+                    "dir_flag", "allowed_uses", "geometry"],
     "zone_geometry_fields": ["zone_id", "geometry"],
     "zone_centroid_fields": ["zone_id", "x_coord", "y_coord"],
     "data_chunk_size": 1000,  # number of rows to read in each chunk
-    "set_cpu_cores": os.cpu_count(),  # number of cpu cores to use
+    "cpu_cores": os.cpu_count(),  # number of cpu cores to use
 }
 
 # ############### Color initialization ############### #

@@ -23,7 +23,7 @@ import pandas as pd
 
 if TYPE_CHECKING:
     import shapely
-    import tqdm
+    from tqdm import tqdm
     from pyproj import Transformer
 
 __all__ = ['Node', 'Link', 'POI', 'Zone', 'Agent',
@@ -34,35 +34,31 @@ __all__ = ['Node', 'Link', 'POI', 'Zone', 'Agent',
 class Node:
     """A node in the network.
 
-    Args:
+    Attributes:
         id: The node ID.
         x_coord: The x coordinate of the node.
         y_coord: The y coordinate of the node.
         production: The production of the node.
         attraction: The attraction of the node.
-        boundary_flag: The boundary flag of the node. = 1 (current node is boundary node)
+        is_boundary: The boundary flag of the node. = 1 (current node is boundary node)
         zone_id: The zone ID. default == -1, only three conditions to become an activity node
                 1) POI node, 2) is_boundary node(freeway),  3) residential in activity_type
         poi_id: The POI ID of the node. default = -1; to be assigned to a POI ID after reading poi.csv
         activity_type: The activity type of the node. provided from osm2gmns such as motoway, residential, ...
-        activity_location_tab: The activity location tab of the node.
         geometry: The geometry of the node. based on wkt format.
-        as_dict: The method to convert the node to a dictionary.
-        to_networkx: The method to convert the node to a networkx node tuple format. (id, attr_dict)
-        _zone_id: store the zone_id for the node, default = -1,
-            to be assigned if field zone_id exists in the node.csv and it is not empty
+        _zone_id: The zone ID. default == -1,
+                this will be assigned if field zone_id exists in the node.csv and is not empty
     """
     id: int = 0
-    x_coord: float = 0
-    y_coord: float = 0
+    x_coord: float = -1
+    y_coord: float = -1
     production: float = 0
     attraction: float = 0
-    boundary_flag: int = 0
-    zone_id: int = -1
-    poi_id: int = -1
-    activity_type: str = ''
-    activity_location_tab: str = ''
-    ctrl_type: str = ''
+    # is_boundary: int = 0
+    # ctrl_type: int = -1
+    zone_id: int | None = None
+    # poi_id: int = -1
+    # activity_type: str = ''
     geometry: str = ''
     _zone_id: int = -1
 
@@ -78,8 +74,8 @@ class Node:
         else:
             raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
 
-    def to_dict(self):
-        return {f.name: getattr(self, f.name) for f in fields(self)}
+    def as_dict(self):
+        return asdict(self)
 
     def to_networkx(self) -> tuple:
         # covert to networkx node
@@ -88,88 +84,28 @@ class Node:
 
 
 @dataclass
-class Link:
-    """A link in the network.
-
-    Args:
-        id: The link ID.
-        name: The name of the link.
-        from_node_id: The from node ID of the link.
-        to_node_id: The to node ID of the link.
-        length: The length of the link.
-        lanes: The lanes of the link.
-        dir_flag: The direction flag of the link.
-        free_speed: The free speed of the link.
-        capacity: The capacity of the link.
-        link_type: The type of the link.
-        link_type_name: The name of the link type.
-        geometry: The geometry of the link. based on wkt format.
-        as_dict: The method to convert the link to a dictionary.
-        to_networkx: The method to convert the link to a networkx edge tuple format.
-            (from_node_id, to_node_id, attr_dict)
-
-    """
-
-    id: int = 0
-    name: str = ""
-    from_node_id: int = -1
-    to_node_id: int = -1
-    length: float = -1
-    lanes: int = -1
-    dir_flag: int = 1
-    free_speed: float = -1
-    capacity: float = -1
-    link_type: int = -1
-    link_type_name: str = ""
-    geometry: str = ""
-    allowed_uses: str = ""
-    from_biway: int = -1
-    is_link: bool = True
-
-    def __getitem__(self, key):
-        if hasattr(self, key):
-            return getattr(self, key)
-        else:
-            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
-
-    def __setitem__(self, key, value):
-        if hasattr(self, key):
-            setattr(self, key, value)
-        else:
-            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
-
-    def to_dict(self):
-        return {f.name: getattr(self, f.name) for f in fields(self)}
-
-    def to_networkx(self) -> tuple:
-        # convert to networkx edge
-        # networkx.add_edges_from([(from_node_id, to_node_id, attr_dict), ])
-        return (self.from_node_id, self.to_node_id, {**self.as_dict(), **{"weight": self.length}})
-
-
-@dataclass
 class POI:
     """A POI in the network.
 
-    Args:
-        id: The POI ID.
-        x_coord: The x coordinate of the POI.
-        y_coord: The y coordinate of the POI.
-        count: The count of the POI. Total POI values for this POI node or POI zone
-        area: The area of the POI. Total area of polygon for this POI zone. unit is square meter
-        poi_type: The type of the POI. Default is empty string
+    Attributes:
+        id      : The POI ID.
+        x_coord : The x coordinate of the POI.
+        y_coord : The y coordinate of the POI.
+        count   : The count of the POI. Total POI values for this POI node or POI zone
+        area    : The area of the POI. Total area of polygon for this POI zone. unit is square meter
+        building: The type of the POI. Default is empty string
         geometry: The polygon of the POI. based on wkt format. Default is empty string
-        zone_id: The zone ID. mapping from zone
-        as_dict: The method to convert the POI to a dictionary.
-        to_networkx: The method to convert the POI to a networkx node tuple format. (id, attr_dict)
+        zone_id : The zone ID. mapping from zone
     """
 
     id: int = 0
     x_coord: float = 0
     y_coord: float = 0
     count: int = 1
-    area: list = field(default_factory=list)
-    poi_type: str = ''
+    building: str = ""
+    amenity: str = ""
+    centroid: str = ""
+    area: str = ""
     trip_rate: dict = field(default_factory=dict)
     geometry: str = ''
     zone_id: int = -1
@@ -186,8 +122,8 @@ class POI:
         else:
             raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
 
-    def to_dict(self):
-        return {f.name: getattr(self, f.name) for f in fields(self)}
+    def as_dict(self):
+        return asdict(self)
 
     def to_networkx(self) -> tuple:
         # convert to networkx node
@@ -199,30 +135,29 @@ class POI:
 class Zone:
     """A zone in the network.
 
-    Args:
-        id: The zone ID.
-        name: The name of the zone.
-        centroid_x: The centroid x coordinate of the zone.
-        centroid_y: The centroid y coordinate of the zone.
-        centroid: The centroid of the zone. (x, y) based on wkt format
-        x_max: The max x coordinate of the zone.
-        x_min: The min x coordinate of the zone.
-        y_max: The max y coordinate of the zone.
-        y_min: The min y coordinate of the zone.
-        node_id_list: Node IDs which belong to this zone.
-        poi_id_list: The POIs which belong to this zone.
-        production: The production of the zone.
-        attraction: The attraction of the zone.
+    Attributes:
+        id              : The zone ID.
+        name            : The name of the zone.
+        x_coord      : The centroid x coordinate of the zone.
+        y_coord      : The centroid y coordinate of the zone.
+        centroid        : The centroid of the zone. (x, y) based on wkt format
+        x_max           : The max x coordinate of the zone.
+        x_min           : The min x coordinate of the zone.
+        y_max           : The max y coordinate of the zone.
+        y_min           : The min y coordinate of the zone.
+        node_id_list    : Node IDs which belong to this zone.
+        poi_id_list     : The POIs which belong to this zone.
+        production      : The production of the zone.
+        attraction      : The attraction of the zone.
         production_fixed: The fixed production of the zone (implement different models).
         attraction_fixed: The fixed attraction of the zone (implement different models).
-        geometry: The geometry of the zone. based on wkt format
-        as_dict: The method to convert the zone to a dictionary.
+        geometry        : The geometry of the zone. based on wkt format
     """
 
     id: int = 0
     name: str = ''
-    centroid_x: float = 0
-    centroid_y: float = 0
+    x_coord: float = 0
+    y_coord: float = 0
     centroid: str = ""
     x_max: float = 0
     x_min: float = 0
@@ -248,15 +183,19 @@ class Zone:
         else:
             raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
 
-    def to_dict(self):
-        return {f.name: getattr(self, f.name) for f in fields(self)}
+    def as_dict(self):
+        return asdict(self)
+
+    # @property
+    # def as_dict(self):
+    #     return asdict(self)
 
 
 @dataclass
 class Agent:
     """An agent in the network.
 
-    Args:
+    Attributes:
         id: The agent ID. default = 0
         agent_type: The agent type. default = ''
         o_zone_id: The origin zone ID. default = 0
@@ -276,7 +215,6 @@ class Agent:
 
         geometry: The geometry of the agent. based on wkt format. default = ''
         departure_time: The departure time of the agent. unit is second. default = 0
-        as_dict: The method to convert the agent to a dictionary.
     """
 
     id: int = 0
@@ -309,8 +247,69 @@ class Agent:
         else:
             raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
 
-    def to_dict(self):
+    def as_dict(self):
+        return asdict(self)
+
+
+@dataclass
+class Link:
+    """A link in the network.
+
+    Args:
+        id: The link ID.
+        name: The name of the link.
+        from_node_id: The from node ID of the link.
+        to_node_id: The to node ID of the link.
+        length: The length of the link.
+        lanes: The lanes of the link.
+        dir_flag: The direction flag of the link.
+        free_speed: The free speed of the link.
+        free_speed_raw: The raw free speed of the link.
+        capacity: The capacity of the link.
+        link_type: The type of the link.
+        mode_type: The mode type of the link. walk, bike, drive, transit, ...
+        facility_type: The facility type of the link.
+        geometry: The geometry of the link. based on wkt format.
+        as_dict: The method to convert the link to a dictionary.
+        to_networkx: The method to convert the link to a networkx edge tuple format.
+            (from_node_id, to_node_id, attr_dict)
+    """
+
+    id: int = 0
+    name: str = ""
+    from_node_id: int = -1
+    to_node_id: int = -1
+    length: float = -1
+    lanes: int = 0
+    dir_flag: int = 1
+    free_speed: float = 0
+    free_speed_raw: str = ""
+    capacity: float = 0
+    link_type: int = -1
+    facility_type: str = ""
+    # link_type_name: str = ""
+    geometry: str = ""
+    mode_type: str = ""  # mode_type: walk, bike, drive, transit, in the column of allowed_uses
+
+    def __getitem__(self, key):
+        if hasattr(self, key):
+            return getattr(self, key)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def __setitem__(self, key, value):
+        if hasattr(self, key):
+            setattr(self, key, value)
+        else:
+            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+    def as_dict(self):
         return {f.name: getattr(self, f.name) for f in fields(self)}
+
+    def to_networkx(self) -> tuple:
+        # convert to networkx edge
+        # networkx.add_edges_from([(from_node_id, to_node_id, attr_dict), ])
+        return (self.from_node_id, self.to_node_id, {**self.as_dict(), **{"weight": self.length}})
 
 
 @requires("shapely")
@@ -324,7 +323,7 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
         dict[int, Node]: a dict of nodes.{node_id: Node}
     """
 
-    import_package("shapely")
+    # import_package("shapely")
     import shapely
 
     # Reset index to avoid index error
@@ -377,27 +376,15 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
             node._zone_id = _zone_id
             node.geometry = shapely.Point(x_coord, y_coord)
 
-            # node = Node(
-            #     id=node_id,
-            #     # activity_type=activity_type,
-            #     # ctrl_type=df_node.loc[i, 'ctrl_type'],
-            #     x_coord=x_coord,
-            #     y_coord=y_coord,
-            #     # poi_id=df_node.loc[i, 'poi_id'],
-            #     # is_boundary=is_boundary,
-            #     geometry=shapely.Point(x_coord, y_coord),
-            #     _zone_id=_zone_id
-            # )
-
             node_dict[node_id] = asdict(node)
 
         except Exception as e:
-            print(f"  : Unable to create node: {node_id}, error: {e}")
+            raise Exception(f"  : Unable to create node: {node_id}, error: {e}")
 
     return node_dict
 
 
-@requires("shapely", "pyproj")
+@requires("shapely", "pyproj", auto_install=True)
 def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     """Create POI from df_poi.
 
@@ -407,9 +394,8 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     Returns:
         dict[int, POI]: a dict of POIs.{poi_id: POI}
     """
-    # import_package("shapely")
-    # import_package("pyproj")
-    # import shapely
+    import shapely
+    from pyproj import Transformer
 
     df_poi = df_poi.reset_index(drop=True)
     col_names = df_poi.columns.tolist()
@@ -477,19 +463,9 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
             poi.y_coord = centroid.y
             poi.area = area
 
-            # poi = POI(
-            #     id=df_poi.loc[i, 'poi_id'],
-            #     x_coord=centroid.x,
-            #     y_coord=centroid.y,
-            #     area=area,  # square feet: area * 10.7639104
-            #     building=df_poi.loc[i, 'building'] or "",
-            #     amenity=df_poi.loc[i, 'amenity'] or "",
-            #     centroid=df_poi.loc[i, 'centroid'],
-            #     geometry=df_poi.loc[i, "geometry"]
-            # )
             poi_dict[poi_id] = asdict(poi)
         except Exception as e:
-            print(f"  : Unable to create poi: {poi_id}, error: {e}")
+            raise Exception(f"  : Unable to create poi: {poi_id}, error: {e}")
     return poi_dict
 
 
@@ -505,7 +481,7 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
     """
 
     # import_package("shapely")
-    # import shapely
+    import shapely
 
     df_zone = df_zone.reset_index(drop=True)
     col_names = df_zone.columns.tolist()
@@ -554,28 +530,10 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
             zone.x_max = zone_geometry_shapely.bounds[2]
             zone.y_max = zone_geometry_shapely.bounds[3]
 
-            # zone = Zone(
-            #     id=zone_id,
-            #     name=zone_id,
-            #     x_coord=x_coord,
-            #     y_coord=y_coord,
-            #     centroid=centroid_wkt,
-            #     x_max=zone_geometry_shapely.bounds[2],
-            #     x_min=zone_geometry_shapely.bounds[0],
-            #     y_max=zone_geometry_shapely.bounds[3],
-            #     y_min=zone_geometry_shapely.bounds[1],
-            #     node_id_list=[],
-            #     poi_id_list=[],
-            #     production=0,
-            #     attraction=0,
-            #     production_fixed=0,
-            #     attraction_fixed=0,
-            #     geometry=zone_geometry
-            # )
-
+            # save zone to zone_dict
             zone_dict[zone_id] = asdict(zone)
         except Exception as e:
-            print(f"  : Unable to create zone: {zone_id}, error: {e}")
+            raise Exception(f"  : Unable to create zone: {zone_id}, error: {e}")
     return zone_dict
 
 
@@ -591,7 +549,7 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
     """
 
     # import_package("shapely")
-    # import shapely
+    import shapely
 
     df_zone = df_zone.reset_index(drop=True)
     col_names = df_zone.columns.tolist()
@@ -640,24 +598,10 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
             zone.centroid = centroid_wkt
             zone.geometry = zone_geometry
 
-            # zone = Zone(
-            #     id=zone_id,
-            #     name=zone_id,
-            #     x_coord=x_coord,
-            #     y_coord=y_coord,
-            #     centroid=centroid_wkt,
-            #     node_id_list=[],
-            #     poi_id_list=[],
-            #     production=0,
-            #     attraction=0,
-            #     production_fixed=0,
-            #     attraction_fixed=0,
-            #     geometry=zone_geometry
-            # )
-
+            # save zone to zone_dict
             zone_dict[zone_id] = asdict(zone)
         except Exception as e:
-            print(f"  : Unable to create zone: {zone_id}, error: {e}")
+            raise Exception(f"  : Unable to create zone: {zone_id}, error: {e}")
     return zone_dict
 
 
@@ -671,42 +615,57 @@ def _create_link_from_dataframe(df_link: pd.DataFrame) -> dict[int, Zone]:
         dict[int, Zone]: a dict of Link.{link_id: Link}
     """
 
-    try:
-        df_link = df_link.reset_index(drop=True)
-        link_dict = {}
+    df_link = df_link.reset_index(drop=True)
+    col_names = df_link.columns.tolist()
 
-        for i in range(len(df_link)):
-            try:
-                link = Link(
-                    id=df_link.loc[i, 'link_id'],
-                    name=df_link.loc[i, 'name'],
-                    from_node_id=df_link.loc[i, 'from_node_id'],
-                    to_node_id=df_link.loc[i, 'to_node_id'],
-                    length=df_link.loc[i, 'length'],
-                    lanes=df_link.loc[i, 'lanes'],
-                    dir_flag=df_link.loc[i, 'dir_flag'],
-                    free_speed=df_link.loc[i, 'free_speed'],
-                    capacity=df_link.loc[i, 'capacity'],
-                    link_type=df_link.loc[i, 'link_type'],
-                    link_type_name=df_link.loc[i, 'link_type_name'],
-                    geometry=df_link.loc[i, 'geometry'],
-                    allowed_uses=df_link.loc[i, 'allowed_uses'],
-                    from_biway=df_link.loc[i, 'from_biway'],
-                )
-                link_dict[df_link.loc[i, 'link_id']] = link
-            except Exception as e:
-                print(f"  : Unable to create link: {df_link.loc[i, 'link_id']}, error: {e}", flush=True)
-        return link_dict
-    except Exception as e:
-        print(f"  : Unable to create link: {e}", flush=True)
-        return {}
+    if "link_id" in col_names:
+        col_names.remove("link_id")
 
+    if "allowed_uses" in col_names:
+        col_names.remove("allowed_uses")
 
-# main functions for reading node, poi, zone files and network
+    # get node dataclass fields
+    # Get the list of attribute names
+    link_attr_names = [f.name for f in fields(Link)]
+
+    # check difference between node_attr_names and col_names
+    diff = list(set(col_names) - set(link_attr_names))
+
+    # create attributes for node class if diff is not empty
+    if diff:
+        diff_attr = [(val, Any, "") for val in diff]
+        Link_ext = extend_dataclass(Link, diff_attr)
+    else:
+        Link_ext = Link
+
+    link_dict = {}
+    for i in range(len(df_link)):
+        try:
+            link_id = df_link.loc[i, 'link_id']
+
+            link = Link_ext()
+
+            # assign values to link attributes
+            for col in col_names:
+                setattr(link, col, df_link.loc[i, col])
+
+            # assign additional values to link attributes
+            link.id = link_id
+            link.mode_type = df_link.loc[i, 'allowed_uses']
+
+            # save link to link_dict
+            link_dict[link_id] = asdict(link)
+
+        except Exception as e:
+            raise Exception(f"Error: Unable to create link {link_id}: error: {e}")
+
+    return link_dict
+
+# main functions for reading node, poi, link, zone files and network
 
 
 @func_time
-@requires("tqdm")
+@requires("tqdm", "shapely", auto_install=True)
 def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Node]:
     """Read node.csv file and return a dict of nodes.
 
@@ -730,6 +689,7 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
         >>> node_dict = read_node(node_file = r"../dataset/ASU/node.csv")
         FileNotFoundError: File: ../dataset/ASU/node.csv does not exist.
     """
+    from tqdm import tqdm
 
     # convert path to linux path
     node_file = path2linux(node_file)
@@ -790,7 +750,7 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
 
 
 @func_time
-@requires("tqdm")
+@requires("tqdm", "shapely", auto_install=True)
 def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: POI]:
     """Read poi.csv file and return a dict of POIs.
 
@@ -815,6 +775,7 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
         FileNotFoundError: File: ../dataset/ASU/poi.csv does not exist.
 
     """
+    from tqdm import tqdm
 
     # convert path to linux path
     poi_file = path2linux(poi_file)
@@ -869,7 +830,7 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
 
 
 @func_time
-@requires("tqdm")
+@requires("tqdm", "shapely", auto_install=True)
 def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
@@ -938,7 +899,7 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
 
 @func_time
-@requires("tqdm")
+@requires("tqdm", "shapely", auto_install=True)
 def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
@@ -1007,7 +968,8 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
 
 @func_time
-def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Link]:
+@requires("tqdm", auto_install=True)
+def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Link]:
     """Read link.csv file and return a dict of Links.
 
     Args:
@@ -1030,6 +992,8 @@ def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
         capacity=0.0, link_type=1, link_type_name='motorway', geometry='LINESTRING (0 0, 1 1)')
     """
 
+    from tqdm import tqdm
+
     # convert path to linux path
     link_file = path2linux(link_file)
 
@@ -1041,17 +1005,19 @@ def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
     if not isinstance(cpu_cores, int):
         raise ValueError(f"cpu_cores should be integer, but got {type(cpu_cores)}")
 
-    if cpu_cores == -1:
-        cpu_cores = config_gmns["set_cpu_cores"]
+    if cpu_cores <= 0:
+        cpu_cores = config_gmns["cpu_cores"]
 
     # Read link.csv with specified columns and chunksize for iterations
     link_required_cols = config_gmns["link_fields"]
     chunk_size = config_gmns["data_chunk_size"]
 
-    print("columns: ", link_required_cols)
     if verbose:
         print(f"  : Reading link.csv with specified columns: {link_required_cols} \
                     \n    and chunksize {chunk_size} for iterations...")
+    # Get total rows in poi.csv and calculate total chunks
+    total_rows = sum(1 for _ in open(link_file)) - 1  # Exclude header row
+    total_chunks = total_rows // chunk_size + 1
     try:
         df_link_chunk = pd.read_csv(
             link_file, usecols=link_required_cols, chunksize=chunk_size, encoding='utf-8')
@@ -1061,19 +1027,23 @@ def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
 
     # Parallel processing using Pool
     if verbose:
-        print(f"  : Parallel creating POIs using Pool with {cpu_cores} CPUs. Please wait...")
-    poi_dict_final = {}
+        print(f"  : Parallel creating Links using Pool with {cpu_cores} CPUs. Please wait...")
 
+    link_dict_final = {}
     with Pool(cpu_cores) as pool:
-        results = pool.map(_create_link_from_dataframe, df_link_chunk)
+        # results = pool.map(_create_link_from_dataframe, df_link_chunk)
+        results = tqdm(pool.imap(_create_link_from_dataframe, df_link_chunk), total=total_chunks)
+        pool.close()
+        pool.join()
 
-    for poi_dict in results:
-        poi_dict_final.update(poi_dict)
+    for link_dict in results:
+        print("link_dict: ", link_dict)
+        link_dict_final.update(link_dict)
 
     if verbose:
-        print(f"  : Successfully loaded poi.csv: {len(poi_dict_final)} POIs loaded.")
+        print(f"  : Successfully loaded link.csv: {len(link_dict_final)} Links loaded.")
 
-    return poi_dict_final
+    return link_dict_final
 
 
 @func_time
@@ -1112,8 +1082,8 @@ def read_zone(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
         raise ValueError("Error: cpu_cores must be an integer greater than 0.")
 
     # check available cpu cores
-    if cpu_cores == -1:
-        cpu_cores = config_gmns["set_cpu_cores"]
+    if cpu_cores <= 0:
+        cpu_cores = config_gmns["cpu_cores"]
 
     # load zone file column names
     zone_columns = []
