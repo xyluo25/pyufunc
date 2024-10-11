@@ -9,6 +9,7 @@
 from pyufunc.util_geo._geo_circle import create_circle_at_point_with_radius
 from pyufunc.util_geo._geo_distance import (proj_point_to_line,
                                             calc_distance_on_unit_sphere,
+                                            calc_distance_on_unit_haversine,
                                             find_closest_point,
                                             get_coordinates_from_geom,
                                             find_k_nearest_points,
@@ -44,6 +45,7 @@ __all__ = [
     # geo_distance
     'proj_point_to_line',
     'calc_distance_on_unit_sphere',
+    'calc_distance_on_unit_haversine',
     'find_closest_point',
     'get_coordinates_from_geom',
     'find_k_nearest_points',

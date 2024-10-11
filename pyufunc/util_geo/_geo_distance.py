@@ -128,57 +128,45 @@ def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
     return np.arccos(cosine) * earth_radius
 
 
-@requires("numpy", verbose=False)
-def calc_distance_on_unit_haversine(origin: np.ndarray, destination: np.ndarray, unit: str = "km") -> np.ndarray:
-    """
-    Calculate the great-circle distance between multiple pairs of points on the Earth's surface specified in decimal degrees using the Haversine formula.
+def calc_distance_on_unit_haversine(lon1: np.ndarray, lat1: np.ndarray, lon2: np.ndarray, lat2: np.ndarray, unit: str = "km") -> np.ndarray:
+    """Calculate the great-circle distance between multiple pairs of points on the Earth's surface specified in decimal degrees using the Haversine formula.
 
     Args:
-        origin: numpy array of shape (n, 2) where each row contains [lat1, lon1] (in decimal degrees)
-        destination: numpy array of shape (n, 2) where each row contains [lat2, lon2] (in decimal degrees)
+        lon1 (np.ndarray): the longitudes of the first points
+        lat1 (np.ndarray): the latitudes of the first points
+        lon2 (np.ndarray): the longitudes of the second points
+        lat2 (np.ndarray): the latitudes of the second points
 
     Example:
-        >>> origin = np.array([[52.2296756, 21.0122287], [34.052235, -118.243683]])
-        >>> destination = np.array([[41.8919300, 12.5113300], [40.712776, -74.005974]])
-        >>> distances = calc_distance_on_haversine(origin, destination)
-        >>> print(f"Distances: {distances}")
-        Distances: [1315.51015566 3935.74559524]
+        >>> import numpy as np
+        >>> lon1 = np.array([-0.1276474, -0.1276474])
+        >>> lat1 = np.array([51.5073219, 51.5073219])
+        >>> lon2 = np.array([-1.9026911, -1.9026911])
+        >>> lat2 = np.array([52.4796992, 52.4796992])
+        >>> calc_distance_on_unit_haversine(lon1, lat1, lon2, lat2)
+        array([162.66049634, 162.66049634])
 
     Returns:
         A numpy array of distances between each pair of points.
     """
-
-    import_package("numpy", verbose=False)
-    import numpy as np
-
     # TDD
-    assert isinstance(
-        origin, np.ndarray), "Origin points should be in ndarray format"
-    assert isinstance(
-        destination, np.ndarray), "Destination points should be in ndarray format"
     assert unit in {
         "meter", "km", "mile"}, "The input unit should be in 'meter', 'km', or 'mile'."
 
     # the default earth radius in meters
     EARTH_RADIUS = {"meter": 6378137, "km": 6371.0, "mile": 3960.0}
 
+    # Convert latitude and longitude from degrees to radians
+    lat1, lon1, lat2, lon2 = map(np.radians, [lat1, lon1, lat2, lon2])
+
     # get the earth radius
     earth_radius = EARTH_RADIUS.get(unit, 6371.0)
-
-    # Combine origin and destination arrays
-    coords = np.hstack((origin, destination))
-
-    # Convert decimal degrees to radians
-    coords = np.radians(coords)
-
-    # Extract latitudes and longitudes
-    lon1, lat1, lon2, lat2 = coords[:, 0], coords[:, 1], coords[:, 2], coords[:, 3]
 
     # Haversine formula
     dlat = lat2 - lat1
     dlon = lon2 - lon1
     a = np.sin(dlat / 2) ** 2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlon / 2) ** 2
-    c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
+    c = 2 * np.arcsin(np.sqrt(a))
 
     return earth_radius * c
 
