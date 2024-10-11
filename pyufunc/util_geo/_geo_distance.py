@@ -128,8 +128,10 @@ def calc_distance_on_unit_sphere(pt1: Union[Point, tuple, list, np.array],
     return np.arccos(cosine) * earth_radius
 
 
-def calc_distance_on_unit_haversine(lon1: np.ndarray, lat1: np.ndarray, lon2: np.ndarray, lat2: np.ndarray, unit: str = "km") -> np.ndarray:
-    """Calculate the great-circle distance between multiple pairs of points on the Earth's surface specified in decimal degrees using the Haversine formula.
+def calc_distance_on_unit_haversine(lon1: np.ndarray, lat1: np.ndarray,
+                                    lon2: np.ndarray, lat2: np.ndarray, unit: str = "km") -> np.ndarray:
+    """Calculate the great-circle distance between multiple pairs of points on the Earth's surface
+    specified in decimal degrees using the Haversine formula.
 
     Args:
         lon1 (np.ndarray): the longitudes of the first points
