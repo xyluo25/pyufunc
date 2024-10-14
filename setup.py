@@ -20,7 +20,7 @@ except Exception:
 
 setuptools.setup(
     name="pyufunc",  # Replace with your own username
-    version="0.3.6",
+    version="0.3.7",
     author="Xiangyong Luo",
     author_email="luoxiangyong01@gmail.com",
 
@@ -48,8 +48,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     include_package_data=True,
     # package_dir={'': 'pyufunc'},
-    package_data={'': ["*.json", "*.txt"],
-                  },
+    package_data={'': ["*.json", "*.txt"]},
     project_urls={
         'Homepage': 'https://github.com/xyluo25/pyufunc',
         # 'Documentation': 'https://github.com/xyluo25/pyufunc',

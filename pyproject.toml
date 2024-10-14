@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyufunc"
-version = "0.3.6"
+version = "0.3.7"
 description = "pyufunc consolidates frequently used utility functions into one cohesive package"
 authors = [
     {name = "Xiangyong Luo", email = "luoxiangyong01@gmail.com"},
@@ -54,8 +54,9 @@ dependencies = {file = ["requirements.txt"]}
 # optional-dependencies = {file = ["requirements_dev.txt"]}
 
 [tool.setuptools]
+include-package-data = true
 py-modules = []
-package-data = {'pyufunc' = ['*.txt', '*.xls', '*.xlsx', '*.csv'], "test_data" = ['*.xls']}
+package-data = {'pyufunc' = ['**/*.txt', '*.xls', '*.xlsx', '*.csv', '*.json', '**/*.json'], "test_data" = ['*.xls', '*.json']}
 
 # [tool.setuptools.packages.find]
 # where = ["pyufunc"]
