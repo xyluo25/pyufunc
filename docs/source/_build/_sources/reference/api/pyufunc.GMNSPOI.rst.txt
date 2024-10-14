@@ -25,14 +25,16 @@ pyufunc.GMNSPOI
 
    .. autosummary::
    
+      ~GMNSPOI.amenity
+      ~GMNSPOI.area
+      ~GMNSPOI.building
+      ~GMNSPOI.centroid
       ~GMNSPOI.count
       ~GMNSPOI.geometry
       ~GMNSPOI.id
-      ~GMNSPOI.poi_type
       ~GMNSPOI.x_coord
       ~GMNSPOI.y_coord
       ~GMNSPOI.zone_id
-      ~GMNSPOI.area
       ~GMNSPOI.trip_rate
    
    

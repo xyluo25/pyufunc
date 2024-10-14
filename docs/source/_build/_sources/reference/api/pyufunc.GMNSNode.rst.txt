@@ -25,14 +25,9 @@ pyufunc.GMNSNode
 
    .. autosummary::
    
-      ~GMNSNode.activity_location_tab
-      ~GMNSNode.activity_type
       ~GMNSNode.attraction
-      ~GMNSNode.boundary_flag
-      ~GMNSNode.ctrl_type
       ~GMNSNode.geometry
       ~GMNSNode.id
-      ~GMNSNode.poi_id
       ~GMNSNode.production
       ~GMNSNode.x_coord
       ~GMNSNode.y_coord

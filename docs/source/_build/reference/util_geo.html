@@ -413,6 +413,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="util_fullstack.html">util_fullstack</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">util_geo</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.calc_distance_on_unit_sphere.html">pyufunc.calc_distance_on_unit_sphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyufunc.calc_distance_on_unit_haversine.html">pyufunc.calc_distance_on_unit_haversine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.find_k_nearest_points.html">pyufunc.find_k_nearest_points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.find_closest_point.html">pyufunc.find_closest_point</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pyufunc.get_coordinates_from_geom.html">pyufunc.get_coordinates_from_geom</a></li>
@@ -516,16 +517,19 @@ document.write(`
 <tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.calc_distance_on_unit_sphere.html#pyufunc.calc_distance_on_unit_sphere" title="pyufunc.calc_distance_on_unit_sphere"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_distance_on_unit_sphere</span></code></a>(pt1, pt2[, unit])</p></td>
 <td><p>Calculate the distance between two points on the unit sphere.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.find_k_nearest_points.html#pyufunc.find_k_nearest_points" title="pyufunc.find_k_nearest_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_k_nearest_points</span></code></a>(pts, geom_obj, radius)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.calc_distance_on_unit_haversine.html#pyufunc.calc_distance_on_unit_haversine" title="pyufunc.calc_distance_on_unit_haversine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_distance_on_unit_haversine</span></code></a>(lon1, lat1, ...)</p></td>
+<td><p>Calculate the great-circle distance between multiple pairs of points on the Earth's surface specified in decimal degrees using the Haversine formula.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.find_k_nearest_points.html#pyufunc.find_k_nearest_points" title="pyufunc.find_k_nearest_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_k_nearest_points</span></code></a>(pts, geom_obj, radius)</p></td>
 <td><p>Find the k nearest points from a list of points to a geometry object (points) within a given radius.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.find_closest_point.html#pyufunc.find_closest_point" title="pyufunc.find_closest_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_closest_point</span></code></a>(pt, pts[, k_closest])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.find_closest_point.html#pyufunc.find_closest_point" title="pyufunc.find_closest_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_closest_point</span></code></a>(pt, pts[, k_closest])</p></td>
 <td><p>Find the closest point from a list of reference points.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.get_coordinates_from_geom.html#pyufunc.get_coordinates_from_geom" title="pyufunc.get_coordinates_from_geom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_coordinates_from_geom</span></code></a>(geom_obj)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.get_coordinates_from_geom.html#pyufunc.get_coordinates_from_geom" title="pyufunc.get_coordinates_from_geom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_coordinates_from_geom</span></code></a>(geom_obj)</p></td>
 <td><p>Get the coordinates from a geometry object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyufunc.proj_point_to_line.html#pyufunc.proj_point_to_line" title="pyufunc.proj_point_to_line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proj_point_to_line</span></code></a>(point, line)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyufunc.proj_point_to_line.html#pyufunc.proj_point_to_line" title="pyufunc.proj_point_to_line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proj_point_to_line</span></code></a>(point, line)</p></td>
 <td><p>Project a point to a line and return the projected point on the line.</p></td>
 </tr>
 </tbody>

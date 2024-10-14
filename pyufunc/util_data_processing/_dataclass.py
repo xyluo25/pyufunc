@@ -12,8 +12,7 @@ import copy
 
 
 def create_dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
-    """
-    Creates a dataclass with attributes and values based on the given dictionary.
+    """Creates a dataclass with attributes and values based on the given dictionary.
     The dataclass will also support dictionary-like access via __getitem__ and __setitem__.
 
     Args:
@@ -66,8 +65,7 @@ def create_dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
 
 
 def create_dataclass(class_name: str, attributes: List[Union[Tuple[str, Type, Any], Tuple[str, Any]]]) -> Type:
-    """
-    Dynamically creates a dataclass with the given attributes.
+    """Dynamically creates a dataclass with the given attributes.
 
     Args:
         class_name (str): The name of the dataclass to create.
@@ -136,10 +134,10 @@ def merge_dataclass(dataclass_one: Type[Any], dataclass_two: Type[Any],
     Args:
         dataclass_one (Type[Any]): The first dataclass to merge.
         dataclass_two (Type[Any]): The second dataclass to merge.
-        prefer (str, optional): Specifies which dataclass to prefer in case of duplicate attributes.
+        prefer (str): Specifies which dataclass to prefer in case of duplicate attributes.
             Defaults to 'first':
-                - (option): 'first'
-                - (option): 'second'
+            - (option): 'first'
+            - (option): 'second'
 
     Returns:
         Type[Any]: A new dataclass that includes all fields from both dataclasses, with duplicates handled.

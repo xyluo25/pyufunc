@@ -25,19 +25,18 @@ pyufunc.GMNSLink
 
    .. autosummary::
    
-      ~GMNSLink.allowed_uses
       ~GMNSLink.capacity
       ~GMNSLink.dir_flag
+      ~GMNSLink.facility_type
       ~GMNSLink.free_speed
-      ~GMNSLink.from_biway
+      ~GMNSLink.free_speed_raw
       ~GMNSLink.from_node_id
       ~GMNSLink.geometry
       ~GMNSLink.id
-      ~GMNSLink.is_link
       ~GMNSLink.lanes
       ~GMNSLink.length
       ~GMNSLink.link_type
-      ~GMNSLink.link_type_name
+      ~GMNSLink.mode_type
       ~GMNSLink.name
       ~GMNSLink.to_node_id
    

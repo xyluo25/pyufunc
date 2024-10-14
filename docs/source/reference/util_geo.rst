@@ -13,6 +13,7 @@ geo_distance
    :toctree: api/
 
    calc_distance_on_unit_sphere
+   calc_distance_on_unit_haversine
    find_k_nearest_points
    find_closest_point
    get_coordinates_from_geom
