@@ -56,7 +56,7 @@ def get_timezone() -> str:
 
 
 #  convert current datetime to another timezone datetime
-def cvt_dt_to_tz(dt: datetime = datetime.datetime.now(),
+def cvt_current_dt_to_tz(dt: datetime = datetime.datetime.now(),
                  timezone: str = "UTC") -> datetime:
     """Convert datetime to another timezone datetime
 

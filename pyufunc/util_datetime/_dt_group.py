@@ -154,7 +154,9 @@ def group_dt_weekly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime"
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
     df_res = dataframe.groupby(pd.Grouper(key="datetime",
                                           axis=0,
-                                          freq="%sW" % interval)).agg(["count", "mean", "sum"])
+                                          freq=f"{interval}W")).agg(["count",
+                                                                     "mean",
+                                                                     "sum"])
     df_res.reset_index(inplace=True)
     df_res.columns = [i[0] if i[0] == "datetime" else i[1]
                       for i in list(df_res.columns)]

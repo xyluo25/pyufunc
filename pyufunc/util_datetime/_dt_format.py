@@ -33,16 +33,12 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
         >>> from pyufunc import fmt_dt_to_str
         >>> fmt_dt_to_str()
         '2024-02-06'
-
-        >>> fmt_dt_to_str(df_fmt="%Y/%m/%d %H:%M:%S")
+        >>> fmt_dt_to_str(dt_fmt="%Y/%m/%d %H:%M:%S")
         '2024/02/06 00:00:00'
-
-        >>> fmt_dt_to_str("2024-02-06", df_fmt="%Y/%m/%d")
+        >>> fmt_dt_to_str("2024-02-06", dt_fmt="%Y/%m/%d")
         '2024/02/06'
-
-        >>> fmt_dt_to_str("2024-02-06", df_fmt="%Y/%m/%d %H:%M:%S")
+        >>> fmt_dt_to_str("2024-02-06", dt_fmt="%Y/%m/%d %H:%M:%S")
         '2024/02/06 00:00:00'
-
         >>> fmt_dt_to_str(datetime.datetime.now(), "%Y/%m/%d %H:%M:%S")
         '2024/02/06 11:11:11'
     """
