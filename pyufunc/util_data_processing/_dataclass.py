@@ -19,6 +19,18 @@ def create_dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
         name (str): The name of the dataclass to create.
         data (Dict[str, Any]): A dictionary where keys are attribute names and values are attribute values.
 
+    Example:
+        >>> from pyufunc import create_dataclass_from_dict
+        >>> data = {'name': 'Alice', 'age': 30, 'city': 'New York'}
+        >>> Person = create_dataclass_from_dict('Person', data)
+        >>> person = Person()
+        >>> person.name
+        'Alice'
+        >>> person.age
+        30
+        >>> person.city
+        'New York'
+
     Returns:
         Type: A dataclass with fields and values corresponding to the dictionary.
     """
@@ -139,6 +151,24 @@ def merge_dataclass(dataclass_one: Type[Any], dataclass_two: Type[Any],
             - (option): 'first'
             - (option): 'second'
 
+    Example:
+        >>> from dataclasses import dataclass
+        >>> from pyufunc import merge_dataclass
+        >>> @dataclass
+        ... class DataclassOne:
+        ...     name: str
+        ...     age: int = 30
+        >>> @dataclass
+        ... class DataclassTwo:
+        ...     city: str
+        ...     age: int = 40
+        >>> MergedDataclass = merge_dataclass(DataclassOne, DataclassTwo, prefer='first')
+        >>> MergedDataclass.age
+        30
+        >>> MergedDataclass = merge_dataclass(DataclassOne, DataclassTwo, prefer='second')
+        >>> MergedDataclass.age
+        40
+
     Returns:
         Type[Any]: A new dataclass that includes all fields from both dataclasses, with duplicates handled.
 
@@ -214,8 +244,6 @@ def extend_dataclass(
         ...     additional_attributes=[('new_attr', List[int], [1, 2, 3])])
         >>> ExtendedDataclass
 
-
-
     Returns:
         dataclass: A new dataclass that includes fields from base_dataclass and additional_attributes.
     """
@@ -268,11 +296,25 @@ def extend_dataclass(
     return new_dataclass
 
 
-def dataclass_dict_access(dataclass_instance: Any) -> Any:
+def dataclass_dict_wrapper(dataclass_instance: Any) -> Any:
     """Wrap a dataclass instance to provide dictionary-like access.
 
     Args:
         dataclass_instance (Any): An instance of a dataclass.
+
+    Example:
+        >>> from dataclasses import dataclass
+        >>> from pyufunc import dataclass_dict_access
+        >>> @dataclass
+        ... class Person:
+        ...     name: str
+        ...     age: int
+        >>> person = Person('Alice', 30)
+        >>> wrapped_person = dataclass_dict_access(person)
+        >>> wrapped_person['name']
+        'Alice'
+        >>> wrapped_person['age']
+        30
 
     Returns:
         Any: A wrapper object that provides dictionary-like access to the dataclass instance.

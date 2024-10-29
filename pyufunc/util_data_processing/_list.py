@@ -9,7 +9,7 @@ from typing import Generator
 import itertools
 
 
-def split_list_by_equal_sublist(lst: list, num_of_sub: int) -> Generator:
+def list_split_by_equal_sublist(lst: list, num_of_sub: int) -> Generator:
     """Split a list into a number of equally-sized sub-lists.
 
     See Also:
@@ -27,7 +27,7 @@ def split_list_by_equal_sublist(lst: list, num_of_sub: int) -> Generator:
         >>> lst = list(range(0, 10))
         >>> lst
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        >>> lst_ = uf.split_list_by_equal_chunks(lst, num_of_sub=3)
+        >>> lst_ = uf.list_split_by_equal_chunks(lst, num_of_sub=3)
         >>> for dat in lst_:
         ...     print(list(dat))
         [0, 1, 2, 3]
@@ -62,7 +62,7 @@ def split_list_by_equal_sublist(lst: list, num_of_sub: int) -> Generator:
                     yield lst[i * sub_size + mod_value:(i + 1) * sub_size + mod_value]
 
 
-def split_list_by_fixed_length(lst: list, fixed_length: int) -> Generator:
+def list_split_by_fixed_length(lst: list, fixed_length: int) -> Generator:
     """Split a list into sublist of the same specified length
 
     See Also:
@@ -80,7 +80,7 @@ def split_list_by_fixed_length(lst: list, fixed_length: int) -> Generator:
         >>> lst = list(range(0, 10))
         >>> lst
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        >>> lst_ = uf.split_list_by_fixed_length(lst, fix_length=3)
+        >>> lst_ = uf.list_split_by_fixed_length(lst, fix_length=3)
         >>> for dat in lst_:
         ...     print(list(dat))
         [0, 1, 2]
@@ -98,7 +98,7 @@ def split_list_by_fixed_length(lst: list, fixed_length: int) -> Generator:
         yield lst[i:i + fixed_length]
 
 
-def flat_nested_list(nest_lst: list) -> list:
+def list_flatten_nested(nest_lst: list) -> list:
     """Flatten a nested list.
 
     Args:
@@ -107,7 +107,7 @@ def flat_nested_list(nest_lst: list) -> list:
     Examples:
         >>> import pyufunc as pf
         >>> nest_lst = [[1, 2, 3], [4, 5], [6, 7, 8]]
-        >>> pf.flat_nested_list(nest_lst)
+        >>> pf.list_flatten_nested(nest_lst)
         [1, 2, 3, 4, 5, 6, 7, 8]
 
     Returns:

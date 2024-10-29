@@ -16,19 +16,14 @@ def cvt_int_to_alpha(num: int) -> str:
     Returns:
         str: an alphabet string
 
-    **Examples**::
-
-        >>> from pyhelpers.ops import cvt_int_to_alpha
-
+    Example::
+        >>> from pyufunc import cvt_int_to_alpha
         >>> cvt_int_to_alpha(0)
         'A'
-
         >>> cvt_int_to_alpha(25)
         'Z'
-
         >>> cvt_int_to_alpha(26)
         'AA'
-
         >>> cvt_int_to_alpha(27)
         'AB'
     """

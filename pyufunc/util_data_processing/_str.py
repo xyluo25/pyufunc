@@ -30,7 +30,7 @@ def str_strip(string: str) -> str:
     return re.sub(pattern=r"[\s  ]+", repl=" ", string=str(string)).strip()
 
 
-def cvt_str_to_int(string: str) -> int:
+def cvt_digit_str_to_int(string: str) -> int:
     """Convert a string to an integer.
 
     Args:
@@ -64,7 +64,7 @@ def cvt_str_to_int(string: str) -> int:
         raise Exception(f"Error: {e}") from e
 
 
-def cvt_str_to_float(string: str) -> float:
+def cvt_digit_str_to_float(string: str) -> float:
     """Convert a string to a float.
 
     Args:
