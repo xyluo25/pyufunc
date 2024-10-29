@@ -19,7 +19,7 @@ import random
 import shutil
 from pathlib import Path
 from typing import TYPE_CHECKING
-from pyufunc.util_common import requires, import_package
+from pyufunc.util_magic import requires, import_package
 
 path_user_agent_strings = Path(__file__).parent.joinpath("static/user-agent-strings.json")
 

@@ -9,7 +9,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 import pandas as pd
 
-from pyufunc.util_common import func_running_time
+from pyufunc.util_magic import func_running_time
 
 
 @func_running_time

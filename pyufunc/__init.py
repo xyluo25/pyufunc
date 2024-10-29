@@ -9,7 +9,7 @@ import itertools
 
 from pyufunc import util_ai
 from pyufunc import util_algorithm
-from pyufunc import util_common
+from pyufunc import util_magic
 from pyufunc import util_data_processing
 from pyufunc import util_datetime
 from pyufunc import util_fullstack
@@ -31,7 +31,7 @@ from .pkg_configs import config_FUNC_KEYWORD
 config_FUNC_CATEGORY = {
     "util_ai": util_ai.__all__,
     "util_algorithm": util_algorithm.__all__,
-    "util_common": util_common.__all__,
+    "util_common": util_magic.__all__,
     "util_data_processing": util_data_processing.__all__,
     "util_datetime": util_datetime.__all__,
     "util_fullstack": util_fullstack.__all__,

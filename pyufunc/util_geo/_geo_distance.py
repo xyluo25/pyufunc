@@ -9,7 +9,7 @@ import copy
 from typing import Union, Iterable, TYPE_CHECKING
 import functools
 from pyufunc.util_geo._geo_circle import create_circle_at_point_with_radius
-from pyufunc.util_common import func_running_time, requires, import_package
+from pyufunc.util_magic import func_running_time, requires, import_package
 import numpy as np
 
 # https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import

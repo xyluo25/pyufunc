@@ -8,7 +8,7 @@ from __future__ import annotations
 import datetime
 from typing import TYPE_CHECKING, Union
 from pyufunc.pkg_configs import config_datetime_fmt
-from pyufunc.util_common import requires, import_package
+from pyufunc.util_magic import requires, import_package
 
 if TYPE_CHECKING:
     import dateutil

@@ -9,7 +9,7 @@ import sys
 # import all modules
 from .util_ai import *  # machine learning functions  # noqa: F403
 from .util_algorithm import *  # algorithm functions  # noqa: F403
-from .util_common import *  # unclassified functions are here  # noqa: F403
+from .util_magic import *  # unclassified functions are here  # noqa: F403
 from .util_data_processing import *  # data processing functions including algorithms  # noqa: F403
 from .util_datetime import *  # datetime functions  # noqa: F403
 from .util_fullstack import *  # fullstack functions, including front end and back end  # noqa: F403

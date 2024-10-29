@@ -12,10 +12,10 @@ import os
 from dataclasses import dataclass, field, asdict, fields
 from multiprocessing import Pool
 
-from pyufunc.util_common._func_time_decorator import func_time
+from pyufunc.util_magic._func_time_decorator import func_time
 from pyufunc.util_pathio._path import path2linux
-from pyufunc.util_common._dependency_requires_decorator import requires
-from pyufunc.util_common._import_package import import_package
+from pyufunc.util_magic._dependency_requires_decorator import requires
+from pyufunc.util_magic._import_package import import_package
 from pyufunc.pkg_configs import config_gmns
 from pyufunc.util_data_processing._dataclass import extend_dataclass, create_dataclass_from_dict
 

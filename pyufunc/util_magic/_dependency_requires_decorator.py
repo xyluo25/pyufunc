@@ -8,7 +8,7 @@
 
 from __future__ import absolute_import
 import copy
-from pyufunc.util_common._import_package import (
+from pyufunc.util_magic._import_package import (
     is_module_importable,
     import_package)
 

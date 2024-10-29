@@ -6,7 +6,7 @@
 ##############################################################
 from __future__ import annotations
 from typing import TYPE_CHECKING
-from pyufunc.util_common import requires, import_package
+from pyufunc.util_magic import requires, import_package
 
 # https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:

@@ -15,8 +15,8 @@ import json
 from collections import OrderedDict
 import time
 import importlib
-from pyufunc.util_common._dependency_requires_decorator import requires
-from pyufunc.util_common._import_package import import_package
+from pyufunc.util_magic._dependency_requires_decorator import requires
+from pyufunc.util_magic._import_package import import_package
 from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
