@@ -355,27 +355,26 @@ class OSMPlaceFinder:
         -------
         None
         """
-        if settings["use_cache"]:
-            if not ok:  # pragma: no cover
-                msg = "Did not save to cache because HTTP status code is not OK"
-                if self.verbose:
-                    print(f"  :{msg}")
-            else:
-                # create the folder on the disk if it doesn't already exist
-                cache_folder = Path(settings["cache_folder"])
-                cache_folder.mkdir(parents=True, exist_ok=True)
+        if not settings["use_cache"]:
+            return
+        if ok:
+            # create the folder on the disk if it doesn't already exist
+            cache_folder = Path(settings["cache_folder"])
+            cache_folder.mkdir(parents=True, exist_ok=True)
 
-                # hash the url to make the filename succinct but unique
-                # sha1 digest is 160 bits = 20 bytes = 40 hexadecimal characters
-                checksum = sha1(url.encode("utf-8")).hexdigest()  # noqa: S324
-                cache_filepath = cache_folder / f"{checksum}.json"
+            # hash the url to make the filename succinct but unique
+            # sha1 digest is 160 bits = 20 bytes = 40 hexadecimal characters
+            checksum = sha1(url.encode("utf-8")).hexdigest()  # noqa: S324
+            cache_filepath = cache_folder / f"{checksum}.json"
 
-                # dump to json, and save to file
-                cache_filepath.write_text(json.dumps(
-                    response_json), encoding="utf-8")
-                msg = f"Saved response to cache file {str(cache_filepath)!r}"
-                if self.verbose:
-                    print(f"  :{msg}")
+            # dump to json, and save to file
+            cache_filepath.write_text(json.dumps(
+                response_json), encoding="utf-8")
+            msg = f"Saved response to cache file {str(cache_filepath)!r}"
+        else:
+            msg = "Did not save to cache because HTTP status code is not OK"
+        if self.verbose:
+            print(f"  :{msg}")
 
     def _url_in_cache(self, url: str) -> Path | None:
         """
@@ -476,9 +475,7 @@ class OSMPlaceFinder:
 
         info = {"User-Agent": user_agent, "referer": referer,
                 "Accept-Language": accept_language}
-        headers = dict(requests.utils.default_headers())
-        headers.update(info)
-        return headers
+        return dict(requests.utils.default_headers()) | info
 
     def _resolve_host_via_doh(self, hostname: str) -> str:
         """

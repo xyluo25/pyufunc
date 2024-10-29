@@ -14,7 +14,7 @@ from pyufunc.util_geo._geo_distance import (proj_point_to_line,
                                             get_coordinates_from_geom,
                                             find_k_nearest_points,
                                             )
-from pyufunc.util_geo._coordinate_coversion import (
+from pyufunc.util_geo._coordinate_convert import (
     cvt_wgs84_to_baidu09,
     cvt_wgs84_to_gcj02,
     cvt_gcj02_to_baidu09,
@@ -22,6 +22,8 @@ from pyufunc.util_geo._coordinate_coversion import (
     cvt_baidu09_to_wgs84,
     cvt_baidu09_to_gcj02,
 )
+
+from pyufunc.util_geo._geo_area import calc_area_from_wkt_geometry
 
 # GMNS: General Modeling Network Specification
 import pyufunc.util_geo._gmns as gmns_geo
@@ -39,6 +41,9 @@ from pyufunc.util_geo._gmns import read_zone as gmns_read_zone
 from pyufunc.util_geo._get_osm_place import get_osm_place
 
 __all__ = [
+    # geo_area
+    'calc_area_from_wkt_geometry',
+
     # geo_circle
     'create_circle_at_point_with_radius',
 
@@ -64,7 +69,7 @@ __all__ = [
     # "gmns_read_zone_by_centroid",
     "gmns_read_zone",
 
-    # coordinate conversion
+    # coordinate convert
     "cvt_wgs84_to_baidu09",
     "cvt_wgs84_to_gcj02",
     "cvt_gcj02_to_baidu09",
