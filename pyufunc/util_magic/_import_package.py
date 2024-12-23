@@ -29,19 +29,19 @@ def import_package(pkg_name: Union[str, tuple, list],
 
     Args:
         package_name (str): the package name, it can be a string or tuple or list.
-            - if it's a string, it's the package name for both installation and import.
+            if it's a string, it's the package name for both installation and import.
 
-            - if it's a tuple or list, it has two elements:
-                - first element is the package name, for pip or conda installation;
-                - second element is the package name, for import the package;
+            if it's a tuple or list, it has two elements:
+                first element is the package name, for pip or conda installation;
+                second element is the package name, for import the package;
 
-            - eg: "numpy" or "numpy==1.19.5";
-            - eg: ("pillow", "PIL");
-            - eg: ["pillow==8.3.1", "PIL"];
-            - eg: ["opencv-python", "cv2"];
+            eg: "numpy" or "numpy==1.19.5";
+            eg: ("pillow", "PIL");
+            eg: ["pillow==8.3.1", "PIL"];
+            eg: ["opencv-python", "cv2"];
 
         options (list, optional): the installation optional inputs.
-            - eg: '--force-reinstall', '--ignore-installed'. Defaults to ["--user"].
+            eg: '--force-reinstall', '--ignore-installed'. Defaults to ["--user"].
         verbose (bool, optional): print the error message if the package is not available.
             Defaults to True.
 
@@ -297,7 +297,9 @@ def get_user_imported_module(obj: object) -> dict:
     with open(obj, mode="r") as f:
         file_contents = "".join(f.readlines())
     imported_members = defaultdict(list)
-    for m, v_wb, v_nb in re.findall(pattern=r"(?:^|(?<=\n))(?:from\s+(.+?)\s+)?import\s+(?:\(((?:.|\s)*?)\)|((?:(?<!\()(?:.|\s))*?))\n", string=file_contents):
+    for m, v_wb, v_nb in re.findall(pattern=(r"(?:^|(?<=\n))(?:from\s+(.+?)\s+)?import\s+"
+                                             r"(?:\(((?:.|\s)*?)\)|((?:(?<!\()(?:.|\s))*?))\n"),
+                                    string=file_contents):
         imported_members[m].extend(
             [str_strip(v) for v in (v_wb + v_nb).split(" as ")[0].split(",")])
     return imported_members
