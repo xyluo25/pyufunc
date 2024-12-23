@@ -26,6 +26,7 @@ from ._path import (path2linux,
                     generate_unique_filename,
                     create_unique_filename,
                     show_dir_in_tree,
+                    add_pkg_to_sys_path,
                     )
 from ._platform import (check_platform,
                         is_windows,
@@ -62,6 +63,7 @@ __all__ = [
     "generate_unique_filename",
     "create_unique_filename",
     "show_dir_in_tree",
+    "add_pkg_to_sys_path",
 
     # platform
     "check_platform",
