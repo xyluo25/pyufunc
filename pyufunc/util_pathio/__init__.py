@@ -27,6 +27,8 @@ from ._path import (path2linux,
                     create_unique_filename,
                     show_dir_in_tree,
                     add_pkg_to_sys_path,
+                    find_executable_from_PATH_on_win,
+                    find_fn_from_PATH_on_win,
                     )
 from ._platform import (check_platform,
                         is_windows,
@@ -64,6 +66,8 @@ __all__ = [
     "create_unique_filename",
     "show_dir_in_tree",
     "add_pkg_to_sys_path",
+    "find_executable_from_PATH_on_win",
+    "find_fn_from_PATH_on_win",
 
     # platform
     "check_platform",

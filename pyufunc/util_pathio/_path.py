@@ -18,10 +18,15 @@ from pyufunc.pkg_configs import config_color
 def path2linux(path: str | Path) -> str:
     """convert path to linux path for all OSes
 
-    Windows is smart enough to handle all paths from other OSes, but for other OSes, they can not handle windows paths.
-    linux paths are friendly to all OSes, Finally, we use linux paths in all OSes.
+    Windows is smart enough to handle all paths from other OSes,
+    but for other OSes, they can not handle windows paths.
+    linux paths are friendly to all OSes,
+    Finally, we decide convert to linux paths for all OSes.
 
-    Besides, the reason not use normalize_path or unify_path or path2uniform but path2linux is that: the author is a big fan of Linux.
+    Besides, the reason not use normalize_path
+    or unify_path or path2uniform
+    but path2linux is that:
+    the author is a big fan of Linus Torvalds (Linux).
 
     As an alternative, you can use path2uniform, which is the same as path2linux.
 
@@ -108,7 +113,6 @@ def get_filenames_by_ext(dir_path: str | Path, file_ext: str | list = "csv", inc
         >>> import pyufunc as uf
         >>> uf.get_filenames_by_ext('./', 'py')
         ['C:/Users/Administrator/Desktop/test/test.py']
-
     """
 
     # convert file extension to tuple
@@ -394,8 +398,8 @@ def show_dir_in_tree(dir_name: Union[str, Path],
     """list contents of directories in a tree-like format.
 
     Args:
-        *args/**kwargs  : Argments for ``root = Path(*args, **kwargs)``
-        pattern (str)   : Argments for ``root.glob(pattern)``
+        *args/**kwargs  : Arguments for ``root = Path(*args, **kwargs)``
+        pattern (str)   : Arguments for ``root.glob(pattern)``
         show_all (bool) : Whether not to ignore entries starting with .
         max_level (int) : Max display depth of the directory tree.
 
@@ -431,20 +435,13 @@ def show_dir_in_tree(dir_name: Union[str, Path],
         __WINDOWS_VTS_SETUP__ = _enable_vts() if os.name == "nt" else True
 
         if __WINDOWS_VTS_SETUP__ and (color in config_color.keys()):
-            charcode = config_color[color]
-            def func(x, is_bg=False): return f"{charcode[is_bg]}{str(x)}\x1b[0m"
+            char_code = config_color[color]
+            def func(x, is_bg=False): return f"{char_code[is_bg]}{str(x)}\x1b[0m"
             func.__doc__ = f"""Convert the output color to {color}
 
             Args:
                 x (str)      : string
                 is_bg (bool) : Whether to change the background color or not.
-
-            Examples:
-                >>> from pycharmers.utils import to{color}
-                >>> print(to{color}("hoge"), is_bg=False)
-                {func('hoge', is_bg=False)}
-                >>> print(to{color}("hoge"), is_bg=True)
-                {func('hoge', is_bg=True)}
             """
         else:
             def func(x, is_bg=False): return str(x)
@@ -474,8 +471,9 @@ def show_dir_in_tree(dir_name: Union[str, Path],
                 self.num_files += 1
 
         @staticmethod
-        def pathjoin(dir_name: str, *filename: str) -> str:
-            """Join two or more pathname components, inserting '/' as needed, and remove './' at the begining."""
+        def path_join(dir_name: str, *filename: str) -> str:
+            """Join two or more pathname components, inserting '/' as needed, and remove './' at the beginning."""
+
             return re.sub(pattern=r"^\.\/", repl="", string=os.path.join(dir_name, *filename))
 
         def run(self, dirname):
@@ -487,10 +485,11 @@ def show_dir_in_tree(dir_name: Union[str, Path],
             self._init()
             print(_toCOLOR_create(color="BLUE")(dirname))
             self.walk(dirname=dirname, depth=1, print_prefix="")
-            print(f"\n{_toCOLOR_create(color='GREEN')(self.num_directories)} directories, {_toCOLOR_create(color='GREEN')(self.num_files)} files.")
+            print(f"\n{_toCOLOR_create(color='GREEN')(self.num_directories)} directories,"
+                  f" {_toCOLOR_create(color='GREEN')(self.num_files)} files.")
 
         def walk(self, dirname, depth=1, print_prefix=""):
-            """Print filecontens in ``dirname`` recursively.
+            """Print file contents in ``dirname`` recursively.
 
             Args:
                 dirname (str)      : path to current directory.
@@ -502,7 +501,7 @@ def show_dir_in_tree(dir_name: Union[str, Path],
                     fn
                     for fn in os.listdir(dirname)
                     if len(self.filepaths) != 0 and any(
-                        fp.startswith(self.pathjoin(dirname, fn))
+                        fp.startswith(self.path_join(dirname, fn))
                         for fp in self.filepaths
                     )
                 ]
@@ -545,10 +544,12 @@ def show_dir_in_tree(dir_name: Union[str, Path],
     tree.run(str(root))
 
 
-def add_pkg_to_sys_path(pkg_name: str, verbose: bool = True) -> None:
-    """Automatically finds an importable Python package by its name in the current directory,
-    parent directories, or child directories, and adds it to the system path.
-    This is useful when writing test functions and needing to import a package that is not installed.
+def add_pkg_to_sys_path(pkg_name: str, verbose: bool = True) -> bool:
+    """Automatically finds an importable Python package by its name
+    in the current directory, parent directories, or child directories,
+    and adds it to the system path.
+    This is useful when writing test functions and
+    needing to import a package that is not installed.
 
     Args:
         package_name (str): The name of the package to locate and add.
@@ -562,8 +563,7 @@ def add_pkg_to_sys_path(pkg_name: str, verbose: bool = True) -> None:
         >>> pf.add_pkg_to_sys_path('my_package', False)
 
     Returns:
-        None: None
-
+        bool: True if the package is found and added to the system path, otherwise
     """
 
     # TDD: check if the package path is a string
@@ -613,7 +613,130 @@ def add_pkg_to_sys_path(pkg_name: str, verbose: bool = True) -> None:
         else:
             if verbose:
                 print(f"{absolute_path_parent} is already in the system path.")
-        return absolute_path
+        return True
 
     print(f"  :Importable package '{pkg_name}' not found"
           "in the current directory, parent directories, or children.")
+    return False
+
+
+def find_executable_from_PATH_on_win(exe_name: str, ext: str = "exe", verbose: bool = True) -> list | None:
+    """Find the executable from the system PATH.
+
+    Args:
+        exe_name (str): The executable name to search for.
+        ext (str): The extension of the executable. Defaults to "exe" for executable files.
+        verbose (bool): Whether to print the process info. Defaults to True.
+
+    Location:
+        pyufunc/util_pathio/_path.py
+
+    Examples:
+        >>> import pyufunc as pf
+        >>> pf.find_executable_from_PATH_on_win('python', 'exe', True)
+        ["**/python.exe", ...]
+
+    Returns:
+        list or None: A list of full path of the executable if found, otherwise None.
+    """
+
+    # check if the executable name is a string
+    if not isinstance(exe_name, str):
+        raise ValueError("exe_name should be a string.")
+
+    # check if extension is str
+    if not isinstance(ext, str):
+        raise ValueError("ext should be a string.")
+
+    # check if exe_name has the extension
+    file_name, ext_str = os.path.splitext(exe_name)
+    if not ext_str:
+        if verbose:
+            print(f"  :The executable: {exe_name} has no extension. Added {ext} as the extension.")
+        exe_name = f"{exe_name}.{ext}"
+
+    # get the full environment PATH
+    env_paths = os.getenv("PATH").split(os.pathsep)
+
+    res = []
+    for path in env_paths:
+        abs_path = path2linux(os.path.join(path, exe_name))
+
+        # check if the file exists and is executable
+        if os.path.isfile(exe_name) and os.access(abs_path, os.X_OK):
+            res.append(abs_path)
+
+    if not res:
+        if verbose:
+            print(f"  :Could not find {exe_name} in the system PATH."
+                  " Please make sure the executable is installed."
+                  " please include executable extension in the name.")
+        return None
+
+    if verbose:
+        print(f"  :Found {exe_name} in the system PATH:")
+        for path in res:
+            print(f"  :  {path}")
+    return res
+
+
+def find_fn_from_PATH_on_win(fn: str, ext: str = "exe", verbose: bool = True) -> list | None:
+    """Find the filename from the system PATH.
+
+    Args:
+        fn (str): The filename to search for.
+        ext (str): The extension of the filename.
+            Defaults to "exe" for executable files.
+        verbose (bool): Whether to print the process info. Defaults
+
+    Location:
+        pyufunc/util_pathio/_path.py
+
+    Examples:
+        >>> import pyufunc as pf
+        >>> pf.find_fn_from_PATH_on_win('python', 'exe', True)
+        ["**/python.exe", ...]
+        >>> pf.find_fn_from_PATH_on_win('aaa', 'exe', True)
+        None
+
+    Returns:
+        list or None: A list of full path of the filename if found, otherwise None.
+    """
+
+    # check if the filename is a string
+    if not isinstance(fn, str):
+        raise ValueError("fn should be a string.")
+
+    if not isinstance(ext, str):
+        raise ValueError("ext should be a string.")
+
+    # check if the extension is in the filename
+    file_name, ext_str = os.path.splitext(fn)
+    if not ext_str:
+        if verbose:
+            print(f"  :The filename: {fn} has no extension. Added {ext} from input as the extension.")
+        fn = f"{fn}.{ext}"
+
+    # get the full environment PATH
+    env_paths = os.getenv("PATH").split(os.pathsep)
+
+    res = []
+    for path in env_paths:
+        abs_path = path2linux(os.path.join(path, fn))
+
+        # check if the file exists
+        if os.path.isfile(abs_path):
+            res.append(abs_path)
+
+    if not res:
+        if verbose:
+            print(f"  :Could not find {fn} in the system PATH."
+                  " Please make sure the file is installed."
+                  " Please include the file extension in the name.")
+        return None
+
+    if verbose:
+        print(f"  :Found {fn} in the system PATH:")
+        for path in res:
+            print(f"  :  {path}")
+    return res
