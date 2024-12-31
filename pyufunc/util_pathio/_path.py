@@ -620,12 +620,17 @@ def add_pkg_to_sys_path(pkg_name: str, verbose: bool = True) -> bool:
     return False
 
 
-def find_executable_from_PATH_on_win(exe_name: str, ext: str = "exe", verbose: bool = True) -> list | None:
+def find_executable_from_PATH_on_win(exe_name: str,
+                                     ext: str = "exe",
+                                     *,
+                                     sel_dir: list = None,
+                                     verbose: bool = True) -> list | None:
     """Find the executable from the system PATH.
 
     Args:
         exe_name (str): The executable name to search for.
         ext (str): The extension of the executable. Defaults to "exe" for executable files.
+        sel_dir (list): The selected directories to search for the executable. Defaults to [].
         verbose (bool): Whether to print the process info. Defaults to True.
 
     Location:
@@ -647,6 +652,19 @@ def find_executable_from_PATH_on_win(exe_name: str, ext: str = "exe", verbose: b
     # check if extension is str
     if not isinstance(ext, str):
         raise ValueError("ext should be a string.")
+
+    # check if sel_dir is a list
+    if not isinstance(sel_dir, (list, type(None))):
+        raise ValueError("sel_dir should be a list.")
+
+    # add the selected directories to the system PATH
+    if sel_dir:
+        for dir_ in sel_dir:
+            if os.path.isdir(dir_) and dir_ not in os.getenv("PATH"):
+                os.environ["PATH"] += os.pathsep + dir_
+            elif verbose:
+                print(f"  :The dir: {dir_} is not a valid directory "
+                      "or already in the system PATH. Skipped.")
 
     # check if exe_name has the extension
     file_name, ext_str = os.path.splitext(exe_name)
@@ -680,13 +698,17 @@ def find_executable_from_PATH_on_win(exe_name: str, ext: str = "exe", verbose: b
     return res
 
 
-def find_fn_from_PATH_on_win(fn: str, ext: str = "exe", verbose: bool = True) -> list | None:
+def find_fn_from_PATH_on_win(fn: str,
+                             ext: str = "exe",
+                             sel_dir: list = None,
+                             verbose: bool = True) -> list | None:
     """Find the filename from the system PATH.
 
     Args:
         fn (str): The filename to search for.
         ext (str): The extension of the filename.
             Defaults to "exe" for executable files.
+        sel_dir (list): The selected directories to search for the filename. Defaults to [].
         verbose (bool): Whether to print the process info. Defaults
 
     Location:
@@ -710,6 +732,9 @@ def find_fn_from_PATH_on_win(fn: str, ext: str = "exe", verbose: bool = True) ->
     if not isinstance(ext, str):
         raise ValueError("ext should be a string.")
 
+    if not isinstance(sel_dir, (list, type(None))):
+        raise ValueError("sel_dir should be a list.")
+
     # check if the extension is in the filename
     file_name, ext_str = os.path.splitext(fn)
     if not ext_str:
@@ -719,6 +744,14 @@ def find_fn_from_PATH_on_win(fn: str, ext: str = "exe", verbose: bool = True) ->
 
     # get the full environment PATH
     env_paths = os.getenv("PATH").split(os.pathsep)
+
+    # add the selected directories to the system PATH
+    if sel_dir:
+        for dir_ in sel_dir:
+            if os.path.isdir(dir_):
+                env_paths.append(os.pathsep + dir_)
+            elif verbose:
+                print(f"  :The dir: {dir_} is not a valid directory. Skipped.")
 
     res = []
     for path in env_paths:
