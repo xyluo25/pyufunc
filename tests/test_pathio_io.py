@@ -1,8 +1,9 @@
 import pytest
 from pathlib import Path
+import shutil
+
 from pyufunc.util_pathio._io import get_file_size, get_dir_size
 from pyufunc import path2linux
-import shutil
 
 
 class TestGetFileSize:

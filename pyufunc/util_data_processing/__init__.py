@@ -5,7 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-from _data_cleaning import get_layer_boundary
+from ._data_cleaning import get_layer_boundary
 from ._dict import (dict_split_by_chunk,
                     dict_delete_keys)
 from ._int_to_alpha import cvt_int_to_alpha
