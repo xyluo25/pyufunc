@@ -20,21 +20,25 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (139):
+Available utility functions in pyUFunc (152):
 
 - non-keywords:
   - add_date_in_filename
   - add_dir_to_env
+  - add_pkg_to_sys_path
   - count_lines_of_code
-  - delete_dict_keys
+  - dataclass_dict_wrapper
   - dict_delete_keys
   - dict_split_by_chunk
+  - download_elevation_tif_by
   - end_of_life
+  - extend_dataclass
   - func_running_time
   - func_time
   - import_package
   - log_logger
   - log_writer
+  - merge_dataclass
   - path2linux
   - path2uniform
   - pickle_load
@@ -66,6 +70,7 @@ Available utility functions in pyUFunc (139):
   - get_files_by_ext
   - get_host_ip
   - get_host_name
+  - get_layer_boundary
   - get_osm_place
   - get_terminal_height
   - get_terminal_width
@@ -82,16 +87,22 @@ Available utility functions in pyUFunc (139):
 
 - create:
   - create_circle_at_point_with_radius
+  - create_dataclass
+  - create_dataclass_from_dict
   - create_tempfile
   - create_unique_filename
 
 - find:
   - find_closest_point
   - find_duplicate_files
+  - find_executable_from_PATH_on_win
+  - find_fn_from_PATH_on_win
   - find_k_nearest_points
   - find_util_func_by_keyword
 
 - calc:
+  - calc_area_from_wkt_geometry
+  - calc_distance_on_unit_haversine
   - calc_distance_on_unit_sphere
 
 - run:
@@ -116,6 +127,9 @@ Available utility functions in pyUFunc (139):
 
 - list:
   - list_all_timezones
+  - list_flatten_nested
+  - list_split_by_equal_sublist
+  - list_split_by_fixed_length
 
 - img:
   - img_bytes_to_CV
@@ -131,11 +145,6 @@ Available utility functions in pyUFunc (139):
   - img_to_bytes
   - img_translate
 
-- split:
-  - split_dict_by_chunk
-  - split_list_by_equal_sublist
-  - split_list_by_fixed_length
-
 - fmt:
   - fmt_dt_to_str
   - fmt_str_to_dt
@@ -143,7 +152,9 @@ Available utility functions in pyUFunc (139):
 - cvt:
   - cvt_baidu09_to_gcj02
   - cvt_baidu09_to_wgs84
-  - cvt_dt_to_tz
+  - cvt_current_dt_to_tz
+  - cvt_digit_str_to_float
+  - cvt_digit_str_to_int
   - cvt_gcj02_to_baidu09
   - cvt_gcj02_to_wgs84
   - cvt_int_to_alpha

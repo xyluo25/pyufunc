@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (139):
+Available utility functions in pyUFunc (152):
 
 - util_ai:
   - mean_absolute_error
@@ -52,18 +52,25 @@ Available utility functions in pyUFunc (139):
   - timeout_linux
 
 - util_data_processing:
+  - create_dataclass
+  - create_dataclass_from_dict
+  - cvt_digit_str_to_float
+  - cvt_digit_str_to_int
   - cvt_int_to_alpha
-  - delete_dict_keys
+  - dataclass_dict_wrapper
   - dict_delete_keys
   - dict_split_by_chunk
+  - extend_dataclass
+  - get_layer_boundary
   - is_float
-  - split_dict_by_chunk
-  - split_list_by_equal_sublist
-  - split_list_by_fixed_length
+  - list_flatten_nested
+  - list_split_by_equal_sublist
+  - list_split_by_fixed_length
+  - merge_dataclass
   - str_strip
 
 - util_datetime:
-  - cvt_dt_to_tz
+  - cvt_current_dt_to_tz
   - fmt_dt_to_str
   - fmt_str_to_dt
   - get_time_diff_in_unit
@@ -77,6 +84,8 @@ Available utility functions in pyUFunc (139):
   - list_all_timezones
 
 - util_geo:
+  - calc_area_from_wkt_geometry
+  - calc_distance_on_unit_haversine
   - calc_distance_on_unit_sphere
   - create_circle_at_point_with_radius
   - cvt_baidu09_to_gcj02
@@ -85,6 +94,7 @@ Available utility functions in pyUFunc (139):
   - cvt_gcj02_to_wgs84
   - cvt_wgs84_to_baidu09
   - cvt_wgs84_to_gcj02
+  - download_elevation_tif_by
   - find_closest_point
   - find_k_nearest_points
   - get_coordinates_from_geom
@@ -140,6 +150,7 @@ Available utility functions in pyUFunc (139):
 
 - util_pathio:
   - add_dir_to_env
+  - add_pkg_to_sys_path
   - check_file_existence
   - check_filename
   - check_files_in_dir
@@ -147,6 +158,8 @@ Available utility functions in pyUFunc (139):
   - create_tempfile
   - create_unique_filename
   - find_duplicate_files
+  - find_executable_from_PATH_on_win
+  - find_fn_from_PATH_on_win
   - generate_unique_filename
   - get_dir_size
   - get_file_size
