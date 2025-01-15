@@ -1,16 +1,16 @@
+"""
 # -*- coding:utf-8 -*-
 ##############################################################
 # Created Date: Wednesday, May 1st 2024
 # Contact Info: luoxiangyong01@gmail.com
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
-
+"""
 
 from __future__ import absolute_import
 import copy
-from pyufunc.util_magic._import_package import (
-    is_module_importable,
-    import_package)
+from pyufunc.util_magic._import_package import (is_module_importable,
+                                                import_package)
 
 
 # decorator with extra arguments
@@ -22,8 +22,8 @@ def requires(*args, **kwargs) -> object:
         *args: the required dependencies to run the function.
             - if argument is a string, module and import are the same.
             - if argument is a tuple or list, it has two elements:
-                - first element is the module name, for pip or conda installation;
-                - second element is the import name, for import the module;
+            first element is the module name, for pip or conda installation;
+            second element is the import name, for import the module;
 
         **kwargs: the optional arguments, including verbose and auto_install.
 

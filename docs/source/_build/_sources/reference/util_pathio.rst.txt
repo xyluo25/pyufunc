@@ -22,6 +22,9 @@ path
    generate_unique_filename
    create_unique_filename
    show_dir_in_tree
+   add_pkg_to_sys_path
+   find_executable_from_PATH_on_win
+   find_fn_from_PATH_on_win
 
 io
 ~~~

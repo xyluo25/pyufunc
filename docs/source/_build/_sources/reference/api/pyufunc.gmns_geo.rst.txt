@@ -4,11 +4,6 @@ pyufunc.gmns\_geo
 .. automodule:: pyufunc.gmns_geo
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -20,10 +15,6 @@ pyufunc.gmns\_geo
       read_zone_by_centroid
       read_zone_by_geometry
    
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
@@ -34,11 +25,3 @@ pyufunc.gmns\_geo
       POI
       Zone
    
-   
-
-   
-   
-   
-
-
-

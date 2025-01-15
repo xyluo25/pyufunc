@@ -12,7 +12,7 @@ Shapely>=2.0.3
 sphinx_multiproject>=1.0.0rc1
 urllib3>=2.2.1
 tqdm
-pyufunc
+# pyufunc
 sphinx_copybutton
 sphinx
 sphinx-design

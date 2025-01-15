@@ -6,7 +6,6 @@
 ##############################################################
 
 
-from pyufunc.util_geo._geo_circle import create_circle_at_point_with_radius
 from pyufunc.util_geo._geo_distance import (proj_point_to_line,
                                             calc_distance_on_unit_sphere,
                                             calc_distance_on_unit_haversine,
@@ -22,6 +21,7 @@ from pyufunc.util_geo._coordinate_convert import (
     cvt_baidu09_to_wgs84,
     cvt_baidu09_to_gcj02,
 )
+from pyufunc.util_geo._geo_circle import create_circle_at_point_with_radius
 
 from pyufunc.util_geo._geo_area import calc_area_from_wkt_geometry
 from pyufunc.util_geo._geo_tif import download_elevation_tif_by
@@ -36,8 +36,6 @@ from pyufunc.util_geo._gmns import Agent as GMNSAgent
 from pyufunc.util_geo._gmns import read_node as gmns_read_node
 from pyufunc.util_geo._gmns import read_poi as gmns_read_poi
 from pyufunc.util_geo._gmns import read_link as gmns_read_link
-# from pyufunc.util_geo._gmns import read_zone_by_geometry as gmns_read_zone_by_geometry
-# from pyufunc.util_geo._gmns import read_zone_by_centroid as gmns_read_zone_by_centroid
 from pyufunc.util_geo._gmns import read_zone as gmns_read_zone
 from pyufunc.util_geo._get_osm_place import get_osm_place
 

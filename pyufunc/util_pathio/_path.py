@@ -395,14 +395,24 @@ def show_dir_in_tree(dir_name: Union[str, Path],
                      show_all=False,
                      max_level=-1,
                      **kwargs) -> None:
-    """list contents of directories in a tree-like format.
+    """
+    list contents of directories in a tree-like format.
 
     Args:
-        *args/**kwargs  : Arguments for ``root = Path(*args, **kwargs)``
+        kwargs: Arguments for ``root = Path(*args, **kwargs)``
         pattern (str)   : Arguments for ``root.glob(pattern)``
         show_all (bool) : Whether not to ignore entries starting with .
         max_level (int) : Max display depth of the directory tree.
 
+    Location:
+        pyufunc/util_pathio/_path.py
+
+    Examples:
+        >>> import pyufunc as pf
+        >>> pf.show_dir_in_tree('./', '*.py', True, 2)
+
+    Returns:
+        None
     """
 
     def _toCOLOR_create(color: str = "") -> Callable[[str, bool], str]:

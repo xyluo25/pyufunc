@@ -50,3 +50,5 @@ for module in category_lst:
         f.close()
 
 print(f"Successfully updated {len(category_lst)} API documentations!")
+# Sphinx-build command
+# sphinx-build docs/source docs/source/_build

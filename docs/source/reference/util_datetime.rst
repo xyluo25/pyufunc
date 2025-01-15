@@ -21,7 +21,7 @@ timezone conversion
 
    list_all_timezones
    get_timezone
-   cvt_dt_to_tz
+   cvt_current_dt_to_tz
 
 time difference
 ~~~~~~~~~~~~~~~
