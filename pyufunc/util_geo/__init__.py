@@ -24,6 +24,7 @@ from pyufunc.util_geo._coordinate_convert import (
 )
 
 from pyufunc.util_geo._geo_area import calc_area_from_wkt_geometry
+from pyufunc.util_geo._geo_tif import download_elevation_tif_by
 
 # GMNS: General Modeling Network Specification
 import pyufunc.util_geo._gmns as gmns_geo
@@ -79,5 +80,8 @@ __all__ = [
 
     # find osm place
     "get_osm_place",
+
+    # geo_tif
+    "download_elevation_tif_by",
 
 ]
