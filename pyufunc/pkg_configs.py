@@ -12,13 +12,15 @@ computer_name = socket.gethostname()
 computer_ip = socket.gethostbyname(computer_name)
 
 # ############## Package Configurations ############## #
-pkg_version = "0.3.2"
+pkg_version = "0.3.8"
+__version__ = pkg_version
 pkg_name = "pyufunc"
 pkg_author = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
 pkg_email = "luoxiangyong01@gmail.com, xzhou74@asu.edu"
 
 __all__ = [
     "pkg_version",
+    "__version__",
     "pkg_name",
     "pkg_author",
     "pkg_email",
