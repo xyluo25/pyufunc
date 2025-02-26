@@ -11,12 +11,12 @@ from ._list import (list_split_by_equal_sublist,
                     list_split_by_fixed_length,
                     list_flatten_nested)
 from ._str import (str_strip,
-                   cvt_digit_str_to_int,
-                   cvt_digit_str_to_float)
-from ._dataclass import (create_dataclass,
-                         create_dataclass_from_dict,
-                         merge_dataclass,
-                         extend_dataclass,
+                   str_digit_to_int,
+                   str_digit_to_float)
+from ._dataclass import (dataclass_creation,
+                         dataclass_from_dict,
+                         dataclass_merge,
+                         dataclass_extend,
                          dataclass_dict_wrapper)
 from ._float import is_float
 from ._data_cleaning import get_layer_boundary
@@ -46,13 +46,13 @@ __all__ = [
 
     # _str
     "str_strip",
-    "cvt_digit_str_to_int",
-    "cvt_digit_str_to_float",
+    "str_digit_to_int",
+    "str_digit_to_float",
 
     # dataclass
-    "create_dataclass",
-    "create_dataclass_from_dict",
-    "merge_dataclass",
-    "extend_dataclass",
+    "dataclass_creation",
+    "dataclass_from_dict",
+    "dataclass_merge",
+    "dataclass_extend",
     "dataclass_dict_wrapper",
 ]

@@ -11,7 +11,7 @@ from typing import Any, List, Tuple, Type, Union, Dict
 import copy
 
 
-def create_dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
+def dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
     """Creates a dataclass with attributes and values based on the given dictionary.
     The dataclass will also support dictionary-like access via __getitem__ and __setitem__.
 
@@ -20,9 +20,9 @@ def create_dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
         data (Dict[str, Any]): A dictionary where keys are attribute names and values are attribute values.
 
     Example:
-        >>> from pyufunc import create_dataclass_from_dict
+        >>> from pyufunc import dataclass_from_dict
         >>> data = {'name': 'Alice', 'age': 30, 'city': 'New York'}
-        >>> Person = create_dataclass_from_dict('Person', data)
+        >>> Person = dataclass_from_dict('Person', data)
         >>> person = Person()
         >>> person.name
         'Alice'
@@ -76,7 +76,7 @@ def create_dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
     return DataClass(**data)
 
 
-def create_dataclass(class_name: str, attributes: List[Union[Tuple[str, Type, Any], Tuple[str, Any]]]) -> Type:
+def dataclass_creation(class_name: str, attributes: List[Union[Tuple[str, Type, Any], Tuple[str, Any]]]) -> Type:
     """Dynamically creates a dataclass with the given attributes.
 
     Args:
@@ -90,12 +90,13 @@ def create_dataclass(class_name: str, attributes: List[Union[Tuple[str, Type, An
         Type: A new dataclass with the specified attributes.
 
     Example:
+        >>> from pyufunc import dataclass_creation
         >>> attributes = [
         ...     ('attribute_one', int, 10),
         ...     ('attribute_two', "default_value"),  # Type inferred as str
         ...     ('attribute_three', float, 0.0)
         ... ]
-        >>> DynamicClass = create_dataclass('DynamicClass', attributes)
+        >>> DynamicClass = dataclass_creation('DynamicClass', attributes)
         >>> instance = DynamicClass(attribute_one=1)
         >>> print(instance.attribute_one)
         1
@@ -137,7 +138,7 @@ def create_dataclass(class_name: str, attributes: List[Union[Tuple[str, Type, An
                                      'as_dict': as_dict})
 
 
-def merge_dataclass(dataclass_one: Type[Any], dataclass_two: Type[Any],
+def dataclass_merge(dataclass_one: Type[Any], dataclass_two: Type[Any],
                     prefer: str = 'first',
                     *,
                     merged_class_name: str = "") -> Type[Any]:
@@ -153,7 +154,7 @@ def merge_dataclass(dataclass_one: Type[Any], dataclass_two: Type[Any],
 
     Example:
         >>> from dataclasses import dataclass
-        >>> from pyufunc import merge_dataclass
+        >>> from pyufunc import dataclass_merge
         >>> @dataclass
         ... class DataclassOne:
         ...     name: str
@@ -162,10 +163,10 @@ def merge_dataclass(dataclass_one: Type[Any], dataclass_two: Type[Any],
         ... class DataclassTwo:
         ...     city: str
         ...     age: int = 40
-        >>> MergedDataclass = merge_dataclass(DataclassOne, DataclassTwo, prefer='first')
+        >>> MergedDataclass = dataclass_merge(DataclassOne, DataclassTwo, prefer='first')
         >>> MergedDataclass.age
         30
-        >>> MergedDataclass = merge_dataclass(DataclassOne, DataclassTwo, prefer='second')
+        >>> MergedDataclass = dataclass_merge(DataclassOne, DataclassTwo, prefer='second')
         >>> MergedDataclass.age
         40
 
@@ -220,10 +221,8 @@ def merge_dataclass(dataclass_one: Type[Any], dataclass_two: Type[Any],
     return MergedDataclass
 
 
-def extend_dataclass(
-    base_dataclass: Type[Any],
-    additional_attributes: List[Tuple[str, Type[Any], Any]]
-) -> Type[Any]:
+def dataclass_extend(base_dataclass: Type[Any],
+                     additional_attributes: List[Tuple[str, Type[Any], Any]]) -> Type[Any]:
     """Creates a new dataclass by extending the base_dataclass with additional_attributes.
 
     Args:
@@ -234,12 +233,12 @@ def extend_dataclass(
     Example:
         >>> from dataclasses import dataclass
         >>> from typing import List
-        >>> from pyufunc import extend_dataclass
+        >>> from pyufunc import dataclass_extend
         >>> @dataclass
         ... class BaseDataclass:
         ...     name: str = 'base'
 
-        >>> ExtendedDataclass = extend_dataclass(
+        >>> ExtendedDataclass = dataclass_extend(
         ...     base_dataclass=BaseDataclass,
         ...     additional_attributes=[('new_attr', List[int], [1, 2, 3])])
         >>> ExtendedDataclass
