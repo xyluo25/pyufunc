@@ -17,9 +17,7 @@ from collections import defaultdict
 from pyufunc.util_data_processing._str import str_strip
 
 
-def import_package(pkg_name: Union[str, tuple, list],
-                   options: list = ["--user"],
-                   verbose: bool = True) -> object:
+def import_package(pkg_name: Union[str, tuple, list], options: list = None, verbose: bool = True) -> object:
     """import a python package, if not exist, install the package and import it again.
     This function can be used in any package to avoid too much pre-installation of dependencies.
     In other words, this function will install the package only if it is needed.
@@ -78,6 +76,8 @@ def import_package(pkg_name: Union[str, tuple, list],
         >>> cv2 = import_package(["opencv-python", "cv2"], options=["--force-reinstall"])
         >>> cv2 = import_package(["opencv-python==4.9.0.80", "cv2"])
     """
+
+    options = ["--user"] if options is None else ["--user", *options]
 
     # TDD, test-driven development: check inputs
     assert isinstance(pkg_name, (str, tuple, list)), "The input pkg_name should be a string or tuple or list."

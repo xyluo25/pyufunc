@@ -60,6 +60,4 @@ def generate_password(pwd_len: int = 15, lowercase: bool = True,
 
     # password_list = list(password)
     secrets.SystemRandom().shuffle(password_list)
-    password = ''.join(password_list)
-
-    return password
+    return ''.join(password_list)

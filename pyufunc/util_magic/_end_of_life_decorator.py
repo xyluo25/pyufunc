@@ -23,7 +23,8 @@ def end_of_life(func: object = None, **kwargs) -> object:
                 second element is the import name, for import the module;
 
         **kwargs: the optional arguments, including message.
-            message (str, optional): the additional message to the users.
+            message(str): the additional message to the users.
+            msg(str): the additional message to the users.
 
     Returns:
         object: the decorated function.
@@ -50,7 +51,7 @@ def end_of_life(func: object = None, **kwargs) -> object:
 
     # kwargs from decorator
     # print("kwargs: ", kwargs)
-    message = kwargs.get("message", None)
+    message = kwargs.get("message", kwargs.get("msg", None))
 
     def inner(func_obj: object) -> object:
         @wraps(func_obj)
