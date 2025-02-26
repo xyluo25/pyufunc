@@ -5,11 +5,18 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 '''
+from typing import TYPE_CHECKING
 
-import requests
+from pyufunc.util_magic import requires, import_package
+
+if TYPE_CHECKING:
+    import requests
+
+# import requests
 from datetime import datetime
 
 
+@requires("requests", verbose=False)
 def download_elevation_tif_by(bbox: tuple | list, output_file: str) -> None:
     """
     Download elevation data (TIFF) from USGS National Map based on a bounding box.

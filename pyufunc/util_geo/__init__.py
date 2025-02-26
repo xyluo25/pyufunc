@@ -27,12 +27,12 @@ from pyufunc.util_geo._geo_area import calc_area_from_wkt_geometry
 from pyufunc.util_geo._geo_tif import download_elevation_tif_by
 
 # GMNS: General Modeling Network Specification
-import pyufunc.util_geo._gmns as gmns_geo
-from pyufunc.util_geo._gmns import Node as GMNSNode
-from pyufunc.util_geo._gmns import Link as GMNSLink
-from pyufunc.util_geo._gmns import POI as GMNSPOI
-from pyufunc.util_geo._gmns import Zone as GMNSZone
-from pyufunc.util_geo._gmns import Agent as GMNSAgent
+# import pyufunc.util_geo._gmns as gmns_geo
+from pyufunc.util_geo._gmns import Node as gmns_Node
+from pyufunc.util_geo._gmns import Link as gmns_Link
+from pyufunc.util_geo._gmns import POI as gmns_POI
+from pyufunc.util_geo._gmns import Zone as gmn_Zone
+from pyufunc.util_geo._gmns import Agent as gmns_Agent
 from pyufunc.util_geo._gmns import read_node as gmns_read_node
 from pyufunc.util_geo._gmns import read_poi as gmns_read_poi
 from pyufunc.util_geo._gmns import read_link as gmns_read_link
@@ -55,12 +55,12 @@ __all__ = [
     'find_k_nearest_points',
 
     # gmns
-    "gmns_geo",
-    "GMNSNode",
-    "GMNSLink",
-    "GMNSPOI",
-    "GMNSZone",
-    "GMNSAgent",
+    # "gmns_geo",
+    "gmns_Node",
+    "gmns_Link",
+    "gmns_POI",
+    "gmn_Zone",
+    "gmns_Agent",
     "gmns_read_node",
     "gmns_read_poi",
     "gmns_read_link",
