@@ -708,14 +708,14 @@ def find_executable_from_PATH_on_win(exe_name: str,
     return res
 
 
-def find_fn_from_PATH_on_win(fn: str,
-                             ext: str = "exe",
-                             sel_dir: list = None,
-                             verbose: bool = True) -> list | None:
+def find_fname_from_PATH_on_win(fname: str,
+                                ext: str = "exe",
+                                sel_dir: list = None,
+                                verbose: bool = True) -> list | None:
     """Find the filename from the system PATH.
 
     Args:
-        fn (str): The filename to search for.
+        fname (str): The filename to search for.
         ext (str): The extension of the filename.
             Defaults to "exe" for executable files.
         sel_dir (list): The selected directories to search for the filename. Defaults to [].
@@ -726,9 +726,9 @@ def find_fn_from_PATH_on_win(fn: str,
 
     Examples:
         >>> import pyufunc as pf
-        >>> pf.find_fn_from_PATH_on_win('python', 'exe', True)
+        >>> pf.find_fname_from_PATH_on_win('python', 'exe', True)
         ["**/python.exe", ...]
-        >>> pf.find_fn_from_PATH_on_win('aaa', 'exe', True)
+        >>> pf.find_fname_from_PATH_on_win('aaa', 'exe', True)
         None
 
     Returns:
@@ -736,7 +736,7 @@ def find_fn_from_PATH_on_win(fn: str,
     """
 
     # check if the filename is a string
-    if not isinstance(fn, str):
+    if not isinstance(fname, str):
         raise ValueError("fn should be a string.")
 
     if not isinstance(ext, str):
@@ -746,11 +746,12 @@ def find_fn_from_PATH_on_win(fn: str,
         raise ValueError("sel_dir should be a list.")
 
     # check if the extension is in the filename
-    file_name, ext_str = os.path.splitext(fn)
+    file_name, ext_str = os.path.splitext(fname)
     if not ext_str:
         if verbose:
-            print(f"  :The filename: {fn} has no extension. Added {ext} from input as the extension.")
-        fn = f"{fn}.{ext}"
+            print(
+                f"  :The filename: {fname} has no extension. Added {ext} from input as the extension.")
+        fname = f"{fname}.{ext}"
 
     # get the full environment PATH
     env_paths = os.getenv("PATH").split(os.pathsep)
@@ -765,7 +766,7 @@ def find_fn_from_PATH_on_win(fn: str,
 
     res = []
     for path in env_paths:
-        abs_path = path2linux(os.path.join(path, fn))
+        abs_path = path2linux(os.path.join(path, fname))
 
         # check if the file exists
         if os.path.isfile(abs_path):
@@ -773,13 +774,13 @@ def find_fn_from_PATH_on_win(fn: str,
 
     if not res:
         if verbose:
-            print(f"  :Could not find {fn} in the system PATH."
+            print(f"  :Could not find {fname} in the system PATH."
                   " Please make sure the file is installed."
                   " Please include the file extension in the name.")
         return None
 
     if verbose:
-        print(f"  :Found {fn} in the system PATH:")
+        print(f"  :Found {fname} in the system PATH:")
         for path in res:
             print(f"  :  {path}")
     return res

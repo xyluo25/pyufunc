@@ -122,9 +122,6 @@ def time_unit_converter(value: float, from_unit: str, to_unit: str, verbose: boo
         "h": "hours", "hr": "hours", "hrs": "hours", "hour": "hours", "hours": "hours",
         "d": "days", "day": "days", "days": "days",
         "y": "years", "yr": "years", "yrs": "years", "year": "years", "years": "years",
-        "season": "season", "seasons": "season",
-        "quarter": "quarter", "quarters": "quarter",
-        "lunar year": "lunar year", "lunar years": "lunar year"
     }
 
     # Conversion factors in seconds.

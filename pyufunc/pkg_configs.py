@@ -16,14 +16,18 @@ pkg_version = "0.3.8"
 __version__ = pkg_version
 pkg_name = "pyufunc"
 pkg_author = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
-pkg_email = "luoxiangyong01@gmail.com, xzhou74@asu.edu"
+__author__ = pkg_author
+pkg_email = "luoxiangyong01@gmail.com"
+__email__ = pkg_email
 
 __all__ = [
     "pkg_version",
     "__version__",
     "pkg_name",
     "pkg_author",
+    "__author__",
     "pkg_email",
+    "__email__",
     "config_FUNC_KEYWORD",
     "config_logging",
     "config_datetime_fmt",

@@ -7,9 +7,15 @@
 
 from ._argparse import with_argparse
 from ._io import (get_file_size,
+                  size_of_file,
+
                   get_dir_size,
+                  size_of_dir,
+
                   create_tempfile,
-                  remove_file,
+                  file_remove,
+                  file_delete,
+
                   add_dir_to_env,
                   pickle_save,
                   pickle_load,
@@ -18,24 +24,29 @@ from ._io import (get_file_size,
                   )
 from ._path import (path2linux,
                     path2uniform,
+
                     get_filenames_by_ext,
                     get_files_by_ext,
+
                     check_files_in_dir,
+
                     check_filename,
                     check_file_existence,
+
                     generate_unique_filename,
                     create_unique_filename,
+
                     show_dir_in_tree,
                     add_pkg_to_sys_path,
                     find_executable_from_PATH_on_win,
-                    find_fn_from_PATH_on_win,
+                    find_fname_from_PATH_on_win,
                     )
 from ._platform import (check_platform,
                         is_windows,
                         is_linux,
                         is_mac,
-                        get_terminal_width,
-                        get_terminal_height,
+                        terminal_width,
+                        terminal_height,
                         )
 
 
@@ -45,9 +56,12 @@ __all__ = [
 
     # io
     "get_file_size",
+    "size_of_file",
     "get_dir_size",
+    "size_of_dir",
     "create_tempfile",
-    "remove_file",
+    "file_remove",
+    "file_delete",
     "add_dir_to_env",
     "pickle_save",
     "pickle_load",
@@ -67,14 +81,14 @@ __all__ = [
     "show_dir_in_tree",
     "add_pkg_to_sys_path",
     "find_executable_from_PATH_on_win",
-    "find_fn_from_PATH_on_win",
+    "find_fname_from_PATH_on_win",
 
     # platform
     "check_platform",
     "is_windows",
     "is_linux",
     "is_mac",
-    "get_terminal_width",
-    "get_terminal_height",
+    "terminal_width",
+    "terminal_height",
 
 ]

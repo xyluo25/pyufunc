@@ -11,8 +11,10 @@ from pathlib import Path
 import uuid
 import sys
 import hashlib
+from pyufunc.util_magic._end_of_life_decorator import end_of_life
 
 
+@end_of_life(msg="This function will be removed in the future. Please use `pyufunc.size_of_file()` instead.")
 def get_file_size(filename: str | Path, unit: str = "kb") -> str:
     """Get the size of a file in the specified unit.
 
@@ -60,7 +62,107 @@ def get_file_size(filename: str | Path, unit: str = "kb") -> str:
     return f"Filesize: {filename_short} {size_bytes / 1024} kb"
 
 
+def size_of_file(fname: str | Path, unit: str = "kb") -> str:
+    """Get the size of a file in the specified unit.
+
+    Args:
+        fname (str): The filename of the file to get the size of.
+        unit (str, optional): the unit for the filesize ('kb', 'mb', 'gb', 'tb') . Defaults to "kb".
+
+    Returns:
+        str: _description_
+    """
+
+    # TDD, Test Driven Development: validate the input
+    assert isinstance(
+        fname, (str, Path)), f"filename must be a string or Path, not {type(fname)}"
+    assert isinstance(unit, str), f"unit must be a string, not {type(unit)}"
+    assert unit.lower() in {
+        'kb',
+        'mb',
+        'gb',
+        'tb',
+    }, f"unit must be one of 'kb', 'mb', 'gb', 'tb', not {unit}"
+
+    # format the filename to linux path
+    fname = path2linux(fname)
+
+    filename_short = os.path.basename(fname)
+
+    # Check if the file exists
+    assert os.path.isfile(fname), f"File {filename_short} does not found, please check the file path and try again"
+    # if not os.path.isfile(filename):
+    #     return f"File {filename_short} does not found, please check the file path and try again"
+
+    # Get the file size in bytes
+    size_bytes = os.path.getsize(fname)
+
+    # Convert the size to the specified unit
+    if unit.lower() == 'kb':
+        return f"Filesize: {filename_short} {size_bytes / 1024} {unit}"
+    elif unit.lower() == 'mb':
+        return f"Filesize: {filename_short} {size_bytes / (1024 ** 2)} {unit}"
+    elif unit.lower() == 'gb':
+        return f"Filesize: {filename_short} {size_bytes / (1024 ** 3)} {unit}"
+    elif unit.lower() == 'tb':
+        return f"Filesize: {filename_short} {size_bytes / (1024 ** 4)} {unit}"
+
+    return f"Filesize: {filename_short} {size_bytes / 1024} kb"
+
+
+@end_of_life(msg="This function will be removed in the future. Please use `pyufunc.size_of_dir()` instead.")
 def get_dir_size(directory: str, unit: str = "kb") -> str:
+    """Get the size of a directory in the specified unit.
+
+    Args:
+        directory (str): The directory to get the size of.
+        unit (str, optional): the unit for the directory ('kb', 'mb', 'gb', 'tb'). Defaults to "kb".
+
+    Returns:
+        str: the size of the directory in the specified unit.
+    """
+
+    # TDD, Test Driven Development: validate the input
+    assert isinstance(directory, str), f"directory must be a string, not {type(directory)}"
+    assert isinstance(unit, str), f"unit must be a string, not {type(unit)}"
+    assert unit.lower() in {
+        'kb',
+        'mb',
+        'gb',
+        'tb',
+    }, f"unit must be one of 'kb', 'mb', 'gb', 'tb', not {unit}"
+
+    # format the directory to linux path
+    directory = path2linux(directory)
+
+    directory_short = os.path.basename(directory)
+
+    # Check if the directory exists
+    assert os.path.isdir(directory), f"Directory {directory_short} does not found, please check the directory path and try again"
+    # if not os.path.isdir(directory):
+    #     return f"Directory {directory_short} does not found, please check the directory path and try again"
+
+    # Get the size of the directory in bytes
+    size_bytes = sum(
+        os.path.getsize(os.path.join(directory, file))
+        for file in os.listdir(directory)
+    )
+
+    # Convert the size to the specified unit
+    if unit.lower() == 'kb':
+        return f"Directory size: {directory_short} {size_bytes / 1024} {unit}"
+    elif unit.lower() == 'mb':
+        return f"Directory size: {directory_short} {size_bytes / (1024 ** 2)} {unit}"
+    elif unit.lower() == 'gb':
+        return f"Directory size: {directory_short} {size_bytes / (1024 ** 3)} {unit}"
+    elif unit.lower() == 'tb':
+        return f"Directory size: {directory_short} {size_bytes / (1024 ** 4)} {unit}"
+
+    # return the size in kb by default
+    return f"Directory size: {directory_short} {size_bytes / 1024} kb"
+
+
+def size_of_dir(directory: str, unit: str = "kb") -> str:
     """Get the size of a directory in the specified unit.
 
     Args:
@@ -152,7 +254,40 @@ def create_tempfile(base_dir: str = "./", ext: str = "txt") -> str:
     return file_path
 
 
-def remove_file(filename: str | Path) -> None:
+def file_remove(filename: str | Path) -> None:
+    """Remove a file from the filesystem.
+
+    Args:
+        filename (str): The filename of the file to remove.
+
+    Returns:
+        None
+
+    Example:
+        >>> from pyufunc import remove_file
+        >>> remove_file("file.txt")
+    """
+
+    # TDD, Test Driven Development: validate the input
+    assert isinstance(filename, (str, Path)), f"filename must be a string or Path, not {type(filename)}"
+
+    # format the filename to linux path
+    filename = path2linux(filename)
+
+    filename_short = os.path.basename(filename)
+
+    # Check if the file exists
+    if not os.path.isfile(filename):
+        print(f"File {filename_short} does not found, please check the file path and try again")
+        return None
+
+    # Remove the file
+    os.remove(filename)
+    return None
+
+
+@end_of_life(msg="This function will be removed in the future. Please use `pyufunc.file_remove()` instead.")
+def file_delete(filename: str | Path) -> None:
     """Remove a file from the filesystem.
 
     Args:

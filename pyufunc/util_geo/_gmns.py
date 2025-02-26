@@ -17,7 +17,7 @@ from pyufunc.util_pathio._path import path2linux
 from pyufunc.util_magic._dependency_requires_decorator import requires
 from pyufunc.util_magic._import_package import import_package
 from pyufunc.pkg_configs import config_gmns
-from pyufunc.util_data_processing._dataclass import extend_dataclass, create_dataclass_from_dict
+from pyufunc.util_data_processing._dataclass import dataclass_extend, dataclass_from_dict
 
 import pandas as pd
 
@@ -343,7 +343,7 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
     # create attributes for node class if diff is not empty
     if diff:
         diff_attr = [(val, str, "") for val in diff]
-        Node_ext = extend_dataclass(Node, diff_attr)
+        Node_ext = dataclass_extend(Node, diff_attr)
     else:
         Node_ext = Node
 
@@ -413,7 +413,7 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     # create attributes for node class if diff is not empty
     if diff:
         diff_attr = [(val, Any, "") for val in diff]
-        POI_ext = extend_dataclass(POI, diff_attr)
+        POI_ext = dataclass_extend(POI, diff_attr)
     else:
         POI_ext = POI
 
@@ -499,7 +499,7 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
     # create attributes for node class if diff is not empty
     if diff:
         diff_attr = [(val, Any, "") for val in diff]
-        Zone_ext = extend_dataclass(Zone, diff_attr)
+        Zone_ext = dataclass_extend(Zone, diff_attr)
     else:
         Zone_ext = Zone
 
@@ -567,7 +567,7 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
     # create attributes for node class if diff is not empty
     if diff:
         diff_attr = [(val, Any, "") for val in diff]
-        Zone_ext = extend_dataclass(Zone, diff_attr)
+        Zone_ext = dataclass_extend(Zone, diff_attr)
     else:
         Zone_ext = Zone
 
@@ -634,7 +634,7 @@ def _create_link_from_dataframe(df_link: pd.DataFrame) -> dict[int, Zone]:
     # create attributes for node class if diff is not empty
     if diff:
         diff_attr = [(val, Any, "") for val in diff]
-        Link_ext = extend_dataclass(Link, diff_attr)
+        Link_ext = dataclass_extend(Link, diff_attr)
     else:
         Link_ext = Link
 
@@ -743,8 +743,7 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
     if verbose:
         print(f"  : Successfully loaded node.csv: {len(node_dict_final)} Nodes loaded.")
 
-    node_dict_final = {k: create_dataclass_from_dict(
-        "Node", v) for k, v in node_dict_final.items()}
+    node_dict_final = {k: dataclass_from_dict("Node", v) for k, v in node_dict_final.items()}
 
     return node_dict_final
 
@@ -823,8 +822,7 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
     if verbose:
         print(f"  : Successfully loaded poi.csv: {len(poi_dict_final)} POIs loaded.")
 
-    poi_dict_final = {k: create_dataclass_from_dict(
-        "POI", v) for k, v in poi_dict_final.items()}
+    poi_dict_final = {k: dataclass_from_dict("POI", v) for k, v in poi_dict_final.items()}
 
     return poi_dict_final
 
@@ -892,8 +890,7 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
     if verbose:
         print(f"  : Successfully loaded zone.csv: {len(zone_dict_final)} Zones loaded.")
 
-    zone_dict_final = {k: create_dataclass_from_dict(
-        "POI", v) for k, v in zone_dict_final.items()}
+    zone_dict_final = {k: dataclass_from_dict("POI", v) for k, v in zone_dict_final.items()}
 
     return zone_dict_final
 
@@ -961,8 +958,7 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
     if verbose:
         print(f"  : Successfully loaded zone.csv: {len(zone_dict_final)} Zones loaded.")
 
-    zone_dict_final = {k: create_dataclass_from_dict(
-        "POI", v) for k, v in zone_dict_final.items()}
+    zone_dict_final = {k: dataclass_from_dict("POI", v) for k, v in zone_dict_final.items()}
 
     return zone_dict_final
 

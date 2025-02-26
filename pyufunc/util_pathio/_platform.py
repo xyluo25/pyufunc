@@ -5,6 +5,12 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
+from typing import TYPE_CHECKING
+from pyufunc.util_magic import requires, import_package
+if TYPE_CHECKING:
+    import shutil
+
+
 # check the current platform
 def check_platform() -> str:
     """check the current platform
@@ -88,7 +94,8 @@ def is_mac() -> bool:
     return platform.system() == "Darwin"
 
 
-def get_terminal_width() -> int:
+@requires("shutil", verbose=False)
+def terminal_width() -> int:
     """get the terminal width
 
     Returns:
@@ -107,7 +114,8 @@ def get_terminal_width() -> int:
     return shutil.get_terminal_size().columns
 
 
-def get_terminal_height() -> int:
+@requires("shutil", verbose=False)
+def terminal_height() -> int:
     """get the terminal height
 
     Returns:
