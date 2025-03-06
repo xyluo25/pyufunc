@@ -82,7 +82,7 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
 @requires("shapely", verbose=False)
 def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
                                        radius: float,
-                                       options: dict = {"edges": 32, "bearing": 0, "direction": 1},
+                                       options: dict = None,
                                        verbose: bool = False) -> dict:
     """Generate a polygon by the center point and radius
 
@@ -140,6 +140,8 @@ def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
         [111.9356, 33.42434831528412]]}
 
     """
+    if options is None:
+        options = {"edges": 32, "bearing": 0, "direction": 1}
     # import shapely.geometry.Point
     import_package("shapely", verbose=False)
     from shapely.geometry import Point

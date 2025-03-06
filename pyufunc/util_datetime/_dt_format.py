@@ -21,7 +21,7 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
 
     Args:
         dt (datetime, str): the datetime to be formatted. Defaults to datetime.datetime.now().
-        dt_fmt (int): the format of the datetime. Defaults ("%Y-%m-%d %H:%M:%S").
+        dt_fmt (str): the format of the datetime. Defaults ("%Y-%m-%d %H:%M:%S").
 
     See Also:
         pyufunc.pkg_configs.config_datetime_fmt : pre-defined datetime string formats
@@ -69,15 +69,15 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
         # use default format
         dt_fmt = config_datetime_fmt[0]  # "%Y-%m-%d"
 
-    if dt_fmt not in config_datetime_fmt.values():
-        dt_fmt = config_datetime_fmt[0]  # "%Y-%m-%d"
+    # if dt_fmt not in config_datetime_fmt.values():
+    #     dt_fmt = config_datetime_fmt[0]  # "%Y-%m-%d"
 
     print("type dt", type(dt))
     try:
         return dt.strftime(dt_fmt)
     except Exception as e:
         print(e)
-        print("Cannot convert the datetime to the specified format. return the original datetime.")
+        print(f"Cannot convert {dt} to format: {dt_fmt}. return the original datetime.")
         return dt
 
 
