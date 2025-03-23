@@ -29,6 +29,9 @@ def list_all_timezones(region_name: str = "*") -> set:
         'Africa/Bangui',
         ...}
 
+        >>> list_all_timezones("Chicago")
+        >>> ['America/Chicago']
+
     """
     if region_name != "*":
         zoneinfo_set = zoneinfo.available_timezones()

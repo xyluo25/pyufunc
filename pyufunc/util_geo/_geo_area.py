@@ -31,9 +31,9 @@ def calc_area_from_wkt_geometry(wkt_geometry: str, unit: str = "sqm", verbose: b
         >>> from pyproj import Transformer
         >>> wkt_geometry = "POLYGON ((-74.006 40.712, -74.006 40.712, -74.006 40.712, -74.006 40.712))"
         >>> calc_area_from_wkt_geometry(wkt_geometry, unit="sqm")
-        >>>
 
-    Return (float): The area of the geometry.
+    Return:
+        float: The area of the geometry in specified unit.
 
     """
     import_package("shapely", verbose=False)

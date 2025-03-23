@@ -13,13 +13,13 @@ from pyufunc.util_magic import func_running_time
 
 
 @func_running_time
-def group_dt_yearly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime", "value"]) -> pd.DataFrame:
+def group_dt_yearly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by year.
 
     Args:
         df (pd.DataFrame): input DataFrame with datetime and value columns
-        interval (int, optional): the time interval to groupby. Defaults to 1.
-        col (list, optional): specify input column names.
+        interval (int): the time interval to groupby. Defaults to 1.
+        col (list): specify input column names.
             if your input column name is not same as default col name, use your own col name.
             e.g. ["your_datetime_col_name", "your_value_col_name"]. Defaults to ["datetime", "value"].
 
@@ -41,6 +41,8 @@ def group_dt_yearly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime"
 
     """
 
+    col = ["datetime", "value"] if col is None else col
+
     print("The group_yearly require at least two columns\n",
           "first column: datetime\n",
           "second column: value")
@@ -59,7 +61,7 @@ def group_dt_yearly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime"
 
 
 @func_running_time
-def group_dt_monthly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime", "value"]) -> pd.DataFrame:
+def group_dt_monthly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by month.
 
     Args:
@@ -96,6 +98,8 @@ def group_dt_monthly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime
         11	2020-12-31	31	350.0	10850
     """
 
+    col = ["datetime", "value"] if col is None else col
+
     print("The group_monthly require at least two columns\n",
           "first column: datetime\n",
           "second column: value")
@@ -114,7 +118,7 @@ def group_dt_monthly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime
 
 
 @func_running_time
-def group_dt_weekly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime", "value"]) -> pd.DataFrame:
+def group_dt_weekly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by week.
 
     Args:
@@ -145,6 +149,7 @@ def group_dt_weekly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime"
 
     """
 
+    col = ["datetime", "value"] if col is None else col
     print("The group_weekly require at least two columns\n",
           "first column: datetime\n",
           "second column: value")
@@ -164,7 +169,7 @@ def group_dt_weekly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime"
 
 
 @func_running_time
-def group_dt_daily(df: pd.DataFrame, interval: int = 1, col: list = ["datetime", "value"]) -> pd.DataFrame:
+def group_dt_daily(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by day.
 
     Args:
@@ -195,6 +200,8 @@ def group_dt_daily(df: pd.DataFrame, interval: int = 1, col: list = ["datetime",
 
     """
 
+    if col is None:
+        col = ["datetime", "value"]
     print("The group_daily require at least two columns\n",
           "first column: datetime\n",
           "second column: value")
@@ -214,7 +221,7 @@ def group_dt_daily(df: pd.DataFrame, interval: int = 1, col: list = ["datetime",
 
 # @requires("pandas", verbose=False)
 @func_running_time
-def group_dt_hourly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime", "value"]) -> pd.DataFrame:
+def group_dt_hourly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by hour.
 
     Args:
@@ -246,6 +253,8 @@ def group_dt_hourly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime"
 
     """
 
+    if col is None:
+        col = ["datetime", "value"]
     print("The group_hourly require at least two columns\n",
           "first column: datetime\n",
           "second column: value")
@@ -264,7 +273,7 @@ def group_dt_hourly(df: pd.DataFrame, interval: int = 1, col: list = ["datetime"
 
 
 @func_running_time
-def group_dt_minutely(df: pd.DataFrame, interval: int = 1, col: list = ["datetime", "value"]) -> pd.DataFrame:
+def group_dt_minutely(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by minute.
 
     Args:
@@ -297,6 +306,8 @@ def group_dt_minutely(df: pd.DataFrame, interval: int = 1, col: list = ["datetim
 
     """
 
+    if col is None:
+        col = ["datetime", "value"]
     print("The group_minutely require at least two columns\n",
           "first column: datetime\n",
           "second column: value")
