@@ -24,7 +24,7 @@ path
    show_dir_in_tree
    add_pkg_to_sys_path
    find_executable_from_PATH_on_win
-   find_fn_from_PATH_on_win
+   find_fname_from_PATH_on_win
 
 io
 ~~~
@@ -32,9 +32,12 @@ io
    :toctree: api/
 
    get_file_size
+   size_of_file
    get_dir_size
+   size_of_dir
    create_tempfile
-   remove_file
+   file_remove
+   file_delete
    add_dir_to_env
    pickle_save
    pickle_load
@@ -50,8 +53,8 @@ platform
    is_windows
    is_linux
    is_mac
-   get_terminal_width
-   get_terminal_height
+   terminal_width
+   terminal_height
 
 argparse
 ~~~~~~~~

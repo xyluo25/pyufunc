@@ -29,7 +29,7 @@ time difference
     :toctree: api/
 
     get_time_diff_in_unit
-
+    time_unit_converter
 
 grouby datetime
 ~~~~~~~~~~~~~~~

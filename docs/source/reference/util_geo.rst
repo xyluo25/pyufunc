@@ -57,12 +57,12 @@ gmns_geo
 .. autosummary::
     :toctree: api/
 
-    gmns_geo
-    GMNSAgent
-    GMNSNode
-    GMNSLink
-    GMNSPOI
-    GMNSZone
+    gmns_Node
+    gmns_Link
+    gmns_POI
+    gmns_Zone
+    gmns_Agent
+
     gmns_read_node
     gmns_read_link
     gmns_read_poi

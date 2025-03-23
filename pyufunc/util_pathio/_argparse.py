@@ -5,7 +5,6 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-
 import argparse
 import inspect
 import functools
@@ -15,42 +14,45 @@ def with_argparse(func_or_class: object):
     """Decorator to add argparse support to a function or class.
 
     Example:
-    # in script.py
-       >>> from pyufunc import with_argparse
-       >>> @with_argparse
-           def example_function(name: str, age: int = 30):
-               print(f'Name: {name}, Age: {age}')
-               return None
-           with __name__ == "__main__":
-               example_function()
+        # in script.py
+        >>> from pyufunc import with_argparse
+        >>> @with_argparse
+        >>>    def example_function(name: str, age: int = 30):
+        >>>        print(f'Name: {name}, Age: {age}')
+        >>>        return None
 
-    # in terminal
-    >>> $ python script.py --name "John" --age 25
+        >>>    with __name__ == "__main__":
+        >>>       example_function()
 
-    # in script_1.py
-    >>> from pyufunc import with_argparse
-    >>> @with_argparse
-        def example_function(name: str, age: int = 30):
-            print(f'Name: {name}, Age: {age}')
-            return None
-    >>> @with_argparse
-        class NewClass:
-            def __init__(self, name: str):
-                self.name = name
-            def main(self, age: int = 30):
-                print(f'Name: {self.name}, Age: {age}')
-    >>> if __name__ == "__main__":
-            import sys
-            if len(sys.argv) > 1:
-                script_name = sys.argv[1]
-                sys.argv = sys.argv[1:]
-                if script_name == "example_function":
-                    example_function()
-                elif script_name == "NewClass":
-                    NewClass()
+        # in terminal
+        >>> $ python script.py --name "John" --age 25
 
-    # in terminal
-    >>> $ python script_1.py example_function --name "John" --age 25
+        # in script_1.py
+        >>> from pyufunc import with_argparse
+        >>> @with_argparse
+        >>> def example_function(name: str, age: int = 30):
+        >>>     print(f'Name: {name}, Age: {age}')
+        >>>     return None
+
+        >>> @with_argparse
+        >>> class NewClass:
+        >>>     def __init__(self, name: str):
+        >>>         self.name = name
+        >>>     def main(self, age: int = 30):
+        >>>         print(f'Name: {self.name}, Age: {age}')
+
+        >>> if __name__ == "__main__":
+        >>>     import sys
+        >>>     if len(sys.argv) > 1:
+        >>>         script_name = sys.argv[1]
+        >>>         sys.argv = sys.argv[1:]
+        >>>         if script_name == "example_function":
+        >>>             example_function()
+        >>>         elif script_name == "NewClass":
+        >>>             NewClass()
+
+        # in terminal
+        >>> $ python script_1.py example_function --name "John" --age 25
 
     """
 

@@ -1,9 +1,9 @@
 
-.. _api.util_common:
+.. _api.util_magic:
 
-===========
-util_common
-===========
+==========
+util_magic
+==========
 .. currentmodule:: pyufunc
 
 docstring style
@@ -78,3 +78,10 @@ time out function
 
    timeout
    timeout_linux
+
+Convert python file to dynamic linked library
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autosummary::
+   :toctree: api/
+
+   cvt_py_to_dll
