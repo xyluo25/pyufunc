@@ -11,7 +11,7 @@ The following subpackages are public.
 
 - ``pyufunc.util_ai``: AI related utility functions.
 - ``pyufunc.util_algorithm``: Algorithm utility functions.
-- ``pyufunc.util_common``: Common unclasified utility functions.
+- ``pyufunc.util_magic``: Magic unclassified utility functions.
 - ``pyufunc.util_data_processing``: Data processing utility functions.
 - ``pyufunc.util_datetime``: Date and time utility functions.
 - ``pyufunc.util_fullstack``: Fullstack utility functions.
@@ -38,7 +38,7 @@ The following subpackages are public.
 
    util_ai
    util_algorithm
-   util_common
+   util_magic
    util_data_processing
    util_datetime
    util_fullstack

@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools", "wheel", "twine"]
+requires = ["setuptools>=42", "wheel", "twine"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyufunc"
-version = "0.3.8"
+version = "0.3.9"
 description = "pyufunc consolidates frequently used utility functions into one cohesive package"
 authors = [
     {name = "Xiangyong Luo", email = "luoxiangyong01@gmail.com"},
@@ -24,14 +24,17 @@ classifiers = [
     'Topic :: Software Development :: Libraries'
 ]
 
-readme = {file = 'README.md', content-type='text/markdown'}
-license = {file = 'LICENSE', content-type='text/plain'}
+readme = 'README.md'
+# license = {file = 'LICENSE'}
 # license = {text = "Apache License"}
 
 requires-python = ">=3.10"
 keywords = ["pyufunc", "utility functions", "utility-library", "python-utilities", "python-utils", "utility", "functions", "common functions", "common utility functions"]
 
 dynamic = ["dependencies"]
+
+[project.license]
+file="LICENSE"
 
 [project.urls]
 "Homepage" = 'https://github.com/xyluo25/pyufunc'
@@ -57,6 +60,7 @@ dependencies = {file = ["requirements.txt"]}
 include-package-data = true
 py-modules = []
 package-data = {'pyufunc' = ['**/*.txt', '*.xls', '*.xlsx', '*.csv', '*.json', '**/*.json'], "test_data" = ['*.xls', '*.json']}
+license-files = []
 
 # [tool.setuptools.packages.find]
 # where = ["pyufunc"]

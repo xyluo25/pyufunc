@@ -28,8 +28,8 @@ string manipulation
 .. autosummary::
     :toctree: api/
 
-    cvt_digit_str_to_int
-    cvt_digit_str_to_float
+    str_digit_to_int
+    str_digit_to_float
     str_strip
 
 dataclass manipulation
@@ -37,10 +37,10 @@ dataclass manipulation
 .. autosummary::
     :toctree: api/
 
-    create_dataclass
-    create_dataclass_from_dict
-    merge_dataclass
-    extend_dataclass
+    dataclass_creation
+    dataclass_from_dict
+    dataclass_merge
+    dataclass_extend
     dataclass_dict_wrapper
 
 data processing

@@ -31,7 +31,7 @@ from pyufunc.util_geo._geo_tif import download_elevation_tif_by
 from pyufunc.util_geo._gmns import Node as gmns_Node
 from pyufunc.util_geo._gmns import Link as gmns_Link
 from pyufunc.util_geo._gmns import POI as gmns_POI
-from pyufunc.util_geo._gmns import Zone as gmn_Zone
+from pyufunc.util_geo._gmns import Zone as gmns_Zone
 from pyufunc.util_geo._gmns import Agent as gmns_Agent
 from pyufunc.util_geo._gmns import read_node as gmns_read_node
 from pyufunc.util_geo._gmns import read_poi as gmns_read_poi
@@ -59,7 +59,7 @@ __all__ = [
     "gmns_Node",
     "gmns_Link",
     "gmns_POI",
-    "gmn_Zone",
+    "gmns_Zone",
     "gmns_Agent",
     "gmns_read_node",
     "gmns_read_poi",

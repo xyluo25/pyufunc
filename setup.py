@@ -20,7 +20,7 @@ except Exception:
 
 setuptools.setup(
     name="pyufunc",  # Replace with your own username
-    version="0.3.7",
+    version="0.3.9",
     author="Xiangyong Luo",
     author_email="luoxiangyong01@gmail.com",
 
@@ -63,5 +63,5 @@ setuptools.setup(
         'Contact': 'https://github.com/xyluo25',
     },
     platforms=["all"],
-    license='MIT License',
+    license='MIT',
 )

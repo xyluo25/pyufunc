@@ -95,7 +95,7 @@ For more information about the ways you can contribute to pyufunc, visit [Pyufun
 
 If you use pyufunc in your work and research, please use the following entry:
 
-- Luo, X.Y. and Zhou, X.S. (2024, February 18). pyufunc: A powerful toolkit of Python utility functions. Retrieved from https://github.com/xyluo25/pyufunc
+- Luo, Xiangyong and Zhou, Simon Xuesong. “Pyufunc: A powerful toolkit of Python utility functions”. Zenodo, March 27, 2025. https://doi.org/10.5281/zenodo.15092919.
 
 ## ACKNOWLEDGMENT
 

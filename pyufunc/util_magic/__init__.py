@@ -27,6 +27,7 @@ from ._run_parallel_decorator import run_parallel
 from ._end_of_life_decorator import end_of_life
 from ._count_code_size import count_lines_of_code
 from ._time_out import timeout, timeout_linux
+from ._convert_py_to_dll import cvt_py_to_dll
 
 
 __all__ = [
@@ -65,4 +66,7 @@ __all__ = [
     # _time_out
     "timeout",
     "timeout_linux",
+
+    # _convert_py_to_dll
+    "cvt_py_to_dll"
 ]
