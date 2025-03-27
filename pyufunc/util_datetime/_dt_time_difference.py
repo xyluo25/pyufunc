@@ -9,6 +9,8 @@
 from datetime import datetime
 from typing import Union
 
+from pyufunc.util_data_processing._str import str_strip
+
 
 def get_time_diff_in_unit(start_time: Union[datetime, str],
                           end_time: Union[datetime, str],
@@ -95,7 +97,7 @@ def get_time_diff_in_unit(start_time: Union[datetime, str],
     return unit_convert_dict["default"]
 
 
-def time_unit_converter(value: float, from_unit: str, to_unit: str, verbose: bool = True) -> float:
+def time_unit_converter(value: float, from_unit: str, to_unit: str, verbose: bool = False) -> float:
     """ Convert a time value between seconds, minutes, hours, days, years
 
     Args:
@@ -151,13 +153,13 @@ def time_unit_converter(value: float, from_unit: str, to_unit: str, verbose: boo
     return result
 
 
-def time_str_to_seconds(time_str: str, to_unit: str = "seconds", verbose: bool = True) -> int:
+def time_str_to_seconds(time_str: str, to_unit: str = "seconds", verbose: bool = False) -> int:
     """Convert a time string to seconds
 
     Args:
         time_str (str): A time string, e.g., "12:00AM", "9:00am", "3:00pm"
         to_unit (str): The desired output unit. e.g. "seconds", "minutes", "hours", "days"
-        verbose (bool): Whether to print the conversion result. Defaults to True.
+        verbose (bool): Whether to print the conversion result. Defaults to False.
 
     Example:
         >>> from pyufunc import time_str_to_seconds
@@ -177,7 +179,27 @@ def time_str_to_seconds(time_str: str, to_unit: str = "seconds", verbose: bool =
         int: The time in the target unit.
     """
 
-    dt = datetime.strptime(time_str.strip().lower(), "%I:%M%p")
+    time_str = str_strip(time_str).lower()
+
+    fmt = [
+        "%I:%M",        # 12-hour, no AM/PM
+        "%I:%M:%S",     # 12-hour with seconds
+        "%I:%M%p",      # 12-hour with AM/PM
+        "%I:%M %p",      # 12-hour with AM/PM
+        "%H:%M",        # 24-hour
+        "%H:%M:%S"      # 24-hour with seconds
+    ]
+
+    dt = None
+    for each_fmt in fmt:
+        try:
+            dt = datetime.strptime(time_str, each_fmt)
+            break
+        except ValueError:
+            continue
+
+    if dt is None:
+        raise ValueError(f"  :Invalid time string: {time_str}")
 
     total_seconds = dt.hour * 3600 + dt.minute * 60 + dt.second
 
@@ -203,6 +225,5 @@ def time_str_to_seconds(time_str: str, to_unit: str = "seconds", verbose: bool =
     result = total_seconds / conversion_factors[to_unit_norm]
 
     if verbose:
-        print(
-            f"  :{time_str} is approximately {result} {to_unit_norm}")
+        print(f"  :{time_str} is approximately {result} {to_unit_norm}")
     return result
