@@ -71,7 +71,7 @@ class _FakeUserAgentParser(html.parser.HTMLParser):
             self.data.append(data.strip())
 
 
-@requires('requests')
+@requires('requests', "urllib3", verbose=False)
 class GitHubFileDownloader:
     """
     Download files on GitHub from a given repository URL.
@@ -359,7 +359,7 @@ class GitHubFileDownloader:
 
         return fake_headers
 
-    @requires('tqdm')
+    @requires('tqdm', verbose=False)
     def _download_file_from_url(self, response, path_to_file):
         """
         Download an object from a valid URL (and save it as a file).
@@ -367,7 +367,7 @@ class GitHubFileDownloader:
         """
 
         # import tqdm if it is available, otherwise, install and import it
-        tqdm_ = import_package('tqdm')
+        tqdm_ = import_package('tqdm', verbose=False)
 
         file_size = int(response.headers.get('content-length'))  # Total size in bytes
 
@@ -583,7 +583,7 @@ def github_file_downloader(repo_url: str, output_dir: str | None = None, flatten
     return GitHubFileDownloader(repo_url, flatten_files=flatten, output_dir=output_dir).download()
 
 
-@requires('requests')
+@requires('requests', verbose=False)
 def github_get_status(usr_name, repo_name=None) -> list[dict]:
     """
     Fetches GitHub repository status including stars, forks, issues, and pull requests.
@@ -608,7 +608,7 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
         'original_stars': None}]
 
     """
-
+    import_package('requests', verbose=False)
     import requests
 
     print(f"  Collecting {usr_name} GitHub repository status...")

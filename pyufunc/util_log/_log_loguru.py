@@ -13,12 +13,10 @@ if TYPE_CHECKING:
     import loguru
 
 
-@requires("loguru")
+@requires("loguru", verbose=False)
 def log_logger(log_file: str = "log.log") -> loguru.logger:
 
     import_package("loguru", verbose=False)
     from loguru import logger
 
     return logger
-
-# logger = loguru_logger()

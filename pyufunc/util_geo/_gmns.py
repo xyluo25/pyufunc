@@ -312,7 +312,7 @@ class Link:
         return (self.from_node_id, self.to_node_id, {**self.as_dict(), **{"weight": self.length}})
 
 
-@requires("shapely")
+@requires("shapely", verbose=False)
 def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
     """Create Node from df_node.
 
@@ -323,7 +323,7 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
         dict[int, Node]: a dict of nodes.{node_id: Node}
     """
 
-    # import_package("shapely")
+    import_package("shapely", verbose=False)
     import shapely
 
     # Reset index to avoid index error
@@ -384,7 +384,7 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
     return node_dict
 
 
-@requires("shapely", "pyproj", auto_install=True)
+@requires("shapely", "pyproj", verbose=False)
 def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     """Create POI from df_poi.
 
@@ -394,6 +394,8 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     Returns:
         dict[int, POI]: a dict of POIs.{poi_id: POI}
     """
+    import_package("shapely", verbose=False)
+    import_package("pyproj", verbose=False)
     import shapely
     from pyproj import Transformer
 
@@ -469,7 +471,7 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     return poi_dict
 
 
-@requires("shapely")
+@requires("shapely", verbose=False)
 def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, Zone]:
     """Create Zone from df_zone.
 
@@ -480,7 +482,7 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
         dict[int, Zone]: a dict of Zones.{zone_id: Zone}
     """
 
-    # import_package("shapely")
+    import_package("shapely", verbose=False)
     import shapely
 
     df_zone = df_zone.reset_index(drop=True)
@@ -537,7 +539,7 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
     return zone_dict
 
 
-@requires("shapely")
+@requires("shapely", verbose=False)
 def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, Zone]:
     """Create Zone from df_zone.
 
@@ -548,7 +550,7 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
         dict[int, Zone]: a dict of Zones.{zone_id: Zone}
     """
 
-    # import_package("shapely")
+    import_package("shapely", verbose=False)
     import shapely
 
     df_zone = df_zone.reset_index(drop=True)
@@ -665,7 +667,7 @@ def _create_link_from_dataframe(df_link: pd.DataFrame) -> dict[int, Zone]:
 
 
 @func_time
-@requires("tqdm", "shapely", auto_install=True)
+@requires("tqdm", verbose=False)
 def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Node]:
     """Read node.csv file and return a dict of nodes.
 
@@ -689,6 +691,7 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
         >>> node_dict = read_node(node_file = r"../dataset/ASU/node.csv")
         FileNotFoundError: File: ../dataset/ASU/node.csv does not exist.
     """
+    import_package("tqdm", verbose=False)
     from tqdm import tqdm
 
     # convert path to linux path
@@ -749,7 +752,7 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
 
 
 @func_time
-@requires("tqdm", "shapely", auto_install=True)
+@requires("tqdm", verbose=False)
 def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: POI]:
     """Read poi.csv file and return a dict of POIs.
 
@@ -774,6 +777,7 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
         FileNotFoundError: File: ../dataset/ASU/poi.csv does not exist.
 
     """
+    import_package("tqdm", verbose=False)
     from tqdm import tqdm
 
     # convert path to linux path
@@ -828,7 +832,6 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
 
 
 @func_time
-@requires("tqdm", "shapely", auto_install=True)
 def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
@@ -842,7 +845,7 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
         verbose (bool, optional): print processing information. Defaults to False.
 
     Returns:
-        _type_: _description_
+        dict: the result dictionary of Zones. {zone_id: Zone}
     """
 
     # convert path to linux path
@@ -896,7 +899,6 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
 
 @func_time
-@requires("tqdm", "shapely", auto_install=True)
 def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
@@ -987,7 +989,7 @@ def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
         Link(id=1, name='A', from_node_id=1, to_node_id=2, length=0.0, lanes=1, dir_flag=1, free_speed=0.0,
         capacity=0.0, link_type=1, link_type_name='motorway', geometry='LINESTRING (0 0, 1 1)')
     """
-
+    import_package("tqdm", verbose=False)
     from tqdm import tqdm
 
     # convert path to linux path
