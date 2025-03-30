@@ -42,14 +42,7 @@ settings = {
 }
 
 
-@requires("shapely", "requests", "urllib", verbose=False)
 class OSMPlaceFinder:
-
-    import_package("shapely", verbose=False)
-    import_package("requests", verbose=False)
-    import_package("urllib", verbose=False)
-    import shapely
-    import requests
 
     def __init__(self, place: str, verbose: bool = False):
 
