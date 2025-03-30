@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     import dateutil
 
 
-@requires(("python-dateutil", "dateutil"))
+@requires(("python-dateutil", "dateutil"), verbose=False)
 def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
                   dt_fmt: str = "") -> str:
     """Format datetime to datetime string
@@ -81,7 +81,7 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
         return dt
 
 
-@requires(("python-dateutil", "dateutil"))
+@requires(("python-dateutil", "dateutil"), verbose=False)
 def fmt_str_to_dt(dt_str: str) -> datetime.datetime:
     """Format datetime string to datetime
 
