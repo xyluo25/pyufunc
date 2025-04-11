@@ -41,7 +41,7 @@ settings = {
     "use_cache": False,
 }
 
-
+@requires("requests", verbose=False)
 class OSMPlaceFinder:
 
     def __init__(self, place: str, verbose: bool = False):
