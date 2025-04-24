@@ -31,7 +31,7 @@ Available utility functions in pyUFunc (157):
   - algo_quick_sort
   - algo_selection_sort
 
-- util_common:
+- util_magic:
   - count_lines_of_code
   - cvt_py_to_dll
   - end_of_life
