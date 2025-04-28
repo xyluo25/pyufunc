@@ -8,7 +8,6 @@ from __future__ import annotations
 import contextlib
 import re
 import os
-import urllib.request
 import json
 import sys
 import html.parser
@@ -17,6 +16,8 @@ import importlib
 import secrets
 import random
 import shutil
+from urllib.parse import urlparse
+import urllib.request
 from pathlib import Path
 from typing import TYPE_CHECKING
 from pyufunc.util_magic import requires, import_package
@@ -678,3 +679,51 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
             print(f"Error: {e}")
 
     return repo_details
+
+
+def github_private_file_downloader(raw_url: str, token: str, dest_path: str) -> bool:
+    """
+    Download a file (e.g. a ZIP) from a private GitHub repository given its
+    raw/blob URL, using a personal access token for authentication.
+
+    Args:
+        raw_url (str): Either a raw.githubusercontent.com URL:
+                       https://raw.githubusercontent.com/{owner}/{repo}/{ref}/{path}
+                       or a GitHub blob URL:
+                       https://github.com/{owner}/{repo}/blob/{ref}/{path}
+        token (str):  Personal access token with `repo` scope.
+        dest_path (str): Local path where the file will be written.
+    """
+    # parse URL
+    parsed = urlparse(raw_url)
+    parts = parsed.path.strip("/").split("/")
+    if parsed.netloc == "github.com":
+        # blob URL: /{owner}/{repo}/blob/{ref}/{path…}
+        owner, repo, blob, ref = parts[:4]
+        if blob != "blob":
+            raise ValueError("Expected a /blob/ URL")
+        file_path = "/".join(parts[4:])
+    elif parsed.netloc == "raw.githubusercontent.com":
+        # raw URL: /{owner}/{repo}/{ref}/{path…}
+        owner, repo, ref = parts[:3]
+        file_path = "/".join(parts[3:])
+    else:
+        raise ValueError(
+            "URL must be raw.githubusercontent.com or github.com blob URL")
+
+    # construct Contents API endpoint
+    api_url = f"https://api.github.com/repos/{owner}/{repo}/contents/{file_path}"
+    headers = {
+        "Authorization": f"token {token}",
+        "Accept": "application/vnd.github.v3.raw"  # <-- ask for raw file bytes
+    }
+    params = {"ref": ref}
+
+    # stream download
+    with requests.get(api_url, headers=headers, params=params, stream=True) as r:
+        r.raise_for_status()  # will surface 404 / 401 / etc.
+        with open(dest_path, "wb") as f:
+            for chunk in r.iter_content(8192):
+                if chunk:
+                    f.write(chunk)
+    return True
