@@ -20,7 +20,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (157):
+Available utility functions in pyUFunc (161):
 
 - non-keywords:
   - add_date_in_filename
@@ -36,6 +36,7 @@ Available utility functions in pyUFunc (157):
   - dict_split_by_chunk
   - download_elevation_tif_by
   - end_of_life
+  - extract_bbox_coordinates
   - file_delete
   - file_remove
   - func_running_time
@@ -82,6 +83,8 @@ Available utility functions in pyUFunc (157):
   - get_host_ip
   - get_host_name
   - get_layer_boundary
+  - get_osm_by_bbox
+  - get_osm_by_relation_id
   - get_osm_place
   - get_time_diff_in_unit
   - get_timezone
@@ -184,6 +187,7 @@ Available utility functions in pyUFunc (157):
 - github:
   - github_file_downloader
   - github_get_status
+  - github_private_file_downloader
 
 - pypi:
   - pypi_downloads

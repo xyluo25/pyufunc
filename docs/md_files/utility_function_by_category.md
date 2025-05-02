@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (157):
+Available utility functions in pyUFunc (161):
 
 - util_ai:
   - mean_absolute_error
@@ -98,9 +98,12 @@ Available utility functions in pyUFunc (157):
   - cvt_wgs84_to_baidu09
   - cvt_wgs84_to_gcj02
   - download_elevation_tif_by
+  - extract_bbox_coordinates
   - find_closest_point
   - find_k_nearest_points
   - get_coordinates_from_geom
+  - get_osm_by_bbox
+  - get_osm_by_relation_id
   - get_osm_place
   - gmns_Agent
   - gmns_Link
@@ -116,6 +119,7 @@ Available utility functions in pyUFunc (157):
 - util_git_pypi:
   - github_file_downloader
   - github_get_status
+  - github_private_file_downloader
   - pypi_downloads
 
 - util_img:

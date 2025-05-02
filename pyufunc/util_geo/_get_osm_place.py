@@ -41,6 +41,7 @@ settings = {
     "use_cache": False,
 }
 
+
 @requires("requests", verbose=False)
 class OSMPlaceFinder:
 

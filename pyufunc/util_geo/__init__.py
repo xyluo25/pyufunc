@@ -38,6 +38,8 @@ from pyufunc.util_geo._gmns import read_poi as gmns_read_poi
 from pyufunc.util_geo._gmns import read_link as gmns_read_link
 from pyufunc.util_geo._gmns import read_zone as gmns_read_zone
 from pyufunc.util_geo._get_osm_place import get_osm_place
+from pyufunc.util_geo._get_osm_data import get_osm_by_relation_id, get_osm_by_bbox, extract_bbox_coordinates
+
 
 __all__ = [
     # geo_area
@@ -82,4 +84,8 @@ __all__ = [
     # geo_tif
     "download_elevation_tif_by",
 
+    # get osm data
+    "get_osm_by_relation_id",
+    "get_osm_by_bbox",
+    "extract_bbox_coordinates",
 ]
