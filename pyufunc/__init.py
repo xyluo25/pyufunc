@@ -31,7 +31,7 @@ from .pkg_configs import config_FUNC_KEYWORD
 config_FUNC_CATEGORY = {
     "util_ai": util_ai.__all__,
     "util_algorithm": util_algorithm.__all__,
-    "util_common": util_magic.__all__,
+    "util_magic": util_magic.__all__,
     "util_data_processing": util_data_processing.__all__,
     "util_datetime": util_datetime.__all__,
     "util_fullstack": util_fullstack.__all__,
@@ -63,7 +63,7 @@ def show_util_func_by_category(verbose: bool = True) -> None:
         >>> uf.show_utility_func_by_category()
         Available utility functions in pyufunc:
 
-        -- util_common:
+        -- util_magic:
            ** show_supported_docstring_header
            ** show_google_docstring_style
            ** show_numpy_docstring_style

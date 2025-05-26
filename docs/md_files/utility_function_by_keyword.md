@@ -20,25 +20,30 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_keyword()
 ```
 
-Available utility functions in pyUFunc (152):
+Available utility functions in pyUFunc (161):
 
 - non-keywords:
   - add_date_in_filename
   - add_dir_to_env
   - add_pkg_to_sys_path
   - count_lines_of_code
+  - dataclass_creation
   - dataclass_dict_wrapper
+  - dataclass_extend
+  - dataclass_from_dict
+  - dataclass_merge
   - dict_delete_keys
   - dict_split_by_chunk
   - download_elevation_tif_by
   - end_of_life
-  - extend_dataclass
+  - extract_bbox_coordinates
+  - file_delete
+  - file_remove
   - func_running_time
   - func_time
   - import_package
   - log_logger
   - log_writer
-  - merge_dataclass
   - path2linux
   - path2uniform
   - pickle_load
@@ -46,10 +51,17 @@ Available utility functions in pyUFunc (152):
   - printer_file
   - r2_score
   - remove_duplicate_files
-  - remove_file
   - requires
   - send_email
+  - size_of_dir
+  - size_of_file
+  - str_digit_to_float
+  - str_digit_to_int
   - str_strip
+  - terminal_height
+  - terminal_width
+  - time_str_to_seconds
+  - time_unit_converter
   - timeout
   - timeout_linux
   - with_argparse
@@ -71,9 +83,9 @@ Available utility functions in pyUFunc (152):
   - get_host_ip
   - get_host_name
   - get_layer_boundary
+  - get_osm_by_bbox
+  - get_osm_by_relation_id
   - get_osm_place
-  - get_terminal_height
-  - get_terminal_width
   - get_time_diff_in_unit
   - get_timezone
   - get_user_defined_func
@@ -87,8 +99,6 @@ Available utility functions in pyUFunc (152):
 
 - create:
   - create_circle_at_point_with_radius
-  - create_dataclass
-  - create_dataclass_from_dict
   - create_tempfile
   - create_unique_filename
 
@@ -96,7 +106,7 @@ Available utility functions in pyUFunc (152):
   - find_closest_point
   - find_duplicate_files
   - find_executable_from_PATH_on_win
-  - find_fn_from_PATH_on_win
+  - find_fname_from_PATH_on_win
   - find_k_nearest_points
   - find_util_func_by_keyword
 
@@ -153,11 +163,10 @@ Available utility functions in pyUFunc (152):
   - cvt_baidu09_to_gcj02
   - cvt_baidu09_to_wgs84
   - cvt_current_dt_to_tz
-  - cvt_digit_str_to_float
-  - cvt_digit_str_to_int
   - cvt_gcj02_to_baidu09
   - cvt_gcj02_to_wgs84
   - cvt_int_to_alpha
+  - cvt_py_to_dll
   - cvt_wgs84_to_baidu09
   - cvt_wgs84_to_gcj02
 
@@ -178,6 +187,7 @@ Available utility functions in pyUFunc (152):
 - github:
   - github_file_downloader
   - github_get_status
+  - github_private_file_downloader
 
 - pypi:
   - pypi_downloads
@@ -199,16 +209,15 @@ Available utility functions in pyUFunc (152):
   - algo_selection_sort
 
 - gmns:
-  - gmns_geo
+  - gmns_Agent
+  - gmns_Link
+  - gmns_Node
+  - gmns_POI
   - gmns_read_link
   - gmns_read_node
   - gmns_read_poi
   - gmns_read_zone
-  - GMNSAgent
-  - GMNSLink
-  - GMNSNode
-  - GMNSPOI
-  - GMNSZone
+  - gmns_Zone
 
 - pytest:
   - pytest_show_assert

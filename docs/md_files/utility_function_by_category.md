@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (152):
+Available utility functions in pyUFunc (161):
 
 - util_ai:
   - mean_absolute_error
@@ -31,8 +31,9 @@ Available utility functions in pyUFunc (152):
   - algo_quick_sort
   - algo_selection_sort
 
-- util_common:
+- util_magic:
   - count_lines_of_code
+  - cvt_py_to_dll
   - end_of_life
   - func_running_time
   - func_time
@@ -52,21 +53,21 @@ Available utility functions in pyUFunc (152):
   - timeout_linux
 
 - util_data_processing:
-  - create_dataclass
-  - create_dataclass_from_dict
-  - cvt_digit_str_to_float
-  - cvt_digit_str_to_int
   - cvt_int_to_alpha
+  - dataclass_creation
   - dataclass_dict_wrapper
+  - dataclass_extend
+  - dataclass_from_dict
+  - dataclass_merge
   - dict_delete_keys
   - dict_split_by_chunk
-  - extend_dataclass
   - get_layer_boundary
   - is_float
   - list_flatten_nested
   - list_split_by_equal_sublist
   - list_split_by_fixed_length
-  - merge_dataclass
+  - str_digit_to_float
+  - str_digit_to_int
   - str_strip
 
 - util_datetime:
@@ -82,6 +83,8 @@ Available utility functions in pyUFunc (152):
   - group_dt_weekly
   - group_dt_yearly
   - list_all_timezones
+  - time_str_to_seconds
+  - time_unit_converter
 
 - util_geo:
   - calc_area_from_wkt_geometry
@@ -95,25 +98,28 @@ Available utility functions in pyUFunc (152):
   - cvt_wgs84_to_baidu09
   - cvt_wgs84_to_gcj02
   - download_elevation_tif_by
+  - extract_bbox_coordinates
   - find_closest_point
   - find_k_nearest_points
   - get_coordinates_from_geom
+  - get_osm_by_bbox
+  - get_osm_by_relation_id
   - get_osm_place
-  - gmns_geo
+  - gmns_Agent
+  - gmns_Link
+  - gmns_Node
+  - gmns_POI
   - gmns_read_link
   - gmns_read_node
   - gmns_read_poi
   - gmns_read_zone
-  - GMNSAgent
-  - GMNSLink
-  - GMNSNode
-  - GMNSPOI
-  - GMNSZone
+  - gmns_Zone
   - proj_point_to_line
 
 - util_git_pypi:
   - github_file_downloader
   - github_get_status
+  - github_private_file_downloader
   - pypi_downloads
 
 - util_img:
@@ -157,16 +163,16 @@ Available utility functions in pyUFunc (152):
   - check_platform
   - create_tempfile
   - create_unique_filename
+  - file_delete
+  - file_remove
   - find_duplicate_files
   - find_executable_from_PATH_on_win
-  - find_fn_from_PATH_on_win
+  - find_fname_from_PATH_on_win
   - generate_unique_filename
   - get_dir_size
   - get_file_size
   - get_filenames_by_ext
   - get_files_by_ext
-  - get_terminal_height
-  - get_terminal_width
   - is_linux
   - is_mac
   - is_windows
@@ -175,8 +181,11 @@ Available utility functions in pyUFunc (152):
   - pickle_load
   - pickle_save
   - remove_duplicate_files
-  - remove_file
   - show_dir_in_tree
+  - size_of_dir
+  - size_of_file
+  - terminal_height
+  - terminal_width
   - with_argparse
 
 - util_test:
