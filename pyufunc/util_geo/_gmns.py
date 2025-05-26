@@ -966,7 +966,7 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
 
 @func_time
-@requires("tqdm", auto_install=True)
+@requires("tqdm", auto_install=False, verbose=False)
 def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Link]:
     """Read link.csv file and return a dict of Links.
 
