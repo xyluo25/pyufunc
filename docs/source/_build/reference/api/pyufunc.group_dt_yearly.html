@@ -504,14 +504,14 @@ document.write(`
 <h1>pyufunc.group_dt_yearly<a class="headerlink" href="#pyufunc-group-dt-yearly" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyufunc.group_dt_yearly">
-<span class="sig-prename descclassname"><span class="pre">pyufunc.</span></span><span class="sig-name descname"><span class="pre">group_dt_yearly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['datetime',</span> <span class="pre">'value']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyufunc.group_dt_yearly" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pyufunc.</span></span><span class="sig-name descname"><span class="pre">group_dt_yearly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyufunc.group_dt_yearly" title="Link to this definition">#</a></dt>
 <dd><p>Group the DataFrame by year.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pd.DataFrame</em>) – input DataFrame with datetime and value columns</p></li>
-<li><p><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – the time interval to groupby. Defaults to 1.</p></li>
-<li><p><strong>col</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>, </em><em>optional</em>) – specify input column names.
+<li><p><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the time interval to groupby. Defaults to 1.</p></li>
+<li><p><strong>col</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a>) – specify input column names.
 if your input column name is not same as default col name, use your own col name.
 e.g. [“your_datetime_col_name”, “your_value_col_name”]. Defaults to [“datetime”, “value”].</p></li>
 </ul>

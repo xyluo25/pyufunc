@@ -511,7 +511,7 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>start_time</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><em>datetime.datetime</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em>) – datetime object or string</p></li>
 <li><p><strong>end_time</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><em>datetime.datetime</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em>) – datetime object or string</p></li>
-<li><p><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>time unit to be calculated. Defaults to “seconds”.</p>
+<li><p><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – <p>time unit to be calculated. Defaults to “seconds”.</p>
 <p>Candidates: [“seconds”, “minutes”, “hours”, “days”, “second”, “minute”,</p>
 <p>”hour”, “day”, “week”, “weeks”, “month”, “months”, “year”, “years”]</p>
 </p></li>
@@ -546,7 +546,7 @@ document.write(`
 <span class="go">86400.0 seconds</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_time_diff_in_unit</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span> <span class="s2">&quot;day&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_time_diff_in_unit</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span> <span class="s2">&quot;day&quot;</span><span class="p">)</span>
 <span class="go">Time difference between 2024-02-06 11:11:11 and 2023-12-08 11:11:11: 60.0 days</span>
 <span class="go">60.0 days</span>
 </pre></div>
