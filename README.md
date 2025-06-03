@@ -1,6 +1,8 @@
+[![PyPI version](https://badge.fury.io/py/pyufunc.svg)](https://badge.fury.io/py/pyufunc)[![Downloads](https://static.pepy.tech/badge/pyufunc)](https://pepy.tech/project/pyufunc)[![](https://img.shields.io/pypi/wheel/gensim.svg)](https://pypi.org/project/pyufunc/)[![](https://img.shields.io/pypi/pyversions/pyufunc.svg)](https://www.python.org/)[![](https://img.shields.io/github/release-date/xyluo25/pyufunc.svg)](https://img.shields.io/github/release-date/xyluo25/pyufunc.svg)[![](https://readthedocs.org/projects/pyufunc/badge/?version=latest)](https://pyufunc.readthedocs.io/en/latest/?badge=latest)[![](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/license/mit)
+
 # pyufunc
 
-<img src="https://github.com/xyluo25/pyufunc/blob/main/docs/static/img/pyufunc_icon.jpg" >
+<img src="https://github.com/xyluo25/pyufunc/blob/main/docs/static/img/pyufunc_icon.jpg">
 
 Welcome to pyufunc, your go-to Python package for a wide array of frequently used utility functions. Simplify your coding experience with this powerful toolkit, meticulously designed to enhance your productivity and streamline your development process. Whether you're a seasoned developer or just starting with Python, pyufunc provides a curated collection of utilities that cater to your everyday programming needs.
 
