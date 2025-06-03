@@ -86,9 +86,17 @@ In conclusion, `pyufunc` fulfills a clear and practical need within the Python d
 
 ## Existing Utility Functions Categorized by Functionality
 
+This document serves as a curated compendium of existing utility functions, meticulously organized by keywords to facilitate ease of navigation and application for developers across various disciplines. By categorizing these functions, we aim to provide a structured overview that not only simplifies the discovery process but also encourages the exploration of new methods and techniques that may have been previously overlooked. This categorization is intended to serve as a bridge, connecting developers with the tools they need to optimize their code, improve functionality, and innovate within their projects.
+
+The categories outlined in this document span a wide range of functionalities, each category is accompanied by a brief description, followed by a list of utility functions that fall under its umbrella, this comprehensive approach aims to arm developers with a robust toolkit, enabling them to select the most appropriate utility functions for their specific needs. Whether you are working on a complex application requiring advanced data manipulation or a simple project needing basic string operations, this guide endeavors to provide a valuable resource that enhances your development process and leads to more efficient, effective, and elegant coding solutions.
+
 * [utility_function_by_category.md](https://github.com/xyluo25/pyufunc/blob/main/docs/md_files/utility_function_by_category.md)
 
 ## Existing Utility Functions Categorized by Keywords
+
+This document is designed to serve as an invaluable resource for developers, offering an extensive list of existing utility functions organized by keywords. The use of keywords for organization purposes aims to streamline the search process, enabling developers to quickly and efficiently find the specific functions they need to enhance their projects. Utility functions play a crucial role in software development, providing pre-built solutions to common problems and tasks, thereby saving time and reducing the complexity of coding from scratch. By presenting these functions in a keyword-centric format, we facilitate a more intuitive and user-friendly approach to accessing a vast repository of tools, ensuring that developers can leverage the full potential of utility functions to optimize their code, improve performance, and innovate within their applications.
+
+This methodical approach empowers developers to efficiently identify the functions that best match their current requirements, thereby enhancing their coding workflow and productivity. Whether tackling complex algorithmic challenges or implementing basic functionality, this guide aims to be an essential companion, fostering a deeper understanding and more effective use of utility functions in software development projects.
 
 * [utility_function_by_keyword.md](https://github.com/xyluo25/pyufunc/blob/main/docs/md_files/utility_function_by_keyword.md)
 
