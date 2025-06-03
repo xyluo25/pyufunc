@@ -34,15 +34,15 @@ Pyufunc aims to bring together the most commonly used utility functions from dif
 
 Let pyufunc take care of the repetitive tasks while you focus on building remarkable Python applications. Empower your projects with the efficiency and elegance that comes with pyufunc - your all-inclusive Python utility toolkit. Happy coding!
 
-**No dependencies will be installed in your coding environment unless you use functions that require specific dependencies. The function will automatically install the necessary packages when you use it.**
-
-**If you discover useful functions that you believe should be included in the package for broader use, or if you have suggestions for additional utility functions, please share your comments here: [Issues](https://github.com/xyluo25/pyufunc/issues) or pull the repository and commit functions.**
-
 ---
 
 This manuscript has been authored in part by UT-Battelle, LLC, under contract DE-AC05-00OR22725 with the US Department of Energy (DOE). The publisher acknowledges the US government license to provide public access under the [DOE Public Access Plan](https://www.energy.gov/doe-public-access-plan)
 
 ---
+
+**No dependencies will be installed in your coding environment unless you use functions that require specific dependencies. The function will automatically install the necessary packages when you use it.**
+
+**If you discover useful functions that you believe should be included in the package for broader use, or if you have suggestions for additional utility functions, please share your comments here: [Issues](https://github.com/xyluo25/pyufunc/issues) or pull the repository and commit functions.**
 
 # Statement of need
 
