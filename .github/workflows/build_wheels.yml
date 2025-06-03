@@ -9,15 +9,16 @@ jobs:
     strategy:
       matrix:
         # macos-13 is an intel runner, macos-14 is apple silicon
-        os: [ubuntu-latest, windows-latest, windows-2019, macos-13, macos-14] # macos-14
+        os: [ubuntu-latest, windows-latest, macos-13, macos-14] # macos-14
+        python-version: ["3.10", "3.12"] # "3.11", "3.13"
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: ${{ matrix.python-version }}
 
       - name: Build wheels
         run: |
@@ -31,7 +32,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: wheels-${{ matrix.os }}-${{ strategy.job-index }}
+          name: wheels-${{ matrix.os }}-${{ matrix.python-version }}-${{ strategy.job-index }}
           path: |
             dist/*.tar.gz
             dist/*.whl
