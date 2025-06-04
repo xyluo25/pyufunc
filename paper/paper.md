@@ -60,7 +60,7 @@ By providing an intuitive, modular, and carefully maintained library, `pyufunc` 
 
 The design of `pyufunc` emphasizes simplicity and modularity, enabling developers at all skill levels to integrate essential utilities effortlessly into their projects. Its modular structure facilitates easy addition or customization of individual functions, minimizing unnecessary dependencies and enhancing extensibility.
 
-Utility functions are particularly beneficial in automated systems and workflows, where reliability and consistency are critical. In automation contexts, leveraging well-tested utility functions from `<span>pyufunc</span>` reduces the risk of errors and enhances operational stability, making automated pipelines more predictable, efficient, and maintainable.
+Utility functions are particularly beneficial in automated systems and workflows, where reliability and consistency are critical. In automation contexts, leveraging well-tested utility functions from `pyufunc` reduces the risk of errors and enhances operational stability, making automated pipelines more predictable, efficient, and maintainable.
 
 Furthermore, `pyufunc` maintains a proactive approach towards compatibility and community engagement. Regular updates align the package with the latest Python standards and practices, while open community feedback mechanisms encourage continual improvement and expansion.
 
