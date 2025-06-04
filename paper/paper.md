@@ -100,7 +100,7 @@ This methodical approach empowers developers to efficiently identify the functio
 
 * [utility_function_by_keyword.md](https://github.com/xyluo25/pyufunc/blob/main/docs/md_files/utility_function_by_keyword.md)
 
-## Review of Existing Python Utility Function Packages
+## Comprehensive Review of Existing Python Utility Function Packages
 
 In this section, you will find a comprehensive review of existing utility function packages. Before delving into the evaluations and insights, the author wishes to express sincere gratitude to all the developers behind these packages. Your contributions to the open-source community are invaluable, and it is with great appreciation that we acknowledge your efforts and dedication.
 
