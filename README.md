@@ -44,7 +44,7 @@ This methodical approach empowers developers to efficiently identify the functio
 
 * [utility_function_by_keyword.md](https://github.com/xyluo25/pyufunc/blob/main/docs/md_files/utility_function_by_keyword.md)
 
-## Review of Existing Python Utility Function Packages
+## Comprehensive Review of Existing Python Utility Function Packages
 
 In this section, you will find a comprehensive review of existing utility function packages. Before delving into the evaluations and insights, the author wishes to express sincere gratitude to all the developers behind these packages. Your contributions to the open-source community are invaluable, and it is with great appreciation that we acknowledge your efforts and dedication.
 
@@ -126,10 +126,6 @@ Writing code isn't the only way to contribute to pyufunc. You can also:
 - write grant proposals and help with other fundraising efforts
 
 For more information about the ways you can contribute to pyufunc, visit [Pyufunc GitHub](https://github.com/xyluo25/pyufunc). If you' re unsure where to start or how your skills fit in, reach out! You can ask by opening a new issue or leaving a comment on a relevant issue that is already open on GitHub.
-
-## Comprehensive Review of Utility Function Packages
-
-- [utility_function_package_review.md](https://github.com/xyluo25/pyufunc/blob/main/docs/md_files/utility_function_pkg_review.md)
 
 ## How to Cite
 
