@@ -1,0 +1,14 @@
+cff-version: 1.1.0
+message: "If you use realtwin software, please cite it as below."
+authors:
+  - family: Luo
+    given-names: Xiangyong
+    orcid: 0009-0003-1290-9983
+  - family: Zhou
+    given-names: Xuesong (Simon)
+    orcid: 0000-0002-9963-5369
+title: "pyufunc: A Set of Utility Functions that Keep Python Sweet"
+version: 0.4.1
+doi: 10.5281/zenodo.15092919
+date-released: 2025-03-27
+url: "https://github.com/xyluo25/pyufunc"
