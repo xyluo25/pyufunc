@@ -1101,7 +1101,7 @@ def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
             pool.join()
 
         for link_dict in results:
-            print("link_dict: ", link_dict)
+            # print("link_dict: ", link_dict)
             link_dict_final.update(link_dict)
 
     if verbose:
