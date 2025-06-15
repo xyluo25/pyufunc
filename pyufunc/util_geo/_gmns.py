@@ -670,7 +670,7 @@ def _create_link_from_dataframe(df_link: pd.DataFrame) -> dict[int, Zone]:
 
 @func_time
 @requires("tqdm", "joblib", verbose=False)
-def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Node]:
+def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Node]:
     """Read node.csv file and return a dict of nodes.
 
     Args:
@@ -704,6 +704,13 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
     # check if node_file exists
     if not os.path.exists(node_file):
         raise FileNotFoundError(f"File: {node_file} does not exist.")
+
+    # check cpu_cores
+    if not isinstance(cpu_cores, int):
+        raise ValueError(f"cpu_cores should be integer, but got {type(cpu_cores)}")
+
+    if cpu_cores <= 0:
+        cpu_cores = config_gmns["cpu_cores"]
 
     # read node.csv with specified columns and chunksize for iterations
     node_required_cols = config_gmns["node_fields"]
@@ -765,8 +772,8 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
 
 
 @func_time
-@requires("tqdm", verbose=False)
-def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: POI]:
+@requires("tqdm", "joblib", verbose=False)
+def read_poi(poi_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: POI]:
     """Read poi.csv file and return a dict of POIs.
 
     Args:
@@ -791,6 +798,8 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
 
     """
     import_package("tqdm", verbose=False)
+    import_package("joblib", verbose=False)
+    from joblib import Parallel, delayed
     from tqdm import tqdm
 
     # convert path to linux path
@@ -799,6 +808,13 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
     # check if poi_file exists
     if not os.path.exists(poi_file):
         raise FileNotFoundError(f"File: {poi_file} does not exist.")
+
+    # check cpu_cores
+    if not isinstance(cpu_cores, int):
+        raise ValueError(f"cpu_cores should be integer, but got {type(cpu_cores)}")
+
+    if cpu_cores <= 0:
+        cpu_cores = config_gmns["cpu_cores"]
 
     # Read poi.csv with specified columns and chunksize for iterations
     poi_required_cols = config_gmns["poi_fields"]
@@ -853,7 +869,8 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
 
 
 @func_time
-def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
+@requires("tqdm", "joblib", verbose=False)
+def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
     Raises:
@@ -869,12 +886,24 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
         dict: the result dictionary of Zones. {zone_id: Zone}
     """
 
+    import_package("tqdm", verbose=False)
+    import_package("joblib", verbose=False)
+    from joblib import Parallel, delayed
+    from tqdm import tqdm
+
     # convert path to linux path
     zone_file = path2linux(zone_file)
 
     # check if zone_file exists
     if not os.path.exists(zone_file):
         raise FileNotFoundError(f"File: {zone_file} does not exist.")
+
+    # check cpu_cores
+    if not isinstance(cpu_cores, int):
+        raise ValueError(f"cpu_cores should be integer, but got {type(cpu_cores)}")
+
+    if cpu_cores <= 0:
+        cpu_cores = config_gmns["cpu_cores"]
 
     # load default settings for zone required fields and chunk size
     zone_required_cols = config_gmns["zone_geometry_fields"]
@@ -938,7 +967,8 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
 
 @func_time
-def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
+@requires("tqdm", "joblib", verbose=False)
+def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
     Args:
@@ -954,12 +984,24 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
         dict: a dict of Zones.
     """
 
+    import_package("tqdm", verbose=False)
+    import_package("joblib", verbose=False)
+    from joblib import Parallel, delayed
+    from tqdm import tqdm
+
     # convert path to linux path
     zone_file = path2linux(zone_file)
 
     # check if zone_file exists
     if not os.path.exists(zone_file):
         raise FileNotFoundError(f"File: {zone_file} does not exist.")
+
+    # check cpu_cores
+    if not isinstance(cpu_cores, int):
+        raise ValueError(f"cpu_cores should be integer, but got {type(cpu_cores)}")
+
+    if cpu_cores <= 0:
+        cpu_cores = config_gmns["cpu_cores"]
 
     # load default settings for zone required fields and chunk size
     zone_required_cols = config_gmns["zone_centroid_fields"]
@@ -1023,8 +1065,8 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
 
 @func_time
-@requires("tqdm", auto_install=False, verbose=False)
-def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Link]:
+@requires("tqdm", "joblib", verbose=False)
+def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Link]:
     """Read link.csv file and return a dict of Links.
 
     Args:
@@ -1047,6 +1089,8 @@ def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
         capacity=0.0, link_type=1, link_type_name='motorway', geometry='LINESTRING (0 0, 1 1)')
     """
     import_package("tqdm", verbose=False)
+    import_package("joblib", verbose=False)
+    from joblib import Parallel, delayed
     from tqdm import tqdm
 
     # convert path to linux path
@@ -1092,7 +1136,9 @@ def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
 
         # Combine results using itertools.chain for efficiency
         link_dict_final = dict(itertools.chain.from_iterable(result.items() for result in results))
-    except Exception:
+    except Exception as e:
+        if verbose:
+            print(f"  : Error occurred while reading link.csv: {e}, trying with Pool...")
         link_dict_final = {}
         with Pool(cpu_cores) as pool:
             # results = pool.map(_create_link_from_dataframe, df_link_chunk)
@@ -1111,6 +1157,7 @@ def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
 
 
 @func_time
+@requires("tqdm", "joblib", verbose=False)
 def read_zone(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
