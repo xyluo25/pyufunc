@@ -13,14 +13,14 @@ authors:
     affiliation: "1" # (Multiple affiliations must be quoted)
 
 affiliations:
-  - name: Oak Ridge National Laboratory, United States
+  - name: Arizona State University, Tempe, AZ, United States
     index: 1
 date: 06 June 2025
 bibliography: paper.bib
 ---
 # Summary
 
-pyufunc [^1] aims to bring together the most commonly used utility functions from different libraries and provide them in a single, cohesive package. By consolidating utility functions from multiple sources, pyufunc simplifies the process of finding and integrating various utility libraries into your projects. Whether you're a seasoned developer or just starting with Python, pyufunc provides a curated collection of utilities that cater to your everyday programming needs [@mertz2015functional;@lott2018functional].
+pyufunc aims to bring together the most commonly used utility functions from different libraries and provide them in a single, cohesive package. By consolidating utility functions from multiple sources, pyufunc simplifies the process of finding and integrating various utility libraries into your projects. Whether you're a seasoned developer or just starting with Python, pyufunc provides a curated collection of utilities that cater to your everyday programming needs [@mertz2015functional;@lott2018functional].
 
 ## Key Features
 
@@ -29,8 +29,6 @@ pyufunc [^1] aims to bring together the most commonly used utility functions fro
 3. **Robust Collection of Utility Functions:** pyufunc offers a versatile assortment of utility functions, carefully crafted and thoroughly tested to meet industry standards.
 4. **Regular Updates and Maintenance:** Our team is dedicated to providing regular updates, ensuring that pyufunc remains compatible with the latest Python releases and industry best practices.
 5. **Time and Effort Savings:** You can avoid reinventing the wheel by leveraging pre-existing, widely used utility functions. Let pyufunc take care of the repetitive tasks while you focus on building remarkable Python applications.
-
-[^1]: This manuscript has been authored in part by UT-Battelle, LLC, under contract DE-AC05-00OR22725 with the US Department of Energy (DOE). The publisher acknowledges the US government license to provide public access under the [DOE Public Access Plan](https://www.energy.gov/doe-public-access-plan)
 
 **No dependencies will be installed in your coding environment unless you use functions that require specific dependencies. The function will automatically install the necessary packages when you use it.**
 
