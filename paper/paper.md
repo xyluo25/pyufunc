@@ -30,9 +30,9 @@ pyufunc aims to bring together the most commonly used utility functions from dif
 4. **Regular Updates and Maintenance:** Our team is dedicated to providing regular updates, ensuring that pyufunc remains compatible with the latest Python releases and industry best practices.
 5. **Time and Effort Savings:** You can avoid reinventing the wheel by leveraging pre-existing, widely used utility functions. Let pyufunc take care of the repetitive tasks while you focus on building remarkable Python applications.
 
-**No dependencies will be installed in your coding environment unless you use functions that require specific dependencies. The function will automatically install the necessary packages when you use it.**
+**Dependencies won’t be added to your environment unless you invoke functions that require them; when you do, the necessary packages are installed automatically.**
 
-**If you discover useful functions that you believe should be included in the package for broader use, or if you have suggestions for additional utility functions, please share your comments here: [Issues](https://github.com/xyluo25/pyufunc/issues) or pull the repository and commit functions.**
+**If you identify functions that would benefit the broader community or have ideas for new utilities, please share your comments here: [Issues](https://github.com/xyluo25/pyufunc/issues) or pull the repository and commit functions.**
 
 # Statement of need
 
@@ -90,6 +90,8 @@ Furthermore, we recognize the importance of proper usage and attribution of the 
 
 # Acknowledgements
 
-This open-source package is supported by National Science Foundation under grant no. TIP-2303748 titled, "[POSE: Phase II: CONNECT: Consortium of Open-source Planning Models for Next-generation Equitable and Efficient Communities and Transportation](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2303748&HistoricalAwards=false)"
+This open-source package was supported by National Science Foundation under grant no. TIP-2303748 titled, "[POSE: Phase II: CONNECT: Consortium of Open-source Planning Models for Next-generation Equitable and Efficient Communities and Transportation](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2303748&HistoricalAwards=false)"
+
+Additional support was provided by the U.S. Department of Energy (DOE), Office of Energy Efficiency and Renewable Energy (EERE), Vehicle Technologies Office. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the USDOT, DOE, and the U.S. Government assumes no liability for the contents or use thereof.
 
 # References
