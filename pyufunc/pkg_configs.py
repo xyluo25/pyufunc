@@ -12,7 +12,7 @@ computer_name = socket.gethostname()
 computer_ip = socket.gethostbyname(computer_name)
 
 # ############## Package Configurations ############## #
-pkg_version = "0.3.8"
+pkg_version = "0.4.1"
 __version__ = pkg_version
 pkg_name = "pyufunc"
 pkg_author = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
