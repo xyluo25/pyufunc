@@ -10,7 +10,7 @@ pyufunc documentation
 
 **Date**: |today| **Version**: |version|
 
-**Previous versions**: Documentation of previous pandas versions is available at
+**Previous versions**: Documentation of previous pyufunc versions is available at
 `pyufunc <https://github.com/xyluo25/pyufunc/>`__.
 
 **Useful links**:

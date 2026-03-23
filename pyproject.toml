@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=42", "wheel", "twine"]
+requires = ["setuptools", "wheel"]  # , "wheel", "twine" "setuptools"
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyufunc"
-version = "0.4.1"
+version = "0.4.2"
 description = "pyufunc consolidates frequently used utility functions into one cohesive package"
 authors = [
     {name = "Xiangyong Luo", email = "luoxiangyong01@gmail.com"},
@@ -61,6 +61,12 @@ include-package-data = true
 py-modules = []
 package-data = {'pyufunc' = ['**/*.txt', '*.xls', '*.xlsx', '*.csv', '*.json', '**/*.json'], "test_data" = ['*.xls', '*.json']}
 license-files = []
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
 
 # [tool.setuptools.packages.find]
 # where = ["pyufunc"]

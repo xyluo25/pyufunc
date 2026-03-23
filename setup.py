@@ -20,7 +20,7 @@ except Exception:
 
 setuptools.setup(
     name="pyufunc",  # Replace with your own username
-    version="0.4.1",
+    version="0.4.2",
     author="Xiangyong Luo",
     author_email="luoxiangyong01@gmail.com",
 
