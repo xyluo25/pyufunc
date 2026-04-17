@@ -28,6 +28,9 @@ with open(path_user_agent_strings, mode='r', encoding='utf-8') as f:
     _web_agent_str = f.read()
 _USER_AGENT_STRINGS = json.loads(_web_agent_str)
 
+if TYPE_CHECKING:
+    from requests import Session
+
 
 class _FakeUserAgentParser(html.parser.HTMLParser):
 
@@ -167,6 +170,9 @@ class GitHubFileDownloader:
             requests.Session:
         """
 
+        import requests
+        import urllib3
+
         if retry_status == 'default':
             codes_for_retries = [429, 500, 502, 503, 504]
         else:
@@ -195,6 +201,7 @@ class GitHubFileDownloader:
         Returns:
             dict: a dictionary of user-agent strings for popular browsers
         """
+        import requests
 
         if browser_names is None:
             browser_names_ = ['Chrome', 'Firefox', 'Safari', 'Edge', 'Internet Explorer', 'Opera']
