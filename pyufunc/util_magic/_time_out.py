@@ -63,22 +63,21 @@ def timeout(seconds: int) -> object:
     Examples:
         >>> from pyufunc import timeout
         >>> @timeout(5)
-            def my_function():
-                return "I'm running!"
+        >>> def my_function():
+        >>> return "I'm running!"
         >>> my_function()
-        "I'm running!"
+        >>> "I'm running!"
 
         >>> @timeout(5)
-            def my_function():
-                import time
-                time.sleep(10)
-                return "I'm running!"
+        >>> def my_function():
+        >>>    import time
+        >>>    time.sleep(10)
+        >>>    return "I'm running!"
         >>> my_function()
-        Error: my_function exceed 5 seconds timeout
+        >>> Error: my_function exceed 5 seconds timeout
     """
 
     def timeout_decorator(func):
-
         def _new_func(oldfunc, result, oldfunc_args, oldfunc_kwargs):
             result.append(oldfunc(*oldfunc_args, **oldfunc_kwargs))
 
@@ -134,23 +133,17 @@ def timeout_linux(timeout: int):
     """
 
     def _timeout_linux(func, ):
-
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             def _timeout_handler(signum, frame):
-
                 raise TimeoutError(
                     f"Function: {func} params: {args}, {kwargs} ,execution timed out: {timeout}")
-
             # timeout for linux system
             signal.signal(signal.SIGALRM, _timeout_handler)
             signal.alarm(timeout)
-
             try:
                 return func(*args, **kwargs)
             finally:
                 signal.alarm(0)
-
         return wrapper
-
     return _timeout_linux

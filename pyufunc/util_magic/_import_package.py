@@ -57,20 +57,15 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
         >>> numpy = import_package("numpy") # equal to "import numpy as numpy"
         >>> np = import_package("numpy")  # equal to "import numpy as np"
 
-        # not existed
-
+        >>> # not existed
         >>> numpy = import_package("numpy")
+        >>> :numpy not existed in current env, installing...
 
-        :numpy not existed in current env, installing...
-
-        # specify the version
-
+        >>> # specify the version
         >>> numpy = import_package("numpy==1.19.5")
+        >>> :Package numpy==1.19.5 not existed in current env, installing...
 
-        :Package numpy==1.19.5 not existed in current env, installing...
-
-        # different name for installation and import
-
+        >>> # different name for installation and import
         >>> PIL = import_package(("pillow", "PIL"))
         >>> cv2 = import_package(["opencv-python", "cv2"])
         >>> cv2 = import_package(["opencv-python", "cv2"], options=["--force-reinstall"])
@@ -86,11 +81,9 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
     if isinstance(pkg_name, str):
         module_name = pkg_name
         import_name = pkg_name
-
     elif isinstance(pkg_name, (tuple, list)) and len(pkg_name) == 2:
         module_name = pkg_name[0]
         import_name = pkg_name[1]
-
     else:
         raise ValueError("The input pkg_name should be a string, tuple or list with two elements.")
 
@@ -98,28 +91,23 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
         # import package from current environment
         module = importlib.import_module(import_name)
     except Exception:
-
         if verbose:
             print(f"  :installing {module_name}...")
-
         # install package to current environment
         outputs = []
         try:
             all_args = [sys.executable, '-m', 'pip', 'install', *options, module_name]
-
-            result = subprocess.run(
-                all_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
+            result = subprocess.run(all_args,
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE)
             stdout = result.stdout.decode('utf-8')
             stderr = result.stderr.decode('utf-8')
             outputs.extend((stdout, stderr))
-
             result.check_returncode()
 
         # if install failed, print the error message
         except Exception as e:
             print(f"  :Info: failed to install {module_name}. please install it manually.")
-
             if verbose:
                 if len(outputs) == 2:
                     [print(f"  :{output}", end='') for output in outputs]
@@ -131,10 +119,8 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
         try:
             module = importlib.import_module(import_name)
             globals()[import_name] = importlib.import_module(import_name)
-
             if verbose:
                 print(f"  :{module_name} has been installed successfully.")
-
         except Exception:
             print(f"  :Info: failed to import {module_name}.")
             return None

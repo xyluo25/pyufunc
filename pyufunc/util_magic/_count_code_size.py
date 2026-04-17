@@ -4,10 +4,9 @@ from pathlib import Path
 import contextlib
 from pyufunc.util_pathio._path import path2linux
 import warnings
-from typing import Union
 
 
-def count_lines_of_code(package_path: Union[str, Path], *, ext: str = "*", verbose: bool = False) -> int:
+def count_lines_of_code(package_path: str | Path, *, ext: str = "*", verbose: bool = False) -> int:
 
     """Counts the number of lines of code in a Python package.
 
@@ -23,11 +22,13 @@ def count_lines_of_code(package_path: Union[str, Path], *, ext: str = "*", verbo
         TypeError: If package_path is not a string.
         TypeError: If ext is not a string.
 
-    Example:
+    Examples:
         >>> from pyufunc import count_lines_of_code
         >>> count_lines_of_code("pyufunc")
-        5000
+        >>> 5000
 
+        >>> count_lines_of_code("pyufunc", ext="py")
+        >>> 4500
     """
 
     # Initialize the count

@@ -30,15 +30,13 @@ def func_running_time(func: object) -> object:
 
     Examples:
         >>> @func_running_time
-            def func():
-                print("main function...)
-                time.sleep(3)
-                return
+        >>> def func():
+        >>>    print("main function...)
+        >>>    time.sleep(3)
+        >>>    return
 
         >>> func()
-            INFO Begin to run function: func …
-            main function...
-            INFO Finished running function: func, total: 3s
+        >>> INFO Finished running function: func, total: 3s
     """
 
     @wraps(func)
@@ -73,15 +71,14 @@ def func_time(func: object) -> object:
 
     Examples:
         >>> @func_running_time
-            def func():
-                print("main function...)
-                time.sleep(3)
-                return
+        >>> def func():
+        >>>    print("main function...")
+        >>>    time.sleep(3)
+        >>>    return
 
         >>> func()
-            INFO Begin to run function: func …
-            main function...
-            INFO Finished running function: func, total: 3s
+        >>> main function...
+        >>> INFO Finished running function: func, total: 3s
     """
 
     @wraps(func)

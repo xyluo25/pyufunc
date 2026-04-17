@@ -713,10 +713,10 @@ def find_executable_from_PATH_on_win(exe_name: str,
 
 
 def find_executable_on_win(exe_name: str,
-                                     ext: str = "exe",
-                                     *,
-                                     sel_dir: list = None,
-                                     verbose: bool = True) -> list | None:
+                           ext: str = "exe",
+                           *,
+                           sel_dir: list = None,
+                           verbose: bool = True) -> list | None:
     """Find the executable from the system PATH.
 
     Args:

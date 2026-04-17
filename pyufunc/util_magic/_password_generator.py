@@ -9,8 +9,10 @@ import secrets
 import string
 
 
-def generate_password(pwd_len: int = 15, lowercase: bool = True,
-                      uppercase: bool = True, digit: bool = True,
+def generate_password(pwd_len: int = 15,
+                      lowercase: bool = True,
+                      uppercase: bool = True,
+                      digit: bool = True,
                       special_char: bool = True,
                       config: dict = {"num_lowercase": 1,
                                       "num_uppercase": 1,

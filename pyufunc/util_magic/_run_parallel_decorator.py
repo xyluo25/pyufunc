@@ -14,7 +14,8 @@ from pyufunc.util_magic._func_time_decorator import func_running_time
 
 
 @func_running_time
-def run_parallel(func: Callable, iterable: Iterable,
+def run_parallel(func: Callable,
+                 iterable: Iterable,
                  num_processes: int = os.cpu_count() - 1,
                  chunksize: int = 0) -> Iterator:
     """Run a function in parallel with multiple processors.
@@ -23,7 +24,7 @@ def run_parallel(func: Callable, iterable: Iterable,
         func (callable): The function to run in parallel.
         iterable (Iterable): The input iterable to the function.
         num_processes (int, optional): The number of processors to use. Defaults to os.cpu_count() - 1.
-        chunksize (int, optional): The chunksize for the parallel processing. Defaults to "".
+        chunksize (int, optional): The chunksize for the parallel processing. Defaults to 0.
 
     Returns:
         Iterator: The results of the function.
@@ -44,12 +45,12 @@ def run_parallel(func: Callable, iterable: Iterable,
         >>> import numpy as np
         >>> from pyufunc import run_parallel
         >>> def my_func(x):
-                print(f"running {x}")
-                return x**2
+        >>>     print(f"running {x}")
+        >>>    return x**2
         >>> results = run_parallel(my_func, list(range(10)), num_processes=7)
         >>> for res in results:
-                print(res)
-        0, 1, 4, 9, 16, 25, 36, 49, 64, 81
+        >>>    print(res)
+        >>> 0, 1, 4, 9, 16, 25, 36, 49, 64, 81
     """
 
     # TDD, test-driven development: check inputs

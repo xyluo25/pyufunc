@@ -7,14 +7,8 @@
 '''
 import os
 import platform
-from typing import TYPE_CHECKING
 from pathlib import Path
-from pyufunc.util_magic._dependency_requires_decorator import requires, import_package
-
-if TYPE_CHECKING:
-    from setuptools import setup, Extension
-    from Cython.Build import cythonize
-    import shutil
+from pyufunc.util_magic._dependency_requires_decorator import requires
 
 
 @requires('setuptools', ('cython', 'Cython'), "shutil")
@@ -38,15 +32,14 @@ def cvt_py_to_dll(py_file: str, output_dir: str = "") -> bool:
     Example:
         >>> import pyufunc as pf
         >>> pf.cvt_py_to_dll('example.py', output_dir='output_directory')
-        >>> # This will convert 'example.py' to 'example.pyd (Windows)/example.so (Linux or Macos)' in 'output_directory'.
+        >>> # This will convert 'example.py' to 'example.pyd (Windows)/example.so (Linux or Macos)'.
         >>> import example # Now you can import the compiled module as a regular Python module.
 
     Returns:
         bool: True if the conversion was successful, False otherwise.
     """
-    import_package('setuptools', verbose=False)
-    import_package('cython', verbose=False)
-    import_package('shutil', verbose=False)
+
+    # import modules within the function to avoid unnecessary imports if the function is not used
     import shutil
     from setuptools import setup, Extension
     from Cython.Build import cythonize
@@ -126,7 +119,7 @@ def cvt_py_to_dll(py_file: str, output_dir: str = "") -> bool:
         # check if output_dir exists, if not create it
         output_dir = Path(output_dir).resolve().absolute()
         if not output_dir.exists():
-            os.getcwd()
+            output_dir = os.getcwd()
 
     # Ensure the output directory exists
     os.makedirs(output_dir, exist_ok=True)

@@ -227,8 +227,9 @@ def dataclass_extend(base_dataclass: Type[Any],
 
     Args:
         base_dataclass (dataclass): The base dataclass to extend.
-        additional_attributes (list): A list of tuples in the form (name, type, default_value).
-            or (name, default_value) to add to the base dataclass.
+        additional_attributes (list): A list of tuples in the form
+            - (name, type, default_value).
+            - or (name, default_value) to add to the base dataclass.
 
     Example:
         >>> from dataclasses import dataclass

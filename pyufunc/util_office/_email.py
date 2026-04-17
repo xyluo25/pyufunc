@@ -35,9 +35,9 @@ def is_valid_email(email: str) -> bool:
     Examples:
         >>> from pyufunc import is_valid_email
         >>> is_valid_email("luoxiangyong01@gamil.com")
-        True
+        >>> True
         >>> is_valid_email("luoxiangyong01")
-        False
+        >>> False
 
     """
 

@@ -10,12 +10,9 @@ from typing import TYPE_CHECKING, Union
 from pyufunc.pkg_configs import config_datetime_fmt
 from pyufunc.util_magic import requires, import_package
 
-if TYPE_CHECKING:
-    import dateutil
 
-
-@requires(("python-dateutil", "dateutil"), verbose=False)
-def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
+@requires(("python-dateutil", "dateutil"))
+def fmt_dt_to_str(dt: datetime.datetime | str = "",
                   dt_fmt: str = "") -> str:
     """Format datetime to datetime string
 
@@ -42,7 +39,7 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
         >>> fmt_dt_to_str(datetime.datetime.now(), "%Y/%m/%d %H:%M:%S")
         '2024/02/06 11:11:11'
     """
-    import_package(("python-dateutil", "dateutil"))
+    # import_package(("python-dateutil", "dateutil"))
     import dateutil
 
     # if the dt is empty, use the current datetime
@@ -81,7 +78,7 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
         return dt
 
 
-@requires(("python-dateutil", "dateutil"), verbose=False)
+@requires(("python-dateutil", "dateutil"))
 def fmt_str_to_dt(dt_str: str) -> datetime.datetime:
     """Format datetime string to datetime
 
@@ -101,7 +98,7 @@ def fmt_str_to_dt(dt_str: str) -> datetime.datetime:
 
     """
     # import dateutil
-    import_package(("python-dateutil", "dateutil"))
+    # import_package(("python-dateutil", "dateutil"))
     import dateutil
 
     # check if the dt is a string

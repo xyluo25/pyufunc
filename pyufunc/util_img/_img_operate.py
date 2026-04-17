@@ -6,7 +6,6 @@
 ##############################################################
 from __future__ import annotations
 from typing import TYPE_CHECKING, Union, Any
-import numpy as np
 
 # https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
@@ -15,11 +14,12 @@ if TYPE_CHECKING:
 
     import cv2
     from PIL import Image
+    import numpy as np
 
 from pyufunc.util_magic import requires, import_package
 
 
-@requires(("pillow", "PIL"), verbose=False)
+@requires(("pillow", "PIL"))
 def is_PIL_img(img: Any) -> bool:
     """Check if the input object is a PIL image
 
@@ -40,7 +40,7 @@ def is_PIL_img(img: Any) -> bool:
         >>> print(is_pil_image(img_pil))
         True
     """
-    import_package(("pillow", "PIL"), verbose=False)
+    # import_package(("pillow", "PIL"), verbose=False)
     from PIL import Image
 
     return isinstance(img, Image.Image)
@@ -74,7 +74,7 @@ def is_CV_img(img: Any) -> bool:
     return isinstance(img, np.ndarray)
 
 
-@requires(("opencv-python", "cv2"), ("pillow", "PIL"), verbose=False)
+@requires(("opencv-python", "cv2"), ("pillow", "PIL"))
 def img_PIL_to_CV(img: Image.Image) -> np.ndarray:
     """Convert PIL image to CV image
 
@@ -93,8 +93,8 @@ def img_PIL_to_CV(img: Image.Image) -> np.ndarray:
 
     """
     # import necessary models
-    import_package(("opencv-python", "cv2"), verbose=False)
-    import_package(("pillow", "PIL"), verbose=False)
+    # import_package(("opencv-python", "cv2"), verbose=False)
+    # import_package(("pillow", "PIL"), verbose=False)
 
     import cv2
     from PIL import Image
@@ -102,7 +102,7 @@ def img_PIL_to_CV(img: Image.Image) -> np.ndarray:
     return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
 
-@requires(("opencv-python", "cv2"), ("pillow", "PIL"), verbose=False)
+@requires(("opencv-python", "cv2"), ("pillow", "PIL"))
 def img_CV_to_PIL(img: np.ndarray) -> Image.Image:
     """Convert CV image to PIL image
 
@@ -120,15 +120,15 @@ def img_CV_to_PIL(img: np.ndarray) -> Image.Image:
         >>> img_pil = cvt_img_CV_to_PIL(img_cv)
     """
     # import necessary models
-    import_package(("opencv-python", "cv2"), verbose=False)
-    import_package(("pillow", "PIL"), verbose=False)
+    # import_package(("opencv-python", "cv2"), verbose=False)
+    # import_package(("pillow", "PIL"), verbose=False)
     import cv2
     from PIL import Image
 
     return Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
 
-@requires(("opencv-python", "cv2"), ("pillow", "PIL"), verbose=False)
+@requires(("opencv-python", "cv2"), ("pillow", "PIL"))
 def img_translate(img: Union[np.ndarray, str, Image.Image],
                   dx: float,
                   dy: float,
@@ -155,8 +155,8 @@ def img_translate(img: Union[np.ndarray, str, Image.Image],
     """
 
     # import necessary models
-    import_package(("opencv-python", "cv2"), verbose=False)
-    import_package(("pillow", "PIL"), verbose=False)
+    # import_package(("opencv-python", "cv2"), verbose=False)
+    # import_package(("pillow", "PIL"), verbose=False)
     import cv2
     from PIL import Image
 
@@ -191,7 +191,7 @@ def img_translate(img: Union[np.ndarray, str, Image.Image],
     return img_t
 
 
-@requires(("opencv-python", "cv2"), ("pillow", "PIL"), verbose=False)
+@requires(("opencv-python", "cv2"), ("pillow", "PIL"))
 def img_rotate(img: Union[np.ndarray, str, Image.Image],
                angle: float,
                center: tuple[float, float] = None,
@@ -221,8 +221,8 @@ def img_rotate(img: Union[np.ndarray, str, Image.Image],
     """
 
     # import necessary models
-    import_package(("opencv-python", "cv2"), verbose=False)
-    import_package(("pillow", "PIL"), vrbose=False)
+    # import_package(("opencv-python", "cv2"), verbose=False)
+    # import_package(("pillow", "PIL"), vrbose=False)
     import cv2
     from PIL import Image
 
@@ -274,7 +274,7 @@ def img_rotate(img: Union[np.ndarray, str, Image.Image],
     return img_r
 
 
-@requires(("opencv-python", "cv2"), ("pillow", "PIL"), verbose=False)
+@requires(("opencv-python", "cv2"), ("pillow", "PIL"))
 def img_rotate_bound(img: Union[np.ndarray, str, Image.Image],
                      angle: float,
                      verbose: bool = True) -> np.ndarray:
@@ -299,8 +299,8 @@ def img_rotate_bound(img: Union[np.ndarray, str, Image.Image],
     """
 
     # import necessary modules
-    import_package(("opencv-python", "cv2"), verbose=False)
-    import_package(("pillow", "PIL"), verbose=False)
+    # import_package(("opencv-python", "cv2"), verbose=False)
+    # import_package(("pillow", "PIL"), verbose=False)
     import cv2
     from PIL import Image
 
@@ -351,7 +351,7 @@ def img_rotate_bound(img: Union[np.ndarray, str, Image.Image],
     return img_rb
 
 
-@requires(("opencv-python", "cv2"), ("pillow", "PIL"), verbose=False)
+@requires(("opencv-python", "cv2"), ("pillow", "PIL"))
 def img_resize(img: Union[np.ndarray, str, Image.Image],
                width: int = None,
                height: int = None,
@@ -380,8 +380,8 @@ def img_resize(img: Union[np.ndarray, str, Image.Image],
     """
 
     # import necessary modules
-    import_package(("opencv-python", "cv2"), verbose=False)
-    import_package(("pillow", "PIL"), verbose=False)
+    # import_package(("opencv-python", "cv2"), verbose=False)
+    # import_package(("pillow", "PIL"), verbose=False)
     import cv2
     from PIL import Image
 
@@ -432,7 +432,7 @@ def img_resize(img: Union[np.ndarray, str, Image.Image],
     return img_rsz
 
 
-@requires(("opencv-python", "cv2"), ("pillow", "PIL"), verbose=False)
+@requires(("opencv-python", "cv2"), ("pillow", "PIL"))
 def img_show(img: Union[str, np.ndarray, Image.Image],
              is_PIL_show: bool = False,
              verbose: bool = True) -> None:
@@ -453,8 +453,8 @@ def img_show(img: Union[str, np.ndarray, Image.Image],
     """
 
     # import necessary modules
-    import_package(("opencv-python", "cv2"), verbose=False)
-    import_package(("pillow", "PIL"), verbose=False)
+    # import_package(("opencv-python", "cv2"), verbose=False)
+    # import_package(("pillow", "PIL"), verbose=False)
     from PIL import Image
 
     # TDD, Test-Driven Development

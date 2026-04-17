@@ -5,16 +5,10 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    import requests
-    from bs4 import BeautifulSoup
-
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 
-@requires("requests", ("beautifulsoup4", "bs4"), verbose=False)
+@requires("requests", ("beautifulsoup4", "bs4"))
 def pypi_downloads(pkg_name: str) -> dict:
     """Get the total downloads of a package from PyPI.
 
@@ -33,8 +27,6 @@ def pypi_downloads(pkg_name: str) -> dict:
     """
 
     # import packages required for this function
-    import_package("requests", verbose=False)
-    import_package(("beautifulsoup4", "bs4"), verbose=False)
     import requests
     from bs4 import BeautifulSoup
 

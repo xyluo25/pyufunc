@@ -12,57 +12,22 @@ computer_name = socket.gethostname()
 computer_ip = socket.gethostbyname(computer_name)
 
 # ############## Package Configurations ############## #
-pkg_version = "0.4.2"
-__version__ = pkg_version
-pkg_name = "pyufunc"
-pkg_author = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
-__author__ = pkg_author
-pkg_email = "luoxiangyong01@gmail.com"
-__email__ = pkg_email
+__version__ = "0.4.2"
+__name__ = "pyufunc"
+__author__ = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
+__email__ = "luoxiangyong01@gmail.com"
 
 __all__ = [
-    "pkg_version",
     "__version__",
-    "pkg_name",
-    "pkg_author",
     "__author__",
-    "pkg_email",
     "__email__",
-    "config_FUNC_KEYWORD",
+    "__name__",
     "config_logging",
     "config_datetime_fmt",
     "config_email",
     "config_gmns",
     "config_color",
 ]
-
-# ############### Function Keywords Configuration ############### #
-config_FUNC_KEYWORD = {
-    "non-keywords": [],
-    "show"        : [],
-    "get"         : [],
-    "generate"    : [],
-    "create"      : [],
-    "find"        : [],
-    "calc"        : [],
-    "run"         : [],
-    "group"       : [],
-    "check"       : [],
-    "validate"    : [],
-    "list"        : [],
-    "img"         : [],
-    "split"       : [],
-    "fmt"         : [],
-    "cvt"         : [],
-    "is"          : [],
-    "proj"        : [],
-    "github"      : [],
-    "pypi"        : [],
-    "error"       : [],
-    "algo"        : [],
-    "gmns"        : [],
-    "pytest"      : [],
-}
 
 # ############## Logging Configurations ############## #
 config_logging = {

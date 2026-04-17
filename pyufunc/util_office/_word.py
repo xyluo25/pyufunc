@@ -9,11 +9,12 @@
 # word to pdf
 # word to text
 
-from win32com.client import Dispatch
 from pathlib import Path
 from pyufunc.util_pathio._platform import is_windows
+from pyufunc import requires
 
 
+@requires(("pywin32", "win32com"))
 def doc2pdf(doc_fname: str, pdf_fname: str = None, verbose: bool = False) -> None:
     """Convert a word document to pdf file on Windows platform
 
@@ -38,6 +39,8 @@ def doc2pdf(doc_fname: str, pdf_fname: str = None, verbose: bool = False) -> Non
     if not is_windows():
         print("This function only works on Windows platform")
         return None
+
+    from win32com.client import Dispatch
 
     # prepare input and out file names
     doc_fname = Path(doc_fname).resolve()

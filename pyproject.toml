@@ -33,8 +33,7 @@ keywords = ["pyufunc", "utility functions", "utility-library", "python-utilities
 
 dynamic = ["dependencies"]
 
-[project.license]
-file="LICENSE"
+license-files=["LICENSE"]
 
 [project.urls]
 "Homepage" = 'https://github.com/xyluo25/pyufunc'
@@ -60,7 +59,6 @@ dependencies = {file = ["requirements.txt"]}
 include-package-data = true
 py-modules = []
 package-data = {'pyufunc' = ['**/*.txt', '*.xls', '*.xlsx', '*.csv', '*.json', '**/*.json'], "test_data" = ['*.xls', '*.json']}
-license-files = []
 
 [[tool.uv.index]]
 name = "testpypi"

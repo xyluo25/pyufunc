@@ -18,16 +18,16 @@ def is_float(value: Any = "") -> bool:
         bool : if the value can be converted to float
 
     Examples:
-        >>> from pyufunc import is_cvt_to_float
-        >>> is_cvt_to_float(1)
+        >>> from pyufunc import is_float
+        >>> is_float(1)
         True
-        >>> is_cvt_to_float("1")
+        >>> is_float("1")
         True
-        >>> is_cvt_to_float("1.0")
+        >>> is_float("1.0")
         True
-        >>> is_cvt_to_float("1.0.0")
+        >>> is_float("1.0.0")
         False
-        >>> is_cvt_to_float("abc")
+        >>> is_float("abc")
         False
     """
 

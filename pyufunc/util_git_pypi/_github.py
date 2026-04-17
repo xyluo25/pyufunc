@@ -28,12 +28,6 @@ with open(path_user_agent_strings, mode='r', encoding='utf-8') as f:
     _web_agent_str = f.read()
 _USER_AGENT_STRINGS = json.loads(_web_agent_str)
 
-#  https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
-if TYPE_CHECKING:
-    import requests
-    from requests import Session
-    import urllib3
-
 
 class _FakeUserAgentParser(html.parser.HTMLParser):
 
@@ -72,15 +66,9 @@ class _FakeUserAgentParser(html.parser.HTMLParser):
             self.data.append(data.strip())
 
 
-@requires('requests', "urllib3", verbose=False)
+@requires('requests', "urllib3")
 class GitHubFileDownloader:
-    """
-    Download files on GitHub from a given repository URL.
-    """
-    import_package('requests', verbose=False)
-    import_package("urllib3", verbose=False)
-    import requests
-    import urllib3
+    """Download files on GitHub from a given repository URL."""
 
     def __init__(self, repo_url: str, flatten_files: bool = False, output_dir: str | None = None) -> None:
         """
@@ -101,6 +89,8 @@ class GitHubFileDownloader:
             ValueError: if the input URL is not valid
 
         """
+        import requests
+        import urllib3
 
         self.dir_out = None
         self.repo_url = repo_url
@@ -584,7 +574,7 @@ def github_file_downloader(repo_url: str, output_dir: str | None = None, flatten
     return GitHubFileDownloader(repo_url, flatten_files=flatten, output_dir=output_dir).download()
 
 
-@requires('requests', verbose=False)
+@requires('requests')
 def github_get_status(usr_name, repo_name=None) -> list[dict]:
     """
     Fetches GitHub repository status including stars, forks, issues, and pull requests.
@@ -609,7 +599,6 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
         'original_stars': None}]
 
     """
-    import_package('requests', verbose=False)
     import requests
 
     print(f"  Collecting {usr_name} GitHub repository status...")
@@ -681,6 +670,7 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
     return repo_details
 
 
+@requires('requests')
 def github_private_file_downloader(raw_url: str, token: str, dest_path: str) -> bool:
     """
     Download a file (e.g. a ZIP) from a private GitHub repository given its
@@ -694,6 +684,8 @@ def github_private_file_downloader(raw_url: str, token: str, dest_path: str) -> 
         token (str):  Personal access token with `repo` scope.
         dest_path (str): Local path where the file will be written.
     """
+    import requests
+
     # parse URL
     parsed = urlparse(raw_url)
     parts = parsed.path.strip("/").split("/")

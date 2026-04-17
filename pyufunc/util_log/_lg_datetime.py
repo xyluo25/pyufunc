@@ -70,6 +70,7 @@ class datetime(datetime_):  # noqa: N801
             "X": "%d" % timestamp,
             "x": "%d" % (int(timestamp) * 1000000 + microsecond),
         }
+
         def get(m):
             try:
                 return rep[m.group(0)]

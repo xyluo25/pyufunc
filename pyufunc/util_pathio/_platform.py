@@ -5,10 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-from typing import TYPE_CHECKING
-from pyufunc.util_magic import requires, import_package
-if TYPE_CHECKING:
-    import shutil
+from pyufunc.util_magic import requires
 
 
 # check the current platform
@@ -109,7 +106,7 @@ def terminal_width() -> int:
         >>> get_terminal_width()
         120
     """
-    import_package("shutil", verbose=False)
+    # import_package("shutil", verbose=False)
     import shutil
     return shutil.get_terminal_size().columns
 
@@ -129,6 +126,6 @@ def terminal_height() -> int:
         >>> get_terminal_height()
         32
     """
-    import_package("shutil", verbose=False)
+    # import_package("shutil", verbose=False)
     import shutil
     return shutil.get_terminal_size().lines
