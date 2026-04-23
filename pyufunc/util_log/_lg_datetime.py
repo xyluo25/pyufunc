@@ -1,6 +1,5 @@
 
 import re
-import sys
 from calendar import day_abbr, day_name, month_abbr, month_name
 from datetime import datetime as datetime_
 from datetime import timedelta, timezone

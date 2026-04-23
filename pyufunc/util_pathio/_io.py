@@ -138,7 +138,8 @@ def get_dir_size(directory: str, unit: str = "kb") -> str:
     directory_short = os.path.basename(directory)
 
     # Check if the directory exists
-    assert os.path.isdir(directory), f"Directory {directory_short} does not found, please check the directory path and try again"
+    assert os.path.isdir(directory), (f"Directory {directory_short} does not found, "
+                                      "please check the directory path and try again")
     # if not os.path.isdir(directory):
     #     return f"Directory {directory_short} does not found, please check the directory path and try again"
 
@@ -189,7 +190,8 @@ def size_of_dir(directory: str, unit: str = "kb") -> str:
     directory_short = os.path.basename(directory)
 
     # Check if the directory exists
-    assert os.path.isdir(directory), f"Directory {directory_short} does not found, please check the directory path and try again"
+    assert os.path.isdir(directory), (f"Directory {directory_short} does not found, "
+                                      "please check the directory path and try again")
     # if not os.path.isdir(directory):
     #     return f"Directory {directory_short} does not found, please check the directory path and try again"
 
@@ -349,8 +351,8 @@ def add_dir_to_env(path_dir: str | Path = os.getcwd()) -> None:
 
 def pickle_save(obj: object, filename: str | Path, base_dir: str = os.getcwd()) -> None:
     """Save an object to a file using the pickle module.
-
-    The object could be a function, a class, a list, dictionary, a string, an int, float, tuple, set, or any other object that can be pickled.
+    The object could be a function, a class, a list, dictionary, a string, an int, float, tuple, set,
+    or any other object that can be pickled.
 
     Args:
         obj: The object to save.

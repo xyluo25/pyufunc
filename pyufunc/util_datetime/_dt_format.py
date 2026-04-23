@@ -6,9 +6,8 @@
 ##############################################################
 from __future__ import annotations
 import datetime
-from typing import TYPE_CHECKING, Union
 from pyufunc.pkg_configs import config_datetime_fmt
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 
 @requires(("python-dateutil", "dateutil"))
@@ -97,7 +96,6 @@ def fmt_str_to_dt(dt_str: str) -> datetime.datetime:
         datetime.datetime(2024, 2, 6, 11, 11, 11)
 
     """
-    # import dateutil
     # import_package(("python-dateutil", "dateutil"))
     import dateutil
 

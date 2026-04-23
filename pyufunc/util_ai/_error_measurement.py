@@ -5,8 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 from __future__ import annotations
-from typing import TYPE_CHECKING, Iterable
-from pyufunc.util_magic import requires, import_package
+from typing import Iterable
 import numpy as np
 
 

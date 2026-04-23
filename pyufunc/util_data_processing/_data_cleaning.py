@@ -9,14 +9,22 @@ import math
 import pandas as pd
 
 
-def get_layer_boundary(df: pd.DataFrame, base_col_name: str, target_col_name: str,
+def get_layer_boundary(df: pd.DataFrame, x_col_name: str, y_col_name: str,
                        base_interval: int = 1, percentile: float = .85) -> pd.DataFrame:
     """Get the boundary values of the target column based on the base column values.
 
+    Notes:
+        - x_col_name also known as x axis in 2D space, y_col_name also known as y axis in 2D space.
+        - The boundary values are calculated based on the max value of the target column
+            for each interval of the base column values.
+        - The interval is defined by the base_interval parameter.
+        - The percentile parameter is used to calculate the boundary values based on
+            the max value of the target column for each interval.
+
     Args:
         df (pd.DataFrame): the input dataframe
-        base_col_name (str): base column name
-        target_col_name (str): target column name
+        x_col_name (str): x column name
+        y_col_name (str): y column name
         base_interval (int): interval for selecting boundary value. Defaults to 1.
         percentile (float): percentile value for each boundary. Defaults to .85.
 
@@ -24,38 +32,38 @@ def get_layer_boundary(df: pd.DataFrame, base_col_name: str, target_col_name: st
         >>> import pandas as pd
         >>> import numpy as np
         >>> from pyufunc import get_layer_boundary
-        >>> df = pd.DataFrame({'base': np.random.randint(0, 100, 100),
-        ...                    'target': np.random.rand(100)})
-        >>> get_layer_boundary(df, 'base', 'target', base_interval=1, percentile=.85)
+        >>> df = pd.DataFrame({'x': np.random.randint(0, 100, 100),
+        ...                    'y': np.random.rand(100)})
+        >>> get_layer_boundary(df, 'x', 'y', base_interval=1, percentile=.85)
 
     Raises:
-        Exception: if base_col_name or target_col_name is not in the dataframe columns
+        Exception: if x_col_name or y_col_name is not in the dataframe columns
 
     Returns:
-        pd.DataFrame: _description_
+        pd.DataFrame: a dataframe with the boundary values of the target column based on the base column values.
     """
 
     # TDD development
-    if not {base_col_name, target_col_name}.issubset(df.columns):
+    if not {x_col_name, y_col_name}.issubset(df.columns):
         raise Exception(
-            f'ERROR: {base_col_name} or {target_col_name} is not in the dataframe columns!')
+            f'ERROR: {x_col_name} or {y_col_name} is not in the dataframe columns!')
 
     # get min and max values of the base column
-    base_col_min, base_col_max = math.floor(
-        df[base_col_name].min()), math.floor(df[base_col_name].max())
+    x_col_min, x_col_max = math.floor(
+        df[x_col_name].min()), math.floor(df[x_col_name].max())
 
     # create criteria for filtering data
     # for each interval, get the mask values
     masks_list = [
-        df[base_col_name].between(i, j) for i, j in zip(range(base_col_min,
-                                                              base_col_max,
-                                                              base_interval),
-                                                        range(base_col_min + base_interval,
-                                                              base_col_max,
-                                                              base_interval))]
+        df[x_col_name].between(i, j) for i, j in zip(range(x_col_name,
+                                                           x_col_name,
+                                                           base_interval),
+                                                     range(x_col_name + base_interval,
+                                                           x_col_name,
+                                                           base_interval))]
 
     # get the target column values for each interval based on the mask values
-    target_values = [df[target_col_name]
+    target_values = [df[y_col_name]
                      [i].max() * percentile for i in masks_list]
-    return pd.DataFrame({base_col_name: range(base_col_min, base_col_max - base_interval),
-                         target_col_name: target_values})
+    return pd.DataFrame({x_col_name: range(x_col_min, x_col_max - base_interval),
+                         y_col_name: target_values})

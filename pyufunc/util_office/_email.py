@@ -76,16 +76,21 @@ def send_email(send_from: str,
         ValueError: Unknown email provider:
 
     Note:
-        - User can add message_type = "html" in the kwargs. If message_type is "html", the message will be sent as html format. eg. message_type = "html", message = "<h1>hello world</h1>"
-        - User can add verbose = True in the kwargs. If verbose is True, the function will print the email sending status.
-        - If you are using gmail, you need to generate an app password for the smtp_password: https://support.google.com/accounts/answer/185833?hl=en
+        - User can add message_type = "html" in the kwargs.
+            If message_type is "html", the message will be sent as html format.
+            eg. message_type = "html", message = "<h1>hello world</h1>"
+        - User can add verbose = True in the kwargs.
+            If verbose is True, the function will print the email sending status.
+        - If you are using gmail, you need to generate an app password
+            for the smtp_password: https://support.google.com/accounts/answer/185833?hl=en
 
     Returns:
         bool: True if the email is sent successfully, False otherwise
 
     Examples:
         >>> from pyufunc import send_email
-        >>> send_email(send_from="", send_to="", subject="", message="", smtp_user="", smtp_password="", file_path="", cc="", bcc="")
+        >>> send_email(send_from="", send_to="", subject="", message="",
+        >>>            smtp_user="", smtp_password="", file_path="", cc="", bcc="")
     """
 
     # TDD, Test Driven Development, check inputs

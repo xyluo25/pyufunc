@@ -16,7 +16,7 @@ if TYPE_CHECKING:
     from PIL import Image
     import numpy as np
 
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 
 @requires(("pillow", "PIL"))

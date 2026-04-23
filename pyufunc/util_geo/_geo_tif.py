@@ -7,7 +7,7 @@
 '''
 from typing import TYPE_CHECKING
 
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 if TYPE_CHECKING:
     import requests
@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 from datetime import datetime
 
 
-@requires("requests", verbose=False)
+@requires("requests")
 def download_elevation_tif_by(bbox: tuple | list, output_file: str) -> None:
     """
     Download elevation data (TIFF) from USGS National Map based on a bounding box.
@@ -47,6 +47,7 @@ def download_elevation_tif_by(bbox: tuple | list, output_file: str) -> None:
     Returns:
         None
     """
+    import requests
 
     # TDD: check input parameters
     if not isinstance(bbox, (tuple, list)):

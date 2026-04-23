@@ -429,7 +429,6 @@ def show_dir_in_tree(dir_name: Union[str, Path],
             # ENABLE_LVB_GRID_WORLDWIDE = 0x0010
             try:
                 from ctypes import windll, wintypes, byref
-                from functools import reduce
                 hOut = windll.kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
                 if hOut == INVALID_HANDLE_VALUE:
                     return False
@@ -648,7 +647,8 @@ def find_executable_from_PATH_on_win(exe_name: str,
         pyufunc/util_pathio/_path.py
 
     Note:
-        This function is same as `find_fname_from_PATH_on_win`, both are used to find the executable from the system PATH.
+        - This function is same as `find_fname_from_PATH_on_win`,
+            both are used to find the executable from the system PATH.
 
     Examples:
         >>> import pyufunc as pf
@@ -729,7 +729,8 @@ def find_executable_on_win(exe_name: str,
         pyufunc/util_pathio/_path.py
 
     Note:
-        This function is same as `find_fname_from_PATH_on_win`, both are used to find the executable from the system PATH.
+        - This function is same as `find_fname_from_PATH_on_win`,
+            both are used to find the executable from the system PATH.
 
     Examples:
         >>> import pyufunc as pf
@@ -810,7 +811,8 @@ def find_fname_from_PATH_on_win(fname: str,
         pyufunc/util_pathio/_path.py
 
     Note:
-        This function is same as `find_executable_from_PATH_on_win`, both are used to find the filename from the system PATH.
+        - This function is same as `find_executable_from_PATH_on_win`,
+            both are used to find the filename from the system PATH.
 
     Examples:
         >>> import pyufunc as pf
@@ -913,7 +915,7 @@ def find_executable_from_PATH_on_linux(exe_name: str,
 
 
 def find_executable_on_linux(exe_name: str,
-                                       verbose: bool = True) -> list[str]:
+                             verbose: bool = True) -> list[str]:
     """Use the system `which -a` to list all matches for exe_name on Linux.
 
     Args:

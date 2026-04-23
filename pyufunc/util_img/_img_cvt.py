@@ -18,7 +18,6 @@ if TYPE_CHECKING:
 
 
 from pyufunc.util_magic._dependency_requires_decorator import requires
-from pyufunc.util_magic._import_package import import_package
 from ._img_operate import img_CV_to_PIL, img_PIL_to_CV
 
 

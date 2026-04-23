@@ -75,10 +75,10 @@ def download_overture_map(bbox: list[float] = None,
                 writer.write_batch(batch)
 
 
-@requires("pyarrow", verbose=False)
+@requires("pyarrow")
 def get_writer(output_format, path, schema):
 
-    import_package("pyarrow", verbose=False)
+    # import_package("pyarrow", verbose=False)
     import pyarrow.parquet as pq
 
     if output_format == "geojson":
@@ -119,14 +119,14 @@ def get_writer(output_format, path, schema):
     return writer
 
 
-@requires("shapely", verbose=False)
+@requires("shapely")
 class BaseGeoJSONWriter:
     """
     A base feature writer that manages either a file handle
     or output stream. Subclasses should implement write_feature()
     and finalize() if needed
     """
-    import_package("shapely", verbose=False)
+    # import_package("shapely", verbose=False)
     import shapely.wkb
 
     def __init__(self, where):
@@ -203,7 +203,7 @@ class GeoJSONWriter(BaseGeoJSONWriter):
         self.writer.write("]}")
 
 
-@requires("pyarrow", verbose=False)
+@requires("pyarrow")
 def record_batch_reader(overture_type: str, bbox=None) -> Optional[pa.RecordBatchReader]:
     """Return a pyarrow RecordBatchReader for the desired bounding box and s3 path
 
@@ -216,7 +216,7 @@ def record_batch_reader(overture_type: str, bbox=None) -> Optional[pa.RecordBatc
             Format is (xmin, ymin, xmax, ymax). Defaults to None.
 
     """
-    import_package("pyarrow", verbose=False)
+    # import_package("pyarrow", verbose=False)
     import pyarrow as pa
     import pyarrow.compute as pc
     import pyarrow.dataset as ds
@@ -250,7 +250,7 @@ def record_batch_reader(overture_type: str, bbox=None) -> Optional[pa.RecordBatc
     return pa.RecordBatchReader.from_batches(geoarrow_schema, non_empty_batches)
 
 
-@requires("geopandas", verbose=False)
+@requires("geopandas")
 def geodataframe(overture_type: str, bbox: tuple[float, float, float, float] = None) -> GeoDataFrame:
     """ Loads geoparquet for specified type into a geopandas dataframe
 
@@ -265,7 +265,7 @@ def geodataframe(overture_type: str, bbox: tuple[float, float, float, float] = N
         GeoDataFrame with the optionally filtered theme data
 
     """
-    import_package("geopandas", verbose=False)
+    # import_package("geopandas", verbose=False)
     import geopandas as gpd
 
     reader = record_batch_reader(overture_type, bbox)

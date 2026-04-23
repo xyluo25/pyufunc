@@ -6,17 +6,17 @@
 ##############################################################
 from __future__ import annotations
 from typing import TYPE_CHECKING
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 # https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
     import loguru
 
 
-@requires("loguru", verbose=False)
+@requires("loguru")
 def log_logger(log_file: str = "log.log") -> loguru.logger:
 
-    import_package("loguru", verbose=False)
-    from loguru import logger
-
-    return logger
+    # import_package("loguru", verbose=False)
+    import loguru
+    # from loguru import logger
+    return loguru.logger

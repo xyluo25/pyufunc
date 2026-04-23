@@ -314,7 +314,7 @@ class Link:
         return (self.from_node_id, self.to_node_id, {**self.as_dict(), **{"weight": self.length}})
 
 
-@requires("shapely", verbose=False)
+@requires("shapely")
 def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
     """Create Node from df_node.
 
@@ -325,7 +325,7 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
         dict[int, Node]: a dict of nodes.{node_id: Node}
     """
 
-    import_package("shapely", verbose=False)
+    # import_package("shapely", verbose=False)
     import shapely
 
     # Reset index to avoid index error
@@ -386,7 +386,7 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
     return node_dict
 
 
-@requires("shapely", "pyproj", verbose=False)
+@requires("shapely", "pyproj")
 def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     """Create POI from df_poi.
 
@@ -396,10 +396,10 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     Returns:
         dict[int, POI]: a dict of POIs.{poi_id: POI}
     """
-    import_package("shapely", verbose=False)
-    import_package("pyproj", verbose=False)
+    # import_package("shapely", verbose=False)
+    # import_package("pyproj", verbose=False)
     import shapely
-    from pyproj import Transformer
+    import pyproj
 
     df_poi = df_poi.reset_index(drop=True)
     col_names = df_poi.columns.tolist()
@@ -433,7 +433,7 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
                 geometry_shapely = shapely.from_wkt(df_poi.loc[i, 'geometry'])
 
                 # Set up a Transformer to convert from WGS 84 to UTM zone 18N (EPSG:32618)
-                transformer = Transformer.from_crs(
+                transformer = pyproj.Transformer.from_crs(
                     "EPSG:4326", "EPSG:32618", always_xy=True)
 
                 # Transform the polygon's coordinates to UTM
@@ -473,7 +473,7 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     return poi_dict
 
 
-@requires("shapely", verbose=False)
+@requires("shapely")
 def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, Zone]:
     """Create Zone from df_zone.
 
@@ -484,7 +484,7 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
         dict[int, Zone]: a dict of Zones.{zone_id: Zone}
     """
 
-    import_package("shapely", verbose=False)
+    # import_package("shapely", verbose=False)
     import shapely
 
     df_zone = df_zone.reset_index(drop=True)
@@ -541,7 +541,7 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
     return zone_dict
 
 
-@requires("shapely", verbose=False)
+@requires("shapely")
 def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, Zone]:
     """Create Zone from df_zone.
 
@@ -552,7 +552,7 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
         dict[int, Zone]: a dict of Zones.{zone_id: Zone}
     """
 
-    import_package("shapely", verbose=False)
+    # import_package("shapely", verbose=False)
     import shapely
 
     df_zone = df_zone.reset_index(drop=True)
@@ -669,7 +669,7 @@ def _create_link_from_dataframe(df_link: pd.DataFrame) -> dict[int, Zone]:
 
 
 @func_time
-@requires("tqdm", "joblib", verbose=False)
+@requires("tqdm", "joblib")
 def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Node]:
     """Read node.csv file and return a dict of nodes.
 
@@ -693,10 +693,10 @@ def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
         >>> node_dict = read_node(node_file = r"../dataset/ASU/node.csv")
         FileNotFoundError: File: ../dataset/ASU/node.csv does not exist.
     """
-    import_package("tqdm", verbose=False)
-    import_package("joblib", verbose=False)
+    # import_package("tqdm", verbose=False)
+    # import_package("joblib", verbose=False)
+    import joblib
     from tqdm import tqdm
-    from joblib import Parallel, delayed
 
     # convert path to linux path
     node_file = path2linux(node_file)
@@ -741,8 +741,8 @@ def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
 
     try:
         # Parallel processing using joblib with tqdm for progress tracking
-        results = Parallel(n_jobs=cpu_cores)(
-            delayed(_create_node_from_dataframe)(chunk)
+        results = joblib.Parallel(n_jobs=cpu_cores)(
+            joblib.delayed(_create_node_from_dataframe)(chunk)
             for chunk in tqdm(df_node_chunk, total=total_chunks, desc="  : Read nodes"))
 
         # Combine results using itertools.chain for efficiency
@@ -772,7 +772,7 @@ def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
 
 
 @func_time
-@requires("tqdm", "joblib", verbose=False)
+@requires("tqdm", "joblib")
 def read_poi(poi_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: POI]:
     """Read poi.csv file and return a dict of POIs.
 
@@ -797,9 +797,9 @@ def read_poi(poi_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> 
         FileNotFoundError: File: ../dataset/ASU/poi.csv does not exist.
 
     """
-    import_package("tqdm", verbose=False)
-    import_package("joblib", verbose=False)
-    from joblib import Parallel, delayed
+    # import_package("tqdm", verbose=False)
+    # import_package("joblib", verbose=False)
+    import joblib
     from tqdm import tqdm
 
     # convert path to linux path
@@ -840,8 +840,8 @@ def read_poi(poi_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> 
 
     try:
         # Parallel processing using joblib with tqdm for progress tracking
-        results = Parallel(n_jobs=cpu_cores)(
-            delayed(_create_poi_from_dataframe)(chunk)
+        results = joblib.Parallel(n_jobs=cpu_cores)(
+            joblib.delayed(_create_poi_from_dataframe)(chunk)
             for chunk in tqdm(df_poi_chunk, total=total_chunks, desc="  : Read poi"))
 
         poi_dict_final = dict(itertools.chain.from_iterable(result.items() for result in results))
@@ -869,7 +869,7 @@ def read_poi(poi_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> 
 
 
 @func_time
-@requires("tqdm", "joblib", verbose=False)
+@requires("tqdm", "joblib")
 def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
@@ -886,9 +886,9 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = -1, verbose: boo
         dict: the result dictionary of Zones. {zone_id: Zone}
     """
 
-    import_package("tqdm", verbose=False)
-    import_package("joblib", verbose=False)
-    from joblib import Parallel, delayed
+    # import_package("tqdm", verbose=False)
+    # import_package("joblib", verbose=False)
+    import joblib
     from tqdm import tqdm
 
     # convert path to linux path
@@ -938,8 +938,8 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = -1, verbose: boo
 
     try:
         # Parallel processing using joblib with tqdm for progress tracking
-        results = Parallel(n_jobs=cpu_cores)(
-            delayed(_create_zone_from_dataframe_by_geometry)(chunk)
+        results = joblib.Parallel(n_jobs=cpu_cores)(
+            joblib.delayed(_create_zone_from_dataframe_by_geometry)(chunk)
             for chunk in tqdm(df_zone_chunk, total=total_chunks, desc="  : Read zone geometry"))
 
         zone_dict_final = dict(itertools.chain.from_iterable(result.items() for result in results))
@@ -967,7 +967,7 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = -1, verbose: boo
 
 
 @func_time
-@requires("tqdm", "joblib", verbose=False)
+@requires("tqdm", "joblib")
 def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 
@@ -984,9 +984,9 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = -1, verbose: boo
         dict: a dict of Zones.
     """
 
-    import_package("tqdm", verbose=False)
-    import_package("joblib", verbose=False)
-    from joblib import Parallel, delayed
+    # import_package("tqdm", verbose=False)
+    # import_package("joblib", verbose=False)
+    import joblib
     from tqdm import tqdm
 
     # convert path to linux path
@@ -1036,8 +1036,8 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = -1, verbose: boo
 
     try:
         # Parallel processing using joblib with tqdm for progress tracking
-        results = Parallel(n_jobs=cpu_cores)(
-            delayed(_create_zone_from_dataframe_by_centroid)(chunk)
+        results = joblib.Parallel(n_jobs=cpu_cores)(
+            joblib.delayed(_create_zone_from_dataframe_by_centroid)(chunk)
             for chunk in tqdm(df_zone_chunk, total=total_chunks, desc="  : Read zone centroid")
         )
         zone_dict_final = dict(itertools.chain.from_iterable(
@@ -1065,7 +1065,7 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = -1, verbose: boo
 
 
 @func_time
-@requires("tqdm", "joblib", verbose=False)
+@requires("tqdm", "joblib")
 def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Link]:
     """Read link.csv file and return a dict of Links.
 
@@ -1088,9 +1088,9 @@ def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
         Link(id=1, name='A', from_node_id=1, to_node_id=2, length=0.0, lanes=1, dir_flag=1, free_speed=0.0,
         capacity=0.0, link_type=1, link_type_name='motorway', geometry='LINESTRING (0 0, 1 1)')
     """
-    import_package("tqdm", verbose=False)
-    import_package("joblib", verbose=False)
-    from joblib import Parallel, delayed
+    # import_package("tqdm", verbose=False)
+    # import_package("joblib", verbose=False)
+    import joblib
     from tqdm import tqdm
 
     # convert path to linux path
@@ -1130,8 +1130,8 @@ def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
 
     try:
         # Parallel processing using joblib with tqdm for progress tracking
-        results = Parallel(n_jobs=cpu_cores)(
-            delayed(_create_link_from_dataframe)(chunk)
+        results = joblib.Parallel(n_jobs=cpu_cores)(
+            joblib.delayed(_create_link_from_dataframe)(chunk)
             for chunk in tqdm(df_link_chunk, total=total_chunks, desc="  : Read links"))
 
         # Combine results using itertools.chain for efficiency
@@ -1157,7 +1157,7 @@ def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
 
 
 @func_time
-@requires("tqdm", "joblib", verbose=False)
+@requires("tqdm", "joblib")
 def read_zone(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Zone]:
     """Read zone.csv file and return a dict of Zones.
 

@@ -42,7 +42,7 @@ settings = {
 }
 
 
-@requires("requests", verbose=False)
+@requires("requests")
 class OSMPlaceFinder:
 
     def __init__(self, place: str, verbose: bool = False):
@@ -137,6 +137,8 @@ class OSMPlaceFinder:
         -------
         response_json
         """
+        import requests
+
         if request_type not in {"search", "reverse", "lookup"}:  # pragma: no cover
             msg = "Nominatim `request_type` must be 'search', 'reverse', or 'lookup'."
             raise ValueError(msg)
@@ -628,7 +630,7 @@ class OSMPlaceFinder:
         return response_json
 
 
-@requires("shapely", "requests", "urllib", verbose=False)
+@requires("shapely", "requests", "urllib")
 def get_osm_place(place: str, verbose: bool = False) -> dict:
     """Geocode a place name to dictionary of its attributes and geometry from OpenStreetMap.
 
@@ -665,11 +667,11 @@ def get_osm_place(place: str, verbose: bool = False) -> dict:
         'geometry': <MULTIPOLYGON (((-111.941 33.424, -111.941 33.424, -111.941 33.424, -111.941...>}
     """
 
-    import_package("shapely", verbose=False)
-    import_package("requests", verbose=False)
+    # import_package("shapely", verbose=False)
+    # import_package("requests", verbose=False)
     import shapely
     import requests
-    globals()["requests"] = importlib.import_module("requests")
-    globals()["shapely"] = importlib.import_module("shapely")
+    # globals()["requests"] = importlib.import_module("requests")
+    # globals()["shapely"] = importlib.import_module("shapely")
 
     return OSMPlaceFinder(place, verbose).get_osm_place(place, None, False)

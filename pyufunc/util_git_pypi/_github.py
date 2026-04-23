@@ -357,7 +357,7 @@ class GitHubFileDownloader:
 
         return fake_headers
 
-    @requires('tqdm', verbose=False)
+    @requires('tqdm')
     def _download_file_from_url(self, response, path_to_file):
         """
         Download an object from a valid URL (and save it as a file).
@@ -365,7 +365,8 @@ class GitHubFileDownloader:
         """
 
         # import tqdm if it is available, otherwise, install and import it
-        tqdm_ = import_package('tqdm', verbose=False)
+        # tqdm_ = import_package('tqdm', verbose=False)
+        import tqdm
 
         file_size = int(response.headers.get('content-length'))  # Total size in bytes
 
@@ -382,7 +383,7 @@ class GitHubFileDownloader:
             'unit_scale': True,
             'unit_divisor': unit_divisor,
         }
-        with tqdm_.tqdm(**pg_args) as progress:
+        with tqdm.tqdm(**pg_args) as progress:
 
             contents = response.iter_content(chunk_size=chunk_size, decode_unicode=True)
 
