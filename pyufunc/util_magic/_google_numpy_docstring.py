@@ -17,6 +17,34 @@ def show_docstring_headers() -> None:
     References:
         source https://sphinxcontrib-napoleon.readthedocs.io/en/latest/
 
+    Examples:
+        >>> import pyufunc as pf
+        >>> pf.show_docstring_headers()
+        >>> This is a general header for google and numpy docstring.
+        >>>     Args (alias of Parameters)
+        >>>     Arguments (alias of Parameters)
+        >>>     Attributes
+        >>>     Example
+        >>>     Examples
+        >>>     Keyword Args (alias of Keyword Arguments)
+        >>>     Keyword Arguments
+        >>>     Methods
+        >>>     Note
+        >>>     Notes
+        >>>     Other Parameters
+        >>>     Parameters
+        >>>     Return (alias of Returns)
+        >>>     Returns
+        >>>     Raises
+        >>>     References
+        >>>     See Also
+        >>>     Todo
+        >>>     Warning
+        >>>     Warnings (alias of Warning)
+        >>>     Warns
+        >>>     Yield (alias of Yields)
+        >>>     Yields
+
     """
 
     print("**** This is a general header for google and numpy docstring. ****")
@@ -54,12 +82,31 @@ def show_docstring_google() -> None:
 
     References:
         source https://sphinxcontrib-napoleon.readthedocs.io/en/latest/
+
+    Examples:
+        >>> import pyufunc as pf
+        >>> pf.show_docstring_google()
+        >>> Google style with Python 3 type annotations:
+        >>>     def func(arg1: int, arg2: str) -> bool:
+        >>>         \"""Summary line.
+        >>>         Extended description of function.
+        >>>
+        >>>         Args:
+        >>>             arg1 (int): Description of arg1
+        >>>             arg2 (str): Description of arg2
+        >>>
+        >>>         Returns:
+        >>>             bool: Description of return value
+        >>>
+        >>>         \"""
+        >>>         return True
+
     """
 
     print("Google style with Python 3 type annotations:")
 
     print_str = """
-    def func(arg1, arg2):
+    def func(arg1: int, arg2: str) -> bool:
         \"""Summary line.
         Extended description of function.
 
@@ -84,12 +131,36 @@ def show_docstring_numpy() -> None:
 
     References:
         source https://sphinxcontrib-napoleon.readthedocs.io/en/latest/
+
+    Examples:
+        >>> import pyufunc as pf
+        >>> pf.show_docstring_numpy()
+        >>> Numpy style annotation:
+        >>>     def func(arg1: int, arg2: str) -> bool:
+        >>>         \"""Summary line.
+        >>>
+        >>>         Extended description of function.
+        >>>
+        >>>         Parameters
+        >>>         ----------
+        >>>         arg1 : int
+        >>>             Description of arg1
+        >>>         arg2 : str
+        >>>             Description of arg2
+        >>>
+        >>>         Returns
+        >>>         -------
+        >>>         bool
+        >>>             Description of return value
+        >>>
+        >>>         \"""
+        >>>         return True
     """
 
     print("Numpy style annotation:")
 
     print_str = """
-    def func(arg1, arg2):
+    def func(arg1: int, arg2: str) -> bool:
         \"""Summary line.
 
         Extended description of function.

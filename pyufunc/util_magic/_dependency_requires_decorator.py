@@ -20,27 +20,24 @@ def requires(*args, **kwargs) -> object:
     Args:
         args: the required dependencies to run the function.
             - if argument is a string, indicate the module and import are the same.
-            - if argument is a tuple or list, indicate the module name from pip or conda installation
-                and the module name for import:
-                    first element is the module name, for pip or conda installation;
-                    second element is the import name, for import the module;
+            - if argument is a tuple or list with two elements, the:
+                first element is the module name, for pip or conda installation;
+                second element is the import name, for import the module;
 
-        kwargs: the optional arguments, including verbose and auto_install.
-            - verbose (bool, optional): print out the processing message. Defaults to True.
-            - auto_install (bool, optional): install the missing dependencies automatically.
-                Defaults to False.
+        kwargs: the optional arguments, including verbose and auto_install:
 
-    Returns:
-        object: the decorated function.
+            - verbose (bool): print out the processing message. Defaults to True.
 
-    Note:
+            - auto_install (bool): install the missing dependencies automatically. Defaults to False.
+
+    Notes:
         - user can parse the verbose and auto_install options to control the behavior of the decorator.
         - verbose: print the error message if the dependencies are not available. Default is True.
         - auto_install: install the missing dependencies automatically. Default is False.
-            eg: @requires("numpy", "pandas", verbose=False)
-            eg: @requires("numpy", "pandas", verbose=True, auto_install=True)
-            eg: @requires("numpy", "pandas", verbose=False, auto_install=True)
-            eg: @requires(("pillow", "PIL"), "pandas", verbose=True, auto_install=True)
+            - eg: @requires("numpy", "pandas", verbose=False)
+            - eg: @requires("numpy", "pandas", verbose=True, auto_install=True)
+            - eg: @requires("numpy", "pandas", verbose=False, auto_install=True)
+            - eg: @requires(("pillow", "PIL"), "pandas", verbose=True, auto_install=True)
 
     Examples:
         >>> # Example 1: the function will not run if the dependencies are not available
@@ -57,6 +54,9 @@ def requires(*args, **kwargs) -> object:
         >>>    return "I'm running!"
         >>> my_function()
         >>> "I'm running!"
+
+    Returns:
+        object: the decorated function.
     """
 
     # get the verbose option, default is True

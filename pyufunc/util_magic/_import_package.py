@@ -47,9 +47,6 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
     This function can be used in any package to avoid too much pre-installation of dependencies.
     In other words, this function will install the package only if it is needed.
 
-    Location:
-        The function defined in pyufunc/pkg_utils.py.
-
     Args:
         package_name (str): the package name, it can be a string or tuple or list.
             if it's a string, it's the package name for both installation and import.
@@ -70,15 +67,15 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
         verbose (bool, optional): print the error message if the package is not available.
             Defaults to True.
 
-    Returns:
-        object: the imported package
-
     Note:
         - if the module name different from import name
             eg. module name is 'pillow', import name is 'PIL'
 
         - please use tuple or list to specify the module name and import name
             e.g. import_package(('pillow', 'PIL'))
+
+    Location:
+        The function defined in pyufunc/pkg_utils.py.
 
     Examples:
         >>> numpy = import_package("numpy") # equal to "import numpy as numpy"
@@ -97,6 +94,9 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
         >>> cv2 = import_package(["opencv-python", "cv2"])
         >>> cv2 = import_package(["opencv-python", "cv2"], options=["--force-reinstall"])
         >>> cv2 = import_package(["opencv-python==4.9.0.80", "cv2"])
+
+    Returns:
+        object: the imported package
     """
 
     env_info = get_active_python_env()
@@ -171,13 +171,13 @@ def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
     Args:
         module (object, optional): the module name. Defaults to sys.modules[__name__].
 
-    Returns:
-        list: a list of user-defined functions in the module.
-
     Examples:
         >>> import pyufunc as pf
         >>> pf.get_user_defined_func()
         ['func_running_time', 'generate_password', 'import_package', 'get_user_defined_func']
+
+    Returns:
+        list: a list of user-defined functions in the module.
     """
 
     # Step 1: check if the model is a module
@@ -202,10 +202,7 @@ def is_user_defined_func(func_obj: object) -> bool:
     """Check if a function is user-defined.
 
     Args:
-        func_obj (object): the function object.
-
-    Returns:
-        bool: True if the function is user-defined, False otherwise.
+        func_obj (object): the function object to check.
 
     Examples:
         >>> import pyufunc as uf
@@ -214,6 +211,9 @@ def is_user_defined_func(func_obj: object) -> bool:
 
         >>> uf.is_user_defined_func(os.path.join)
         False
+
+    Returns:
+        bool: True if the function is user-defined, False otherwise.
     """
 
     try:
@@ -238,9 +238,6 @@ def is_module_importable(module_name: str) -> bool:
     Args:
         module_name (str): the module name to import.
 
-    Returns:
-        bool: True if the module is importable, False otherwise.
-
     Note:
         This check is performed against the current interpreter (``sys.executable``),
         so it reflects the currently activated virtual environment.
@@ -251,6 +248,9 @@ def is_module_importable(module_name: str) -> bool:
         True
         >>> is_module_importable("unknown_module")
         False
+
+    Returns:
+        bool: True if the module is importable, False otherwise.
     """
 
     # TDD, test-driven development: check inputs
@@ -271,9 +271,6 @@ def get_user_defined_module(obj: object,
         obj (object)         : module.
         predicate (callable) : Only return members that satisfy a given ``predicate`` .
 
-    Returns:
-        dict : ``{"member name" : "member object"}``
-
     Examples:
         >>> from pycharmers.utils import inspect_utils, get_defined_members
         >>> get_defined_members(inspect_utils)
@@ -281,6 +278,9 @@ def get_user_defined_module(obj: object,
             'get_defined_members': <function pycharmers.utils.inspect_utils.get_defined_members(obj, predicate=<function <lambda> at 0x14227fca0>)>,
             'get_imported_members': <function pycharmers.utils.inspect_utils.get_imported_members(obj)>
         }
+
+    Returns:
+        dict : ``{"member name" : "member object"}``
     """
 
     imported_members_lst = get_user_imported_module(obj).values()

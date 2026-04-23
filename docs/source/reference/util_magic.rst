@@ -58,6 +58,7 @@ module import
    :toctree: api/
 
    import_package
+   get_active_python_env
    get_user_defined_func
    get_user_defined_module
    get_user_imported_module

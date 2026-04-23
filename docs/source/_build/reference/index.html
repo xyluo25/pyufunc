@@ -52,8 +52,8 @@
     <link rel="icon" href="../_static/pyufunc_logo_icon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="util_ai" href="util_ai.html" />
-    <link rel="prev" title="util_ai" href="../how_to_guide/util_ai.html" />
+    <link rel="next" title="util_magic" href="util_magic.html" />
+    <link rel="prev" title="Package overview" href="../getting_started/overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="0.4.2" />
@@ -145,13 +145,6 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../how_to_guide/index.html">
-    How-to guide
-  </a>
-</li>
-
-
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="#">
     API reference
@@ -172,23 +165,13 @@
   </a>
 </li>
 
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../acknowledgement/index.html">
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../acknowledgement/index.html">
     Acknowledgements
   </a>
 </li>
 
-                </ul>
-            </li>
-            
   </ul>
 </nav></div>
       
@@ -293,13 +276,6 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../how_to_guide/index.html">
-    How-to guide
-  </a>
-</li>
-
-
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="#">
     API reference
@@ -382,24 +358,25 @@
   <div class="bd-toc-item navbar-nav">
     
     <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="util_ai.html">util_ai</a></li>
-<li class="toctree-l1"><a class="reference internal" href="util_algorithm.html">util_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_magic.html">util_magic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_data_processing.html">util_data_processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_datetime.html">util_datetime</a></li>
-<li class="toctree-l1"><a class="reference internal" href="util_fullstack.html">util_fullstack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_pathio.html">util_pathio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_geo.html">util_geo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_git_pypi.html">util_git_pypi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="util_gui.html">util_gui</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_img.html">util_img</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_log.html">util_log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_network.html">util_network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_office.html">util_office</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_ai.html">util_ai</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_algorithm.html">util_algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_fullstack.html">util_fullstack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_gui.html">util_gui</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_optimization.html">util_optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="util_pathio.html">util_pathio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util_vis.html">util_vis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pkg_utils.html">pkg_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_pkgs.html">psutil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cfg.html">pkg_utils</a></li>
 </ul>
 
     
@@ -461,59 +438,8 @@
                   
   <section id="api-reference">
 <span id="api"></span><h1>API reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
-<p>This page gives an overview of all public pyufunc objects, functions and
-methods. All classes and functions exposed in <code class="docutils literal notranslate"><span class="pre">pyufunc.*</span></code> namespace are public.</p>
-<p>The following subpackages are public.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_ai</span></code>: AI related utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_algorithm</span></code>: Algorithm utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_magic</span></code>: Magic unclassified utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_data_processing</span></code>: Data processing utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_datetime</span></code>: Date and time utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_fullstack</span></code>: Fullstack utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_geo</span></code>: Geospatial utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_git_pypi</span></code>: GitHub and PyPI utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_gui</span></code>: GUI utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_img</span></code>: Image utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_log</span></code>: Logging utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_network</span></code>: Network utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_office</span></code>: Office (word, excel, ppt) related utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_optimization</span></code>: Optimization utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_pathio</span></code>: Path related utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_test</span></code>: Test utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.util_vis</span></code>: Visualization utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.pkg_utils</span></code>: Package utility functions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyufunc.pkg_configs</span></code>: Package configurations.</p></li>
-</ul>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="util_ai.html">util_ai</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_ai.html#error-measurement">Error Measurement</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_absolute_error.html">pyufunc.mean_absolute_error</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_absolute_percentage_error.html">pyufunc.mean_absolute_percentage_error</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_percentage_error.html">pyufunc.mean_percentage_error</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_squared_error.html">pyufunc.mean_squared_error</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_squared_log_error.html">pyufunc.mean_squared_log_error</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.r2_score.html">pyufunc.r2_score</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.root_mean_squared_error.html">pyufunc.root_mean_squared_error</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util_ai.html#open-cv">open_cv</a></li>
-<li class="toctree-l2"><a class="reference internal" href="util_ai.html#prtorch">prtorch</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="util_algorithm.html">util_algorithm</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_algorithm.html#sorting-algorithm">Sorting Algorithm</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_bubble_sort.html">pyufunc.algo_bubble_sort</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_heap_sort.html">pyufunc.algo_heap_sort</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_insertion_sort.html">pyufunc.algo_insertion_sort</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_merge_sort.html">pyufunc.algo_merge_sort</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_quick_sort.html">pyufunc.algo_quick_sort</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_selection_sort.html">pyufunc.algo_selection_sort</a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="util_magic.html">util_magic</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="util_magic.html#docstring-style">docstring style</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.show_docstring_headers.html">pyufunc.show_docstring_headers</a></li>
@@ -544,6 +470,7 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 </li>
 <li class="toctree-l2"><a class="reference internal" href="util_magic.html#module-import">module import</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.import_package.html">pyufunc.import_package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_active_python_env.html">pyufunc.get_active_python_env</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_user_defined_func.html">pyufunc.get_user_defined_func</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_user_defined_module.html">pyufunc.get_user_defined_module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_user_imported_module.html">pyufunc.get_user_imported_module</a></li>
@@ -615,6 +542,7 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 <li class="toctree-l2"><a class="reference internal" href="util_datetime.html#time-difference">time difference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_time_diff_in_unit.html">pyufunc.get_time_diff_in_unit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.time_unit_converter.html">pyufunc.time_unit_converter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.time_str_to_seconds.html">pyufunc.time_str_to_seconds</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="util_datetime.html#grouby-datetime">grouby datetime</a><ul>
@@ -626,136 +554,6 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.group_dt_minutely.html">pyufunc.group_dt_minutely</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="util_fullstack.html">util_fullstack</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_fullstack.html#updating">Updating…</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="util_geo.html">util_geo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_geo.html#geo-distance">geo_distance</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.calc_distance_on_unit_sphere.html">pyufunc.calc_distance_on_unit_sphere</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.calc_distance_on_unit_haversine.html">pyufunc.calc_distance_on_unit_haversine</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.find_k_nearest_points.html">pyufunc.find_k_nearest_points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.find_closest_point.html">pyufunc.find_closest_point</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_coordinates_from_geom.html">pyufunc.get_coordinates_from_geom</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.proj_point_to_line.html">pyufunc.proj_point_to_line</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util_geo.html#coordinate-conversation">Coordinate Conversation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_wgs84_to_baidu09.html">pyufunc.cvt_wgs84_to_baidu09</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_wgs84_to_gcj02.html">pyufunc.cvt_wgs84_to_gcj02</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_gcj02_to_wgs84.html">pyufunc.cvt_gcj02_to_wgs84</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_gcj02_to_baidu09.html">pyufunc.cvt_gcj02_to_baidu09</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_baidu09_to_wgs84.html">pyufunc.cvt_baidu09_to_wgs84</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_baidu09_to_gcj02.html">pyufunc.cvt_baidu09_to_gcj02</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util_geo.html#geo-circle">geo_circle</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.create_circle_at_point_with_radius.html">pyufunc.create_circle_at_point_with_radius</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util_geo.html#geo-area">geo_area</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.calc_area_from_wkt_geometry.html">pyufunc.calc_area_from_wkt_geometry</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util_geo.html#download-elevation-tiff-file">Download Elevation Tiff File</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.download_elevation_tif_by.html">pyufunc.download_elevation_tif_by</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util_geo.html#gmns-geo">gmns_geo</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_Node.html">pyufunc.gmns_Node</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_Link.html">pyufunc.gmns_Link</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_POI.html">pyufunc.gmns_POI</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_Zone.html">pyufunc.gmns_Zone</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_Agent.html">pyufunc.gmns_Agent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_read_node.html">pyufunc.gmns_read_node</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_read_link.html">pyufunc.gmns_read_link</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_read_poi.html">pyufunc.gmns_read_poi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_read_zone.html">pyufunc.gmns_read_zone</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_osm_place.html">pyufunc.get_osm_place</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="util_git_pypi.html">util_git_pypi</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_git_pypi.html#github">github</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.github_file_downloader.html">pyufunc.github_file_downloader</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.github_get_status.html">pyufunc.github_get_status</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util_git_pypi.html#pypi">pypi</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pypi_downloads.html">pyufunc.pypi_downloads</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="util_gui.html">util_gui</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_gui.html#updating">Updating…</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="util_img.html">util_img</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_img.html#img-conversion">img conversion</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_to_bytes.html">pyufunc.img_to_bytes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_PIL_to_bytes.html">pyufunc.img_PIL_to_bytes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_CV_to_bytes.html">pyufunc.img_CV_to_bytes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_bytes_to_PIL.html">pyufunc.img_bytes_to_PIL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_bytes_to_CV.html">pyufunc.img_bytes_to_CV</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util_img.html#img-operations">img operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.is_PIL_img.html">pyufunc.is_PIL_img</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.is_CV_img.html">pyufunc.is_CV_img</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_PIL_to_CV.html">pyufunc.img_PIL_to_CV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_CV_to_PIL.html">pyufunc.img_CV_to_PIL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_translate.html">pyufunc.img_translate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_rotate.html">pyufunc.img_rotate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_rotate_bound.html">pyufunc.img_rotate_bound</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_resize.html">pyufunc.img_resize</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_show.html">pyufunc.img_show</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="util_log.html">util_log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_log.html#log-dir">log_dir</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.add_date_in_filename.html">pyufunc.add_date_in_filename</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.generate_dir_with_date.html">pyufunc.generate_dir_with_date</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util_log.html#log-writer">log_writer</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.log_writer.html">pyufunc.log_writer</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util_log.html#log-logger">log_logger</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.log_logger.html">pyufunc.log_logger</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="util_network.html">util_network</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_network.html#network">network</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_host_ip.html">pyufunc.get_host_ip</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.validate_url.html">pyufunc.validate_url</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_host_name.html">pyufunc.get_host_name</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="util_office.html">util_office</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_office.html#email">Email</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.is_valid_email.html">pyufunc.is_valid_email</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.send_email.html">pyufunc.send_email</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util_office.html#printer">Printer</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.printer_file.html">pyufunc.printer_file</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="util_optimization.html">util_optimization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_optimization.html#updating">Updating…</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="util_pathio.html">util_pathio</a><ul>
@@ -819,14 +617,189 @@ methods. All classes and functions exposed in <code class="docutils literal notr
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="util_geo.html">util_geo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_geo.html#geo-distance">geo_distance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.calc_distance_on_unit_sphere.html">pyufunc.calc_distance_on_unit_sphere</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.calc_distance_on_unit_haversine.html">pyufunc.calc_distance_on_unit_haversine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.find_k_nearest_points.html">pyufunc.find_k_nearest_points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.find_closest_point.html">pyufunc.find_closest_point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_coordinates_from_geom.html">pyufunc.get_coordinates_from_geom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.proj_point_to_line.html">pyufunc.proj_point_to_line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_geo.html#coordinate-conversation">Coordinate Conversation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_wgs84_to_baidu09.html">pyufunc.cvt_wgs84_to_baidu09</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_wgs84_to_gcj02.html">pyufunc.cvt_wgs84_to_gcj02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_gcj02_to_wgs84.html">pyufunc.cvt_gcj02_to_wgs84</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_gcj02_to_baidu09.html">pyufunc.cvt_gcj02_to_baidu09</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_baidu09_to_wgs84.html">pyufunc.cvt_baidu09_to_wgs84</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cvt_baidu09_to_gcj02.html">pyufunc.cvt_baidu09_to_gcj02</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_geo.html#geo-circle">geo_circle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.create_circle_at_point_with_radius.html">pyufunc.create_circle_at_point_with_radius</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_geo.html#geo-area">geo_area</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.calc_area_from_wkt_geometry.html">pyufunc.calc_area_from_wkt_geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_geo.html#download-elevation-tiff-file">Download Elevation Tiff File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.download_elevation_tif_by.html">pyufunc.download_elevation_tif_by</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_geo.html#gmns-geo">gmns_geo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_Node.html">pyufunc.gmns_Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_Link.html">pyufunc.gmns_Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_POI.html">pyufunc.gmns_POI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_Zone.html">pyufunc.gmns_Zone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_Agent.html">pyufunc.gmns_Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_read_node.html">pyufunc.gmns_read_node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_read_link.html">pyufunc.gmns_read_link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_read_poi.html">pyufunc.gmns_read_poi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.gmns_read_zone.html">pyufunc.gmns_read_zone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_osm_place.html">pyufunc.get_osm_place</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_geo.html#osm-data-and-place">OSM data and place</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_osm_place.html">pyufunc.get_osm_place</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_osm_by_relation_id.html">pyufunc.get_osm_by_relation_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_osm_by_bbox.html">pyufunc.get_osm_by_bbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.extract_bbox_coordinates.html">pyufunc.extract_bbox_coordinates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util_git_pypi.html">util_git_pypi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_git_pypi.html#github">github</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.github_file_downloader.html">pyufunc.github_file_downloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.github_get_status.html">pyufunc.github_get_status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.github_private_file_downloader.html">pyufunc.github_private_file_downloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_git_pypi.html#pypi">pypi</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.pypi_downloads.html">pyufunc.pypi_downloads</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util_img.html">util_img</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_img.html#img-conversion">img conversion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_to_bytes.html">pyufunc.img_to_bytes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_PIL_to_bytes.html">pyufunc.img_PIL_to_bytes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_CV_to_bytes.html">pyufunc.img_CV_to_bytes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_bytes_to_PIL.html">pyufunc.img_bytes_to_PIL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_bytes_to_CV.html">pyufunc.img_bytes_to_CV</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_img.html#img-operations">img operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.is_PIL_img.html">pyufunc.is_PIL_img</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.is_CV_img.html">pyufunc.is_CV_img</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_PIL_to_CV.html">pyufunc.img_PIL_to_CV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_CV_to_PIL.html">pyufunc.img_CV_to_PIL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_translate.html">pyufunc.img_translate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_rotate.html">pyufunc.img_rotate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_rotate_bound.html">pyufunc.img_rotate_bound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_resize.html">pyufunc.img_resize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.img_show.html">pyufunc.img_show</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util_log.html">util_log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_log.html#log-dir">log_dir</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.add_date_in_filename.html">pyufunc.add_date_in_filename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.generate_dir_with_date.html">pyufunc.generate_dir_with_date</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_log.html#log-logger">log_logger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.log_logger.html">pyufunc.log_logger</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util_network.html">util_network</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_network.html#network">network</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_host_ip.html">pyufunc.get_host_ip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.validate_url.html">pyufunc.validate_url</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.get_host_name.html">pyufunc.get_host_name</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util_office.html">util_office</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_office.html#email">Email</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.is_valid_email.html">pyufunc.is_valid_email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.send_email.html">pyufunc.send_email</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_office.html#printer">Printer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.printer_file.html">pyufunc.printer_file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util_ai.html">util_ai</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_ai.html#error-measurement">Error Measurement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_absolute_error.html">pyufunc.mean_absolute_error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_absolute_percentage_error.html">pyufunc.mean_absolute_percentage_error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_percentage_error.html">pyufunc.mean_percentage_error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_squared_error.html">pyufunc.mean_squared_error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.mean_squared_log_error.html">pyufunc.mean_squared_log_error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.r2_score.html">pyufunc.r2_score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.root_mean_squared_error.html">pyufunc.root_mean_squared_error</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_ai.html#open-cv">open_cv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_ai.html#prtorch">prtorch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util_algorithm.html">util_algorithm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_algorithm.html#sorting-algorithm">Sorting Algorithm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_bubble_sort.html">pyufunc.algo_bubble_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_heap_sort.html">pyufunc.algo_heap_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_insertion_sort.html">pyufunc.algo_insertion_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_merge_sort.html">pyufunc.algo_merge_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_quick_sort.html">pyufunc.algo_quick_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.algo_selection_sort.html">pyufunc.algo_selection_sort</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util_fullstack.html">util_fullstack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_fullstack.html#updating">Updating…</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util_gui.html">util_gui</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_gui.html#updating">Updating…</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util_optimization.html">util_optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_optimization.html#updating">Updating…</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="util_vis.html">util_vis</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="util_vis.html#updating">Updating…</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pkg_utils.html">pkg_utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pkg_utils.html#utilities">Utilities</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="util_pkgs.html">psutil</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_pkgs.html#cpu-memory-disk-related-utility-functions">CPU, memory, disk related utility functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cpu_count.html">pyufunc.cpu_count</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cpu_percent.html">pyufunc.cpu_percent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.cpu_times.html">pyufunc.cpu_times</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.virtual_memory.html">pyufunc.virtual_memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.swap_memory.html">pyufunc.swap_memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.disk_usage.html">pyufunc.disk_usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.sensor_temperatures.html">pyufunc.sensor_temperatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.sensor_fans.html">pyufunc.sensor_fans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.sensor_battery.html">pyufunc.sensor_battery</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cfg.html">pkg_utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cfg.html#utilities">Utilities</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.show_util_func_by_category.html">pyufunc.show_util_func_by_category</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/pyufunc.show_util_func_by_keyword.html">pyufunc.show_util_func_by_keyword</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/pyufunc.find_util_func_by_keyword.html">pyufunc.find_util_func_by_keyword</a></li>
 </ul>
 </li>
@@ -847,20 +820,20 @@ methods. All classes and functions exposed in <code class="docutils literal notr
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../how_to_guide/util_ai.html"
+       href="../getting_started/overview.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">util_ai</p>
+        <p class="prev-next-title">Package overview</p>
       </div>
     </a>
     <a class="right-next"
-       href="util_ai.html"
+       href="util_magic.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">util_ai</p>
+        <p class="prev-next-title">util_magic</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

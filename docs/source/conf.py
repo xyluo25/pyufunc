@@ -32,7 +32,7 @@ sys.path.insert(0, os.path.abspath("./sphinxext"))
 project = "pyufunc"
 copyright = f'2023 - {datetime.datetime.now().year} , Xiangyong Luo'
 author = 'Xiangyong Luo'
-version = str(pyufunc.pkg_version)
+version = str(pyufunc.__version__)
 release = version
 language = "en"
 

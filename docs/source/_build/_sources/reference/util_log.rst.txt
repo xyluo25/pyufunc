@@ -13,14 +13,6 @@ log_dir
    add_date_in_filename
    generate_dir_with_date
 
-
-log_writer
-~~~~~~~~~~~
-.. autosummary::
-   :toctree: api/
-
-   log_writer
-
 log_logger
 ~~~~~~~~~~~
 .. autosummary::

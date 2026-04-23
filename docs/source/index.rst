@@ -8,6 +8,8 @@
 pyufunc documentation
 *********************
 
+**A set of utility functions that keep Python sweet**
+
 **Date**: |today| **Version**: |version|
 
 **Previous versions**: Documentation of previous pyufunc versions is available at
@@ -44,24 +46,6 @@ programming language.
             :expand:
 
             To getting started guides
-
-    .. grid-item-card::  User guide
-        :img-top: _static/index_user_guide.svg
-        :class-card: intro-card
-        :shadow: md
-
-        The user guide provides in-depth information on the
-        key concepts of pyufunc with useful background information and explanation.
-
-        +++
-
-        .. button-ref:: user_guide
-            :ref-type: ref
-            :click-parent:
-            :color: secondary
-            :expand:
-
-            To the user guide
 
     .. grid-item-card::  API reference
         :img-top: _static/index_api.svg
@@ -101,6 +85,22 @@ programming language.
 
             To the development guide
 
+    .. grid-item-card::  Release notes
+        :img-top: _static/index_release_notes.svg
+        :class-card: intro-card
+        :shadow: md
+
+        The release notes contain a detailed description of the changes in each pyufunc release. It is recommended to check the release notes when updating pyufunc to a new version.
+
+        +++
+
+        .. button-ref:: release
+            :ref-type: ref
+            :click-parent:
+            :color: secondary
+            :expand:
+
+            To the release notes
 
 .. toctree::
     :maxdepth: 3
@@ -109,8 +109,7 @@ programming language.
 
 
     getting_started/index
-    how_to_guide/index
     reference/index
     development/index
-    whatsnew/index
+    release_notes/index
     acknowledgement/index

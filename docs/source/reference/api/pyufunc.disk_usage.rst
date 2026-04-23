@@ -1,6 +1,6 @@
-pyufunc.log\_writer
+pyufunc.disk\_usage
 ===================
 
 .. currentmodule:: pyufunc
 
-.. autofunction:: log_writer
+.. autofunction:: disk_usage

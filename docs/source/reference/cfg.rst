@@ -11,6 +11,4 @@ Utilities
    :toctree: api/
 
    show_util_func_by_category
-   show_util_func_by_keyword
    find_util_func_by_keyword
-

@@ -145,13 +145,6 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../how_to_guide/index.html">
-    How-to guide
-  </a>
-</li>
-
-
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="../index.html">
     API reference
@@ -167,28 +160,18 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../whatsnew/index.html">
+  <a class="nav-link nav-internal" href="../../release_notes/index.html">
     Release notes
   </a>
 </li>
 
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../../acknowledgement/index.html">
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../acknowledgement/index.html">
     Acknowledgements
   </a>
 </li>
 
-                </ul>
-            </li>
-            
   </ul>
 </nav></div>
       
@@ -293,13 +276,6 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../how_to_guide/index.html">
-    How-to guide
-  </a>
-</li>
-
-
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="../index.html">
     API reference
@@ -315,7 +291,7 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../whatsnew/index.html">
+  <a class="nav-link nav-internal" href="../../release_notes/index.html">
     Release notes
   </a>
 </li>
@@ -382,15 +358,13 @@
   <div class="bd-toc-item navbar-nav">
     
     <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../util_ai.html">util_ai</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../util_algorithm.html">util_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_magic.html">util_magic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_data_processing.html">util_data_processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_datetime.html">util_datetime</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../util_fullstack.html">util_fullstack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_pathio.html">util_pathio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_geo.html">util_geo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_git_pypi.html">util_git_pypi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../util_gui.html">util_gui</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_img.html">util_img</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_log.html">util_log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_network.html">util_network</a></li>
@@ -400,11 +374,14 @@
 <li class="toctree-l2"><a class="reference internal" href="pyufunc.printer_file.html">pyufunc.printer_file</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_ai.html">util_ai</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_algorithm.html">util_algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_fullstack.html">util_fullstack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_gui.html">util_gui</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_optimization.html">util_optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../util_pathio.html">util_pathio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../util_test.html">util_test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../util_vis.html">util_vis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pkg_utils.html">pkg_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util_pkgs.html">psutil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cfg.html">pkg_utils</a></li>
 </ul>
 
     
@@ -504,9 +481,22 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>User can add message_type = “html” in the kwargs. If message_type is “html”, the message will be sent as html format. eg. message_type = “html”, message = “&lt;h1&gt;hello world&lt;/h1&gt;”</p></li>
-<li><p>User can add verbose = True in the kwargs. If verbose is True, the function will print the email sending status.</p></li>
-<li><p>If you are using gmail, you need to generate an app password for the smtp_password: <a class="reference external" href="https://support.google.com/accounts/answer/185833?hl=en">https://support.google.com/accounts/answer/185833?hl=en</a></p></li>
+<li><dl class="simple">
+<dt>User can add message_type = “html” in the kwargs.</dt><dd><p>If message_type is “html”, the message will be sent as html format.
+eg. message_type = “html”, message = “&lt;h1&gt;hello world&lt;/h1&gt;”</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>User can add verbose = True in the kwargs.</dt><dd><p>If verbose is True, the function will print the email sending status.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>If you are using gmail, you need to generate an app password</dt><dd><p>for the smtp_password: <a class="reference external" href="https://support.google.com/accounts/answer/185833?hl=en">https://support.google.com/accounts/answer/185833?hl=en</a></p>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <dl class="field-list simple">
@@ -519,7 +509,8 @@
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyufunc</span><span class="w"> </span><span class="kn">import</span> <span class="n">send_email</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">send_email</span><span class="p">(</span><span class="n">send_from</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">send_to</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">smtp_user</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">smtp_password</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">cc</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">bcc</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">send_email</span><span class="p">(</span><span class="n">send_from</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">send_to</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>           <span class="n">smtp_user</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">smtp_password</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">cc</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">bcc</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>

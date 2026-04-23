@@ -104,7 +104,6 @@ def show_util_func_by_category(verbose: bool = True) -> dict:
         "util_vis": util_vis.__all__,
         "util_pkgs": util_pkgs.__all__,
         "pkg_utils": ["show_util_func_by_category",
-                      "show_util_func_by_keyword",
                       "find_util_func_by_keyword"],
     }
 

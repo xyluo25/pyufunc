@@ -42,12 +42,6 @@ from pyufunc.util_geo._get_osm_data import get_osm_by_relation_id, get_osm_by_bb
 
 
 __all__ = [
-    # geo_area
-    'calc_area_from_wkt_geometry',
-
-    # geo_circle
-    'create_circle_at_point_with_radius',
-
     # geo_distance
     'proj_point_to_line',
     'calc_distance_on_unit_sphere',
@@ -55,6 +49,23 @@ __all__ = [
     'find_closest_point',
     'get_coordinates_from_geom',
     'find_k_nearest_points',
+
+    # coordinate convert
+    "cvt_wgs84_to_baidu09",
+    "cvt_wgs84_to_gcj02",
+    "cvt_gcj02_to_baidu09",
+    "cvt_gcj02_to_wgs84",
+    "cvt_baidu09_to_wgs84",
+    "cvt_baidu09_to_gcj02",
+
+    # geo_circle
+    'create_circle_at_point_with_radius',
+
+    # geo_area
+    'calc_area_from_wkt_geometry',
+
+    # geo_tif
+    "download_elevation_tif_by",
 
     # gmns
     # "gmns_geo",
@@ -70,19 +81,8 @@ __all__ = [
     # "gmns_read_zone_by_centroid",
     "gmns_read_zone",
 
-    # coordinate convert
-    "cvt_wgs84_to_baidu09",
-    "cvt_wgs84_to_gcj02",
-    "cvt_gcj02_to_baidu09",
-    "cvt_gcj02_to_wgs84",
-    "cvt_baidu09_to_wgs84",
-    "cvt_baidu09_to_gcj02",
-
     # find osm place
     "get_osm_place",
-
-    # geo_tif
-    "download_elevation_tif_by",
 
     # get osm data
     "get_osm_by_relation_id",

@@ -30,6 +30,7 @@ time difference
 
     get_time_diff_in_unit
     time_unit_converter
+    time_str_to_seconds
 
 grouby datetime
 ~~~~~~~~~~~~~~~

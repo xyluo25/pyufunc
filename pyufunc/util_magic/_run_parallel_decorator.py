@@ -26,9 +26,6 @@ def run_parallel(func: Callable,
         num_processes (int, optional): The number of processors to use. Defaults to os.cpu_count() - 1.
         chunksize (int, optional): The chunksize for the parallel processing. Defaults to 0.
 
-    Returns:
-        Iterator: The results of the function.
-
     Raises:
         TypeError: If the input function is not callable,
             - or if chunksize or num_processes are not integers,
@@ -51,6 +48,9 @@ def run_parallel(func: Callable,
         >>> for res in results:
         >>>    print(res)
         >>> 0, 1, 4, 9, 16, 25, 36, 49, 64, 81
+
+    Returns:
+        Iterator: The results of the function.
     """
 
     # TDD, test-driven development: check inputs

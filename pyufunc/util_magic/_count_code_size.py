@@ -15,9 +15,6 @@ def count_lines_of_code(package_path: str | Path, *, ext: str = "*", verbose: bo
         ext (str): The extension of the files to count. Default is "*".
         verbose (bool): Whether to print the file paths being counted. Default is False.
 
-    Returns:
-        int: The number of lines of code in the package.
-
     Raises:
         TypeError: If package_path is not a string.
         TypeError: If ext is not a string.
@@ -29,6 +26,9 @@ def count_lines_of_code(package_path: str | Path, *, ext: str = "*", verbose: bo
 
         >>> count_lines_of_code("pyufunc", ext="py")
         >>> 4500
+
+    Returns:
+        int: The number of lines of code in the package.
     """
 
     # Initialize the count

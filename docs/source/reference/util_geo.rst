@@ -68,3 +68,14 @@ gmns_geo
     gmns_read_poi
     gmns_read_zone
     get_osm_place
+
+
+OSM data and place
+~~~~~~~~~~~~~~~~~~~
+.. autosummary::
+    :toctree: api/
+
+    get_osm_place
+    get_osm_by_relation_id
+    get_osm_by_bbox
+    extract_bbox_coordinates

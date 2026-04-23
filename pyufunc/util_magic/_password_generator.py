@@ -40,7 +40,13 @@ def generate_password(pwd_len: int = 15,
 
     Examples:
         >>> generate_password()
-        '5#4X6v8&9^0%1$2'
+        >>> '5#4X6v8&9^0%1$2'
+
+        >>> generate_password(pwd_len=20, lowercase=False, uppercase=False, digit=True, special_char=False)
+        >>> '83920174651235323436'
+
+        >>> generate_password(pwd_len=20, config={"num_lowercase": 5, "num_uppercase": 5, "num_digit": 5, "num_special_char": 5})
+        >>> "5y9D`Bp|5h0FXX3}%'px"
     """
 
     # check total config length

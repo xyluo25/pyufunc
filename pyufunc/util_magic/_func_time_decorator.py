@@ -15,18 +15,15 @@ def func_running_time(func: object) -> object:
     """A decorator to measure the time of a function or class method.
     It is useful to use this function in test, debug, logging and running time measurement.
 
+    Args:
+        func (object): the function or class method to be measured.
+
     Note:
         It's equivalent to the func_time as func_running_time have been used in many packages,
         and we keep both of them for compatibility.
 
     Location:
         The function defined in pyufunc.util_common._func_time_decorator.py.
-
-    Args:
-        func (object): the function or class method to be measured.
-
-    Returns:
-        object: the decorated function or class method.
 
     Examples:
         >>> @func_running_time
@@ -37,6 +34,10 @@ def func_running_time(func: object) -> object:
 
         >>> func()
         >>> INFO Finished running function: func, total: 3s
+
+    Returns:
+        object: the decorated function or class method.
+
     """
 
     @wraps(func)
@@ -56,18 +57,15 @@ def func_time(func: object) -> object:
     """A decorator to measure the time of a function or class method.
     It is useful to use this function in test, debug, logging and running time measurement.
 
+    Args:
+        func (object): the function or class method to be measured.
+
     Note:
         It's equivalent to the func_running_time as func_running_time have been used in many packages.
         We keep both of them for compatibility.
 
     Location:
         The function defined in pyufunc.util_common._func_time_decorator.py.
-
-    Args:
-        func (object): the function or class method to be measured.
-
-    Returns:
-        object: the decorated function or class method.
 
     Examples:
         >>> @func_running_time
@@ -79,6 +77,10 @@ def func_time(func: object) -> object:
         >>> func()
         >>> main function...
         >>> INFO Finished running function: func, total: 3s
+
+    Returns:
+        object: the decorated function or class method.
+
     """
 
     @wraps(func)

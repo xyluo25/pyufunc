@@ -16,7 +16,8 @@ import pyufunc as pf
 
 # Get all the modules in the pyufunc package
 category_lst = []
-for module_lst in pf.config_FUNC_CATEGORY.values():
+cfg_func_category = pf.show_util_func_by_category(verbose=False)
+for module_lst in cfg_func_category.values():
     if module_lst:
         category_lst.extend(iter(module_lst))
 
