@@ -10,99 +10,34 @@
 import sys
 import itertools
 
-# import all modules
-from .util_ai import *  # machine learning functions  # noqa: F403
-from .util_algorithm import *  # algorithm functions  # noqa: F403
-from .util_magic import *  # unclassified functions are here  # noqa: F403
-from .util_data_processing import *  # data processing functions including algorithms  # noqa: F403
-from .util_datetime import *  # datetime functions  # noqa: F403
-from .util_fullstack import *  # fullstack functions, including front end and back end  # noqa: F403
-from .util_geo import *  # geographic functions  # noqa: F403
-from .util_git_pypi import *  # git and pypi functions  # noqa: F403
-from .util_gui import *  # GUI functions    # noqa: F403
-from .util_img import *  # image functions   # noqa: F403
-from .util_log import *  # logging functions    # noqa: F403
-from .util_network import *  # network functions    # noqa: F403
-from .util_office import *  # office functions  # noqa: F403
-from .util_optimization import *  # optimization functions  # noqa: F403
-from .util_pathio import *  # path and IO functions  # noqa: F403
-from .util_test import *  # test functions  # noqa: F403
-from .util_vis import *  # visualization functions  # noqa: F403
+from .util_ai import *  # machine learning functions
+from .util_algorithm import *  # algorithm functions
+from .util_magic import *  # unclassified functions are here
+from .util_data_processing import *  # data processing functions including algorithms
+from .util_datetime import *  # datetime functions
+from .util_fullstack import *  # fullstack functions, including front end and back end
+from .util_geo import *  # geographic functions
+from .util_git_pypi import *  # git and pypi functions
+from .util_gui import *  # GUI functions
+from .util_img import *  # image functions
+from .util_log import *  # logging functions
+from .util_network import *  # network functions
+from .util_office import *  # office functions
+from .util_optimization import *  # optimization functions
+from .util_pathio import *  # path and IO functions
+from .util_test import *  # test functions
+from .util_vis import *  # visualization functions
 
-# import package configurations and utilities
-from .pkg_configs import *  # noqa: F403
-from . import (
-    util_ai,
-    util_algorithm,
-    util_magic,
-    util_data_processing,
-    util_datetime,
-    util_fullstack,
-    util_geo,
-    util_git_pypi,
-    util_gui,
-    util_img,
-    util_log,
-    util_network,
-    util_office,
-    util_optimization,
-    util_pathio,
-    util_test,
-    util_vis,
-)
+# import adopted functions from other packages
+from .util_pkgs import *
 
-config_FUNC_KEYWORD = {
-    "non-keywords": [],
-    "show": [],
-    "get": [],
-    "generate": [],
-    "create": [],
-    "find": [],
-    "calc": [],
-    "run": [],
-    "group": [],
-    "check": [],
-    "validate": [],
-    "list": [],
-    "img": [],
-    "split": [],
-    "fmt": [],
-    "cvt": [],
-    "is": [],
-    "proj": [],
-    "github": [],
-    "pypi": [],
-    "error": [],
-    "algo": [],
-    "gmns": [],
-    "pytest": [],
-}
-
-config_FUNC_CATEGORY = {
-    "util_ai": util_ai.__all__,
-    "util_algorithm": util_algorithm.__all__,
-    "util_magic": util_magic.__all__,
-    "util_data_processing": util_data_processing.__all__,
-    "util_datetime": util_datetime.__all__,
-    "util_fullstack": util_fullstack.__all__,
-    "util_geo": util_geo.__all__,
-    "util_git_pypi": util_git_pypi.__all__,
-    "util_gui": util_gui.__all__,
-    "util_img": util_img.__all__,
-    "util_log": util_log.__all__,
-    "util_network": util_network.__all__,
-    "util_office": util_office.__all__,
-    "util_optimization": util_optimization.__all__,
-    "util_pathio": util_pathio.__all__,
-    "util_test": util_test.__all__,
-    "util_vis": util_vis.__all__,
-    "pkg_utils": ["show_util_func_by_category",
-                  "show_util_func_by_keyword",
-                  "find_util_func_by_keyword"],
-}
+__version__ = "0.4.2"
+__name__ = "pyufunc"
+__author__ = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
+__email__ = "luoxiangyong01@gmail.com"
 
 
-def show_util_func_by_category(verbose: bool = True) -> None:
+def show_util_func_by_category(verbose: bool = True) -> dict:
     """show all available utility functions in pyufunc by category or by prefix keywords.
 
     Args:
@@ -127,6 +62,51 @@ def show_util_func_by_category(verbose: bool = True) -> None:
            ** cvt_dt_to_tz
            ** get_time_diff_in_unit
     """
+    # import package configurations and utilities
+    from . import (
+        util_ai,
+        util_algorithm,
+        util_magic,
+        util_data_processing,
+        util_datetime,
+        util_fullstack,
+        util_geo,
+        util_git_pypi,
+        util_gui,
+        util_img,
+        util_log,
+        util_network,
+        util_office,
+        util_optimization,
+        util_pathio,
+        util_test,
+        util_vis,
+        util_pkgs,
+    )
+
+    config_FUNC_CATEGORY = {
+        "util_ai": util_ai.__all__,
+        "util_algorithm": util_algorithm.__all__,
+        "util_magic": util_magic.__all__,
+        "util_data_processing": util_data_processing.__all__,
+        "util_datetime": util_datetime.__all__,
+        "util_fullstack": util_fullstack.__all__,
+        "util_geo": util_geo.__all__,
+        "util_git_pypi": util_git_pypi.__all__,
+        "util_gui": util_gui.__all__,
+        "util_img": util_img.__all__,
+        "util_log": util_log.__all__,
+        "util_network": util_network.__all__,
+        "util_office": util_office.__all__,
+        "util_optimization": util_optimization.__all__,
+        "util_pathio": util_pathio.__all__,
+        "util_test": util_test.__all__,
+        "util_vis": util_vis.__all__,
+        "util_pkgs": util_pkgs.__all__,
+        "pkg_utils": ["show_util_func_by_category",
+                      "show_util_func_by_keyword",
+                      "find_util_func_by_keyword"],
+    }
 
     res_str_head = "Available utility functions in pyUFunc"
     res_str_by_category = ""
@@ -142,83 +122,42 @@ def show_util_func_by_category(verbose: bool = True) -> None:
 
     if verbose:
         print(res_str)
-        return None
-    return res_str
+        return
+    return config_FUNC_CATEGORY
 
 
-def show_util_func_by_keyword(verbose: bool = True) -> None:
-    """show all available utility functions in pyufunc by prefix keywords.
-
-    Args:
-        verbose (bool, optional): whether to print string information. Defaults to True.
-
-    Examples:
-        >>> import pyufunc as uf
-        >>> uf.show_utility_func_by_keyword()
-        Available utility functions in pyufunc:
-
-        -- non-keywords:
-           ** point_to_circle_on_unit_radius
-           ** path2linux
-           ** path2uniform
-           ** import_package
-           ** func_running_time
-           ** requires
-
-        -- show:
-           ** show_numpy_docstring_style
-           ** show_available_utility_func
-    """
-
-    # get all function names with lower case
-    all_func_str = sorted(list(itertools.chain.from_iterable(
-        config_FUNC_CATEGORY.values())), key=str.lower)
-
-    # get the prefix and suffix of the function name and add them to the corresponding list
-    for func_str in all_func_str:
-        # get the prefix and suffix of the function name
-        prefix = func_str.split("_")[0]
-        suffix = func_str.split("_")[-1]
-
-        # if the prefix is not in FUNC_KEYWORD, add it
-        if prefix in config_FUNC_KEYWORD and func_str not in config_FUNC_KEYWORD[prefix]:
-            config_FUNC_KEYWORD[prefix].append(func_str)
-        elif suffix in config_FUNC_KEYWORD and func_str not in config_FUNC_KEYWORD[suffix]:
-            config_FUNC_KEYWORD[suffix].append(func_str)
-
-        # add gmns to the keyword list
-        elif "gmns" in func_str.lower() and func_str not in config_FUNC_KEYWORD["gmns"]:
-            config_FUNC_KEYWORD["gmns"].append(func_str)
-        else:
-            config_FUNC_KEYWORD["non-keywords"].append(func_str)
-
-    res_str_head = "Available utility functions in pyUFunc"
-    res_str_by_keyword = ""
-    func_count = 0
-
-    for keyword in config_FUNC_KEYWORD:
-        if config_FUNC_KEYWORD[keyword]:
-            res_str_by_keyword += f"\n- {keyword}:\n"
-
-            # add unique function names to the string
-            for func in config_FUNC_KEYWORD[keyword]:
-                res_str_by_keyword += f"  - {func}\n"
-                func_count += 1
-
-    res_str = f"{res_str_head} ({func_count}):\n{res_str_by_keyword}"
-
-    if verbose:
-        print(res_str)
-        return None
-    return res_str
-
-
-def find_util_func_by_keyword(keyword: str, verbose: bool = True) -> list:
+def find_util_func_by_keyword(keyword: str = None, verbose: bool = True) -> list:
     """find all available utility functions in pyufunc by keyword.
 
     Args:
-        keyword (str): the keyword
-        verbose (bool, optional): whether to print string information. Defaults to True.
+        keyword (str): the keyword in the utility function.
+            if keyword is empty, it will return total number of utility functions in pyufunc.
+            - Recommended keyword include:
+                cvt: convert or conversion
+                fmt: format or formatting
+                is: check if something is something else, e.g., is_digit
+                calc: calculate or calculation
+                get: get or obtain something
+                show: show or display something
+                generate: generate or creation
+                create: create or construction
+                find: find or search something
+                run: run or execute something
+                group: group or clustering something
+                check: check or validation something
+                validate: validate or verification something
+                list: list or enumeration something
+                img: image processing related functions
+                split: split or segmentation something
+                proj: projection related functions
+                github: functions related to github
+                pypi: functions related to pypi
+                error: functions related to error handling
+                algo: functions related to algorithms
+                gmns: functions related to General Modeling Network Specification
+                pytest: functions related pytest usage
+
+        verbose (bool): whether to print string information. Defaults to True.
 
     Returns:
         list: if verbose is True, print the result string; otherwise return the result list.
@@ -231,7 +170,18 @@ def find_util_func_by_keyword(keyword: str, verbose: bool = True) -> list:
            - show_available_utility_func
            ...
     """
+    # get all functions by category
+    config_FUNC_CATEGORY = show_util_func_by_category(verbose=False)
 
+    # if keyword is empty, return total number of utility functions in pyufunc
+    if keyword is None or keyword.strip() == "":
+        total_func_count = sum(len(func_lst) for func_lst in config_FUNC_CATEGORY.values())
+        res_str = f"Total number of utility functions in pyufunc: {total_func_count}"
+        if verbose:
+            print(res_str)
+        return res_str
+
+    # find all functions that contain the keyword in their name (case-insensitive)
     res_str_by_keyword = ""
     res_str_lst = []
     func_count = 0
@@ -245,13 +195,11 @@ def find_util_func_by_keyword(keyword: str, verbose: bool = True) -> list:
     if verbose:
         res_str_head = f"Available functions by keyword: {keyword}"
         res_str = f"{res_str_head} ({func_count}):\n{res_str_by_keyword}"
-
         print(res_str)
-        return ""
     return res_str_lst
 
 
-def check_python_version(min_version: str = "3.10") -> tuple:
+def __check_python_version(min_version: str = "3.10") -> tuple:
     # Split the version string and convert to tuple of integers
     version_tuple = tuple(map(int, sys.version.split()[0].split('.')))
 
@@ -265,6 +213,6 @@ def check_python_version(min_version: str = "3.10") -> tuple:
         print(f"pyufunc supports Python {min_version} or higher.")
     return version_tuple
 
-check_python_version()
+__check_python_version()
 
-__all__ = [func for fn_lst in list(config_FUNC_CATEGORY.values()) for func in fn_lst]
+# __all__ = [func for fn_lst in list(config_FUNC_CATEGORY.values()) for func in fn_lst]

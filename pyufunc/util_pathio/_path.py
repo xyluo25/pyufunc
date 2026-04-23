@@ -13,7 +13,7 @@ import re
 import sys
 import subprocess
 from typing import Callable, Union
-from pyufunc.pkg_configs import config_color
+from pyufunc.cfg import config_color
 
 
 def path2linux(path: str | Path) -> str:

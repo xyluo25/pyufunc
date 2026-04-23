@@ -12,21 +12,15 @@ computer_name = socket.gethostname()
 computer_ip = socket.gethostbyname(computer_name)
 
 # ############## Package Configurations ############## #
-__version__ = "0.4.2"
-__name__ = "pyufunc"
-__author__ = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
-__email__ = "luoxiangyong01@gmail.com"
 
 __all__ = [
-    "__version__",
-    "__author__",
-    "__email__",
-    "__name__",
     "config_logging",
     "config_datetime_fmt",
     "config_email",
     "config_gmns",
     "config_color",
+    "computer_name",
+    "computer_ip",
 ]
 
 # ############## Logging Configurations ############## #

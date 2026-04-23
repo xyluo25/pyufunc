@@ -6,7 +6,7 @@
 ##############################################################
 from __future__ import annotations
 import datetime
-from pyufunc.pkg_configs import config_datetime_fmt
+from pyufunc.cfg import config_datetime_fmt
 from pyufunc.util_magic import requires
 
 

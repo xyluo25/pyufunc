@@ -19,7 +19,7 @@ from email import encoders
 # For guessing MIME type based on file name extension
 import mimetypes
 
-from pyufunc.pkg_configs import config_email
+from pyufunc.cfg import config_email
 from pyufunc.util_pathio._path import path2linux
 
 
