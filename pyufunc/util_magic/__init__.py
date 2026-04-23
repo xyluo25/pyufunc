@@ -15,6 +15,7 @@ from ._password_generator import generate_password
 
 from ._import_package import (
     import_package,
+    get_active_python_env,
     is_module_importable,
     get_user_defined_func,
     get_user_defined_module,
@@ -41,6 +42,7 @@ __all__ = [
 
     # _import_package
     "import_package",
+    "get_active_python_env",
     "is_module_importable",
     "get_user_defined_func",
     "get_user_defined_module",

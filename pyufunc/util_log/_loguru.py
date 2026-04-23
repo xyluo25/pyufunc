@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 @requires("loguru")
-def log_logger(log_file: str = "log.log") -> loguru.logger:
+def log_logger():
 
     # import_package("loguru", verbose=False)
     import loguru

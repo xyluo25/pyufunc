@@ -10,11 +10,36 @@ import importlib
 import subprocess
 import sys
 import inspect
+import os
 from typing import Union
 import re
 import pathlib
 from collections import defaultdict
 from pyufunc.util_data_processing._str import str_strip
+
+
+def get_active_python_env() -> dict:
+    """Return active Python environment information.
+
+    Returns:
+        dict: Environment metadata including whether a virtual environment is active.
+    """
+
+    conda_prefix = pathlib.Path(os.environ.get("CONDA_PREFIX", "")).as_posix()
+    virtual_env = pathlib.Path(os.environ.get("VIRTUAL_ENV", "")).as_posix()
+
+    env_info = {
+        "is_venv": bool(getattr(sys, "base_prefix", sys.prefix) != sys.prefix or getattr(sys, "real_prefix", None)),
+        "is_conda": bool(conda_prefix),
+        "prefix": pathlib.Path(sys.prefix).as_posix(),
+        "base_prefix": pathlib.Path(getattr(sys, "base_prefix", sys.prefix)).as_posix(),
+        "virtual_env": virtual_env,
+        "conda_prefix": conda_prefix,
+        "python": pathlib.Path(sys.executable).as_posix(),
+    }
+    env_info["is_virtual_env"] = env_info["is_venv"] or env_info["is_conda"]
+    env_info["name"] = pathlib.Path(env_info["prefix"]).name if env_info["is_virtual_env"] else "system"
+    return env_info
 
 
 def import_package(pkg_name: Union[str, tuple, list], options: list = None, verbose: bool = True) -> object:
@@ -38,8 +63,10 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
             eg: ["pillow==8.3.1", "PIL"];
             eg: ["opencv-python", "cv2"];
 
-        options (list, optional): the installation optional inputs.
-            eg: '--force-reinstall', '--ignore-installed'. Defaults to ["--user"].
+        options (list, optional): optional pip install arguments.
+            eg: '--force-reinstall', '--ignore-installed'.
+            If not provided, this function installs into the active virtual environment
+            (venv/conda). When no virtual environment is active, it falls back to '--user'.
         verbose (bool, optional): print the error message if the package is not available.
             Defaults to True.
 
@@ -72,7 +99,16 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
         >>> cv2 = import_package(["opencv-python==4.9.0.80", "cv2"])
     """
 
-    options = ["--user"] if options is None else ["--user", *options]
+    env_info = get_active_python_env()
+
+    if options is None:
+        options = [] if env_info["is_virtual_env"] else ["--user"]
+    else:
+        options = list(options)
+
+    # When options are omitted, install into active virtual env; fallback is --user on system Python.
+    if env_info["is_virtual_env"] and "--user" in options:
+        options = [opt for opt in options if opt != "--user"]
 
     # TDD, test-driven development: check inputs
     assert isinstance(pkg_name, (str, tuple, list)), "The input pkg_name should be a string or tuple or list."
@@ -92,6 +128,7 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
         module = importlib.import_module(import_name)
     except Exception:
         if verbose:
+            print(f"  :active python env: {env_info['name']} ({env_info['python']})")
             print(f"  :installing {module_name}...")
         # install package to current environment
         outputs = []
@@ -138,8 +175,8 @@ def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
         list: a list of user-defined functions in the module.
 
     Examples:
-        >>> import ufunc as uf
-        >>> uf.get_user_defined_func()
+        >>> import pyufunc as pf
+        >>> pf.get_user_defined_func()
         ['func_running_time', 'generate_password', 'import_package', 'get_user_defined_func']
     """
 
@@ -196,7 +233,7 @@ def is_user_defined_func(func_obj: object) -> bool:
 
 
 def is_module_importable(module_name: str) -> bool:
-    """Safely import a module and return a boolean. If the module is not importable, return False.
+    """Check whether a module is importable in the current Python environment.
 
     Args:
         module_name (str): the module name to import.
@@ -205,7 +242,8 @@ def is_module_importable(module_name: str) -> bool:
         bool: True if the module is importable, False otherwise.
 
     Note:
-        This function is useful to check if a module is installed in the current environment.
+        This check is performed against the current interpreter (``sys.executable``),
+        so it reflects the currently activated virtual environment.
 
     Examples:
         >>> from pyufunc import is_module_importable
@@ -219,12 +257,10 @@ def is_module_importable(module_name: str) -> bool:
     assert isinstance(module_name, str), "The input module name should be a string."
 
     try:
-        exec(f"import {module_name}")
-        is_importable = True
-    except ImportError:
-        is_importable = False
-
-    return is_importable
+        importlib.invalidate_caches()
+        return importlib.util.find_spec(module_name) is not None
+    except (ImportError, ModuleNotFoundError, ValueError):
+        return False
 
 
 def get_user_defined_module(obj: object,

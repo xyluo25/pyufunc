@@ -8,7 +8,6 @@
 """
 
 from __future__ import absolute_import
-import copy
 from pyufunc.util_magic._import_package import (is_module_importable,
                                                 import_package)
 
@@ -108,7 +107,8 @@ def requires(*args, **kwargs) -> object:
         def passer(*args, **kwargs):
             if verbose:
                 print(f"  :{function.__name__} missing dependency {','.join(missing_install_name)}"
-                      ", please install them manually or use pyufunc package: pf.import_module(<module_name>).")
+                      ", please install manually or use pyufunc package: pf.import_package(<module_name>).")
+                return None
             # if verbose and not auto_install:
             #     print("  :You can set auto_install=True to install the package automatically,")
             #     print(f"  :eg. @requires{args_requires}" + ", auto_install=True)\n")
