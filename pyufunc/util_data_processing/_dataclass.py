@@ -6,9 +6,35 @@
 ##############################################################
 '''
 
+from __future__ import annotations
+
 from dataclasses import field, fields, make_dataclass, MISSING, is_dataclass, asdict
 from typing import Any, List, Tuple, Type, Union, Dict
 import copy
+
+
+def _dataclass_getitem(self, key):
+    if hasattr(self, key):
+        return getattr(self, key)
+    raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+
+def _dataclass_setitem(self, key, value):
+    if hasattr(self, key):
+        setattr(self, key, value)
+        return
+    raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+
+
+def _dataclass_as_dict(self):
+    return asdict(self)
+
+
+_DICT_NAMESPACE = {
+    "__getitem__": _dataclass_getitem,
+    "__setitem__": _dataclass_setitem,
+    "as_dict": _dataclass_as_dict,
+}
 
 
 def dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
@@ -34,30 +60,12 @@ def dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
     Returns:
         Type: A dataclass with fields and values corresponding to the dictionary.
     """
-    # Define a method for __getitem__ for dictionary-like access
-
-    def __getitem__(self, key):
-        if hasattr(self, key):
-            return getattr(self, key)
-        raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
-
-    # Define a method for __setitem__ for dictionary-like assignment
-    def __setitem__(self, key, value):
-        if hasattr(self, key):
-            setattr(self, key, value)
-            return
-        raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
-
-    # Define a method to convert the dataclass to a dictionary
-    def as_dict(self):
-        return asdict(self)
-
     # Extract fields and their types from the dictionary
     dataclass_fields = []
     for key, value in data.items():
         if isinstance(value, (list, dict, set)):  # For mutable types
             dataclass_fields.append(
-                (key, type(value), field(default_factory=lambda v=value: v)))  # pylint: disable=invalid-field-call
+                (key, type(value), field(default_factory=lambda v=value: copy.deepcopy(v))))  # pylint: disable=invalid-field-call
         else:  # For immutable types
             dataclass_fields.append((key, type(value), field(default=value)))  # pylint: disable=invalid-field-call
 
@@ -66,9 +74,7 @@ def dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
         cls_name=name,
         fields=dataclass_fields,
         bases=(),
-        namespace={'__getitem__': __getitem__,
-                   '__setitem__': __setitem__,
-                   'as_dict': as_dict}
+        namespace=_DICT_NAMESPACE,
     )
 
     # Instantiate the dataclass with the values from the dictionary
@@ -105,21 +111,6 @@ def dataclass_creation(class_name: str, attributes: List[Union[Tuple[str, Type, 
         0.0
     """
 
-    def __getitem__(self, key):
-        if hasattr(self, key):
-            return getattr(self, key)
-        raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
-
-    # Define a method for __setitem__ for dictionary-like assignment
-    def __setitem__(self, key, value):
-        if hasattr(self, key):
-            setattr(self, key, value)
-            return
-        raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
-
-    def as_dict(self):
-        return asdict(self)
-
     processed_attributes = []
 
     for attr in attributes:
@@ -130,10 +121,7 @@ def dataclass_creation(class_name: str, attributes: List[Union[Tuple[str, Type, 
             # Name, type, and default value provided
             processed_attributes.append((attr[0], attr[1], attr[2]))
 
-    return make_dataclass(class_name, processed_attributes,
-                          namespace={'__getitem__': __getitem__,
-                                     '__setitem__': __setitem__,
-                                     'as_dict': as_dict})
+    return make_dataclass(class_name, processed_attributes, namespace=_DICT_NAMESPACE)
 
 
 def dataclass_merge(dataclass_one: Type[Any], dataclass_two: Type[Any],
@@ -212,7 +200,7 @@ def dataclass_merge(dataclass_one: Type[Any], dataclass_two: Type[Any],
 
     # Create the merged dataclass dynamically
     MergedDataclass = make_dataclass(
-        cls_name=merged_class_name or None,
+        cls_name=merged_class_name or f"{dataclass_one.__name__}{dataclass_two.__name__}",
         fields=final_fields
     )
 

@@ -177,6 +177,35 @@ ignored-modules = [
     "shapely",
 ]
 
+[tool.coverage.run]
+source = ["pyufunc"]
+omit = [
+    "tests/*",
+    "pyufunc/util_geo/_geo_overture_map.py",
+    "pyufunc/util_geo/_geo_tif.py",
+    "pyufunc/util_geo/_get_osm_data.py",
+    "pyufunc/util_geo/_get_osm_place.py",
+    "pyufunc/util_geo/_gmns.py",
+    "pyufunc/util_git_pypi/_github.py",
+    "pyufunc/util_git_pypi/_pypi.py",
+    "pyufunc/util_img/_img_cvt.py",
+    "pyufunc/util_img/_img_operate.py",
+    "pyufunc/util_log/_log_dir.py",
+    "pyufunc/util_magic/_convert_py_to_dll.py",
+    "pyufunc/util_magic/_import_package.py",
+    "pyufunc/util_magic/_venv_operate.py",
+    "pyufunc/util_office/_email.py",
+    "pyufunc/util_office/_printer.py",
+    "pyufunc/util_office/_word.py",
+    "pyufunc/util_pathio/_argparse.py",
+    "pyufunc/util_pathio/_io.py",
+    "pyufunc/util_pathio/_path.py",
+    "pyufunc/util_pkgs/_psutil.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+
 # [tool.hatch.build.targets.wheel]
 # packages = ["pyufunc"]
 

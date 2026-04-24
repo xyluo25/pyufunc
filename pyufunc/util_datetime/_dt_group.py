@@ -55,7 +55,6 @@ def group_dt_yearly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
     df_res = dataframe.groupby(
         pd.Grouper(key="datetime",
-                   axis=0,
                    freq=f"{interval}YE")).agg(["count", "mean", "sum"])
     df_res.reset_index(inplace=True)
     df_res.columns = [i[0] if i[0] == "datetime" else i[1]
@@ -114,7 +113,6 @@ def group_dt_monthly(df: pd.DataFrame, interval: int = 1, col: list = None) -> p
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
     df_res = dataframe.groupby(
         pd.Grouper(key="datetime",
-                   axis=0,
                    freq=f"{interval}ME")).agg(["count", "mean", "sum"])
     df_res.reset_index(inplace=True)
     df_res.columns = [i[0] if i[0] == "datetime" else i[1]
@@ -164,7 +162,6 @@ def group_dt_weekly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
     dataframe.columns = ["datetime", "value"]
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
     df_res = dataframe.groupby(pd.Grouper(key="datetime",
-                                          axis=0,
                                           freq=f"{interval}W")).agg(["count",
                                                                      "mean",
                                                                      "sum"])
@@ -219,7 +216,6 @@ def group_dt_daily(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
     df_res = dataframe.groupby(
         pd.Grouper(key="datetime",
-                   axis=0,
                    freq=f"{interval}D")).agg(["count", "mean", "sum"])
     df_res.reset_index(inplace=True)
     df_res.columns = [i[0] if i[0] == "datetime" else i[1]
@@ -273,7 +269,6 @@ def group_dt_hourly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
     df_res = dataframe.groupby(
         pd.Grouper(key="datetime",
-                   axis=0,
                    freq=f"{interval}h")).agg(["count", "mean", "sum"])
     df_res.reset_index(inplace=True)
     df_res.columns = [i[0] if i[0] == "datetime" else i[1]
@@ -328,7 +323,6 @@ def group_dt_minutely(df: pd.DataFrame, interval: int = 1, col: list = None) -> 
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
     df_res = dataframe.groupby(
         pd.Grouper(key="datetime",
-                   axis=0,
                    freq=f"{interval}min")).agg(["count", "mean", "sum"])
     df_res.reset_index(inplace=True)
     df_res.columns = [i[0] if i[0] == "datetime" else i[1]

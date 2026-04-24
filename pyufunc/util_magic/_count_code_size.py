@@ -35,12 +35,12 @@ def count_lines_of_code(package_path: str | Path, *, ext: str = "*", verbose: bo
     count = 0
 
     if not isinstance(package_path, (str, Path)):
-        warnings.warn("Package path must be a string or Path.", UserWarning)
+        warnings.warn("Package path must be a string or Path.")
         # raise TypeError("Package path must be a string or Path.")
         return count
 
     if not isinstance(ext, str):
-        warnings.warn("Extension must be a string.", UserWarning)
+        warnings.warn("Extension must be a string.")
         # raise TypeError("Extension must be a string.")
         return count
 
@@ -52,7 +52,7 @@ def count_lines_of_code(package_path: str | Path, *, ext: str = "*", verbose: bo
     is_dir = os.path.isdir(package_path)
 
     if not is_file and not is_dir:
-        warnings.warn(f"'{package_path}' is not a file or directory, please check your input.", UserWarning)
+        warnings.warn(f"'{package_path}' is not a file or directory, please check your input.")
         # raise FileNotFoundError(f"'{package_path}' is not a file or directory, please check your input.")
         return count
 
@@ -62,7 +62,7 @@ def count_lines_of_code(package_path: str | Path, *, ext: str = "*", verbose: bo
 
     # Count the lines of code
     if verbose:
-        print(f"Counting lines of code in '{package_path}'...")
+        warnings.warn(f"Counting lines of code in '{package_path}'...")
 
     if is_file:
         if ext == "*" or package_path.endswith(ext):
@@ -70,7 +70,7 @@ def count_lines_of_code(package_path: str | Path, *, ext: str = "*", verbose: bo
                 with contextlib.suppress(Exception):
                     count += len(f.readlines())
         else:
-            print(f"Package path '{package_path}' does not have the extension '{ext}'.")
+            warnings.warn(f"Package path '{package_path}' does not have the extension '{ext}'.")
 
         return count
 

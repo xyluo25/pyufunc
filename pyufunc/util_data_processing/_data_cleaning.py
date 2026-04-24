@@ -55,15 +55,15 @@ def get_layer_boundary(df: pd.DataFrame, x_col_name: str, y_col_name: str,
     # create criteria for filtering data
     # for each interval, get the mask values
     masks_list = [
-        df[x_col_name].between(i, j) for i, j in zip(range(x_col_name,
-                                                           x_col_name,
+        df[x_col_name].between(i, j) for i, j in zip(range(x_col_min,
+                                                           x_col_max,
                                                            base_interval),
-                                                     range(x_col_name + base_interval,
-                                                           x_col_name,
+                                                     range(x_col_min + base_interval,
+                                                           x_col_max + base_interval,
                                                            base_interval))]
 
     # get the target column values for each interval based on the mask values
     target_values = [df[y_col_name]
                      [i].max() * percentile for i in masks_list]
-    return pd.DataFrame({x_col_name: range(x_col_min, x_col_max - base_interval),
+    return pd.DataFrame({x_col_name: range(x_col_min, x_col_max, base_interval),
                          y_col_name: target_values})
