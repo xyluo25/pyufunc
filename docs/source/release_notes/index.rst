@@ -4,38 +4,5 @@
 Release notes
 *************
 
-This is the list of changes to pyufunc between each release. For full details,
-see the `commit logs <https://github.com/xyluo25/pyufunc/commits/>`_.
-
-Version 0.4.2
--------------
-.. toctree::
-   :maxdepth: 2
-
-   v0.4.2
-
-
-Version 0.2.6
--------------
-.. toctree::
-   :maxdepth: 2
-
-   v0.2.6
-
-
-Version 0.2.0
--------------
-
-.. toctree::
-   :maxdepth: 2
-
-   v0.2.0
-
-
-Version 0.1.9
--------------
-
-.. toctree::
-   :maxdepth: 2
-
-   v0.1.9
+.. include:: ../../../CHANGELOG.md
+   :parser: myst_parser.sphinx_

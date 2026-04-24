@@ -36,7 +36,7 @@ version = str(pyufunc.__version__)
 release = version
 language = "en"
 
-source_suffix = [".rst"]
+source_suffix = [".rst", ".md"]
 source_encoding = "utf-8"
 master_doc = "index"
 
@@ -57,6 +57,7 @@ extensions = [
     "sphinx.ext.todo",
     "nbsphinx",
     "numpydoc",
+    "myst_parser",
 ]
 
 source_path = os.path.dirname(os.path.abspath(__file__))

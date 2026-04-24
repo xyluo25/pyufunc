@@ -34,6 +34,7 @@ sphinxemoji
 sphinxext-opengraph
 nbsphinx
 numpydoc
+myst-parser
 pydata_sphinx_theme
 pillow
 opencv-python
