@@ -3,8 +3,6 @@
 
 # pyufunc
 
-![img](https://github.com/xyluo25/pyufunc/blob/main/docs/static/img/pyufunc_icon.jpg?raw=true)
-
 Welcome to pyufunc, your go-to Python package for a wide array of frequently used utility functions. Simplify your coding experience with this toolkit, designed to enhance your productivity and streamline your development process with a curated collection of utilities that cater to your everyday programming needs.
 
 Pyufunc aims to bring together the commonly used utility functions from different libraries and provide them in a single, cohesive package. By consolidating utility functions from multiple sources, pyufunc simplifies the process of finding and integrating various utility libraries into your projects. It provides a centralized resource for accessing a diverse set of utility functions, ultimately saving time and effort.
