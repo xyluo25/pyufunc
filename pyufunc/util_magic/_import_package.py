@@ -15,7 +15,10 @@ from typing import Union
 import re
 import pathlib
 from collections import defaultdict
-from pyufunc.util_data_processing._str import str_strip
+
+
+def _str_strip(string: str) -> str:
+    return re.sub(pattern=r"[\s  ]+", repl=" ", string=str(string)).strip()
 
 
 def get_active_python_env() -> dict:
@@ -323,5 +326,5 @@ def get_user_imported_module(obj: object) -> dict:
                                              r"(?:\(((?:.|\s)*?)\)|((?:(?<!\()(?:.|\s))*?))\n"),
                                     string=file_contents):
         imported_members[m].extend(
-            [str_strip(v) for v in (v_wb + v_nb).split(" as ")[0].split(",")])
+            [_str_strip(v) for v in (v_wb + v_nb).split(" as ")[0].split(",")])
     return imported_members

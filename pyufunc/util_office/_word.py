@@ -11,7 +11,7 @@
 
 from pathlib import Path
 from pyufunc.util_pathio._platform import is_windows
-from pyufunc import requires
+from pyufunc.util_magic._dependency_requires_decorator import requires
 
 
 @requires(("pywin32", "win32com"))

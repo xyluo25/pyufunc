@@ -40,7 +40,6 @@ settings = {
 }
 
 
-@requires("requests")
 class OSMPlaceFinder:
 
     def __init__(self, place: str, verbose: bool = False):

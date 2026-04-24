@@ -19,13 +19,13 @@ from pyufunc.util_magic._dependency_requires_decorator import requires
 from pyufunc.cfg import config_gmns
 from pyufunc.util_data_processing._dataclass import dataclass_extend, dataclass_from_dict
 
-import pandas as pd
 
 if TYPE_CHECKING:
     import shapely
     from tqdm import tqdm
     from pyproj import Transformer
     from joblib import Parallel, delayed
+    import pandas as pd
 
 __all__ = ['Node', 'Link', 'POI', 'Zone', 'Agent',
            'read_node', 'read_poi', 'read_link', 'read_zone']

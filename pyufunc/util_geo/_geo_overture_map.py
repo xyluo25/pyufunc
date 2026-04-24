@@ -122,14 +122,12 @@ def get_writer(output_format, path, schema):
     return writer
 
 
-@requires("shapely")
 class BaseGeoJSONWriter:
     """
     A base feature writer that manages either a file handle
     or output stream. Subclasses should implement write_feature()
     and finalize() if needed
     """
-    import shapely.wkb
 
     def __init__(self, where):
         self.file_handle = None

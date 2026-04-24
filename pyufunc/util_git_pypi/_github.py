@@ -69,7 +69,6 @@ class _FakeUserAgentParser(html.parser.HTMLParser):
             self.data.append(data.strip())
 
 
-@requires('requests', "urllib3")
 class GitHubFileDownloader:
     """Download files on GitHub from a given repository URL."""
 
@@ -563,6 +562,7 @@ class GitHubFileDownloader:
         return self.total_files
 
 
+@requires('requests', "urllib3")
 def github_file_downloader(repo_url: str, output_dir: str | None = None, flatten: bool = False) -> int:
     """Download files from a GitHub repository.
 

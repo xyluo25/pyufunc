@@ -5,10 +5,17 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
+from __future__ import annotations
+
 import math
-import pandas as pd
+from typing import TYPE_CHECKING
+from pyufunc.util_magic._dependency_requires_decorator import requires
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
+@requires('pandas')
 def get_layer_boundary(df: pd.DataFrame, x_col_name: str, y_col_name: str,
                        base_interval: int = 1, percentile: float = .85) -> pd.DataFrame:
     """Get the boundary values of the target column based on the base column values.
@@ -42,6 +49,8 @@ def get_layer_boundary(df: pd.DataFrame, x_col_name: str, y_col_name: str,
     Returns:
         pd.DataFrame: a dataframe with the boundary values of the target column based on the base column values.
     """
+
+    import pandas as pd
 
     # TDD development
     if not {x_col_name, y_col_name}.issubset(df.columns):
