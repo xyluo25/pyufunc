@@ -106,7 +106,6 @@ def terminal_width() -> int:
         >>> get_terminal_width()
         120
     """
-    # import_package("shutil", verbose=False)
     import shutil
     return shutil.get_terminal_size().columns
 
@@ -126,6 +125,5 @@ def terminal_height() -> int:
         >>> get_terminal_height()
         32
     """
-    # import_package("shutil", verbose=False)
     import shutil
     return shutil.get_terminal_size().lines

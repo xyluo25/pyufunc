@@ -19,6 +19,18 @@ except ImportError:
     os.chdir(current_path)
 
 
+def _format_util_func_by_category(config_func_category: dict) -> str:
+    res_str_by_category = ""
+    func_count = 0
+    for util_category, func_lst in config_func_category.items():
+        if func_lst:
+            res_str_by_category += f"\n- {util_category}:\n"
+            for func in sorted(func_lst, key=str.lower):
+                res_str_by_category += f"  - {func}\n"
+                func_count += 1
+    return f"Available utility functions in pyUFunc ({func_count}):\n{res_str_by_category}"
+
+
 def update_util_func_by_keywords_md(path_keyword: str) -> None:
     with open(path_keyword, "r", encoding="utf-8") as f:
         keyword = f.read()
@@ -41,7 +53,10 @@ def update_util_func_by_category_md(path_category: str) -> None:
 
     util_func_starting = category.find("Available utility functions in pyUFunc")
 
-    category_new = category[:util_func_starting] + pf.show_util_func_by_category(False)
+    category_new = (
+        category[:util_func_starting]
+        + _format_util_func_by_category(pf.show_util_func_by_category(False))
+    )
 
     with open(path_category, "w", encoding="utf-8") as f_new:
         f_new.write(category_new)

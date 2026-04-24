@@ -6,11 +6,14 @@
 ##############################################################
 
 from __future__ import annotations
-import pandas as pd
-from pyufunc.util_magic import func_running_time
+from typing import TYPE_CHECKING
+from pyufunc.util_magic import func_running_time, requires
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
-@func_running_time
+@requires("pandas")
 def group_dt_yearly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by year.
 
@@ -39,6 +42,8 @@ def group_dt_yearly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
 
     """
 
+    import pandas as pd
+
     col = ["datetime", "value"] if col is None else col
 
     print("The group_yearly require at least two columns\n",
@@ -58,7 +63,7 @@ def group_dt_yearly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
     return df_res
 
 
-@func_running_time
+@requires("pandas")
 def group_dt_monthly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by month.
 
@@ -96,6 +101,8 @@ def group_dt_monthly(df: pd.DataFrame, interval: int = 1, col: list = None) -> p
         11	2020-12-31	31	350.0	10850
     """
 
+    import pandas as pd
+
     col = ["datetime", "value"] if col is None else col
 
     print("The group_monthly require at least two columns\n",
@@ -115,7 +122,7 @@ def group_dt_monthly(df: pd.DataFrame, interval: int = 1, col: list = None) -> p
     return df_res
 
 
-@func_running_time
+@requires("pandas")
 def group_dt_weekly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by week.
 
@@ -146,6 +153,7 @@ def group_dt_weekly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
         4	2020-02-02	7	29.0	203
 
     """
+    import pandas as pd
 
     col = ["datetime", "value"] if col is None else col
     print("The group_weekly require at least two columns\n",
@@ -166,7 +174,7 @@ def group_dt_weekly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
     return df_res
 
 
-@func_running_time
+@requires("pandas")
 def group_dt_daily(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by day.
 
@@ -198,6 +206,8 @@ def group_dt_daily(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.
 
     """
 
+    import pandas as pd
+
     if col is None:
         col = ["datetime", "value"]
     print("The group_daily require at least two columns\n",
@@ -217,8 +227,7 @@ def group_dt_daily(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.
     return df_res
 
 
-# @requires("pandas", verbose=False)
-@func_running_time
+@requires("pandas")
 def group_dt_hourly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by hour.
 
@@ -251,6 +260,8 @@ def group_dt_hourly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
 
     """
 
+    import pandas as pd
+
     if col is None:
         col = ["datetime", "value"]
     print("The group_hourly require at least two columns\n",
@@ -270,7 +281,7 @@ def group_dt_hourly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
     return df_res
 
 
-@func_running_time
+@requires("pandas")
 def group_dt_minutely(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by minute.
 
@@ -303,6 +314,8 @@ def group_dt_minutely(df: pd.DataFrame, interval: int = 1, col: list = None) -> 
         4	2020-01-01 00:04:00	1	4.0	    4
 
     """
+
+    import pandas as pd
 
     if col is None:
         col = ["datetime", "value"]

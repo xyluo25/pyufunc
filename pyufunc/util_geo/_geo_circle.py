@@ -7,7 +7,7 @@
 from __future__ import annotations
 import math
 from typing import Iterable, Union, TYPE_CHECKING
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 #  https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
@@ -79,7 +79,7 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
     return [to_degrees(lon), to_degrees(lat)]
 
 
-@requires("shapely", verbose=False)
+@requires("shapely")
 def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
                                        radius: float,
                                        options: dict = None,
@@ -142,12 +142,12 @@ def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
     """
     if options is None:
         options = {"edges": 32, "bearing": 0, "direction": 1}
-    # import shapely.geometry.Point
-    import_package("shapely", verbose=False)
+
     from shapely.geometry import Point
 
     # TDD, test driven development: input validation
-    assert isinstance(point, (Point, Iterable)), "the point should be a shapely.geometry.Point or a list of longitude and latitude"
+    assert isinstance(point, (Point, Iterable)), ("the point should be a shapely.geometry.Point "
+                                                  "or a list of longitude and latitude")
     assert isinstance(radius, (int, float)), "the radius should be a number"
     assert isinstance(options, dict), "the options should be a dictionary"
 

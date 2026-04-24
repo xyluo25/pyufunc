@@ -39,15 +39,14 @@ def dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
     def __getitem__(self, key):
         if hasattr(self, key):
             return getattr(self, key)
-        else:
-            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+        raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
 
     # Define a method for __setitem__ for dictionary-like assignment
     def __setitem__(self, key, value):
         if hasattr(self, key):
             setattr(self, key, value)
-        else:
-            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+            return
+        raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
 
     # Define a method to convert the dataclass to a dictionary
     def as_dict(self):
@@ -58,9 +57,9 @@ def dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
     for key, value in data.items():
         if isinstance(value, (list, dict, set)):  # For mutable types
             dataclass_fields.append(
-                (key, type(value), field(default_factory=lambda v=value: v)))
+                (key, type(value), field(default_factory=lambda v=value: v)))  # pylint: disable=invalid-field-call
         else:  # For immutable types
-            dataclass_fields.append((key, type(value), field(default=value)))
+            dataclass_fields.append((key, type(value), field(default=value)))  # pylint: disable=invalid-field-call
 
     # Create the dataclass dynamically
     DataClass = make_dataclass(
@@ -109,15 +108,14 @@ def dataclass_creation(class_name: str, attributes: List[Union[Tuple[str, Type, 
     def __getitem__(self, key):
         if hasattr(self, key):
             return getattr(self, key)
-        else:
-            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+        raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
 
     # Define a method for __setitem__ for dictionary-like assignment
     def __setitem__(self, key, value):
         if hasattr(self, key):
             setattr(self, key, value)
-        else:
-            raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
+            return
+        raise KeyError(f"Key {key} not found in {self.__class__.__name__}")
 
     def as_dict(self):
         return asdict(self)
@@ -184,7 +182,7 @@ def dataclass_merge(dataclass_one: Type[Any], dataclass_two: Type[Any],
             if f.default is not MISSING:
                 result.append((f.name, f.type, f.default))
             elif f.default_factory is not MISSING:
-                result.append((f.name, f.type, field(
+                result.append((f.name, f.type, field(  # pylint: disable=invalid-field-call
                     default_factory=f.default_factory)))
             else:
                 result.append((f.name, f.type))
@@ -267,7 +265,7 @@ def dataclass_extend(base_dataclass: Type[Any],
         if f.default is not MISSING:
             base_fields.append((f.name, f.type, f.default))
         elif f.default_factory is not MISSING:
-            base_fields.append((f.name, f.type, field(
+            base_fields.append((f.name, f.type, field(  # pylint: disable=invalid-field-call
                 default_factory=f.default_factory)))
         else:
             base_fields.append((f.name, f.type))
@@ -334,14 +332,13 @@ class DataclassDictWrapper:
     def __getitem__(self, key):
         if hasattr(self._instance, key):
             return getattr(self._instance, key)
-        else:
-            raise KeyError(f"Key {key} not found in {self._instance.__class__.__name__}")
+        raise KeyError(f"Key {key} not found in {self._instance.__class__.__name__}")
 
     def __setitem__(self, key, value):
         if hasattr(self._instance, key):
             setattr(self._instance, key, value)
-        else:
-            raise KeyError(f"Key {key} not found in {self._instance.__class__.__name__}")
+            return
+        raise KeyError(f"Key {key} not found in {self._instance.__class__.__name__}")
 
     def __getattr__(self, item):
         return getattr(self._instance, item)

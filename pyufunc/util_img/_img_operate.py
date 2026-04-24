@@ -7,6 +7,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING, Union, Any
 
+# pylint: disable=no-member
+
 # https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
     # import modules from 3rd party libraries
@@ -40,13 +42,12 @@ def is_PIL_img(img: Any) -> bool:
         >>> print(is_pil_image(img_pil))
         True
     """
-    # import_package(("pillow", "PIL"), verbose=False)
     from PIL import Image
 
     return isinstance(img, Image.Image)
 
 
-# @requires("numpy", verbose=False)
+@requires("numpy")
 def is_CV_img(img: Any) -> bool:
     """Check if the input object is a CV image
 
@@ -67,9 +68,7 @@ def is_CV_img(img: Any) -> bool:
         >>> print(is_cv_image(img_pil))
         False
     """
-    # # import necessary modules
-    # import_package("numpy", verbose=False)
-    # import numpy as np
+    import numpy as np
 
     return isinstance(img, np.ndarray)
 
@@ -92,12 +91,10 @@ def img_PIL_to_CV(img: Image.Image) -> np.ndarray:
         >>> img_cv = cvt_img_PIL_to_CV(img_pil)
 
     """
-    # import necessary models
-    # import_package(("opencv-python", "cv2"), verbose=False)
-    # import_package(("pillow", "PIL"), verbose=False)
 
     import cv2
     from PIL import Image
+    import numpy as np
 
     return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
@@ -119,9 +116,6 @@ def img_CV_to_PIL(img: np.ndarray) -> Image.Image:
         >>> img_cv = cv2.imread('test.jpg')
         >>> img_pil = cvt_img_CV_to_PIL(img_cv)
     """
-    # import necessary models
-    # import_package(("opencv-python", "cv2"), verbose=False)
-    # import_package(("pillow", "PIL"), verbose=False)
     import cv2
     from PIL import Image
 
@@ -153,12 +147,9 @@ def img_translate(img: Union[np.ndarray, str, Image.Image],
         >>> cv2.waitKey(0)
         >>> cv2.destroyAllWindows()
     """
-
-    # import necessary models
-    # import_package(("opencv-python", "cv2"), verbose=False)
-    # import_package(("pillow", "PIL"), verbose=False)
     import cv2
     from PIL import Image
+    import numpy as np
 
     # TDD, Test-Driven Development
     # check if the input image is a string
@@ -221,10 +212,9 @@ def img_rotate(img: Union[np.ndarray, str, Image.Image],
     """
 
     # import necessary models
-    # import_package(("opencv-python", "cv2"), verbose=False)
-    # import_package(("pillow", "PIL"), vrbose=False)
     import cv2
     from PIL import Image
+    import numpy as np
 
     # TDD, Test-Driven Development
     # check if the input image is a string
@@ -299,10 +289,9 @@ def img_rotate_bound(img: Union[np.ndarray, str, Image.Image],
     """
 
     # import necessary modules
-    # import_package(("opencv-python", "cv2"), verbose=False)
-    # import_package(("pillow", "PIL"), verbose=False)
     import cv2
     from PIL import Image
+    import numpy as np
 
     # TDD, Test-Driven Development
     # check if the input image is a string
@@ -380,10 +369,9 @@ def img_resize(img: Union[np.ndarray, str, Image.Image],
     """
 
     # import necessary modules
-    # import_package(("opencv-python", "cv2"), verbose=False)
-    # import_package(("pillow", "PIL"), verbose=False)
     import cv2
     from PIL import Image
+    import numpy as np
 
     # TDD, Test-Driven Development
     # check if the input image is a string
@@ -453,9 +441,9 @@ def img_show(img: Union[str, np.ndarray, Image.Image],
     """
 
     # import necessary modules
-    # import_package(("opencv-python", "cv2"), verbose=False)
-    # import_package(("pillow", "PIL"), verbose=False)
+    import cv2
     from PIL import Image
+    import numpy as np
 
     # TDD, Test-Driven Development
     # check if the input image is a string
@@ -471,14 +459,16 @@ def img_show(img: Union[str, np.ndarray, Image.Image],
             raise Exception(f"Error: {e}") from e
 
     # check if the input image is a PIL image
-    if isinstance(img, Image.Image):
+    elif isinstance(img, Image.Image):
         img_cv = img_PIL_to_CV(img)
         img_pil = img
 
     # check if the input image is a CV image
-    if isinstance(img, np.ndarray):
+    elif isinstance(img, np.ndarray):
         img_cv = img
         img_pil = img_CV_to_PIL(img)
+    else:
+        raise Exception("Error: the input image should be a string or a PIL image or a CV image")
 
     if is_PIL_show:
         if verbose:

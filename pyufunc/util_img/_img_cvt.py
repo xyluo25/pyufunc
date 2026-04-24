@@ -88,7 +88,6 @@ def img_bytes_to_PIL(img_b: bytes) -> Image:
         >>> img.show()
     """
 
-    # import_package(("pillow", "PIL"))
     from PIL import Image
 
     try:

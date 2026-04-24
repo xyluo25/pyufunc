@@ -16,7 +16,6 @@ if TYPE_CHECKING:
 @requires("loguru")
 def log_logger():
 
-    # import_package("loguru", verbose=False)
     import loguru
     # from loguru import logger
     return loguru.logger

@@ -20,7 +20,7 @@ from urllib.parse import urlparse
 import urllib.request
 from pathlib import Path
 from typing import TYPE_CHECKING
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 path_user_agent_strings = Path(__file__).parent.joinpath("static/user-agent-strings.json")
 
@@ -365,7 +365,6 @@ class GitHubFileDownloader:
         """
 
         # import tqdm if it is available, otherwise, install and import it
-        # tqdm_ = import_package('tqdm', verbose=False)
         import tqdm
 
         file_size = int(response.headers.get('content-length'))  # Total size in bytes

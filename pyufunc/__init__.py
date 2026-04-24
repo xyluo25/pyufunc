@@ -32,7 +32,6 @@ from .util_vis import *  # visualization functions
 from .util_pkgs import *
 
 __version__ = "0.4.2"
-__name__ = "pyufunc"
 __author__ = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
 __email__ = "luoxiangyong01@gmail.com"
 
@@ -47,13 +46,11 @@ def show_util_func_by_category(verbose: bool = True) -> dict:
         >>> import pyufunc as uf
         >>> uf.show_utility_func_by_category()
         Available utility functions in pyufunc:
-
         -- util_magic:
            ** show_supported_docstring_header
            ** show_google_docstring_style
            ** show_numpy_docstring_style
            ** generate_password
-
         -- util_datetime:
            ** fmt_dt_to_str
            ** fmt_dt
@@ -84,7 +81,7 @@ def show_util_func_by_category(verbose: bool = True) -> dict:
         util_pkgs,
     )
 
-    config_FUNC_CATEGORY = {
+    config_func_category = {
         "util_ai": util_ai.__all__,
         "util_algorithm": util_algorithm.__all__,
         "util_magic": util_magic.__all__,
@@ -110,10 +107,10 @@ def show_util_func_by_category(verbose: bool = True) -> dict:
     res_str_head = "Available utility functions in pyUFunc"
     res_str_by_category = ""
     func_count = 0
-    for util_category in config_FUNC_CATEGORY:
-        if config_FUNC_CATEGORY[util_category]:
+    for util_category, func_names in config_func_category.items():
+        if func_names:
             res_str_by_category += f"\n- {util_category}:\n"
-            for func in sorted(config_FUNC_CATEGORY[util_category], key=str.lower):
+            for func in sorted(func_names, key=str.lower):
                 res_str_by_category += f"  - {func}\n"
                 func_count += 1
 
@@ -122,7 +119,7 @@ def show_util_func_by_category(verbose: bool = True) -> dict:
     if verbose:
         print(res_str)
         return
-    return config_FUNC_CATEGORY
+    return config_func_category
 
 
 def find_util_func_by_keyword(keyword: str = None, verbose: bool = True) -> list:
@@ -131,30 +128,31 @@ def find_util_func_by_keyword(keyword: str = None, verbose: bool = True) -> list
     Args:
         keyword (str): the keyword in the utility function.
             if keyword is empty, it will return total number of utility functions in pyufunc.
+
             - Recommended keyword include:
-                cvt: convert or conversion
-                fmt: format or formatting
-                is: check if something is something else, e.g., is_digit
-                calc: calculate or calculation
-                get: get or obtain something
-                show: show or display something
-                generate: generate or creation
-                create: create or construction
-                find: find or search something
-                run: run or execute something
-                group: group or clustering something
-                check: check or validation something
-                validate: validate or verification something
-                list: list or enumeration something
-                img: image processing related functions
-                split: split or segmentation something
-                proj: projection related functions
-                github: functions related to github
-                pypi: functions related to pypi
-                error: functions related to error handling
-                algo: functions related to algorithms
-                gmns: functions related to General Modeling Network Specification
-                pytest: functions related pytest usage
+                - **cvt**: convert or conversion
+                - **fmt**: format or formatting
+                - **is**: check if something is something else, e.g., is_digit
+                - **calc**: calculate or calculation
+                - **get**: get or obtain something
+                - **show**: show or display something
+                - **generate**: generate or creation
+                - **create**: create or construction
+                - **find**: find or search something
+                - **run**: run or execute something
+                - **group**: group or clustering something
+                - **check**: check or validation something
+                - **validate**: validate or verification something
+                - **list**: list or enumeration something
+                - **img**: image processing related functions
+                - **split**: split or segmentation something
+                - **proj**: projection related functions
+                - **github**: functions related to github
+                - **pypi**: functions related to pypi
+                - **error**: functions related to error handling
+                - **algo**: functions related to algorithms
+                - **gmns**: functions related to General Modeling Network Specification
+                - **pytest**: functions related pytest usage
 
         verbose (bool): whether to print string information. Defaults to True.
 
@@ -170,11 +168,11 @@ def find_util_func_by_keyword(keyword: str = None, verbose: bool = True) -> list
            ...
     """
     # get all functions by category
-    config_FUNC_CATEGORY = show_util_func_by_category(verbose=False)
+    config_func_category = show_util_func_by_category(verbose=False)
 
     # if keyword is empty, return total number of utility functions in pyufunc
     if keyword is None or keyword.strip() == "":
-        total_func_count = sum(len(func_lst) for func_lst in config_FUNC_CATEGORY.values())
+        total_func_count = sum(len(func_lst) for func_lst in config_func_category.values())
         res_str = f"Total number of utility functions in pyufunc: {total_func_count}"
         if verbose:
             print(res_str)
@@ -185,7 +183,7 @@ def find_util_func_by_keyword(keyword: str = None, verbose: bool = True) -> list
     res_str_lst = []
     func_count = 0
 
-    for func_str in list(itertools.chain.from_iterable(config_FUNC_CATEGORY.values())):
+    for func_str in itertools.chain.from_iterable(config_func_category.values()):
         if keyword.lower() in func_str.lower():
             res_str_by_keyword += f"  \n{func_count + 1}. {func_str}\n"
             res_str_lst.append(func_str)

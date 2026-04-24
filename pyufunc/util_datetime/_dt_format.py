@@ -38,7 +38,6 @@ def fmt_dt_to_str(dt: datetime.datetime | str = "",
         >>> fmt_dt_to_str(datetime.datetime.now(), "%Y/%m/%d %H:%M:%S")
         '2024/02/06 11:11:11'
     """
-    # import_package(("python-dateutil", "dateutil"))
     import dateutil
 
     # if the dt is empty, use the current datetime
@@ -96,7 +95,6 @@ def fmt_str_to_dt(dt_str: str) -> datetime.datetime:
         datetime.datetime(2024, 2, 6, 11, 11, 11)
 
     """
-    # import_package(("python-dateutil", "dateutil"))
     import dateutil
 
     # check if the dt is a string

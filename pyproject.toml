@@ -126,6 +126,57 @@ explicit = true
 # [tool.ruff.lint.pydocstyle]
 # convention = "numpy"
 
+[tool.pylint.main]
+ignore = ["docs", "tests"]
+extension-pkg-allow-list = ["cv2"]
+
+[tool.pylint.format]
+max-line-length = 120
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "invalid-name",
+    "import-outside-toplevel",
+    "line-too-long",
+    "too-many-locals",
+    "too-many-branches",
+    "too-many-statements",
+    "too-many-arguments",
+    "too-many-positional-arguments",
+    "broad-exception-caught",
+    "broad-exception-raised",
+    "fixme",
+    "duplicate-code",
+    "consider-using-f-string",
+    "wrong-import-order",
+    "wrong-import-position",
+    "redefined-outer-name",
+    "unspecified-encoding",
+    "unnecessary-pass",
+    "unnecessary-ellipsis",
+    'protected-access',
+]
+
+[tool.pylint.typecheck]
+generated-members = ["cv2.*"]
+ignored-modules = [
+    "cv2",
+    "Cython.Build",
+    "dateutil",
+    "geopandas",
+    "joblib",
+    "pyarrow",
+    "pyarrow.compute",
+    "pyarrow.dataset",
+    "pyarrow.fs",
+    "pyarrow.parquet",
+    "pyproj",
+    "shapely",
+]
+
 # [tool.hatch.build.targets.wheel]
 # packages = ["pyufunc"]
 

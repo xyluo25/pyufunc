@@ -6,6 +6,8 @@
 ##############################################################
 '''
 
+from __future__ import annotations
+
 import json
 import os
 import sys
@@ -20,7 +22,7 @@ if TYPE_CHECKING:
     import geopandas as gpd
     from geopandas import GeoDataFrame
 
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 
 def download_overture_map(bbox: list[float] = None,
@@ -78,7 +80,6 @@ def download_overture_map(bbox: list[float] = None,
 @requires("pyarrow")
 def get_writer(output_format, path, schema):
 
-    # import_package("pyarrow", verbose=False)
     import pyarrow.parquet as pq
 
     if output_format == "geojson":
@@ -116,6 +117,8 @@ def get_writer(output_format, path, schema):
         metadata[b"geo"] = json.dumps(geo).encode("utf-8")
         schema = schema.with_metadata(metadata)
         writer = pq.ParquetWriter(path, schema)
+    else:
+        raise ValueError("output_format must be 'geojson', 'geojsonseq', or 'geoparquet'.")
     return writer
 
 
@@ -126,7 +129,6 @@ class BaseGeoJSONWriter:
     or output stream. Subclasses should implement write_feature()
     and finalize() if needed
     """
-    # import_package("shapely", verbose=False)
     import shapely.wkb
 
     def __init__(self, where):
@@ -167,6 +169,8 @@ class BaseGeoJSONWriter:
         pass
 
     def row_to_feature(self, row):
+        import shapely.wkb
+
         geometry = shapely.wkb.loads(row.pop("geometry"))
         row.pop("bbox")
 
@@ -216,7 +220,6 @@ def record_batch_reader(overture_type: str, bbox=None) -> Optional[pa.RecordBatc
             Format is (xmin, ymin, xmax, ymax). Defaults to None.
 
     """
-    # import_package("pyarrow", verbose=False)
     import pyarrow as pa
     import pyarrow.compute as pc
     import pyarrow.dataset as ds
@@ -265,7 +268,6 @@ def geodataframe(overture_type: str, bbox: tuple[float, float, float, float] = N
         GeoDataFrame with the optionally filtered theme data
 
     """
-    # import_package("geopandas", verbose=False)
     import geopandas as gpd
 
     reader = record_batch_reader(overture_type, bbox)

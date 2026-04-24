@@ -29,7 +29,7 @@ def printer_file(fname_lst: list, host: str, port: int = 9100) -> None:
     """
 
     try:
-        net_printer = socket.socket(socket.AF_INF, socket.SOCK_STREAM)
+        net_printer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         net_printer.connect((host, port))
         data_binary = []
 

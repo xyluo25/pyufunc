@@ -16,7 +16,6 @@ from multiprocessing import Pool
 from pyufunc.util_magic._func_time_decorator import func_time
 from pyufunc.util_pathio._path import path2linux
 from pyufunc.util_magic._dependency_requires_decorator import requires
-from pyufunc.util_magic._import_package import import_package
 from pyufunc.cfg import config_gmns
 from pyufunc.util_data_processing._dataclass import dataclass_extend, dataclass_from_dict
 
@@ -325,7 +324,6 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
         dict[int, Node]: a dict of nodes.{node_id: Node}
     """
 
-    # import_package("shapely", verbose=False)
     import shapely
 
     # Reset index to avoid index error
@@ -396,8 +394,6 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     Returns:
         dict[int, POI]: a dict of POIs.{poi_id: POI}
     """
-    # import_package("shapely", verbose=False)
-    # import_package("pyproj", verbose=False)
     import shapely
     import pyproj
 
@@ -484,7 +480,6 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
         dict[int, Zone]: a dict of Zones.{zone_id: Zone}
     """
 
-    # import_package("shapely", verbose=False)
     import shapely
 
     df_zone = df_zone.reset_index(drop=True)
@@ -552,7 +547,6 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
         dict[int, Zone]: a dict of Zones.{zone_id: Zone}
     """
 
-    # import_package("shapely", verbose=False)
     import shapely
 
     df_zone = df_zone.reset_index(drop=True)
@@ -693,8 +687,6 @@ def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
         >>> node_dict = read_node(node_file = r"../dataset/ASU/node.csv")
         FileNotFoundError: File: ../dataset/ASU/node.csv does not exist.
     """
-    # import_package("tqdm", verbose=False)
-    # import_package("joblib", verbose=False)
     import joblib
     from tqdm import tqdm
 
@@ -797,8 +789,6 @@ def read_poi(poi_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> 
         FileNotFoundError: File: ../dataset/ASU/poi.csv does not exist.
 
     """
-    # import_package("tqdm", verbose=False)
-    # import_package("joblib", verbose=False)
     import joblib
     from tqdm import tqdm
 
@@ -886,8 +876,6 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = -1, verbose: boo
         dict: the result dictionary of Zones. {zone_id: Zone}
     """
 
-    # import_package("tqdm", verbose=False)
-    # import_package("joblib", verbose=False)
     import joblib
     from tqdm import tqdm
 
@@ -984,8 +972,6 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = -1, verbose: boo
         dict: a dict of Zones.
     """
 
-    # import_package("tqdm", verbose=False)
-    # import_package("joblib", verbose=False)
     import joblib
     from tqdm import tqdm
 
@@ -1088,8 +1074,6 @@ def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
         Link(id=1, name='A', from_node_id=1, to_node_id=2, length=0.0, lanes=1, dir_flag=1, free_speed=0.0,
         capacity=0.0, link_type=1, link_type_name='motorway', geometry='LINESTRING (0 0, 1 1)')
     """
-    # import_package("tqdm", verbose=False)
-    # import_package("joblib", verbose=False)
     import joblib
     from tqdm import tqdm
 

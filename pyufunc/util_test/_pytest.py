@@ -41,8 +41,6 @@ def pytest_show_naming_convention() -> None:
           " functions with names starting with check_ or ending with _check.")
     print()
 
-    return None
-
 
 def pytest_show_assert() -> None:
     """Show pytest assert.
@@ -74,7 +72,6 @@ def pytest_show_assert() -> None:
 
     """
     print(pytest_assert)
-    return None
 
 
 def pytest_show_raise() -> None:
@@ -100,7 +97,6 @@ def pytest_show_raise() -> None:
 
     """
     print(pytest_raise)
-    return None
 
 
 def pytest_show_warning() -> None:
@@ -139,7 +135,6 @@ def pytest_show_warning() -> None:
 
     """
     print(pytest_warning)
-    return None
 
 
 def pytest_show_skip_xfail() -> None:
@@ -173,7 +168,6 @@ def pytest_show_skip_xfail() -> None:
 
     """
     print(pytest_skip_xfail)
-    return None
 
 
 def pytest_show_parametrize() -> None:
@@ -205,7 +199,6 @@ def pytest_show_parametrize() -> None:
 
     """
     print(pytest_parametrize)
-    return None
 
 
 def pytest_show_fixture() -> None:
@@ -235,7 +228,6 @@ def pytest_show_fixture() -> None:
 
     """
     print(pytest_fixture)
-    return None
 
 
 def pytest_show_database() -> None:
@@ -271,4 +263,3 @@ def pytest_show_database() -> None:
 
     """
     print(pytest_database)
-    return None

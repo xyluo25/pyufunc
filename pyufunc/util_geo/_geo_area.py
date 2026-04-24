@@ -9,14 +9,14 @@
 import os
 from typing import TYPE_CHECKING
 
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 if TYPE_CHECKING:
     from pyproj import Transformer
     import shapely
 
 
-@requires("pyproj", "shapely", verbose=False)
+@requires("pyproj", "shapely")
 def calc_area_from_wkt_geometry(wkt_geometry: str, unit: str = "sqm", verbose: bool = False) -> float:
     """
     Calculate the area of a geometry in WKT format.
@@ -36,8 +36,6 @@ def calc_area_from_wkt_geometry(wkt_geometry: str, unit: str = "sqm", verbose: b
         float: The area of the geometry in specified unit.
 
     """
-    import_package("shapely", verbose=False)
-    import_package("pyproj", verbose=False)
     import shapely
     from pyproj import Transformer
 

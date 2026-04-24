@@ -135,6 +135,9 @@ def timeout_linux(timeout: int):
     def _timeout_linux(func, ):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
+            if not hasattr(signal, "SIGALRM") or not hasattr(signal, "alarm"):
+                raise RuntimeError("timeout_linux is only supported on platforms with SIGALRM.")
+
             def _timeout_handler(signum, frame):
                 raise TimeoutError(
                     f"Function: {func} params: {args}, {kwargs} ,execution timed out: {timeout}")

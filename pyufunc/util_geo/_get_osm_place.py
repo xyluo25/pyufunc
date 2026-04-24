@@ -14,9 +14,7 @@ import socket
 import json
 from collections import OrderedDict
 import time
-import importlib
 from pyufunc.util_magic._dependency_requires_decorator import requires
-from pyufunc.util_magic._import_package import import_package
 from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -290,6 +288,8 @@ class OSMPlaceFinder:
         feature_coords = feature["geometry"]["coordinates"]
 
         try:
+            import shapely
+
             place_dict["geometry"] = shapely.geometry.MultiPolygon(
                 [shapely.geometry.Polygon(s[0]) for s in feature_coords])
         except Exception:
@@ -471,6 +471,8 @@ class OSMPlaceFinder:
 
         info = {"User-Agent": user_agent, "referer": referer,
                 "Accept-Language": accept_language}
+        import requests
+
         return dict(requests.utils.default_headers()) | info
 
     def _resolve_host_via_doh(self, hostname: str) -> str:
@@ -504,8 +506,12 @@ class OSMPlaceFinder:
         if self.verbose:
             err_msg = f"Failed to resolve {hostname!r} IP via DoH, requesting host by name"
             print(f"  :{err_msg}")
+
+        import requests
+
         try:
             url = settings["doh_url_template"].format(hostname=hostname)
+
             response = requests.get(url, timeout=settings["requests_timeout"])
             data = response.json()
 
@@ -663,15 +669,12 @@ def get_osm_place(place: str, verbose: bool = False) -> dict:
         'importance': 0.5547365758311374,
         'addresstype': 'amenity',
         'name': 'Arizona State University',
-        'display_name': 'Arizona State University, 1151, South Forest Avenue, Tempe Junction, Tempe, Maricopa County, Arizona, 85281, United States',
+        'display_name': 'Arizona State University, 1151, South Forest Avenue, Tempe Junction,
+            Tempe, Maricopa County, Arizona, 85281, United States',
         'geometry': <MULTIPOLYGON (((-111.941 33.424, -111.941 33.424, -111.941 33.424, -111.941...>}
     """
 
-    # import_package("shapely", verbose=False)
-    # import_package("requests", verbose=False)
     import shapely
     import requests
-    # globals()["requests"] = importlib.import_module("requests")
-    # globals()["shapely"] = importlib.import_module("shapely")
 
     return OSMPlaceFinder(place, verbose).get_osm_place(place, None, False)

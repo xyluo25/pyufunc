@@ -20,4 +20,3 @@ from pyufunc.util_magic import requires
 
 if TYPE_CHECKING:
     import pyhelpers
-
