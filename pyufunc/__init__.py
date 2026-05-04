@@ -31,7 +31,7 @@ from .util_vis import *  # visualization functions
 # import adopted functions from other packages
 from .util_pkgs import *
 
-__version__ = "0.4.3"
+__version__ = "0.4.4"
 __author__ = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
 __email__ = "luoxiangyong01@gmail.com"
 
