@@ -40,13 +40,13 @@ def generate_password(pwd_len: int = 15,
 
     Examples:
         >>> generate_password()
-        >>> '5#4X6v8&9^0%1$2'
+        '5#4X6v8&9^0%1$2'
 
         >>> generate_password(pwd_len=20, lowercase=False, uppercase=False, digit=True, special_char=False)
-        >>> '83920174651235323436'
+        '83920174651235323436'
 
         >>> generate_password(pwd_len=20, config={"num_lowercase": 5, "num_uppercase": 5, "num_digit": 5, "num_special_char": 5})
-        >>> "5y9D`Bp|5h0FXX3}%'px"
+        '5y9D`Bp|5h0FXX3}%'px'
     """
 
     # check total config length
@@ -56,15 +56,15 @@ def generate_password(pwd_len: int = 15,
         raise ValueError("The total length of password in config is longer than the password length.")
 
     # create random number of characters for each type with length on config
-    lowercase = [secrets.choice(string.ascii_lowercase) for _ in range(config["num_lowercase"])]
-    uppercase = [secrets.choice(string.ascii_uppercase) for _ in range(config["num_uppercase"])]
-    digit = [secrets.choice(string.digits) for _ in range(config["num_digit"])]
-    special_char = [secrets.choice(string.punctuation) for _ in range(config["num_special_char"])]
+    lowercase_chars = [secrets.choice(string.ascii_lowercase) for _ in range(config["num_lowercase"])]
+    uppercase_chars = [secrets.choice(string.ascii_uppercase) for _ in range(config["num_uppercase"])]
+    digit_chars = [secrets.choice(string.digits) for _ in range(config["num_digit"])]
+    special_chars = [secrets.choice(string.punctuation) for _ in range(config["num_special_char"])]
 
     all_chars = string.ascii_letters + string.digits + string.punctuation
     remaining_length = pwd_len - config_length
-    password_list = lowercase + uppercase + digit + special_char + \
-        [''.join(secrets.choice(all_chars) for _ in range(remaining_length))]
+    password_list = lowercase_chars + uppercase_chars + digit_chars + special_chars + \
+        [secrets.choice(all_chars) for _ in range(remaining_length)]
 
     # password_list = list(password)
     secrets.SystemRandom().shuffle(password_list)

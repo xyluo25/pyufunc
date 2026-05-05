@@ -50,7 +50,7 @@ class TestGetFileSize:
 
 
 class TestGetDirSize:
-    def test_valid_directory_size(self, tmp_path: str):
+    def test_valid_directory_size(self, tmp_path: Path):
         # Create a temporary directory with some files
         dir_path = tmp_path / "test_directory"
         dir_path.mkdir()

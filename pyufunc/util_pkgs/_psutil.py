@@ -44,7 +44,7 @@ def cpu_times(percpu: bool = False) -> "psutil.cpu_times":
 
 
 @requires('psutil')
-def cpu_count(logical: bool = True) -> int:
+def cpu_count(logical: bool = True) -> int | None:
     """Return the number of logical or physical CPUs in the system.
 
     Args:
@@ -114,18 +114,16 @@ def virtual_memory(unit: str = "bytes") -> "psutil.virtual_memory":
     import psutil
     vir_mem = psutil.virtual_memory()._asdict()
 
-    if unit in ("KB", "kB", "kb", "Kb"):
-        for key in vir_mem:
+    for key in vir_mem:
+        if unit in {"KB", "kB", "kb", "Kb"}:
             if key == "percent":
                 continue
             vir_mem[key] /= 1024
-    elif unit in ("MB", "mB", "mb", "Mb"):
-        for key in vir_mem:
+        elif unit in {"MB", "mB", "mb", "Mb"}:
             if key == "percent":
                 continue
             vir_mem[key] /= (1024 ** 2)
-    elif unit in ("GB", "gB", "gb", "Gb"):
-        for key in vir_mem:
+        elif unit in {"GB", "gB", "gb", "Gb"}:
             if key == "percent":
                 continue
             vir_mem[key] /= (1024 ** 3)
@@ -157,21 +155,21 @@ def swap_memory(unit: str = "bytes") -> "psutil.swap_memory":
     import psutil
     swap_mem = psutil.swap_memory()._asdict()
 
-    if unit in ("KB", "kB", "kb", "Kb"):
-        for key in swap_mem:
+    for key in swap_mem:
+        if unit in {"KB", "kB", "kb", "Kb"}:
             if key == "percent":
                 continue
             swap_mem[key] /= 1024
-    elif unit in ("MB", "mB", "mb", "Mb"):
-        for key in swap_mem:
-            if key == "percent":
-                continue
-            swap_mem[key] /= (1024 ** 2)
-    elif unit in ("GB", "gB", "gb", "Gb"):
-        for key in swap_mem:
-            if key == "percent":
-                continue
-            swap_mem[key] /= (1024 ** 3)
+        elif unit in {"MB", "mB", "mb", "Mb"}:
+            for key in swap_mem:
+                if key == "percent":
+                    continue
+                swap_mem[key] /= (1024 ** 2)
+        elif unit in {"GB", "gB", "gb", "Gb"}:
+            for key in swap_mem:
+                if key == "percent":
+                    continue
+                swap_mem[key] /= (1024 ** 3)
 
     return psutil._ntuples.sswap(**swap_mem)
 
@@ -201,18 +199,16 @@ def disk_usage(path: str = "/", *, unit: str = "bytes") -> "psutil.disk_usage":
     import psutil
     disk_usage = psutil.disk_usage(path)._asdict()
 
-    if unit in ("KB", "kB", "kb", "Kb"):
-        for key in disk_usage:
+    for key in disk_usage:
+        if unit in {"KB", "kB", "kb", "Kb"}:
             if key == "percent":
                 continue
             disk_usage[key] /= 1024
-    elif unit in ("MB", "mB", "mb", "Mb"):
-        for key in disk_usage:
+        elif unit in {"MB", "mB", "mb", "Mb"}:
             if key == "percent":
                 continue
             disk_usage[key] /= (1024 ** 2)
-    elif unit in ("GB", "gB", "gb", "Gb"):
-        for key in disk_usage:
+        elif unit in {"GB", "gB", "gb", "Gb"}:
             if key == "percent":
                 continue
             disk_usage[key] /= (1024 ** 3)
@@ -280,9 +276,9 @@ def sensor_battery(time_unit: str = "seconds") -> "psutil.sensors_battery":
 
     for key in battery:
         if key in ("secsleft"):
-            if time_unit in ("minutes", "minute", "min", "m"):
+            if time_unit in {"minutes", "minute", "min", "m"}:
                 battery[key] /= 60
-            elif time_unit in ("hours", "hour", "h"):
+            elif time_unit in {"hours", "hour", "h"}:
                 battery[key] /= 3600
 
     return psutil._ntuples.sbattery(**battery)

@@ -5,7 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 from __future__ import annotations
-from typing import TYPE_CHECKING, Union, Any
+from typing import TYPE_CHECKING, Any
 
 # pylint: disable=no-member
 
@@ -14,8 +14,7 @@ if TYPE_CHECKING:
     # import modules from 3rd party libraries
     type_checking = True
 
-    import cv2
-    from PIL import Image
+    from PIL import Image  # pyright: ignore[reportMissingImports]
     import numpy as np
 
 from pyufunc.util_magic import requires
@@ -42,7 +41,7 @@ def is_PIL_img(img: Any) -> bool:
         >>> print(is_pil_image(img_pil))
         True
     """
-    from PIL import Image
+    from PIL import Image  # pyright: ignore[reportMissingImports]
 
     return isinstance(img, Image.Image)
 
@@ -88,12 +87,11 @@ def img_PIL_to_CV(img: Image.Image) -> np.ndarray:
         >>> from PIL import Image
         >>> from pyufunc import img_PIL_to_CV
         >>> img_pil = Image.open('test.jpg')
-        >>> img_cv = cvt_img_PIL_to_CV(img_pil)
+        >>> img_cv = img_PIL_to_CV(img_pil)
 
     """
 
-    import cv2
-    from PIL import Image
+    import cv2  # pyright: ignore[reportMissingImports]
     import numpy as np
 
     return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
@@ -114,16 +112,16 @@ def img_CV_to_PIL(img: np.ndarray) -> Image.Image:
         >>> from PIL import Image
         >>> from pyufunc import img_CV_to_PIL
         >>> img_cv = cv2.imread('test.jpg')
-        >>> img_pil = cvt_img_CV_to_PIL(img_cv)
+        >>> img_pil = img_CV_to_PIL(img_cv)
     """
-    import cv2
-    from PIL import Image
+    import cv2  # pyright: ignore[reportMissingImports]
+    from PIL import Image  # pyright: ignore[reportMissingImports]
 
     return Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
-def img_translate(img: Union[np.ndarray, str, Image.Image],
+def img_translate(img: np.ndarray | str | Image.Image,
                   dx: float,
                   dy: float,
                   verbose: bool = True) -> np.ndarray:
@@ -147,8 +145,8 @@ def img_translate(img: Union[np.ndarray, str, Image.Image],
         >>> cv2.waitKey(0)
         >>> cv2.destroyAllWindows()
     """
-    import cv2
-    from PIL import Image
+    import cv2  # pyright: ignore[reportMissingImports]
+    from PIL import Image  # pyright: ignore[reportMissingImports]
     import numpy as np
 
     # TDD, Test-Driven Development
@@ -183,7 +181,7 @@ def img_translate(img: Union[np.ndarray, str, Image.Image],
 
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
-def img_rotate(img: Union[np.ndarray, str, Image.Image],
+def img_rotate(img: np.ndarray | str | Image.Image,
                angle: float,
                center: tuple[float, float] = None,
                scale: float = 1.0,
@@ -212,8 +210,8 @@ def img_rotate(img: Union[np.ndarray, str, Image.Image],
     """
 
     # import necessary models
-    import cv2
-    from PIL import Image
+    import cv2  # pyright: ignore[reportMissingImports]
+    from PIL import Image  # pyright: ignore[reportMissingImports]
     import numpy as np
 
     # TDD, Test-Driven Development
@@ -265,7 +263,7 @@ def img_rotate(img: Union[np.ndarray, str, Image.Image],
 
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
-def img_rotate_bound(img: Union[np.ndarray, str, Image.Image],
+def img_rotate_bound(img: np.ndarray | str | Image.Image,
                      angle: float,
                      verbose: bool = True) -> np.ndarray:
     """Rotate image with a given angle, and keep the whole image in the frame
@@ -289,8 +287,8 @@ def img_rotate_bound(img: Union[np.ndarray, str, Image.Image],
     """
 
     # import necessary modules
-    import cv2
-    from PIL import Image
+    import cv2  # pyright: ignore[reportMissingImports]
+    from PIL import Image  # pyright: ignore[reportMissingImports]
     import numpy as np
 
     # TDD, Test-Driven Development
@@ -341,7 +339,7 @@ def img_rotate_bound(img: Union[np.ndarray, str, Image.Image],
 
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
-def img_resize(img: Union[np.ndarray, str, Image.Image],
+def img_resize(img: np.ndarray | str | Image.Image,
                width: int = None,
                height: int = None,
                inter: int = None,
@@ -369,8 +367,8 @@ def img_resize(img: Union[np.ndarray, str, Image.Image],
     """
 
     # import necessary modules
-    import cv2
-    from PIL import Image
+    import cv2  # pyright: ignore[reportMissingImports]
+    from PIL import Image  # pyright: ignore[reportMissingImports]
     import numpy as np
 
     # TDD, Test-Driven Development
@@ -421,7 +419,7 @@ def img_resize(img: Union[np.ndarray, str, Image.Image],
 
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
-def img_show(img: Union[str, np.ndarray, Image.Image],
+def img_show(img: np.ndarray | str | Image.Image,
              is_PIL_show: bool = False,
              verbose: bool = True) -> None:
     """Show image in a window from image path or image array or PIL image object
@@ -441,8 +439,8 @@ def img_show(img: Union[str, np.ndarray, Image.Image],
     """
 
     # import necessary modules
-    import cv2
-    from PIL import Image
+    import cv2  # pyright: ignore[reportMissingImports]
+    from PIL import Image  # pyright: ignore[reportMissingImports]
     import numpy as np
 
     # TDD, Test-Driven Development

@@ -29,7 +29,9 @@ class __KThread(threading.Thread):
     def __run(self):
         """Hacked run function, which installs the trace."""
         sys.settrace(self.globaltrace)
-        self.__run_backup()
+        run_backup = self.__run_backup
+        if run_backup is not None:
+            run_backup()
         self.run = self.__run_backup
 
     def globaltrace(self, frame, why, arg):

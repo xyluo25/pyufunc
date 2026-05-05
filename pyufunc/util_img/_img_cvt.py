@@ -12,8 +12,7 @@ import io
 if TYPE_CHECKING:
     # check the support version of python
     # https://pillow.readthedocs.io/en/stable/installation.html
-    from PIL import Image
-    import cv2
+    from PIL import Image  # pyright: ignore[reportMissingImports]
     import numpy as np
 
 
@@ -88,7 +87,7 @@ def img_bytes_to_PIL(img_b: bytes) -> Image:
         >>> img.show()
     """
 
-    from PIL import Image
+    from PIL import Image  # pyright: ignore[reportMissingImports]
 
     try:
         return Image.open(io.BytesIO(img_b))

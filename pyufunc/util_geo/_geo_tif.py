@@ -5,12 +5,8 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 '''
-from typing import TYPE_CHECKING
 
 from pyufunc.util_magic import requires
-
-if TYPE_CHECKING:
-    import requests
 
 # import requests
 from datetime import datetime
@@ -47,7 +43,7 @@ def download_elevation_tif_by(bbox: tuple | list, output_file: str) -> None:
     Returns:
         None
     """
-    import requests
+    import requests  # pyright: ignore[reportMissingModuleSource]
 
     # TDD: check input parameters
     if not isinstance(bbox, (tuple, list)):

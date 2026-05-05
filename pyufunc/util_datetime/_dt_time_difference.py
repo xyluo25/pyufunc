@@ -7,13 +7,11 @@
 
 
 from datetime import datetime
-from typing import Union
-
 from pyufunc.util_data_processing._str import str_strip
 
 
-def get_time_diff_in_unit(start_time: Union[datetime, str],
-                          end_time: Union[datetime, str],
+def get_time_diff_in_unit(start_time: datetime | str,
+                          end_time: datetime | str,
                           unit: str = "seconds") -> float:
     """Calculate the time difference between two datetime objects/strings
 
@@ -150,10 +148,10 @@ def time_unit_converter(value: float, from_unit: str, to_unit: str, verbose: boo
 
     if verbose:
         print(f"  :{value} {from_unit_norm} is approximately {result} {to_unit_norm}")
-    return result
+    return int(result)
 
 
-def time_str_to_seconds(time_str: str, to_unit: str = "seconds", verbose: bool = False) -> int:
+def time_str_to_seconds(time_str: str, to_unit: str = "seconds", verbose: bool = False) -> float:
     """Convert a time string to seconds
 
     Args:
@@ -176,7 +174,7 @@ def time_str_to_seconds(time_str: str, to_unit: str = "seconds", verbose: bool =
         930.0
 
     Returns:
-        int: The time in the target unit.
+        float: The time in the target unit.
     """
 
     time_str = str_strip(time_str).lower()

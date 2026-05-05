@@ -11,7 +11,6 @@ import subprocess
 import sys
 import inspect
 import os
-from typing import Union
 import re
 import pathlib
 from collections import defaultdict
@@ -45,7 +44,7 @@ def get_active_python_env() -> dict:
     return env_info
 
 
-def import_package(pkg_name: Union[str, tuple, list], options: list = None, verbose: bool = True) -> object:
+def import_package(pkg_name: str | tuple | list, options: list = None, verbose: bool = True) -> object:
     """import a python package, if not exist, install the package and import it again.
     This function can be used in any package to avoid too much pre-installation of dependencies.
     In other words, this function will install the package only if it is needed.
@@ -262,7 +261,7 @@ def is_module_importable(module_name: str) -> bool:
     try:
         importlib.invalidate_caches()
         return importlib.util.find_spec(module_name) is not None
-    except (ImportError, ModuleNotFoundError, ValueError):
+    except (ImportError, ValueError):
         return False
 
 

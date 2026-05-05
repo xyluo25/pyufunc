@@ -6,7 +6,7 @@
 ##############################################################
 from __future__ import annotations
 import datetime
-from pyufunc.cfg import config_datetime_fmt
+from pyufunc.__cfg import config_datetime_fmt
 from pyufunc.util_magic import requires
 
 
@@ -20,7 +20,7 @@ def fmt_dt_to_str(dt: datetime.datetime | str = "",
         dt_fmt (str): the format of the datetime. Defaults ("%Y-%m-%d %H:%M:%S").
 
     See Also:
-        pyufunc.pkg_configs.config_datetime_fmt : pre-defined datetime string formats
+        pyufunc.__cfg.config_datetime_fmt : pre-defined datetime string formats
 
     Returns:
         str : the formatted datetime string
@@ -51,13 +51,13 @@ def fmt_dt_to_str(dt: datetime.datetime | str = "",
         except Exception as e:
             print(e)
             print(f"Cannot convert {dt} to datetime object. return the original value.")
-            return dt
+            return str(dt)
 
     # check if the input format is valid
     if not isinstance(dt, (datetime.datetime, str)):
         # convert input datetime string to datetime object
         print(f"The {dt} is not a str or datetime object. return the original value.")
-        return dt
+        return str(dt)
 
     # check if the input format is valid
     if not isinstance(dt_fmt, str):
@@ -73,7 +73,7 @@ def fmt_dt_to_str(dt: datetime.datetime | str = "",
     except Exception as e:
         print(e)
         print(f"Cannot convert {dt} to format: {dt_fmt}. return the original datetime.")
-        return dt
+        return str(dt)
 
 
 @requires(("python-dateutil", "dateutil"))
@@ -84,7 +84,7 @@ def fmt_str_to_dt(dt_str: str) -> datetime.datetime:
         dt_str (str): the datetime string to be formatted.
 
     See Also:
-        pyufunc.pkg_configs.config_datetime_fmt : pre-defined datetime string formats
+        pyufunc.__cfg.config_datetime_fmt : pre-defined datetime string formats
 
     Returns:
         datetime.datetime : the formatted datetime

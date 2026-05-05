@@ -6,7 +6,6 @@
 ##############################################################
 
 import itertools
-from typing import Union
 
 
 def dict_split_by_chunk(dictionary: dict, chunk_size: int) -> list:
@@ -40,12 +39,12 @@ def dict_split_by_chunk(dictionary: dict, chunk_size: int) -> list:
     return chunk_lst
 
 
-def dict_delete_keys(dictionary: dict, keys: Union[list, str, tuple]) -> dict:
+def dict_delete_keys(dictionary: dict, keys: list | str | tuple) -> dict:
     """Delete keys from dictionary
 
     Args:
         dictionary (dict): the input dictionary with key-value pairs
-        keys (list): the keys to be deleted
+        keys (list | str | tuple): the keys to be deleted
 
     Returns:
         dict: the dictionary after deleting keys

@@ -7,7 +7,6 @@
 
 import os
 import re
-from typing import Union
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -19,7 +18,7 @@ from email import encoders
 # For guessing MIME type based on file name extension
 import mimetypes
 
-from pyufunc.cfg import config_email
+from pyufunc.__cfg import config_email
 from pyufunc.util_pathio._path import path2linux
 
 
@@ -45,27 +44,27 @@ def is_valid_email(email: str) -> bool:
 
 
 def send_email(send_from: str,
-               send_to: Union[str, list],
+               send_to: str | list,
                subject: str,
                message: str,
                smtp_user: str,
                smtp_password: str,
-               file_path: Union[str, list] = [],
-               cc: Union[str, list] = [],
-               bcc: Union[str, list] = [],
+               file_path: str | list = [],
+               cc: str | list = [],
+               bcc: str | list = [],
                **kwargs) -> bool:
     """send email with attachments
 
     Args:
         send_from (str): email address of the sender
-        send_to (Union[str, list]): email address of the receiver, can be a list of email addresses
+        send_to (str | list): email address of the receiver, can be a list of email addresses
         subject (str): email subject
         message (str): the email body
         smtp_user (str): user name of the smtp server, normally the same as the email address
         smtp_password (str): password of the smtp server, if you use gmail, you need to generate an app password
-        file_path (Union[str, list], optional): _description_. Defaults to [].
-        cc (Union[str, list], optional): cc'd email. Defaults to [].
-        bcc (Union[str, list], optional): bcc'd email. Defaults to [].
+        file_path (str | list, optional): _description_. Defaults to [].
+        cc (str | list, optional): cc'd email. Defaults to [].
+        bcc (str | list, optional): bcc'd email. Defaults to [].
 
     Raises:
         ValueError: Invalid email address:

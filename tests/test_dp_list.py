@@ -9,9 +9,9 @@ from __future__ import absolute_import
 import pytest
 
 from _path_setup import add_pkg_to_sys_path
-add_pkg_to_sys_path("pyufunc")
-
 from pyufunc import list_split_by_equal_sublist, list_split_by_fixed_length
+
+add_pkg_to_sys_path("pyufunc")
 
 
 class TestSplitListByEqualSublist:

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyufunc"
-version = "0.4.4"
+version = "0.4.5"
 description = "pyufunc consolidates frequently used utility functions into one cohesive package"
 authors = [
     {name = "Xiangyong Luo", email = "luoxiangyong01@gmail.com"},
@@ -58,7 +58,9 @@ dependencies = {file = ["requirements.txt"]}
 [tool.setuptools]
 include-package-data = true
 py-modules = []
-package-data = {'pyufunc' = ['**/*.txt', '*.xls', '*.xlsx', '*.csv', '*.json', '**/*.json'], "test_data" = ['*.xls', '*.json']}
+
+[tool.setuptools.package-data]
+pyufunc = ['**/*.txt', '*.xls', '*.xlsx', '*.csv', '*.json', '**/*.json']
 
 [[tool.uv.index]]
 name = "testpypi"
@@ -66,14 +68,9 @@ url = "https://test.pypi.org/simple/"
 publish-url = "https://test.pypi.org/legacy/"
 explicit = true
 
-# [tool.setuptools.packages.find]
-# where = ["pyufunc"]
-
-# [tool.setuptools.package-data]
-# pyufunc = ['*.txt', '*.xls', '*.xlsx', '*.csv']
-
-# [project.urls]
-# GitHub = "https://github.com/ORNL/flowcept"
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pyufunc*"]
 
 # [project.optional-dependencies]
 # analytics = ["seaborn", "plotly", "scipy"]
@@ -113,18 +110,15 @@ explicit = true
 #    "flowcept[dev]",
 # ]
 
-# [tool.hatch.version]
-# path = "version.py"
+[tool.ruff]
+line-length = 120
 
-# [tool.ruff]
-# line-length = 120
-
-# [tool.ruff.lint]
-# extend-select = ["E501", "D"]
-# ignore = ["D200", "D212", "D105", "D401", "D205", "D100"]
+[tool.ruff.lint]
+extend-select = ["E501", "D"]
+ignore = ["D200", "D212", "D105", "D401", "D205", "D100"]
 
 # [tool.ruff.lint.pydocstyle]
-# convention = "numpy"
+# convention = "google"
 
 [tool.pylint.main]
 ignore = ["docs", "tests"]
@@ -206,8 +200,10 @@ omit = [
 [tool.coverage.report]
 show_missing = true
 
-# [tool.hatch.build.targets.wheel]
-# packages = ["pyufunc"]
+[dependency-groups]
+dev = [
+    "ipykernel>=7.2.0",
+]
 
-# [tool.hatch.build.targets.wheel.force-include]
-#  "resources/sample_settings.yaml" = "resources/sample_settings.yaml"
+[tool.hatch.build.targets.wheel]
+packages = ["pyufunc"]

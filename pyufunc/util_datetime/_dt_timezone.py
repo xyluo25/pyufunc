@@ -35,9 +35,9 @@ def list_all_timezones(region_name: str = "*") -> set:
     """
     if region_name != "*":
         zoneinfo_set = zoneinfo.available_timezones()
-        zoneinfo_region_set = [
+        zoneinfo_region_set = {
             i for i in zoneinfo_set if region_name.lower() in i.lower()
-        ]
+        }
         print(f"Listing timezones in the region: {region_name}")
         return zoneinfo_region_set
     print("Listing all timezones...")

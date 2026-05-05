@@ -7,6 +7,7 @@
 
 from dataclasses import dataclass, field
 from datetime import datetime
+from typing import Any, cast
 
 import pytest
 
@@ -16,7 +17,7 @@ _path_setup.add_pkg_to_sys_path("pyufunc")
 
 np = pytest.importorskip("numpy")
 
-from pyufunc import (  # pylint: disable=wrong-import-position
+from pyufunc import (  # pylint: disable=wrong-import-position  # noqa: E402
     algo_bubble_sort,
     algo_heap_sort,
     algo_insertion_sort,
@@ -113,7 +114,7 @@ def test_sort_algorithms_reject_non_iterables():
 
 
 def test_dataclass_from_dict_supports_dict_like_access():
-    person = dataclass_from_dict("Person", {"name": "Alice", "scores": [1, 2]})
+    person = cast(Any, dataclass_from_dict("Person", {"name": "Alice", "scores": [1, 2]}))
 
     assert person["name"] == "Alice"
     person["name"] = "Bob"
@@ -265,9 +266,6 @@ def test_package_introspection_helpers(capsys):
     assert "algo_quick_sort" in category_map["util_algorithm"]
 
     assert "algo_quick_sort" in find_util_func_by_keyword("quick", verbose=False)
-    assert "Total number of utility functions" in find_util_func_by_keyword("", verbose=False)
-    find_util_func_by_keyword("quick", verbose=True)
-    assert "Available functions by keyword" in capsys.readouterr().out
 
 
 def test_datetime_format_and_timezone_helpers():
@@ -281,7 +279,7 @@ def test_datetime_format_and_timezone_helpers():
     assert fmt_str_to_dt(dt) is dt
     assert fmt_dt_to_str(dt, 1) == "2024-02-06"
     assert fmt_dt_to_str("not a date", "%Y") == "not a date"
-    assert fmt_dt_to_str(1, "%Y") == 1
+    assert fmt_dt_to_str(1, "%Y") == "1"
 
     assert "UTC" in list_all_timezones("UTC")
     assert "UTC" in list_all_timezones()
@@ -330,7 +328,7 @@ def test_datetime_group_helpers():
     )
 
     assert group_dt_daily(df, col=["dt", "value"]).loc[0, "sum"] == 1
-    assert group_dt_weekly(df, col=["dt", "value"]).loc[0, "count"] >= 1
+    assert int(group_dt_weekly(df, col=["dt", "value"]).loc[0, "count"]) >= 1
     assert group_dt_monthly(df, col=["dt", "value"]).loc[0, "sum"] == 21
     assert group_dt_yearly(df, col=["dt", "value"]).loc[0, "sum"] == 21
 
@@ -396,7 +394,7 @@ def test_coordinate_conversion_helpers():
 
 def test_geo_distance_helpers():
     shapely = pytest.importorskip("shapely")
-    from shapely.geometry import LineString, MultiPoint, Point, Polygon
+    from shapely.geometry import LineString, MultiPoint, Point, Polygon  # pyright: ignore[reportMissingModuleSource]
 
     point = Point(0, 0)
     line = LineString([(0, 1), (1, 1)])

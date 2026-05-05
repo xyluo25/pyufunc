@@ -1,5 +1,5 @@
 """
-# -*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-.
 ##############################################################
 # Created Date: Tuesday, July 4th 2023
 # Contact Info: luoxiangyong01@gmail.com
@@ -31,13 +31,14 @@ from .util_vis import *  # visualization functions
 # import adopted functions from other packages
 from .util_pkgs import *
 
-__version__ = "0.4.4"
+__version__ = "0.4.5"
 __author__ = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
 __email__ = "luoxiangyong01@gmail.com"
 
 
 def show_util_func_by_category(verbose: bool = True) -> dict:
-    """show all available utility functions in pyufunc by category or by prefix keywords.
+    """
+    Show all available utility functions in pyufunc by category or by prefix keywords.
 
     Args:
         verbose (bool, optional): whether to print out information. Defaults to True.
@@ -58,6 +59,7 @@ def show_util_func_by_category(verbose: bool = True) -> dict:
            ** get_timezone
            ** cvt_dt_to_tz
            ** get_time_diff_in_unit
+
     """
     # import package configurations and utilities
     from . import (
@@ -104,7 +106,6 @@ def show_util_func_by_category(verbose: bool = True) -> dict:
                       "find_util_func_by_keyword"],
     }
 
-    res_str_head = "Available utility functions in pyUFunc"
     res_str_by_category = ""
     func_count = 0
     for util_category, func_names in config_func_category.items():
@@ -114,19 +115,19 @@ def show_util_func_by_category(verbose: bool = True) -> dict:
                 res_str_by_category += f"  - {func}\n"
                 func_count += 1
 
-    res_str = f"{res_str_head} ({func_count}):\n{res_str_by_category}"
-
     if verbose:
+        res_str_head = "Available utility functions in pyUFunc"
+        res_str = f"{res_str_head} ({func_count}):\n{res_str_by_category}"
         print(res_str)
-        return
     return config_func_category
 
 
-def find_util_func_by_keyword(keyword: str = None, verbose: bool = True) -> list:
-    """find all available utility functions in pyufunc by keyword.
+def find_util_func_by_keyword(keyword: str | None = None, verbose: bool = True) -> list[str]:
+    """
+    Find all available utility functions in pyufunc by keyword.
 
     Args:
-        keyword (str): the keyword in the utility function.
+        keyword (str | None): the keyword in the utility function.
             if keyword is empty, it will return total number of utility functions in pyufunc.
 
             - Recommended keyword include:
@@ -166,6 +167,7 @@ def find_util_func_by_keyword(keyword: str = None, verbose: bool = True) -> list
            - show_numpy_docstring_style
            - show_available_utility_func
            ...
+
     """
     # get all functions by category
     config_func_category = show_util_func_by_category(verbose=False)
@@ -176,7 +178,8 @@ def find_util_func_by_keyword(keyword: str = None, verbose: bool = True) -> list
         res_str = f"Total number of utility functions in pyufunc: {total_func_count}"
         if verbose:
             print(res_str)
-        return res_str
+        # return as a single-item list to match the declared return type
+        return []
 
     # find all functions that contain the keyword in their name (case-insensitive)
     res_str_by_keyword = ""
@@ -211,5 +214,3 @@ def __check_python_version(min_version: str = "3.10") -> tuple:
     return version_tuple
 
 __check_python_version()
-
-# __all__ = [func for fn_lst in list(config_FUNC_CATEGORY.values()) for func in fn_lst]

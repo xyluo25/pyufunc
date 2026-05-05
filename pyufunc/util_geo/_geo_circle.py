@@ -6,12 +6,13 @@
 ##############################################################
 from __future__ import annotations
 import math
-from typing import Iterable, Union, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
+from collections.abc import Iterable
 from pyufunc.util_magic import requires
 
 #  https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
-    from shapely.geometry import Point
+    Point = Any
 
 
 # convert degrees to radians
@@ -61,7 +62,7 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
         list: the new longitude and latitude in degree format [longitude, latitude]
     """
 
-    from shapely.geometry import Point
+    from shapely.geometry import Point  # pyright: ignore[reportMissingModuleSource]
 
     # TDD, test driven development: input validation
     assert isinstance(point, Point), "the point should be a shapely.geometry.Point"
@@ -80,7 +81,7 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
 
 
 @requires("shapely")
-def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
+def create_circle_at_point_with_radius(point: Point | Iterable[float],
                                        radius: float,
                                        options: dict = None,
                                        verbose: bool = False) -> dict:
@@ -143,7 +144,7 @@ def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
     if options is None:
         options = {"edges": 32, "bearing": 0, "direction": 1}
 
-    from shapely.geometry import Point
+    from shapely.geometry import Point  # pyright: ignore[reportMissingModuleSource]
 
     # TDD, test driven development: input validation
     assert isinstance(point, (Point, Iterable)), ("the point should be a shapely.geometry.Point "

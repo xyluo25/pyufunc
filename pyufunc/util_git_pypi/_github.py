@@ -29,7 +29,7 @@ with open(path_user_agent_strings, mode='r', encoding='utf-8') as f:
 _USER_AGENT_STRINGS = json.loads(_web_agent_str)
 
 if TYPE_CHECKING:
-    from requests import Session
+    from requests import Session  # pyright: ignore[reportMissingModuleSource]
 
 
 class _FakeUserAgentParser(html.parser.HTMLParser):
@@ -52,13 +52,12 @@ class _FakeUserAgentParser(html.parser.HTMLParser):
             self.recording += 1
             return
 
-        if tag == 'a':
-            for name, link in attrs:
-                if name == 'href' and link.startswith(f'/{self.browser_name}') and link.endswith('.php'):
-                    break
-                else:
-                    return
-            self.recording = 1
+        for name, link in attrs:
+            if name == 'href' and link.startswith(f'/{self.browser_name}') and link.endswith('.php'):
+                break
+            else:
+                return
+        self.recording = 1
 
     def handle_endtag(self, tag):
         if tag == 'a' and self.recording:
@@ -91,8 +90,6 @@ class GitHubFileDownloader:
             ValueError: if the input URL is not valid
 
         """
-        import requests
-        import urllib3
 
         self.dir_out = None
         self.repo_url = repo_url
@@ -140,11 +137,11 @@ class GitHubFileDownloader:
 
         # Extract the branch name from the given url (e.g. master)
         branch = re_branch.search(url)
+        if branch is None:
+            raise ValueError("Invalid GitHub URL: missing branch segment (e.g. /tree/<branch>/ or /blob/<branch>/)")
         download_paths = url[branch.end():]
 
-        api_url = (
-            f'{url[: branch.start()].replace("github.com", "api.github.com/repos", 1)}/'
-            f'contents/{download_paths}?ref={branch[2]}')
+        api_url = f'{url[:branch.start()].replace("github.com", "api.github.com/repos", 1)}/contents/{download_paths}?ref={branch[2]}'
 
         return (api_url, download_paths)
 
@@ -169,8 +166,8 @@ class GitHubFileDownloader:
             requests.Session:
         """
 
-        import requests
-        import urllib3
+        import requests  # pyright: ignore[reportMissingModuleSource]
+        import urllib3  # pyright: ignore[reportMissingImports]
 
         if retry_status == 'default':
             codes_for_retries = [429, 500, 502, 503, 504]
@@ -200,7 +197,7 @@ class GitHubFileDownloader:
         Returns:
             dict: a dictionary of user-agent strings for popular browsers
         """
-        import requests
+        import requests  # pyright: ignore[reportMissingModuleSource]
 
         if browser_names is None:
             browser_names_ = ['Chrome', 'Firefox', 'Safari', 'Edge', 'Internet Explorer', 'Opera']
@@ -212,7 +209,7 @@ class GitHubFileDownloader:
         user_agent_strings = {}
         for browser_name in browser_names_:
             # url = resource_url.replace('useragentstring.php', browser_name.replace(" ", "+") + '/')
-            url = resource_url + f'?name={browser_name.replace(" ", "+")}'
+            url = f'{resource_url}?name={browser_name.replace(" ", "+")}'
             response = requests.get(url=url)
             fua_parser = _FakeUserAgentParser(browser_name=browser_name)
             fua_parser.feed(response.text)
@@ -229,7 +226,7 @@ class GitHubFileDownloader:
                                 shuffled: bool = False,
                                 flattened: bool = False,
                                 update: bool = False,
-                                verbose: bool = False) -> list:
+                                verbose: bool = False) -> dict | list:
         """
         Load user-agent strings of popular browsers.
 
@@ -323,9 +320,7 @@ class GitHubFileDownloader:
             kwargs['flattened'] = True
             user_agent_strings = self.load_user_agent_strings(**kwargs)
 
-        user_agent_string = secrets.choice(user_agent_strings)
-
-        return user_agent_string
+        return secrets.choice(user_agent_strings)
 
     def fake_requests_headers(self, randomized: bool = True, **kwargs) -> dict:
         """
@@ -352,9 +347,7 @@ class GitHubFileDownloader:
 
         user_agent_string = self.get_user_agent_string(**kwargs)
 
-        fake_headers = {'user-agent': user_agent_string}
-
-        return fake_headers
+        return {'user-agent': user_agent_string}
 
     @requires('tqdm')
     def _download_file_from_url(self, response, path_to_file):
@@ -364,7 +357,7 @@ class GitHubFileDownloader:
         """
 
         # import tqdm if it is available, otherwise, install and import it
-        import tqdm
+        import tqdm  # pyright: ignore[reportMissingModuleSource]
 
         file_size = int(response.headers.get('content-length'))  # Total size in bytes
 
@@ -606,7 +599,7 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
         'original_stars': None}]
 
     """
-    import requests
+    import requests  # pyright: ignore[reportMissingModuleSource]
 
     print(f"  Collecting {usr_name} GitHub repository status...")
     base_url = "https://api.github.com/users"
@@ -691,7 +684,7 @@ def github_private_file_downloader(raw_url: str, token: str, dest_path: str) -> 
         token (str):  Personal access token with `repo` scope.
         dest_path (str): Local path where the file will be written.
     """
-    import requests
+    import requests  # pyright: ignore[reportMissingModuleSource]
 
     # parse URL
     parsed = urlparse(raw_url)

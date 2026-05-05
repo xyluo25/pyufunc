@@ -12,8 +12,8 @@ import os
 import re
 import sys
 import subprocess
-from typing import Callable, Union
-from pyufunc.cfg import config_color
+from collections.abc import Callable
+from pyufunc.__cfg import config_color
 
 
 def path2linux(path: str | Path) -> str:
@@ -390,7 +390,7 @@ def create_unique_filename(filename: str | Path, suffix_num: int = 1) -> str:
     return filename_abspath
 
 
-def show_dir_in_tree(dir_name: Union[str, Path],
+def show_dir_in_tree(dir_name: str | Path,
                      pattern: str = "**/*",
                      *,
                      show_all=False,
@@ -906,12 +906,12 @@ def find_executable_from_PATH_on_linux(exe_name: str,
                     print(f"[which] Found: {p}")
             else:
                 print(f"[which] No matches for {exe_name}")
-        return paths or None
+        return paths or []
 
     except FileNotFoundError:
         if verbose:
             print("[which] `which` command not found on this system.")
-        return None
+        return []
 
 
 def find_executable_on_linux(exe_name: str,
@@ -944,9 +944,9 @@ def find_executable_on_linux(exe_name: str,
                     print(f"[which] Found: {p}")
             else:
                 print(f"[which] No matches for {exe_name}")
-        return paths or None
+        return paths or []
 
     except FileNotFoundError:
         if verbose:
             print("[which] `which` command not found on this system.")
-        return None
+        return []

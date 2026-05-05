@@ -40,7 +40,7 @@ def _readCompressed(conn, urlpath, query, filename):
         print(f'map data has been written to {filename}')
 
 
-def get_osm_by_relation_id(relation_id, output_filepath='map.osm', url=_url) -> bool:
+def get_osm_by_relation_id(relation_id, output_filepath='map.osm', url=_url) -> bool | None:
     """Downloads OpenStreetMap (OSM) data for a specified region using the Overpass API.
 
     This function queries the Overpass API for a given OSM relation ID, retrieves
@@ -62,7 +62,8 @@ def get_osm_by_relation_id(relation_id, output_filepath='map.osm', url=_url) -> 
         >>> pf.get_osm_by_relation_id(relation_id, output_filepath='my_map.osm')
 
     Returns:
-        bool: True if the data was successfully downloaded and saved, False otherwise.
+        bool | None: True if the data was successfully downloaded and saved, False otherwise.
+            Returns None if the data could not be downloaded.
     """
 
     file_name, file_extension = os.path.splitext(output_filepath)
@@ -99,7 +100,7 @@ def get_osm_by_relation_id(relation_id, output_filepath='map.osm', url=_url) -> 
     conn.close()
 
 
-def extract_bbox_coordinates(bbox: str | tuple | list) -> tuple[float]:
+def extract_bbox_coordinates(bbox: str | tuple | list) -> tuple[float, float, float, float]:
     """Extracts bounding box coordinates from a string, tuple, or list.
 
     Args:
@@ -117,13 +118,14 @@ def extract_bbox_coordinates(bbox: str | tuple | list) -> tuple[float]:
         (37.7749, -122.4194, 37.8049, -122.3894)
 
     Returns:
-        tuple: A tuple containing the coordinates (west, south, east, north).
+        tuple[float, float, float, float]: A tuple containing the coordinates (west, south, east, north).
     """
     if isinstance(bbox, (tuple, list)) and len(bbox) == 4:
         west, south, east, north = [float(val) for val in bbox]
     elif isinstance(bbox, str):
         try:
-            return tuple(float(val) for val in bbox.split(','))
+            west, south, east, north = (float(val) for val in bbox.split(','))
+            return (west, south, east, north)
         except ValueError as e:
             raise ValueError("bbox string must be in the format 'min_latitude,min_longitude,max_latitude,max_longitude'") from e
     else:
@@ -137,7 +139,7 @@ def extract_bbox_coordinates(bbox: str | tuple | list) -> tuple[float]:
     return (west, south, east, north)
 
 
-def get_osm_by_bbox(bbox: str | tuple | list, output_filepath='map.osm', url=_url) -> bool:
+def get_osm_by_bbox(bbox: str | tuple | list, output_filepath='map.osm', url=_url) -> bool | None:
     """Downloads OpenStreetMap (OSM) data for a specified bounding box using the Overpass API.
 
     This function queries the Overpass API for a given bounding box, retrieves
@@ -156,7 +158,8 @@ def get_osm_by_bbox(bbox: str | tuple | list, output_filepath='map.osm', url=_ur
         >>> pf.get_osm_by_bbox(bbox, output_filepath='my_map.osm')
 
     Returns:
-        bool: True if the data was successfully downloaded and saved, False otherwise.
+        bool | None: True if the data was successfully downloaded and saved, False otherwise.
+            Returns None if the operation fails.
     """
     west, south, east, north = extract_bbox_coordinates(bbox)
 

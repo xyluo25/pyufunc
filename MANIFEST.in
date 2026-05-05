@@ -1,0 +1,1 @@
+recursive-include pyufunc *.txt *.xls *.xlsx *.csv *.json

@@ -18,8 +18,7 @@ from pyufunc.util_magic._dependency_requires_decorator import requires
 from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    import shapely
-    import requests
+    import requests  # pyright: ignore[reportMissingModuleSource]
 
 # capture getaddrinfo function to use original later after mutating it
 _original_getaddrinfo = socket.getaddrinfo
@@ -134,7 +133,7 @@ class OSMPlaceFinder:
         -------
         response_json
         """
-        import requests
+        import requests  # pyright: ignore[reportMissingModuleSource]
 
         if request_type not in {"search", "reverse", "lookup"}:  # pragma: no cover
             msg = "Nominatim `request_type` must be 'search', 'reverse', or 'lookup'."
@@ -287,7 +286,7 @@ class OSMPlaceFinder:
         feature_coords = feature["geometry"]["coordinates"]
 
         try:
-            import shapely
+            import shapely  # pyright: ignore[reportMissingModuleSource]
 
             place_dict["geometry"] = shapely.geometry.MultiPolygon(
                 [shapely.geometry.Polygon(s[0]) for s in feature_coords])
@@ -469,10 +468,14 @@ class OSMPlaceFinder:
             accept_language = settings["http_accept_language"]
 
         info = {"User-Agent": user_agent, "referer": referer,
-                "Accept-Language": accept_language}
-        import requests
+            "Accept-Language": accept_language}
+        import requests  # pyright: ignore[reportMissingModuleSource]
 
-        return dict(requests.utils.default_headers()) | info
+        base = dict(requests.utils.default_headers())
+        # filter out None and ensure all values are strings to satisfy type checkers
+        info_clean = {k: str(v) for k, v in info.items() if v is not None}
+        base |= info_clean
+        return base
 
     def _resolve_host_via_doh(self, hostname: str) -> str:
         """
@@ -506,7 +509,7 @@ class OSMPlaceFinder:
             err_msg = f"Failed to resolve {hostname!r} IP via DoH, requesting host by name"
             print(f"  :{err_msg}")
 
-        import requests
+        import requests  # pyright: ignore[reportMissingModuleSource]
 
         try:
             url = settings["doh_url_template"].format(hostname=hostname)
@@ -672,8 +675,5 @@ def get_osm_place(place: str, verbose: bool = False) -> dict:
             Tempe, Maricopa County, Arizona, 85281, United States',
         'geometry': <MULTIPOLYGON (((-111.941 33.424, -111.941 33.424, -111.941 33.424, -111.941...>}
     """
-
-    import shapely
-    import requests
 
     return OSMPlaceFinder(place, verbose).get_osm_place(place, None, False)

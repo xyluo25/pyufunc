@@ -5,15 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-
-import os
-from typing import TYPE_CHECKING
-
 from pyufunc.util_magic import requires
-
-if TYPE_CHECKING:
-    from pyproj import Transformer
-    import shapely
 
 
 @requires("pyproj", "shapely")
@@ -36,8 +28,8 @@ def calc_area_from_wkt_geometry(wkt_geometry: str, unit: str = "sqm", verbose: b
         float: The area of the geometry in specified unit.
 
     """
-    import shapely
-    from pyproj import Transformer
+    import shapely  # pyright: ignore[reportMissingModuleSource]
+    from pyproj import Transformer  # pyright: ignore[reportMissingImports]
 
     # TDD
     if unit not in ["sqm", "sqft"]:

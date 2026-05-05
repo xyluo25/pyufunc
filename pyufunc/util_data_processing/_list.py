@@ -5,7 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-from typing import Generator
+from collections.abc import Generator
 import itertools
 
 

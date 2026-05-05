@@ -5,17 +5,14 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 from __future__ import annotations
-from typing import TYPE_CHECKING
 from pyufunc.util_magic import requires
 
 # https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
-if TYPE_CHECKING:
-    import loguru
 
 
 @requires("loguru")
 def log_logger():
 
-    import loguru
+    import loguru  # pyright: ignore[reportMissingImports]
     # from loguru import logger
     return loguru.logger

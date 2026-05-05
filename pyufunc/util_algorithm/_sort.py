@@ -6,7 +6,7 @@
 ##############################################################
 
 
-from typing import Iterable
+from collections.abc import Iterable
 import math
 
 
@@ -33,9 +33,13 @@ def algo_quick_sort(array: Iterable, verbose: bool = False) -> Iterable:
     """
 
     # TDD: Test-Driven Development
-    # check if the input is iterable or not
+    # check if the input is iterable or not, convert to list for indexing
     if not isinstance(array, Iterable):
         raise ValueError("Input should be iterable")
+
+    array = list(array)
+
+    array = list(array)
 
     if len(array) <= 1:
         return array
@@ -48,7 +52,8 @@ def algo_quick_sort(array: Iterable, verbose: bool = False) -> Iterable:
     if verbose:
         print("Running time of quick_sort: O(n log n)")
 
-    return algo_quick_sort(left) + middle + algo_quick_sort(right)
+    # Ensure we return a list to allow concatenation
+    return list(algo_quick_sort(left)) + middle + list(algo_quick_sort(right))
 
 
 def algo_merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
@@ -75,16 +80,18 @@ def algo_merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
     """
 
     # TDD: Test-Driven Development
-    # check if the input is iterable or not
+    # check if the input is iterable or not, convert to list for indexing
     if not isinstance(array, Iterable):
         raise ValueError("Input should be iterable")
+
+    array = list(array)
 
     # check if the input array is larger than 1
     if len(array) <= 1:
         return array
 
     # merge the two sorted lists
-    def merge(left: Iterable, right: Iterable) -> Iterable:
+    def merge(left: list, right: list) -> list:
 
         # initialize the merged list, left and right index
         merged_list = []
@@ -117,8 +124,8 @@ def algo_merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
     right = array[mid:]
 
     # recursively sort the left and right parts
-    left = algo_merge_sort(left)
-    right = algo_merge_sort(right)
+    left = list(algo_merge_sort(left))
+    right = list(algo_merge_sort(right))
 
     # if print out the running time
     if verbose:
@@ -151,12 +158,15 @@ def algo_heap_sort(array: Iterable, verbose: bool = False) -> Iterable:
     """
 
     # TDD: Test-Driven Development
-    # check if the input is iterable or not
+    # check if the input is iterable or not, convert to list for indexing
     if not isinstance(array, Iterable):
         raise ValueError("Input should be iterable")
 
+    array = list(array)
+
     # heapify the array with subtree rooted at index i of the array
-    def heapify(array: Iterable, arr_len: int, i: int) -> None:
+    # array here is a list (converted above) so annotate accordingly to allow indexing
+    def heapify(array: list, arr_len: int, i: int) -> None:
 
         # initialize the largest as root from beginning
         largest = i  # the root index
@@ -201,11 +211,11 @@ def algo_selection_sort(array: Iterable, verbose: bool = False) -> Iterable:
     """Sort the input array using selection sort algorithm.
 
     Args:
-        array (Iterable): iterable object to be sorted.
+        array (Iterable): sequence object to be sorted.
         verbose (bool, optional): whether to print out running time. Defaults to False.
 
     Raises:
-        ValueError: Input should be iterable.
+        ValueError: Input should be a sequence.
 
     Returns:
         Iterable: sorted array
@@ -220,9 +230,11 @@ def algo_selection_sort(array: Iterable, verbose: bool = False) -> Iterable:
     """
 
     # TDD: Test-Driven Development
-    # check if the input is iterable or not
+    # check if the input is a sequence or not
     if not isinstance(array, Iterable):
-        raise ValueError("Input should be iterable")
+        raise ValueError("Input should be a sequence")
+
+    array = list(array)
 
     for i in range(len(array)):
         # Find the minimum element in remaining
@@ -272,6 +284,8 @@ def algo_insertion_sort(array: Iterable, verbose: bool = False) -> Iterable:
     if not isinstance(array, Iterable):
         raise ValueError("Input should be iterable")
 
+    array = list(array)
+
     for i in range(1, len(array)):
         key_item = array[i]
 
@@ -313,6 +327,8 @@ def algo_bubble_sort(array: Iterable, verbose: bool = False) -> Iterable:
     # check if the input is iterable or not
     if not isinstance(array, Iterable):
         raise ValueError("Input should be iterable")
+
+    array = list(array)
 
     n = len(array)
     # Traverse through all array elements

@@ -9,7 +9,7 @@ import datetime
 import os
 from pyufunc.util_pathio._path import path2linux
 from pyufunc.util_datetime._dt_format import fmt_str_to_dt, fmt_dt_to_str
-from pyufunc.cfg import config_datetime_fmt
+from pyufunc.__cfg import config_datetime_fmt
 
 
 def add_date_in_filename(filename: str,

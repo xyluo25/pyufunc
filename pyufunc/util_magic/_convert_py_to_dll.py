@@ -42,7 +42,7 @@ def cvt_py_to_dll(py_file: str, output_dir: str = "") -> bool:
     # import modules within the function to avoid unnecessary imports if the function is not used
     import shutil
     from setuptools import setup, Extension
-    from Cython.Build import cythonize
+    from Cython.Build import cythonize  # pyright: ignore[reportMissingImports]
 
     # check whether py_file extension is .py and .pyx
     if not (py_file.endswith('.py') or py_file.endswith('.pyx')):

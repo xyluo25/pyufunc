@@ -7,7 +7,7 @@
 
 from __future__ import annotations
 from typing import TYPE_CHECKING
-from pyufunc.util_magic import func_running_time, requires
+from pyufunc.util_magic import requires
 
 if TYPE_CHECKING:
     import pandas as pd

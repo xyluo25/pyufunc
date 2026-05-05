@@ -11,16 +11,11 @@ from __future__ import annotations
 import json
 import os
 import sys
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    import shapely
-    import pyarrow as pa
-    import pyarrow.compute as pc
-    import pyarrow.dataset as ds
-    import pyarrow.fs as fs
-    import geopandas as gpd
-    from geopandas import GeoDataFrame
+    import pyarrow as pa  # pyright: ignore[reportMissingImports]
+    from geopandas import GeoDataFrame  # pyright: ignore[reportMissingModuleSource]
 
 from pyufunc.util_magic import requires
 
@@ -80,7 +75,7 @@ def download_overture_map(bbox: list[float] = None,
 @requires("pyarrow")
 def get_writer(output_format, path, schema):
 
-    import pyarrow.parquet as pq
+    import pyarrow.parquet as pq  # pyright: ignore[reportMissingImports]
 
     if output_format == "geojson":
         writer = GeoJSONWriter(path)
@@ -167,7 +162,7 @@ class BaseGeoJSONWriter:
         pass
 
     def row_to_feature(self, row):
-        import shapely.wkb
+        import shapely.wkb  # pyright: ignore[reportMissingModuleSource]
 
         geometry = shapely.wkb.loads(row.pop("geometry"))
         row.pop("bbox")
@@ -206,7 +201,7 @@ class GeoJSONWriter(BaseGeoJSONWriter):
 
 
 @requires("pyarrow")
-def record_batch_reader(overture_type: str, bbox=None) -> Optional[pa.RecordBatchReader]:
+def record_batch_reader(overture_type: str, bbox=None) -> pa.RecordBatchReader:
     """Return a pyarrow RecordBatchReader for the desired bounding box and s3 path
 
     Args:
@@ -218,10 +213,10 @@ def record_batch_reader(overture_type: str, bbox=None) -> Optional[pa.RecordBatc
             Format is (xmin, ymin, xmax, ymax). Defaults to None.
 
     """
-    import pyarrow as pa
-    import pyarrow.compute as pc
-    import pyarrow.dataset as ds
-    import pyarrow.fs as fs
+    import pyarrow as pa  # pyright: ignore[reportMissingImports]
+    import pyarrow.compute as pc  # pyright: ignore[reportMissingImports]
+    import pyarrow.dataset as ds  # pyright: ignore[reportMissingImports]
+    import pyarrow.fs as fs  # pyright: ignore[reportMissingImports]
 
     path = _dataset_path(overture_type)
 
@@ -266,7 +261,7 @@ def geodataframe(overture_type: str, bbox: tuple[float, float, float, float] = N
         GeoDataFrame with the optionally filtered theme data
 
     """
-    import geopandas as gpd
+    import geopandas as gpd  # pyright: ignore[reportMissingModuleSource]
 
     reader = record_batch_reader(overture_type, bbox)
     return gpd.GeoDataFrame.from_arrow(reader)
@@ -330,5 +325,5 @@ def _dataset_path(overture_type: str) -> str:
     return f"overturemaps-us-west-2/release/2025-03-19.0/theme={theme}/type={overture_type}/"
 
 
-def get_all_overture_types() -> List[str]:
+def get_all_overture_types() -> list[str]:
     return list(type_theme_map.keys())

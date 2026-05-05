@@ -43,10 +43,11 @@ def mean_absolute_error(y_true: Iterable, y_pred: Iterable) -> float:
         raise TypeError("Input should be an iterable object")
 
     # covert to numpy array if not
-    y_true = np.array(y_true)
-    y_pred = np.array(y_pred)
+    y_true = np.asarray(y_true, dtype=float)
+    y_pred = np.asarray(y_pred, dtype=float)
 
-    return np.mean(np.abs(y_true - y_pred))
+    # Ensure a native Python float is returned (avoid numpy.floating for type checkers)
+    return float(np.mean(np.abs(y_true - y_pred)))
 
 
 @requires("numpy")
@@ -83,7 +84,7 @@ def mean_squared_error(y_true: Iterable, y_pred: Iterable) -> float:
     y_true = np.array(y_true)
     y_pred = np.array(y_pred)
 
-    return np.mean(np.square(y_true - y_pred))
+    return float(np.mean(np.square(y_true - y_pred)))
 
 
 @requires("numpy")
@@ -120,7 +121,8 @@ def mean_squared_log_error(y_true: Iterable, y_pred: Iterable) -> float:
     y_true = np.array(y_true)
     y_pred = np.array(y_pred)
 
-    return np.mean(np.square(np.log1p(y_true) - np.log1p(y_pred)))
+    # Ensure a native Python float is returned (avoid numpy.floating for type checkers)
+    return float(np.mean(np.square(np.log1p(y_true) - np.log1p(y_pred))))
 
 
 @requires("numpy")
@@ -157,7 +159,8 @@ def root_mean_squared_error(y_true: Iterable, y_pred: Iterable) -> float:
     y_true = np.array(y_true)
     y_pred = np.array(y_pred)
 
-    return np.sqrt(np.mean(np.square(y_true - y_pred)))
+    # Ensure a native Python float is returned
+    return float(np.sqrt(np.mean(np.square(y_true - y_pred))))
 
 
 @requires("numpy")
@@ -194,7 +197,7 @@ def mean_absolute_percentage_error(y_true: Iterable, y_pred: Iterable) -> float:
     y_true = np.array(y_true)
     y_pred = np.array(y_pred)
 
-    return np.mean(np.abs((y_true - y_pred) / y_true))
+    return float(np.mean(np.abs((y_true - y_pred) / y_true)))
 
 
 @requires("numpy")
@@ -231,7 +234,7 @@ def mean_percentage_error(y_true: Iterable, y_pred: Iterable) -> float:
     y_true = np.array(y_true)
     y_pred = np.array(y_pred)
 
-    return np.mean((y_true - y_pred) / y_true)
+    return float(np.mean((y_true - y_pred) / y_true))
 
 
 @requires("numpy")
@@ -269,7 +272,8 @@ def r2_score(y_true: Iterable, y_pred: Iterable) -> float:
     y_pred = np.array(y_pred)
 
     mean_y = np.mean(y_true)
-    ss_res = np.sum(np.square(y_true - y_pred))
+    ss_res = np.sum(np.square(np.subtract(y_true, y_pred)))
     ss_tot = np.sum(np.square(y_true - mean_y))
 
-    return 1 - ss_res / ss_tot
+    # Ensure a native Python float is returned
+    return float(1 - ss_res / ss_tot)

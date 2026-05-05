@@ -33,7 +33,7 @@ def func_running_time(func: object) -> object:
         >>>    return
 
         >>> func()
-        >>> INFO Finished running function: func, total: 3s
+        INFO Finished running function: func, total: 3s
 
     Returns:
         object: the decorated function or class method.
@@ -75,8 +75,8 @@ def func_time(func: object) -> object:
         >>>    return
 
         >>> func()
-        >>> main function...
-        >>> INFO Finished running function: func, total: 3s
+        main function...
+        INFO Finished running function: func, total: 3s
 
     Returns:
         object: the decorated function or class method.

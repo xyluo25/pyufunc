@@ -27,8 +27,8 @@ def pypi_downloads(pkg_name: str) -> dict:
     """
 
     # import packages required for this function
-    import requests
-    from bs4 import BeautifulSoup
+    import requests  # pyright: ignore[reportMissingModuleSource]
+    from bs4 import BeautifulSoup  # pyright: ignore[reportMissingImports]
 
     # prepare the url and get the response
     # url = 'https://api.pepy.tech/api/projects/' + package_name

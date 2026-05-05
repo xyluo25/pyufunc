@@ -8,12 +8,17 @@
 """
 
 from __future__ import absolute_import
+from collections.abc import Callable
+from typing import Any, TypeVar, cast
+
 from pyufunc.util_magic._import_package import (is_module_importable,
                                                 import_package)
 
+F = TypeVar("F", bound=Callable[..., Any])
+
 
 # decorator with extra arguments
-def requires(*args, **kwargs) -> object:
+def requires(*args, **kwargs) -> Callable[[F], F]:
     """A decorator to wrap functions with extra dependencies.
     If the dependencies are not available, the function will not run.
 
@@ -81,7 +86,7 @@ def requires(*args, **kwargs) -> object:
         else:
             raise ValueError("The input arguments should be strings or tuple with two elements.")
 
-    def inner(function):
+    def inner(function: F) -> F:
         # check if the dependencies are available
         available = [is_module_importable(arg) for arg in arg_import_name]
         if all(available):
@@ -114,6 +119,6 @@ def requires(*args, **kwargs) -> object:
             #     print(f"  :eg. @requires{args_requires}" + ", auto_install=True)\n")
             return function(*args, **kwargs)
 
-        return passer
+        return cast(F, passer)
 
     return inner

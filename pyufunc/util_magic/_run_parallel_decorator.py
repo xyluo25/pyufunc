@@ -8,7 +8,7 @@
 
 from __future__ import absolute_import
 from multiprocessing import Pool
-from typing import Iterable, Callable, Iterator
+from collections.abc import Iterable, Callable
 import os
 from pyufunc.util_magic._func_time_decorator import func_running_time
 
@@ -16,8 +16,8 @@ from pyufunc.util_magic._func_time_decorator import func_running_time
 @func_running_time
 def run_parallel(func: Callable,
                  iterable: Iterable,
-                 num_processes: int = os.cpu_count() - 1,
-                 chunksize: int = 0) -> Iterator:
+                 num_processes: int = None,
+                 chunksize: int = 0) -> list:
     """Run a function in parallel with multiple processors.
 
     Args:
@@ -50,7 +50,7 @@ def run_parallel(func: Callable,
         >>> 0, 1, 4, 9, 16, 25, 36, 49, 64, 81
 
     Returns:
-        Iterator: The results of the function.
+        list: The results of the function.
     """
 
     # TDD, test-driven development: check inputs
@@ -70,8 +70,16 @@ def run_parallel(func: Callable,
     if chunksize < 0:
         raise ValueError("The input chunksize should be greater than 0.")
 
-    # Step 1: get the number of processors to use
-    num_processors = min(num_processes, os.cpu_count() - 1)
+    # Step 1: determine default number of processes if not provided
+    if num_processes is None:
+        cpu_count = os.cpu_count() or 1
+        # prefer using cpu_count - 1 when possible, but ensure at least 1
+        num_processes = cpu_count - 1 if cpu_count > 1 else 1
+
+    # Step 2: get the number of processors to use (cap by available CPUs)
+    available = (os.cpu_count() or 1) - 1
+    available = available if available > 0 else 1
+    num_processors = min(num_processes, available)
     print(f"  :Info: using {num_processors} processors to run {func.__name__}...")
 
     # Step 2: check the chunksize
