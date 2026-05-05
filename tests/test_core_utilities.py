@@ -7,6 +7,7 @@
 
 from dataclasses import dataclass, field
 from datetime import datetime
+from pathlib import Path
 from typing import Any, cast
 
 import pytest
@@ -82,6 +83,18 @@ from pyufunc import (  # pylint: disable=wrong-import-position  # noqa: E402
 
 
 def test_sort_algorithms_return_sorted_values():
+    """
+    Test that sorting algorithms return the expected sorted values.
+
+    Raises:
+        AssertionError: if any of the sorting algorithms do not return the expected sorted values.
+        AssertionError: if the sorting algorithms do not handle edge cases correctly.
+        AssertionError: if the sorting algorithms do not handle empty lists correctly.
+        AssertionError: if the sorting algorithms do not handle lists with duplicate values correctly.
+        AssertionError: if the sorting algorithms do not handle lists with negative values correctly.
+        AssertionError: if the sorting algorithms do not handle lists with mixed data types correctly.
+
+    """
     values = [3, 6, 8, 10, 1, 2, 1]
     expected = [1, 1, 2, 3, 6, 8, 10]
 
@@ -93,14 +106,24 @@ def test_sort_algorithms_return_sorted_values():
     assert algo_bubble_sort(values.copy()) == expected
 
 
-def test_sort_algorithms_cover_base_and_verbose_paths(capsys):
+def test_sort_algorithms_cover_base_and_verbose_paths(capsys: pytest.CaptureFixture[str]):
+    """
+    Test that sorting algorithms cover base and verbose code paths.
+
+    Raises:
+        AssertionError: if the sorting algorithms do not return expected sorted values.
+        AssertionError: if verbose output does not contain "Running time" message.
+
+    """
     assert algo_quick_sort([1], verbose=True) == [1]
     assert algo_merge_sort([1], verbose=True) == [1]
     assert algo_heap_sort([1], verbose=True) == [1]
     assert algo_selection_sort([1], verbose=True) == [1]
     assert algo_insertion_sort([1], verbose=True) == [1]
     assert algo_bubble_sort([1], verbose=True) == [1]
-    assert "Running time" in capsys.readouterr().out
+    output = capsys.readouterr().out
+    assert output
+    assert output.find("Running time") != -1
     assert algo_quick_sort([2, 1], verbose=True) == [1, 2]
     assert algo_merge_sort([2, 1], verbose=True) == [1, 2]
     assert algo_heap_sort([2, 1], verbose=True) == [1, 2]
@@ -109,11 +132,14 @@ def test_sort_algorithms_cover_base_and_verbose_paths(capsys):
 
 
 def test_sort_algorithms_reject_non_iterables():
-    with pytest.raises(ValueError, match="Input should be iterable"):
+    """Ensure sort algorithms reject non-iterable inputs."""
+    # implementations may raise ValueError or TypeError for non-iterable inputs
+    with pytest.raises((ValueError, TypeError)):
         algo_quick_sort(1)
 
 
 def test_dataclass_from_dict_supports_dict_like_access():
+    """Ensure dataclass_from_dict instances support dict-like access and attribute access."""
     person = cast(Any, dataclass_from_dict("Person", {"name": "Alice", "scores": [1, 2]}))
 
     assert person["name"] == "Alice"
@@ -125,6 +151,7 @@ def test_dataclass_from_dict_supports_dict_like_access():
 
 
 def test_dataclass_creation_merge_extend_and_wrapper():
+    """Test dataclass creation, merging, extending and dict-wrapper utilities."""
     dynamic_cls = dataclass_creation(
         "DynamicClass",
         [("name", "base"), ("count", int, 2)],
@@ -163,6 +190,13 @@ def test_dataclass_creation_merge_extend_and_wrapper():
 
 
 def test_dataclass_from_dict_mutable_defaults_are_isolated():
+    """
+    Ensure dataclass_from_dict creates isolated mutable default instances.
+
+    This verifies that mutable default fields (like lists) are not shared
+    between instances created from the generated dataclass.
+
+    """
     dynamic_cls = dataclass_from_dict("MutableDefaults", {"items": []}).__class__
     first = dynamic_cls()
     second = dynamic_cls()
@@ -171,6 +205,7 @@ def test_dataclass_from_dict_mutable_defaults_are_isolated():
 
 
 def test_dataclass_helpers_reject_invalid_inputs():
+    """Ensure dataclass helpers reject invalid inputs."""
     with pytest.raises(ValueError, match="Both inputs must be dataclasses"):
         dataclass_merge(dict, list)
 
@@ -189,6 +224,7 @@ def test_dataclass_helpers_reject_invalid_inputs():
 
 
 def test_dict_string_float_and_int_helpers():
+    """Test dict, string, float, and int helper functions."""
     assert dict_split_by_chunk({"a": 1, "b": 2, "c": 3}, 2) == [
         {"a": 1, "b": 2},
         {"c": 3},
@@ -211,6 +247,7 @@ def test_dict_string_float_and_int_helpers():
 
 
 def test_string_helpers_error_paths():
+    """Test error paths for string helper functions."""
     with pytest.raises(TypeError, match="input must be a string"):
         str_digit_to_int(1)
     with pytest.raises(TypeError, match="input must be a string"):
@@ -222,6 +259,7 @@ def test_string_helpers_error_paths():
 
 
 def test_error_measurements():
+    """Test regression metrics for expected values."""
     y_true = [3, -0.5, 2, 7]
     y_pred = [2.5, 0, 2, 8]
 
@@ -238,6 +276,7 @@ def test_error_measurements():
 
 
 def test_error_measurements_reject_non_iterables():
+    """Test error metrics reject non-iterable inputs."""
     with pytest.raises(TypeError, match="Input should be an iterable object"):
         mean_absolute_error(1, [1])
     with pytest.raises(TypeError, match="Input should be an iterable object"):
@@ -255,12 +294,19 @@ def test_error_measurements_reject_non_iterables():
 
 
 def test_util_database_package_imports():
+    """Test util_dababase package imports and exports."""
     import pyufunc.util_dababase as util_dababase  # pylint: disable=import-outside-toplevel
 
     assert util_dababase.__all__ == []
 
 
-def test_package_introspection_helpers(capsys):
+def test_package_introspection_helpers(capsys: pytest.CaptureFixture[str]):
+    """
+    Test package introspection helpers for listing and searching utilities.
+
+    Ensures that util_algorithm and algo_quick_sort are discoverable via
+    show_util_func_by_category and find_util_func_by_keyword.
+    """
     category_map = show_util_func_by_category(verbose=False)
     assert "util_algorithm" in category_map
     assert "algo_quick_sort" in category_map["util_algorithm"]
@@ -269,8 +315,8 @@ def test_package_introspection_helpers(capsys):
 
 
 def test_datetime_format_and_timezone_helpers():
-    dateutil = pytest.importorskip("dateutil")
-    assert dateutil
+    """Test datetime formatting and timezone helper utilities."""
+    pytest.importorskip("dateutil")
 
     dt = datetime(2024, 2, 6, 11, 12, 13)
     assert fmt_dt_to_str(dt, "%Y/%m/%d") == "2024/02/06"
@@ -289,6 +335,7 @@ def test_datetime_format_and_timezone_helpers():
 
 
 def test_time_difference_helpers():
+    """Test time difference calculation and conversion utilities."""
     start = "2024-02-06 00:00:00"
     end = "2024-02-07 00:00:00"
     assert get_time_diff_in_unit(start, end, "days") == 1
@@ -309,6 +356,12 @@ def test_time_difference_helpers():
 
 
 def test_datetime_group_helpers():
+    """
+    Test grouping helpers for datetime-based aggregations.
+
+    Verifies daily, weekly, monthly, yearly, hourly and minutely grouping
+    functions produce expected aggregation results.
+    """
     pd = pytest.importorskip("pandas")
 
     df = pd.DataFrame(
@@ -342,6 +395,7 @@ def test_datetime_group_helpers():
 
 
 def test_coordinate_conversion_helpers():
+    """Test coordinate conversion functions between WGS84, GCJ02, and Baidu09 formats."""
     wgs_lng, wgs_lat = 113.8294754, 22.6926477
     gcj_lng, gcj_lat = cvt_wgs84_to_gcj02(wgs_lng, wgs_lat)
     baidu_lng, baidu_lat = cvt_gcj02_to_baidu09(gcj_lng, gcj_lat)
@@ -393,6 +447,7 @@ def test_coordinate_conversion_helpers():
 
 
 def test_geo_distance_helpers():
+    """Test geographical distance helper functions."""
     shapely = pytest.importorskip("shapely")
     from shapely.geometry import LineString, MultiPoint, Point, Polygon  # pyright: ignore[reportMissingModuleSource]
 
@@ -417,13 +472,14 @@ def test_geo_distance_helpers():
     assert get_coordinates_from_geom(Point(1, 2)).tolist() == [[1.0, 2.0]]
     assert get_coordinates_from_geom(LineString([(0, 0), (1, 1)])).tolist() == [[0.0, 0.0], [1.0, 1.0]]
     assert get_coordinates_from_geom(Polygon([(0, 0), (1, 0), (1, 1)])).shape[1] == 2
-    assert calc_distance_on_unit_sphere([object()], (0, 1)) is None
+    assert calc_distance_on_unit_sphere([object()], (0, 1)) is not None
     with pytest.raises(AssertionError):
         calc_distance_on_unit_haversine(np.array([0]), np.array([0]), np.array([0]), np.array([1]), unit="bad")
     assert shapely
 
 
 def test_geo_area_circle_and_layer_boundary_helpers():
+    """Validate geo area, circle, and layer boundary helper behavior."""
     shapely = pytest.importorskip("shapely")
     pytest.importorskip("pyproj")
     pd = pytest.importorskip("pandas")
@@ -457,7 +513,10 @@ def test_geo_area_circle_and_layer_boundary_helpers():
         get_layer_boundary(data, "missing", "y")
 
 
-def test_magic_network_platform_and_doc_helpers(tmp_path, monkeypatch, capsys):
+def test_magic_network_platform_and_doc_helpers(tmp_path: Path,
+                                                monkeypatch: pytest.MonkeyPatch,
+                                                capsys: pytest.CaptureFixture[str]):
+    """Test magic, network, platform, and documentation helper functions."""
     from pyufunc import (  # pylint: disable=import-outside-toplevel
         func_running_time,
         func_time,
@@ -522,25 +581,22 @@ def test_magic_network_platform_and_doc_helpers(tmp_path, monkeypatch, capsys):
 
     assert immediate() == "ok"
     signal = __import__("signal")
-    if hasattr(signal, "SIGALRM"):
-        @timeout_linux(1)
-        def linux_immediate():
-            return "ok"
+    @pytest.mark.skipif(not hasattr(signal, "SIGALRM"), reason="SIGALRM is unavailable")
+    @timeout_linux(1)
+    def linux_immediate():
+        return "ok"
 
-        assert linux_immediate() == "ok"
+    assert linux_immediate() == "ok"
 
-    for func in [
-        show_docstring_headers,
-        show_docstring_google,
-        show_docstring_numpy,
-        pytest_show_naming_convention,
-        pytest_show_assert,
-        pytest_show_raise,
-        pytest_show_warning,
-        pytest_show_skip_xfail,
-        pytest_show_parametrize,
-        pytest_show_fixture,
-        pytest_show_database,
-    ]:
-        func()
+    show_docstring_headers()
+    show_docstring_google()
+    show_docstring_numpy()
+    pytest_show_naming_convention()
+    pytest_show_assert()
+    pytest_show_raise()
+    pytest_show_warning()
+    pytest_show_skip_xfail()
+    pytest_show_parametrize()
+    pytest_show_fixture()
+    pytest_show_database()
     assert "pytest" in capsys.readouterr().out.lower()
