@@ -9,8 +9,14 @@ from collections.abc import Generator
 import itertools
 
 
+def _validate(condition: bool, message: str) -> None:
+    if not condition:
+        raise AssertionError(message)
+
+
 def list_split_by_equal_sublist(lst: list, num_of_sub: int) -> Generator:
-    """Split a list into a number of equally-sized sub-lists.
+    """
+    Split a list into a number of equally-sized sub-lists.
 
     See Also:
         [`OPS-SL-1 <https://stackoverflow.com/questions/312443/>`_].
@@ -33,12 +39,12 @@ def list_split_by_equal_sublist(lst: list, num_of_sub: int) -> Generator:
         [0, 1, 2, 3]
         [4, 5, 6]
         [7, 8, 9]
-    """
 
+    """
     # TDD, Test-Driven Development: validate inputs
-    assert isinstance(lst, list), "lst should be a list"
-    assert isinstance(num_of_sub, int), "num_of_sub should be an integer"
-    assert num_of_sub > 0, "num_of_sub should be a positive integer"
+    _validate(isinstance(lst, list), "lst should be a list")
+    _validate(isinstance(num_of_sub, int), "num_of_sub should be an integer")
+    _validate(num_of_sub > 0, "num_of_sub should be a positive integer")
 
     if num_of_sub >= len(lst):
         print(f"  num_of_sub: {num_of_sub} is greater than or equal to the length of lst: {len(lst)}")
@@ -63,14 +69,15 @@ def list_split_by_equal_sublist(lst: list, num_of_sub: int) -> Generator:
 
 
 def list_split_by_fixed_length(lst: list, fixed_length: int) -> Generator:
-    """Split a list into sublist of the same specified length
+    """
+    Split a list into sublist of the same specified length.
 
     See Also:
         [`OPS-SL-2 <https://stackoverflow.com/questions/312443/>`_].
 
     Args:
         lst (list): a list of elements
-        length (int): the length of each sub-list
+        fixed_length (int): the length of each sub-list
 
     Returns:
         Generator: a sequence of sub-lists
@@ -80,26 +87,27 @@ def list_split_by_fixed_length(lst: list, fixed_length: int) -> Generator:
         >>> lst = list(range(0, 10))
         >>> lst
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        >>> lst_ = uf.list_split_by_fixed_length(lst, fix_length=3)
+        >>> lst_ = uf.list_split_by_fixed_length(lst, fixed_length=3)
         >>> for dat in lst_:
         ...     print(list(dat))
         [0, 1, 2]
         [3, 4, 5]
         [6, 7, 8]
         [9]
-    """
 
+    """
     # TDD, Test-Driven Development: validate inputs
-    assert isinstance(lst, list), "lst should be a list"
-    assert isinstance(fixed_length, int), "fixed_length should be an integer"
-    assert fixed_length > 0, "fixed_length should be a positive integer"
+    _validate(isinstance(lst, list), "lst should be a list")
+    _validate(isinstance(fixed_length, int), "fixed_length should be an integer")
+    _validate(fixed_length > 0, "fixed_length should be a positive integer")
 
     for i in range(0, len(lst), fixed_length):
         yield lst[i:i + fixed_length]
 
 
 def list_flatten_nested(nest_lst: list) -> list:
-    """Flatten a nested list.
+    """
+    Flatten a nested list.
 
     Args:
         nest_lst (list): a nested list
@@ -112,6 +120,6 @@ def list_flatten_nested(nest_lst: list) -> list:
 
     Returns:
         list: a flat list
-    """
 
+    """
     return list(itertools.chain(*nest_lst))

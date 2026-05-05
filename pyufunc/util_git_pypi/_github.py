@@ -90,7 +90,6 @@ class GitHubFileDownloader:
             ValueError: if the input URL is not valid
 
         """
-
         self.dir_out = None
         self.repo_url = repo_url
         self.flatten = flatten_files
@@ -123,7 +122,6 @@ class GitHubFileDownloader:
             tuple: a tuple of two strings, the first string is the API URL, and the second string is the download path
 
         """
-
         repo_only_url = re.compile(
             r"https://github\.com/[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}/[a-zA-Z0-9]+$")
         re_branch = re.compile("/(tree|blob)/(.+?)/")
@@ -151,7 +149,8 @@ class GitHubFileDownloader:
                               retry_status: str = 'default',
                               **kwargs) -> Session:
         # sourcery skip: dict-assign-update-to-union
-        """Initialize a session for making HTTP requests.
+        """
+        Initialize a session for making HTTP requests.
 
         Args:
             url (_type_): a valid URL
@@ -161,11 +160,12 @@ class GitHubFileDownloader:
                 inherited from ``status_forcelist`` of `urllib3.util.retry.Retry`_;
                 when ``retry_status='default'``, the list defaults to ``[429, 500, 502, 503, 504]``.
                 Defaults to 'default'.
+            kwargs: [optional] parameters of `urllib3.util.retry.Retry`_
 
         Returns:
-            requests.Session:
-        """
+            requests.Session
 
+        """
         import requests  # pyright: ignore[reportMissingModuleSource]
         import urllib3  # pyright: ignore[reportMissingImports]
 
@@ -188,7 +188,8 @@ class GitHubFileDownloader:
         return session
 
     def _user_agent_strings(self, browser_names: list = None, dump_dat: bool = True) -> dict:
-        """Get a dictionary of user-agent strings for popular browsers.
+        """
+        Get a dictionary of user-agent strings for popular browsers.
 
         Args:
             browser_names (list, optional): names of a list of popular browsers. Defaults to None.
@@ -196,6 +197,7 @@ class GitHubFileDownloader:
 
         Returns:
             dict: a dictionary of user-agent strings for popular browsers
+
         """
         import requests  # pyright: ignore[reportMissingModuleSource]
 
@@ -243,7 +245,7 @@ class GitHubFileDownloader:
         Returns:
             list: a list of user-agent strings of popular browsers
 
-        See also:
+        See Also:
             .. _`Chrome`: https://useragentstring.com/pages/useragentstring.php?name=Chrome
             .. _`Firefox`: https://useragentstring.com/pages/useragentstring.php?name=Firefox
             .. _`Safari`: https://useragentstring.com/pages/useragentstring.php?name=Safari
@@ -251,12 +253,11 @@ class GitHubFileDownloader:
             .. _`Internet Explorer`: https://useragentstring.com/pages/useragentstring.php?name=Internet+Explorer
             .. _`Opera`: https://useragentstring.com/pages/useragentstring.php?name=Opera
 
-
         Notes:
             The order of the elements in ``uas_list`` may be different every time we run the example
             as ``shuffled=True``.
-        """
 
+        """
         if not update:
             # path_to_json = pkg_resources.resource_filename(__name__, "data\\user-agent-strings.json")
             # json_in = open(path_to_json, mode='r')
@@ -301,15 +302,15 @@ class GitHubFileDownloader:
         Returns:
             str: a random user-agent string of a certain browser
 
-
         Notes:
             In the above examples, the returned user-agent string is random and may be different
             every time of running the function.
-        """
 
+        """
         if fancy is not None:
             browser_names = {'Chrome', 'Firefox', 'Safari', 'Edge', 'Internet Explorer', 'Opera'}
-            assert fancy in browser_names, f"`fancy` must be one of {browser_names}."
+            if fancy not in browser_names:
+                raise AssertionError(f"`fancy` must be one of {browser_names}.")
 
             kwargs['flattened'] = False
             user_agent_strings_ = self.load_user_agent_strings(**kwargs)
@@ -340,8 +341,8 @@ class GitHubFileDownloader:
             user-agent strings, even though ``randomized`` is (by default) set to be ``False``.
             - By setting ``randomized=True``, the function returns a random result from among
             all available user-agent strings of several popular browsers.
-        """
 
+        """
         if not randomized:
             kwargs['fancy'] = 'Chrome'
 
@@ -351,11 +352,7 @@ class GitHubFileDownloader:
 
     @requires('tqdm')
     def _download_file_from_url(self, response, path_to_file):
-        """
-        Download an object from a valid URL (and save it as a file).
-
-        """
-
+        """Download an object from a valid URL (and save it as a file)."""
         # import tqdm if it is available, otherwise, install and import it
         import tqdm  # pyright: ignore[reportMissingModuleSource]
 
@@ -404,7 +401,7 @@ class GitHubFileDownloader:
         """
         Download an object available at a valid URL.
 
-        See also:
+        See Also:
             [`OPS-DFFU-1`_] and [`OPS-DFFU-2`_].
 
             .. _OPS-DFFU-1: https://stackoverflow.com/questions/37573483/
@@ -426,12 +423,11 @@ class GitHubFileDownloader:
             https://docs.python-requests.org/en/master/_modules/requests/sessions/#Session.get
 
         Notes:
-
             - When ``verbose=True``, the function requires `tqdm`_.
 
             .. _`tqdm`: https://pypi.org/project/tqdm/
-        """
 
+        """
         path_to_dir = os.path.dirname(path_to_file)
         if path_to_dir == "":
             path_to_file_ = os.path.join(os.getcwd(), path_to_file)
@@ -557,10 +553,11 @@ class GitHubFileDownloader:
 
 @requires('requests', "urllib3")
 def github_file_downloader(repo_url: str, output_dir: str | None = None, flatten: bool = False) -> int:
-    """Download files from a GitHub repository.
+    """
+    Download files from a GitHub repository.
 
     Args:
-        url (str): URL of a GitHub repository to download from;
+        repo_url (str): URL of a GitHub repository to download from;
             it can be a ``blob`` or tree path
         output_dir (str): an output directory where the downloaded files will be saved,
             when ``output_dir=None``, it defaults to ``None``
@@ -569,8 +566,8 @@ def github_file_downloader(repo_url: str, output_dir: str | None = None, flatten
 
     Returns:
         int: total number of files downloaded
-    """
 
+    """
     return GitHubFileDownloader(repo_url, flatten_files=flatten, output_dir=output_dir).download()
 
 
@@ -609,7 +606,6 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
         """
         Helper function to fetch repository information including the star count of the original repository if forked.
         """
-
         repo_response = requests.get(repo_url)
         repo = repo_response.json()
         repo_url = repo['url']  # Using the URL directly from the repo data
@@ -636,11 +632,12 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
         """
         Helper function to fetch the count of open pull requests for a repository.
 
-        Parameters:
-        - repo_url: URL of the repository
+        Args:
+            repo_url (str): URL of the repository
 
         Returns:
-        The count of open pull requests.
+            int: The count of open pull requests.
+
         """
         prs_url = f"{repo_url}/pulls?state=open"
         prs_response = requests.get(prs_url)
@@ -683,6 +680,7 @@ def github_private_file_downloader(raw_url: str, token: str, dest_path: str) -> 
                        https://github.com/{owner}/{repo}/blob/{ref}/{path}
         token (str):  Personal access token with `repo` scope.
         dest_path (str): Local path where the file will be written.
+
     """
     import requests  # pyright: ignore[reportMissingModuleSource]
 

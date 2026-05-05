@@ -16,17 +16,23 @@ import pathlib
 from collections import defaultdict
 
 
+def _validate(condition: bool, message: str) -> None:
+    if not condition:
+        raise AssertionError(message)
+
+
 def _str_strip(string: str) -> str:
     return re.sub(pattern=r"[\s  ]+", repl=" ", string=str(string)).strip()
 
 
 def get_active_python_env() -> dict:
-    """Return active Python environment information.
+    """
+    Return active Python environment information.
 
     Returns:
         dict: Environment metadata including whether a virtual environment is active.
-    """
 
+    """
     conda_prefix = pathlib.Path(os.environ.get("CONDA_PREFIX", "")).as_posix()
     virtual_env = pathlib.Path(os.environ.get("VIRTUAL_ENV", "")).as_posix()
 
@@ -45,12 +51,13 @@ def get_active_python_env() -> dict:
 
 
 def import_package(pkg_name: str | tuple | list, options: list = None, verbose: bool = True) -> object:
-    """import a python package, if not exist, install the package and import it again.
+    """
+    Import a python package, if not exist, install the package and import it again.
     This function can be used in any package to avoid too much pre-installation of dependencies.
     In other words, this function will install the package only if it is needed.
 
     Args:
-        package_name (str): the package name, it can be a string or tuple or list.
+        pkg_name (str): the package name, it can be a string or tuple or list.
             if it's a string, it's the package name for both installation and import.
 
             if it's a tuple or list, it has two elements:
@@ -99,8 +106,8 @@ def import_package(pkg_name: str | tuple | list, options: list = None, verbose: 
 
     Returns:
         object: the imported package
-    """
 
+    """
     env_info = get_active_python_env()
 
     if options is None:
@@ -113,7 +120,7 @@ def import_package(pkg_name: str | tuple | list, options: list = None, verbose: 
         options = [opt for opt in options if opt != "--user"]
 
     # TDD, test-driven development: check inputs
-    assert isinstance(pkg_name, (str, tuple, list)), "The input pkg_name should be a string or tuple or list."
+    _validate(isinstance(pkg_name, (str, tuple, list)), "The input pkg_name should be a string or tuple or list.")
 
     # Step 1: check if the package name is a string
     if isinstance(pkg_name, str):
@@ -168,7 +175,8 @@ def import_package(pkg_name: str | tuple | list, options: list = None, verbose: 
 
 
 def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
-    """list all user-defined functions in a module.
+    """
+    List all user-defined functions in a module.
 
     Args:
         module (object, optional): the module name. Defaults to sys.modules[__name__].
@@ -180,8 +188,8 @@ def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
 
     Returns:
         list: a list of user-defined functions in the module.
-    """
 
+    """
     # Step 1: check if the model is a module
     if not inspect.ismodule(module):
         raise ValueError("The input is not a module.")
@@ -201,7 +209,8 @@ def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
 
 
 def is_user_defined_func(func_obj: object) -> bool:
-    """Check if a function is user-defined.
+    """
+    Check if a function is user-defined.
 
     Args:
         func_obj (object): the function object to check.
@@ -216,8 +225,8 @@ def is_user_defined_func(func_obj: object) -> bool:
 
     Returns:
         bool: True if the function is user-defined, False otherwise.
-    """
 
+    """
     try:
         # Try to get the file where the function is defined
         func_file = inspect.getfile(func_obj)
@@ -235,7 +244,8 @@ def is_user_defined_func(func_obj: object) -> bool:
 
 
 def is_module_importable(module_name: str) -> bool:
-    """Check whether a module is importable in the current Python environment.
+    """
+    Check whether a module is importable in the current Python environment.
 
     Args:
         module_name (str): the module name to import.
@@ -253,10 +263,10 @@ def is_module_importable(module_name: str) -> bool:
 
     Returns:
         bool: True if the module is importable, False otherwise.
-    """
 
+    """
     # TDD, test-driven development: check inputs
-    assert isinstance(module_name, str), "The input module name should be a string."
+    _validate(isinstance(module_name, str), "The input module name should be a string.")
 
     try:
         importlib.invalidate_caches()
@@ -267,7 +277,8 @@ def is_module_importable(module_name: str) -> bool:
 
 def get_user_defined_module(obj: object,
                             predicate: callable = lambda x: inspect.isfunction(x) or inspect.isclass(x)):
-    """Get only defined members.
+    """
+    Get only defined members.
 
     Args:
         obj (object)         : module.
@@ -283,8 +294,8 @@ def get_user_defined_module(obj: object,
 
     Returns:
         dict : ``{"member name" : "member object"}``
-    """
 
+    """
     imported_members_lst = get_user_imported_module(obj).values()
     imported_members = [element for sublist in imported_members_lst for element in sublist]
 
@@ -294,12 +305,13 @@ def get_user_defined_module(obj: object,
 
 
 def get_user_imported_module(obj: object) -> dict:
-    """Get import members.
+    """
+    Get import members.
 
     Args:
         obj (object) : module.
 
-    Returns
+    Returns:
         dict : ``{ "module" : ["import members"]}``
 
     Examples:
@@ -309,8 +321,8 @@ def get_user_imported_module(obj: object) -> dict:
             {'.decoder': ['JSONDecoder', 'JSONDecodeError'],
              '.encoder': ['JSONEncoder'],
              '': ['codecs']})
-    """
 
+    """
     if not inspect.ismodule(obj):
         raise ValueError("The input obj should be an importable module.")
 

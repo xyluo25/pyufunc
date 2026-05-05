@@ -62,7 +62,8 @@ def get_authors(revision_range):
     if "|" in cur_release:
         # e.g. v1.0.1|HEAD
         maybe_tag, head = cur_release.split("|")
-        assert head == "HEAD"
+        if head != "HEAD":
+            raise AssertionError("revision range suffix must be HEAD")
         if maybe_tag in this_repo.tags:
             cur_release = maybe_tag
         else:
