@@ -18,65 +18,55 @@ class TestSplitListByEqualSublist:
     def test_list_split_by_equal_sublist(self):
         lst = list(range(10))
         lst_ = list_split_by_equal_sublist(lst, num_of_sub=3)
-        if not ([list(dat) for dat in lst_] == [[0, 1, 2, 3], [4, 5, 6], [7, 8, 9]]):
-            raise AssertionError()
+        assert [list(dat) for dat in lst_] == [[0, 1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
     def test_with_invalid_num_of_sub(self):
         with pytest.raises(AssertionError) as excinfo:
             list(list_split_by_equal_sublist(list(range(10)), 0))
-        if not ("num_of_sub should be a positive integer" in str(excinfo.value)):
-            raise AssertionError()
+        assert "num_of_sub should be a positive integer" in str(excinfo.value)
 
     def test_with_invalid_lst_type(self):
         lst = str(list(range(10)))
         with pytest.raises(AssertionError) as excinfo:
             list(list_split_by_equal_sublist(lst, 3))
-        if not ("lst should be a list" in str(excinfo.value)):
-            raise AssertionError()
+        assert "lst should be a list" in str(excinfo.value)
 
     def test_with_invalid_num_of_sub_type(self):
         lst = list(range(10))
         with pytest.raises(AssertionError) as excinfo:
             list(list_split_by_equal_sublist(lst, "3"))
-        if not ("num_of_sub should be an integer" in str(excinfo.value)):
-            raise AssertionError()
+        assert "num_of_sub should be an integer" in str(excinfo.value)
 
     def test_with_num_of_sub_greater_than_lst_length(self):
         lst = list(range(10))
         lst_ = list(list_split_by_equal_sublist(lst, num_of_sub=20))
-        if not (lst == lst_):
-            raise AssertionError()
+        assert lst == lst_
 
 
 class TestSplitListByFixedLength:
     def test_list_split_by_fixed_length(self):
         lst = list(range(10))
         lst_ = list_split_by_fixed_length(lst, fixed_length=3)
-        if not ([list(dat) for dat in lst_] == [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]):
-            raise AssertionError()
+        assert [list(dat) for dat in lst_] == [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]
 
     def test_with_invalid_length(self):
         with pytest.raises(AssertionError) as excinfo:
             list(list_split_by_fixed_length(list(range(10)), fixed_length=0))
-        if not ("fixed_length should be a positive integer" in str(excinfo.value)):
-            raise AssertionError()
+        assert "fixed_length should be a positive integer" in str(excinfo.value)
 
     def test_with_invalid_lst_type(self):
         lst = str(list(range(10)))
         with pytest.raises(AssertionError) as excinfo:
             list(list_split_by_fixed_length(lst, fixed_length=3))
-        if not ("lst should be a list" in str(excinfo.value)):
-            raise AssertionError()
+        assert "lst should be a list" in str(excinfo.value)
 
     def test_with_invalid_length_type(self):
         lst = list(range(10))
         with pytest.raises(AssertionError) as excinfo:
             list(list_split_by_fixed_length(lst, fixed_length="3"))
-        if not ("fixed_length should be an integer" in str(excinfo.value)):
-            raise AssertionError()
+        assert "fixed_length should be an integer" in str(excinfo.value)
 
     def test_with_length_greater_than_lst_length(self):
         lst = list(range(10))
         lst_ = list_split_by_fixed_length(lst, fixed_length=20)
-        if not ([list(dat) for dat in lst_] == [lst]):
-            raise AssertionError()
+        assert [list(dat) for dat in lst_] == [lst]

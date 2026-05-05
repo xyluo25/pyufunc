@@ -30,27 +30,23 @@ class TestGetFileSize:
         # delete tmp_path
         tmp_path.rmdir()
 
-        if not (expected_output == result):
-            raise AssertionError()
+        assert expected_output == result
 
     def test_invalid_filename_type(self):
         with pytest.raises(AssertionError) as excinfo:
             get_file_size(123, "kb")
-        if not ("filename must be a string or Path" in str(excinfo.value)):
-            raise AssertionError()
+        assert "filename must be a string or Path" in str(excinfo.value)
 
     def test_invalid_unit(self):
         with pytest.raises(AssertionError) as excinfo:
             get_file_size("somefile.txt", "xyz")
-        if not ("unit must be one of 'kb', 'mb', 'gb', 'tb'" in str(excinfo.value)):
-            raise AssertionError()
+        assert "unit must be one of 'kb', 'mb', 'gb', 'tb'" in str(excinfo.value)
 
     def test_file_not_found(self, tmp_path):
         file_path = tmp_path / "nonexistent_file.txt"
         with pytest.raises(AssertionError) as excinfo:
             get_file_size(file_path, "kb")
-        if not ("File nonexistent_file.txt does not found" in str(excinfo.value)):
-            raise AssertionError()
+        assert "File nonexistent_file.txt does not found" in str(excinfo.value)
 
 
 class TestGetDirSize:
@@ -71,23 +67,19 @@ class TestGetDirSize:
         shutil.rmtree(dir_path, ignore_errors=True)
 
         # Check the result
-        if not (result == f"Directory size: test_directory {expected_size_kb} kb"):
-            raise AssertionError()
+        assert result == f"Directory size: test_directory {expected_size_kb} kb"
 
     def test_invalid_directory_type(self):
         with pytest.raises(AssertionError) as excinfo:
             get_dir_size(123, "kb")
-        if not ("directory must be a string" in str(excinfo.value)):
-            raise AssertionError()
+        assert "directory must be a string" in str(excinfo.value)
 
     def test_invalid_unit(self):
         with pytest.raises(AssertionError) as excinfo:
             get_dir_size("some_directory", "xyz")
-        if not ("unit must be one of 'kb', 'mb', 'gb', 'tb'" in str(excinfo.value)):
-            raise AssertionError()
+        assert "unit must be one of 'kb', 'mb', 'gb', 'tb'" in str(excinfo.value)
 
     def test_directory_not_found(self):
         with pytest.raises(AssertionError) as excinfo:
             get_dir_size("nonexistent_directory", "kb")
-        if not ("Directory nonexistent_directory does not found" in str(excinfo.value)):
-            raise AssertionError()
+        assert "Directory nonexistent_directory does not found" in str(excinfo.value)
