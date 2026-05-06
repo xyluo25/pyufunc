@@ -139,7 +139,8 @@ class GitHubFileDownloader:
             raise ValueError("Invalid GitHub URL: missing branch segment (e.g. /tree/<branch>/ or /blob/<branch>/)")
         download_paths = url[branch.end():]
 
-        api_url = f'{url[:branch.start()].replace("github.com", "api.github.com/repos", 1)}/contents/{download_paths}?ref={branch[2]}'
+        api_url = (f'{url[:branch.start()].replace("github.com", "api.github.com/repos", 1)}'
+                   f'/contents/{download_paths}?ref={branch[2]}')
 
         return (api_url, download_paths)
 

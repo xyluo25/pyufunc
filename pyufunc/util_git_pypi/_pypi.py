@@ -10,10 +10,11 @@ from pyufunc.util_magic import requires
 
 @requires("requests", ("beautifulsoup4", "bs4"))
 def pypi_downloads(pkg_name: str) -> dict:
-    """Get the total downloads of a package from PyPI.
+    """
+    Get the total downloads of a package from PyPI.
 
     Args:
-        package (str): The name of the package.
+        pkg_name (str): The name of the package.
 
     Returns:
         dict: A dictionary containing the total downloads of the package.
@@ -24,8 +25,8 @@ def pypi_downloads(pkg_name: str) -> dict:
 
         >>> pypi_downloads("pandas123")  # package is not found
         {'pandas123': 0}
-    """
 
+    """
     # import packages required for this function
     import requests  # pyright: ignore[reportMissingModuleSource]
     from bs4 import BeautifulSoup  # pyright: ignore[reportMissingImports]
