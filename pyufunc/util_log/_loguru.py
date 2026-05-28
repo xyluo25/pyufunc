@@ -14,5 +14,6 @@ from pyufunc.util_magic import requires
 def log_logger():
 
     import loguru  # pyright: ignore[reportMissingImports]
+
     # from loguru import logger
     return loguru.logger

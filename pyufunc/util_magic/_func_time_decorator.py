@@ -46,8 +46,7 @@ def func_running_time(func: object) -> object:
         time_start = datetime.datetime.now()
         res = func(*args, **kwargs)
         time_diff = datetime.datetime.now() - time_start
-        print(
-            f'  :INFO: finished function: {func.__name__}, total: {time_diff.seconds}s \n')
+        print(f"  :INFO: finished function: {func.__name__}, total: {time_diff.seconds}s \n")
         return res
 
     return inner
@@ -89,8 +88,7 @@ def func_time(func: object) -> object:
         time_start = datetime.datetime.now()
         res = func(*args, **kwargs)
         time_diff = datetime.datetime.now() - time_start
-        print(
-            f'  :INFO: finished function: {func.__name__}, total: {time_diff.seconds}s \n')
+        print(f"  :INFO: finished function: {func.__name__}, total: {time_diff.seconds}s \n")
         return res
 
     return inner

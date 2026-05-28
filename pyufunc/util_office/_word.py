@@ -16,7 +16,7 @@ from pyufunc.util_magic._dependency_requires_decorator import requires
 
 @requires(("pywin32", "win32com"))
 def doc2pdf(doc_fname: str, pdf_fname: str = None, verbose: bool = False) -> None:
-    """Convert a word document to pdf file on Windows platform
+    """Convert a word document to pdf file on Windows platform.
 
     Args:
         doc_fname (str): word document file name
@@ -34,7 +34,6 @@ def doc2pdf(doc_fname: str, pdf_fname: str = None, verbose: bool = False) -> Non
         >>> doc2pdf('test.docx', 'test.pdf', verbose=True)
         Successfully convert test.docx to test.pdf
     """
-
     # check platform
     if not is_windows():
         print("This function only works on Windows platform")
@@ -45,11 +44,11 @@ def doc2pdf(doc_fname: str, pdf_fname: str = None, verbose: bool = False) -> Non
     # prepare input and out file names
     doc_fname = Path(doc_fname).resolve()
     if pdf_fname is None:
-        pdf_fname = doc_fname.with_suffix('.pdf')
+        pdf_fname = doc_fname.with_suffix(".pdf")
     else:
         pdf_fname = Path(pdf_fname).resolve()
 
-    word = Dispatch('Word.Application')
+    word = Dispatch("Word.Application")
     doc = word.Documents.Open(doc_fname)
     doc.SaveAs(pdf_fname, FileFormat=17)
     doc.Close()

@@ -85,16 +85,16 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
 
     # calculate the new longitude and latitude
     lat = math.asin(math.sin(lat1) * math.cos(d_by_r) + math.cos(lat1) * math.sin(d_by_r) * math.cos(bearing))
-    lon = lon1 + math.atan2(math.sin(bearing) * math.sin(d_by_r) * math.cos(lat1),
-                            math.cos(d_by_r) - math.sin(lat1) * math.sin(lat))
+    lon = lon1 + math.atan2(
+        math.sin(bearing) * math.sin(d_by_r) * math.cos(lat1), math.cos(d_by_r) - math.sin(lat1) * math.sin(lat)
+    )
     return [to_degrees(lon), to_degrees(lat)]
 
 
 @requires("shapely")
-def create_circle_at_point_with_radius(point: Point | Iterable[float],
-                                       radius: float,
-                                       options: dict = None,
-                                       verbose: bool = False) -> dict:
+def create_circle_at_point_with_radius(
+    point: Point | Iterable[float], radius: float, options: dict = None, verbose: bool = False
+) -> dict:
     """
     Generate a polygon by the center point and radius.
 
@@ -158,8 +158,10 @@ def create_circle_at_point_with_radius(point: Point | Iterable[float],
     from shapely.geometry import Point  # pyright: ignore[reportMissingModuleSource]
 
     # TDD, test driven development: input validation
-    _validate(isinstance(point, (Point, Iterable)), ("the point should be a shapely.geometry.Point "
-                                                     "or a list of longitude and latitude"))
+    _validate(
+        isinstance(point, (Point, Iterable)),
+        ("the point should be a shapely.geometry.Point or a list of longitude and latitude"),
+    )
     _validate(isinstance(radius, (int, float)), "the radius should be a number")
     _validate(isinstance(options, dict), "the options should be a dictionary")
 

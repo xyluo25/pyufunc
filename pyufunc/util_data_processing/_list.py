@@ -55,17 +55,17 @@ def list_split_by_equal_sublist(lst: list, num_of_sub: int) -> Generator:
         # equally split the list
         if mod_value == 0:
             for i in range(0, len(lst), sub_size):
-                yield lst[i:i + sub_size]
+                yield lst[i : i + sub_size]
 
         # split the list with the mod value
         else:
             mod_value_count = 0
             for i in range(num_of_sub):
                 if mod_value_count < mod_value:
-                    yield lst[i * (sub_size + 1):(i + 1) * (sub_size + 1)]
+                    yield lst[i * (sub_size + 1) : (i + 1) * (sub_size + 1)]
                     mod_value_count += 1
                 else:
-                    yield lst[i * sub_size + mod_value:(i + 1) * sub_size + mod_value]
+                    yield lst[i * sub_size + mod_value : (i + 1) * sub_size + mod_value]
 
 
 def list_split_by_fixed_length(lst: list, fixed_length: int) -> Generator:
@@ -102,7 +102,7 @@ def list_split_by_fixed_length(lst: list, fixed_length: int) -> Generator:
     _validate(fixed_length > 0, "fixed_length should be a positive integer")
 
     for i in range(0, len(lst), fixed_length):
-        yield lst[i:i + fixed_length]
+        yield lst[i : i + fixed_length]
 
 
 def list_flatten_nested(nest_lst: list) -> list:

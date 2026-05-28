@@ -12,14 +12,16 @@ from pyufunc.util_datetime._dt_format import fmt_str_to_dt, fmt_dt_to_str
 from pyufunc.__cfg import config_datetime_fmt
 
 
-def add_date_in_filename(filename: str,
-                         date: str | datetime.datetime = "",
-                         *,
-                         dt_fmt="%Y-%m-%d",
-                         as_prefix: bool = False,
-                         as_suffix: bool = True,
-                         verbose: bool = True) -> str:
-    """Add date str in filename
+def add_date_in_filename(
+    filename: str,
+    date: str | datetime.datetime = "",
+    *,
+    dt_fmt="%Y-%m-%d",
+    as_prefix: bool = False,
+    as_suffix: bool = True,
+    verbose: bool = True,
+) -> str:
+    """Add date str in filename.
 
     Args:
         filename (str): filename string
@@ -87,12 +89,10 @@ def add_date_in_filename(filename: str,
         return filename
 
 
-def generate_dir_with_date(root_dir: str = "",
-                           date: str | datetime.datetime = "",
-                           *,
-                           date_fmt: str = "%Y-%m-%d",
-                           exist_ok: bool = True) -> str:
-    """Generate directory with date
+def generate_dir_with_date(
+    root_dir: str = "", date: str | datetime.datetime = "", *, date_fmt: str = "%Y-%m-%d", exist_ok: bool = True
+) -> str:
+    """Generate directory with date.
 
     Args:
         root_dir (str, optional): specify root dir, if not specified, use current dir. Defaults to "".
@@ -111,7 +111,6 @@ def generate_dir_with_date(root_dir: str = "",
         >>> generate_dir_with_date()
         "/home/user/2024-05/2024-05-16"
     """
-
     # check root directory
     if not root_dir:
         root_dir = os.getcwd()

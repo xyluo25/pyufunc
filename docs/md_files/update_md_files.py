@@ -16,6 +16,7 @@ except ImportError:
     print("root_path: ", root_path)
     os.chdir(root_path)
     import pyufunc as pf
+
     os.chdir(current_path)
 
 
@@ -32,6 +33,11 @@ def _format_util_func_by_category(config_func_category: dict) -> str:
 
 
 def update_util_func_by_keywords_md(path_keyword: str) -> None:
+    """Update the keyword utility listing in a Markdown file.
+
+    Args:
+        path_keyword (str): Path to the keyword Markdown file.
+    """
     with open(path_keyword, "r", encoding="utf-8") as f:
         keyword = f.read()
     f.close()
@@ -47,16 +53,18 @@ def update_util_func_by_keywords_md(path_keyword: str) -> None:
 
 
 def update_util_func_by_category_md(path_category: str) -> None:
+    """Update the category utility listing in a Markdown file.
+
+    Args:
+        path_category (str): Path to the category Markdown file.
+    """
     with open(path_category, "r", encoding="utf-8") as f:
         category = f.read()
     f.close()
 
     util_func_starting = category.find("Available utility functions in pyUFunc")
 
-    category_new = (
-        category[:util_func_starting]
-        + _format_util_func_by_category(pf.show_util_func_by_category(False))
-    )
+    category_new = category[:util_func_starting] + _format_util_func_by_category(pf.show_util_func_by_category(False))
 
     with open(path_category, "w", encoding="utf-8") as f_new:
         f_new.write(category_new)

@@ -1,25 +1,24 @@
-"""
 # -*- coding:utf-8 -*-
 ##############################################################
 # Created Date: Wednesday, May 1st 2024
 # Contact Info: luoxiangyong01@gmail.com
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
-"""
 
 from __future__ import absolute_import
 from collections.abc import Callable
 from typing import Any, TypeVar, cast
 
-from pyufunc.util_magic._import_package import (is_module_importable,
-                                                import_package)
+from pyufunc.util_magic._import_package import is_module_importable, import_package
 
 F = TypeVar("F", bound=Callable[..., Any])
 
 
 # decorator with extra arguments
 def requires(*args, **kwargs) -> Callable[[F], F]:
-    """A decorator to wrap functions with extra dependencies.
+    """
+    Wrap a function with extra dependency checks.
+
     If the dependencies are not available, the function will not run.
 
     Args:
@@ -62,8 +61,8 @@ def requires(*args, **kwargs) -> Callable[[F], F]:
 
     Returns:
         object: the decorated function.
-    """
 
+    """
     # get the verbose option, default is True
     # the verbose option is used to print the error message
     verbose = kwargs.get("verbose", True)
@@ -104,20 +103,22 @@ def requires(*args, **kwargs) -> Callable[[F], F]:
             if verbose:
                 print(f"  :Info: installing {','.join(missing_install_name)}...")
             for pkg_name in missing_pkg_name:
-                import_package(pkg_name, verbose=verbose)
+                import_package(pkg_name, verbose=verbose, auto_install=True)
             available = [is_module_importable(arg) for arg in missing_import_name]
             if all(available):
                 return function
 
         def passer(*args, **kwargs):
             if verbose:
-                print(f"  :{function.__name__} missing dependency {','.join(missing_install_name)}"
-                      ", please install manually or use pyufunc package: pf.import_package(<module_name>).")
-                return None
+                print(
+                    f"  :{function.__name__} missing dependency {','.join(missing_install_name)}"
+                    ", please install manually or use pyufunc package: "
+                    "pf.import_package(<module_name>, auto_install=True)."
+                )
             # if verbose and not auto_install:
             #     print("  :You can set auto_install=True to install the package automatically,")
             #     print(f"  :eg. @requires{args_requires}" + ", auto_install=True)\n")
-            return function(*args, **kwargs)
+            return None
 
         return cast(F, passer)
 

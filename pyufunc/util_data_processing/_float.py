@@ -9,10 +9,10 @@ from typing import Any
 
 
 def is_float(value: Any = "") -> bool:
-    """Check if the value can be converted to float
+    """Check if the value can be converted to float.
 
     Args:
-        val (Any): the value to be checked
+        value (Any): the value to be checked.
 
     Returns:
         bool : if the value can be converted to float
@@ -30,7 +30,6 @@ def is_float(value: Any = "") -> bool:
         >>> is_float("abc")
         False
     """
-
     if value and isinstance(value, (int, float, str)):
         try:
             float(value)

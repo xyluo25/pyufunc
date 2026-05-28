@@ -41,11 +41,9 @@ def cvt_gcj02_to_baidu09(gcj_lng: float, gcj_lat: float) -> tuple[float, float]:
 
     # check if the input is in China
     if not 72.004 <= gcj_lng <= 137.8347:
-        raise ValueError(
-            "Longitude outside of China, please don't use this function for coordinates outside of China.")
+        raise ValueError("Longitude outside of China, please don't use this function for coordinates outside of China.")
     if not 0.8293 <= gcj_lat <= 55.8271:
-        raise ValueError(
-            "Latitude outside of China, please don't use this function for coordinates outside of China.")
+        raise ValueError("Latitude outside of China, please don't use this function for coordinates outside of China.")
 
     x_pi = PI * 3000.0 / 180.0
 
@@ -90,11 +88,9 @@ def cvt_baidu09_to_gcj02(baidu_lng: float, baidu_lat: float) -> tuple[float, flo
 
     # check if the input is in China
     if not 72.004 <= baidu_lng <= 137.8347:
-        raise ValueError(
-            "Longitude outside of China, please don't use this function for coordinates outside of China.")
+        raise ValueError("Longitude outside of China, please don't use this function for coordinates outside of China.")
     if not 0.8293 <= baidu_lat <= 55.8271:
-        raise ValueError(
-            "Latitude outside of China, please don't use this function for coordinates outside of China.")
+        raise ValueError("Latitude outside of China, please don't use this function for coordinates outside of China.")
 
     x_pi = PI * 3000.0 / 180.0
 
@@ -128,7 +124,6 @@ def cvt_wgs84_to_gcj02(wgs84_lng: float, wgs84_lat: float) -> tuple[float, float
     See Also:
         - https://github.com/sshuair/coord-convert
     """
-
     # TDD: check if the input is valid
     if not isinstance(wgs84_lng, (int, float)):
         raise TypeError("Invalid input for longitude.")
@@ -265,11 +260,9 @@ def cvt_baidu09_to_wgs84(baidu_lng: float, baidu_lat: float) -> tuple[float, flo
 
     # check if the input is in China
     if not 72.004 <= baidu_lng <= 137.8347:
-        raise ValueError(
-            "Longitude outside of China, please don't use this function for coordinates outside of China.")
+        raise ValueError("Longitude outside of China, please don't use this function for coordinates outside of China.")
     if not 0.8293 <= baidu_lat <= 55.8271:
-        raise ValueError(
-            "Latitude outside of China, please don't use this function for coordinates outside of China.")
+        raise ValueError("Latitude outside of China, please don't use this function for coordinates outside of China.")
 
     gcj_lng, gcj_lat = cvt_baidu09_to_gcj02(baidu_lng, baidu_lat)
     wgs84_lng, wgs84_lat = cvt_gcj02_to_wgs84(gcj_lng, gcj_lat)
@@ -297,7 +290,6 @@ def cvt_wgs84_to_baidu09(wgs84_lng: float, wgs84_lat: float) -> tuple[float, flo
         if the input is not in China, the result may be inaccurate.
         The package will check if the input is valid, and raise an error if the input is invalid.
     """
-
     # TDD: check if the input is valid
     if not isinstance(wgs84_lng, (int, float)):
         raise TypeError("Invalid input for longitude.")
@@ -312,11 +304,9 @@ def cvt_wgs84_to_baidu09(wgs84_lng: float, wgs84_lat: float) -> tuple[float, flo
 
     # check if the input is in China
     if not 72.004 <= wgs84_lng <= 137.8347:
-        raise ValueError(
-            "Longitude outside of China, please don't use this function for coordinates outside of China.")
+        raise ValueError("Longitude outside of China, please don't use this function for coordinates outside of China.")
     if not 0.8293 <= wgs84_lat <= 55.8271:
-        raise ValueError(
-            "Latitude outside of China, please don't use this function for coordinates outside of China.")
+        raise ValueError("Latitude outside of China, please don't use this function for coordinates outside of China.")
 
     gcj_lng, gcj_lat = cvt_wgs84_to_gcj02(wgs84_lng, wgs84_lat)
     baidu_lng, baidu_lat = cvt_gcj02_to_baidu09(gcj_lng, gcj_lat)
@@ -325,41 +315,34 @@ def cvt_wgs84_to_baidu09(wgs84_lng: float, wgs84_lat: float) -> tuple[float, flo
 
 
 def _cvt_lat(lng: float, lat: float) -> float:
-    """latitude adjustment based on the longitude and latitude.
+    """Latitude adjustment based on the longitude and latitude.
 
     Args:
-        x (float): longitude
-        y (float): latitude
+        lng (float): Longitude.
+        lat (float): Latitude.
 
     Returns:
         float: latitude adjustment on spherical coordinate system.
     """
-
-    ret = -100.0 + 2.0 * lng + 3.0 * lat + 0.2 * \
-        lat * lat + 0.1 * lng * lat + 0.2 * sqrt(fabs(lng))
-    ret = ret + (20.0 * sin(6.0 * lng * PI) + 20.0 *
-                 sin(2.0 * lng * PI)) * 2.0 / 3.0
+    ret = -100.0 + 2.0 * lng + 3.0 * lat + 0.2 * lat * lat + 0.1 * lng * lat + 0.2 * sqrt(fabs(lng))
+    ret = ret + (20.0 * sin(6.0 * lng * PI) + 20.0 * sin(2.0 * lng * PI)) * 2.0 / 3.0
     ret = ret + (20.0 * sin(lat * PI) + 40.0 * sin(lat / 3.0 * PI)) * 2.0 / 3.0
-    ret = ret + (160.0 * sin(lat / 12.0 * PI) + 320.0 *
-                 sin(lat * PI / 30.0)) * 2.0 / 3.0
+    ret = ret + (160.0 * sin(lat / 12.0 * PI) + 320.0 * sin(lat * PI / 30.0)) * 2.0 / 3.0
     return ret
 
 
 def _cvt_lon(lng: float, lat: float) -> float:
-    """longitude adjustment based on the longitude and latitude.
+    """Longitude adjustment based on the longitude and latitude.
 
     Args:
-        x (float): longitude
-        y (float): latitude
+        lng (float): Longitude.
+        lat (float): Latitude.
 
     Returns:
         float: longitude adjustment on spherical coordinate system.
     """
-    ret = 300.0 + lng + 2.0 * lat + 0.1 * lng * \
-        lng + 0.1 * lng * lat + 0.1 * sqrt(fabs(lng))
-    ret = ret + (20.0 * sin(6.0 * lng * PI) + 20.0 *
-                 sin(2.0 * lng * PI)) * 2.0 / 3.0
+    ret = 300.0 + lng + 2.0 * lat + 0.1 * lng * lng + 0.1 * lng * lat + 0.1 * sqrt(fabs(lng))
+    ret = ret + (20.0 * sin(6.0 * lng * PI) + 20.0 * sin(2.0 * lng * PI)) * 2.0 / 3.0
     ret = ret + (20.0 * sin(lng * PI) + 40.0 * sin(lng / 3.0 * PI)) * 2.0 / 3.0
-    ret = ret + (150.0 * sin(lng / 12.0 * PI) + 300.0 *
-                 sin(lng * PI / 30.0)) * 2.0 / 3.0
+    ret = ret + (150.0 * sin(lng / 12.0 * PI) + 300.0 * sin(lng * PI / 30.0)) * 2.0 / 3.0
     return ret

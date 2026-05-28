@@ -5,6 +5,8 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
+"""Algorithm utility exports."""
+
 from ._sort import (
     algo_quick_sort,
     algo_merge_sort,
@@ -12,7 +14,6 @@ from ._sort import (
     algo_selection_sort,
     algo_insertion_sort,
     algo_bubble_sort,
-
 )
 
 __all__ = [

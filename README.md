@@ -21,7 +21,7 @@ Pyufunc aims to bring together the commonly used utility functions from differen
 Let pyufunc take care of the repetitive tasks while you focus on building remarkable Python applications. Empower your projects with the efficiency and elegance that comes with pyufunc - your all-inclusive Python utility toolkit. Happy coding!
 
 > [!TIP]
-> 🚀️ **As we develop, design, and integrate utility functions from different packages, users will be prompted to install the required package whenever a utility function is called and that package is not available in the working environment.**
+> **pyufunc does not install optional dependencies automatically. If a utility function needs a package that is not available in the working environment, pyufunc reports the missing dependency and skips the function call. Users can install the dependency manually, or explicitly opt in with `auto_install=True` where supported.**
 
 ## Existing Utility Functions Categorized by Functionality
 

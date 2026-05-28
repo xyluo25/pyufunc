@@ -5,15 +5,15 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
+"""Office automation utility exports."""
+
 from ._email import is_valid_email, send_email
 from ._printer import printer_file
 
 __all__ = [
-
     # .email
     "is_valid_email",
     "send_email",
-
     # .printer
     "printer_file",
 ]

@@ -48,7 +48,6 @@ def str_digit_to_int(string: str) -> int:
         >>> str_digit_to_int("123.9")
         123
     """
-
     # TDD
     if not isinstance(string, str):
         raise TypeError("The input must be a string.")
@@ -82,7 +81,6 @@ def str_digit_to_float(string: str) -> float:
         >>> str_digit_to_float("123.9")
         123.9
     """
-
     # TDD
     if not isinstance(string, str):
         raise TypeError("The input must be a string.")

@@ -1,4 +1,3 @@
-
 # This file is execfile()d with the current directory set to its containing
 # dir.
 #
@@ -19,7 +18,7 @@ import datetime
 root = Path(__file__).resolve().parents[2]
 sys.path = [str(root)] + sys.path
 
-import pyufunc
+import pyufunc  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
@@ -30,8 +29,8 @@ sys.path.insert(0, os.path.abspath("./sphinxext"))
 
 # General information about the project.
 project = "pyufunc"
-copyright = f'2023 - {datetime.datetime.now().year} , Xiangyong Luo'
-author = 'Xiangyong Luo'
+copyright = f"2023 - {datetime.datetime.now().year} , Xiangyong Luo"
+author = "Xiangyong Luo"
 version = str(pyufunc.__version__)
 release = version
 language = "en"
@@ -42,7 +41,7 @@ master_doc = "index"
 
 # -- General configuration -----------------------------------------------
 extensions = [
-    'sphinx.ext.napoleon',
+    "sphinx.ext.napoleon",
     "sphinx_copybutton",
     "sphinx_design",
     "sphinx.ext.autodoc",
@@ -121,13 +120,9 @@ html_theme_options = {
     "navbar_start": ["navbar-logo"],
     "navbar_end": ["theme-switcher", "navbar-icon-links"],
     "navbar_persistent": ["search-button"],
-
     "external_links": [],
-
     "github_url": "https://github.com/xyluo25/pyufunc",
-
     "logo": {"image_dark": "./_static/pyufunc_logo.png"},
-
     "show_version_warning_banner": True,
     "icon_links": [
         {
@@ -136,7 +131,6 @@ html_theme_options = {
             "icon": "fab fa-linkedin",
         }
     ],
-
     # footer
     "footer_start": ["copyright", "sphinx-version"],
     "footer_end": [],
@@ -214,9 +208,7 @@ ipython_execlines = [
 
 # based on numpy doc/source/conf.py
 def linkcode_resolve(domain, info) -> str | None:
-    """
-    Determine the URL corresponding to Python object
-    """
+    """Determine the URL corresponding to a Python object."""
     if domain != "py":
         return None
 
@@ -247,14 +239,4 @@ def linkcode_resolve(domain, info) -> str | None:
     if not fn:
         return None
 
-    try:
-        source, lineno = inspect.getsourcelines(obj)
-    except TypeError:
-        try:  # property
-            source, lineno = inspect.getsourcelines(obj.fget)
-        except (AttributeError, TypeError):
-            lineno = None
-    except OSError:
-        lineno = None
-
-    linespec = f"#L{lineno}-L{lineno + len(source) - 1}" if lineno else ""
+    return None

@@ -1,4 +1,3 @@
-
 """Utilities for working with GitHub and PyPI resources."""
 
 from ._github import github_file_downloader, github_get_status, github_private_file_downloader
@@ -9,4 +8,4 @@ __all__ = [
     "pypi_downloads",
     "github_get_status",
     "github_private_file_downloader",
-    ]
+]

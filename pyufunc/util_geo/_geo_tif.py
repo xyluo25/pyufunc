@@ -1,10 +1,10 @@
-'''
+"""
 ##############################################################
 # Created Date: Wednesday, January 15th 2025
 # Contact Info: luoxiangyong01@gmail.com
-# Author/Copyright: Mr. Xiangyong Luo
+# Author/Copyright: Mr. Xiangyong Luo.
 ##############################################################
-'''
+"""
 
 from pyufunc.util_magic import requires
 
@@ -77,7 +77,7 @@ def download_elevation_tif_by(bbox: tuple | list, output_file: str) -> None:
         "datasets": "National Elevation Dataset (NED) 1/3 arc-second",
         "bbox": ",".join(map(str, bbox)),
         "outputFormat": "json",
-        "extentType": "bbox"
+        "extentType": "bbox",
     }
 
     # Make a request to the API
@@ -100,8 +100,8 @@ def download_elevation_tif_by(bbox: tuple | list, output_file: str) -> None:
     # Extract date from each URL
     def extract_date(url):
         try:
-            date_str = url.split('_')[-1].split('.')[0]
-            return datetime.strptime(date_str, '%Y%m%d')
+            date_str = url.split("_")[-1].split(".")[0]
+            return datetime.strptime(date_str, "%Y%m%d")
         except Exception:
             return None
 
@@ -113,7 +113,7 @@ def download_elevation_tif_by(bbox: tuple | list, output_file: str) -> None:
     tiff_response = requests.get(latest_url, stream=True)
     if tiff_response.status_code == 200:
         # Get the total file size in MB
-        total_size = int(tiff_response.headers.get('content-length', 0))
+        total_size = int(tiff_response.headers.get("content-length", 0))
         total_size_mb = total_size / (1024 * 1024)
         print(f"  Total file size: {total_size_mb:.2f} MB")
 

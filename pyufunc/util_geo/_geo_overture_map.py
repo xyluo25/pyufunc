@@ -1,10 +1,10 @@
-'''
+"""
 ##############################################################
 # Created Date: Thursday, March 27th 2025
 # Contact Info: luoxiangyong01@gmail.com
-# Author/Copyright: Mr. Xiangyong Luo
+# Author/Copyright: Mr. Xiangyong Luo.
 ##############################################################
-'''
+"""
 
 from __future__ import annotations
 
@@ -20,10 +20,9 @@ if TYPE_CHECKING:
 from pyufunc.util_magic import requires
 
 
-def download_overture_map(bbox: list[float] = None,
-                          map_type: str = "buildings",
-                          output_fmt: str = "geojson",
-                          output_fname: str = ""):
+def download_overture_map(
+    bbox: list[float] = None, map_type: str = "buildings", output_fmt: str = "geojson", output_fname: str = ""
+):
     """
     Download Overture map data within a specified bounding box and theme type and save it in the specified format.
 
@@ -46,7 +45,6 @@ def download_overture_map(bbox: list[float] = None,
     Returns:
         geopandas.GeoDataFrame: A GeoDataFrame containing the Overture map data.
     """
-
     # check input parameters
     if not isinstance(bbox, (tuple, list)):
         raise ValueError("Bounding box must be a tuple or list.")
@@ -121,7 +119,7 @@ class BaseGeoJSONWriter:
     """
     A base feature writer that manages either a file handle
     or output stream. Subclasses should implement write_feature()
-    and finalize() if needed
+    and finalize() if needed.
     """
 
     def __init__(self, where):
@@ -202,7 +200,7 @@ class GeoJSONWriter(BaseGeoJSONWriter):
 
 @requires("pyarrow")
 def record_batch_reader(overture_type: str, bbox=None) -> pa.RecordBatchReader:
-    """Return a pyarrow RecordBatchReader for the desired bounding box and s3 path
+    """Return a pyarrow RecordBatchReader for the desired bounding box and s3 path.
 
     Args:
         overture_type (str): The type of Overture map data to load. Options include
@@ -248,7 +246,7 @@ def record_batch_reader(overture_type: str, bbox=None) -> pa.RecordBatchReader:
 
 @requires("geopandas")
 def geodataframe(overture_type: str, bbox: tuple[float, float, float, float] = None) -> GeoDataFrame:
-    """ Loads geoparquet for specified type into a geopandas dataframe
+    """Loads geoparquet for specified type into a geopandas dataframe.
 
     Args:
         overture_type (str): The type of Overture map data to load. Options include
@@ -269,7 +267,7 @@ def geodataframe(overture_type: str, bbox: tuple[float, float, float, float] = N
 
 def geoarrow_schema_adapter(schema: pa.Schema) -> pa.Schema:
     """
-    Convert a geoarrow-compatible schema to a proper geoarrow schema
+    Convert a geoarrow-compatible schema to a proper geoarrow schema.
 
     This assumes there is a single "geometry" column with WKB formatting
 
@@ -277,7 +275,7 @@ def geoarrow_schema_adapter(schema: pa.Schema) -> pa.Schema:
     ----------
     schema: pa.Schema
 
-    Returns
+    Returns:
     -------
     pa.Schema
     A copy of the input schema with the geometry field replaced with
@@ -286,9 +284,7 @@ def geoarrow_schema_adapter(schema: pa.Schema) -> pa.Schema:
     """
     geometry_field_index = schema.get_field_index("geometry")
     geometry_field = schema.field(geometry_field_index)
-    geoarrow_geometry_field = geometry_field.with_metadata(
-        {b"ARROW:extension:name": b"geoarrow.wkb"}
-    )
+    geoarrow_geometry_field = geometry_field.with_metadata({b"ARROW:extension:name": b"geoarrow.wkb"})
 
     return schema.set(geometry_field_index, geoarrow_geometry_field)
 
@@ -315,7 +311,7 @@ type_theme_map = {
 def _dataset_path(overture_type: str) -> str:
     """
     Returns the s3 path of the Overture dataset to use. This assumes overture_type has
-    been validated, e.g. by the CLI
+    been validated, e.g. by the CLI.
 
     """
     # Map of sub-partition "type" to parent partition "theme" for forming the

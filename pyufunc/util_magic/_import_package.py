@@ -50,11 +50,17 @@ def get_active_python_env() -> dict:
     return env_info
 
 
-def import_package(pkg_name: str | tuple | list, options: list = None, verbose: bool = True) -> object:
+def import_package(
+    pkg_name: str | tuple | list,
+    options: list | None = None,
+    verbose: bool = True,
+    auto_install: bool = False,
+) -> object | None:
     """
-    Import a python package, if not exist, install the package and import it again.
-    This function can be used in any package to avoid too much pre-installation of dependencies.
-    In other words, this function will install the package only if it is needed.
+    Import a python package and optionally install it when it is missing.
+
+    This function does not install packages by default. Pass ``auto_install=True``
+    to opt in to installing a missing package with pip before importing it.
 
     Args:
         pkg_name (str): the package name, it can be a string or tuple or list.
@@ -69,12 +75,15 @@ def import_package(pkg_name: str | tuple | list, options: list = None, verbose: 
             eg: ["pillow==8.3.1", "PIL"];
             eg: ["opencv-python", "cv2"];
 
-        options (list, optional): optional pip install arguments.
+        options (list, optional): optional pip install arguments used only when auto_install=True.
             eg: '--force-reinstall', '--ignore-installed'.
-            If not provided, this function installs into the active virtual environment
-            (venv/conda). When no virtual environment is active, it falls back to '--user'.
+            If not provided and auto_install=True, this function installs into the active
+            virtual environment (venv/conda). When no virtual environment is active,
+            it falls back to '--user'.
         verbose (bool, optional): print the error message if the package is not available.
             Defaults to True.
+        auto_install (bool, optional): install the missing package automatically.
+            Defaults to False.
 
     Note:
         - if the module name different from import name
@@ -92,20 +101,20 @@ def import_package(pkg_name: str | tuple | list, options: list = None, verbose: 
 
         >>> # not existed
         >>> numpy = import_package("numpy")
-        >>> :numpy not existed in current env, installing...
+        >>> :Info: missing dependency numpy. Please install it manually or call import_package(..., auto_install=True).
 
         >>> # specify the version
-        >>> numpy = import_package("numpy==1.19.5")
+        >>> numpy = import_package("numpy==1.19.5", auto_install=True)
         >>> :Package numpy==1.19.5 not existed in current env, installing...
 
         >>> # different name for installation and import
         >>> PIL = import_package(("pillow", "PIL"))
-        >>> cv2 = import_package(["opencv-python", "cv2"])
-        >>> cv2 = import_package(["opencv-python", "cv2"], options=["--force-reinstall"])
-        >>> cv2 = import_package(["opencv-python==4.9.0.80", "cv2"])
+        >>> cv2 = import_package(["opencv-python", "cv2"], auto_install=True)
+        >>> cv2 = import_package(["opencv-python", "cv2"], options=["--force-reinstall"], auto_install=True)
+        >>> cv2 = import_package(["opencv-python==4.9.0.80", "cv2"], auto_install=True)
 
     Returns:
-        object: the imported package
+        object | None: the imported package, or None when the package cannot be imported.
 
     """
     env_info = get_active_python_env()
@@ -135,19 +144,26 @@ def import_package(pkg_name: str | tuple | list, options: list = None, verbose: 
     try:
         # import package from current environment
         module = importlib.import_module(import_name)
-    except Exception:
+    except ImportError:
+        if not auto_install:
+            if verbose:
+                print(f"  :active python env: {env_info['name']} ({env_info['python']})")
+                print(
+                    f"  :Info: missing dependency {module_name}. "
+                    "Please install it manually or call import_package(..., auto_install=True)."
+                )
+            return None
+
         if verbose:
             print(f"  :active python env: {env_info['name']} ({env_info['python']})")
             print(f"  :installing {module_name}...")
         # install package to current environment
         outputs = []
         try:
-            all_args = [sys.executable, '-m', 'pip', 'install', *options, module_name]
-            result = subprocess.run(all_args,
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE)
-            stdout = result.stdout.decode('utf-8')
-            stderr = result.stderr.decode('utf-8')
+            all_args = [sys.executable, "-m", "pip", "install", *options, module_name]
+            result = subprocess.run(all_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            stdout = result.stdout.decode("utf-8")
+            stderr = result.stderr.decode("utf-8")
             outputs.extend((stdout, stderr))
             result.check_returncode()
 
@@ -156,7 +172,7 @@ def import_package(pkg_name: str | tuple | list, options: list = None, verbose: 
             print(f"  :Info: failed to install {module_name}. please install it manually.")
             if verbose:
                 if len(outputs) == 2:
-                    [print(f"  :{output}", end='') for output in outputs]
+                    [print(f"  :{output}", end="") for output in outputs]
                 else:
                     print(f"  :{e}")
             return None
@@ -275,8 +291,7 @@ def is_module_importable(module_name: str) -> bool:
         return False
 
 
-def get_user_defined_module(obj: object,
-                            predicate: callable = lambda x: inspect.isfunction(x) or inspect.isclass(x)):
+def get_user_defined_module(obj: object, predicate: callable = lambda x: inspect.isfunction(x) or inspect.isclass(x)):
     """
     Get only defined members.
 
@@ -288,8 +303,8 @@ def get_user_defined_module(obj: object,
         >>> from pycharmers.utils import inspect_utils, get_defined_members
         >>> get_defined_members(inspect_utils)
         {
-            'get_defined_members': <function pycharmers.utils.inspect_utils.get_defined_members(obj, predicate=<function <lambda> at 0x14227fca0>)>,
-            'get_imported_members': <function pycharmers.utils.inspect_utils.get_imported_members(obj)>
+            'get_defined_members': <function get_defined_members(...)>,
+            'get_imported_members': <function get_imported_members(...)>
         }
 
     Returns:
@@ -299,8 +314,9 @@ def get_user_defined_module(obj: object,
     imported_members_lst = get_user_imported_module(obj).values()
     imported_members = [element for sublist in imported_members_lst for element in sublist]
 
-    res = {name: member for name, member in inspect.getmembers(obj,
-                                                               predicate=predicate) if name not in imported_members}
+    res = {
+        name: member for name, member in inspect.getmembers(obj, predicate=predicate) if name not in imported_members
+    }
     return dict(sorted(res.items()))
 
 
@@ -333,9 +349,12 @@ def get_user_imported_module(obj: object) -> dict:
     with open(obj, mode="r") as f:
         file_contents = "".join(f.readlines())
     imported_members = defaultdict(list)
-    for m, v_wb, v_nb in re.findall(pattern=(r"(?:^|(?<=\n))(?:from\s+(.+?)\s+)?import\s+"
-                                             r"(?:\(((?:.|\s)*?)\)|((?:(?<!\()(?:.|\s))*?))\n"),
-                                    string=file_contents):
-        imported_members[m].extend(
-            [_str_strip(v) for v in (v_wb + v_nb).split(" as ")[0].split(",")])
+    for m, v_wb, v_nb in re.findall(
+        pattern=(
+            r"(?:^|(?<=\n))(?:from\s+(.+?)\s+)?import\s+"
+            r"(?:\(((?:.|\s)*?)\)|((?:(?<!\()(?:.|\s))*?))\n"
+        ),
+        string=file_contents,
+    ):
+        imported_members[m].extend([_str_strip(v) for v in (v_wb + v_nb).split(" as ")[0].split(",")])
     return imported_members

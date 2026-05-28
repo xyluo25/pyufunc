@@ -1,10 +1,10 @@
-'''
+"""
 ##############################################################
 # Created Date: Thursday, August 22nd 2024
 # Contact Info: luoxiangyong01@gmail.com
-# Author/Copyright: Mr. Xiangyong Luo
+# Author/Copyright: Mr. Xiangyong Luo.
 ##############################################################
-'''
+"""
 
 from __future__ import annotations
 
@@ -64,8 +64,7 @@ def dataclass_from_dict(name: str, data: Dict[str, Any]) -> Type:
     dataclass_fields = []
     for key, value in data.items():
         if isinstance(value, (list, dict, set)):  # For mutable types
-            dataclass_fields.append(
-                (key, type(value), field(default_factory=lambda v=value: copy.deepcopy(v))))  # pylint: disable=invalid-field-call
+            dataclass_fields.append((key, type(value), field(default_factory=lambda v=value: copy.deepcopy(v))))  # pylint: disable=invalid-field-call
         else:  # For immutable types
             dataclass_fields.append((key, type(value), field(default=value)))  # pylint: disable=invalid-field-call
 
@@ -110,7 +109,6 @@ def dataclass_creation(class_name: str, attributes: List[Union[Tuple[str, Type, 
         >>> print(instance.attribute_three)
         0.0
     """
-
     processed_attributes = []
 
     for attr in attributes:
@@ -124,10 +122,9 @@ def dataclass_creation(class_name: str, attributes: List[Union[Tuple[str, Type, 
     return make_dataclass(class_name, processed_attributes, namespace=_DICT_NAMESPACE)
 
 
-def dataclass_merge(dataclass_one: Type[Any], dataclass_two: Type[Any],
-                    prefer: str = 'first',
-                    *,
-                    merged_class_name: str = "") -> Type[Any]:
+def dataclass_merge(
+    dataclass_one: Type[Any], dataclass_two: Type[Any], prefer: str = "first", *, merged_class_name: str = ""
+) -> Type[Any]:
     """Merges two dataclasses into a single new dataclass, handling duplicate attributes.
 
     Args:
@@ -137,6 +134,8 @@ def dataclass_merge(dataclass_one: Type[Any], dataclass_two: Type[Any],
             Defaults to 'first':
             - (option): 'first'
             - (option): 'second'
+        merged_class_name (str): Optional name for the generated merged dataclass.
+            Defaults to "".
 
     Example:
         >>> from dataclasses import dataclass
@@ -162,7 +161,7 @@ def dataclass_merge(dataclass_one: Type[Any], dataclass_two: Type[Any],
     """
     # Check if the inputs are dataclasses
     if not is_dataclass(dataclass_one) or not is_dataclass(dataclass_two):
-        raise ValueError('Both inputs must be dataclasses')
+        raise ValueError("Both inputs must be dataclasses")
 
     def get_fields(dataclass_inst: Type[Any]) -> List[Tuple[str, Type[Any], Any]]:
         result = []
@@ -170,8 +169,15 @@ def dataclass_merge(dataclass_one: Type[Any], dataclass_two: Type[Any],
             if f.default is not MISSING:
                 result.append((f.name, f.type, f.default))
             elif f.default_factory is not MISSING:
-                result.append((f.name, f.type, field(  # pylint: disable=invalid-field-call
-                    default_factory=f.default_factory)))
+                result.append(
+                    (
+                        f.name,
+                        f.type,
+                        field(  # pylint: disable=invalid-field-call
+                            default_factory=f.default_factory
+                        ),
+                    )
+                )
             else:
                 result.append((f.name, f.type))
         return result
@@ -190,7 +196,7 @@ def dataclass_merge(dataclass_one: Type[Any], dataclass_two: Type[Any],
     # Add fields from the second dataclass, potentially overwriting
     for name, typ, *default in fields_two:
         if name in all_fields:
-            if prefer == 'second':
+            if prefer == "second":
                 all_fields[name] = (typ, *default)
         else:
             all_fields[name] = (typ, *default)
@@ -200,15 +206,13 @@ def dataclass_merge(dataclass_one: Type[Any], dataclass_two: Type[Any],
 
     # Create the merged dataclass dynamically
     MergedDataclass = make_dataclass(
-        cls_name=merged_class_name or f"{dataclass_one.__name__}{dataclass_two.__name__}",
-        fields=final_fields
+        cls_name=merged_class_name or f"{dataclass_one.__name__}{dataclass_two.__name__}", fields=final_fields
     )
 
     return MergedDataclass
 
 
-def dataclass_extend(base_dataclass: Type[Any],
-                     additional_attributes: List[Tuple[str, Type[Any], Any]]) -> Type[Any]:
+def dataclass_extend(base_dataclass: Type[Any], additional_attributes: List[Tuple[str, Type[Any], Any]]) -> Type[Any]:
     """Creates a new dataclass by extending the base_dataclass with additional_attributes.
 
     Args:
@@ -233,15 +237,16 @@ def dataclass_extend(base_dataclass: Type[Any],
     Returns:
         dataclass: A new dataclass that includes fields from base_dataclass and additional_attributes.
     """
-
     # check inputs
     if not is_dataclass(base_dataclass):
-        raise ValueError('base_dataclass must be a dataclass')
+        raise ValueError("base_dataclass must be a dataclass")
 
     for attr in additional_attributes:
         if len(attr) not in {2, 3}:
-            raise ValueError('additional_attributes must be a list of tuples'
-                             ' in the form (name, default_value) or (name, type, default_value)')
+            raise ValueError(
+                "additional_attributes must be a list of tuples"
+                " in the form (name, default_value) or (name, type, default_value)"
+            )
 
     # deepcopy the base dataclass
     base_dataclass_ = copy.deepcopy(base_dataclass)
@@ -253,24 +258,28 @@ def dataclass_extend(base_dataclass: Type[Any],
         if f.default is not MISSING:
             base_fields.append((f.name, f.type, f.default))
         elif f.default_factory is not MISSING:
-            base_fields.append((f.name, f.type, field(  # pylint: disable=invalid-field-call
-                default_factory=f.default_factory)))
+            base_fields.append(
+                (
+                    f.name,
+                    f.type,
+                    field(  # pylint: disable=invalid-field-call
+                        default_factory=f.default_factory
+                    ),
+                )
+            )
         else:
             base_fields.append((f.name, f.type))
 
     # check if additional attributes:
     # if len == 2, adding Any as data type in the middle if the tuple
     # if len == 3, keep the original tuple
-    additional_attributes = [
-        val if len(val) == 3 else (val[0], Any, val[1])
-        for val in additional_attributes
-    ]
+    additional_attributes = [val if len(val) == 3 else (val[0], Any, val[1]) for val in additional_attributes]
 
     # Combine base fields with additional attributes
     all_fields = base_fields + additional_attributes
 
     new_dataclass = make_dataclass(
-        cls_name=f'{base_dataclass_.__name__}',
+        cls_name=f"{base_dataclass_.__name__}",
         fields=all_fields,
         bases=(base_dataclass,),
     )
@@ -309,8 +318,7 @@ def dataclass_dict_wrapper(dataclass_instance: Any) -> Any:
 
 
 class DataclassDictWrapper:
-    """Wrapper class that provides dictionary-like access to a dataclass instance.
-    """
+    """Wrapper class that provides dictionary-like access to a dataclass instance."""
 
     def __init__(self, dataclass_instance):
         if not is_dataclass(dataclass_instance):

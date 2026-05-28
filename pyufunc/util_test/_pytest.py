@@ -36,9 +36,11 @@ def pytest_show_naming_convention() -> None:
           python_files = check_*.py
           python_classes = Check*
           python_functions = check_* or *_check""")
-    print("pytest will then only consider files matching the pattern check_*.py\n",
-          " classes with names starting with Check and,\n",
-          " functions with names starting with check_ or ending with _check.")
+    print(
+        "pytest will then only consider files matching the pattern check_*.py\n",
+        " classes with names starting with Check and,\n",
+        " functions with names starting with check_ or ending with _check.",
+    )
     print()
 
 
@@ -231,7 +233,7 @@ def pytest_show_fixture() -> None:
 
 
 def pytest_show_database() -> None:
-    """Show pytest database connection and testing
+    """Show pytest database connection and testing.
 
     Examples:
         >>> import pyufunc as pf

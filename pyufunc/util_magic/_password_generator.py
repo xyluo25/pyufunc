@@ -9,15 +9,14 @@ import secrets
 import string
 
 
-def generate_password(pwd_len: int = 15,
-                      lowercase: bool = True,
-                      uppercase: bool = True,
-                      digit: bool = True,
-                      special_char: bool = True,
-                      config: dict = {"num_lowercase": 1,
-                                      "num_uppercase": 1,
-                                      "num_digit": 1,
-                                      "num_special_char": 1}) -> str:
+def generate_password(
+    pwd_len: int = 15,
+    lowercase: bool = True,
+    uppercase: bool = True,
+    digit: bool = True,
+    special_char: bool = True,
+    config: dict = {"num_lowercase": 1, "num_uppercase": 1, "num_digit": 1, "num_special_char": 1},
+) -> str:
     """Generate a random password with given length and character types.
 
     Location:
@@ -45,10 +44,12 @@ def generate_password(pwd_len: int = 15,
         >>> generate_password(pwd_len=20, lowercase=False, uppercase=False, digit=True, special_char=False)
         '83920174651235323436'
 
-        >>> generate_password(pwd_len=20, config={"num_lowercase": 5, "num_uppercase": 5, "num_digit": 5, "num_special_char": 5})
+        >>> generate_password(
+        ...     pwd_len=20,
+        ...     config={"num_lowercase": 5, "num_uppercase": 5, "num_digit": 5, "num_special_char": 5},
+        ... )
         '5y9D`Bp|5h0FXX3}%'px'
     """
-
     # check total config length
     config_length = sum(config[key] for key in config if key.startswith("num_"))
 
@@ -63,9 +64,14 @@ def generate_password(pwd_len: int = 15,
 
     all_chars = string.ascii_letters + string.digits + string.punctuation
     remaining_length = pwd_len - config_length
-    password_list = lowercase_chars + uppercase_chars + digit_chars + special_chars + \
-        [secrets.choice(all_chars) for _ in range(remaining_length)]
+    password_list = (
+        lowercase_chars
+        + uppercase_chars
+        + digit_chars
+        + special_chars
+        + [secrets.choice(all_chars) for _ in range(remaining_length)]
+    )
 
     # password_list = list(password)
     secrets.SystemRandom().shuffle(password_list)
-    return ''.join(password_list)
+    return "".join(password_list)

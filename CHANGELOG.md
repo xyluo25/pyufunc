@@ -10,6 +10,14 @@ This is the list of changes to pyufunc between each release. For full details, s
 
 Types of changes: ***Added**, **Changed**, **Deprecated**, **Removed**, **Fixed**, **Security***
 
+### Changed
+
+- Keep optional dependency installation disabled by default in `import_package`; users must pass `auto_install=True` to run pip automatically.
+
+### Fixed
+
+- Ensure `@requires(..., verbose=False)` still skips wrapped functions when required dependencies are missing.
+
 ## [0.4.3] - 2026-04-24
 
 ### Added

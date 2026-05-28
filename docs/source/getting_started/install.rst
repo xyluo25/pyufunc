@@ -65,7 +65,11 @@ Required dependencies
 
 pyufunc requires **no** dependencies.
 
-updating...
+Optional dependencies used by specific utility functions are not installed
+automatically. If a function requires a missing package, pyufunc reports the
+missing dependency and skips the function call. Install the package manually, or
+explicitly opt in to automatic installation where supported, for example
+``import_package("package-name", auto_install=True)``.
 
 .. ================================================================ ==========================
 .. Package                                                          Minimum supported version

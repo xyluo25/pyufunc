@@ -15,8 +15,15 @@ from pyufunc.util_magic import func_running_time, requires
 # https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
     import numpy as np
-    from shapely.geometry import (Point, MultiPoint, LineString, MultiLineString,  # pyright: ignore[reportMissingModuleSource]
-                                  Polygon, MultiPolygon, GeometryCollection)
+    from shapely.geometry import (
+        Point,
+        MultiPoint,
+        LineString,
+        MultiLineString,  # pyright: ignore[reportMissingModuleSource]
+        Polygon,
+        MultiPolygon,
+        GeometryCollection,
+    )
 
 
 def _validate(condition: bool, message: str) -> None:
@@ -60,9 +67,9 @@ def proj_point_to_line(point: Point, line: LineString) -> Point:
 
 
 @requires("numpy", "shapely")
-def calc_distance_on_unit_sphere(pt1: Point | tuple | list | np.array,
-                                 pt2: Point | tuple | list | np.array,
-                                 unit: str = 'km') -> float | None:
+def calc_distance_on_unit_sphere(
+    pt1: Point | tuple | list | np.array, pt2: Point | tuple | list | np.array, unit: str = "km"
+) -> float | None:
     """
     Calculate the distance between two points on the unit sphere.
 
@@ -94,11 +101,11 @@ def calc_distance_on_unit_sphere(pt1: Point | tuple | list | np.array,
 
     # TDD: Test-Driven Development, check data types of input arguments
     _validate(
-        isinstance(pt1, (Point, tuple, list, np.ndarray)),
-        "pt1 should be a shapely.Point, tuple, list, or np.array.")
+        isinstance(pt1, (Point, tuple, list, np.ndarray)), "pt1 should be a shapely.Point, tuple, list, or np.array."
+    )
     _validate(
-        isinstance(pt2, (Point, tuple, list, np.ndarray)),
-        "pt2 should be a shapely.Point, tuple, list, or np.array.")
+        isinstance(pt2, (Point, tuple, list, np.ndarray)), "pt2 should be a shapely.Point, tuple, list, or np.array."
+    )
     _validate(unit in {"meter", "km", "mile"}, "The input unit should be in 'meter', 'km', or 'mile'.")
 
     # the default earth radius in meters
@@ -133,13 +140,14 @@ def calc_distance_on_unit_sphere(pt1: Point | tuple | list | np.array,
     # cosine( arc length ) = sin phi sin phi' cos(theta-theta') + cos phi cos phi'
     # distance = rho * arc length
 
-    cosine = (np.sin(phi1) * np.sin(phi2) * np.cos(theta1 - theta2) + np.cos(phi1) * np.cos(phi2))
+    cosine = np.sin(phi1) * np.sin(phi2) * np.cos(theta1 - theta2) + np.cos(phi1) * np.cos(phi2)
     return np.arccos(cosine) * earth_radius
 
 
 @requires("numpy")
-def calc_distance_on_unit_haversine(lon1: np.ndarray, lat1: np.ndarray,
-                                    lon2: np.ndarray, lat2: np.ndarray, unit: str = "km") -> np.ndarray:
+def calc_distance_on_unit_haversine(
+    lon1: np.ndarray, lat1: np.ndarray, lon2: np.ndarray, lat2: np.ndarray, unit: str = "km"
+) -> np.ndarray:
     """
     Calculate the great-circle distance between multiple pairs of points on the Earth's surface
     specified in decimal degrees using the Haversine formula.
@@ -170,8 +178,7 @@ def calc_distance_on_unit_haversine(lon1: np.ndarray, lat1: np.ndarray,
     import numpy as np
 
     # TDD
-    _validate(unit in {
-        "meter", "km", "mile"}, "The input unit should be in 'meter', 'km', or 'mile'.")
+    _validate(unit in {"meter", "km", "mile"}, "The input unit should be in 'meter', 'km', or 'mile'.")
 
     # the default earth radius in meters
     EARTH_RADIUS = {"meter": 6378137, "km": 6371.0, "mile": 3960.0}
@@ -241,14 +248,15 @@ def find_closest_point(pt: Point, pts: MultiPoint, k_closest: int = 1) -> list:
 
 
 @requires("numpy", "shapely")
-def get_coordinates_from_geom(geom_obj: Point | MultiPoint | LineString | MultiLineString |
-                              Polygon | MultiPolygon | GeometryCollection) -> np.ndarray:
+def get_coordinates_from_geom(
+    geom_obj: Point | MultiPoint | LineString | MultiLineString | Polygon | MultiPolygon | GeometryCollection,
+) -> np.ndarray:
     """
     Get the coordinates from a geometry object.
 
     Args:
         geom_obj (Union[Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection]):
-        the geometry object
+            The geometry object.
 
     Returns:
         np.ndarray: the coordinates of the geometry object in the format of numpy.ndarray
@@ -281,18 +289,21 @@ def get_coordinates_from_geom(geom_obj: Point | MultiPoint | LineString | MultiL
     """
     # import required modules
     import numpy as np
-    from shapely.geometry import (Point,  # pyright: ignore[reportMissingModuleSource]
-                                  MultiPoint,
-                                  LineString,
-                                  MultiLineString,
-                                  Polygon,
-                                  MultiPolygon,
-                                  GeometryCollection)
+    from shapely.geometry import (
+        Point,  # pyright: ignore[reportMissingModuleSource]
+        MultiPoint,
+        LineString,
+        MultiLineString,
+        Polygon,
+        MultiPolygon,
+        GeometryCollection,
+    )
 
     # TDD: Test-Driven Development, check data types of input arguments
     typing_list = (Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection)
-    _validate(isinstance(geom_obj, typing_list),
-              "The input geom_obj should be a shapely.geometry.base.BaseGeometry object.")
+    _validate(
+        isinstance(geom_obj, typing_list), "The input geom_obj should be a shapely.geometry.base.BaseGeometry object."
+    )
 
     if isinstance(geom_obj, np.ndarray):
         coords = geom_obj
@@ -303,19 +314,17 @@ def get_coordinates_from_geom(geom_obj: Point | MultiPoint | LineString | MultiL
     else:
         geom_type = geom_obj.geom_type
 
-        if 'Collection' in geom_type:
-            temp = [get_coordinates_from_geom(x) for x in geom_obj.__getattribute__('geoms')]
+        if "Collection" in geom_type:
+            temp = [get_coordinates_from_geom(x) for x in geom_obj.__getattribute__("geoms")]
             coords = np.concatenate(temp)
 
-        elif geom_type.startswith('Multi'):
+        elif geom_type.startswith("Multi"):
             coords = (
-                np.vstack(
-                    [np.array(x.exterior.coords) for x in geom_obj.geoms]
-                )
-                if 'Polygon' in geom_type
+                np.vstack([np.array(x.exterior.coords) for x in geom_obj.geoms])
+                if "Polygon" in geom_type
                 else np.vstack([np.array(x.coords) for x in geom_obj.geoms])
             )
-        elif 'Polygon' in geom_type:
+        elif "Polygon" in geom_type:
             coords = np.array(geom_obj.exterior.coords)
         else:
             coords = np.array(geom_obj.coords)
@@ -325,12 +334,12 @@ def get_coordinates_from_geom(geom_obj: Point | MultiPoint | LineString | MultiL
 
 @func_running_time
 @requires("numpy", "shapely")
-def find_k_nearest_points(pts: Point | MultiPoint | LineString | MultiLineString |
-                                     Polygon | MultiPolygon | GeometryCollection,
-                          geom_obj: Point | MultiPoint | LineString | MultiLineString |
-                                          Polygon | MultiPolygon | GeometryCollection,
-                          radius: float,
-                          k_nearest: int = 0) -> dict:
+def find_k_nearest_points(
+    pts: Point | MultiPoint | LineString | MultiLineString | Polygon | MultiPolygon | GeometryCollection,
+    geom_obj: Point | MultiPoint | LineString | MultiLineString | Polygon | MultiPolygon | GeometryCollection,
+    radius: float,
+    k_nearest: int = 0,
+) -> dict:
     """
     Find the k nearest points from a list of points to a geometry object (points) within a given radius.
 
@@ -349,15 +358,22 @@ def find_k_nearest_points(pts: Point | MultiPoint | LineString | MultiLineString
 
     """
     # import required modules
-    from shapely.geometry import (Point, MultiPoint, LineString, MultiLineString,   # pyright: ignore[reportMissingModuleSource]
-                                  Polygon, MultiPolygon, GeometryCollection)
+    from shapely.geometry import (
+        Point,
+        MultiPoint,
+        LineString,
+        MultiLineString,  # pyright: ignore[reportMissingModuleSource]
+        Polygon,
+        MultiPolygon,
+        GeometryCollection,
+    )
 
     # TDD: Test-Driven Development, check data types of input arguments
     typing_set = (Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection)
-    _validate(isinstance(pts, typing_set),
-              "The input pts should be a shapely.geometry.base.BaseGeometry object.")
-    _validate(isinstance(geom_obj, typing_set),
-              "The input pts should be a shapely.geometry.base.BaseGeometry object. object.")
+    _validate(isinstance(pts, typing_set), "The input pts should be a shapely.geometry.base.BaseGeometry object.")
+    _validate(
+        isinstance(geom_obj, typing_set), "The input pts should be a shapely.geometry.base.BaseGeometry object. object."
+    )
     _validate(isinstance(radius, (float, int)), "The input radius should be a float, int object.")
     _validate(isinstance(k_nearest, int), "The input k_nearest should be an int object.")
 
@@ -382,9 +398,9 @@ def find_k_nearest_points(pts: Point | MultiPoint | LineString | MultiLineString
     print(f"  Radius unit: {radius} meters")
 
     # create a buffer for each starting point with the given radius in meters
-    pts_coords_buffer = [Polygon(
-        create_circle_at_point_with_radius(coord, radius)["coordinates"])
-        for coord in pts_coords]
+    pts_coords_buffer = [
+        Polygon(create_circle_at_point_with_radius(coord, radius)["coordinates"]) for coord in pts_coords
+    ]
 
     # find the closest points for each starting point within the buffer
     for coord, pt_buffer in zip(pts_coords, pts_coords_buffer):
@@ -399,8 +415,7 @@ def find_k_nearest_points(pts: Point | MultiPoint | LineString | MultiLineString
         elif isinstance(intersected_pts, Point):
             closest_points[pt] = [intersected_pts]
         else:
-            closest_points[pt] = sorted(intersected_pts.geoms,
-                                        key=functools.partial(calc_distance_on_unit_sphere, pt))
+            closest_points[pt] = sorted(intersected_pts.geoms, key=functools.partial(calc_distance_on_unit_sphere, pt))
 
     if k_nearest > 0:
         closest_points = {k: v[:k_nearest] for k, v in closest_points.items()}

@@ -5,5 +5,6 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
+"""GUI utility exports."""
 
 __all__ = []

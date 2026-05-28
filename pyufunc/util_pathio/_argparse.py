@@ -58,16 +58,15 @@ def with_argparse(func_or_class: object):
         if inspect.isclass(func_or_class):
             cls_instance = func_or_class
             init_sig = inspect.signature(cls_instance.__init__)
-            main_method = getattr(cls_instance, 'main', None)
+            main_method = getattr(cls_instance, "main", None)
             if not main_method:
-                raise ValueError(
-                    "Class must have a 'main' method to use with_argparse.")
+                raise ValueError("Class must have a 'main' method to use with_argparse.")
             main_sig = inspect.signature(main_method)
 
             # Skip 'self'
             for name, param in list(init_sig.parameters.items())[1:]:
                 parser.add_argument(
-                    f'--{name}',
+                    f"--{name}",
                     type=(param.annotation if param.annotation != inspect._empty else str),
                     required=param.default == inspect._empty,
                 )
@@ -75,16 +74,18 @@ def with_argparse(func_or_class: object):
             # Skip 'self'
             for name, param in list(main_sig.parameters.items())[1:]:
                 parser.add_argument(
-                    f'--{name}',
+                    f"--{name}",
                     type=(param.annotation if param.annotation != inspect._empty else str),
                     required=param.default == inspect._empty,
                 )
 
             parsed_args = parser.parse_args()
-            init_args = {name: getattr(parsed_args, name) for name in list(
-                init_sig.parameters.keys())[1:]}  # Skip 'self'
-            main_args = {name: getattr(parsed_args, name) for name in list(
-                main_sig.parameters.keys())[1:]}  # Skip 'self'
+            init_args = {
+                name: getattr(parsed_args, name) for name in list(init_sig.parameters.keys())[1:]
+            }  # Skip 'self'
+            main_args = {
+                name: getattr(parsed_args, name) for name in list(main_sig.parameters.keys())[1:]
+            }  # Skip 'self'
 
             instance = cls_instance(**init_args)
             return instance.main(**main_args)
@@ -94,13 +95,14 @@ def with_argparse(func_or_class: object):
             func = func_or_class
             sig = inspect.signature(func)
             for name, param in sig.parameters.items():
-                parser.add_argument(f'--{name}',
-                                    type=param.annotation if param.annotation != inspect._empty else str,
-                                    required=param.default == inspect._empty)
+                parser.add_argument(
+                    f"--{name}",
+                    type=param.annotation if param.annotation != inspect._empty else str,
+                    required=param.default == inspect._empty,
+                )
 
             parsed_args = parser.parse_args()
-            func_args = {name: getattr(parsed_args, name)
-                         for name in sig.parameters.keys()}
+            func_args = {name: getattr(parsed_args, name) for name in sig.parameters.keys()}
 
             return func(**func_args)
 
@@ -122,8 +124,7 @@ def with_argparse(func_or_class: object):
         script_name = sys.argv[0] if sys.argv else "script.py"
         available = sorted(set(getattr(main_module, "_with_argparse_available_functions", [])))
         print("  :Info: direct style is not supported.")
-        print("  :Use subcommand style instead:"
-              f" python {script_name} <function_name> [arguments]")
+        print(f"  :Use subcommand style instead: python {script_name} <function_name> [arguments]")
         if available:
             print(f"  :Available functions: {', '.join(available)}")
 

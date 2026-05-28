@@ -21,14 +21,13 @@ from pathlib import Path
 from pyufunc.util_magic import requires
 
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
     from requests import Session, Response  # pyright: ignore[reportMissingModuleSource]
     from bs4 import BeautifulSoup  # pyright: ignore[reportMissingImports]
 
 
-_PYTHON_BUILTIN_FUNCTION_NAMES = {
-    name for name in dir(builtins) if callable(getattr(builtins, name))
-}
+_PYTHON_BUILTIN_FUNCTION_NAMES = {name for name in dir(builtins) if callable(getattr(builtins, name))}
 
 
 @requires("requests", ("beautifulsoup4", "bs4"), "tqdm")
@@ -107,8 +106,7 @@ def pkg_dependents_func_usage(github_link: str, *, GITHUB_TOKEN: Optional[str] =
 
     result: Dict[str, list[str]] = {}
 
-    for dep_full_name in tqdm(dependents,
-                              desc="Processing dependents"):
+    for dep_full_name in tqdm(dependents, desc="Processing dependents"):
         dep_owner, dep_repo = dep_full_name.split("/", 1)
 
         try:
@@ -148,10 +146,7 @@ def _parse_github_repo(github_link: str) -> Tuple[str, str]:
     parts = [p for p in parsed.path.split("/") if p]
 
     if len(parts) < 2:
-        raise ValueError(
-            "Invalid GitHub repository URL. Expected format: "
-            "https://github.com/{owner}/{repo}"
-        )
+        raise ValueError("Invalid GitHub repository URL. Expected format: https://github.com/{owner}/{repo}")
 
     owner, repo = parts[0], parts[1]
     repo = repo.removesuffix(".git")
@@ -170,10 +165,7 @@ def _github_get(session: Session, url: str, **kwargs) -> Response:
     response = session.get(url, timeout=30, headers=headers, **kwargs)
 
     if response.status_code == 403:
-        raise RuntimeError(
-            "GitHub returned 403. You may be rate limited. "
-            "Set GITHUB_TOKEN to increase the rate limit."
-        )
+        raise RuntimeError("GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit.")
 
     if response.status_code == 404:
         raise RuntimeError(f"GitHub returned 404 for: {url}")
@@ -234,7 +226,7 @@ def _infer_python_package_name(
                     return match.group(1).replace("-", "_")
 
             if path == "setup.cfg":
-                match = re.search(r'(?m)^\s*name\s*=\s*([A-Za-z0-9_.-]+)', text)
+                match = re.search(r"(?m)^\s*name\s*=\s*([A-Za-z0-9_.-]+)", text)
                 if match:
                     return match.group(1).replace("-", "_")
 
@@ -359,10 +351,7 @@ def _get_python_files_from_repo(
 
     default_branch = repo_info.get("default_branch", "main")
 
-    tree_url = (
-        f"https://api.github.com/repos/{owner}/{repo}/git/trees/"
-        f"{default_branch}?recursive=1"
-    )
+    tree_url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{default_branch}?recursive=1"
     tree_data = _github_get(session, tree_url).json()
 
     files = []
@@ -371,17 +360,12 @@ def _get_python_files_from_repo(
     py_items = [
         item
         for item in tree
-        if item.get("type") == "blob"
-        and item.get("path", "").endswith(".py")
-        and item.get("size", 0) <= max_file_size
+        if item.get("type") == "blob" and item.get("path", "").endswith(".py") and item.get("size", 0) <= max_file_size
     ]
 
     for item in py_items[:max_files]:
         path = item["path"]
-        raw_url = (
-            f"https://raw.githubusercontent.com/"
-            f"{owner}/{repo}/{default_branch}/{path}"
-        )
+        raw_url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/{path}"
 
         try:
             response = session.get(raw_url, timeout=30)
@@ -452,9 +436,7 @@ def _extract_used_functions_from_source(
             elif module.startswith(package_name + "."):
                 for alias in node.names:
                     local_name = alias.asname or alias.name
-                    imported_functions[local_name] = f"{module}.{alias.name}".replace(
-                        package_name + ".", ""
-                    )
+                    imported_functions[local_name] = f"{module}.{alias.name}".replace(package_name + ".", "")
 
     for node in ast.walk(tree):
         if isinstance(node, ast.Call):
@@ -488,9 +470,7 @@ def _extract_used_functions_from_source(
                     cleaned_module_path = module_path.replace(package_name + ".", "")
                     _add_used_function(
                         used_functions=used_functions,
-                        function_name=(
-                            f"{cleaned_module_path}.{full_attr.split('.', 1)[1]}"
-                        ),
+                        function_name=(f"{cleaned_module_path}.{full_attr.split('.', 1)[1]}"),
                     )
 
     return used_functions
@@ -555,12 +535,11 @@ def save_dict_to_json(filename: str, data: Dict, *, output_dir: str = ".") -> No
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
 
+
 if __name__ == "__main__":
     github_url = "https://github.com/mikeqfu/pyhelpers"
     result = pkg_dependents_func_usage(github_url)
-    save_dict_to_json(filename="pyhelpers",
-                      data=result,
-                      output_dir="datasets/util_pkgs_dependents_func_usage")
+    save_dict_to_json(filename="pyhelpers", data=result, output_dir="datasets/util_pkgs_dependents_func_usage")
 
     for dependent, functions in result.items():
         print(dependent, functions)

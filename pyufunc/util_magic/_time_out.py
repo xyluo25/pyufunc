@@ -35,10 +35,10 @@ class __KThread(threading.Thread):
         self.run = self.__run_backup
 
     def globaltrace(self, frame, why, arg):
-        return self.localtrace if why == 'call' else None
+        return self.localtrace if why == "call" else None
 
     def localtrace(self, frame, why, arg):
-        if why == 'line':
+        if why == "line":
             if self.killed:
                 raise SystemExit()
         return self.localtrace
@@ -49,7 +49,8 @@ class __KThread(threading.Thread):
 
 # noinspection PyPep8Naming
 class TIMEOUT_EXCEPTION(Exception):
-    """function run timeout"""
+    """function run timeout."""
+
     pass
 
 
@@ -85,12 +86,7 @@ def timeout(seconds: int) -> object:
 
         def _(*args, **kwargs):
             result = []
-            new_kwargs = {
-                'oldfunc': func,
-                'result': result,
-                'oldfunc_args': args,
-                'oldfunc_kwargs': kwargs
-            }
+            new_kwargs = {"oldfunc": func, "result": result, "oldfunc_args": args, "oldfunc_kwargs": kwargs}
 
             thd = __KThread(target=_new_func, args=(), kwargs=new_kwargs)
             thd.start()
@@ -100,7 +96,7 @@ def timeout(seconds: int) -> object:
 
             if alive:
                 # raise TIMEOUT_EXCEPTION('function run too long, timeout %d seconds.' % seconds)
-                raise TIMEOUT_EXCEPTION(f'{func.__name__} exceed {seconds} seconds timeout')
+                raise TIMEOUT_EXCEPTION(f"{func.__name__} exceed {seconds} seconds timeout")
             return result[0] if result else result
 
         _.__name__ = func.__name__
@@ -112,6 +108,7 @@ def timeout(seconds: int) -> object:
 
 def timeout_linux(timeout: int):
     """A decorator to set the timeout for the function on linux system.
+
     Args:
         timeout (int): timeout seconds for the function.
 
@@ -134,15 +131,17 @@ def timeout_linux(timeout: int):
         object: the decorated function.
     """
 
-    def _timeout_linux(func, ):
+    def _timeout_linux(
+        func,
+    ):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             if not hasattr(signal, "SIGALRM") or not hasattr(signal, "alarm"):
                 raise RuntimeError("timeout_linux is only supported on platforms with SIGALRM.")
 
             def _timeout_handler(signum, frame):
-                raise TimeoutError(
-                    f"Function: {func} params: {args}, {kwargs} ,execution timed out: {timeout}")
+                raise TimeoutError(f"Function: {func} params: {args}, {kwargs} ,execution timed out: {timeout}")
+
             # timeout for linux system
             signal.signal(signal.SIGALRM, _timeout_handler)
             signal.alarm(timeout)
@@ -150,5 +149,7 @@ def timeout_linux(timeout: int):
                 return func(*args, **kwargs)
             finally:
                 signal.alarm(0)
+
         return wrapper
+
     return _timeout_linux

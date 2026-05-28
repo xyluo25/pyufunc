@@ -53,6 +53,7 @@ from pyufunc import (  # pylint: disable=wrong-import-position  # noqa: E402
     get_coordinates_from_geom,
     get_host_ip,
     get_host_name,
+    import_package,
     get_layer_boundary,
     get_time_diff_in_unit,
     get_timezone,
@@ -69,6 +70,7 @@ from pyufunc import (  # pylint: disable=wrong-import-position  # noqa: E402
     mean_squared_log_error,
     proj_point_to_line,
     r2_score,
+    requires,
     root_mean_squared_error,
     show_util_func_by_category,
     terminal_height,
@@ -270,9 +272,7 @@ def test_error_measurements():
     assert mean_percentage_error(y_true, y_pred) == pytest.approx(0.255952380952381)
     assert r2_score(y_true, y_pred) == pytest.approx(0.9486081370449679)
 
-    assert mean_squared_log_error([3, 5, 2.5, 7], [2.5, 5, 4, 8]) == pytest.approx(
-        0.03973012298459379
-    )
+    assert mean_squared_log_error([3, 5, 2.5, 7], [2.5, 5, 4, 8]) == pytest.approx(0.03973012298459379)
 
 
 def test_error_measurements_reject_non_iterables():
@@ -298,6 +298,89 @@ def test_util_database_package_imports():
     import pyufunc.util_dababase as util_dababase  # pylint: disable=import-outside-toplevel
 
     assert util_dababase.__all__ == []
+
+
+def test_import_package_does_not_install_missing_dependency_by_default(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+):
+    """Ensure import_package reports missing dependencies without invoking pip by default."""
+    subprocess_calls = []
+
+    def fail_run(*args, **kwargs):
+        subprocess_calls.append((args, kwargs))
+        raise AssertionError("import_package should not run pip unless auto_install=True.")
+
+    monkeypatch.setattr("subprocess.run", fail_run)
+
+    missing_module = "pyufunc_missing_dependency_for_test"
+    assert import_package(missing_module, verbose=True) is None
+    assert subprocess_calls == []
+
+    output = capsys.readouterr().out
+    assert f"missing dependency {missing_module}" in output
+    assert "auto_install=True" in output
+
+
+def test_import_package_installs_only_with_explicit_opt_in(monkeypatch: pytest.MonkeyPatch):
+    """Ensure import_package invokes pip only when auto_install=True is passed."""
+    import pyufunc.util_magic._import_package as import_helpers  # pylint: disable=import-outside-toplevel
+
+    fake_module = object()
+    import_attempts = []
+    subprocess_calls = []
+
+    def fake_import_module(module_name: str):
+        import_attempts.append(module_name)
+        if len(import_attempts) == 1:
+            raise ImportError(module_name)
+        return fake_module
+
+    class FakeCompletedProcess:
+        """Minimal subprocess result used by import_package."""
+
+        stdout = b""
+        stderr = b""
+
+        @staticmethod
+        def check_returncode():
+            return None
+
+    def fake_run(command, stdout, stderr):
+        subprocess_calls.append(command)
+        return FakeCompletedProcess()
+
+    monkeypatch.setattr(import_helpers.importlib, "import_module", fake_import_module)
+    monkeypatch.setattr(import_helpers.subprocess, "run", fake_run)
+
+    imported_module = import_package("demo_package", options=["--no-index"], verbose=False, auto_install=True)
+
+    assert imported_module is fake_module
+    assert len(subprocess_calls) == 1
+    command = subprocess_calls[0]
+    assert command[1:4] == ["-m", "pip", "install"]
+    assert "--no-index" in command
+    assert command[-1] == "demo_package"
+
+
+def test_requires_missing_dependency_skips_without_installing(monkeypatch: pytest.MonkeyPatch):
+    """Ensure requires does not call the wrapped function or install packages by default."""
+    import pyufunc.util_magic._dependency_requires_decorator as requires_helpers
+
+    call_log = []
+
+    def fail_import_package(*args, **kwargs):
+        raise AssertionError("requires should not install missing dependencies by default.")
+
+    monkeypatch.setattr(requires_helpers, "import_package", fail_import_package)
+
+    @requires("pyufunc_missing_dependency_for_test", verbose=False)
+    def guarded_function():
+        call_log.append("called")
+        return "called"
+
+    assert guarded_function() is None
+    assert call_log == []
 
 
 def test_package_introspection_helpers(capsys: pytest.CaptureFixture[str]):
@@ -472,7 +555,7 @@ def test_geo_distance_helpers():
     assert get_coordinates_from_geom(Point(1, 2)).tolist() == [[1.0, 2.0]]
     assert get_coordinates_from_geom(LineString([(0, 0), (1, 1)])).tolist() == [[0.0, 0.0], [1.0, 1.0]]
     assert get_coordinates_from_geom(Polygon([(0, 0), (1, 0), (1, 1)])).shape[1] == 2
-    assert calc_distance_on_unit_sphere([object()], (0, 1)) is not None
+    assert calc_distance_on_unit_sphere([object()], (0, 1)) is None
     with pytest.raises(AssertionError):
         calc_distance_on_unit_haversine(np.array([0]), np.array([0]), np.array([0]), np.array([1]), unit="bad")
     assert shapely
@@ -484,10 +567,7 @@ def test_geo_area_circle_and_layer_boundary_helpers():
     pytest.importorskip("pyproj")
     pd = pytest.importorskip("pandas")
 
-    polygon = (
-        "POLYGON ((-74.006 40.712, -74.005 40.712, -74.005 40.713, "
-        "-74.006 40.713, -74.006 40.712))"
-    )
+    polygon = "POLYGON ((-74.006 40.712, -74.005 40.712, -74.005 40.713, -74.006 40.713, -74.006 40.712))"
     area_sqm = calc_area_from_wkt_geometry(polygon, unit="sqm", verbose=True)
     area_sqft = calc_area_from_wkt_geometry(polygon, unit="sqft", verbose=True)
     assert area_sqm > 0
@@ -513,9 +593,9 @@ def test_geo_area_circle_and_layer_boundary_helpers():
         get_layer_boundary(data, "missing", "y")
 
 
-def test_magic_network_platform_and_doc_helpers(tmp_path: Path,
-                                                monkeypatch: pytest.MonkeyPatch,
-                                                capsys: pytest.CaptureFixture[str]):
+def test_magic_network_platform_and_doc_helpers(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+):
     """Test magic, network, platform, and documentation helper functions."""
     from pyufunc import (  # pylint: disable=import-outside-toplevel
         func_running_time,
@@ -581,12 +661,14 @@ def test_magic_network_platform_and_doc_helpers(tmp_path: Path,
 
     assert immediate() == "ok"
     signal = __import__("signal")
-    @pytest.mark.skipif(not hasattr(signal, "SIGALRM"), reason="SIGALRM is unavailable")
-    @timeout_linux(1)
-    def linux_immediate():
-        return "ok"
 
-    assert linux_immediate() == "ok"
+    if hasattr(signal, "SIGALRM") and hasattr(signal, "alarm"):
+
+        @timeout_linux(1)
+        def linux_immediate():
+            return "ok"
+
+        assert linux_immediate() == "ok"
 
     show_docstring_headers()
     show_docstring_google()

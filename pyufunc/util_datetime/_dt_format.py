@@ -11,9 +11,8 @@ from pyufunc.util_magic import requires
 
 
 @requires(("python-dateutil", "dateutil"))
-def fmt_dt_to_str(dt: datetime.datetime | str = "",
-                  dt_fmt: str = "") -> str:
-    """Format datetime to datetime string
+def fmt_dt_to_str(dt: datetime.datetime | str = "", dt_fmt: str = "") -> str:
+    """Format datetime to datetime string.
 
     Args:
         dt (datetime, str): the datetime to be formatted. Defaults to datetime.datetime.now().
@@ -78,7 +77,7 @@ def fmt_dt_to_str(dt: datetime.datetime | str = "",
 
 @requires(("python-dateutil", "dateutil"))
 def fmt_str_to_dt(dt_str: str) -> datetime.datetime:
-    """Format datetime string to datetime
+    """Format datetime string to datetime.
 
     Args:
         dt_str (str): the datetime string to be formatted.

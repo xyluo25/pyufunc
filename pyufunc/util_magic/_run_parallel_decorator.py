@@ -14,10 +14,7 @@ from pyufunc.util_magic._func_time_decorator import func_running_time
 
 
 @func_running_time
-def run_parallel(func: Callable,
-                 iterable: Iterable,
-                 num_processes: int = None,
-                 chunksize: int = 0) -> list:
+def run_parallel(func: Callable, iterable: Iterable, num_processes: int = None, chunksize: int = 0) -> list:
     """Run a function in parallel with multiple processors.
 
     Args:
@@ -52,7 +49,6 @@ def run_parallel(func: Callable,
     Returns:
         list: The results of the function.
     """
-
     # TDD, test-driven development: check inputs
 
     if not callable(func):

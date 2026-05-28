@@ -46,7 +46,6 @@ def show_docstring_headers() -> None:
         >>>     Yields
 
     """
-
     print("**** This is a general header for google and numpy docstring. ****")
     print("""
         Args (alias of Parameters)
@@ -88,7 +87,7 @@ def show_docstring_google() -> None:
         >>> pf.show_docstring_google()
         >>> Google style with Python 3 type annotations:
         >>>     def func(arg1: int, arg2: str) -> bool:
-        >>>         \"""Summary line.
+        >>>         '''Summary line.
         >>>         Extended description of function.
         >>>
         >>>         Args:
@@ -98,11 +97,10 @@ def show_docstring_google() -> None:
         >>>         Returns:
         >>>             bool: Description of return value
         >>>
-        >>>         \"""
+        >>>         '''
         >>>         return True
 
     """
-
     print("Google style with Python 3 type annotations:")
 
     print_str = """
@@ -137,7 +135,7 @@ def show_docstring_numpy() -> None:
         >>> pf.show_docstring_numpy()
         >>> Numpy style annotation:
         >>>     def func(arg1: int, arg2: str) -> bool:
-        >>>         \"""Summary line.
+        >>>         '''Summary line.
         >>>
         >>>         Extended description of function.
         >>>
@@ -153,10 +151,9 @@ def show_docstring_numpy() -> None:
         >>>         bool
         >>>             Description of return value
         >>>
-        >>>         \"""
+        >>>         '''
         >>>         return True
     """
-
     print("Numpy style annotation:")
 
     print_str = """

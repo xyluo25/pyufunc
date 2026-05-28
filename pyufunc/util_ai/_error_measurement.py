@@ -5,16 +5,13 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 from __future__ import annotations
-from typing import Iterable, TYPE_CHECKING
+from typing import Iterable
 from pyufunc.util_magic import requires
-
-if TYPE_CHECKING:
-    import numpy as np
 
 
 @requires("numpy")
 def mean_absolute_error(y_true: Iterable, y_pred: Iterable) -> float:
-    """Calculate mean absolute error between y_true and y_pred
+    """Calculate mean absolute error between y_true and y_pred.
 
     Args:
         y_true: Iterable, The true values
@@ -52,7 +49,7 @@ def mean_absolute_error(y_true: Iterable, y_pred: Iterable) -> float:
 
 @requires("numpy")
 def mean_squared_error(y_true: Iterable, y_pred: Iterable) -> float:
-    """Calculate mean squared error between y_true and y_pred
+    """Calculate mean squared error between y_true and y_pred.
 
     Args:
         y_true: Iterable, The true values
@@ -89,7 +86,7 @@ def mean_squared_error(y_true: Iterable, y_pred: Iterable) -> float:
 
 @requires("numpy")
 def mean_squared_log_error(y_true: Iterable, y_pred: Iterable) -> float:
-    """Calculate mean squared log error between y_true and y_pred
+    """Calculate mean squared log error between y_true and y_pred.
 
     Args:
         y_true: Iterable, The true values
@@ -127,7 +124,7 @@ def mean_squared_log_error(y_true: Iterable, y_pred: Iterable) -> float:
 
 @requires("numpy")
 def root_mean_squared_error(y_true: Iterable, y_pred: Iterable) -> float:
-    """Calculate root mean squared error between y_true and y_pred
+    """Calculate root mean squared error between y_true and y_pred.
 
     Args:
         y_true: Iterable, The true values
@@ -165,7 +162,7 @@ def root_mean_squared_error(y_true: Iterable, y_pred: Iterable) -> float:
 
 @requires("numpy")
 def mean_absolute_percentage_error(y_true: Iterable, y_pred: Iterable) -> float:
-    """Calculate mean absolute percentage error between y_true and y_pred
+    """Calculate mean absolute percentage error between y_true and y_pred.
 
     Args:
         y_true: Iterable, The true values
@@ -202,7 +199,7 @@ def mean_absolute_percentage_error(y_true: Iterable, y_pred: Iterable) -> float:
 
 @requires("numpy")
 def mean_percentage_error(y_true: Iterable, y_pred: Iterable) -> float:
-    """Calculate mean percentage error between y_true and y_pred
+    """Calculate mean percentage error between y_true and y_pred.
 
     Args:
         y_true: Iterable, The true values

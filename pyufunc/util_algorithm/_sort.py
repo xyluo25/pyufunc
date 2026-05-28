@@ -31,7 +31,6 @@ def algo_quick_sort(array: Iterable, verbose: bool = False) -> Iterable:
         Running time of quick_sort: O(n log n)
         [1, 1, 2, 3, 6, 8, 10]
     """
-
     # TDD: Test-Driven Development
     # check if the input is iterable or not, convert to list for indexing
     if not isinstance(array, Iterable):
@@ -78,7 +77,6 @@ def algo_merge_sort(array: Iterable, verbose: bool = False) -> Iterable:
         [1, 1, 2, 3, 6, 8, 10]
 
     """
-
     # TDD: Test-Driven Development
     # check if the input is iterable or not, convert to list for indexing
     if not isinstance(array, Iterable):
@@ -156,7 +154,6 @@ def algo_heap_sort(array: Iterable, verbose: bool = False) -> Iterable:
         Running time of heap_sort: O(n log n): 29.0
         [1, 1, 2, 3, 6, 8, 10]
     """
-
     # TDD: Test-Driven Development
     # check if the input is iterable or not, convert to list for indexing
     if not isinstance(array, Iterable):
@@ -228,7 +225,6 @@ def algo_selection_sort(array: Iterable, verbose: bool = False) -> Iterable:
         Running time of selection_sort: O(n^2)
         [1, 1, 2, 3, 6, 8, 10]
     """
-
     # TDD: Test-Driven Development
     # check if the input is a sequence or not
     if not isinstance(array, Iterable):
@@ -278,7 +274,6 @@ def algo_insertion_sort(array: Iterable, verbose: bool = False) -> Iterable:
         Running time of insertion_sort: O(n^2)
         [1, 1, 2, 3, 6, 8, 10]
     """
-
     # TDD: Test-Driven Development
     # check if the input is iterable or not
     if not isinstance(array, Iterable):
@@ -322,7 +317,6 @@ def algo_bubble_sort(array: Iterable, verbose: bool = False) -> Iterable:
         Running time of bubble_sort: O(n^2)
         [1, 1, 2, 3, 6, 8, 10]
     """
-
     # TDD: Test-Driven Development
     # check if the input is iterable or not
     if not isinstance(array, Iterable):
@@ -337,7 +331,6 @@ def algo_bubble_sort(array: Iterable, verbose: bool = False) -> Iterable:
 
         # Last i elements are already in place
         for j in range(n - i - 1):
-
             # Traverse the array from 0 to n-i-1
             # Swap if the element found is greater
             # than the next element

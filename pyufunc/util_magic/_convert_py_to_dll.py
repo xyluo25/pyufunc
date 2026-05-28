@@ -1,17 +1,18 @@
-'''
+"""
 ##############################################################
 # Created Date: Sunday, March 23rd 2025
 # Contact Info: luoxiangyong01@gmail.com
-# Author/Copyright: Mr. Xiangyong Luo
+# Author/Copyright: Mr. Xiangyong Luo.
 ##############################################################
-'''
+"""
+
 import os
 import platform
 from pathlib import Path
 from pyufunc.util_magic._dependency_requires_decorator import requires
 
 
-@requires('setuptools', ('cython', 'Cython'), "shutil")
+@requires("setuptools", ("cython", "Cython"), "shutil")
 def cvt_py_to_dll(py_file: str, output_dir: str = "") -> bool:
     """
     Convert a Python file to a DLL using Cython and setuptools.
@@ -38,14 +39,13 @@ def cvt_py_to_dll(py_file: str, output_dir: str = "") -> bool:
     Returns:
         bool: True if the conversion was successful, False otherwise.
     """
-
     # import modules within the function to avoid unnecessary imports if the function is not used
     import shutil
     from setuptools import setup, Extension
     from Cython.Build import cythonize  # pyright: ignore[reportMissingImports]
 
     # check whether py_file extension is .py and .pyx
-    if not (py_file.endswith('.py') or py_file.endswith('.pyx')):
+    if not (py_file.endswith(".py") or py_file.endswith(".pyx")):
         raise ValueError("The file must be a .py or .pyx file.")
 
     # get the name of the Python file without extension and directory
@@ -54,11 +54,11 @@ def cvt_py_to_dll(py_file: str, output_dir: str = "") -> bool:
     py_filename = Path(py_file).stem
 
     # create the template directory for conversion
-    dir_temp = os.path.join(py_file_dir, 'temp_cython')
+    dir_temp = os.path.join(py_file_dir, "temp_cython")
     os.makedirs(dir_temp, exist_ok=True)
 
     # Copy the Python file to the temporary directory if it is not already there
-    shutil.copy(py_file_abs, os.path.join(dir_temp, f'{py_filename}.pyx'))
+    shutil.copy(py_file_abs, os.path.join(dir_temp, f"{py_filename}.pyx"))
 
     # change the working directory to the temporary directory
     os.chdir(dir_temp)
@@ -82,25 +82,21 @@ def cvt_py_to_dll(py_file: str, output_dir: str = "") -> bool:
     # if it's Windows, check .pyd extension, else use .so for Unix-like systems
     if platform.system() == "Windows":
         # get all files in the temp directory with .pyd extension
-        dll_pyd_files = [f for f in os.listdir(dir_temp) if f.endswith('.pyd')]
+        dll_pyd_files = [f for f in os.listdir(dir_temp) if f.endswith(".pyd")]
         if not dll_pyd_files:
-            raise FileNotFoundError(
-                "No .pyd file found in the temporary directory.")
+            raise FileNotFoundError("No .pyd file found in the temporary directory.")
         # use the first .pyd file found and rename it to the module name
-        os.rename(os.path.join(dir_temp, dll_pyd_files[0]), os.path.join(
-            dir_temp, f"{module_name}.pyd"))
+        os.rename(os.path.join(dir_temp, dll_pyd_files[0]), os.path.join(dir_temp, f"{module_name}.pyd"))
         # set the dll_file to the renamed .pyd file
         dll_file = os.path.join(dir_temp, f"{module_name}.pyd")
 
     else:  # Unix-like systems (Linux, macOS)
         # get all .so files in the temp directory
-        so_files = [f for f in os.listdir(dir_temp) if f.endswith('.so')]
+        so_files = [f for f in os.listdir(dir_temp) if f.endswith(".so")]
         if not so_files:
-            raise FileNotFoundError(
-                "No .so file found in the temporary directory.")
+            raise FileNotFoundError("No .so file found in the temporary directory.")
         # use the first .so file found and rename it to the module name
-        os.rename(os.path.join(dir_temp, so_files[0]), os.path.join(
-            dir_temp, f"{module_name}.so"))
+        os.rename(os.path.join(dir_temp, so_files[0]), os.path.join(dir_temp, f"{module_name}.so"))
 
         # set the dll_file to the renamed .so file
         dll_file = os.path.join(dir_temp, f"{module_name}.so")

@@ -1,4 +1,3 @@
-
 import os
 from pathlib import Path
 import contextlib
@@ -7,7 +6,6 @@ import warnings
 
 
 def count_lines_of_code(package_path: str | Path, *, ext: str = "*", verbose: bool = False) -> int:
-
     """Counts the number of lines of code in a Python package.
 
     Args:
@@ -30,7 +28,6 @@ def count_lines_of_code(package_path: str | Path, *, ext: str = "*", verbose: bo
     Returns:
         int: The number of lines of code in the package.
     """
-
     # Initialize the count
     count = 0
 

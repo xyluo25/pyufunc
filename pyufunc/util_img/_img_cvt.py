@@ -21,7 +21,7 @@ from ._img_operate import img_CV_to_PIL, img_PIL_to_CV
 
 
 def img_to_bytes(img_path: str) -> bytes:
-    """Convert image to bytes
+    """Convert image to bytes.
 
     Args:
         img_path (str): image path, include all image format, e.g. .jpg, .png, .bmp, .gif, etc.
@@ -36,15 +36,15 @@ def img_to_bytes(img_path: str) -> bytes:
         >>> print(img_b)
     """
     try:
-        with open(img_path, 'rb') as f:
+        with open(img_path, "rb") as f:
             img_b = f.read()
     except Exception:
-        img_b = bytes("", encoding='utf-8')
+        img_b = bytes("", encoding="utf-8")
     return img_b
 
 
 def img_PIL_to_bytes(img: Image) -> bytes:
-    """Convert PIL image to bytes
+    """Convert PIL image to bytes.
 
     Args:
         img (Image): PIL image object
@@ -61,16 +61,16 @@ def img_PIL_to_bytes(img: Image) -> bytes:
     """
     try:
         img_b = io.BytesIO()
-        img.save(img_b, format='JPEG')
+        img.save(img_b, format="JPEG")
         return img_b.getvalue()
     except Exception:
         print("Error: fail to convert PIL image to bytes, return empty bytes")
-        return bytes("", encoding='utf-8')
+        return bytes("", encoding="utf-8")
 
 
 @requires(("pillow", "PIL"))
 def img_bytes_to_PIL(img_b: bytes) -> Image:
-    """Convert image bytes to PIL image
+    """Convert image bytes to PIL image.
 
     Args:
         img_b (bytes): image bytes
@@ -86,18 +86,17 @@ def img_bytes_to_PIL(img_b: bytes) -> Image:
         >>> img = cvt_img_bytes_to_PIL_img(img_b)
         >>> img.show()
     """
-
     from PIL import Image  # pyright: ignore[reportMissingImports]
 
     try:
         return Image.open(io.BytesIO(img_b))
     except Exception:
         print("Error: fail to convert image bytes to PIL image, return a white image")
-        return Image.new('RGB', (1, 1), (255, 255, 255))
+        return Image.new("RGB", (1, 1), (255, 255, 255))
 
 
 def img_bytes_to_CV(img_b: bytes) -> np.ndarray:
-    """Convert image bytes to OpenCV numpy array
+    """Convert image bytes to OpenCV numpy array.
 
     Args:
         img_b (bytes): image bytes
@@ -119,7 +118,7 @@ def img_bytes_to_CV(img_b: bytes) -> np.ndarray:
 
 
 def img_CV_to_bytes(img: np.ndarray) -> bytes:
-    """Convert OpenCV numpy array to image bytes
+    """Convert OpenCV numpy array to image bytes.
 
     Args:
         img (np.ndarray): OpenCV numpy array
@@ -134,6 +133,5 @@ def img_CV_to_bytes(img: np.ndarray) -> bytes:
         >>> img_b = img_CV_to_bytes(img)
         >>> img_show(img)
     """
-
     img_pil = img_CV_to_PIL(img)
     return img_PIL_to_bytes(img_pil)

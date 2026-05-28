@@ -5,11 +5,9 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
+"""General-purpose helper and decorator exports."""
 
-from ._google_numpy_docstring import (show_docstring_headers,
-                                      show_docstring_google,
-                                      show_docstring_numpy
-                                      )
+from ._google_numpy_docstring import show_docstring_headers, show_docstring_google, show_docstring_numpy
 
 from ._password_generator import generate_password
 
@@ -20,7 +18,8 @@ from ._import_package import (
     get_user_defined_func,
     get_user_defined_module,
     get_user_imported_module,
-    is_user_defined_func)
+    is_user_defined_func,
+)
 
 from ._dependency_requires_decorator import requires
 from ._func_time_decorator import func_running_time, func_time
@@ -36,10 +35,8 @@ __all__ = [
     "show_docstring_headers",
     "show_docstring_google",
     "show_docstring_numpy",
-
     # _password_generator
     "generate_password",
-
     # _import_package
     "import_package",
     "get_active_python_env",
@@ -48,27 +45,20 @@ __all__ = [
     "get_user_defined_module",
     "get_user_imported_module",
     "is_user_defined_func",
-
     # _decorator_dependency_requires
     "requires",
-
     # _decorator_func_time
     "func_running_time",
     "func_time",
-
     # _decorator_run_parallel
     "run_parallel",
-
     # _decorator_end_of_life
     "end_of_life",
-
     # _count_code_size
     "count_lines_of_code",
-
     # _time_out
     "timeout",
     "timeout_linux",
-
     # _convert_py_to_dll
-    "cvt_py_to_dll"
+    "cvt_py_to_dll",
 ]

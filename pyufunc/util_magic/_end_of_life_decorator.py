@@ -42,7 +42,6 @@ def end_of_life(func_or_class: object = None, **kwargs) -> object:
         object: the decorated function.
 
     """
-
     # kwargs from decorator
     # print("kwargs: ", kwargs)
     message = kwargs.get("message", kwargs.get("msg", None))
@@ -57,6 +56,7 @@ def end_of_life(func_or_class: object = None, **kwargs) -> object:
                 print(f"  :{message}")
 
             return func_obj(*args, **kwargs)
+
         return wrapper
 
     return inner(func_or_class) if func_or_class else inner

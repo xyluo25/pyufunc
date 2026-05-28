@@ -10,26 +10,26 @@
 import sys
 import itertools
 
-from .util_ai import *  # machine learning functions
-from .util_algorithm import *  # algorithm functions
-from .util_magic import *  # unclassified functions are here
-from .util_data_processing import *  # data processing functions including algorithms
-from .util_datetime import *  # datetime functions
-from .util_fullstack import *  # fullstack functions, including front end and back end
-from .util_geo import *  # geographic functions
-from .util_git_pypi import *  # git and pypi functions
-from .util_gui import *  # GUI functions
-from .util_img import *  # image functions
-from .util_log import *  # logging functions
-from .util_network import *  # network functions
-from .util_office import *  # office functions
-from .util_optimization import *  # optimization functions
-from .util_pathio import *  # path and IO functions
-from .util_test import *  # test functions
-from .util_vis import *  # visualization functions
+from .util_ai import *  # noqa: F403  # machine learning functions
+from .util_algorithm import *  # noqa: F403  # algorithm functions
+from .util_magic import *  # noqa: F403  # unclassified functions are here
+from .util_data_processing import *  # noqa: F403  # data processing functions including algorithms
+from .util_datetime import *  # noqa: F403  # datetime functions
+from .util_fullstack import *  # noqa: F403  # fullstack functions, including front end and back end
+from .util_geo import *  # noqa: F403  # geographic functions
+from .util_git_pypi import *  # noqa: F403  # git and pypi functions
+from .util_gui import *  # noqa: F403  # GUI functions
+from .util_img import *  # noqa: F403  # image functions
+from .util_log import *  # noqa: F403  # logging functions
+from .util_network import *  # noqa: F403  # network functions
+from .util_office import *  # noqa: F403  # office functions
+from .util_optimization import *  # noqa: F403  # optimization functions
+from .util_pathio import *  # noqa: F403  # path and IO functions
+from .util_test import *  # noqa: F403  # test functions
+from .util_vis import *  # noqa: F403  # visualization functions
 
 # import adopted functions from other packages
-from .util_pkgs import *
+from .util_pkgs import *  # noqa: F403
 
 __version__ = "0.4.5"
 __author__ = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
@@ -102,8 +102,7 @@ def show_util_func_by_category(verbose: bool = True) -> dict:
         "util_test": util_test.__all__,
         "util_vis": util_vis.__all__,
         "util_pkgs": util_pkgs.__all__,
-        "pkg_utils": ["show_util_func_by_category",
-                      "find_util_func_by_keyword"],
+        "pkg_utils": ["show_util_func_by_category", "find_util_func_by_keyword"],
     }
 
     res_str_by_category = ""
@@ -201,16 +200,16 @@ def find_util_func_by_keyword(keyword: str | None = None, verbose: bool = True) 
 
 def __check_python_version(min_version: str = "3.10") -> tuple:
     # Split the version string and convert to tuple of integers
-    version_tuple = tuple(map(int, sys.version.split()[0].split('.')))
+    version_tuple = tuple(map(int, sys.version.split()[0].split(".")))
 
     # Check if the version is greater than or equal to the minimum version required
     major, minor = min_version.split(".")
     try:
         if version_tuple < (int(major), int(minor)):
-            raise EnvironmentError(
-                f"Python version {min_version} or higher is required.")
+            raise EnvironmentError(f"Python version {min_version} or higher is required.")
     except Exception:
         print(f"pyufunc supports Python {min_version} or higher.")
     return version_tuple
+
 
 __check_python_version()

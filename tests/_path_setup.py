@@ -1,10 +1,5 @@
-'''
-##############################################################
-# Created Date: Wednesday, January 15th 2025
-# Contact Info: luoxiangyong01@gmail.com
-# Author/Copyright: Mr. Xiangyong Luo
-##############################################################
-'''
+"""Test import path setup helpers."""
+
 from pathlib import Path
 import sys
 import os
@@ -18,7 +13,7 @@ def add_pkg_to_sys_path(pkg_name: str, verbose: bool = True) -> bool:
     needing to import a package that is not installed.
 
     Args:
-        package_name (str): The name of the package to locate and add.
+        pkg_name (str): The name of the package to locate and add.
         verbose (bool): Whether to print the process info. Defaults to True.
 
     Location:
@@ -31,7 +26,6 @@ def add_pkg_to_sys_path(pkg_name: str, verbose: bool = True) -> bool:
     Returns:
         bool: True if the package is found and added to the system path, otherwise
     """
-
     # TDD: check if the package path is a string
     if not isinstance(pkg_name, str):
         raise ValueError("pkg_path should be a string.")
@@ -40,9 +34,9 @@ def add_pkg_to_sys_path(pkg_name: str, verbose: bool = True) -> bool:
     def is_importable_package(path):
         return os.path.isdir(path) and (
             # Check for traditional package
-            os.path.isfile(os.path.join(path, '__init__.py'))
+            os.path.isfile(os.path.join(path, "__init__.py"))
             # Accept single-module package
-            or any(fname.endswith('.py') for fname in os.listdir(path))
+            or any(fname.endswith(".py") for fname in os.listdir(path))
         )
 
     # Helper function to locate the package in the directory tree
@@ -81,6 +75,5 @@ def add_pkg_to_sys_path(pkg_name: str, verbose: bool = True) -> bool:
                 print(f"{absolute_path_parent} is already in the system path.")
         return True
 
-    print(f"  :Importable package '{pkg_name}' not found"
-          "in the current directory, parent directories, or children.")
+    print(f"  :Importable package '{pkg_name}' not foundin the current directory, parent directories, or children.")
     return False

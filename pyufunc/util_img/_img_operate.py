@@ -22,7 +22,7 @@ from pyufunc.util_magic import requires
 
 @requires(("pillow", "PIL"))
 def is_PIL_img(img: Any) -> bool:
-    """Check if the input object is a PIL image
+    """Check if the input object is a PIL image.
 
     Args:
         img (Any): input object
@@ -48,7 +48,7 @@ def is_PIL_img(img: Any) -> bool:
 
 @requires("numpy")
 def is_CV_img(img: Any) -> bool:
-    """Check if the input object is a CV image
+    """Check if the input object is a CV image.
 
     Args:
         img (Any): input object
@@ -74,7 +74,7 @@ def is_CV_img(img: Any) -> bool:
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
 def img_PIL_to_CV(img: Image.Image) -> np.ndarray:
-    """Convert PIL image to CV image
+    """Convert PIL image to CV image.
 
     Args:
         img (Image.Image): PIL image object
@@ -90,7 +90,6 @@ def img_PIL_to_CV(img: Image.Image) -> np.ndarray:
         >>> img_cv = img_PIL_to_CV(img_pil)
 
     """
-
     import cv2  # pyright: ignore[reportMissingImports]
     import numpy as np
 
@@ -99,7 +98,7 @@ def img_PIL_to_CV(img: Image.Image) -> np.ndarray:
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
 def img_CV_to_PIL(img: np.ndarray) -> Image.Image:
-    """Convert CV image to PIL image
+    """Convert CV image to PIL image.
 
     Args:
         img (np.ndarray): CV image array
@@ -121,11 +120,8 @@ def img_CV_to_PIL(img: np.ndarray) -> Image.Image:
 
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
-def img_translate(img: np.ndarray | str | Image.Image,
-                  dx: float,
-                  dy: float,
-                  verbose: bool = True) -> np.ndarray:
-    """Translate image with a given distance in x-axis and y-axis
+def img_translate(img: np.ndarray | str | Image.Image, dx: float, dy: float, verbose: bool = True) -> np.ndarray:
+    """Translate image with a given distance in x-axis and y-axis.
 
     Args:
         img (Union[np.ndarray, str, Image.Image]): image array or image path or PIL image object
@@ -181,12 +177,14 @@ def img_translate(img: np.ndarray | str | Image.Image,
 
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
-def img_rotate(img: np.ndarray | str | Image.Image,
-               angle: float,
-               center: tuple[float, float] = None,
-               scale: float = 1.0,
-               verbose: bool = True) -> np.ndarray:
-    """Rotate image with a given angle at a given center
+def img_rotate(
+    img: np.ndarray | str | Image.Image,
+    angle: float,
+    center: tuple[float, float] = None,
+    scale: float = 1.0,
+    verbose: bool = True,
+) -> np.ndarray:
+    """Rotate image with a given angle at a given center.
 
     Args:
         img (Union[np.ndarray, str, Image.Image]): image array or image path or PIL image object
@@ -208,7 +206,6 @@ def img_rotate(img: np.ndarray | str | Image.Image,
         >>> cv2.waitKey(0)
         >>> cv2.destroyAllWindows()
     """
-
     # import necessary models
     import cv2  # pyright: ignore[reportMissingImports]
     from PIL import Image  # pyright: ignore[reportMissingImports]
@@ -263,10 +260,8 @@ def img_rotate(img: np.ndarray | str | Image.Image,
 
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
-def img_rotate_bound(img: np.ndarray | str | Image.Image,
-                     angle: float,
-                     verbose: bool = True) -> np.ndarray:
-    """Rotate image with a given angle, and keep the whole image in the frame
+def img_rotate_bound(img: np.ndarray | str | Image.Image, angle: float, verbose: bool = True) -> np.ndarray:
+    """Rotate image with a given angle, and keep the whole image in the frame.
 
     Args:
         img (Union[np.ndarray, str, Image.Image]): image array or image path or PIL image object
@@ -285,7 +280,6 @@ def img_rotate_bound(img: np.ndarray | str | Image.Image,
         >>> cv2.waitKey(0)
         >>> cv2.destroyAllWindows()
     """
-
     # import necessary modules
     import cv2  # pyright: ignore[reportMissingImports]
     from PIL import Image  # pyright: ignore[reportMissingImports]
@@ -339,12 +333,10 @@ def img_rotate_bound(img: np.ndarray | str | Image.Image,
 
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
-def img_resize(img: np.ndarray | str | Image.Image,
-               width: int = None,
-               height: int = None,
-               inter: int = None,
-               verbose: bool = True) -> np.ndarray:
-    """Resize image
+def img_resize(
+    img: np.ndarray | str | Image.Image, width: int = None, height: int = None, inter: int = None, verbose: bool = True
+) -> np.ndarray:
+    """Resize image.
 
     Args:
         img (Union[np.ndarray, str, Image.Image]): image array or image path or PIL image object
@@ -365,7 +357,6 @@ def img_resize(img: np.ndarray | str | Image.Image,
         >>> cv2.waitKey(0)
         >>> cv2.destroyAllWindows()
     """
-
     # import necessary modules
     import cv2  # pyright: ignore[reportMissingImports]
     from PIL import Image  # pyright: ignore[reportMissingImports]
@@ -419,10 +410,8 @@ def img_resize(img: np.ndarray | str | Image.Image,
 
 
 @requires(("opencv-python", "cv2"), ("pillow", "PIL"))
-def img_show(img: np.ndarray | str | Image.Image,
-             is_PIL_show: bool = False,
-             verbose: bool = True) -> None:
-    """Show image in a window from image path or image array or PIL image object
+def img_show(img: np.ndarray | str | Image.Image, is_PIL_show: bool = False, verbose: bool = True) -> None:
+    """Show image in a window from image path or image array or PIL image object.
 
     Args:
         img (Union[str, np.ndarray, Image.Image]): image path or OpenCV image array or PIL image object
@@ -437,7 +426,6 @@ def img_show(img: np.ndarray | str | Image.Image,
         >>> img = cv2.imread('test.jpg')
         >>> img_show(img)
     """
-
     # import necessary modules
     import cv2  # pyright: ignore[reportMissingImports]
     from PIL import Image  # pyright: ignore[reportMissingImports]
@@ -478,7 +466,7 @@ def img_show(img: np.ndarray | str | Image.Image,
     if verbose:
         print("  Show image using OpenCV in default, if you want to show the image using PIL, set is_PIL_show=True")
 
-    cv2.imshow('image', img_cv)
+    cv2.imshow("image", img_cv)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 

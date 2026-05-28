@@ -1,10 +1,10 @@
-'''
+"""
 ##############################################################
 # Created Date: Thursday, April 23rd 2026
 # Contact Info: luoxiangyong01@gmail.com
-# Author/Copyright: Mr. Xiangyong Luo
+# Author/Copyright: Mr. Xiangyong Luo.
 ##############################################################
-'''
+"""
 
 # This module including adopted functions from psutil package.
 
@@ -22,7 +22,7 @@ if TYPE_CHECKING:
     import psutil
 
 
-@requires('psutil')
+@requires("psutil")
 def cpu_times(percpu: bool = False) -> "psutil.cpu_times":
     """Count the CPU times.
 
@@ -38,12 +38,12 @@ def cpu_times(percpu: bool = False) -> "psutil.cpu_times":
     Returns:
         psutil.cpu_times: A named tuple representing the CPU times.
     """
-
     import psutil
+
     return psutil.cpu_times(percpu=percpu)
 
 
-@requires('psutil')
+@requires("psutil")
 def cpu_count(logical: bool = True) -> int | None:
     """Return the number of logical or physical CPUs in the system.
 
@@ -60,12 +60,12 @@ def cpu_count(logical: bool = True) -> int | None:
     Returns:
         int: The number of logical or physical CPUs in the system.
     """
-
     import psutil
+
     return psutil.cpu_count(logical=logical)
 
 
-@requires('psutil')
+@requires("psutil")
 def cpu_percent(interval: float = None, percpu: bool = False) -> "psutil.cpu_percent":
     """Return a float representing the current system-wide CPU utilization as a percentage.
 
@@ -77,6 +77,7 @@ def cpu_percent(interval: float = None, percpu: bool = False) -> "psutil.cpu_per
             In this case it is recommended for accuracy that this function
             be called with at least 0.1 seconds between calls.
         percpu (bool): If True, returns a list of floats representing each logical CPU. Defaults to False.
+
     Notes:
         - This function is adopted from psutil.cpu_percent().
         - the original license of psutil is BSD 3-Clause License, and we will keep the license in our project.
@@ -86,12 +87,12 @@ def cpu_percent(interval: float = None, percpu: bool = False) -> "psutil.cpu_per
         psutil.cpu_percent: A float representing the current system-wide CPU utilization as a percentage,
             or a list of floats if percpu is True.
     """
-
     import psutil
+
     return psutil.cpu_percent(interval=interval, percpu=percpu)
 
 
-@requires('psutil')
+@requires("psutil")
 def virtual_memory(unit: str = "bytes") -> "psutil.virtual_memory":
     """Return statistics about system memory usage (RAM). All values are expressed in bytes.
 
@@ -112,6 +113,7 @@ def virtual_memory(unit: str = "bytes") -> "psutil.virtual_memory":
         psutil.virtual_memory: A named tuple representing the system memory usage statistics.
     """
     import psutil
+
     vir_mem = psutil.virtual_memory()._asdict()
 
     for key in vir_mem:
@@ -122,16 +124,16 @@ def virtual_memory(unit: str = "bytes") -> "psutil.virtual_memory":
         elif unit in {"MB", "mB", "mb", "Mb"}:
             if key == "percent":
                 continue
-            vir_mem[key] /= (1024 ** 2)
+            vir_mem[key] /= 1024**2
         elif unit in {"GB", "gB", "gb", "Gb"}:
             if key == "percent":
                 continue
-            vir_mem[key] /= (1024 ** 3)
+            vir_mem[key] /= 1024**3
 
     return psutil._ntuples.svmem(**vir_mem)
 
 
-@requires('psutil')
+@requires("psutil")
 def swap_memory(unit: str = "bytes") -> "psutil.swap_memory":
     """Return statistics about system swap memory usage. All values are expressed in bytes.
 
@@ -151,8 +153,8 @@ def swap_memory(unit: str = "bytes") -> "psutil.swap_memory":
     Returns:
         psutil.swap_memory: A named tuple representing the system swap memory usage statistics.
     """
-
     import psutil
+
     swap_mem = psutil.swap_memory()._asdict()
 
     for key in swap_mem:
@@ -164,17 +166,17 @@ def swap_memory(unit: str = "bytes") -> "psutil.swap_memory":
             for key in swap_mem:
                 if key == "percent":
                     continue
-                swap_mem[key] /= (1024 ** 2)
+                swap_mem[key] /= 1024**2
         elif unit in {"GB", "gB", "gb", "Gb"}:
             for key in swap_mem:
                 if key == "percent":
                     continue
-                swap_mem[key] /= (1024 ** 3)
+                swap_mem[key] /= 1024**3
 
     return psutil._ntuples.sswap(**swap_mem)
 
 
-@requires('psutil')
+@requires("psutil")
 def disk_usage(path: str = "/", *, unit: str = "bytes") -> "psutil.disk_usage":
     """Return disk usage statistics about the given path as a named tuple including total, used and free space.
 
@@ -195,8 +197,8 @@ def disk_usage(path: str = "/", *, unit: str = "bytes") -> "psutil.disk_usage":
     Returns:
         psutil.disk_usage: A named tuple representing the disk usage statistics for the given path.
     """
-
     import psutil
+
     disk_usage = psutil.disk_usage(path)._asdict()
 
     for key in disk_usage:
@@ -207,16 +209,16 @@ def disk_usage(path: str = "/", *, unit: str = "bytes") -> "psutil.disk_usage":
         elif unit in {"MB", "mB", "mb", "Mb"}:
             if key == "percent":
                 continue
-            disk_usage[key] /= (1024 ** 2)
+            disk_usage[key] /= 1024**2
         elif unit in {"GB", "gB", "gb", "Gb"}:
             if key == "percent":
                 continue
-            disk_usage[key] /= (1024 ** 3)
+            disk_usage[key] /= 1024**3
 
     return psutil._ntuples.sdiskusage(**disk_usage)
 
 
-@requires('psutil')
+@requires("psutil")
 def sensor_temperatures() -> "psutil.sensors_temperatures":
     """Return hardware temperatures.
 
@@ -230,10 +232,11 @@ def sensor_temperatures() -> "psutil.sensors_temperatures":
             representing the temperature readings for each sensor.
     """
     import psutil
+
     return psutil.sensors_temperatures()
 
 
-@requires('psutil')
+@requires("psutil")
 def sensor_fans() -> "psutil.sensors_fans":
     """Return hardware fans speed.
 
@@ -248,10 +251,11 @@ def sensor_fans() -> "psutil.sensors_fans":
             representing the fan speed readings for each sensor.
     """
     import psutil
+
     return psutil.sensors_fans()
 
 
-@requires('psutil')
+@requires("psutil")
 def sensor_battery(time_unit: str = "seconds") -> "psutil.sensors_battery":
     """Return battery status information.
 
@@ -272,6 +276,7 @@ def sensor_battery(time_unit: str = "seconds") -> "psutil.sensors_battery":
             or None if no battery is found.
     """
     import psutil
+
     battery = psutil.sensors_battery()._asdict()
 
     for key in battery:

@@ -15,8 +15,8 @@ def calc_area_from_wkt_geometry(wkt_geometry: str, unit: str = "sqm", verbose: b
 
     Args:
         wkt_geometry (str): The geometry in WKT format.
-        transformer (Transformer): The transformer to convert the geometry to the target CRS.
         unit (str): The unit of the area. Default is "sqm". Options are "sqm", "sqft"
+        verbose (bool): Whether to print the calculated area. Defaults to False.
 
     Example:
         >>> from pyufunc import calc_area_from_wkt_geometry
@@ -38,22 +38,17 @@ def calc_area_from_wkt_geometry(wkt_geometry: str, unit: str = "sqm", verbose: b
     geometry_shapely = shapely.from_wkt(wkt_geometry)
 
     # Set up a Transformer to convert from WGS 84 to UTM zone 18N (EPSG:32618)
-    transformer = Transformer.from_crs(
-        "EPSG:4326", "EPSG:32618", always_xy=True)
+    transformer = Transformer.from_crs("EPSG:4326", "EPSG:32618", always_xy=True)
 
     # Transform the polygon's coordinates to UTM
     if isinstance(geometry_shapely, shapely.MultiPolygon):
         transformed_polygons = []
         for polygon in geometry_shapely.geoms:
-            transformed_coords = [transformer.transform(
-                x, y) for x, y in polygon.exterior.coords]
-            transformed_polygons.append(
-                shapely.Polygon(transformed_coords))
-        transformed_geometry = shapely.MultiPolygon(
-            transformed_polygons)
+            transformed_coords = [transformer.transform(x, y) for x, y in polygon.exterior.coords]
+            transformed_polygons.append(shapely.Polygon(transformed_coords))
+        transformed_geometry = shapely.MultiPolygon(transformed_polygons)
     else:
-        transformed_coords = [transformer.transform(
-            x, y) for x, y in geometry_shapely.exterior.coords]
+        transformed_coords = [transformer.transform(x, y) for x, y in geometry_shapely.exterior.coords]
         transformed_geometry = shapely.Polygon(transformed_coords)
 
     if unit == "sqm":

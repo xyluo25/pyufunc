@@ -49,4 +49,4 @@ def validate_url(url: str) -> bool:
     Returns:
         bool: True if the URL is valid, False otherwise.
     """
-    return bool(re.match(r'^https?:/{2}\w.+$', url))
+    return bool(re.match(r"^https?:/{2}\w.+$", url))
