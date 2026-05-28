@@ -6,17 +6,24 @@
 ##############################################################
 from __future__ import annotations
 import math
-from typing import Iterable, Union, TYPE_CHECKING
-from pyufunc.util_magic import requires, import_package
+from typing import TYPE_CHECKING, Any
+from collections.abc import Iterable
+from pyufunc.util_magic import requires
 
 #  https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
-    from shapely.geometry import Point
+    Point = Any
+
+
+def _validate(condition: bool, message: str) -> None:
+    if not condition:
+        raise AssertionError(message)
 
 
 # convert degrees to radians
 def to_radians(angle_in_degrees: float) -> float:
-    """Convert degrees to radians
+    """
+    Convert degrees to radians.
 
     Args:
         angle_in_degrees (float): angle in degrees
@@ -27,13 +34,15 @@ def to_radians(angle_in_degrees: float) -> float:
     Example:
         >>> to_radians(180)
         3.141592653589793
+
     """
     return (angle_in_degrees * math.pi) / 180
 
 
 # convert radians to degrees
 def to_degrees(angle_in_radians: float) -> float:
-    """Convert radians to degrees
+    """
+    Convert radians to degrees.
 
     Args:
         angle_in_radians (float): angle in radians
@@ -44,12 +53,14 @@ def to_degrees(angle_in_radians: float) -> float:
     Example:
         >>> to_degrees(3.141592653589793)
         180.0
+
     """
     return (angle_in_radians * 180) / math.pi
 
 
 def _offset(point: Point, distance: float, earth_radius: float, bearing: float) -> list:
-    """ the function to calculate the new longitude and latitude by the distance and bearing from the original point
+    """
+    Calculate the new longitude and latitude by the distance and bearing from the original point.
 
     Args:
         point (shapely.geometry.Point): the point of longitude and latitude in format POINT (longitude, latitude)
@@ -59,12 +70,12 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
 
     Returns:
         list: the new longitude and latitude in degree format [longitude, latitude]
-    """
 
-    from shapely.geometry import Point
+    """
+    from shapely.geometry import Point  # pyright: ignore[reportMissingModuleSource]
 
     # TDD, test driven development: input validation
-    assert isinstance(point, Point), "the point should be a shapely.geometry.Point"
+    _validate(isinstance(point, Point), "the point should be a shapely.geometry.Point")
 
     # convert longitude and latitude to radians
     lon1 = to_radians(point.x)
@@ -74,17 +85,18 @@ def _offset(point: Point, distance: float, earth_radius: float, bearing: float) 
 
     # calculate the new longitude and latitude
     lat = math.asin(math.sin(lat1) * math.cos(d_by_r) + math.cos(lat1) * math.sin(d_by_r) * math.cos(bearing))
-    lon = lon1 + math.atan2(math.sin(bearing) * math.sin(d_by_r) * math.cos(lat1),
-                            math.cos(d_by_r) - math.sin(lat1) * math.sin(lat))
+    lon = lon1 + math.atan2(
+        math.sin(bearing) * math.sin(d_by_r) * math.cos(lat1), math.cos(d_by_r) - math.sin(lat1) * math.sin(lat)
+    )
     return [to_degrees(lon), to_degrees(lat)]
 
 
-@requires("shapely", verbose=False)
-def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
-                                       radius: float,
-                                       options: dict = None,
-                                       verbose: bool = False) -> dict:
-    """Generate a polygon by the center point and radius
+@requires("shapely")
+def create_circle_at_point_with_radius(
+    point: Point | Iterable[float], radius: float, options: dict = None, verbose: bool = False
+) -> dict:
+    """
+    Generate a polygon by the center point and radius.
 
     Args:
         point (shapely.geometry.Point, Iterable[float]): the center point with format [longitude, latitude]
@@ -142,14 +154,16 @@ def create_circle_at_point_with_radius(point: Union[Point, Iterable[float]],
     """
     if options is None:
         options = {"edges": 32, "bearing": 0, "direction": 1}
-    # import shapely.geometry.Point
-    import_package("shapely", verbose=False)
-    from shapely.geometry import Point
+
+    from shapely.geometry import Point  # pyright: ignore[reportMissingModuleSource]
 
     # TDD, test driven development: input validation
-    assert isinstance(point, (Point, Iterable)), "the point should be a shapely.geometry.Point or a list of longitude and latitude"
-    assert isinstance(radius, (int, float)), "the radius should be a number"
-    assert isinstance(options, dict), "the options should be a dictionary"
+    _validate(
+        isinstance(point, (Point, Iterable)),
+        ("the point should be a shapely.geometry.Point or a list of longitude and latitude"),
+    )
+    _validate(isinstance(radius, (int, float)), "the radius should be a number")
+    _validate(isinstance(options, dict), "the options should be a dictionary")
 
     if verbose:
         print(" :Info: the unit in point_to_circle_on_unit_radius is meter, please convert the unit if necessary.")

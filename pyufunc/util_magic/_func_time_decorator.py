@@ -15,6 +15,9 @@ def func_running_time(func: object) -> object:
     """A decorator to measure the time of a function or class method.
     It is useful to use this function in test, debug, logging and running time measurement.
 
+    Args:
+        func (object): the function or class method to be measured.
+
     Note:
         It's equivalent to the func_time as func_running_time have been used in many packages,
         and we keep both of them for compatibility.
@@ -22,23 +25,19 @@ def func_running_time(func: object) -> object:
     Location:
         The function defined in pyufunc.util_common._func_time_decorator.py.
 
-    Args:
-        func (object): the function or class method to be measured.
+    Examples:
+        >>> @func_running_time
+        >>> def func():
+        >>>    print("main function...)
+        >>>    time.sleep(3)
+        >>>    return
+
+        >>> func()
+        INFO Finished running function: func, total: 3s
 
     Returns:
         object: the decorated function or class method.
 
-    Examples:
-        >>> @func_running_time
-            def func():
-                print("main function...)
-                time.sleep(3)
-                return
-
-        >>> func()
-            INFO Begin to run function: func …
-            main function...
-            INFO Finished running function: func, total: 3s
     """
 
     @wraps(func)
@@ -47,8 +46,7 @@ def func_running_time(func: object) -> object:
         time_start = datetime.datetime.now()
         res = func(*args, **kwargs)
         time_diff = datetime.datetime.now() - time_start
-        print(
-            f'  :INFO: finished function: {func.__name__}, total: {time_diff.seconds}s \n')
+        print(f"  :INFO: finished function: {func.__name__}, total: {time_diff.seconds}s \n")
         return res
 
     return inner
@@ -58,6 +56,9 @@ def func_time(func: object) -> object:
     """A decorator to measure the time of a function or class method.
     It is useful to use this function in test, debug, logging and running time measurement.
 
+    Args:
+        func (object): the function or class method to be measured.
+
     Note:
         It's equivalent to the func_running_time as func_running_time have been used in many packages.
         We keep both of them for compatibility.
@@ -65,23 +66,20 @@ def func_time(func: object) -> object:
     Location:
         The function defined in pyufunc.util_common._func_time_decorator.py.
 
-    Args:
-        func (object): the function or class method to be measured.
+    Examples:
+        >>> @func_running_time
+        >>> def func():
+        >>>    print("main function...")
+        >>>    time.sleep(3)
+        >>>    return
+
+        >>> func()
+        main function...
+        INFO Finished running function: func, total: 3s
 
     Returns:
         object: the decorated function or class method.
 
-    Examples:
-        >>> @func_running_time
-            def func():
-                print("main function...)
-                time.sleep(3)
-                return
-
-        >>> func()
-            INFO Begin to run function: func …
-            main function...
-            INFO Finished running function: func, total: 3s
     """
 
     @wraps(func)
@@ -90,8 +88,7 @@ def func_time(func: object) -> object:
         time_start = datetime.datetime.now()
         res = func(*args, **kwargs)
         time_diff = datetime.datetime.now() - time_start
-        print(
-            f'  :INFO: finished function: {func.__name__}, total: {time_diff.seconds}s \n')
+        print(f"  :INFO: finished function: {func.__name__}, total: {time_diff.seconds}s \n")
         return res
 
     return inner

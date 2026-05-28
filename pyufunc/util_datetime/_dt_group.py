@@ -7,12 +7,13 @@
 
 from __future__ import annotations
 from typing import TYPE_CHECKING
-import pandas as pd
+from pyufunc.util_magic import requires
 
-from pyufunc.util_magic import func_running_time
+if TYPE_CHECKING:
+    import pandas as pd
 
 
-@func_running_time
+@requires("pandas")
 def group_dt_yearly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by year.
 
@@ -40,27 +41,22 @@ def group_dt_yearly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
         1	2021-12-31	12	   17.5	    210
 
     """
+    import pandas as pd
 
     col = ["datetime", "value"] if col is None else col
 
-    print("The group_yearly require at least two columns\n",
-          "first column: datetime\n",
-          "second column: value")
+    print("The group_yearly require at least two columns\n", "first column: datetime\n", "second column: value")
     interval = interval if interval > 0 else ""
     dataframe = df[col]
     dataframe.columns = ["datetime", "value"]
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
-    df_res = dataframe.groupby(
-        pd.Grouper(key="datetime",
-                   axis=0,
-                   freq=f"{interval}YE")).agg(["count", "mean", "sum"])
+    df_res = dataframe.groupby(pd.Grouper(key="datetime", freq=f"{interval}YE")).agg(["count", "mean", "sum"])
     df_res.reset_index(inplace=True)
-    df_res.columns = [i[0] if i[0] == "datetime" else i[1]
-                      for i in list(df_res.columns)]
+    df_res.columns = [i[0] if i[0] == "datetime" else i[1] for i in list(df_res.columns)]
     return df_res
 
 
-@func_running_time
+@requires("pandas")
 def group_dt_monthly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by month.
 
@@ -97,27 +93,22 @@ def group_dt_monthly(df: pd.DataFrame, interval: int = 1, col: list = None) -> p
         10	2020-11-30	30	319.5	9585
         11	2020-12-31	31	350.0	10850
     """
+    import pandas as pd
 
     col = ["datetime", "value"] if col is None else col
 
-    print("The group_monthly require at least two columns\n",
-          "first column: datetime\n",
-          "second column: value")
+    print("The group_monthly require at least two columns\n", "first column: datetime\n", "second column: value")
     interval = interval if interval > 0 else ""
     dataframe = df[col]
     dataframe.columns = ["datetime", "value"]
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
-    df_res = dataframe.groupby(
-        pd.Grouper(key="datetime",
-                   axis=0,
-                   freq=f"{interval}ME")).agg(["count", "mean", "sum"])
+    df_res = dataframe.groupby(pd.Grouper(key="datetime", freq=f"{interval}ME")).agg(["count", "mean", "sum"])
     df_res.reset_index(inplace=True)
-    df_res.columns = [i[0] if i[0] == "datetime" else i[1]
-                      for i in list(df_res.columns)]
+    df_res.columns = [i[0] if i[0] == "datetime" else i[1] for i in list(df_res.columns)]
     return df_res
 
 
-@func_running_time
+@requires("pandas")
 def group_dt_weekly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by week.
 
@@ -148,27 +139,21 @@ def group_dt_weekly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
         4	2020-02-02	7	29.0	203
 
     """
+    import pandas as pd
 
     col = ["datetime", "value"] if col is None else col
-    print("The group_weekly require at least two columns\n",
-          "first column: datetime\n",
-          "second column: value")
+    print("The group_weekly require at least two columns\n", "first column: datetime\n", "second column: value")
     interval = interval if interval > 0 else ""
     dataframe = df[col]
     dataframe.columns = ["datetime", "value"]
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
-    df_res = dataframe.groupby(pd.Grouper(key="datetime",
-                                          axis=0,
-                                          freq=f"{interval}W")).agg(["count",
-                                                                     "mean",
-                                                                     "sum"])
+    df_res = dataframe.groupby(pd.Grouper(key="datetime", freq=f"{interval}W")).agg(["count", "mean", "sum"])
     df_res.reset_index(inplace=True)
-    df_res.columns = [i[0] if i[0] == "datetime" else i[1]
-                      for i in list(df_res.columns)]
+    df_res.columns = [i[0] if i[0] == "datetime" else i[1] for i in list(df_res.columns)]
     return df_res
 
 
-@func_running_time
+@requires("pandas")
 def group_dt_daily(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by day.
 
@@ -199,28 +184,22 @@ def group_dt_daily(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.
             4	2020-01-05	1	4.0	    4
 
     """
+    import pandas as pd
 
     if col is None:
         col = ["datetime", "value"]
-    print("The group_daily require at least two columns\n",
-          "first column: datetime\n",
-          "second column: value")
+    print("The group_daily require at least two columns\n", "first column: datetime\n", "second column: value")
     interval = interval if interval > 0 else ""
     dataframe = df[col]
     dataframe.columns = ["datetime", "value"]
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
-    df_res = dataframe.groupby(
-        pd.Grouper(key="datetime",
-                   axis=0,
-                   freq=f"{interval}D")).agg(["count", "mean", "sum"])
+    df_res = dataframe.groupby(pd.Grouper(key="datetime", freq=f"{interval}D")).agg(["count", "mean", "sum"])
     df_res.reset_index(inplace=True)
-    df_res.columns = [i[0] if i[0] == "datetime" else i[1]
-                      for i in list(df_res.columns)]
+    df_res.columns = [i[0] if i[0] == "datetime" else i[1] for i in list(df_res.columns)]
     return df_res
 
 
-# @requires("pandas", verbose=False)
-@func_running_time
+@requires("pandas")
 def group_dt_hourly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by hour.
 
@@ -252,27 +231,22 @@ def group_dt_hourly(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd
         5	2020-01-01 05:00:00	1	5.0	    5
 
     """
+    import pandas as pd
 
     if col is None:
         col = ["datetime", "value"]
-    print("The group_hourly require at least two columns\n",
-          "first column: datetime\n",
-          "second column: value")
+    print("The group_hourly require at least two columns\n", "first column: datetime\n", "second column: value")
     interval = interval if interval > 0 else ""
     dataframe = df[col]
     dataframe.columns = ["datetime", "value"]
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
-    df_res = dataframe.groupby(
-        pd.Grouper(key="datetime",
-                   axis=0,
-                   freq=f"{interval}h")).agg(["count", "mean", "sum"])
+    df_res = dataframe.groupby(pd.Grouper(key="datetime", freq=f"{interval}h")).agg(["count", "mean", "sum"])
     df_res.reset_index(inplace=True)
-    df_res.columns = [i[0] if i[0] == "datetime" else i[1]
-                      for i in list(df_res.columns)]
+    df_res.columns = [i[0] if i[0] == "datetime" else i[1] for i in list(df_res.columns)]
     return df_res
 
 
-@func_running_time
+@requires("pandas")
 def group_dt_minutely(df: pd.DataFrame, interval: int = 1, col: list = None) -> pd.DataFrame:
     """Group the DataFrame by minute.
 
@@ -305,21 +279,16 @@ def group_dt_minutely(df: pd.DataFrame, interval: int = 1, col: list = None) -> 
         4	2020-01-01 00:04:00	1	4.0	    4
 
     """
+    import pandas as pd
 
     if col is None:
         col = ["datetime", "value"]
-    print("The group_minutely require at least two columns\n",
-          "first column: datetime\n",
-          "second column: value")
+    print("The group_minutely require at least two columns\n", "first column: datetime\n", "second column: value")
     interval = interval if interval > 0 else ""
     dataframe = df[col]
     dataframe.columns = ["datetime", "value"]
     dataframe["datetime"] = pd.to_datetime(dataframe["datetime"])
-    df_res = dataframe.groupby(
-        pd.Grouper(key="datetime",
-                   axis=0,
-                   freq=f"{interval}min")).agg(["count", "mean", "sum"])
+    df_res = dataframe.groupby(pd.Grouper(key="datetime", freq=f"{interval}min")).agg(["count", "mean", "sum"])
     df_res.reset_index(inplace=True)
-    df_res.columns = [i[0] if i[0] == "datetime" else i[1]
-                      for i in list(df_res.columns)]
+    df_res.columns = [i[0] if i[0] == "datetime" else i[1] for i in list(df_res.columns)]
     return df_res

@@ -6,25 +6,20 @@
 ##############################################################
 from __future__ import annotations
 import datetime
-from typing import TYPE_CHECKING, Union
-from pyufunc.pkg_configs import config_datetime_fmt
-from pyufunc.util_magic import requires, import_package
-
-if TYPE_CHECKING:
-    import dateutil
+from pyufunc.__cfg import config_datetime_fmt
+from pyufunc.util_magic import requires
 
 
-@requires(("python-dateutil", "dateutil"), verbose=False)
-def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
-                  dt_fmt: str = "") -> str:
-    """Format datetime to datetime string
+@requires(("python-dateutil", "dateutil"))
+def fmt_dt_to_str(dt: datetime.datetime | str = "", dt_fmt: str = "") -> str:
+    """Format datetime to datetime string.
 
     Args:
         dt (datetime, str): the datetime to be formatted. Defaults to datetime.datetime.now().
         dt_fmt (str): the format of the datetime. Defaults ("%Y-%m-%d %H:%M:%S").
 
     See Also:
-        pyufunc.pkg_configs.config_datetime_fmt : pre-defined datetime string formats
+        pyufunc.__cfg.config_datetime_fmt : pre-defined datetime string formats
 
     Returns:
         str : the formatted datetime string
@@ -42,7 +37,6 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
         >>> fmt_dt_to_str(datetime.datetime.now(), "%Y/%m/%d %H:%M:%S")
         '2024/02/06 11:11:11'
     """
-    import_package(("python-dateutil", "dateutil"))
     import dateutil
 
     # if the dt is empty, use the current datetime
@@ -56,13 +50,13 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
         except Exception as e:
             print(e)
             print(f"Cannot convert {dt} to datetime object. return the original value.")
-            return dt
+            return str(dt)
 
     # check if the input format is valid
     if not isinstance(dt, (datetime.datetime, str)):
         # convert input datetime string to datetime object
         print(f"The {dt} is not a str or datetime object. return the original value.")
-        return dt
+        return str(dt)
 
     # check if the input format is valid
     if not isinstance(dt_fmt, str):
@@ -78,18 +72,18 @@ def fmt_dt_to_str(dt: Union[datetime.datetime, str] = "",
     except Exception as e:
         print(e)
         print(f"Cannot convert {dt} to format: {dt_fmt}. return the original datetime.")
-        return dt
+        return str(dt)
 
 
-@requires(("python-dateutil", "dateutil"), verbose=False)
+@requires(("python-dateutil", "dateutil"))
 def fmt_str_to_dt(dt_str: str) -> datetime.datetime:
-    """Format datetime string to datetime
+    """Format datetime string to datetime.
 
     Args:
         dt_str (str): the datetime string to be formatted.
 
     See Also:
-        pyufunc.pkg_configs.config_datetime_fmt : pre-defined datetime string formats
+        pyufunc.__cfg.config_datetime_fmt : pre-defined datetime string formats
 
     Returns:
         datetime.datetime : the formatted datetime
@@ -100,8 +94,6 @@ def fmt_str_to_dt(dt_str: str) -> datetime.datetime:
         datetime.datetime(2024, 2, 6, 11, 11, 11)
 
     """
-    # import dateutil
-    import_package(("python-dateutil", "dateutil"))
     import dateutil
 
     # check if the dt is a string

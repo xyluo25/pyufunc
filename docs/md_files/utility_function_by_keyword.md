@@ -6,9 +6,9 @@
 
 ## Message From pyufunc Developers
 
-This document is designed to serve as an invaluable resource for developers, offering an extensive list of existing utility functions organized by keywords. The use of keywords for organization purposes aims to streamline the search process, enabling developers to quickly and efficiently find the specific functions they need to enhance their projects. Utility functions play a crucial role in software development, providing pre-built solutions to common problems and tasks, thereby saving time and reducing the complexity of coding from scratch. By presenting these functions in a keyword-centric format, we facilitate a more intuitive and user-friendly approach to accessing a vast repository of tools, ensuring that developers can leverage the full potential of utility functions to optimize their code, improve performance, and innovate within their applications.
+This document is a generated keyword index for the public utility functions exposed by pyufunc. The keyword groups are derived from function names and are intended to support API discovery.
 
-This methodical approach empowers developers to efficiently identify the functions that best match their current requirements, thereby enhancing their coding workflow and productivity. Whether tackling complex algorithmic challenges or implementing basic functionality, this guide aims to be an essential companion, fostering a deeper understanding and more effective use of utility functions in software development projects.
+The keyword index should not be interpreted as evidence that a function is widely used, frequently used, or faster than an alternative implementation. Evidence about reviewed packages and exploratory dependent-usage scans is tracked separately in `PACKAGE_CLAIMS.md`, `docs/md_files/utility_function_pkg_review.md`, and `datasets/util_pkgs_dependents_func_usage`.
 
 ## Existing Utility Functions by Keywords
 
@@ -17,64 +17,147 @@ Available utility functions in pyufunc:
 Note: we may not update available functions in time, please run code below to check latest available functions.
 
 ```python
-pyufunc.show_util_func_by_keyword()
+pyufunc.find_util_func_by_keyword("keyword")
 ```
 
-Available utility functions in pyUFunc (161):
+Available utility functions in pyUFunc (253):
 
 - non-keywords:
   - add_date_in_filename
   - add_dir_to_env
   - add_pkg_to_sys_path
+  - atomic_save_file
+  - auto_canny
+  - boot_time
+  - cd
+  - collect_files_excluding_gitignore
+  - confirmed
   - count_lines_of_code
+  - cpu_count
+  - cpu_freq
+  - cpu_percent
+  - cpu_times
   - dataclass_creation
   - dataclass_dict_wrapper
   - dataclass_extend
   - dataclass_from_dict
   - dataclass_merge
   - dict_delete_keys
+  - dict_flatten
+  - dict_get_by_path
+  - dict_set_by_path
   - dict_split_by_chunk
+  - dict_to_json_safe
+  - dict_unflatten
+  - disable_logger
+  - disk_io_counters
+  - disk_usage
   - download_elevation_tif_by
+  - enable_logger
   - end_of_life
   - extract_bbox_coordinates
+  - fake_requests_headers
   - file_delete
   - file_remove
+  - filter_paths_by_gitignore
+  - flatten_iterable
   - func_running_time
   - func_time
+  - getloadavg
+  - grab_contours
+  - human_file_size
+  - human_intcomma
+  - human_number
+  - human_time_delta
   - import_package
-  - log_logger
-  - log_writer
+  - iter_chunked
+  - iter_flatten
+  - iter_split_when
+  - iter_unique
+  - iter_windowed
+  - load_data
+  - load_gitignore_patterns
+  - load_pickle
+  - log_ceil
+  - merge_dicts
+  - net_io_counters
+  - opencv2matplotlib
+  - osgb36_to_wgs84
+  - pad_size
+  - parse_timedelta_text
   - path2linux
   - path2uniform
   - pickle_load
   - pickle_save
+  - pkg_dependents_func_usage
+  - pkg_public_func
+  - precondition
   - printer_file
+  - Process
+  - process_iter
   - r2_score
+  - remap_nested_dict
   - remove_duplicate_files
+  - remove_punctuation
   - requires
+  - resize
+  - resolve_dir
+  - retry_call
+  - retry_on_exception
+  - retry_with_backoff
+  - rotate
+  - rotate_bound
+  - safe_write_json_with_lock
+  - safe_write_pickle_with_lock
+  - safe_write_text_with_lock
+  - save_data
+  - save_dict_to_json
+  - save_pickle
   - send_email
+  - sensor_battery
+  - sensor_fans
+  - sensor_temperatures
+  - sensors_temperatures
+  - setup_file_logger
+  - setup_simple_logger
   - size_of_dir
   - size_of_file
+  - skeletonize
+  - slugify_text
   - str_digit_to_float
   - str_digit_to_int
   - str_strip
+  - swap_memory
   - terminal_height
   - terminal_width
   - time_str_to_seconds
   - time_unit_converter
   - timeout
   - timeout_linux
+  - toolz_count_frequencies
+  - toolz_groupby_key
+  - toolz_merge_dicts
+  - toolz_pipe_call
+  - toolz_sliding_window
+  - translate
+  - update_dict_keys
+  - url_to_image
+  - Version
+  - virtual_memory
+  - wgs84_to_osgb36
   - with_argparse
+  - with_file_lock
 
 - show:
   - show_dir_in_tree
   - show_docstring_google
   - show_docstring_headers
   - show_docstring_numpy
+  - show_public_func
   - show_util_func_by_category
-  - show_util_func_by_keyword
 
 - get:
+  - get_active_python_env
   - get_coordinates_from_geom
   - get_dir_size
   - get_file_size
@@ -88,9 +171,13 @@ Available utility functions in pyUFunc (161):
   - get_osm_place
   - get_time_diff_in_unit
   - get_timezone
+  - get_user_cache_dir
+  - get_user_config_dir
+  - get_user_data_dir
   - get_user_defined_func
   - get_user_defined_module
   - get_user_imported_module
+  - get_user_log_dir
 
 - generate:
   - generate_dir_with_date
@@ -108,6 +195,7 @@ Available utility functions in pyUFunc (161):
   - find_executable_from_PATH_on_win
   - find_fname_from_PATH_on_win
   - find_k_nearest_points
+  - find_similar_str
   - find_util_func_by_keyword
 
 - calc:
@@ -171,11 +259,15 @@ Available utility functions in pyUFunc (161):
   - cvt_wgs84_to_gcj02
 
 - is:
+  - is_cv2
+  - is_cv3
+  - is_cv4
   - is_CV_img
   - is_float
   - is_linux
   - is_mac
   - is_module_importable
+  - is_path_ignored
   - is_PIL_img
   - is_user_defined_func
   - is_valid_email

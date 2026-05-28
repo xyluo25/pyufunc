@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Script to generate contributor and pull request lists
+Generate contributor and pull request lists.
 
 This script generates contributor and pull request lists for release
 announcements using GitHub v3 protocol. Use requires an authentication token in
@@ -24,14 +24,13 @@ Dependencies
 
 Some code was copied from scipy `tools/gh_lists.py` and `tools/authors.py`.
 
-Examples
---------
-
+Examples:
 From the bash command line with $GITHUB token.
 
     $ ./scripts/announce.py $GITHUB v1.11.0..v1.11.1 > announce.rst
 
 """
+
 import codecs
 import os
 import re
@@ -56,13 +55,19 @@ A total of %d pull requests were merged for this release.
 
 
 def get_authors(revision_range):
+    """Return contributor names for a revision range.
+
+    Args:
+        revision_range: Git revision range in ``start..end`` format.
+    """
     pat = "^.*\\t(.*)$"
     lst_release, cur_release = (r.strip() for r in revision_range.split(".."))
 
     if "|" in cur_release:
         # e.g. v1.0.1|HEAD
         maybe_tag, head = cur_release.split("|")
-        assert head == "HEAD"
+        if head != "HEAD":
+            raise AssertionError("revision range suffix must be HEAD")
         if maybe_tag in this_repo.tags:
             cur_release = maybe_tag
         else:
@@ -74,16 +79,10 @@ def get_authors(revision_range):
     # "Co-authored by" commits, which come from backports by the bot,
     # and one for regular commits.
     xpr = re.compile(r"Co-authored-by: (?P<name>[^<]+) ")
-    cur = set(
-        xpr.findall(
-            this_repo.git.log("--grep=Co-authored", "--pretty=%b", revision_range)
-        )
-    )
+    cur = set(xpr.findall(this_repo.git.log("--grep=Co-authored", "--pretty=%b", revision_range)))
     cur |= set(re.findall(pat, this_repo.git.shortlog("-s", revision_range), re.M))
 
-    pre = set(
-        xpr.findall(this_repo.git.log("--grep=Co-authored", "--pretty=%b", lst_release))
-    )
+    pre = set(xpr.findall(this_repo.git.log("--grep=Co-authored", "--pretty=%b", lst_release)))
     pre |= set(re.findall(pat, this_repo.git.shortlog("-s", lst_release), re.M))
 
     # Homu is the author of auto merges, clean him out.
@@ -108,6 +107,12 @@ def get_authors(revision_range):
 
 
 def get_pull_requests(repo, revision_range):
+    """Return pull requests merged in a revision range.
+
+    Args:
+        repo: GitHub repository object.
+        revision_range: Git revision range in ``start..end`` format.
+    """
     prnums = []
 
     # From regular merges
@@ -120,9 +125,7 @@ def get_pull_requests(repo, revision_range):
     prnums.extend(int(s) for s in issues)
 
     # From fast forward squash-merges
-    commits = this_repo.git.log(
-        "--oneline", "--no-merges", "--first-parent", revision_range
-    )
+    commits = this_repo.git.log("--oneline", "--no-merges", "--first-parent", revision_range)
     issues = re.findall("^.*\\(\\#(\\d+)\\)$", commits, re.M)
     prnums.extend(int(s) for s in issues)
 
@@ -133,6 +136,12 @@ def get_pull_requests(repo, revision_range):
 
 
 def build_components(revision_range, heading="Contributors"):
+    """Build release announcement component values.
+
+    Args:
+        revision_range: Git revision range in ``start..end`` format.
+        heading: Heading for the generated contributor section.
+    """
     lst_release, cur_release = (r.strip() for r in revision_range.split(".."))
     authors = get_authors(revision_range)
 
@@ -144,6 +153,12 @@ def build_components(revision_range, heading="Contributors"):
 
 
 def build_string(revision_range, heading="Contributors"):
+    """Build a release contributor section string.
+
+    Args:
+        revision_range: Git revision range in ``start..end`` format.
+        heading: Heading for the generated contributor section.
+    """
     components = build_components(revision_range, heading=heading)
     components["uline"] = "=" * len(components["heading"])
     components["authors"] = "* " + "\n* ".join(components["authors"])
@@ -161,6 +176,11 @@ def build_string(revision_range, heading="Contributors"):
 
 
 def main(revision_range):
+    """Print the contributor section for a revision range.
+
+    Args:
+        revision_range: Git revision range in ``start..end`` format.
+    """
     # document authors
     text = build_string(revision_range)
     print(text)

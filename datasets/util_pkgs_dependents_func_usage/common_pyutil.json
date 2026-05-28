@@ -1,0 +1,23 @@
+{
+    "alphavector/all": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "Lyn4ever29/pipy_server": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "akshaybadola/class_specific_cnn": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "akshaybadola/ref-man-py": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "akshaybadola/pndconf": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "akshaybadola/simple_trainer": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "akshaybadola/bloggen": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ]
+}

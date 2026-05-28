@@ -1,8 +1,8 @@
 ## Message From pyufunc Developers
 
-This document serves as a curated compendium of existing utility functions, meticulously organized by keywords to facilitate ease of navigation and application for developers across various disciplines. By categorizing these functions, we aim to provide a structured overview that not only simplifies the discovery process but also encourages the exploration of new methods and techniques that may have been previously overlooked. This categorization is intended to serve as a bridge, connecting developers with the tools they need to optimize their code, improve functionality, and innovate within their projects.
+This document is a generated category index for the public utility functions exposed by pyufunc. It is intended to help users inspect the package API by subpackage and identify candidate functions for a specific task.
 
-The categories outlined in this document span a wide range of functionalities, each category is accompanied by a brief description, followed by a list of utility functions that fall under its umbrella, this comprehensive approach aims to arm developers with a robust toolkit, enabling them to select the most appropriate utility functions for their specific needs. Whether you are working on a complex application requiring advanced data manipulation or a simple project needing basic string operations, this guide endeavors to provide a valuable resource that enhances your development process and leads to more efficient, effective, and elegant coding solutions.
+The list is an API-discovery aid, not a claim that every function is widely used or performance-improving. Evidence about reviewed source packages and exploratory dependent-usage scans is tracked separately in `PACKAGE_CLAIMS.md`, `docs/md_files/utility_function_pkg_review.md`, and `datasets/util_pkgs_dependents_func_usage`.
 
 ## Existing Utility Functions by Category
 
@@ -12,7 +12,7 @@ Note: we may not update available functions in time, please run code below to ch
 pyufunc.show_util_func_by_category()
 ```
 
-Available utility functions in pyUFunc (161):
+Available utility functions in pyUFunc (253):
 
 - util_ai:
   - mean_absolute_error
@@ -38,6 +38,7 @@ Available utility functions in pyUFunc (161):
   - func_running_time
   - func_time
   - generate_password
+  - get_active_python_env
   - get_user_defined_func
   - get_user_defined_module
   - get_user_imported_module
@@ -141,8 +142,6 @@ Available utility functions in pyUFunc (161):
 - util_log:
   - add_date_in_filename
   - generate_dir_with_date
-  - log_logger
-  - log_writer
 
 - util_network:
   - get_host_ip
@@ -198,7 +197,102 @@ Available utility functions in pyUFunc (161):
   - pytest_show_skip_xfail
   - pytest_show_warning
 
+- util_pkgs:
+  - atomic_save_file
+  - auto_canny
+  - boot_time
+  - cd
+  - collect_files_excluding_gitignore
+  - confirmed
+  - cpu_count
+  - cpu_freq
+  - cpu_percent
+  - cpu_times
+  - dict_flatten
+  - dict_get_by_path
+  - dict_set_by_path
+  - dict_to_json_safe
+  - dict_unflatten
+  - disable_logger
+  - disk_io_counters
+  - disk_usage
+  - enable_logger
+  - fake_requests_headers
+  - filter_paths_by_gitignore
+  - find_similar_str
+  - flatten_iterable
+  - get_user_cache_dir
+  - get_user_config_dir
+  - get_user_data_dir
+  - get_user_log_dir
+  - getloadavg
+  - grab_contours
+  - human_file_size
+  - human_intcomma
+  - human_number
+  - human_time_delta
+  - is_cv2
+  - is_cv3
+  - is_cv4
+  - is_path_ignored
+  - iter_chunked
+  - iter_flatten
+  - iter_split_when
+  - iter_unique
+  - iter_windowed
+  - load_data
+  - load_gitignore_patterns
+  - load_pickle
+  - log_ceil
+  - merge_dicts
+  - net_io_counters
+  - opencv2matplotlib
+  - osgb36_to_wgs84
+  - pad_size
+  - parse_timedelta_text
+  - pkg_dependents_func_usage
+  - pkg_public_func
+  - precondition
+  - Process
+  - process_iter
+  - remap_nested_dict
+  - remove_punctuation
+  - resize
+  - resolve_dir
+  - retry_call
+  - retry_on_exception
+  - retry_with_backoff
+  - rotate
+  - rotate_bound
+  - safe_write_json_with_lock
+  - safe_write_pickle_with_lock
+  - safe_write_text_with_lock
+  - save_data
+  - save_dict_to_json
+  - save_pickle
+  - sensor_battery
+  - sensor_fans
+  - sensor_temperatures
+  - sensors_temperatures
+  - setup_file_logger
+  - setup_simple_logger
+  - show_public_func
+  - skeletonize
+  - slugify_text
+  - swap_memory
+  - toolz_count_frequencies
+  - toolz_groupby_key
+  - toolz_merge_dicts
+  - toolz_pipe_call
+  - toolz_sliding_window
+  - translate
+  - update_dict_keys
+  - url_to_image
+  - Version
+  - virtual_memory
+  - wgs84_to_osgb36
+  - with_file_lock
+
 - pkg_utils:
   - find_util_func_by_keyword
   - show_util_func_by_category
-  - show_util_func_by_keyword

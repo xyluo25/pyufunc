@@ -11,7 +11,7 @@ import datetime
 
 
 def list_all_timezones(region_name: str = "*") -> set:
-    """List all available timezones
+    """List all available timezones.
 
     Returns:
         set : a set of all available timezones
@@ -35,9 +35,7 @@ def list_all_timezones(region_name: str = "*") -> set:
     """
     if region_name != "*":
         zoneinfo_set = zoneinfo.available_timezones()
-        zoneinfo_region_set = [
-            i for i in zoneinfo_set if region_name.lower() in i.lower()
-        ]
+        zoneinfo_region_set = {i for i in zoneinfo_set if region_name.lower() in i.lower()}
         print(f"Listing timezones in the region: {region_name}")
         return zoneinfo_region_set
     print("Listing all timezones...")
@@ -45,7 +43,7 @@ def list_all_timezones(region_name: str = "*") -> set:
 
 
 def get_timezone() -> str:
-    """Check the current timezone
+    """Check the current timezone.
 
     Returns:
         str : the current timezone
@@ -59,9 +57,8 @@ def get_timezone() -> str:
 
 
 #  convert current datetime to another timezone datetime
-def cvt_current_dt_to_tz(dt: datetime = datetime.datetime.now(),
-                         timezone: str = "UTC") -> datetime:
-    """Convert datetime to another timezone datetime
+def cvt_current_dt_to_tz(dt: datetime = datetime.datetime.now(), timezone: str = "UTC") -> datetime:
+    """Convert datetime to another timezone datetime.
 
     Args:
         dt (datetime, optional): the datetime to be converted. Defaults to datetime.datetime.now().
@@ -76,7 +73,6 @@ def cvt_current_dt_to_tz(dt: datetime = datetime.datetime.now(),
         datetime.datetime(2024, 2, 6, 14, 10, 0, 0, tzinfo=zoneinfo.ZoneInfo(key='Asia/Shanghai'))
 
     """
-
     # check if the timezone is valid
     try:
         # Attempt to create a ZoneInfo object with the given timezone string

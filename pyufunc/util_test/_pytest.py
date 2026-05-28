@@ -36,12 +36,12 @@ def pytest_show_naming_convention() -> None:
           python_files = check_*.py
           python_classes = Check*
           python_functions = check_* or *_check""")
-    print("pytest will then only consider files matching the pattern check_*.py\n",
-          " classes with names starting with Check and,\n",
-          " functions with names starting with check_ or ending with _check.")
+    print(
+        "pytest will then only consider files matching the pattern check_*.py\n",
+        " classes with names starting with Check and,\n",
+        " functions with names starting with check_ or ending with _check.",
+    )
     print()
-
-    return None
 
 
 def pytest_show_assert() -> None:
@@ -74,7 +74,6 @@ def pytest_show_assert() -> None:
 
     """
     print(pytest_assert)
-    return None
 
 
 def pytest_show_raise() -> None:
@@ -100,7 +99,6 @@ def pytest_show_raise() -> None:
 
     """
     print(pytest_raise)
-    return None
 
 
 def pytest_show_warning() -> None:
@@ -139,7 +137,6 @@ def pytest_show_warning() -> None:
 
     """
     print(pytest_warning)
-    return None
 
 
 def pytest_show_skip_xfail() -> None:
@@ -173,7 +170,6 @@ def pytest_show_skip_xfail() -> None:
 
     """
     print(pytest_skip_xfail)
-    return None
 
 
 def pytest_show_parametrize() -> None:
@@ -205,7 +201,6 @@ def pytest_show_parametrize() -> None:
 
     """
     print(pytest_parametrize)
-    return None
 
 
 def pytest_show_fixture() -> None:
@@ -235,11 +230,10 @@ def pytest_show_fixture() -> None:
 
     """
     print(pytest_fixture)
-    return None
 
 
 def pytest_show_database() -> None:
-    """Show pytest database connection and testing
+    """Show pytest database connection and testing.
 
     Examples:
         >>> import pyufunc as pf
@@ -271,4 +265,3 @@ def pytest_show_database() -> None:
 
     """
     print(pytest_database)
-    return None

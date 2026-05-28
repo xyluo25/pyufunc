@@ -29,14 +29,16 @@ class __KThread(threading.Thread):
     def __run(self):
         """Hacked run function, which installs the trace."""
         sys.settrace(self.globaltrace)
-        self.__run_backup()
+        run_backup = self.__run_backup
+        if run_backup is not None:
+            run_backup()
         self.run = self.__run_backup
 
     def globaltrace(self, frame, why, arg):
-        return self.localtrace if why == 'call' else None
+        return self.localtrace if why == "call" else None
 
     def localtrace(self, frame, why, arg):
-        if why == 'line':
+        if why == "line":
             if self.killed:
                 raise SystemExit()
         return self.localtrace
@@ -47,7 +49,8 @@ class __KThread(threading.Thread):
 
 # noinspection PyPep8Naming
 class TIMEOUT_EXCEPTION(Exception):
-    """function run timeout"""
+    """function run timeout."""
+
     pass
 
 
@@ -57,39 +60,33 @@ def timeout(seconds: int) -> object:
     Args:
         seconds (int): timeout seconds for the function.
 
-    Returns:
-        object: the decorated function.
-
     Examples:
         >>> from pyufunc import timeout
         >>> @timeout(5)
-            def my_function():
-                return "I'm running!"
+        >>> def my_function():
+        >>> return "I'm running!"
         >>> my_function()
-        "I'm running!"
+        >>> "I'm running!"
 
         >>> @timeout(5)
-            def my_function():
-                import time
-                time.sleep(10)
-                return "I'm running!"
+        >>> def my_function():
+        >>>    import time
+        >>>    time.sleep(10)
+        >>>    return "I'm running!"
         >>> my_function()
-        Error: my_function exceed 5 seconds timeout
+        >>> Error: my_function exceed 5 seconds timeout
+
+    Returns:
+        object: the decorated function.
     """
 
     def timeout_decorator(func):
-
         def _new_func(oldfunc, result, oldfunc_args, oldfunc_kwargs):
             result.append(oldfunc(*oldfunc_args, **oldfunc_kwargs))
 
         def _(*args, **kwargs):
             result = []
-            new_kwargs = {
-                'oldfunc': func,
-                'result': result,
-                'oldfunc_args': args,
-                'oldfunc_kwargs': kwargs
-            }
+            new_kwargs = {"oldfunc": func, "result": result, "oldfunc_args": args, "oldfunc_kwargs": kwargs}
 
             thd = __KThread(target=_new_func, args=(), kwargs=new_kwargs)
             thd.start()
@@ -99,7 +96,7 @@ def timeout(seconds: int) -> object:
 
             if alive:
                 # raise TIMEOUT_EXCEPTION('function run too long, timeout %d seconds.' % seconds)
-                raise TIMEOUT_EXCEPTION(f'{func.__name__} exceed {seconds} seconds timeout')
+                raise TIMEOUT_EXCEPTION(f"{func.__name__} exceed {seconds} seconds timeout")
             return result[0] if result else result
 
         _.__name__ = func.__name__
@@ -111,11 +108,9 @@ def timeout(seconds: int) -> object:
 
 def timeout_linux(timeout: int):
     """A decorator to set the timeout for the function on linux system.
+
     Args:
         timeout (int): timeout seconds for the function.
-
-    Returns:
-        object: the decorated function.
 
     Examples:
         >>> from pyufunc import timeout_linux
@@ -131,21 +126,25 @@ def timeout_linux(timeout: int):
                 return "I'm running!"
         >>> my_function()
         Error: Function: my_function params: (), {} ,execution timed out: 5
+
+    Returns:
+        object: the decorated function.
     """
 
-    def _timeout_linux(func, ):
-
+    def _timeout_linux(
+        func,
+    ):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            def _timeout_handler(signum, frame):
+            if not hasattr(signal, "SIGALRM") or not hasattr(signal, "alarm"):
+                raise RuntimeError("timeout_linux is only supported on platforms with SIGALRM.")
 
-                raise TimeoutError(
-                    f"Function: {func} params: {args}, {kwargs} ,execution timed out: {timeout}")
+            def _timeout_handler(signum, frame):
+                raise TimeoutError(f"Function: {func} params: {args}, {kwargs} ,execution timed out: {timeout}")
 
             # timeout for linux system
             signal.signal(signal.SIGALRM, _timeout_handler)
             signal.alarm(timeout)
-
             try:
                 return func(*args, **kwargs)
             finally:

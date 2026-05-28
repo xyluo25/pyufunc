@@ -1,0 +1,99 @@
+{
+    "zooko/pyutil": [],
+    "zeroclassic/ZeroClassic": [],
+    "ZcashFoundation/zcashd": [],
+    "helix-clyde/myscripts": [],
+    "alenpeacock/flud": [
+        "mathutil.pad_size"
+    ],
+    "johansantri/jakija": [],
+    "ai4protein/VenusX": [],
+    "terryyz/X-Repo2Run": [],
+    "mbdevpl/zbase32": [
+        "version_class.Version"
+    ],
+    "DirtyWork-Solutions/PyExtend": [],
+    "koopatroopa787/Useful-Scripts": [],
+    "kielmarj/illacceptanything": [],
+    "SuanQ1212/zxdstore": [],
+    "alphavector/all": [],
+    "Masaya-Sakamoto/ion-dtn": [
+        "version_class.Version"
+    ],
+    "Lyn4ever29/pipy_server": [],
+    "SchematicHQ/billy-python": [],
+    "itskenethb/Keylogger": [],
+    "sherryxiao1988/routability": [],
+    "HeartyHaven/soc-analyser": [],
+    "mcw1217/DLW-YOLO": [],
+    "nasa-jpl/ION-DTN": [],
+    "andpleas1/zcash": [],
+    "WIDE-spacewg/ION-DTN-4.1.2": [
+        "version_class.Version"
+    ],
+    "shawsuzuki/test_iondtn": [
+        "version_class.Version"
+    ],
+    "nchashch/zcash-drivechain": [],
+    "sumonst21/tahoe-lafs": [],
+    "RaidonCloud/CircuitNet": [],
+    "kycccyk/zcash-node": [],
+    "esaid/ga144ide": [
+        "fileappend",
+        "inany",
+        "fileoverwrite",
+        "filereplace"
+    ],
+    "skalarfeilds79/zcash": [],
+    "han0147/zcash": [],
+    "gridsync/frozen-tahoe": [],
+    "daira/zcash": [],
+    "BoomBoomMushroom/API": [],
+    "circuitnet/CircuitNet": [],
+    "BTCPrivateClassic/BTCPrivateClassic": [],
+    "crypticcoin-renewed/CrypticCoin": [],
+    "nathan-at-least/zcashd-barebones": [],
+    "BuckCoin/buck": [],
+    "tomoki171923/aws-service-package": [
+        "time_watch.TimeWatch",
+        "date_time.DateTime"
+    ],
+    "tahoe-lafs/magic-folder": [],
+    "tpltnt/zfec": [
+        "mathutil.pad_size",
+        "mathutil.log_ceil"
+    ],
+    "dannywillems/zcash": [],
+    "NirvanaNimbusa/zcash": [],
+    "couchbase/couchbase-python-client": [],
+    "closeio/zbase62": [
+        "version_class.Version"
+    ],
+    "fakecoinbase/zcashslashzcash": [],
+    "sehajps/Stock-Management": [],
+    "mazx4960/binarika": [],
+    "zcash-hackworks/docker-builds": [],
+    "gridsync/gridsync": [],
+    "GamjaPower/splunk-util": [],
+    "AndyTsangChun/cvplus": [
+        "PyLogger",
+        "PyLogger"
+    ],
+    "kangg18/vonx_protocol": [],
+    "yrane/CloudHaven_dev": [],
+    "moduspwnens/boa-chat": [],
+    "sabativi/demerio": [],
+    "zooko/fdleakfinder": [],
+    "tahoe-lafs/zfec": [],
+    "simplegeo/python-geojson": [],
+    "simplegeo/python-simplegeo-places": [
+        "assertutil.precondition",
+        "version_class.Version"
+    ],
+    "simplegeo/python-txsimplegeo.shared": [
+        "version_class.Version"
+    ],
+    "simplegeo/python-simplegeo-shared": [
+        "version_class.Version"
+    ]
+}

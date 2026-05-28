@@ -1,0 +1,8 @@
+.. _release:
+
+*************
+Release notes
+*************
+
+.. include:: ../../../CHANGELOG.md
+   :parser: myst_parser.sphinx_

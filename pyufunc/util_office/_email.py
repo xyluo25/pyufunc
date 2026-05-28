@@ -7,7 +7,6 @@
 
 import os
 import re
-from typing import Union
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -19,12 +18,12 @@ from email import encoders
 # For guessing MIME type based on file name extension
 import mimetypes
 
-from pyufunc.pkg_configs import config_email
+from pyufunc.__cfg import config_email
 from pyufunc.util_pathio._path import path2linux
 
 
 def is_valid_email(email: str) -> bool:
-    """check if the email is valid
+    """Check if the email is valid.
 
     Args:
         email (str): email address, eg. luoxiangyong01@gmail.com
@@ -35,37 +34,39 @@ def is_valid_email(email: str) -> bool:
     Examples:
         >>> from pyufunc import is_valid_email
         >>> is_valid_email("luoxiangyong01@gamil.com")
-        True
+        >>> True
         >>> is_valid_email("luoxiangyong01")
-        False
+        >>> False
 
     """
-
     return bool(re.match(r"[^@]+@[^@]+\.[^@]+", email))
 
 
-def send_email(send_from: str,
-               send_to: Union[str, list],
-               subject: str,
-               message: str,
-               smtp_user: str,
-               smtp_password: str,
-               file_path: Union[str, list] = [],
-               cc: Union[str, list] = [],
-               bcc: Union[str, list] = [],
-               **kwargs) -> bool:
-    """send email with attachments
+def send_email(
+    send_from: str,
+    send_to: str | list,
+    subject: str,
+    message: str,
+    smtp_user: str,
+    smtp_password: str,
+    file_path: str | list = [],
+    cc: str | list = [],
+    bcc: str | list = [],
+    **kwargs,
+) -> bool:
+    """Send email with attachments.
 
     Args:
         send_from (str): email address of the sender
-        send_to (Union[str, list]): email address of the receiver, can be a list of email addresses
+        send_to (str | list): email address of the receiver, can be a list of email addresses
         subject (str): email subject
         message (str): the email body
         smtp_user (str): user name of the smtp server, normally the same as the email address
         smtp_password (str): password of the smtp server, if you use gmail, you need to generate an app password
-        file_path (Union[str, list], optional): _description_. Defaults to [].
-        cc (Union[str, list], optional): cc'd email. Defaults to [].
-        bcc (Union[str, list], optional): bcc'd email. Defaults to [].
+        file_path (str | list, optional): _description_. Defaults to [].
+        cc (str | list, optional): cc'd email. Defaults to [].
+        bcc (str | list, optional): bcc'd email. Defaults to [].
+        **kwargs: Optional email settings, including ``message_type`` and ``verbose``.
 
     Raises:
         ValueError: Invalid email address:
@@ -76,18 +77,22 @@ def send_email(send_from: str,
         ValueError: Unknown email provider:
 
     Note:
-        - User can add message_type = "html" in the kwargs. If message_type is "html", the message will be sent as html format. eg. message_type = "html", message = "<h1>hello world</h1>"
-        - User can add verbose = True in the kwargs. If verbose is True, the function will print the email sending status.
-        - If you are using gmail, you need to generate an app password for the smtp_password: https://support.google.com/accounts/answer/185833?hl=en
+        - User can add message_type = "html" in the kwargs.
+            If message_type is "html", the message will be sent as html format.
+            eg. message_type = "html", message = "<h1>hello world</h1>"
+        - User can add verbose = True in the kwargs.
+            If verbose is True, the function will print the email sending status.
+        - If you are using gmail, you need to generate an app password
+            for the smtp_password: https://support.google.com/accounts/answer/185833?hl=en
 
     Returns:
         bool: True if the email is sent successfully, False otherwise
 
     Examples:
         >>> from pyufunc import send_email
-        >>> send_email(send_from="", send_to="", subject="", message="", smtp_user="", smtp_password="", file_path="", cc="", bcc="")
+        >>> send_email(send_from="", send_to="", subject="", message="",
+        >>>            smtp_user="", smtp_password="", file_path="", cc="", bcc="")
     """
-
     # TDD, Test Driven Development, check inputs
     if not is_valid_email(send_from):
         raise ValueError(f"Invalid email address: {send_from}")
@@ -145,17 +150,17 @@ def send_email(send_from: str,
 
     # Create a multipart message
     msg = MIMEMultipart()
-    msg['From'] = send_from
-    msg['To'] = "; ".join(send_to)
-    msg['Subject'] = subject
-    msg['Cc'] = "; ".join(cc)
-    msg['Bcc'] = "; ".join(bcc)
+    msg["From"] = send_from
+    msg["To"] = "; ".join(send_to)
+    msg["Subject"] = subject
+    msg["Cc"] = "; ".join(cc)
+    msg["Bcc"] = "; ".join(bcc)
 
     # Attach the email body
     if kwargs.get("message_type") == "html":
-        msg.attach(MIMEText(message, 'html'))
+        msg.attach(MIMEText(message, "html"))
     else:
-        msg.attach(MIMEText(message, 'plain'))
+        msg.attach(MIMEText(message, "plain"))
 
     # Load the attachment
     def load_attachment(filename: str) -> MIMEBase:
@@ -169,30 +174,30 @@ def send_email(send_from: str,
         if ctype is None or encoding is not None:
             # No guess could be made, or the file is encoded (compressed), so
             # use a generic bag-of-bits type.
-            ctype = 'application/octet-stream'
+            ctype = "application/octet-stream"
 
-        maintype, subtype = ctype.split('/', 1)
+        maintype, subtype = ctype.split("/", 1)
 
         # Check the file type and load the attachment
-        if maintype == 'text':
+        if maintype == "text":
             with open(path) as fp:
                 # Note: we should handle calculating the charset
                 part = MIMEText(fp.read(), _subtype=subtype)
-        elif maintype == 'image':
-            with open(path, 'rb') as fp:
+        elif maintype == "image":
+            with open(path, "rb") as fp:
                 part = MIMEImage(fp.read(), _subtype=subtype)
-        elif maintype == 'audio':
-            with open(path, 'rb') as fp:
+        elif maintype == "audio":
+            with open(path, "rb") as fp:
                 part = MIMEAudio(fp.read(), _subtype=subtype)
         else:
-            with open(path, 'rb') as fp:
+            with open(path, "rb") as fp:
                 part = MIMEBase(maintype, subtype)
                 part.set_payload(fp.read())
             # Encode the payload using Base64
             encoders.encode_base64(part)
 
         # Add header as key/value pair to attachment part
-        part.add_header('Content-Disposition', 'attachment', filename=filename.split("/")[-1])
+        part.add_header("Content-Disposition", "attachment", filename=filename.split("/")[-1])
 
         return part
 

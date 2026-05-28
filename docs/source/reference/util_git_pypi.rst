@@ -13,6 +13,7 @@ github
 
    github_file_downloader
    github_get_status
+   github_private_file_downloader
 
 pypi
 ~~~~

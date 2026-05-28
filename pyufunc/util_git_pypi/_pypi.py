@@ -5,21 +5,16 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    import requests
-    from bs4 import BeautifulSoup
-
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 
-@requires("requests", ("beautifulsoup4", "bs4"), verbose=False)
+@requires("requests", ("beautifulsoup4", "bs4"))
 def pypi_downloads(pkg_name: str) -> dict:
-    """Get the total downloads of a package from PyPI.
+    """
+    Get the total downloads of a package from PyPI.
 
     Args:
-        package (str): The name of the package.
+        pkg_name (str): The name of the package.
 
     Returns:
         dict: A dictionary containing the total downloads of the package.
@@ -30,13 +25,11 @@ def pypi_downloads(pkg_name: str) -> dict:
 
         >>> pypi_downloads("pandas123")  # package is not found
         {'pandas123': 0}
-    """
 
+    """
     # import packages required for this function
-    import_package("requests", verbose=False)
-    import_package(("beautifulsoup4", "bs4"), verbose=False)
-    import requests
-    from bs4 import BeautifulSoup
+    import requests  # pyright: ignore[reportMissingModuleSource]
+    from bs4 import BeautifulSoup  # pyright: ignore[reportMissingImports]
 
     # prepare the url and get the response
     # url = 'https://api.pepy.tech/api/projects/' + package_name

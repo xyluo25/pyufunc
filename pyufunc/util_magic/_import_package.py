@@ -10,23 +10,60 @@ import importlib
 import subprocess
 import sys
 import inspect
-from typing import Union
+import os
 import re
 import pathlib
 from collections import defaultdict
-from pyufunc.util_data_processing._str import str_strip
 
 
-def import_package(pkg_name: Union[str, tuple, list], options: list = None, verbose: bool = True) -> object:
-    """import a python package, if not exist, install the package and import it again.
-    This function can be used in any package to avoid too much pre-installation of dependencies.
-    In other words, this function will install the package only if it is needed.
+def _validate(condition: bool, message: str) -> None:
+    if not condition:
+        raise AssertionError(message)
 
-    Location:
-        The function defined in pyufunc/pkg_utils.py.
+
+def _str_strip(string: str) -> str:
+    return re.sub(pattern=r"[\s  ]+", repl=" ", string=str(string)).strip()
+
+
+def get_active_python_env() -> dict:
+    """
+    Return active Python environment information.
+
+    Returns:
+        dict: Environment metadata including whether a virtual environment is active.
+
+    """
+    conda_prefix = pathlib.Path(os.environ.get("CONDA_PREFIX", "")).as_posix()
+    virtual_env = pathlib.Path(os.environ.get("VIRTUAL_ENV", "")).as_posix()
+
+    env_info = {
+        "is_venv": bool(getattr(sys, "base_prefix", sys.prefix) != sys.prefix or getattr(sys, "real_prefix", None)),
+        "is_conda": bool(conda_prefix),
+        "prefix": pathlib.Path(sys.prefix).as_posix(),
+        "base_prefix": pathlib.Path(getattr(sys, "base_prefix", sys.prefix)).as_posix(),
+        "virtual_env": virtual_env,
+        "conda_prefix": conda_prefix,
+        "python": pathlib.Path(sys.executable).as_posix(),
+    }
+    env_info["is_virtual_env"] = env_info["is_venv"] or env_info["is_conda"]
+    env_info["name"] = pathlib.Path(env_info["prefix"]).name if env_info["is_virtual_env"] else "system"
+    return env_info
+
+
+def import_package(
+    pkg_name: str | tuple | list,
+    options: list | None = None,
+    verbose: bool = True,
+    auto_install: bool = False,
+) -> object | None:
+    """
+    Import a python package and optionally install it when it is missing.
+
+    This function does not install packages by default. Pass ``auto_install=True``
+    to opt in to installing a missing package with pip before importing it.
 
     Args:
-        package_name (str): the package name, it can be a string or tuple or list.
+        pkg_name (str): the package name, it can be a string or tuple or list.
             if it's a string, it's the package name for both installation and import.
 
             if it's a tuple or list, it has two elements:
@@ -38,13 +75,15 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
             eg: ["pillow==8.3.1", "PIL"];
             eg: ["opencv-python", "cv2"];
 
-        options (list, optional): the installation optional inputs.
-            eg: '--force-reinstall', '--ignore-installed'. Defaults to ["--user"].
+        options (list, optional): optional pip install arguments used only when auto_install=True.
+            eg: '--force-reinstall', '--ignore-installed'.
+            If not provided and auto_install=True, this function installs into the active
+            virtual environment (venv/conda). When no virtual environment is active,
+            it falls back to '--user'.
         verbose (bool, optional): print the error message if the package is not available.
             Defaults to True.
-
-    Returns:
-        object: the imported package
+        auto_install (bool, optional): install the missing package automatically.
+            Defaults to False.
 
     Note:
         - if the module name different from import name
@@ -53,76 +92,87 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
         - please use tuple or list to specify the module name and import name
             e.g. import_package(('pillow', 'PIL'))
 
+    Location:
+        The function defined in pyufunc/pkg_utils.py.
+
     Examples:
         >>> numpy = import_package("numpy") # equal to "import numpy as numpy"
         >>> np = import_package("numpy")  # equal to "import numpy as np"
 
-        # not existed
-
+        >>> # not existed
         >>> numpy = import_package("numpy")
+        >>> :Info: missing dependency numpy. Please install it manually or call import_package(..., auto_install=True).
 
-        :numpy not existed in current env, installing...
+        >>> # specify the version
+        >>> numpy = import_package("numpy==1.19.5", auto_install=True)
+        >>> :Package numpy==1.19.5 not existed in current env, installing...
 
-        # specify the version
-
-        >>> numpy = import_package("numpy==1.19.5")
-
-        :Package numpy==1.19.5 not existed in current env, installing...
-
-        # different name for installation and import
-
+        >>> # different name for installation and import
         >>> PIL = import_package(("pillow", "PIL"))
-        >>> cv2 = import_package(["opencv-python", "cv2"])
-        >>> cv2 = import_package(["opencv-python", "cv2"], options=["--force-reinstall"])
-        >>> cv2 = import_package(["opencv-python==4.9.0.80", "cv2"])
-    """
+        >>> cv2 = import_package(["opencv-python", "cv2"], auto_install=True)
+        >>> cv2 = import_package(["opencv-python", "cv2"], options=["--force-reinstall"], auto_install=True)
+        >>> cv2 = import_package(["opencv-python==4.9.0.80", "cv2"], auto_install=True)
 
-    options = ["--user"] if options is None else ["--user", *options]
+    Returns:
+        object | None: the imported package, or None when the package cannot be imported.
+
+    """
+    env_info = get_active_python_env()
+
+    if options is None:
+        options = [] if env_info["is_virtual_env"] else ["--user"]
+    else:
+        options = list(options)
+
+    # When options are omitted, install into active virtual env; fallback is --user on system Python.
+    if env_info["is_virtual_env"] and "--user" in options:
+        options = [opt for opt in options if opt != "--user"]
 
     # TDD, test-driven development: check inputs
-    assert isinstance(pkg_name, (str, tuple, list)), "The input pkg_name should be a string or tuple or list."
+    _validate(isinstance(pkg_name, (str, tuple, list)), "The input pkg_name should be a string or tuple or list.")
 
     # Step 1: check if the package name is a string
     if isinstance(pkg_name, str):
         module_name = pkg_name
         import_name = pkg_name
-
     elif isinstance(pkg_name, (tuple, list)) and len(pkg_name) == 2:
         module_name = pkg_name[0]
         import_name = pkg_name[1]
-
     else:
         raise ValueError("The input pkg_name should be a string, tuple or list with two elements.")
 
     try:
         # import package from current environment
         module = importlib.import_module(import_name)
-    except Exception:
+    except ImportError:
+        if not auto_install:
+            if verbose:
+                print(f"  :active python env: {env_info['name']} ({env_info['python']})")
+                print(
+                    f"  :Info: missing dependency {module_name}. "
+                    "Please install it manually or call import_package(..., auto_install=True)."
+                )
+            return None
 
         if verbose:
+            print(f"  :active python env: {env_info['name']} ({env_info['python']})")
             print(f"  :installing {module_name}...")
-
         # install package to current environment
         outputs = []
         try:
-            all_args = [sys.executable, '-m', 'pip', 'install', *options, module_name]
-
-            result = subprocess.run(
-                all_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-            stdout = result.stdout.decode('utf-8')
-            stderr = result.stderr.decode('utf-8')
+            all_args = [sys.executable, "-m", "pip", "install", *options, module_name]
+            result = subprocess.run(all_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            stdout = result.stdout.decode("utf-8")
+            stderr = result.stderr.decode("utf-8")
             outputs.extend((stdout, stderr))
-
             result.check_returncode()
 
         # if install failed, print the error message
         except Exception as e:
             print(f"  :Info: failed to install {module_name}. please install it manually.")
-
             if verbose:
                 if len(outputs) == 2:
-                    [print(f"  :{output}", end='') for output in outputs]
+                    [print(f"  :{output}", end="") for output in outputs]
                 else:
                     print(f"  :{e}")
             return None
@@ -131,10 +181,8 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
         try:
             module = importlib.import_module(import_name)
             globals()[import_name] = importlib.import_module(import_name)
-
             if verbose:
                 print(f"  :{module_name} has been installed successfully.")
-
         except Exception:
             print(f"  :Info: failed to import {module_name}.")
             return None
@@ -143,20 +191,21 @@ def import_package(pkg_name: Union[str, tuple, list], options: list = None, verb
 
 
 def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
-    """list all user-defined functions in a module.
+    """
+    List all user-defined functions in a module.
 
     Args:
         module (object, optional): the module name. Defaults to sys.modules[__name__].
 
+    Examples:
+        >>> import pyufunc as pf
+        >>> pf.get_user_defined_func()
+        ['func_running_time', 'generate_password', 'import_package', 'get_user_defined_func']
+
     Returns:
         list: a list of user-defined functions in the module.
 
-    Examples:
-        >>> import ufunc as uf
-        >>> uf.get_user_defined_func()
-        ['func_running_time', 'generate_password', 'import_package', 'get_user_defined_func']
     """
-
     # Step 1: check if the model is a module
     if not inspect.ismodule(module):
         raise ValueError("The input is not a module.")
@@ -176,13 +225,11 @@ def get_user_defined_func(module: object = sys.modules[__name__]) -> list:
 
 
 def is_user_defined_func(func_obj: object) -> bool:
-    """Check if a function is user-defined.
+    """
+    Check if a function is user-defined.
 
     Args:
-        func_obj (object): the function object.
-
-    Returns:
-        bool: True if the function is user-defined, False otherwise.
+        func_obj (object): the function object to check.
 
     Examples:
         >>> import pyufunc as uf
@@ -191,8 +238,11 @@ def is_user_defined_func(func_obj: object) -> bool:
 
         >>> uf.is_user_defined_func(os.path.join)
         False
-    """
 
+    Returns:
+        bool: True if the function is user-defined, False otherwise.
+
+    """
     try:
         # Try to get the file where the function is defined
         func_file = inspect.getfile(func_obj)
@@ -210,16 +260,15 @@ def is_user_defined_func(func_obj: object) -> bool:
 
 
 def is_module_importable(module_name: str) -> bool:
-    """Safely import a module and return a boolean. If the module is not importable, return False.
+    """
+    Check whether a module is importable in the current Python environment.
 
     Args:
         module_name (str): the module name to import.
 
-    Returns:
-        bool: True if the module is importable, False otherwise.
-
     Note:
-        This function is useful to check if a module is installed in the current environment.
+        This check is performed against the current interpreter (``sys.executable``),
+        so it reflects the currently activated virtual environment.
 
     Examples:
         >>> from pyufunc import is_module_importable
@@ -227,55 +276,58 @@ def is_module_importable(module_name: str) -> bool:
         True
         >>> is_module_importable("unknown_module")
         False
-    """
 
+    Returns:
+        bool: True if the module is importable, False otherwise.
+
+    """
     # TDD, test-driven development: check inputs
-    assert isinstance(module_name, str), "The input module name should be a string."
+    _validate(isinstance(module_name, str), "The input module name should be a string.")
 
     try:
-        exec(f"import {module_name}")
-        is_importable = True
-    except ImportError:
-        is_importable = False
-
-    return is_importable
+        importlib.invalidate_caches()
+        return importlib.util.find_spec(module_name) is not None
+    except (ImportError, ValueError):
+        return False
 
 
-def get_user_defined_module(obj: object,
-                            predicate: callable = lambda x: inspect.isfunction(x) or inspect.isclass(x)):
-    """Get only defined members.
+def get_user_defined_module(obj: object, predicate: callable = lambda x: inspect.isfunction(x) or inspect.isclass(x)):
+    """
+    Get only defined members.
 
     Args:
         obj (object)         : module.
         predicate (callable) : Only return members that satisfy a given ``predicate`` .
 
-    Returns:
-        dict : ``{"member name" : "member object"}``
-
     Examples:
         >>> from pycharmers.utils import inspect_utils, get_defined_members
         >>> get_defined_members(inspect_utils)
         {
-            'get_defined_members': <function pycharmers.utils.inspect_utils.get_defined_members(obj, predicate=<function <lambda> at 0x14227fca0>)>,
-            'get_imported_members': <function pycharmers.utils.inspect_utils.get_imported_members(obj)>
+            'get_defined_members': <function get_defined_members(...)>,
+            'get_imported_members': <function get_imported_members(...)>
         }
-    """
 
+    Returns:
+        dict : ``{"member name" : "member object"}``
+
+    """
     imported_members_lst = get_user_imported_module(obj).values()
     imported_members = [element for sublist in imported_members_lst for element in sublist]
 
-    res = {name: member for name, member in inspect.getmembers(obj,
-                                                               predicate=predicate) if name not in imported_members}
+    res = {
+        name: member for name, member in inspect.getmembers(obj, predicate=predicate) if name not in imported_members
+    }
     return dict(sorted(res.items()))
 
 
 def get_user_imported_module(obj: object) -> dict:
-    """Get import members.
+    """
+    Get import members.
 
     Args:
         obj (object) : module.
 
-    Returns
+    Returns:
         dict : ``{ "module" : ["import members"]}``
 
     Examples:
@@ -285,8 +337,8 @@ def get_user_imported_module(obj: object) -> dict:
             {'.decoder': ['JSONDecoder', 'JSONDecodeError'],
              '.encoder': ['JSONEncoder'],
              '': ['codecs']})
-    """
 
+    """
     if not inspect.ismodule(obj):
         raise ValueError("The input obj should be an importable module.")
 
@@ -297,9 +349,12 @@ def get_user_imported_module(obj: object) -> dict:
     with open(obj, mode="r") as f:
         file_contents = "".join(f.readlines())
     imported_members = defaultdict(list)
-    for m, v_wb, v_nb in re.findall(pattern=(r"(?:^|(?<=\n))(?:from\s+(.+?)\s+)?import\s+"
-                                             r"(?:\(((?:.|\s)*?)\)|((?:(?<!\()(?:.|\s))*?))\n"),
-                                    string=file_contents):
-        imported_members[m].extend(
-            [str_strip(v) for v in (v_wb + v_nb).split(" as ")[0].split(",")])
+    for m, v_wb, v_nb in re.findall(
+        pattern=(
+            r"(?:^|(?<=\n))(?:from\s+(.+?)\s+)?import\s+"
+            r"(?:\(((?:.|\s)*?)\)|((?:(?<!\()(?:.|\s))*?))\n"
+        ),
+        string=file_contents,
+    ):
+        imported_members[m].extend([_str_strip(v) for v in (v_wb + v_nb).split(" as ")[0].split(",")])
     return imported_members

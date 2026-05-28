@@ -7,15 +7,11 @@
 
 
 from datetime import datetime
-from typing import Union
-
 from pyufunc.util_data_processing._str import str_strip
 
 
-def get_time_diff_in_unit(start_time: Union[datetime, str],
-                          end_time: Union[datetime, str],
-                          unit: str = "seconds") -> float:
-    """Calculate the time difference between two datetime objects/strings
+def get_time_diff_in_unit(start_time: datetime | str, end_time: datetime | str, unit: str = "seconds") -> float:
+    """Calculate the time difference between two datetime objects/strings.
 
     Args:
         start_time (Union[datetime.datetime, str]): datetime object or string
@@ -52,7 +48,6 @@ def get_time_diff_in_unit(start_time: Union[datetime, str],
         60.0 days
 
     """
-
     # check if the start time and end time are datetime objects
     if isinstance(start_time, str):
         start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
@@ -73,19 +68,16 @@ def get_time_diff_in_unit(start_time: Union[datetime, str],
         "minutes": time_diff.total_seconds() / 60,
         "hours": time_diff.total_seconds() / 3600,
         "days": time_diff.total_seconds() / 86400,
-
         "second": time_diff.total_seconds(),
         "minute": time_diff.total_seconds() / 60,
         "hour": time_diff.total_seconds() / 3600,
         "day": time_diff.total_seconds() / 86400,
-
         "week": time_diff.total_seconds() / 604800,
         "weeks": time_diff.total_seconds() / 604800,
         "month": time_diff.total_seconds() / 2628000,
         "months": time_diff.total_seconds() / 2628000,
         "year": time_diff.total_seconds() / 31536000,
         "years": time_diff.total_seconds() / 31536000,
-
         "default": time_diff.total_seconds(),
     }
 
@@ -98,12 +90,13 @@ def get_time_diff_in_unit(start_time: Union[datetime, str],
 
 
 def time_unit_converter(value: float, from_unit: str, to_unit: str, verbose: bool = False) -> float:
-    """ Convert a time value between seconds, minutes, hours, days, years
+    """Convert a time value between seconds, minutes, hours, days, years.
 
     Args:
         value (float): The numerical value to convert.
         from_unit (str): The unit of the input value.
         to_unit (str): The desired output unit.
+        verbose (bool): Whether to print the conversion result. Defaults to False.
 
     Example:
         >>> from pyufunc import time_unit_converter
@@ -116,23 +109,40 @@ def time_unit_converter(value: float, from_unit: str, to_unit: str, verbose: boo
     Raises:
         ValueError: If an invalid unit is provided.
     """
-
     # Define aliases to standardize unit names.
     unit_aliases = {
-        "s": "seconds", "sec": "seconds", "secs": "seconds", "second": "seconds", "seconds": "seconds",
-        "m": "minutes", "min": "minutes", "mins": "minutes", "minute": "minutes", "minutes": "minutes",
-        "h": "hours", "hr": "hours", "hrs": "hours", "hour": "hours", "hours": "hours",
-        "d": "days", "day": "days", "days": "days",
-        "y": "years", "yr": "years", "yrs": "years", "year": "years", "years": "years",
+        "s": "seconds",
+        "sec": "seconds",
+        "secs": "seconds",
+        "second": "seconds",
+        "seconds": "seconds",
+        "m": "minutes",
+        "min": "minutes",
+        "mins": "minutes",
+        "minute": "minutes",
+        "minutes": "minutes",
+        "h": "hours",
+        "hr": "hours",
+        "hrs": "hours",
+        "hour": "hours",
+        "hours": "hours",
+        "d": "days",
+        "day": "days",
+        "days": "days",
+        "y": "years",
+        "yr": "years",
+        "yrs": "years",
+        "year": "years",
+        "years": "years",
     }
 
     # Conversion factors in seconds.
     conversion_factors = {
         "seconds": 1,
-        "minutes": 60,                     # 60 seconds
-        "hours": 3600,                     # 60 minutes * 60 seconds
-        "days": 86400,                     # 24 hours * 3600 seconds
-        "years": 31536000,                 # 365 days * 86400 seconds
+        "minutes": 60,  # 60 seconds
+        "hours": 3600,  # 60 minutes * 60 seconds
+        "days": 86400,  # 24 hours * 3600 seconds
+        "years": 31536000,  # 365 days * 86400 seconds
     }
 
     # Normalize the provided unit strings.
@@ -140,7 +150,9 @@ def time_unit_converter(value: float, from_unit: str, to_unit: str, verbose: boo
     to_unit_norm = unit_aliases.get(to_unit.lower().strip())
 
     if from_unit_norm is None or to_unit_norm is None:
-        raise ValueError("Invalid unit provided. Allowed units: seconds, minutes, hours, days, years, season, quarter, lunar year.")
+        raise ValueError(
+            "Invalid unit provided. Allowed units: seconds, minutes, hours, days, years, season, quarter, lunar year."
+        )
 
     # Convert the input value to seconds.
     value_in_seconds = value * conversion_factors[from_unit_norm]
@@ -150,11 +162,11 @@ def time_unit_converter(value: float, from_unit: str, to_unit: str, verbose: boo
 
     if verbose:
         print(f"  :{value} {from_unit_norm} is approximately {result} {to_unit_norm}")
-    return result
+    return int(result)
 
 
-def time_str_to_seconds(time_str: str, to_unit: str = "seconds", verbose: bool = False) -> int:
-    """Convert a time string to seconds
+def time_str_to_seconds(time_str: str, to_unit: str = "seconds", verbose: bool = False) -> float:
+    """Convert a time string to seconds.
 
     Args:
         time_str (str): A time string, e.g., "12:00AM", "9:00am", "3:00pm"
@@ -176,18 +188,17 @@ def time_str_to_seconds(time_str: str, to_unit: str = "seconds", verbose: bool =
         930.0
 
     Returns:
-        int: The time in the target unit.
+        float: The time in the target unit.
     """
-
     time_str = str_strip(time_str).lower()
 
     fmt = [
-        "%I:%M",        # 12-hour, no AM/PM
-        "%I:%M:%S",     # 12-hour with seconds
-        "%I:%M%p",      # 12-hour with AM/PM
-        "%I:%M %p",      # 12-hour with AM/PM
-        "%H:%M",        # 24-hour
-        "%H:%M:%S"      # 24-hour with seconds
+        "%I:%M",  # 12-hour, no AM/PM
+        "%I:%M:%S",  # 12-hour with seconds
+        "%I:%M%p",  # 12-hour with AM/PM
+        "%I:%M %p",  # 12-hour with AM/PM
+        "%H:%M",  # 24-hour
+        "%H:%M:%S",  # 24-hour with seconds
     ]
 
     dt = None
@@ -204,20 +215,38 @@ def time_str_to_seconds(time_str: str, to_unit: str = "seconds", verbose: bool =
     total_seconds = dt.hour * 3600 + dt.minute * 60 + dt.second
 
     unit_aliases = {
-        "s": "seconds", "sec": "seconds", "secs": "seconds", "second": "seconds", "seconds": "seconds",
-        "m": "minutes", "min": "minutes", "mins": "minutes", "minute": "minutes", "minutes": "minutes",
-        "h": "hours", "hr": "hours", "hrs": "hours", "hour": "hours", "hours": "hours",
-        "d": "days", "day": "days", "days": "days",
-        "y": "years", "yr": "years", "yrs": "years", "year": "years", "years": "years",
+        "s": "seconds",
+        "sec": "seconds",
+        "secs": "seconds",
+        "second": "seconds",
+        "seconds": "seconds",
+        "m": "minutes",
+        "min": "minutes",
+        "mins": "minutes",
+        "minute": "minutes",
+        "minutes": "minutes",
+        "h": "hours",
+        "hr": "hours",
+        "hrs": "hours",
+        "hour": "hours",
+        "hours": "hours",
+        "d": "days",
+        "day": "days",
+        "days": "days",
+        "y": "years",
+        "yr": "years",
+        "yrs": "years",
+        "year": "years",
+        "years": "years",
     }
 
     # Conversion factors in seconds.
     conversion_factors = {
         "seconds": 1,
-        "minutes": 60,                     # 60 seconds
-        "hours": 3600,                     # 60 minutes * 60 seconds
-        "days": 86400,                     # 24 hours * 3600 seconds
-        "years": 31536000,                 # 365 days * 86400 seconds
+        "minutes": 60,  # 60 seconds
+        "hours": 3600,  # 60 minutes * 60 seconds
+        "days": 86400,  # 24 hours * 3600 seconds
+        "years": 31536000,  # 365 days * 86400 seconds
     }
 
     # Convert from seconds to the target unit.

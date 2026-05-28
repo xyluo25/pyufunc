@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -37,18 +37,19 @@
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css?v=b7db95b1" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
 
-    <script src="../_static/documentation_options.js?v=c1cae59a"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=b9afe91b"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/index';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="icon" href="../_static/pyufunc_logo_icon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -56,21 +57,27 @@
     <link rel="prev" title="pyufunc documentation" href="../index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.3.8" />
+  <meta name="docsearch:version" content="0.5.1" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -96,7 +103,7 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
   <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
@@ -146,13 +153,6 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../how_to_guide/index.html">
-    How-to guide
-  </a>
-</li>
-
-
-<li class="nav-item ">
   <a class="nav-link nav-internal" href="../reference/index.html">
     API reference
   </a>
@@ -167,28 +167,18 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../whatsnew/index.html">
+  <a class="nav-link nav-internal" href="../release_notes/index.html">
     Release notes
   </a>
 </li>
 
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../acknowledgement/index.html">
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../acknowledgement/index.html">
     Acknowledgements
   </a>
 </li>
 
-                </ul>
-            </li>
-            
   </ul>
 </nav></div>
       
@@ -208,11 +198,18 @@
       
         <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
       
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -225,8 +222,7 @@
           
           
           
-          <a href="https://github.com/xyluo25/pyufunc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">GitHub</span></a>
+          <a href="https://github.com/xyluo25/pyufunc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -237,8 +233,7 @@
           
           
           
-          <a href="https://www.linkedin.com/in/xiangyong-roy-luo/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">LinkedIn</span></a>
+          <a href="https://www.linkedin.com/in/xiangyong-roy-luo/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i><span class="visually-hidden">LinkedIn</span></a>
         </li>
 </ul></div>
       
@@ -294,13 +289,6 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../how_to_guide/index.html">
-    How-to guide
-  </a>
-</li>
-
-
-<li class="nav-item ">
   <a class="nav-link nav-internal" href="../reference/index.html">
     API reference
   </a>
@@ -315,7 +303,7 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../whatsnew/index.html">
+  <a class="nav-link nav-internal" href="../release_notes/index.html">
     Release notes
   </a>
 </li>
@@ -339,11 +327,18 @@
         
           <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
         
           <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -356,8 +351,7 @@
           
           
           
-          <a href="https://github.com/xyluo25/pyufunc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">GitHub</span></a>
+          <a href="https://github.com/xyluo25/pyufunc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -368,8 +362,7 @@
           
           
           
-          <a href="https://www.linkedin.com/in/xiangyong-roy-luo/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">LinkedIn</span></a>
+          <a href="https://www.linkedin.com/in/xiangyong-roy-luo/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i><span class="visually-hidden">LinkedIn</span></a>
         </li>
 </ul></div>
         
@@ -378,6 +371,12 @@
   </div>
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <div class="bd-toc-item navbar-nav">
     
@@ -483,38 +482,199 @@ installation page.</p>
 </section>
 <section id="intro-to-pyufunc">
 <h2>Intro to pyufunc<a class="headerlink" href="#intro-to-pyufunc" title="Link to this heading">#</a></h2>
-<div class="container">
-<div id="accordion" class="shadow tutorial-accordion">
+<p>pyufunc is a Python package that collects small helper functions for common
+programming tasks. These helpers cover areas such as string cleanup, list
+processing, date and time conversion, path and file handling, testing helpers,
+image utilities, and selected wrappers around third-party packages.</p>
+<p>Most functions are available directly from the top-level package:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyufunc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
 
-    <div class="card tutorial-card">
-        <div class="card-header collapsed card-link" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-            <div class="d-flex flex-row tutorial-card-header-1">
-                <div class="d-flex flex-row tutorial-card-header-2">
-                    <button class="btn btn-dark btn-sm"></button>
-                    What is pyufunc and what can it be used for?
-                </div>
-                <span class="badge gs-badge-link"></span>
-            </div>
-        </div>
-        <div id="collapseOne" class="collapse" data-parent="#accordion">
-            <div class="card-body">
-            Welcome to pyufunc, your go-to Python package for a wide array of frequently used utility functions. Simplify your coding experience with this powerful toolkit, meticulously designed to enhance your productivity and streamline your development process. Whether you're a seasoned developer or just starting with Python, pyufunc provides a curated collection of utilities that cater to your everyday programming needs. <br><br>
-
-            PyUFunc aims to bring together the most commonly used utility functions from different libraries and provide them in a single, cohesive package. By consolidating utility functions from multiple sources, pyufunc simplifies the process of finding and integrating various utility libraries into your projects. It provides a centralized resource for accessing a diverse set of utility functions, ultimately saving time and effort.
-            <div class="d-flex flex-row">
-                <span class="badge gs-badge-link">
-
-                </span>
-                <span class="badge gs-badge-link">
-                </span>
-            </div>
-        </div>
-    </div>
-</div></section>
+<span class="n">cleaned_text</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">str_strip</span><span class="p">(</span><span class="s2">&quot;  Hello     Python   &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cleaned_text</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can think of pyufunc as a toolbox. You still choose the tool that fits your
+task, but pyufunc gives you one place to look for common helpers.</p>
+</section>
 <section id="tutorials">
 <h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h2>
-<p>The community produces a wide variety of tutorials available online: <a class="reference external" href="https://github.com/xyluo25/pyufunc">pyufunc homepage</a>. Some of the
-material is enlisted in the community contributed.</p>
+<p>These tutorials are written for entry-level Python users. Each example can be
+copied into a Python file and run from the terminal.</p>
+<p>If you are new to Python packages, start with this pattern:</p>
+<ol class="arabic simple">
+<li><p>Install the package with <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p></li>
+<li><p>Import the package in Python.</p></li>
+<li><p>Call one function.</p></li>
+<li><p>Save the return value in a variable or print it.</p></li>
+</ol>
+<section id="tutorial-1-install-import-and-check-the-version">
+<h3>Tutorial 1: install, import, and check the version<a class="headerlink" href="#tutorial-1-install-import-and-check-the-version" title="Link to this heading">#</a></h3>
+<p>Install pyufunc from PyPI:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pyufunc
+</pre></div>
+</div>
+<p>Create a file named <code class="docutils literal notranslate"><span class="pre">my_first_pyufunc.py</span></code> and add:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyufunc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run the file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>my_first_pyufunc.py
+</pre></div>
+</div>
+<p>If Python prints a version number, pyufunc is installed and ready to use.</p>
+</section>
+<section id="tutorial-2-find-a-function-before-using-it">
+<h3>Tutorial 2: find a function before using it<a class="headerlink" href="#tutorial-2-find-a-function-before-using-it" title="Link to this heading">#</a></h3>
+<p>pyufunc contains functions in different categories. You can inspect those
+categories from Python.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyufunc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+
+<span class="n">categories</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">show_util_func_by_category</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">categories</span><span class="p">[</span><span class="s2">&quot;util_data_processing&quot;</span><span class="p">][:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>You can also search by a word in the function name:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyufunc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+
+<span class="n">time_functions</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">find_util_func_by_keyword</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">time_functions</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use this when you know the task, such as working with time, files, paths, or
+lists, but do not know the exact function name yet.</p>
+</section>
+<section id="tutorial-3-clean-text-and-convert-simple-values">
+<h3>Tutorial 3: clean text and convert simple values<a class="headerlink" href="#tutorial-3-clean-text-and-convert-simple-values" title="Link to this heading">#</a></h3>
+<p>This example starts with messy text and a number stored as a string.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyufunc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;  Hello     Python   &quot;</span>
+<span class="n">clean_message</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">str_strip</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+<span class="n">user_input</span> <span class="o">=</span> <span class="s2">&quot;42.9&quot;</span>
+<span class="n">user_number</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">str_digit_to_int</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">clean_message</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user_number</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pf</span><span class="o">.</span><span class="n">is_float</span><span class="p">(</span><span class="s2">&quot;3.14&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Hello Python
+42
+True
+</pre></div>
+</div>
+<p>This is useful when reading values from forms, text files, spreadsheets, or
+command-line input.</p>
+</section>
+<section id="tutorial-4-convert-text-into-a-date-and-time">
+<h3>Tutorial 4: convert text into a date and time<a class="headerlink" href="#tutorial-4-convert-text-into-a-date-and-time" title="Link to this heading">#</a></h3>
+<p>Dates often begin as text, especially when they come from a CSV file or user
+input. <code class="docutils literal notranslate"><span class="pre">fmt_str_to_dt</span></code> converts a text value into a Python <code class="docutils literal notranslate"><span class="pre">datetime</span></code> object.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyufunc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+
+<span class="n">meeting_time</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">fmt_str_to_dt</span><span class="p">(</span><span class="s2">&quot;2026-05-28 09:30:00&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">meeting_time</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">meeting_time</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">meeting_time</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">meeting_time</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>2026
+5
+28
+9
+</pre></div>
+</div>
+<p>After conversion, you can use normal Python date and time attributes such as
+<code class="docutils literal notranslate"><span class="pre">year</span></code>, <code class="docutils literal notranslate"><span class="pre">month</span></code>, <code class="docutils literal notranslate"><span class="pre">day</span></code>, and <code class="docutils literal notranslate"><span class="pre">hour</span></code>.</p>
+</section>
+<section id="tutorial-5-work-with-files-safely">
+<h3>Tutorial 5: work with files safely<a class="headerlink" href="#tutorial-5-work-with-files-safely" title="Link to this heading">#</a></h3>
+<p>This example creates a small text file, checks whether it exists, and asks
+pyufunc for a safe filename to use if another file with the same name already
+exists.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyufunc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+
+<span class="n">note</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;tutorial_note.txt&quot;</span><span class="p">)</span>
+<span class="n">note</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pf</span><span class="o">.</span><span class="n">check_filename</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
+
+<span class="n">safe_name</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">generate_unique_filename</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">safe_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;tutorial_note(1).txt&quot;</span><span class="p">))</span>
+
+<span class="n">note</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True
+True
+</pre></div>
+</div>
+<p>The last line, <code class="docutils literal notranslate"><span class="pre">note.unlink()</span></code>, deletes the small tutorial file after the
+example runs.</p>
+</section>
+<section id="tutorial-6-split-and-flatten-lists">
+<h3>Tutorial 6: split and flatten lists<a class="headerlink" href="#tutorial-6-split-and-flatten-lists" title="Link to this heading">#</a></h3>
+<p>Lists are one of the most common Python data structures. pyufunc includes helpers
+for list cleanup and grouping.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyufunc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+
+<span class="n">nested_numbers</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">]]</span>
+<span class="n">flat_numbers</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">list_flatten_nested</span><span class="p">(</span><span class="n">nested_numbers</span><span class="p">)</span>
+
+<span class="n">groups</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pf</span><span class="o">.</span><span class="n">list_split_by_fixed_length</span><span class="p">(</span><span class="n">flat_numbers</span><span class="p">,</span> <span class="n">fixed_length</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">flat_numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5]
+[[1, 2], [3, 4], [5]]
+</pre></div>
+</div>
+</section>
+<section id="tutorial-7-understand-optional-dependencies">
+<h3>Tutorial 7: understand optional dependencies<a class="headerlink" href="#tutorial-7-understand-optional-dependencies" title="Link to this heading">#</a></h3>
+<p>pyufunc does not automatically install missing optional packages. This avoids
+unexpected package installation in CI, offline, or security-sensitive
+environments.</p>
+<p>Some helper functions wrap third-party packages. If the package is not installed,
+install it yourself before using that helper.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyufunc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+
+<span class="n">humanize</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">import_package</span><span class="p">(</span><span class="s2">&quot;humanize&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">humanize</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Install the optional package with: pip install humanize&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pf</span><span class="o">.</span><span class="n">human_file_size</span><span class="p">(</span><span class="mi">1536</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This pattern is useful when sharing code with other users because it gives a
+clear message when an optional package is missing.</p>
+</section>
+<section id="next-steps">
+<h3>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use <a class="reference internal" href="../reference/index.html#api"><span class="std std-ref">API reference</span></a> when you want the full list of public functions.</p></li>
+<li><p>Use <a class="reference internal" href="../reference/util_pkgs.html#api-util-pkgs"><span class="std std-ref">util_pkgs</span></a> when you want helpers that wrap selected third-party
+utility packages.</p></li>
+<li><p>Use the <a class="reference external" href="https://github.com/xyluo25/pyufunc/issues">GitHub issue tracker</a>
+to report unclear documentation or request a tutorial for a specific task.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -563,22 +723,32 @@ material is enlisted in the community contributed.</p>
     class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro-to-pyufunc">Intro to pyufunc</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorials">Tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorials">Tutorials</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-1-install-import-and-check-the-version">Tutorial 1: install, import, and check the version</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-2-find-a-function-before-using-it">Tutorial 2: find a function before using it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-3-clean-text-and-convert-simple-values">Tutorial 3: clean text and convert simple values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-4-convert-text-into-a-date-and-time">Tutorial 4: convert text into a date and time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-5-work-with-files-safely">Tutorial 5: work with files safely</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-6-split-and-flatten-lists">Tutorial 6: split and flatten lists</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-7-understand-optional-dependencies">Tutorial 7: understand optional dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/getting_started/index.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div></div>
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/getting_started/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
 
 </div></div>
               
@@ -593,8 +763,8 @@ material is enlisted in the community contributed.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -605,7 +775,7 @@ material is enlisted in the community contributed.</p>
 
   <p class="copyright">
     
-      © Copyright 2023 - 2025 , Xiangyong Luo.
+      © Copyright 2023 - 2026 , Xiangyong Luo.
       <br/>
     
   </p>
@@ -614,7 +784,7 @@ material is enlisted in the community contributed.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

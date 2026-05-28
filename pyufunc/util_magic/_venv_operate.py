@@ -1,10 +1,10 @@
-'''
+"""
 ##############################################################
 # Created Date: Sunday, March 2nd 2025
 # Contact Info: luoxiangyong01@gmail.com
-# Author/Copyright: Mr. Xiangyong Luo
+# Author/Copyright: Mr. Xiangyong Luo.
 ##############################################################
-'''
+"""
 
 import os
 import sys
@@ -62,12 +62,12 @@ def venv_create(*, venv_name: str = "", venv_dir: str = "", pkg_name: str = "pyu
 
     # Find the executable python in the virtual environment
     if is_windows():
-        python_executable = path2linux(os.path.join(venv_path, 'Scripts', 'python.exe'))
+        python_executable = path2linux(os.path.join(venv_path, "Scripts", "python.exe"))
         # activate_path = pf.path2linux(os.path.join(venv_path, "Scripts", "activate"))
         # subprocess.run([activate_path], shell=True, check=True)
 
     elif is_linux() or is_mac():
-        python_executable = path2linux(os.path.join(venv_path, 'bin', 'python'))
+        python_executable = path2linux(os.path.join(venv_path, "bin", "python"))
         # activate_path = os.path.join(venv_path, "bin", "activate")
         # subprocess.run(["source", activate_path], shell=True, check=True)
 
@@ -76,7 +76,7 @@ def venv_create(*, venv_name: str = "", venv_dir: str = "", pkg_name: str = "pyu
 
     # Install the realtwin package in the virtual environment
     try:
-        subprocess.check_call([python_executable, '-m', 'pip', 'install', pkg_name])
+        subprocess.check_call([python_executable, "-m", "pip", "install", pkg_name])
         print(f"  :Successfully installed {pkg_name} in the virtual environment.")
         return True
     except subprocess.CalledProcessError as e:
@@ -98,7 +98,6 @@ def venv_delete(*, venv_name: str = "", venv_dir: str = "", verbose: bool = True
     Returns:
         bool: True if the virtual environment is deleted successfully, False otherwise
     """
-
     # Default values for env_name and folder_path if not provided
     if not venv_name:
         venv_name = "venv_pf"
@@ -125,9 +124,11 @@ def venv_delete(*, venv_name: str = "", venv_dir: str = "", verbose: bool = True
 
 
 def venv_activate() -> bool:
-    print("In order to activate your virtual environment, \n"
-          "please be aware the different IDE (integrated development environment) may need different actions.\n"
-          "For cmd: https://python.land/virtual-environments/virtualenv \n"
-          "For VS Code: https://code.visualstudio.com/docs/python/environments \n"
-          "For PyCharm: https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html \n")
+    print(
+        "In order to activate your virtual environment, \n"
+        "please be aware the different IDE (integrated development environment) may need different actions.\n"
+        "For cmd: https://python.land/virtual-environments/virtualenv \n"
+        "For VS Code: https://code.visualstudio.com/docs/python/environments \n"
+        "For PyCharm: https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html \n"
+    )
     return True

@@ -14,17 +14,25 @@ use::
 While the v0.23.1 tag does not exist, that will use the HEAD of the
 branch as the end of the revision range.
 """
-from announce import build_components
+
 from docutils import nodes
 from docutils.parsers.rst import Directive
 import git
 
+try:
+    from .announce import build_components
+except ImportError:
+    from announce import build_components
+
 
 class ContributorsDirective(Directive):
+    """Directive that renders contributors for a revision range."""
+
     required_arguments = 1
     name = "contributors"
 
     def run(self):
+        """Render contributor nodes for the configured revision range."""
         range_ = self.arguments[0]
         if range_.endswith("x..HEAD"):
             return [nodes.paragraph(), nodes.bullet_list()]
@@ -52,6 +60,7 @@ class ContributorsDirective(Directive):
 
 
 def setup(app):
+    """Register the contributors directive with Sphinx."""
     app.add_directive("contributors", ContributorsDirective)
 
     return {"version": "0.1", "parallel_read_safe": True, "parallel_write_safe": True}

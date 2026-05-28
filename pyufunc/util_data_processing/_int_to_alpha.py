@@ -31,5 +31,4 @@ def cvt_int_to_alpha(num: int) -> str:
     if num < 26:
         # return alpha[num]
         return chr(num + 65)
-    else:
-        return cvt_int_to_alpha((num // 26) - 1) + cvt_int_to_alpha(num % 26)
+    return cvt_int_to_alpha((num // 26) - 1) + cvt_int_to_alpha(num % 26)

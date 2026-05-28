@@ -20,23 +20,19 @@ from urllib.parse import urlparse
 import urllib.request
 from pathlib import Path
 from typing import TYPE_CHECKING
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 path_user_agent_strings = Path(__file__).parent.joinpath("static/user-agent-strings.json")
 
-with open(path_user_agent_strings, mode='r', encoding='utf-8') as f:
+with open(path_user_agent_strings, mode="r", encoding="utf-8") as f:
     _web_agent_str = f.read()
 _USER_AGENT_STRINGS = json.loads(_web_agent_str)
 
-#  https://stackoverflow.com/questions/61384752/how-to-type-hint-with-an-optional-import
 if TYPE_CHECKING:
-    import requests
-    from requests import Session
-    import urllib3
+    from requests import Session  # pyright: ignore[reportMissingModuleSource]
 
 
 class _FakeUserAgentParser(html.parser.HTMLParser):
-
     def __init__(self, browser_name):
         super().__init__()
         self.reset()
@@ -48,23 +44,22 @@ class _FakeUserAgentParser(html.parser.HTMLParser):
         pass
 
     def handle_starttag(self, tag, attrs):
-        if tag != 'a':
+        if tag != "a":
             return
 
         if self.recording:
             self.recording += 1
             return
 
-        if tag == 'a':
-            for name, link in attrs:
-                if name == 'href' and link.startswith(f'/{self.browser_name}') and link.endswith('.php'):
-                    break
-                else:
-                    return
-            self.recording = 1
+        for name, link in attrs:
+            if name == "href" and link.startswith(f"/{self.browser_name}") and link.endswith(".php"):
+                break
+            else:
+                return
+        self.recording = 1
 
     def handle_endtag(self, tag):
-        if tag == 'a' and self.recording:
+        if tag == "a" and self.recording:
             self.recording -= 1
 
     def handle_data(self, data):
@@ -72,15 +67,8 @@ class _FakeUserAgentParser(html.parser.HTMLParser):
             self.data.append(data.strip())
 
 
-@requires('requests', "urllib3", verbose=False)
 class GitHubFileDownloader:
-    """
-    Download files on GitHub from a given repository URL.
-    """
-    import_package('requests', verbose=False)
-    import_package("urllib3", verbose=False)
-    import requests
-    import urllib3
+    """Download files on GitHub from a given repository URL."""
 
     def __init__(self, repo_url: str, flatten_files: bool = False, output_dir: str | None = None) -> None:
         """
@@ -101,7 +89,6 @@ class GitHubFileDownloader:
             ValueError: if the input URL is not valid
 
         """
-
         self.dir_out = None
         self.repo_url = repo_url
         self.flatten = flatten_files
@@ -134,35 +121,33 @@ class GitHubFileDownloader:
             tuple: a tuple of two strings, the first string is the API URL, and the second string is the download path
 
         """
-
-        repo_only_url = re.compile(
-            r"https://github\.com/[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}/[a-zA-Z0-9]+$")
+        repo_only_url = re.compile(r"https://github\.com/[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}/[a-zA-Z0-9]+$")
         re_branch = re.compile("/(tree|blob)/(.+?)/")
 
         # Check if the given url is a complete url to a GitHub repo.
         if re.match(repo_only_url, url):
-            print(
-                "Given url is a complete repository, "
-                "please use 'git clone' to download the repository")
+            print("Given url is a complete repository, please use 'git clone' to download the repository")
             sys.exit()
 
         # Extract the branch name from the given url (e.g. master)
         branch = re_branch.search(url)
-        download_paths = url[branch.end():]
+        if branch is None:
+            raise ValueError("Invalid GitHub URL: missing branch segment (e.g. /tree/<branch>/ or /blob/<branch>/)")
+        download_paths = url[branch.end() :]
 
         api_url = (
-            f'{url[: branch.start()].replace("github.com", "api.github.com/repos", 1)}/'
-            f'contents/{download_paths}?ref={branch[2]}')
+            f"{url[: branch.start()].replace('github.com', 'api.github.com/repos', 1)}"
+            f"/contents/{download_paths}?ref={branch[2]}"
+        )
 
         return (api_url, download_paths)
 
-    def init_requests_session(self, url: str,
-                              max_retries: int = 5,
-                              backoff_factor: float = 0.1,
-                              retry_status: str = 'default',
-                              **kwargs) -> Session:
+    def init_requests_session(
+        self, url: str, max_retries: int = 5, backoff_factor: float = 0.1, retry_status: str = "default", **kwargs
+    ) -> Session:
         # sourcery skip: dict-assign-update-to-union
-        """Initialize a session for making HTTP requests.
+        """
+        Initialize a session for making HTTP requests.
 
         Args:
             url (_type_): a valid URL
@@ -172,31 +157,36 @@ class GitHubFileDownloader:
                 inherited from ``status_forcelist`` of `urllib3.util.retry.Retry`_;
                 when ``retry_status='default'``, the list defaults to ``[429, 500, 502, 503, 504]``.
                 Defaults to 'default'.
+            kwargs: [optional] parameters of `urllib3.util.retry.Retry`_
 
         Returns:
-            requests.Session:
-        """
+            requests.Session
 
-        if retry_status == 'default':
+        """
+        import requests  # pyright: ignore[reportMissingModuleSource]
+        import urllib3  # pyright: ignore[reportMissingImports]
+
+        if retry_status == "default":
             codes_for_retries = [429, 500, 502, 503, 504]
         else:
             codes_for_retries = copy.copy(retry_status)
 
-        kwargs.update({'backoff_factor': backoff_factor,
-                       'status_forcelist': codes_for_retries})
+        kwargs.update({"backoff_factor": backoff_factor, "status_forcelist": codes_for_retries})
         retries = urllib3.util.retry.Retry(total=max_retries, **kwargs)
 
         session = requests.Session()
 
         # noinspection HttpUrlsUsage
         session.mount(
-            prefix='https://' if url.startswith('https:') else 'http://',
-            adapter=requests.adapters.HTTPAdapter(max_retries=retries))
+            prefix="https://" if url.startswith("https:") else "http://",
+            adapter=requests.adapters.HTTPAdapter(max_retries=retries),
+        )
 
         return session
 
     def _user_agent_strings(self, browser_names: list = None, dump_dat: bool = True) -> dict:
-        """Get a dictionary of user-agent strings for popular browsers.
+        """
+        Get a dictionary of user-agent strings for popular browsers.
 
         Args:
             browser_names (list, optional): names of a list of popular browsers. Defaults to None.
@@ -204,19 +194,21 @@ class GitHubFileDownloader:
 
         Returns:
             dict: a dictionary of user-agent strings for popular browsers
+
         """
+        import requests  # pyright: ignore[reportMissingModuleSource]
 
         if browser_names is None:
-            browser_names_ = ['Chrome', 'Firefox', 'Safari', 'Edge', 'Internet Explorer', 'Opera']
+            browser_names_ = ["Chrome", "Firefox", "Safari", "Edge", "Internet Explorer", "Opera"]
         else:
             browser_names_ = browser_names.copy()
 
-        resource_url = 'https://useragentstring.com/pages/useragentstring.php'
+        resource_url = "https://useragentstring.com/pages/useragentstring.php"
 
         user_agent_strings = {}
         for browser_name in browser_names_:
             # url = resource_url.replace('useragentstring.php', browser_name.replace(" ", "+") + '/')
-            url = resource_url + f'?name={browser_name.replace(" ", "+")}'
+            url = f"{resource_url}?name={browser_name.replace(' ', '+')}"
             response = requests.get(url=url)
             fua_parser = _FakeUserAgentParser(browser_name=browser_name)
             fua_parser.feed(response.text)
@@ -224,16 +216,14 @@ class GitHubFileDownloader:
 
         if dump_dat and all(user_agent_strings.values()):
             path_to_uas = importlib.resources.files(__package__).joinpath("data/user-agent-strings.json")
-            with path_to_uas.open(mode='w') as f:
+            with path_to_uas.open(mode="w") as f:
                 f.write(json.dumps(user_agent_strings, indent=4))
 
         return user_agent_strings
 
-    def load_user_agent_strings(self,
-                                shuffled: bool = False,
-                                flattened: bool = False,
-                                update: bool = False,
-                                verbose: bool = False) -> list:
+    def load_user_agent_strings(
+        self, shuffled: bool = False, flattened: bool = False, update: bool = False, verbose: bool = False
+    ) -> dict | list:
         """
         Load user-agent strings of popular browsers.
 
@@ -250,7 +240,7 @@ class GitHubFileDownloader:
         Returns:
             list: a list of user-agent strings of popular browsers
 
-        See also:
+        See Also:
             .. _`Chrome`: https://useragentstring.com/pages/useragentstring.php?name=Chrome
             .. _`Firefox`: https://useragentstring.com/pages/useragentstring.php?name=Firefox
             .. _`Safari`: https://useragentstring.com/pages/useragentstring.php?name=Safari
@@ -258,12 +248,11 @@ class GitHubFileDownloader:
             .. _`Internet Explorer`: https://useragentstring.com/pages/useragentstring.php?name=Internet+Explorer
             .. _`Opera`: https://useragentstring.com/pages/useragentstring.php?name=Opera
 
-
         Notes:
             The order of the elements in ``uas_list`` may be different every time we run the example
             as ``shuffled=True``.
-        """
 
+        """
         if not update:
             # path_to_json = pkg_resources.resource_filename(__name__, "data\\user-agent-strings.json")
             # json_in = open(path_to_json, mode='r')
@@ -277,7 +266,7 @@ class GitHubFileDownloader:
             try:
                 user_agent_strings = self._user_agent_strings(dump_dat=True)
 
-                importlib.reload(sys.modules.get('pyhelpers._cache'))
+                importlib.reload(sys.modules.get("pyhelpers._cache"))
 
                 if verbose:
                     print("Done.")
@@ -308,28 +297,26 @@ class GitHubFileDownloader:
         Returns:
             str: a random user-agent string of a certain browser
 
-
         Notes:
             In the above examples, the returned user-agent string is random and may be different
             every time of running the function.
+
         """
-
         if fancy is not None:
-            browser_names = {'Chrome', 'Firefox', 'Safari', 'Edge', 'Internet Explorer', 'Opera'}
-            assert fancy in browser_names, f"`fancy` must be one of {browser_names}."
+            browser_names = {"Chrome", "Firefox", "Safari", "Edge", "Internet Explorer", "Opera"}
+            if fancy not in browser_names:
+                raise AssertionError(f"`fancy` must be one of {browser_names}.")
 
-            kwargs['flattened'] = False
+            kwargs["flattened"] = False
             user_agent_strings_ = self.load_user_agent_strings(**kwargs)
 
             user_agent_strings = user_agent_strings_[fancy]
 
         else:
-            kwargs['flattened'] = True
+            kwargs["flattened"] = True
             user_agent_strings = self.load_user_agent_strings(**kwargs)
 
-        user_agent_string = secrets.choice(user_agent_strings)
-
-        return user_agent_string
+        return secrets.choice(user_agent_strings)
 
     def fake_requests_headers(self, randomized: bool = True, **kwargs) -> dict:
         """
@@ -349,47 +336,40 @@ class GitHubFileDownloader:
             user-agent strings, even though ``randomized`` is (by default) set to be ``False``.
             - By setting ``randomized=True``, the function returns a random result from among
             all available user-agent strings of several popular browsers.
-        """
 
+        """
         if not randomized:
-            kwargs['fancy'] = 'Chrome'
+            kwargs["fancy"] = "Chrome"
 
         user_agent_string = self.get_user_agent_string(**kwargs)
 
-        fake_headers = {'user-agent': user_agent_string}
+        return {"user-agent": user_agent_string}
 
-        return fake_headers
-
-    @requires('tqdm', verbose=False)
+    @requires("tqdm")
     def _download_file_from_url(self, response, path_to_file):
-        """
-        Download an object from a valid URL (and save it as a file).
-
-        """
-
+        """Download an object from a valid URL (and save it as a file)."""
         # import tqdm if it is available, otherwise, install and import it
-        tqdm_ = import_package('tqdm', verbose=False)
+        import tqdm  # pyright: ignore[reportMissingModuleSource]
 
-        file_size = int(response.headers.get('content-length'))  # Total size in bytes
+        file_size = int(response.headers.get("content-length"))  # Total size in bytes
 
         unit_divisor = 1024
-        block_size = unit_divisor ** 2
+        block_size = unit_divisor**2
         chunk_size = block_size if file_size >= block_size else unit_divisor
 
         total_iter = file_size // chunk_size
 
         pg_args = {
-            'desc': f'"{path_to_file}"',
-            'total': total_iter,
-            'unit': 'B',
-            'unit_scale': True,
-            'unit_divisor': unit_divisor,
+            "desc": f'"{path_to_file}"',
+            "total": total_iter,
+            "unit": "B",
+            "unit_scale": True,
+            "unit_divisor": unit_divisor,
         }
-        with tqdm_.tqdm(**pg_args) as progress:
-
+        with tqdm.tqdm(**pg_args) as progress:
             contents = response.iter_content(chunk_size=chunk_size, decode_unicode=True)
 
-            with open(file=path_to_file, mode='wb') as f:
+            with open(file=path_to_file, mode="wb") as f:
                 written = 0
                 for data in contents:
                     if data:
@@ -403,19 +383,22 @@ class GitHubFileDownloader:
         if file_size != 0 and written != file_size:
             print("ERROR! Something went wrong!")
 
-    def download_file_from_url(self, url: str,
-                               path_to_file: str,
-                               if_exists: str = 'replace',
-                               max_retries: str = 5,
-                               random_header: bool = True,
-                               verbose: bool = False,
-                               requests_session_args=None,
-                               fake_headers_args: dict = None,
-                               **kwargs):
+    def download_file_from_url(
+        self,
+        url: str,
+        path_to_file: str,
+        if_exists: str = "replace",
+        max_retries: str = 5,
+        random_header: bool = True,
+        verbose: bool = False,
+        requests_session_args=None,
+        fake_headers_args: dict = None,
+        **kwargs,
+    ):
         """
         Download an object available at a valid URL.
 
-        See also:
+        See Also:
             [`OPS-DFFU-1`_] and [`OPS-DFFU-2`_].
 
             .. _OPS-DFFU-1: https://stackoverflow.com/questions/37573483/
@@ -437,12 +420,11 @@ class GitHubFileDownloader:
             https://docs.python-requests.org/en/master/_modules/requests/sessions/#Session.get
 
         Notes:
-
             - When ``verbose=True``, the function requires `tqdm`_.
 
             .. _`tqdm`: https://pypi.org/project/tqdm/
-        """
 
+        """
         path_to_dir = os.path.dirname(path_to_file)
         if path_to_dir == "":
             path_to_file_ = os.path.join(os.getcwd(), path_to_file)
@@ -450,10 +432,12 @@ class GitHubFileDownloader:
         else:
             path_to_file_ = copy.copy(path_to_file)
 
-        if os.path.exists(path_to_file_) and if_exists != 'replace':
+        if os.path.exists(path_to_file_) and if_exists != "replace":
             if verbose:
-                print(f"The destination already has a file named: {os.path.basename(path_to_file_)}, \
-                      the download is cancelled.")
+                print(
+                    f"The destination already has a file named: {os.path.basename(path_to_file_)}, \
+                      the download is cancelled."
+                )
 
         else:
             if requests_session_args is None:
@@ -466,7 +450,6 @@ class GitHubFileDownloader:
 
             # Streaming, so we can iterate over the response
             with session.get(url=url, stream=True, headers=fake_headers, **kwargs) as response:
-
                 if not os.path.exists(path_to_dir):
                     os.makedirs(path_to_dir)
 
@@ -474,7 +457,7 @@ class GitHubFileDownloader:
                     self._download_file_from_url(response=response, path_to_file=path_to_file_)
 
                 else:
-                    with open(file=path_to_file_, mode='wb') as f:
+                    with open(file=path_to_file_, mode="wb") as f:
                         shutil.copyfileobj(fsrc=response.raw, fdst=f)
 
                     if os.stat(path=path_to_file_).st_size == 0:
@@ -488,8 +471,7 @@ class GitHubFileDownloader:
             if self.output_dir == "./":
                 print(f"Downloaded to: ./{dir_out.split('/')[-1]}")
             else:
-                print(
-                    f"Downloaded to: {self.output_dir}/{dir_out.split('/')[-1]}")
+                print(f"Downloaded to: {self.output_dir}/{dir_out.split('/')[-1]}")
         else:
             print(f"Downloaded to: {dir_out}")
 
@@ -503,8 +485,7 @@ class GitHubFileDownloader:
         elif len(self.download_dirs.split(".")) == 0:
             self.dir_out = os.path.join(self.output_dir, self.download_dirs)
         else:
-            self.dir_out = os.path.join(
-                self.output_dir, "/".join(self.download_dirs.split("/")[:-1]))
+            self.dir_out = os.path.join(self.output_dir, "/".join(self.download_dirs.split("/")[:-1]))
 
         # Make a directory with the name which is taken from the actual repo
         os.makedirs(self.dir_out, exist_ok=True)
@@ -513,8 +494,7 @@ class GitHubFileDownloader:
         try:
             response = urllib.request.urlretrieve(api_url_local)
         except KeyboardInterrupt:
-            print(
-                "Can not get response from GitHub API, please check the url again or try later.")
+            print("Can not get response from GitHub API, please check the url again or try later.")
 
         # Download files according to the response
         with open(response[0], "r") as f:
@@ -524,8 +504,7 @@ class GitHubFileDownloader:
         if isinstance(data, dict) and data["type"] == "file":
             try:
                 # Download the file
-                self.download_single_file(
-                    data["download_url"], "/".join([self.dir_out, data["name"]]))
+                self.download_single_file(data["download_url"], "/".join([self.dir_out, data["name"]]))
                 self.total_files += 1
                 return self.total_files
             except KeyboardInterrupt as e:
@@ -541,7 +520,7 @@ class GitHubFileDownloader:
             dirname = os.path.dirname(path)
 
             # Create a directory if it does not exist
-            if dirname != '':
+            if dirname != "":
                 os.makedirs(os.path.dirname(path), exist_ok=True)
 
             # Download the file if it is not a directory
@@ -556,21 +535,21 @@ class GitHubFileDownloader:
             # If the file is a directory, recursively download it
             else:
                 try:
-                    self.api_url, self.download_dirs = self.create_url(
-                        file["html_url"])
+                    self.api_url, self.download_dirs = self.create_url(file["html_url"])
                     self.download(self.api_url)
                 except Exception:
-                    print(
-                        f"Error: {file['html_url']} is not a file or a directory")
+                    print(f"Error: {file['html_url']} is not a file or a directory")
 
         return self.total_files
 
 
+@requires("requests", "urllib3")
 def github_file_downloader(repo_url: str, output_dir: str | None = None, flatten: bool = False) -> int:
-    """Download files from a GitHub repository.
+    """
+    Download files from a GitHub repository.
 
     Args:
-        url (str): URL of a GitHub repository to download from;
+        repo_url (str): URL of a GitHub repository to download from;
             it can be a ``blob`` or tree path
         output_dir (str): an output directory where the downloaded files will be saved,
             when ``output_dir=None``, it defaults to ``None``
@@ -579,12 +558,12 @@ def github_file_downloader(repo_url: str, output_dir: str | None = None, flatten
 
     Returns:
         int: total number of files downloaded
-    """
 
+    """
     return GitHubFileDownloader(repo_url, flatten_files=flatten, output_dir=output_dir).download()
 
 
-@requires('requests', verbose=False)
+@requires("requests")
 def github_get_status(usr_name, repo_name=None) -> list[dict]:
     """
     Fetches GitHub repository status including stars, forks, issues, and pull requests.
@@ -609,8 +588,7 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
         'original_stars': None}]
 
     """
-    import_package('requests', verbose=False)
-    import requests
+    import requests  # pyright: ignore[reportMissingModuleSource]
 
     print(f"  Collecting {usr_name} GitHub repository status...")
     base_url = "https://api.github.com/users"
@@ -620,38 +598,38 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
         """
         Helper function to fetch repository information including the star count of the original repository if forked.
         """
-
         repo_response = requests.get(repo_url)
         repo = repo_response.json()
-        repo_url = repo['url']  # Using the URL directly from the repo data
+        repo_url = repo["url"]  # Using the URL directly from the repo data
         prs_count = get_pull_requests_count(repo_url)
         repo_info = {
-            "name": repo['name'],
-            "stars": repo.get('stargazers_count', 0),
-            "forks": repo.get('forks_count', 0),
-            "issues": repo.get('open_issues_count', 0),
+            "name": repo["name"],
+            "stars": repo.get("stargazers_count", 0),
+            "forks": repo.get("forks_count", 0),
+            "issues": repo.get("open_issues_count", 0),
             "pull_requests": prs_count,
-            "original_stars": None  # Default value
+            "original_stars": None,  # Default value
         }
 
-        if repo['fork']:
+        if repo["fork"]:
             # Fetch the original repository's star count
             with contextlib.suppress(Exception):
-                original_repo_url = repo['source']['url']
+                original_repo_url = repo["source"]["url"]
                 original_repo_response = requests.get(original_repo_url)
                 original_repo_data = original_repo_response.json()
-                repo_info['original_stars'] = original_repo_data.get('stargazers_count', 0)
+                repo_info["original_stars"] = original_repo_data.get("stargazers_count", 0)
         return repo_info
 
     def get_pull_requests_count(repo_url):
         """
         Helper function to fetch the count of open pull requests for a repository.
 
-        Parameters:
-        - repo_url: URL of the repository
+        Args:
+            repo_url (str): URL of the repository
 
         Returns:
-        The count of open pull requests.
+            int: The count of open pull requests.
+
         """
         prs_url = f"{repo_url}/pulls?state=open"
         prs_response = requests.get(prs_url)
@@ -671,7 +649,7 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
             user_repos_url = f"{base_url}/{usr_name}/repos?page=1&per_page=1000"
             repos_response = requests.get(user_repos_url)
             repos_data = repos_response.json()
-            repo_url_all = [repo['url'] for repo in repos_data]
+            repo_url_all = [repo["url"] for repo in repos_data]
 
             for repo_url_single in repo_url_all:
                 repo_details.append(get_repo_info(repo_url_single))
@@ -681,6 +659,7 @@ def github_get_status(usr_name, repo_name=None) -> list[dict]:
     return repo_details
 
 
+@requires("requests")
 def github_private_file_downloader(raw_url: str, token: str, dest_path: str) -> bool:
     """
     Download a file (e.g. a ZIP) from a private GitHub repository given its
@@ -693,7 +672,10 @@ def github_private_file_downloader(raw_url: str, token: str, dest_path: str) -> 
                        https://github.com/{owner}/{repo}/blob/{ref}/{path}
         token (str):  Personal access token with `repo` scope.
         dest_path (str): Local path where the file will be written.
+
     """
+    import requests  # pyright: ignore[reportMissingModuleSource]
+
     # parse URL
     parsed = urlparse(raw_url)
     parts = parsed.path.strip("/").split("/")
@@ -708,14 +690,13 @@ def github_private_file_downloader(raw_url: str, token: str, dest_path: str) -> 
         owner, repo, ref = parts[:3]
         file_path = "/".join(parts[3:])
     else:
-        raise ValueError(
-            "URL must be raw.githubusercontent.com or github.com blob URL")
+        raise ValueError("URL must be raw.githubusercontent.com or github.com blob URL")
 
     # construct Contents API endpoint
     api_url = f"https://api.github.com/repos/{owner}/{repo}/contents/{file_path}"
     headers = {
         "Authorization": f"token {token}",
-        "Accept": "application/vnd.github.v3.raw"  # <-- ask for raw file bytes
+        "Accept": "application/vnd.github.v3.raw",  # <-- ask for raw file bytes
     }
     params = {"ref": ref}
 

@@ -1,4 +1,3 @@
-
 # -*- coding:utf-8 -*-
 ##############################################################
 # Created Date: Monday, September 4th 2023
@@ -16,20 +15,14 @@ from multiprocessing import Pool
 from pyufunc.util_magic._func_time_decorator import func_time
 from pyufunc.util_pathio._path import path2linux
 from pyufunc.util_magic._dependency_requires_decorator import requires
-from pyufunc.util_magic._import_package import import_package
-from pyufunc.pkg_configs import config_gmns
+from pyufunc.__cfg import config_gmns
 from pyufunc.util_data_processing._dataclass import dataclass_extend, dataclass_from_dict
 
-import pandas as pd
 
 if TYPE_CHECKING:
-    import shapely
-    from tqdm import tqdm
-    from pyproj import Transformer
-    from joblib import Parallel, delayed
+    import pandas as pd
 
-__all__ = ['Node', 'Link', 'POI', 'Zone', 'Agent',
-           'read_node', 'read_poi', 'read_link', 'read_zone']
+__all__ = ["Node", "Link", "POI", "Zone", "Agent", "read_node", "read_poi", "read_link", "read_zone"]
 
 
 @dataclass
@@ -51,6 +44,7 @@ class Node:
         _zone_id: The zone ID. default == -1,
                 this will be assigned if field zone_id exists in the node.csv and is not empty
     """
+
     id: int = 0
     x_coord: float = -1
     y_coord: float = -1
@@ -61,7 +55,7 @@ class Node:
     zone_id: int | None = None
     # poi_id: int = -1
     # activity_type: str = ''
-    geometry: str = ''
+    geometry: str = ""
     _zone_id: int = -1
 
     def __getitem__(self, key):
@@ -109,7 +103,7 @@ class POI:
     centroid: str = ""
     area: str = ""
     trip_rate: dict = field(default_factory=dict)
-    geometry: str = ''
+    geometry: str = ""
     zone_id: int = -1
 
     def __getitem__(self, key):
@@ -157,7 +151,7 @@ class Zone:
     """
 
     id: int = 0
-    name: str = ''
+    name: str = ""
     x_coord: float = 0
     y_coord: float = 0
     centroid: str = ""
@@ -171,7 +165,7 @@ class Zone:
     attraction: float = 0
     production_fixed: float = 0
     attraction_fixed: float = 0
-    geometry: str = ''
+    geometry: str = ""
 
     def __getitem__(self, key):
         if hasattr(self, key):
@@ -220,11 +214,11 @@ class Agent:
     """
 
     id: int = 0
-    agent_type: str = ''
+    agent_type: str = ""
     o_zone_id: int = 0
     d_zone_id: int = 0
-    o_zone_name: str = ''
-    d_zone_name: str = ''
+    o_zone_name: str = ""
+    d_zone_name: str = ""
 
     # some attributes to be assigned later
     o_node_id: int = 0
@@ -234,7 +228,7 @@ class Agent:
     path_cost = 0
     b_generated: bool = False
     b_complete_trip: bool = False
-    geometry: str = ''
+    geometry: str = ""
     departure_time: int = 0  # unit is second
 
     def __getitem__(self, key):
@@ -314,7 +308,7 @@ class Link:
         return (self.from_node_id, self.to_node_id, {**self.as_dict(), **{"weight": self.length}})
 
 
-@requires("shapely", verbose=False)
+@requires("shapely")
 def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
     """Create Node from df_node.
 
@@ -324,9 +318,7 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
     Returns:
         dict[int, Node]: a dict of nodes.{node_id: Node}
     """
-
-    import_package("shapely", verbose=False)
-    import shapely
+    import shapely  # pyright: ignore[reportMissingModuleSource]
 
     # Reset index to avoid index error
     df_node = df_node.reset_index(drop=True)
@@ -355,19 +347,16 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
             # check whether zone_id field in node.csv or not
             # if zone_id field exists and is not empty, assign it to _zone_id
             try:
-                _zone_id = int(df_node.loc[i, 'zone_id'])
-
-                # check if _zone is none or empty, assign -1
-                if pd.isna(_zone_id) or not _zone_id:
+                _zone_id = int(str(df_node.loc[i, "zone_id"]))
+                if pd.isna(_zone_id) or _zone_id in {"", " ", None}:
                     _zone_id = -1
-
             except Exception:
                 _zone_id = -1
 
             # get node id
-            node_id = int(df_node.loc[i, 'node_id'])
-            x_coord = float(df_node.loc[i, 'x_coord'])
-            y_coord = float(df_node.loc[i, 'y_coord'])
+            node_id = int(str(df_node.loc[i, "node_id"]))
+            x_coord = float(str(df_node.loc[i, "x_coord"]))
+            y_coord = float(str(df_node.loc[i, "y_coord"]))
 
             node = Node_ext()
 
@@ -381,12 +370,12 @@ def _create_node_from_dataframe(df_node: pd.DataFrame) -> dict[int, Node]:
             node_dict[node_id] = asdict(node)
 
         except Exception as e:
-            raise Exception(f"  : Unable to create node: {node_id}, error: {e}")
+            raise Exception(f"  : Unable to create node: {node_id}, error: {e}") from e
 
     return node_dict
 
 
-@requires("shapely", "pyproj", verbose=False)
+@requires("shapely", "pyproj")
 def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     """Create POI from df_poi.
 
@@ -396,10 +385,8 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
     Returns:
         dict[int, POI]: a dict of POIs.{poi_id: POI}
     """
-    import_package("shapely", verbose=False)
-    import_package("pyproj", verbose=False)
-    import shapely
-    from pyproj import Transformer
+    import shapely  # pyright: ignore[reportMissingModuleSource]
+    import pyproj  # pyright: ignore[reportMissingImports]
 
     df_poi = df_poi.reset_index(drop=True)
     col_names = df_poi.columns.tolist()
@@ -425,20 +412,18 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
 
     for i in range(len(df_poi)):
         try:
-            centroid = shapely.from_wkt(df_poi.loc[i, 'centroid'])
+            centroid = shapely.from_wkt(str(df_poi.loc[i, "centroid"]))
 
             # check if area is empty or not
-            area = df_poi.loc[i, 'area']
+            area = df_poi.loc[i, "area"]
             if pd.isna(area) or not area:
-                geometry_shapely = shapely.from_wkt(df_poi.loc[i, 'geometry'])
+                geometry_shapely = shapely.from_wkt(str(df_poi.loc[i, "geometry"]))
 
                 # Set up a Transformer to convert from WGS 84 to UTM zone 18N (EPSG:32618)
-                transformer = Transformer.from_crs(
-                    "EPSG:4326", "EPSG:32618", always_xy=True)
+                transformer = pyproj.Transformer.from_crs("EPSG:4326", "EPSG:32618", always_xy=True)
 
                 # Transform the polygon's coordinates to UTM
-                transformed_coords = [transformer.transform(
-                    x, y) for x, y in geometry_shapely.exterior.coords]
+                transformed_coords = [transformer.transform(x, y) for x, y in geometry_shapely.exterior.coords]
                 transformed_polygon = shapely.Polygon(transformed_coords)
 
                 # square meters
@@ -449,13 +434,10 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
 
                 area = area_sqm
 
-            elif area > 90000:
+            elif float(area) > 90000:
                 area = 0
-            else:
-                pass
-
             # get poi id
-            poi_id = int(df_poi.loc[i, 'poi_id'])
+            poi_id = int(str(df_poi.loc[i, "poi_id"]))
 
             poi = POI_ext()
 
@@ -469,11 +451,11 @@ def _create_poi_from_dataframe(df_poi: pd.DataFrame) -> dict[int, POI]:
 
             poi_dict[poi_id] = asdict(poi)
         except Exception as e:
-            raise Exception(f"  : Unable to create poi: {poi_id}, error: {e}")
+            raise Exception(f"  : Unable to create poi: {poi_id}, error: {e}") from e
     return poi_dict
 
 
-@requires("shapely", verbose=False)
+@requires("shapely")
 def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, Zone]:
     """Create Zone from df_zone.
 
@@ -483,9 +465,7 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
     Returns:
         dict[int, Zone]: a dict of Zones.{zone_id: Zone}
     """
-
-    import_package("shapely", verbose=False)
-    import shapely
+    import shapely  # pyright: ignore[reportMissingModuleSource]
 
     df_zone = df_zone.reset_index(drop=True)
     col_names = df_zone.columns.tolist()
@@ -511,8 +491,8 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
 
     for i in range(len(df_zone)):
         try:
-            zone_id = df_zone.loc[i, 'zone_id']
-            zone_geometry = df_zone.loc[i, 'geometry']
+            zone_id = df_zone.loc[i, "zone_id"]
+            zone_geometry = df_zone.loc[i, "geometry"]
 
             zone_geometry_shapely = shapely.from_wkt(zone_geometry)
             centroid_wkt = zone_geometry_shapely.centroid.wkt
@@ -537,11 +517,11 @@ def _create_zone_from_dataframe_by_geometry(df_zone: pd.DataFrame) -> dict[int, 
             # save zone to zone_dict
             zone_dict[zone_id] = asdict(zone)
         except Exception as e:
-            raise Exception(f"  : Unable to create zone: {zone_id}, error: {e}")
+            raise Exception(f"  : Unable to create zone: {zone_id}, error: {e}") from e
     return zone_dict
 
 
-@requires("shapely", verbose=False)
+@requires("shapely")
 def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, Zone]:
     """Create Zone from df_zone.
 
@@ -551,9 +531,7 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
     Returns:
         dict[int, Zone]: a dict of Zones.{zone_id: Zone}
     """
-
-    import_package("shapely", verbose=False)
-    import shapely
+    import shapely  # pyright: ignore[reportMissingModuleSource]
 
     df_zone = df_zone.reset_index(drop=True)
     col_names = df_zone.columns.tolist()
@@ -579,13 +557,13 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
 
     for i in range(len(df_zone)):
         try:
-            zone_id = df_zone.loc[i, 'zone_id']
-            x_coord = df_zone.loc[i, 'x_coord']
-            y_coord = df_zone.loc[i, 'y_coord']
+            zone_id = df_zone.loc[i, "zone_id"]
+            x_coord = df_zone.loc[i, "x_coord"]
+            y_coord = df_zone.loc[i, "y_coord"]
 
             # load zone geometry
             try:
-                zone_geometry = df_zone.loc[i, 'geometry']
+                zone_geometry = df_zone.loc[i, "geometry"]
             except Exception:
                 zone_geometry = ""
 
@@ -605,20 +583,19 @@ def _create_zone_from_dataframe_by_centroid(df_zone: pd.DataFrame) -> dict[int, 
             # save zone to zone_dict
             zone_dict[zone_id] = asdict(zone)
         except Exception as e:
-            raise Exception(f"  : Unable to create zone: {zone_id}, error: {e}")
+            raise Exception(f"  : Unable to create zone: {zone_id}, error: {e}") from e
     return zone_dict
 
 
-def _create_link_from_dataframe(df_link: pd.DataFrame) -> dict[int, Zone]:
+def _create_link_from_dataframe(df_link: pd.DataFrame) -> dict[int, Link]:
     """Create Link from df_link.
 
     Args:
         df_link (pd.DataFrame): dataframe of link from link.csv
 
     Returns:
-        dict[int, Zone]: a dict of Link.{link_id: Link}
+        dict[int, Link]: a dict of Link.{link_id: Link}
     """
-
     df_link = df_link.reset_index(drop=True)
     col_names = df_link.columns.tolist()
 
@@ -645,7 +622,7 @@ def _create_link_from_dataframe(df_link: pd.DataFrame) -> dict[int, Zone]:
     link_dict = {}
     for i in range(len(df_link)):
         try:
-            link_id = df_link.loc[i, 'link_id']
+            link_id = df_link.loc[i, "link_id"]
 
             link = Link_ext()
 
@@ -655,22 +632,23 @@ def _create_link_from_dataframe(df_link: pd.DataFrame) -> dict[int, Zone]:
 
             # assign additional values to link attributes
             link.id = link_id
-            link.mode_type = df_link.loc[i, 'allowed_uses']
+            link.mode_type = df_link.loc[i, "allowed_uses"]
 
             # save link to link_dict
             link_dict[link_id] = asdict(link)
 
         except Exception as e:
-            raise Exception(f"Error: Unable to create link {link_id}: error: {e}")
+            raise Exception(f"Error: Unable to create link {link_id}: error: {e}") from e
 
     return link_dict
+
 
 # main functions for reading node, poi, link, zone files and network
 
 
 @func_time
-@requires("tqdm", "joblib", verbose=False)
-def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Node]:
+@requires("tqdm", "joblib")
+def read_node(node_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict:
     """Read node.csv file and return a dict of nodes.
 
     Args:
@@ -689,14 +667,12 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
         >>> node_dict[1]
         Node(id=1, zone_id=0, x_coord=0.0, y_coord=0.0, is_boundary=0, geometry='POINT (0 0)',...)
 
-        # if node_file does not exist, raise error
+        >>> # if node_file does not exist, raise error
         >>> node_dict = read_node(node_file = r"../dataset/ASU/node.csv")
         FileNotFoundError: File: ../dataset/ASU/node.csv does not exist.
     """
-    import_package("tqdm", verbose=False)
-    import_package("joblib", verbose=False)
-    from tqdm import tqdm
-    from joblib import Parallel, delayed
+    import joblib  # pyright: ignore[reportMissingImports]
+    from tqdm import tqdm  # pyright: ignore[reportMissingModuleSource]
 
     # convert path to linux path
     node_file = path2linux(node_file)
@@ -704,6 +680,13 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
     # check if node_file exists
     if not os.path.exists(node_file):
         raise FileNotFoundError(f"File: {node_file} does not exist.")
+
+    # check cpu_cores
+    if not isinstance(cpu_cores, int):
+        raise ValueError(f"cpu_cores should be integer, but got {type(cpu_cores)}")
+
+    if cpu_cores <= 0:
+        cpu_cores = config_gmns["cpu_cores"]
 
     # read node.csv with specified columns and chunksize for iterations
     node_required_cols = config_gmns["node_fields"]
@@ -717,15 +700,16 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
         node_required_cols.append("zone_id")
 
     if verbose:
-        print(f"  : Reading node.csv with specified columns: {node_required_cols} \
-                    \n    and chunksize {chunk_size} for iterations...")
+        print(
+            f"  : Reading node.csv with specified columns: {node_required_cols} "
+            f"and chunksize {chunk_size} for iterations..."
+        )
 
     try:
         # Get total rows in poi.csv and calculate total chunks
         total_rows = sum(1 for _ in open(node_file)) - 1  # Exclude header row
         total_chunks = total_rows // chunk_size + 1
-        df_node_chunk = pd.read_csv(
-            node_file, usecols=node_required_cols, chunksize=chunk_size)
+        df_node_chunk = pd.read_csv(node_file, usecols=node_required_cols, chunksize=chunk_size)
     except Exception as e:
         raise Exception(f"Error: Unable to read node.csv file for: {e}")
 
@@ -734,9 +718,10 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
 
     try:
         # Parallel processing using joblib with tqdm for progress tracking
-        results = Parallel(n_jobs=cpu_cores)(
-            delayed(_create_node_from_dataframe)(chunk)
-            for chunk in tqdm(df_node_chunk, total=total_chunks, desc="  : Read nodes"))
+        results = joblib.Parallel(n_jobs=cpu_cores)(
+            joblib.delayed(_create_node_from_dataframe)(chunk)
+            for chunk in tqdm(df_node_chunk, total=total_chunks, desc="  : Read nodes")
+        )
 
         # Combine results using itertools.chain for efficiency
         node_dict_final = dict(itertools.chain.from_iterable(result.items() for result in results))
@@ -747,13 +732,12 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
         # Parallel processing using Pool
         with Pool(cpu_cores) as pool:
             # results = pool.map(_create_node_from_dataframe, df_node_chunk)
-            results = list(
-                tqdm(pool.imap(_create_node_from_dataframe, df_node_chunk), total=total_chunks))
+            results = list(tqdm(pool.imap(_create_node_from_dataframe, df_node_chunk), total=total_chunks))
             pool.close()
             pool.join()
 
         for node_dict in results:
-            node_dict_final.update(node_dict)
+            node_dict_final |= node_dict
 
     if verbose:
         print(f"  : Successfully loaded node.csv: {len(node_dict_final)} Nodes loaded.")
@@ -765,8 +749,8 @@ def read_node(node_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
 
 
 @func_time
-@requires("tqdm", verbose=False)
-def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: POI]:
+@requires("tqdm", "joblib")
+def read_poi(poi_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict:
     """Read poi.csv file and return a dict of POIs.
 
     Args:
@@ -790,8 +774,8 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
         FileNotFoundError: File: ../dataset/ASU/poi.csv does not exist.
 
     """
-    import_package("tqdm", verbose=False)
-    from tqdm import tqdm
+    import joblib  # pyright: ignore[reportMissingImports]
+    from tqdm import tqdm  # pyright: ignore[reportMissingModuleSource]
 
     # convert path to linux path
     poi_file = path2linux(poi_file)
@@ -800,23 +784,30 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
     if not os.path.exists(poi_file):
         raise FileNotFoundError(f"File: {poi_file} does not exist.")
 
+    # check cpu_cores
+    if not isinstance(cpu_cores, int):
+        raise ValueError(f"cpu_cores should be integer, but got {type(cpu_cores)}")
+
+    if cpu_cores <= 0:
+        cpu_cores = config_gmns["cpu_cores"]
+
     # Read poi.csv with specified columns and chunksize for iterations
     poi_required_cols = config_gmns["poi_fields"]
     chunk_size = config_gmns["data_chunk_size"]
 
     if verbose:
-        print(f"  : Reading poi.csv with specified columns: {poi_required_cols} \
-                    \n    and chunksize {chunk_size} for iterations...")
+        print(
+            f"  : Reading poi.csv with specified columns: {poi_required_cols} \
+                    \n    and chunksize {chunk_size} for iterations..."
+        )
     try:
         # Get total rows in poi.csv and calculate total chunks
         total_rows = sum(1 for _ in open(poi_file)) - 1  # Exclude header row
         total_chunks = total_rows // chunk_size + 1
 
-        df_poi_chunk = pd.read_csv(
-            poi_file, usecols=poi_required_cols, chunksize=chunk_size, encoding='utf-8')
+        df_poi_chunk = pd.read_csv(poi_file, usecols=poi_required_cols, chunksize=chunk_size, encoding="utf-8")
     except Exception:
-        df_poi_chunk = pd.read_csv(
-            poi_file, usecols=poi_required_cols, chunksize=chunk_size, encoding='latin-1')
+        df_poi_chunk = pd.read_csv(poi_file, usecols=poi_required_cols, chunksize=chunk_size, encoding="latin-1")
 
     # Parallel processing using Pool
     if verbose:
@@ -824,25 +815,24 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
 
     try:
         # Parallel processing using joblib with tqdm for progress tracking
-        results = Parallel(n_jobs=cpu_cores)(
-            delayed(_create_poi_from_dataframe)(chunk)
-            for chunk in tqdm(df_poi_chunk, total=total_chunks, desc="  : Read poi"))
+        results = joblib.Parallel(n_jobs=cpu_cores)(
+            joblib.delayed(_create_poi_from_dataframe)(chunk)
+            for chunk in tqdm(df_poi_chunk, total=total_chunks, desc="  : Read poi")
+        )
 
         poi_dict_final = dict(itertools.chain.from_iterable(result.items() for result in results))
 
     except Exception:
-
         poi_dict_final = {}
 
         with Pool(cpu_cores) as pool:
             # results = pool.map(_create_poi_from_dataframe, df_poi_chunk)
-            results = list(
-                tqdm(pool.imap(_create_poi_from_dataframe, df_poi_chunk), total=total_chunks))
+            results = list(tqdm(pool.imap(_create_poi_from_dataframe, df_poi_chunk), total=total_chunks))
             pool.close()
             pool.join()
 
         for poi_dict in results:
-            poi_dict_final.update(poi_dict)
+            poi_dict_final |= poi_dict
 
     if verbose:
         print(f"  : Successfully loaded poi.csv: {len(poi_dict_final)} POIs loaded.")
@@ -853,7 +843,8 @@ def read_poi(poi_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> d
 
 
 @func_time
-def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
+@requires("tqdm", "joblib")
+def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int, Zone]:
     """Read zone.csv file and return a dict of Zones.
 
     Raises:
@@ -868,6 +859,8 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
     Returns:
         dict: the result dictionary of Zones. {zone_id: Zone}
     """
+    import joblib  # pyright: ignore[reportMissingImports]
+    from tqdm import tqdm  # pyright: ignore[reportMissingModuleSource]
 
     # convert path to linux path
     zone_file = path2linux(zone_file)
@@ -876,21 +869,32 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
     if not os.path.exists(zone_file):
         raise FileNotFoundError(f"File: {zone_file} does not exist.")
 
+    # check cpu_cores
+    if not isinstance(cpu_cores, int):
+        raise ValueError(f"cpu_cores should be integer, but got {type(cpu_cores)}")
+
+    if cpu_cores <= 0:
+        cpu_cores = config_gmns["cpu_cores"]
+
     # load default settings for zone required fields and chunk size
     zone_required_cols = config_gmns["zone_geometry_fields"]
     chunk_size = config_gmns["data_chunk_size"]
 
     if verbose:
-        print(f"  : Reading zone.csv with specified columns: {zone_required_cols} \
-                \n   and chunksize {chunk_size} for iterations...")
+        print(
+            f"  : Reading zone.csv with specified columns: {zone_required_cols} "
+            f"and chunksize {chunk_size} for iterations..."
+        )
 
     # check whether required fields are in zone.csv
     df_zone = pd.read_csv(zone_file, nrows=1)
     col_names = df_zone.columns.tolist()
     for col in zone_required_cols:
         if col not in col_names:
-            raise FileNotFoundError(f"Required column: {col} is not in zone.csv. \
-                Please make sure you have {zone_required_cols} in zone.csv.")
+            raise FileNotFoundError(
+                f"Required column: {col} is not in zone.csv. \
+                Please make sure you have {zone_required_cols} in zone.csv."
+            )
 
     # load zone.csv with specified columns and chunksize for iterations
     try:
@@ -901,7 +905,7 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
         # load zone.csv with specified columns and chunksize for iterations
         df_zone_chunk = pd.read_csv(zone_file, usecols=zone_required_cols, chunksize=chunk_size)
     except Exception as e:
-        raise Exception(f"Error: Unable to read zone.csv file for: {e}")
+        raise Exception(f"Error: Unable to read zone.csv file for: {e}") from e
 
     # Parallel processing using Pool
     if verbose:
@@ -909,19 +913,18 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
     try:
         # Parallel processing using joblib with tqdm for progress tracking
-        results = Parallel(n_jobs=cpu_cores)(
-            delayed(_create_zone_from_dataframe_by_geometry)(chunk)
-            for chunk in tqdm(df_zone_chunk, total=total_chunks, desc="  : Read zone geometry"))
+        results = joblib.Parallel(n_jobs=cpu_cores)(
+            joblib.delayed(_create_zone_from_dataframe_by_geometry)(chunk)
+            for chunk in tqdm(df_zone_chunk, total=total_chunks, desc="  : Read zone geometry")
+        )
 
         zone_dict_final = dict(itertools.chain.from_iterable(result.items() for result in results))
 
     except Exception:
-
         zone_dict_final = {}
 
         with Pool(cpu_cores) as pool:
-            results = pool.map(
-                _create_zone_from_dataframe_by_geometry, df_zone_chunk)
+            results = pool.map(_create_zone_from_dataframe_by_geometry, df_zone_chunk)
             pool.close()
             pool.join()
 
@@ -938,7 +941,8 @@ def read_zone_by_geometry(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
 
 @func_time
-def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Zone]:
+@requires("tqdm", "joblib")
+def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int, Zone]:
     """Read zone.csv file and return a dict of Zones.
 
     Args:
@@ -953,6 +957,8 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
     Returns:
         dict: a dict of Zones.
     """
+    import joblib  # pyright: ignore[reportMissingImports]
+    from tqdm import tqdm  # pyright: ignore[reportMissingModuleSource]
 
     # convert path to linux path
     zone_file = path2linux(zone_file)
@@ -961,21 +967,32 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
     if not os.path.exists(zone_file):
         raise FileNotFoundError(f"File: {zone_file} does not exist.")
 
+    # check cpu_cores
+    if not isinstance(cpu_cores, int):
+        raise ValueError(f"cpu_cores should be integer, but got {type(cpu_cores)}")
+
+    if cpu_cores <= 0:
+        cpu_cores = config_gmns["cpu_cores"]
+
     # load default settings for zone required fields and chunk size
     zone_required_cols = config_gmns["zone_centroid_fields"]
     chunk_size = config_gmns["data_chunk_size"]
 
     if verbose:
-        print(f"  : Reading zone.csv with specified columns: {zone_required_cols} \
-                \n   and chunksize {chunk_size} for iterations...")
+        print(
+            f"  : Reading zone.csv with specified columns: {zone_required_cols} "
+            f"and chunksize {chunk_size} for iterations..."
+        )
 
     # check whether required fields are in zone.csv
     df_zone = pd.read_csv(zone_file, nrows=1)
     col_names = df_zone.columns.tolist()
     for col in zone_required_cols:
         if col not in col_names:
-            raise FileNotFoundError(f"Required column: {col} is not in zone.csv. \
-                Please make sure you have {zone_required_cols} in zone.csv.")
+            raise FileNotFoundError(
+                f"Required column: {col} is not in zone.csv. \
+                Please make sure you have {zone_required_cols} in zone.csv."
+            )
 
     # load zone.csv with specified columns and chunksize for iterations
     try:
@@ -986,7 +1003,7 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
         # load zone.csv with specified columns and chunksize for iterations
         df_zone_chunk = pd.read_csv(zone_file, usecols=zone_required_cols, chunksize=chunk_size)
     except Exception as e:
-        raise Exception(f"  : Unable to read zone.csv for {e}")
+        raise Exception(f"  : Unable to read zone.csv for {e}") from e
 
     # Parallel processing using Pool
     if verbose:
@@ -994,24 +1011,22 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
     try:
         # Parallel processing using joblib with tqdm for progress tracking
-        results = Parallel(n_jobs=cpu_cores)(
-            delayed(_create_zone_from_dataframe_by_centroid)(chunk)
+        results = joblib.Parallel(n_jobs=cpu_cores)(
+            joblib.delayed(_create_zone_from_dataframe_by_centroid)(chunk)
             for chunk in tqdm(df_zone_chunk, total=total_chunks, desc="  : Read zone centroid")
         )
-        zone_dict_final = dict(itertools.chain.from_iterable(
-            result.items() for result in results))
+        zone_dict_final = dict(itertools.chain.from_iterable(result.items() for result in results))
 
     except Exception:
         zone_dict_final = {}
 
         with Pool(cpu_cores) as pool:
-            results = pool.map(
-                _create_zone_from_dataframe_by_centroid, df_zone_chunk)
+            results = pool.map(_create_zone_from_dataframe_by_centroid, df_zone_chunk)
             pool.close()
             pool.join()
 
         for zone_dict in results:
-            zone_dict_final.update(zone_dict)
+            zone_dict_final |= zone_dict
 
     if verbose:
         print(f"  : Successfully loaded zone.csv: {len(zone_dict_final)} Zones loaded.")
@@ -1023,8 +1038,8 @@ def read_zone_by_centroid(zone_file: str = "", cpu_cores: int = 1, verbose: bool
 
 
 @func_time
-@requires("tqdm", auto_install=False, verbose=False)
-def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) -> dict[int: Link]:
+@requires("tqdm", "joblib")
+def read_link(link_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int, Link]:
     """Read link.csv file and return a dict of Links.
 
     Args:
@@ -1046,8 +1061,8 @@ def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
         Link(id=1, name='A', from_node_id=1, to_node_id=2, length=0.0, lanes=1, dir_flag=1, free_speed=0.0,
         capacity=0.0, link_type=1, link_type_name='motorway', geometry='LINESTRING (0 0, 1 1)')
     """
-    import_package("tqdm", verbose=False)
-    from tqdm import tqdm
+    import joblib  # pyright: ignore[reportMissingImports]
+    from tqdm import tqdm  # pyright: ignore[reportMissingModuleSource]
 
     # convert path to linux path
     link_file = path2linux(link_file)
@@ -1068,17 +1083,17 @@ def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
     chunk_size = config_gmns["data_chunk_size"]
 
     if verbose:
-        print(f"  : Reading link.csv with specified columns: {link_required_cols} \
-                    \n    and chunksize {chunk_size} for iterations...")
+        print(
+            f"  : Reading link.csv with specified columns: {link_required_cols} "
+            f"and chunksize {chunk_size} for iterations..."
+        )
     # Get total rows in poi.csv and calculate total chunks
     total_rows = sum(1 for _ in open(link_file)) - 1  # Exclude header row
     total_chunks = total_rows // chunk_size + 1
     try:
-        df_link_chunk = pd.read_csv(
-            link_file, usecols=link_required_cols, chunksize=chunk_size, encoding='utf-8')
+        df_link_chunk = pd.read_csv(link_file, usecols=link_required_cols, chunksize=chunk_size, encoding="utf-8")
     except Exception:
-        df_link_chunk = pd.read_csv(
-            link_file, usecols=link_required_cols, chunksize=chunk_size, encoding='latin-1')
+        df_link_chunk = pd.read_csv(link_file, usecols=link_required_cols, chunksize=chunk_size, encoding="latin-1")
 
     # Parallel processing using Pool
     if verbose:
@@ -1086,13 +1101,16 @@ def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
 
     try:
         # Parallel processing using joblib with tqdm for progress tracking
-        results = Parallel(n_jobs=cpu_cores)(
-            delayed(_create_link_from_dataframe)(chunk)
-            for chunk in tqdm(df_link_chunk, total=total_chunks, desc="  : Read links"))
+        results = joblib.Parallel(n_jobs=cpu_cores)(
+            joblib.delayed(_create_link_from_dataframe)(chunk)
+            for chunk in tqdm(df_link_chunk, total=total_chunks, desc="  : Read links")
+        )
 
         # Combine results using itertools.chain for efficiency
         link_dict_final = dict(itertools.chain.from_iterable(result.items() for result in results))
-    except Exception:
+    except Exception as e:
+        if verbose:
+            print(f"  : Error occurred while reading link.csv: {e}, trying with Pool...")
         link_dict_final = {}
         with Pool(cpu_cores) as pool:
             # results = pool.map(_create_link_from_dataframe, df_link_chunk)
@@ -1101,8 +1119,8 @@ def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
             pool.join()
 
         for link_dict in results:
-            print("link_dict: ", link_dict)
-            link_dict_final.update(link_dict)
+            # print("link_dict: ", link_dict)
+            link_dict_final |= link_dict
 
     if verbose:
         print(f"  : Successfully loaded link.csv: {len(link_dict_final)} Links loaded.")
@@ -1111,7 +1129,8 @@ def read_link(link_file: str = "", cpu_cores: int = 1, verbose: bool = False) ->
 
 
 @func_time
-def read_zone(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int: Zone]:
+@requires("tqdm", "joblib")
+def read_zone(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -> dict[int, Zone]:
     """Read zone.csv file and return a dict of Zones.
 
     Args:
@@ -1136,7 +1155,6 @@ def read_zone(zone_file: str = "", cpu_cores: int = -1, verbose: bool = False) -
         production=0, attraction=0, production_fixed=0, attraction_fixed=0,
         geometry='POLYGON ((0 0, 1 1, 1 0, 0 0))')
     """
-
     # check zone_file, geometry or centroid?
     if not os.path.exists(zone_file):
         raise FileNotFoundError(f"Error: File {zone_file} does not exist.")

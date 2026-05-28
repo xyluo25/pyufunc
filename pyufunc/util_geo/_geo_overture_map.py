@@ -1,32 +1,28 @@
-'''
+"""
 ##############################################################
 # Created Date: Thursday, March 27th 2025
 # Contact Info: luoxiangyong01@gmail.com
-# Author/Copyright: Mr. Xiangyong Luo
+# Author/Copyright: Mr. Xiangyong Luo.
 ##############################################################
-'''
+"""
+
+from __future__ import annotations
 
 import json
 import os
 import sys
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    import shapely
-    import pyarrow as pa
-    import pyarrow.compute as pc
-    import pyarrow.dataset as ds
-    import pyarrow.fs as fs
-    import geopandas as gpd
-    from geopandas import GeoDataFrame
+    import pyarrow as pa  # pyright: ignore[reportMissingImports]
+    from geopandas import GeoDataFrame  # pyright: ignore[reportMissingModuleSource]
 
-from pyufunc.util_magic import requires, import_package
+from pyufunc.util_magic import requires
 
 
-def download_overture_map(bbox: list[float] = None,
-                          map_type: str = "buildings",
-                          output_fmt: str = "geojson",
-                          output_fname: str = ""):
+def download_overture_map(
+    bbox: list[float] = None, map_type: str = "buildings", output_fmt: str = "geojson", output_fname: str = ""
+):
     """
     Download Overture map data within a specified bounding box and theme type and save it in the specified format.
 
@@ -49,7 +45,6 @@ def download_overture_map(bbox: list[float] = None,
     Returns:
         geopandas.GeoDataFrame: A GeoDataFrame containing the Overture map data.
     """
-
     # check input parameters
     if not isinstance(bbox, (tuple, list)):
         raise ValueError("Bounding box must be a tuple or list.")
@@ -75,11 +70,10 @@ def download_overture_map(bbox: list[float] = None,
                 writer.write_batch(batch)
 
 
-@requires("pyarrow", verbose=False)
+@requires("pyarrow")
 def get_writer(output_format, path, schema):
 
-    import_package("pyarrow", verbose=False)
-    import pyarrow.parquet as pq
+    import pyarrow.parquet as pq  # pyright: ignore[reportMissingImports]
 
     if output_format == "geojson":
         writer = GeoJSONWriter(path)
@@ -116,18 +110,17 @@ def get_writer(output_format, path, schema):
         metadata[b"geo"] = json.dumps(geo).encode("utf-8")
         schema = schema.with_metadata(metadata)
         writer = pq.ParquetWriter(path, schema)
+    else:
+        raise ValueError("output_format must be 'geojson', 'geojsonseq', or 'geoparquet'.")
     return writer
 
 
-@requires("shapely", verbose=False)
 class BaseGeoJSONWriter:
     """
     A base feature writer that manages either a file handle
     or output stream. Subclasses should implement write_feature()
-    and finalize() if needed
+    and finalize() if needed.
     """
-    import_package("shapely", verbose=False)
-    import shapely.wkb
 
     def __init__(self, where):
         self.file_handle = None
@@ -167,6 +160,8 @@ class BaseGeoJSONWriter:
         pass
 
     def row_to_feature(self, row):
+        import shapely.wkb  # pyright: ignore[reportMissingModuleSource]
+
         geometry = shapely.wkb.loads(row.pop("geometry"))
         row.pop("bbox")
 
@@ -203,9 +198,9 @@ class GeoJSONWriter(BaseGeoJSONWriter):
         self.writer.write("]}")
 
 
-@requires("pyarrow", verbose=False)
-def record_batch_reader(overture_type: str, bbox=None) -> Optional[pa.RecordBatchReader]:
-    """Return a pyarrow RecordBatchReader for the desired bounding box and s3 path
+@requires("pyarrow")
+def record_batch_reader(overture_type: str, bbox=None) -> pa.RecordBatchReader:
+    """Return a pyarrow RecordBatchReader for the desired bounding box and s3 path.
 
     Args:
         overture_type (str): The type of Overture map data to load. Options include
@@ -216,11 +211,10 @@ def record_batch_reader(overture_type: str, bbox=None) -> Optional[pa.RecordBatc
             Format is (xmin, ymin, xmax, ymax). Defaults to None.
 
     """
-    import_package("pyarrow", verbose=False)
-    import pyarrow as pa
-    import pyarrow.compute as pc
-    import pyarrow.dataset as ds
-    import pyarrow.fs as fs
+    import pyarrow as pa  # pyright: ignore[reportMissingImports]
+    import pyarrow.compute as pc  # pyright: ignore[reportMissingImports]
+    import pyarrow.dataset as ds  # pyright: ignore[reportMissingImports]
+    import pyarrow.fs as fs  # pyright: ignore[reportMissingImports]
 
     path = _dataset_path(overture_type)
 
@@ -250,9 +244,9 @@ def record_batch_reader(overture_type: str, bbox=None) -> Optional[pa.RecordBatc
     return pa.RecordBatchReader.from_batches(geoarrow_schema, non_empty_batches)
 
 
-@requires("geopandas", verbose=False)
+@requires("geopandas")
 def geodataframe(overture_type: str, bbox: tuple[float, float, float, float] = None) -> GeoDataFrame:
-    """ Loads geoparquet for specified type into a geopandas dataframe
+    """Loads geoparquet for specified type into a geopandas dataframe.
 
     Args:
         overture_type (str): The type of Overture map data to load. Options include
@@ -265,8 +259,7 @@ def geodataframe(overture_type: str, bbox: tuple[float, float, float, float] = N
         GeoDataFrame with the optionally filtered theme data
 
     """
-    import_package("geopandas", verbose=False)
-    import geopandas as gpd
+    import geopandas as gpd  # pyright: ignore[reportMissingModuleSource]
 
     reader = record_batch_reader(overture_type, bbox)
     return gpd.GeoDataFrame.from_arrow(reader)
@@ -274,7 +267,7 @@ def geodataframe(overture_type: str, bbox: tuple[float, float, float, float] = N
 
 def geoarrow_schema_adapter(schema: pa.Schema) -> pa.Schema:
     """
-    Convert a geoarrow-compatible schema to a proper geoarrow schema
+    Convert a geoarrow-compatible schema to a proper geoarrow schema.
 
     This assumes there is a single "geometry" column with WKB formatting
 
@@ -282,7 +275,7 @@ def geoarrow_schema_adapter(schema: pa.Schema) -> pa.Schema:
     ----------
     schema: pa.Schema
 
-    Returns
+    Returns:
     -------
     pa.Schema
     A copy of the input schema with the geometry field replaced with
@@ -291,9 +284,7 @@ def geoarrow_schema_adapter(schema: pa.Schema) -> pa.Schema:
     """
     geometry_field_index = schema.get_field_index("geometry")
     geometry_field = schema.field(geometry_field_index)
-    geoarrow_geometry_field = geometry_field.with_metadata(
-        {b"ARROW:extension:name": b"geoarrow.wkb"}
-    )
+    geoarrow_geometry_field = geometry_field.with_metadata({b"ARROW:extension:name": b"geoarrow.wkb"})
 
     return schema.set(geometry_field_index, geoarrow_geometry_field)
 
@@ -320,7 +311,7 @@ type_theme_map = {
 def _dataset_path(overture_type: str) -> str:
     """
     Returns the s3 path of the Overture dataset to use. This assumes overture_type has
-    been validated, e.g. by the CLI
+    been validated, e.g. by the CLI.
 
     """
     # Map of sub-partition "type" to parent partition "theme" for forming the
@@ -330,5 +321,5 @@ def _dataset_path(overture_type: str) -> str:
     return f"overturemaps-us-west-2/release/2025-03-19.0/theme={theme}/type={overture_type}/"
 
 
-def get_all_overture_types() -> List[str]:
+def get_all_overture_types() -> list[str]:
     return list(type_theme_map.keys())

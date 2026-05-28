@@ -6,11 +6,10 @@
 ##############################################################
 
 import itertools
-from typing import Union
 
 
 def dict_split_by_chunk(dictionary: dict, chunk_size: int) -> list:
-    """Split dictionary into a list of chunks
+    """Split dictionary into a list of chunks.
 
     Args:
         dictionary (dict): the input dictionary with key-value pairs
@@ -19,7 +18,7 @@ def dict_split_by_chunk(dictionary: dict, chunk_size: int) -> list:
     Returns:
         list: a list of the chunk_dict
 
-    See also:
+    See Also:
         split_dict_by_chunk
 
     Examples:
@@ -31,7 +30,6 @@ def dict_split_by_chunk(dictionary: dict, chunk_size: int) -> list:
         [{'a': 1, 'b': 2}, {'c': 3, 'd': 4}]
 
     """
-
     chunk_lst = []
     iterator = iter(dictionary.items())
     for _ in range(0, len(dictionary), chunk_size):
@@ -40,12 +38,12 @@ def dict_split_by_chunk(dictionary: dict, chunk_size: int) -> list:
     return chunk_lst
 
 
-def dict_delete_keys(dictionary: dict, keys: Union[list, str, tuple]) -> dict:
-    """Delete keys from dictionary
+def dict_delete_keys(dictionary: dict, keys: list | str | tuple) -> dict:
+    """Delete keys from dictionary.
 
     Args:
         dictionary (dict): the input dictionary with key-value pairs
-        keys (list): the keys to be deleted
+        keys (list | str | tuple): the keys to be deleted
 
     Returns:
         dict: the dictionary after deleting keys
@@ -59,7 +57,6 @@ def dict_delete_keys(dictionary: dict, keys: Union[list, str, tuple]) -> dict:
         {'c': 3, 'd': 4}
 
     """
-
     if not isinstance(keys, (list, str, tuple)):
         raise ValueError("keys must be a list, str or tuple")
 

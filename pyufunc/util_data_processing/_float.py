@@ -9,28 +9,27 @@ from typing import Any
 
 
 def is_float(value: Any = "") -> bool:
-    """Check if the value can be converted to float
+    """Check if the value can be converted to float.
 
     Args:
-        val (Any): the value to be checked
+        value (Any): the value to be checked.
 
     Returns:
         bool : if the value can be converted to float
 
     Examples:
-        >>> from pyufunc import is_cvt_to_float
-        >>> is_cvt_to_float(1)
+        >>> from pyufunc import is_float
+        >>> is_float(1)
         True
-        >>> is_cvt_to_float("1")
+        >>> is_float("1")
         True
-        >>> is_cvt_to_float("1.0")
+        >>> is_float("1.0")
         True
-        >>> is_cvt_to_float("1.0.0")
+        >>> is_float("1.0.0")
         False
-        >>> is_cvt_to_float("abc")
+        >>> is_float("abc")
         False
     """
-
     if value and isinstance(value, (int, float, str)):
         try:
             float(value)

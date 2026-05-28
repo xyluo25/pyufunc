@@ -14,14 +14,11 @@ import socket
 import json
 from collections import OrderedDict
 import time
-import importlib
 from pyufunc.util_magic._dependency_requires_decorator import requires
-from pyufunc.util_magic._import_package import import_package
 from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    import shapely
-    import requests
+    import requests  # pyright: ignore[reportMissingModuleSource]
 
 # capture getaddrinfo function to use original later after mutating it
 _original_getaddrinfo = socket.getaddrinfo
@@ -35,28 +32,26 @@ settings = {
     "max_query_area_size": 50 * 1000 * 50 * 1000,
     "nominatim_key": None,
     "nominatim_url": "https://nominatim.openstreetmap.org/",
-
     "requests_kwargs": {},
     "requests_timeout": 180,
     "use_cache": False,
 }
 
 
-@requires("requests", verbose=False)
 class OSMPlaceFinder:
-
     def __init__(self, place: str, verbose: bool = False):
 
         self.place = place
         self.verbose = verbose
 
-    def _download_nominatim_element(self,
-                                    query: str | dict[str, str],
-                                    *,
-                                    by_osmid: bool = False,
-                                    limit: int = 50,
-                                    polygon_geojson: bool = True,
-                                    ) -> list[dict[str, Any]]:
+    def _download_nominatim_element(
+        self,
+        query: str | dict[str, str],
+        *,
+        by_osmid: bool = False,
+        limit: int = 50,
+        polygon_geojson: bool = True,
+    ) -> list[dict[str, Any]]:
         """
         Retrieve an OSM element from the Nominatim API.
 
@@ -71,7 +66,7 @@ class OSMPlaceFinder:
         polygon_geojson
             Whether to retrieve the place's geometry from the API.
 
-        Returns
+        Returns:
         -------
         response_json
         """
@@ -111,12 +106,14 @@ class OSMPlaceFinder:
         # request the URL, return the JSON
         return self._nominatim_request(params=params, request_type=request_type)
 
-    def _nominatim_request(self,
-                           params: OrderedDict[str, int | str],
-                           *,
-                           request_type: str = "search",
-                           pause: float = 1,
-                           error_pause: float = 60) -> list[dict[str, Any]]:
+    def _nominatim_request(
+        self,
+        params: OrderedDict[str, int | str],
+        *,
+        request_type: str = "search",
+        pause: float = 1,
+        error_pause: float = 60,
+    ) -> list[dict[str, Any]]:
         """
         Send a HTTP GET request to the Nominatim API and return response.
 
@@ -133,10 +130,12 @@ class OSMPlaceFinder:
         error_pause
             How long to pause in seconds before re-trying request if error.
 
-        Returns
+        Returns:
         -------
         response_json
         """
+        import requests  # pyright: ignore[reportMissingModuleSource]
+
         if request_type not in {"search", "reverse", "lookup"}:  # pragma: no cover
             msg = "Nominatim `request_type` must be 'search', 'reverse', or 'lookup'."
             raise ValueError(msg)
@@ -173,10 +172,7 @@ class OSMPlaceFinder:
 
         # handle 429 and 504 errors by pausing then recursively re-trying request
         if response.status_code in {429, 504}:  # pragma: no cover
-            msg = (
-                f"{domain!r} responded {response.status_code} {response.reason}: "
-                f"we'll retry in {error_pause} secs"
-            )
+            msg = f"{domain!r} responded {response.status_code} {response.reason}: we'll retry in {error_pause} secs"
             if self.verbose:
                 print(f"  :{msg}")
             time.sleep(error_pause)
@@ -195,10 +191,9 @@ class OSMPlaceFinder:
 
         return response_json
 
-    def get_osm_place(self,
-                      query: str | dict[str, str],
-                      which_result: int | None = None,
-                      by_osmid: bool = False) -> dict:
+    def get_osm_place(
+        self, query: str | dict[str, str], which_result: int | None = None, by_osmid: bool = False
+    ) -> dict:
         """
         Geocode a single place query to a GeoDataFrame.
 
@@ -214,15 +209,13 @@ class OSMPlaceFinder:
         by_osmid
             If True, treat query as an OSM ID lookup rather than text search.
 
-        Returns
+        Returns:
         -------
         dict
             Dictionary with the geocoding result.
         """
-
         limit = 50 if which_result is None else which_result
-        results = self._download_nominatim_element(
-            query, by_osmid=by_osmid, limit=limit)
+        results = self._download_nominatim_element(query, by_osmid=by_osmid, limit=limit)
 
         # choose the right result from the JSON response
         if len(results) == 0:
@@ -277,19 +270,22 @@ class OSMPlaceFinder:
                 feature["properties"][attr] = result[attr]
 
         place_dict = feature["properties"]
-#         # create and return the GeoDataFrame
-#         gdf = gpd.GeoDataFrame.from_features([feature])
-#         cols = ["lat", "lon", "bbox_north",
-#                 "bbox_south", "bbox_east", "bbox_west"]
-#         gdf[cols] = gdf[cols].astype(float)
-#
-#         place_dict = gdf.to_dict(orient="records")[0]
+        #         # create and return the GeoDataFrame
+        #         gdf = gpd.GeoDataFrame.from_features([feature])
+        #         cols = ["lat", "lon", "bbox_north",
+        #                 "bbox_south", "bbox_east", "bbox_west"]
+        #         gdf[cols] = gdf[cols].astype(float)
+        #
+        #         place_dict = gdf.to_dict(orient="records")[0]
 
         feature_coords = feature["geometry"]["coordinates"]
 
         try:
+            import shapely  # pyright: ignore[reportMissingModuleSource]
+
             place_dict["geometry"] = shapely.geometry.MultiPolygon(
-                [shapely.geometry.Polygon(s[0]) for s in feature_coords])
+                [shapely.geometry.Polygon(s[0]) for s in feature_coords]
+            )
         except Exception:
             place_dict["geometry"] = feature_coords
         return place_dict
@@ -303,7 +299,7 @@ class OSMPlaceFinder:
         results
             Results from the Nominatim API.
 
-        Returns
+        Returns:
         -------
         result
             The chosen result.
@@ -317,10 +313,7 @@ class OSMPlaceFinder:
         # if we never found a polygon, raise an error
         raise TypeError
 
-    def _save_to_cache(self,
-                       url: str,
-                       response_json: dict[str, Any] | list[dict[str, Any]],
-                       ok: bool) -> None:
+    def _save_to_cache(self, url: str, response_json: dict[str, Any] | list[dict[str, Any]], ok: bool) -> None:
         """
         Save a HTTP response JSON object to a file in the cache folder.
 
@@ -345,7 +338,7 @@ class OSMPlaceFinder:
         ok
             A `requests.response.ok` value.
 
-        Returns
+        Returns:
         -------
         None
         """
@@ -362,8 +355,7 @@ class OSMPlaceFinder:
             cache_filepath = cache_folder / f"{checksum}.json"
 
             # dump to json, and save to file
-            cache_filepath.write_text(json.dumps(
-                response_json), encoding="utf-8")
+            cache_filepath.write_text(json.dumps(response_json), encoding="utf-8")
             msg = f"Saved response to cache file {str(cache_filepath)!r}"
         else:
             msg = "Did not save to cache because HTTP status code is not OK"
@@ -382,7 +374,7 @@ class OSMPlaceFinder:
         url
             The URL to look for in the cache.
 
-        Returns
+        Returns:
         -------
         cache_filepath
             Path to cached response for `url` if it exists, otherwise None.
@@ -405,7 +397,7 @@ class OSMPlaceFinder:
         url
             The URL of the request.
 
-        Returns
+        Returns:
         -------
         response_json
             Cached response for `url` if it exists in the cache and does not
@@ -437,12 +429,13 @@ class OSMPlaceFinder:
 
         return None
 
-    def _get_http_headers(self,
-                          *,
-                          user_agent: str | None = None,
-                          referer: str | None = None,
-                          accept_language: str | None = None,
-                          ) -> dict[str, str]:
+    def _get_http_headers(
+        self,
+        *,
+        user_agent: str | None = None,
+        referer: str | None = None,
+        accept_language: str | None = None,
+    ) -> dict[str, str]:
         """
         Update the default requests HTTP headers with OSMnx information.
 
@@ -456,7 +449,7 @@ class OSMPlaceFinder:
             The accept language. If None, use `settings.http_accept_language`
             value.
 
-        Returns
+        Returns:
         -------
         headers
         """
@@ -467,9 +460,14 @@ class OSMPlaceFinder:
         if accept_language is None:
             accept_language = settings["http_accept_language"]
 
-        info = {"User-Agent": user_agent, "referer": referer,
-                "Accept-Language": accept_language}
-        return dict(requests.utils.default_headers()) | info
+        info = {"User-Agent": user_agent, "referer": referer, "Accept-Language": accept_language}
+        import requests  # pyright: ignore[reportMissingModuleSource]
+
+        base = dict(requests.utils.default_headers())
+        # filter out None and ensure all values are strings to satisfy type checkers
+        info_clean = {k: str(v) for k, v in info.items() if v is not None}
+        base |= info_clean
+        return base
 
     def _resolve_host_via_doh(self, hostname: str) -> str:
         """
@@ -487,7 +485,7 @@ class OSMPlaceFinder:
         hostname
             The hostname to consistently resolve the IP address of.
 
-        Returns
+        Returns:
         -------
         ip_address
             Resolved IP address of host, or hostname itself if resolution failed.
@@ -502,8 +500,12 @@ class OSMPlaceFinder:
         if self.verbose:
             err_msg = f"Failed to resolve {hostname!r} IP via DoH, requesting host by name"
             print(f"  :{err_msg}")
+
+        import requests  # pyright: ignore[reportMissingModuleSource]
+
         try:
             url = settings["doh_url_template"].format(hostname=hostname)
+
             response = requests.get(url, timeout=settings["requests_timeout"])
             data = response.json()
 
@@ -544,7 +546,7 @@ class OSMPlaceFinder:
         url
             The URL to consistently resolve the IP address of.
 
-        Returns
+        Returns:
         -------
         None
         """
@@ -580,7 +582,7 @@ class OSMPlaceFinder:
         url
             The url from which to extract the hostname.
 
-        Returns
+        Returns:
         -------
         hostname
             The extracted hostname (domain).
@@ -596,7 +598,7 @@ class OSMPlaceFinder:
         response
             The response object.
 
-        Returns
+        Returns:
         -------
         response_json
             Value will be a dict if the response is from the Google or Overpass
@@ -628,7 +630,7 @@ class OSMPlaceFinder:
         return response_json
 
 
-@requires("shapely", "requests", "urllib", verbose=False)
+@requires("shapely", "requests", "urllib")
 def get_osm_place(place: str, verbose: bool = False) -> dict:
     """Geocode a place name to dictionary of its attributes and geometry from OpenStreetMap.
 
@@ -661,15 +663,8 @@ def get_osm_place(place: str, verbose: bool = False) -> dict:
         'importance': 0.5547365758311374,
         'addresstype': 'amenity',
         'name': 'Arizona State University',
-        'display_name': 'Arizona State University, 1151, South Forest Avenue, Tempe Junction, Tempe, Maricopa County, Arizona, 85281, United States',
+        'display_name': 'Arizona State University, 1151, South Forest Avenue, Tempe Junction,
+            Tempe, Maricopa County, Arizona, 85281, United States',
         'geometry': <MULTIPOLYGON (((-111.941 33.424, -111.941 33.424, -111.941 33.424, -111.941...>}
     """
-
-    import_package("shapely", verbose=False)
-    import_package("requests", verbose=False)
-    import shapely
-    import requests
-    globals()["requests"] = importlib.import_module("requests")
-    globals()["shapely"] = importlib.import_module("shapely")
-
     return OSMPlaceFinder(place, verbose).get_osm_place(place, None, False)

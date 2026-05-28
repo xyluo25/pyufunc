@@ -4,10 +4,11 @@
 Package overview
 ****************
 
-pyufunc is a `Python <https://www.python.org>`__ package providing fast,
-flexible, and expressive utility functions. It aims to be the
-fundamental high-level building block for doing practical, **real-world**
-utility functions in Python.
+pyufunc is a `Python <https://www.python.org>`__ package that provides
+categorized utility functions for common programming tasks and selected wrappers
+around third-party utility packages. The package is intended for API discovery
+and reuse of maintained helpers, while users should still evaluate whether each
+utility is appropriate for a specific project.
 
 Getting support
 ---------------

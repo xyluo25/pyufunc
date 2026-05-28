@@ -5,6 +5,8 @@ __pycache__/
 Tutorial_PyPI.md
 .pypirc
 
+**/**pylint_report.txt
+
 # C extensions
 *.so
 

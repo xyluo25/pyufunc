@@ -12,11 +12,12 @@ import os
 root = Path(__file__).resolve().parents[3]
 sys.path = [str(root)] + sys.path
 
-import pyufunc as pf
+import pyufunc as pf  # noqa: E402
 
 # Get all the modules in the pyufunc package
 category_lst = []
-for module_lst in pf.config_FUNC_CATEGORY.values():
+cfg_func_category = pf.show_util_func_by_category(verbose=False)
+for module_lst in cfg_func_category.values():
     if module_lst:
         category_lst.extend(iter(module_lst))
 
@@ -33,7 +34,6 @@ for module in category_lst:
     heading_message = f"pyufunc.{module}"
 
     with open(file_name, "w", encoding="utf-8") as f:
-
         heading_message_new = heading_message.replace("_", "\\_")
         heading_dashes = "=" * len(heading_message_new)
 

@@ -1,97 +1,155 @@
 ---
-title: "pyufunc: A Set of Utility Functions that Keep Python Sweet"
+title: 'pyufunc: A Categorized Collection of Python Utility Functions'
 tags:
   - Python
-  - Utility Functions
-  - Utility library
-  - Frequent used functions
-  - Categorized functions
-  - Keys-based functions
+  - utilities
+  - software reuse
+  - packaging
+  - documentation
 authors:
   - name: Xiangyong Luo
-    orcid: 0009-0003-1290-9983
-    affiliation: "1" # (Multiple affiliations must be quoted)
-
+    orcid: "0009-0003-1290-9983"
+    affiliation: "1"
+  - name: Xuesong Simon Zhou
+    orcid: "0000-0002-9963-5369"
+    affiliation: "1"
 affiliations:
-  - name: Arizona State University, Tempe, AZ, United States
+  - name: Arizona State University, United States
     index: 1
-date: 06 June 2025
+date: 28 May 2026
 bibliography: paper.bib
 ---
+
 # Summary
 
-pyufunc aims to bring together the most commonly used utility functions from different libraries and provide them in a single, cohesive package. By consolidating utility functions from multiple sources, pyufunc simplifies the process of finding and integrating various utility libraries into your projects. Whether you're a seasoned developer or just starting with Python, pyufunc provides a curated collection of utilities that cater to your everyday programming needs [@mertz2015functional;@lott2018functional].
+`pyufunc` is a Python package that collects utility functions for recurring
+programming tasks, including path and file handling, date and time conversion,
+data processing, testing helpers, image utilities, geographic helpers, and
+selected wrappers around third-party utility packages. The package provides a
+categorized public API so that users can inspect available helpers by category
+or keyword before importing a specific function.
 
-## Key Features
-
-1. **Intuitive and Easy-to-Use:** Simplicity is at the core of pyufunc's design. Every utility function is thoughtfully documented, making it easy for developers of all skill levels to integrate them seamlessly into their projects.
-2. **Modularity and Extensibility:** pyufunc is structured with modularity in mind. Each utility function is a standalone entity, allowing you to cherry-pick the ones you need without introducing unnecessary dependencies. Furthermore, the package is designed to be extensible, making it effortless to contribute your own utility functions and enrich the community.
-3. **Robust Collection of Utility Functions:** pyufunc offers a versatile assortment of utility functions, carefully crafted and thoroughly tested to meet industry standards.
-4. **Regular Updates and Maintenance:** Our team is dedicated to providing regular updates, ensuring that pyufunc remains compatible with the latest Python releases and industry best practices.
-5. **Time and Effort Savings:** You can avoid reinventing the wheel by leveraging pre-existing, widely used utility functions. Let pyufunc take care of the repetitive tasks while you focus on building remarkable Python applications.
-
-**Dependencies won’t be added to your environment unless you invoke functions that require them; when you do, the necessary packages are installed automatically.**
-
-**If you identify functions that would benefit the broader community or have ideas for new utilities, please share your comments here: [Issues](https://github.com/xyluo25/pyufunc/issues) or pull the repository and commit functions.**
+The current package design emphasizes documented, reviewable utility code
+rather than novelty in a single algorithmic method. Version 0.5.1 exposes more
+than 250 public utility entries, including optional wrappers for selected
+packages whose source package, repository, documentation, and license are
+recorded in function docstrings and repository-level third-party license
+metadata.
 
 # Statement of need
 
-In the Python development community, efficiency and productivity are often hindered by repetitive tasks and scattered utility functions across numerous libraries. Developers frequently encounter the inconvenience of integrating multiple packages, each providing different subsets of common utility functions, leading to complexity in dependency management and integration challenges [@mertz2015functional;@lott2018functional].
+Small helper functions are common in research software. They are often copied
+between projects, rewritten with minor differences, or hidden inside local
+scripts where they are difficult to test and document consistently. This pattern
+can make research code harder to maintain because behavior that appears simple,
+such as path normalization, date conversion, dictionary traversal, file locking,
+or retry logic, may still need clear inputs, errors, examples, and dependency
+handling.
 
-`pyufunc` addresses this issue by consolidating the most frequently used utility functions into a single cohesive Python package. This centralized approach streamlines the coding experience, significantly reducing the overhead involved in identifying, installing, and managing various disparate utility libraries.
+`pyufunc` addresses this maintenance problem by grouping selected helpers into a
+single package with type hints, tests, and generated documentation. The target
+users are Python developers and researchers who need small, reusable functions
+while maintaining readable project code. The package is particularly relevant to
+research workflows where scripts combine file operations, tabular data
+preparation, time handling, image or geospatial preprocessing, and lightweight
+testing utilities in the same project.
 
-The necessity for a package like `pyufunc` arises from the following common scenarios faced by Python developers:
+The project does not claim that every included function is widely used or that
+the package improves runtime performance in general. Instead, package selection
+is documented through public metadata, review tables, and exploratory
+dependent-repository scans stored in the repository. These records define the
+current evidence boundary for utility selection.
 
-* **Fragmentation of utility functions**: Often, commonly used functions such as data manipulation, file handling, and mathematical operations are scattered across multiple libraries, each with its own dependencies, documentation standards, and installation processes.
-* **Complexity in dependency management**: Integrating multiple small libraries often results in dependency conflicts or bloated virtual environments, making project setups cumbersome.
-* **Repetitive development tasks**: Writing similar utility functions repeatedly in different projects consumes unnecessary time and resources.
+# State of the field
 
-By providing an intuitive, modular, and carefully maintained library, `pyufunc` simplifies these challenges. It ensures that Python developers have immediate access to a versatile set of robust, well-documented, and regularly updated utility functions [@degrandis2009elicitation;@walsh2004utility].
+The Python ecosystem already includes mature packages that solve specialized
+utility problems. Examples include `psutil` for system monitoring [@psutil],
+`dateutil` for date and time extensions [@dateutil], `imutils` for image
+processing convenience functions [@imutils], `pyhelpers` for data and path
+helpers [@Fu_PyHelpers_2020], and `pyutil` for general helper functions
+[@pyutil]. These packages remain the appropriate primary dependencies when a
+project needs their broader APIs.
 
-In conclusion, `pyufunc` fulfills a clear and practical need within the Python developer community, promoting efficiency, reducing redundant efforts, and enabling developers to focus on the core functionalities of their applications.
+`pyufunc` was developed as a collection and documentation layer rather than as a
+replacement for those projects. The build-versus-contribute decision follows
+from the package scope: the objective is to expose a categorized, cross-domain
+set of small helpers and thin optional wrappers under one namespace, while
+preserving attribution to source packages and avoiding vendoring their code.
+Contributing every selected helper to a single upstream package would not
+address cross-domain API discovery, and contributing unrelated file, date,
+image, testing, and system helpers to many separate projects would not provide a
+common documentation and dependency-handling model for users.
 
-## Existing Utility Functions Categorized by Functionality
+# Software design
 
-The categories outlined in this document span a wide range of functionalities, each category is accompanied by a brief description, followed by a list of utility functions that fall under its umbrella, this comprehensive approach aims to arm developers with a robust toolkit, enabling them to select the most appropriate utility functions for their specific needs. Whether you are working on a complex application requiring advanced data manipulation or a simple project needing basic string operations, this guide endeavors to provide a valuable resource that enhances your development process and leads to more efficient, effective, and elegant coding solutions.
+The package is organized by utility domain, with modules for categories such as
+path input/output, data processing, datetime, images, geographic utilities,
+testing, logging, networking, and third-party package wrappers. Public function
+indexes are generated for category-based and keyword-based discovery, and the
+Read the Docs API reference is generated from the same public API surface.
 
-* [utility_function_by_category.md](https://github.com/xyluo25/pyufunc/blob/main/docs/md_files/utility_function_by_category.md)
+The `util_pkgs` subpackage contains thin wrappers around selected third-party
+packages. These wrappers are intentionally narrow: they provide concise entry
+points for common operations, retain source attribution in the docstrings, and
+defer to the upstream package implementation at runtime. Third-party packages
+are not vendored. Optional dependencies are also not installed automatically by
+default; missing packages are reported to the user, and explicit installation is
+left to the environment owner. This design avoids surprising network access in
+continuous-integration or offline environments.
 
-## Existing Utility Functions Categorized by Keywords
+The main tradeoff is API size. A larger utility namespace can reduce repeated
+local helper code, but it can also increase search and selection overhead.
+`pyufunc` mitigates this through categorized indexes, keyword search helpers,
+examples, tests, and clear dependency behavior. The package also carries
+maintenance responsibilities for license attribution, compatibility with
+upstream packages, and test coverage across multiple utility domains.
 
-By presenting these functions in a keyword-centric format, we facilitate a more intuitive and user-friendly approach to accessing a vast repository of tools, ensuring that developers can leverage the full potential of utility functions to optimize their code, improve performance, and innovate within their applications. Whether tackling complex algorithmic challenges or implementing basic functionality, this guide aims to be an essential companion, fostering a deeper understanding and more effective use of utility functions in software development projects.
+# Research impact statement
 
-* [utility_function_by_keyword.md](https://github.com/xyluo25/pyufunc/blob/main/docs/md_files/utility_function_by_keyword.md)
+The current evidence for `pyufunc` is strongest as community-ready research
+software infrastructure. The repository includes packaging metadata, tests,
+continuous-integration configuration, generated API documentation, a changelog,
+contribution guidance, third-party license notices, and package-selection
+evidence. The package review table records metadata for 92 candidate packages
+listed in the project guidance, including PyPI version badges, download badges
+where available, GitHub latest-commit badges, repository links, license
+metadata, and descriptions.
 
-## Comprehensive Review of Existing Python Utility Function Packages
+Exploratory dependent-usage datasets are stored under
+`datasets/util_pkgs_dependents_func_usage`. In the current checked-in data,
+`psutil.json` records 35 valid function references across 5 dependent
+repositories, `pyhelpers.json` records 175 valid function references across 4
+dependent repositories, and `pyutil.json` records 20 valid function references
+across 13 dependent repositories. These scans are incomplete because GitHub
+dependent pages are rate-limited, private repositories are not visible, and
+static analysis does not capture every dynamic call. They are therefore used as
+selection evidence, not as a complete frequency measurement.
 
-In this section, you will find a comprehensive review of existing utility function packages. Before delving into the evaluations and insights, the author wishes to express sincere gratitude to all the developers behind these packages. Your contributions to the open-source community are invaluable, and it is with great appreciation that we acknowledge your efforts and dedication. Our goal with pyufunc is to collect all sorts of useful utility functions together to boost the efficiency of developers. If you need to use utility functions in your project, all you need is pyufunc.
+The practical research contribution is a maintained utility layer that helps
+research teams keep common helper behavior documented, tested, and attributable.
+This is useful when utility code supports reproducible workflows but is not the
+primary scientific method itself.
 
-Furthermore, we recognize the importance of proper usage and attribution of the utility functions we have integrated into pyufunc. If any package developer finds their utility function has been used improperly, we encourage you to reach out to the pyufunc developers for further discussion. We are committed to maintaining a respectful and collaborative relationship with the original developers, ensuring that all contributions are appropriately acknowledged and utilized within the bounds of open-source licenses and community norms. Your feedback and insights are crucial to us, as they help in refining pyufunc to better serve the open-source community.
+# AI usage disclosure
 
-| [Package Name](https://github.com/xyluo25/pyufunc)                   | Description                                                                                                                                                                                                            | Cite               |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| [pyutil](https://github.com/tpltnt/pyutil)                           | a library of useful Python functions and classes                                                                                                                                                                       | @pyutil            |
-| [PyHelpers](https://github.com/mikeqfu/pyhelpers)                    | An open-source toolkit for facilitating Python<br />users' data manipulation tasks                                                                                                                                     | @Fu_PyHelpers_2020 |
-| [psutil](https://github.com/giampaolo/psutil)                        | Cross-platform lib for process and system monitoring in Python                                                                                                                                                         | @psutil            |
-| [pyutilator](https://github.com/antoprince001/pyutilator)            | open source python package comprising of decorators<br /> that can be used for utility operations                                                                                                                      | @pyutilator        |
-| [pyutils](https://github.com/scottgasch/pyutils)                     | Python utilities                                                                                                                                                                                                       | @pyutils           |
-| [common-pyutil](https://github.com/akshaybadola/common-pyutil)       | Bunch of common utility functions I've used in various projects.<br />This package provides a uniform interface to them.                                                                                               | @common-pyutil     |
-| [pyutl](https://github.com/Jesrat/pyutl)                             | functions and utilities to recycle code                                                                                                                                                                                | @pyutl             |
-| [pyutilities](https://github.com/dmitry-ed-gusev/pyutilities)        | Useful utilities for python 3.10+                                                                                                                                                                                      | @pyutilities       |
-| [dry-pyutils](https://github.com/monthero/dry-pyutils)               | This package's goal is to offer a set of utility methods<br />I end up using in a lot of projects.                                                                                                                     | @dry-pyutils       |
-| [pripy-utils](https://github.com/linjonh/pripy-utils)                | Python utilities                                                                                                                                                                                                       | @pripy-utils       |
-| [imutils](https://github.com/PyImageSearch/imutils)                  | A series of convenience functions to make basic image<br />processing operations such as translation, rotation, resizing, <br />skeletonization, and displaying Matplotlib images easier with <br />OpenCV and Python. | @imutils           |
-| [dateutil](https://github.com/dateutil/dateutil)                     | Useful extensions to the standard Python datetime features                                                                                                                                                             | @dateutil          |
-| [nb_utils](https://github.com/Nivratti/nb_utils)                     | python utility functions                                                                                                                                                                                               | @nb_utils          |
-| [Python-Charmers](https://github.com/iwasakishuto/Python-Charmers)   | A collection of useful python programs.                                                                                                                                                                                | @Python-Charmers   |
-| [python-in-action](https://github.com/Nevergiveupp/python-in-action) | python crawler in action                                                                                                                                                                                               | @python-in-action  |
-| [tbm13-utils](https://github.com/TBM13/tbm13-utils)                  | Python utils made for personal use on my projects.                                                                                                                                                                     | @tbm13-utils       |
-| ...                                                               | ...                                                                                                                                                                                                                    | ...                |
+OpenAI Codex, based on GPT-5, was used during recent maintenance to assist with
+code review, documentation updates, and manuscript editing. Human authors made
+the project design decisions, reviewed and edited AI-assisted outputs, and
+remain responsible for the correctness, licensing, and originality of the
+submitted software and paper.
 
 # Acknowledgements
 
-This open-source package was supported by National Science Foundation under grant no. TIP-2303748 titled, "[POSE: Phase II: CONNECT: Consortium of Open-source Planning Models for Next-generation Equitable and Efficient Communities and Transportation](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2303748&HistoricalAwards=false)"
+This open-source package was supported by the National Science Foundation under
+grant no. TIP-2303748, "POSE: Phase II: CONNECT: Consortium of Open-source
+Planning Models for Next-generation Equitable and Efficient Communities and
+Transportation."
 
-Additional support was provided by the U.S. Department of Energy (DOE), Office of Energy Efficiency and Renewable Energy (EERE), Vehicle Technologies Office. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the USDOT, DOE, and the U.S. Government assumes no liability for the contents or use thereof.
+Additional support was provided by the U.S. Department of Energy, Office of
+Energy Efficiency and Renewable Energy, Vehicle Technologies Office. Any
+opinions, findings, conclusions, or recommendations expressed in this material
+are those of the authors and do not necessarily reflect the views of the U.S.
+Department of Transportation, the U.S. Department of Energy, or the U.S.
+Government.
 
 # References

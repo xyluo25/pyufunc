@@ -19,16 +19,3 @@ Error Measurement
    r2_score
    root_mean_squared_error
 
-open_cv
-~~~~~~~
-.. autosummary::
-   :toctree: api/
-
-updating...
-
-prtorch
-~~~~~~~
-.. autosummary::
-   :toctree: api/
-
-updating...
