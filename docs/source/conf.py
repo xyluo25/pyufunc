@@ -61,8 +61,8 @@ extensions = [
 
 source_path = os.path.dirname(os.path.abspath(__file__))
 pattern = os.environ.get("SPHINX_PATTERN")
-single_doc = pattern is not None and pattern not in ("-api", "whatsnew")
-include_api = pattern is None or pattern == "whatsnew"
+single_doc = pattern is not None and pattern not in ("-api", "release_notes")
+include_api = pattern is None or pattern == "release_notes"
 
 # prepare index.rst from index.rst.template
 # with open(os.path.join(source_path, "index.rst.template"), encoding="utf-8") as f:
@@ -92,6 +92,7 @@ toggleprompt_offset_right = 35
 # List of directories, relative to source directory, that shouldn't be searched
 # for source files.
 exclude_trees = []
+exclude_patterns = ["_build", "_templates"]
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
 # add_function_parentheses = True
@@ -176,7 +177,7 @@ latex_documents = [
     (
         "index",
         "pandas.tex",
-        "pyufunc: powerful Python utility function toolkit",
+        "pyufunc: Python utility function toolkit",
         "Xiangyong Luo and the pyufunc Development Team",
         "manual",
     )

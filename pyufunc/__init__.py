@@ -15,23 +15,19 @@ from .util_algorithm import *  # noqa: F403  # algorithm functions
 from .util_magic import *  # noqa: F403  # unclassified functions are here
 from .util_data_processing import *  # noqa: F403  # data processing functions including algorithms
 from .util_datetime import *  # noqa: F403  # datetime functions
-from .util_fullstack import *  # noqa: F403  # fullstack functions, including front end and back end
 from .util_geo import *  # noqa: F403  # geographic functions
 from .util_git_pypi import *  # noqa: F403  # git and pypi functions
-from .util_gui import *  # noqa: F403  # GUI functions
 from .util_img import *  # noqa: F403  # image functions
 from .util_log import *  # noqa: F403  # logging functions
 from .util_network import *  # noqa: F403  # network functions
 from .util_office import *  # noqa: F403  # office functions
-from .util_optimization import *  # noqa: F403  # optimization functions
 from .util_pathio import *  # noqa: F403  # path and IO functions
 from .util_test import *  # noqa: F403  # test functions
-from .util_vis import *  # noqa: F403  # visualization functions
 
 # import adopted functions from other packages
 from .util_pkgs import *  # noqa: F403
 
-__version__ = "0.4.5"
+__version__ = "0.5.1"
 __author__ = "Mr. Xiangyong Luo, Dr. Xuesong Simon Zhou"
 __email__ = "luoxiangyong01@gmail.com"
 
@@ -68,18 +64,14 @@ def show_util_func_by_category(verbose: bool = True) -> dict:
         util_magic,
         util_data_processing,
         util_datetime,
-        util_fullstack,
         util_geo,
         util_git_pypi,
-        util_gui,
         util_img,
         util_log,
         util_network,
         util_office,
-        util_optimization,
         util_pathio,
         util_test,
-        util_vis,
         util_pkgs,
     )
 
@@ -89,18 +81,14 @@ def show_util_func_by_category(verbose: bool = True) -> dict:
         "util_magic": util_magic.__all__,
         "util_data_processing": util_data_processing.__all__,
         "util_datetime": util_datetime.__all__,
-        "util_fullstack": util_fullstack.__all__,
         "util_geo": util_geo.__all__,
         "util_git_pypi": util_git_pypi.__all__,
-        "util_gui": util_gui.__all__,
         "util_img": util_img.__all__,
         "util_log": util_log.__all__,
         "util_network": util_network.__all__,
         "util_office": util_office.__all__,
-        "util_optimization": util_optimization.__all__,
         "util_pathio": util_pathio.__all__,
         "util_test": util_test.__all__,
-        "util_vis": util_vis.__all__,
         "util_pkgs": util_pkgs.__all__,
         "pkg_utils": ["show_util_func_by_category", "find_util_func_by_keyword"],
     }

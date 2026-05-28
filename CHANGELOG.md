@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file (v0.4.2~).
 
-The format is based on [**Keep a Changelog**](https://keepachangelog.com/en/1.0.0/), and this project adheres to [**Semantic Versioning**](**https://semver.org/spec/v2.0.0.html**).
+The format is based on [**Keep a Changelog**](https://keepachangelog.com/en/1.0.0/), and this project adheres to [**Semantic Versioning**](https://semver.org/spec/v2.0.0.html).
 
 This is the list of changes to pyufunc between each release. For full details, see the [**Commit Logs**](https://github.com/xyluo25/pyufunc/commits/).
 
@@ -10,13 +10,61 @@ This is the list of changes to pyufunc between each release. For full details, s
 
 Types of changes: ***Added**, **Changed**, **Deprecated**, **Removed**, **Fixed**, **Security***
 
+## [0.5.1] - 2026-05-28
+
+This release summarizes changes since `v0.4.5`.
+
+### Added
+
+- Add selected `util_pkgs` wrappers for `psutil`, `pyhelpers`, `pyutil`, `imutils`, `platformdirs`, `filelock`, `pathspec`, `more-itertools`, `humanize`, `tenacity`, `boltons`, `toolz`, `python-benedict`, and `loguru`.
+- Add package inspection helpers, including `pkg_public_func`, `pkg_dependents_func_usage`, and `save_dict_to_json`.
+- Add exploratory dependent-usage JSON datasets under `datasets/util_pkgs_dependents_func_usage`.
+- Add `THIRD_PARTY_LICENSES.md` and package metadata links for third-party license information.
+- Add `PACKAGE_CLAIMS.md` to document supported claims, evidence sources, claim boundaries, and tradeoffs.
+- Add ReadTheDocs API references for selected third-party wrappers and third-party license documentation.
+- Add a custom autosummary class template for generated class API pages.
+
 ### Changed
 
 - Keep optional dependency installation disabled by default in `import_package`; users must pass `auto_install=True` to run pip automatically.
+- Update `requires` so missing dependencies are reported without installing packages unless `auto_install=True` is explicitly passed.
+- Update README and documentation language to use objective, evidence-bounded claims instead of broad statements such as "widely used" or general performance improvement.
+- Update utility package review documentation with PyPI version badges, download badges, latest-commit badges, repository links, package licenses, and selected package metadata.
+- Update generated utility indexes for function categories and keyword search.
+- Update Ruff configuration to use Google-style docstring checks.
+- Update package metadata for version `0.5.1`, the revised project description, and third-party license file inclusion.
+
+### Removed
+
+- Remove obsolete public utility categories from package exports and documentation, including `util_dababase`, `util_fullstack`, `util_gui`, `util_optimization`, and `util_vis`.
+- Remove unused optional placeholder modules for AI, office, testing, visualization, and optimization helpers that are not part of the maintained public API.
 
 ### Fixed
 
 - Ensure `@requires(..., verbose=False)` still skips wrapped functions when required dependencies are missing.
+- Preserve wrapped function metadata in `requires` by using `functools.wraps`.
+- Fix ReadTheDocs autodoc and docutils warnings from generated `__init__` method pages, stale API references, and malformed docstring markup.
+- Fix stale `show_public_func` references by using `pkg_public_func`.
+- Fix documentation links and malformed MyST markup in release notes.
+- Expand tests for optional dependency handling, removed public packages, package inspection helpers, selected third-party wrappers, and existing utility behavior.
+
+### Security
+
+- Disable automatic installation of missing dependencies by default to avoid unexpected package installation in CI, offline, or security-sensitive environments.
+
+## [0.4.5] - 2026-05-26
+
+### Changed
+
+- Move package configuration from `cfg.py` to `__cfg.py` and update imports.
+- Continue standardizing utility function docstrings, formatting, and input validation.
+- Update utility modules across data processing, datetime, geo, GitHub/PyPI, image, magic, office, path/IO, and package-wrapper helpers.
+- Update project packaging files and dependency lock data for the release.
+
+### Fixed
+
+- Fix package import and utility discovery behavior after the configuration module rename.
+- Improve test coverage for core utilities, path/IO helpers, and list helper behavior.
 
 ## [0.4.3] - 2026-04-24
 

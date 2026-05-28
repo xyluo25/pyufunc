@@ -69,6 +69,7 @@ from pyufunc import (  # pylint: disable=wrong-import-position  # noqa: E402
     mean_squared_error,
     mean_squared_log_error,
     proj_point_to_line,
+    pkg_public_func,
     r2_score,
     requires,
     root_mean_squared_error,
@@ -293,11 +294,12 @@ def test_error_measurements_reject_non_iterables():
         r2_score(1, [1])
 
 
-def test_util_database_package_imports():
-    """Test util_dababase package imports and exports."""
-    import pyufunc.util_dababase as util_dababase  # pylint: disable=import-outside-toplevel
+def test_removed_database_package_is_not_public():
+    """Test deleted util_dababase package is not exposed as a public category."""
+    with pytest.raises(ModuleNotFoundError):
+        __import__("pyufunc.util_dababase")
 
-    assert util_dababase.__all__ == []
+    assert "util_dababase" not in show_util_func_by_category(verbose=False)
 
 
 def test_import_package_does_not_install_missing_dependency_by_default(
@@ -376,9 +378,12 @@ def test_requires_missing_dependency_skips_without_installing(monkeypatch: pytes
 
     @requires("pyufunc_missing_dependency_for_test", verbose=False)
     def guarded_function():
+        """Guarded function docstring."""
         call_log.append("called")
         return "called"
 
+    assert guarded_function.__doc__ == "Guarded function docstring."
+    assert guarded_function.__name__ == "guarded_function"
     assert guarded_function() is None
     assert call_log == []
 
@@ -395,6 +400,215 @@ def test_package_introspection_helpers(capsys: pytest.CaptureFixture[str]):
     assert "algo_quick_sort" in category_map["util_algorithm"]
 
     assert "algo_quick_sort" in find_util_func_by_keyword("quick", verbose=False)
+
+
+def test_pkg_public_func_from_installed_and_source_package(tmp_path: Path):
+    """Test public function discovery from installed packages and source trees."""
+    assert "img_to_bytes" in pkg_public_func("pyufunc.util_img")
+
+    package_dir = tmp_path / "demo_pkg"
+    package_dir.mkdir()
+    (package_dir / "__init__.py").write_text(
+        "\n".join(
+            [
+                "from .helpers import *",
+                "from .helpers import renamed as alias",
+                "__all__ = ['alias', 'public_func', 'star_func']",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    (package_dir / "helpers.py").write_text(
+        "\n".join(
+            [
+                "__all__ = ['public_func', 'star_func']",
+                "def public_func():",
+                "    return 'public'",
+                "def star_func():",
+                "    return 'star'",
+                "def renamed():",
+                "    return 'renamed'",
+                "def _private_func():",
+                "    return 'private'",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    from pyufunc.util_pkgs.__pkg_public_func import _get_public_functions_from_source_tree
+
+    assert _get_public_functions_from_source_tree(tmp_path, "demo_pkg") == ["alias", "public_func", "star_func"]
+
+
+def test_platformdirs_wrappers():
+    """Test platformdirs wrapper functions when the optional dependency exists."""
+    pytest.importorskip("platformdirs")
+    from pyufunc import (
+        get_user_cache_dir,
+        get_user_config_dir,
+        get_user_data_dir,
+        get_user_log_dir,
+    )
+
+    app_name = "pyufunc-test"
+    assert app_name in get_user_cache_dir(app_name)
+    assert app_name in get_user_config_dir(app_name)
+    assert app_name in get_user_data_dir(app_name)
+    assert app_name in get_user_log_dir(app_name)
+
+
+def test_filelock_wrappers(tmp_path: Path):
+    """Test filelock write helpers when the optional dependency exists."""
+    pytest.importorskip("filelock")
+    from pyufunc import (
+        safe_write_json_with_lock,
+        safe_write_pickle_with_lock,
+        safe_write_text_with_lock,
+        with_file_lock,
+    )
+
+    text_path = safe_write_text_with_lock(tmp_path / "note.txt", "hello")
+    assert text_path.read_text(encoding="utf-8") == "hello"
+
+    json_path = safe_write_json_with_lock(tmp_path / "data.json", {"ok": True}, sort_keys=True)
+    assert json_path.read_text(encoding="utf-8") == '{"ok": true}'
+
+    pickle_path = safe_write_pickle_with_lock(tmp_path / "data.pkl", {"ok": True})
+    assert pickle_path.read_bytes()
+
+    with with_file_lock(tmp_path / "manual.lock"):
+        assert True
+
+
+def test_pathspec_wrappers(tmp_path: Path):
+    """Test pathspec gitignore helpers when the optional dependency exists."""
+    pytest.importorskip("pathspec")
+    from pyufunc import (
+        collect_files_excluding_gitignore,
+        filter_paths_by_gitignore,
+        is_path_ignored,
+        load_gitignore_patterns,
+    )
+
+    (tmp_path / ".gitignore").write_text("build/\n*.pyc\n", encoding="utf-8")
+    (tmp_path / "keep.txt").write_text("keep", encoding="utf-8")
+    build_dir = tmp_path / "build"
+    build_dir.mkdir()
+    (build_dir / "skip.txt").write_text("skip", encoding="utf-8")
+
+    spec = load_gitignore_patterns(tmp_path / ".gitignore")
+    assert is_path_ignored(tmp_path / "build" / "skip.txt", spec, root=tmp_path)
+    assert filter_paths_by_gitignore([tmp_path / "keep.txt", build_dir / "skip.txt"], spec, root=tmp_path) == [
+        tmp_path / "keep.txt"
+    ]
+    assert tmp_path / "keep.txt" in collect_files_excluding_gitignore(tmp_path)
+
+
+def test_more_itertools_wrappers():
+    """Test more-itertools wrappers when the optional dependency exists."""
+    pytest.importorskip("more_itertools")
+    from pyufunc import iter_chunked, iter_flatten, iter_split_when, iter_unique, iter_windowed
+
+    assert list(iter_chunked([1, 2, 3], 2)) == [[1, 2], [3]]
+    assert list(iter_windowed([1, 2, 3], 2)) == [(1, 2), (2, 3)]
+    assert list(iter_unique([1, 1, 2])) == [1, 2]
+    assert list(iter_flatten([[1], [2, [3]]])) == [1, 2, 3]
+    assert list(iter_split_when([1, 2, 5], lambda left, right: right - left > 1)) == [[1, 2], [5]]
+
+
+def test_humanize_wrappers():
+    """Test humanize wrappers when the optional dependency exists."""
+    pytest.importorskip("humanize")
+    from pyufunc import human_file_size, human_intcomma, human_number, human_time_delta
+
+    assert "kB" in human_file_size(1536)
+    assert human_intcomma(1200000) == "1,200,000"
+    assert "million" in human_number(1200000)
+    assert human_time_delta(3600)
+
+
+def test_tenacity_wrappers():
+    """Test tenacity retry wrappers when the optional dependency exists."""
+    pytest.importorskip("tenacity")
+    from pyufunc import retry_call, retry_on_exception, retry_with_backoff
+
+    attempts = {"count": 0}
+
+    def flaky():
+        attempts["count"] += 1
+        if attempts["count"] < 2:
+            raise ValueError("try again")
+        return "ok"
+
+    assert retry_call(flaky, attempts=2, wait_seconds=0, retry_exceptions=ValueError) == "ok"
+    assert retry_with_backoff(lambda: "ok", attempts=1, min_seconds=0, max_seconds=0)() == "ok"
+    assert retry_on_exception(lambda: "ok", attempts=1, wait_seconds=0)() == "ok"
+
+
+def test_boltons_wrappers(tmp_path: Path):
+    """Test boltons wrappers when the optional dependency exists."""
+    pytest.importorskip("boltons")
+    from pyufunc import atomic_save_file, flatten_iterable, parse_timedelta_text, remap_nested_dict, slugify_text
+
+    assert remap_nested_dict({"a": {"b": 1}}) == {"a": {"b": 1}}
+    assert flatten_iterable([[1], [2, 3]]) == [1, 2, 3]
+    assert slugify_text("Hello World") == "hello_world"
+    assert parse_timedelta_text("1d 2h").days == 1
+
+    output_path = atomic_save_file(tmp_path / "atomic.txt", "hello")
+    assert output_path.read_text(encoding="utf-8") == "hello"
+
+
+def test_toolz_wrappers():
+    """Test toolz wrappers when the optional dependency exists."""
+    pytest.importorskip("toolz")
+    from pyufunc import (
+        toolz_count_frequencies,
+        toolz_groupby_key,
+        toolz_merge_dicts,
+        toolz_pipe_call,
+        toolz_sliding_window,
+    )
+
+    assert toolz_groupby_key(lambda value: value % 2, [1, 2, 3]) == {1: [1, 3], 0: [2]}
+    assert toolz_merge_dicts({"a": 1}, {"b": 2}) == {"a": 1, "b": 2}
+    assert list(toolz_sliding_window(2, [1, 2, 3])) == [(1, 2), (2, 3)]
+    assert toolz_pipe_call(2, lambda value: value + 1, lambda value: value * 2) == 6
+    assert toolz_count_frequencies(["a", "a", "b"]) == {"a": 2, "b": 1}
+
+
+def test_python_benedict_wrappers():
+    """Test python-benedict wrappers when the optional dependency exists."""
+    pytest.importorskip("benedict")
+    from pyufunc import dict_flatten, dict_get_by_path, dict_set_by_path, dict_to_json_safe, dict_unflatten
+
+    nested = {"a": {"b": 1}}
+    assert dict_get_by_path(nested, "a.b") == 1
+    assert dict_set_by_path({}, "a.b", 1) == nested
+    assert dict_flatten(nested) == {"a_b": 1}
+    assert dict_unflatten({"a_b": 1}) == nested
+    assert '"a"' in dict_to_json_safe(nested)
+
+
+def test_loguru_wrappers(tmp_path: Path):
+    """Test loguru wrappers when the optional dependency exists."""
+    pytest.importorskip("loguru")
+    from loguru import logger
+
+    from pyufunc import disable_logger, enable_logger, setup_file_logger, setup_simple_logger
+
+    stderr_handler_id = setup_simple_logger(level="INFO")
+    logger.remove(stderr_handler_id)
+
+    log_path = tmp_path / "app.log"
+    file_handler_id = setup_file_logger(log_path, level="INFO")
+    logger.info("hello from pyufunc")
+    logger.remove(file_handler_id)
+
+    assert log_path.exists()
+    assert "hello from pyufunc" in log_path.read_text(encoding="utf-8")
+    disable_logger("pyufunc-test")
+    enable_logger("pyufunc-test")
 
 
 def test_datetime_format_and_timezone_helpers():

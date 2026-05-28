@@ -31,49 +31,61 @@ _PYTHON_BUILTIN_FUNCTION_NAMES = {name for name in dir(builtins) if callable(get
 
 
 @requires("requests", ("beautifulsoup4", "bs4"), "tqdm")
-def pkg_dependents_func_usage(github_link: str, *, GITHUB_TOKEN: Optional[str] = None) -> Dict[str, List[str]]:
-    """
-    Collect public GitHub dependents of a repository and detect which functions
-    from the target package are used by each dependent.
+def pkg_dependents_func_usage(
+    github_link: str,
+    *,
+    GITHUB_TOKEN: Optional[str] = None,
+    package_name: str | None = None,
+    max_pages: int = 20,
+    max_dependents: int | None = None,
+    max_files: int = 300,
+    max_file_size: int = 300_000,
+    sleep_seconds: float = 1.0,
+) -> Dict[str, List[str]]:
+    """Collect dependent repositories and detect target package function usage.
 
     Args:
         github_link: URL of the target GitHub repository.
         GITHUB_TOKEN: Optional GitHub token for authenticated requests. Can also
             be set via the GITHUB_TOKEN environment variable.
+        package_name: Optional import package name override. Use this when the
+            repository or PyPI distribution name differs from the import name.
+        max_pages: Maximum number of GitHub dependents pages to scrape.
+        max_dependents: Optional maximum number of dependent repositories to scan.
+        max_files: Maximum number of Python files to inspect in each dependent repository.
+        max_file_size: Maximum Python file size, in bytes, to download and inspect.
+        sleep_seconds: Delay between GitHub dependents page requests.
 
-    Notes:
+    Note:
+        - Source package: ``pyufunc``.
+        - Source repository: https://github.com/xyluo25/pyufunc
+        - Source document: https://pyufunc.readthedocs.io/en/latest/
+        - Source license: MIT License.
         - This function relies on GitHub's web UI for dependents collection, which
           may be subject to change and rate limits. Use a token to increase the
           rate limit if you have many dependents.
-          unauthorized requests have very low rate limits (60 requests per hour)
+          Unauthorized requests have very low rate limits (60 requests per hour);
           authenticated requests can have much higher limits (up to 5000 requests per hour).
         - The function usage detection is based on static analysis of Python files
           in the dependent repositories. It may not be 100% accurate but should
           give a good indication of which functions are used.
         - This function targets Python packages and Python dependent repositories.
         - GitHub does not provide a stable official REST API for dependents, so
-            the dependents page is scraped.
+          the dependents page is scraped.
         - Set environment variable GITHUB_TOKEN for better rate limits:
-            Windows PowerShell:
-                $env:GITHUB_TOKEN="ghp_xxx"
-            Linux/macOS:
-                export GITHUB_TOKEN="ghp_xxx"
+          Windows PowerShell: ``$env:GITHUB_TOKEN="ghp_xxx"``.
+          Linux/macOS: ``export GITHUB_TOKEN="ghp_xxx"``.
         - For very popular packages, scanning all dependents can be slow.
 
     Example:
         >>> github_url = ""
-        >>> github_token = "" # Optional
+        >>> github_token = ""  # Optional
         >>> result = pkg_dependents_func_usage(github_url, GITHUB_TOKEN=github_token)
 
     Returns:
-        dict: A dictionary mapping each dependent repository (in "owner/repo" format)
-            to a list of function names from the target package that are used in that dependent.
-            If there was an error processing a dependent, the list will contain an error message. Dict[str, List[str]]:
-            {
-                "dependent_owner/dependent_repo": ["func_a", "module.func_b", ...],
-                ...
-            }
-
+        A dictionary mapping each dependent repository in ``"owner/repo"`` format
+        to function names detected from the target package. If a dependent
+        repository cannot be processed, its value contains an error message.
     """
     import requests
     from tqdm import tqdm
@@ -94,15 +106,17 @@ def pkg_dependents_func_usage(github_link: str, *, GITHUB_TOKEN: Optional[str] =
         session.headers.update({"Authorization": f"Bearer {token}"})
 
     owner, repo = _parse_github_repo(github_link)
-    package_name = _infer_python_package_name(session, owner, repo) or repo.replace("-", "_")
+    package_name = package_name or _infer_python_package_name(session, owner, repo) or repo.replace("-", "_")
 
     dependents = _collect_dependents_from_github_ui(
         session=session,
         owner=owner,
         repo=repo,
-        max_pages=20,
-        sleep_seconds=1.0,
+        max_pages=max_pages,
+        sleep_seconds=sleep_seconds,
     )
+    if max_dependents is not None:
+        dependents = dependents[:max_dependents]
 
     result: Dict[str, list[str]] = {}
 
@@ -114,8 +128,8 @@ def pkg_dependents_func_usage(github_link: str, *, GITHUB_TOKEN: Optional[str] =
                 session=session,
                 owner=dep_owner,
                 repo=dep_repo,
-                max_files=300,
-                max_file_size=300_000,
+                max_files=max_files,
+                max_file_size=max_file_size,
             )
 
             used_functions: list[str] = []
@@ -508,14 +522,24 @@ def _ast_attribute_to_string(node: ast.AST) -> Optional[str]:
 
 
 def save_dict_to_json(filename: str, data: Dict, *, output_dir: str = ".") -> None:
-    """
-    Save a dictionary to a JSON file with pretty formatting.
+    """Save a dictionary to a JSON file with pretty formatting.
 
     Args:
         filename (str): The name of the output JSON file.
         data (Dict): The dictionary to save.
         output_dir (str): The directory where the JSON file will be saved.
 
+    Note:
+        - Source package: ``pyufunc``.
+        - Source repository: https://github.com/xyluo25/pyufunc
+        - Source document: https://pyufunc.readthedocs.io/en/latest/
+        - Source license: MIT License.
+
+    Example:
+        >>> save_dict_to_json("usage", {"repo": ["func"]}, output_dir=".")  # doctest: +SKIP
+
+    Returns:
+        None: This function does not return a value.
     """
     import json
 

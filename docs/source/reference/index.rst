@@ -14,18 +14,14 @@ API reference
 .. - ``pyufunc.util_magic``: Magic unclassified utility functions.
 .. - ``pyufunc.util_data_processing``: Data processing utility functions.
 .. - ``pyufunc.util_datetime``: Date and time utility functions.
-.. - ``pyufunc.util_fullstack``: Fullstack utility functions.
 .. - ``pyufunc.util_geo``: Geospatial utility functions.
 .. - ``pyufunc.util_git_pypi``: GitHub and PyPI utility functions.
-.. - ``pyufunc.util_gui``: GUI utility functions.
 .. - ``pyufunc.util_img``: Image utility functions.
 .. - ``pyufunc.util_log``: Logging utility functions.
 .. - ``pyufunc.util_network``: Network utility functions.
 .. - ``pyufunc.util_office``: Office (word, excel, ppt) related utility functions.
-.. - ``pyufunc.util_optimization``: Optimization utility functions.
 .. - ``pyufunc.util_pathio``: Path related utility functions.
 .. - ``pyufunc.util_test``: Test utility functions.
-.. - ``pyufunc.util_vis``: Visualization utility functions.
 .. - ``pyufunc.cfg``: Package configurations.
 
 
@@ -48,9 +44,6 @@ API reference
    util_office
    util_ai
    util_algorithm
-   util_fullstack
-   util_gui
-   util_optimization
-   util_vis
    util_pkgs
+   third_party_licenses
    cfg

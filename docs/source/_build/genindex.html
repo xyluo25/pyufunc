@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -36,38 +36,45 @@
     <link rel="stylesheet" type="text/css" href="_static/css/pandas.css?v=b7db95b1" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
 
-    <script src="_static/documentation_options.js?v=b93bbcb9"></script>
+    <script src="_static/documentation_options.js?v=b9afe91b"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="icon" href="_static/pyufunc_logo_icon.ico"/>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.4.32" />
+  <meta name="docsearch:version" content="0.5.1" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -93,7 +100,7 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
   <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
@@ -188,11 +195,18 @@
       
         <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
       
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -205,8 +219,7 @@
           
           
           
-          <a href="https://github.com/xyluo25/pyufunc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">GitHub</span></a>
+          <a href="https://github.com/xyluo25/pyufunc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -217,8 +230,7 @@
           
           
           
-          <a href="https://www.linkedin.com/in/xiangyong-roy-luo/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">LinkedIn</span></a>
+          <a href="https://www.linkedin.com/in/xiangyong-roy-luo/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i><span class="visually-hidden">LinkedIn</span></a>
         </li>
 </ul></div>
       
@@ -310,11 +322,18 @@
         
           <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
         
           <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -327,8 +346,7 @@
           
           
           
-          <a href="https://github.com/xyluo25/pyufunc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">GitHub</span></a>
+          <a href="https://github.com/xyluo25/pyufunc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -339,8 +357,7 @@
           
           
           
-          <a href="https://www.linkedin.com/in/xiangyong-roy-luo/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">LinkedIn</span></a>
+          <a href="https://www.linkedin.com/in/xiangyong-roy-luo/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i><span class="visually-hidden">LinkedIn</span></a>
         </li>
 </ul></div>
         
@@ -386,13 +403,16 @@
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
+ | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  
@@ -408,10 +428,10 @@
 </li>
       <li><a href="reference/api/pyufunc.algo_bubble_sort.html#pyufunc.algo_bubble_sort">algo_bubble_sort() (in module pyufunc)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.algo_heap_sort.html#pyufunc.algo_heap_sort">algo_heap_sort() (in module pyufunc)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.algo_insertion_sort.html#pyufunc.algo_insertion_sort">algo_insertion_sort() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.algo_merge_sort.html#pyufunc.algo_merge_sort">algo_merge_sort() (in module pyufunc)</a>
@@ -419,6 +439,10 @@
       <li><a href="reference/api/pyufunc.algo_quick_sort.html#pyufunc.algo_quick_sort">algo_quick_sort() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.algo_selection_sort.html#pyufunc.algo_selection_sort">algo_selection_sort() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.atomic_save_file.html#pyufunc.atomic_save_file">atomic_save_file() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.auto_canny.html#pyufunc.auto_canny">auto_canny() (in module pyufunc)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -432,6 +456,8 @@
 </li>
       <li><a href="reference/api/pyufunc.calc_distance_on_unit_sphere.html#pyufunc.calc_distance_on_unit_sphere">calc_distance_on_unit_sphere() (in module pyufunc)</a>
 </li>
+      <li><a href="reference/api/pyufunc.cd.html#pyufunc.cd">cd() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.check_file_existence.html#pyufunc.check_file_existence">check_file_existence() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.check_filename.html#pyufunc.check_filename">check_filename() (in module pyufunc)</a>
@@ -440,16 +466,20 @@
 </li>
       <li><a href="reference/api/pyufunc.check_platform.html#pyufunc.check_platform">check_platform() (in module pyufunc)</a>
 </li>
+      <li><a href="reference/api/pyufunc.collect_files_excluding_gitignore.html#pyufunc.collect_files_excluding_gitignore">collect_files_excluding_gitignore() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.confirmed.html#pyufunc.confirmed">confirmed() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.count_lines_of_code.html#pyufunc.count_lines_of_code">count_lines_of_code() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.cpu_count.html#pyufunc.cpu_count">cpu_count() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.cpu_percent.html#pyufunc.cpu_percent">cpu_percent() (in module pyufunc)</a>
 </li>
-      <li><a href="reference/api/pyufunc.cpu_times.html#pyufunc.cpu_times">cpu_times() (in module pyufunc)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.cpu_times.html#pyufunc.cpu_times">cpu_times() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.create_circle_at_point_with_radius.html#pyufunc.create_circle_at_point_with_radius">create_circle_at_point_with_radius() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.create_tempfile.html#pyufunc.create_tempfile">create_tempfile() (in module pyufunc)</a>
@@ -488,13 +518,25 @@
 </li>
       <li><a href="reference/api/pyufunc.dataclass_from_dict.html#pyufunc.dataclass_from_dict">dataclass_from_dict() (in module pyufunc)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.dataclass_merge.html#pyufunc.dataclass_merge">dataclass_merge() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.dict_delete_keys.html#pyufunc.dict_delete_keys">dict_delete_keys() (in module pyufunc)</a>
 </li>
+      <li><a href="reference/api/pyufunc.dict_flatten.html#pyufunc.dict_flatten">dict_flatten() (in module pyufunc)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.dict_get_by_path.html#pyufunc.dict_get_by_path">dict_get_by_path() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.dict_set_by_path.html#pyufunc.dict_set_by_path">dict_set_by_path() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.dict_split_by_chunk.html#pyufunc.dict_split_by_chunk">dict_split_by_chunk() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.dict_to_json_safe.html#pyufunc.dict_to_json_safe">dict_to_json_safe() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.dict_unflatten.html#pyufunc.dict_unflatten">dict_unflatten() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.disable_logger.html#pyufunc.disable_logger">disable_logger() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.disk_usage.html#pyufunc.disk_usage">disk_usage() (in module pyufunc)</a>
 </li>
@@ -506,10 +548,12 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/api/pyufunc.end_of_life.html#pyufunc.end_of_life">end_of_life() (in module pyufunc)</a>
+      <li><a href="reference/api/pyufunc.enable_logger.html#pyufunc.enable_logger">enable_logger() (in module pyufunc)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.end_of_life.html#pyufunc.end_of_life">end_of_life() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.extract_bbox_coordinates.html#pyufunc.extract_bbox_coordinates">extract_bbox_coordinates() (in module pyufunc)</a>
 </li>
   </ul></td>
@@ -518,9 +562,13 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.fake_requests_headers.html#pyufunc.fake_requests_headers">fake_requests_headers() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.file_delete.html#pyufunc.file_delete">file_delete() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.file_remove.html#pyufunc.file_remove">file_remove() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.filter_paths_by_gitignore.html#pyufunc.filter_paths_by_gitignore">filter_paths_by_gitignore() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.find_closest_point.html#pyufunc.find_closest_point">find_closest_point() (in module pyufunc)</a>
 </li>
@@ -534,7 +582,11 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.find_k_nearest_points.html#pyufunc.find_k_nearest_points">find_k_nearest_points() (in module pyufunc)</a>
 </li>
+      <li><a href="reference/api/pyufunc.find_similar_str.html#pyufunc.find_similar_str">find_similar_str() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.find_util_func_by_keyword.html#pyufunc.find_util_func_by_keyword">find_util_func_by_keyword() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.flatten_iterable.html#pyufunc.flatten_iterable">flatten_iterable() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.fmt_dt_to_str.html#pyufunc.fmt_dt_to_str">fmt_dt_to_str() (in module pyufunc)</a>
 </li>
@@ -584,13 +636,21 @@
 </li>
       <li><a href="reference/api/pyufunc.get_timezone.html#pyufunc.get_timezone">get_timezone() (in module pyufunc)</a>
 </li>
-      <li><a href="reference/api/pyufunc.get_user_defined_func.html#pyufunc.get_user_defined_func">get_user_defined_func() (in module pyufunc)</a>
+      <li><a href="reference/api/pyufunc.get_user_cache_dir.html#pyufunc.get_user_cache_dir">get_user_cache_dir() (in module pyufunc)</a>
 </li>
-      <li><a href="reference/api/pyufunc.get_user_defined_module.html#pyufunc.get_user_defined_module">get_user_defined_module() (in module pyufunc)</a>
+      <li><a href="reference/api/pyufunc.get_user_config_dir.html#pyufunc.get_user_config_dir">get_user_config_dir() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.get_user_data_dir.html#pyufunc.get_user_data_dir">get_user_data_dir() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.get_user_defined_func.html#pyufunc.get_user_defined_func">get_user_defined_func() (in module pyufunc)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.get_user_defined_module.html#pyufunc.get_user_defined_module">get_user_defined_module() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.get_user_imported_module.html#pyufunc.get_user_imported_module">get_user_imported_module() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.get_user_log_dir.html#pyufunc.get_user_log_dir">get_user_log_dir() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.github_file_downloader.html#pyufunc.github_file_downloader">github_file_downloader() (in module pyufunc)</a>
 </li>
@@ -598,13 +658,13 @@
 </li>
       <li><a href="reference/api/pyufunc.github_private_file_downloader.html#pyufunc.github_private_file_downloader">github_private_file_downloader() (in module pyufunc)</a>
 </li>
-      <li><a href="reference/api/pyufunc.gmns_Agent.html#pyufunc.gmns_Agent">gmns_Agent (in module pyufunc)</a>
+      <li><a href="reference/api/pyufunc.gmns_Agent.html#pyufunc.gmns_Agent">gmns_Agent (class in pyufunc)</a>
 </li>
-      <li><a href="reference/api/pyufunc.gmns_Link.html#pyufunc.gmns_Link">gmns_Link (in module pyufunc)</a>
+      <li><a href="reference/api/pyufunc.gmns_Link.html#pyufunc.gmns_Link">gmns_Link (class in pyufunc)</a>
 </li>
-      <li><a href="reference/api/pyufunc.gmns_Node.html#pyufunc.gmns_Node">gmns_Node (in module pyufunc)</a>
+      <li><a href="reference/api/pyufunc.gmns_Node.html#pyufunc.gmns_Node">gmns_Node (class in pyufunc)</a>
 </li>
-      <li><a href="reference/api/pyufunc.gmns_POI.html#pyufunc.gmns_POI">gmns_POI (in module pyufunc)</a>
+      <li><a href="reference/api/pyufunc.gmns_POI.html#pyufunc.gmns_POI">gmns_POI (class in pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.gmns_read_link.html#pyufunc.gmns_read_link">gmns_read_link() (in module pyufunc)</a>
 </li>
@@ -614,7 +674,9 @@
 </li>
       <li><a href="reference/api/pyufunc.gmns_read_zone.html#pyufunc.gmns_read_zone">gmns_read_zone() (in module pyufunc)</a>
 </li>
-      <li><a href="reference/api/pyufunc.gmns_Zone.html#pyufunc.gmns_Zone">gmns_Zone (in module pyufunc)</a>
+      <li><a href="reference/api/pyufunc.gmns_Zone.html#pyufunc.gmns_Zone">gmns_Zone (class in pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.grab_contours.html#pyufunc.grab_contours">grab_contours() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.group_dt_daily.html#pyufunc.group_dt_daily">group_dt_daily() (in module pyufunc)</a>
 </li>
@@ -627,6 +689,22 @@
       <li><a href="reference/api/pyufunc.group_dt_weekly.html#pyufunc.group_dt_weekly">group_dt_weekly() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.group_dt_yearly.html#pyufunc.group_dt_yearly">group_dt_yearly() (in module pyufunc)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.human_file_size.html#pyufunc.human_file_size">human_file_size() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.human_intcomma.html#pyufunc.human_intcomma">human_intcomma() (in module pyufunc)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.human_number.html#pyufunc.human_number">human_number() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.human_time_delta.html#pyufunc.human_time_delta">human_time_delta() (in module pyufunc)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -656,11 +734,17 @@
 </li>
       <li><a href="reference/api/pyufunc.img_to_bytes.html#pyufunc.img_to_bytes">img_to_bytes() (in module pyufunc)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.img_translate.html#pyufunc.img_translate">img_translate() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.import_package.html#pyufunc.import_package">import_package() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.is_cv2.html#pyufunc.is_cv2">is_cv2() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.is_cv3.html#pyufunc.is_cv3">is_cv3() (in module pyufunc)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.is_cv4.html#pyufunc.is_cv4">is_cv4() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.is_CV_img.html#pyufunc.is_CV_img">is_CV_img() (in module pyufunc)</a>
 </li>
@@ -672,6 +756,8 @@
 </li>
       <li><a href="reference/api/pyufunc.is_module_importable.html#pyufunc.is_module_importable">is_module_importable() (in module pyufunc)</a>
 </li>
+      <li><a href="reference/api/pyufunc.is_path_ignored.html#pyufunc.is_path_ignored">is_path_ignored() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.is_PIL_img.html#pyufunc.is_PIL_img">is_PIL_img() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.is_user_defined_func.html#pyufunc.is_user_defined_func">is_user_defined_func() (in module pyufunc)</a>
@@ -679,6 +765,16 @@
       <li><a href="reference/api/pyufunc.is_valid_email.html#pyufunc.is_valid_email">is_valid_email() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.is_windows.html#pyufunc.is_windows">is_windows() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.iter_chunked.html#pyufunc.iter_chunked">iter_chunked() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.iter_flatten.html#pyufunc.iter_flatten">iter_flatten() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.iter_split_when.html#pyufunc.iter_split_when">iter_split_when() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.iter_unique.html#pyufunc.iter_unique">iter_unique() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.iter_windowed.html#pyufunc.iter_windowed">iter_windowed() (in module pyufunc)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -690,13 +786,19 @@
 </li>
       <li><a href="reference/api/pyufunc.list_flatten_nested.html#pyufunc.list_flatten_nested">list_flatten_nested() (in module pyufunc)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.list_split_by_equal_sublist.html#pyufunc.list_split_by_equal_sublist">list_split_by_equal_sublist() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.list_split_by_fixed_length.html#pyufunc.list_split_by_fixed_length">list_split_by_fixed_length() (in module pyufunc)</a>
 </li>
-      <li><a href="reference/api/pyufunc.log_logger.html#pyufunc.log_logger">log_logger() (in module pyufunc)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.load_data.html#pyufunc.load_data">load_data() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.load_gitignore_patterns.html#pyufunc.load_gitignore_patterns">load_gitignore_patterns() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.load_pickle.html#pyufunc.load_pickle">load_pickle() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.log_ceil.html#pyufunc.log_ceil">log_ceil() (in module pyufunc)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -710,11 +812,13 @@
 </li>
       <li><a href="reference/api/pyufunc.mean_percentage_error.html#pyufunc.mean_percentage_error">mean_percentage_error() (in module pyufunc)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.mean_squared_error.html#pyufunc.mean_squared_error">mean_squared_error() (in module pyufunc)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.mean_squared_log_error.html#pyufunc.mean_squared_log_error">mean_squared_log_error() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.merge_dicts.html#pyufunc.merge_dicts">merge_dicts() (in module pyufunc)</a>
 </li>
       <li>
     module
@@ -726,9 +830,25 @@
   </ul></td>
 </tr></table>
 
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.opencv2matplotlib.html#pyufunc.opencv2matplotlib">opencv2matplotlib() (in module pyufunc)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.osgb36_to_wgs84.html#pyufunc.osgb36_to_wgs84">osgb36_to_wgs84() (in module pyufunc)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.pad_size.html#pyufunc.pad_size">pad_size() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.parse_timedelta_text.html#pyufunc.parse_timedelta_text">parse_timedelta_text() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.path2linux.html#pyufunc.path2linux">path2linux() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.path2uniform.html#pyufunc.path2uniform">path2uniform() (in module pyufunc)</a>
@@ -737,16 +857,22 @@
 </li>
       <li><a href="reference/api/pyufunc.pickle_save.html#pyufunc.pickle_save">pickle_save() (in module pyufunc)</a>
 </li>
+      <li><a href="reference/api/pyufunc.pkg_dependents_func_usage.html#pyufunc.pkg_dependents_func_usage">pkg_dependents_func_usage() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.pkg_public_func.html#pyufunc.pkg_public_func">pkg_public_func() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.precondition.html#pyufunc.precondition">precondition() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.printer_file.html#pyufunc.printer_file">printer_file() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.proj_point_to_line.html#pyufunc.proj_point_to_line">proj_point_to_line() (in module pyufunc)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.pypi_downloads.html#pyufunc.pypi_downloads">pypi_downloads() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.pytest_show_assert.html#pyufunc.pytest_show_assert">pytest_show_assert() (in module pyufunc)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.pytest_show_database.html#pyufunc.pytest_show_database">pytest_show_database() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.pytest_show_fixture.html#pyufunc.pytest_show_fixture">pytest_show_fixture() (in module pyufunc)</a>
@@ -776,13 +902,31 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.r2_score.html#pyufunc.r2_score">r2_score() (in module pyufunc)</a>
 </li>
+      <li><a href="reference/api/pyufunc.remap_nested_dict.html#pyufunc.remap_nested_dict">remap_nested_dict() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.remove_duplicate_files.html#pyufunc.remove_duplicate_files">remove_duplicate_files() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.remove_punctuation.html#pyufunc.remove_punctuation">remove_punctuation() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.requires.html#pyufunc.requires">requires() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.resize.html#pyufunc.resize">resize() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.resolve_dir.html#pyufunc.resolve_dir">resolve_dir() (in module pyufunc)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/api/pyufunc.requires.html#pyufunc.requires">requires() (in module pyufunc)</a>
+      <li><a href="reference/api/pyufunc.retry_call.html#pyufunc.retry_call">retry_call() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.retry_on_exception.html#pyufunc.retry_on_exception">retry_on_exception() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.retry_with_backoff.html#pyufunc.retry_with_backoff">retry_with_backoff() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.root_mean_squared_error.html#pyufunc.root_mean_squared_error">root_mean_squared_error() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.rotate.html#pyufunc.rotate">rotate() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.rotate_bound.html#pyufunc.rotate_bound">rotate_bound() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.run_parallel.html#pyufunc.run_parallel">run_parallel() (in module pyufunc)</a>
 </li>
@@ -792,6 +936,18 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.safe_write_json_with_lock.html#pyufunc.safe_write_json_with_lock">safe_write_json_with_lock() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.safe_write_pickle_with_lock.html#pyufunc.safe_write_pickle_with_lock">safe_write_pickle_with_lock() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.safe_write_text_with_lock.html#pyufunc.safe_write_text_with_lock">safe_write_text_with_lock() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.save_data.html#pyufunc.save_data">save_data() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.save_dict_to_json.html#pyufunc.save_dict_to_json">save_dict_to_json() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.save_pickle.html#pyufunc.save_pickle">save_pickle() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.send_email.html#pyufunc.send_email">send_email() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.sensor_battery.html#pyufunc.sensor_battery">sensor_battery() (in module pyufunc)</a>
@@ -800,14 +956,18 @@
 </li>
       <li><a href="reference/api/pyufunc.sensor_temperatures.html#pyufunc.sensor_temperatures">sensor_temperatures() (in module pyufunc)</a>
 </li>
+      <li><a href="reference/api/pyufunc.setup_file_logger.html#pyufunc.setup_file_logger">setup_file_logger() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.setup_simple_logger.html#pyufunc.setup_simple_logger">setup_simple_logger() (in module pyufunc)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.show_dir_in_tree.html#pyufunc.show_dir_in_tree">show_dir_in_tree() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.show_docstring_google.html#pyufunc.show_docstring_google">show_docstring_google() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.show_docstring_headers.html#pyufunc.show_docstring_headers">show_docstring_headers() (in module pyufunc)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.show_docstring_numpy.html#pyufunc.show_docstring_numpy">show_docstring_numpy() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.show_util_func_by_category.html#pyufunc.show_util_func_by_category">show_util_func_by_category() (in module pyufunc)</a>
@@ -815,6 +975,10 @@
       <li><a href="reference/api/pyufunc.size_of_dir.html#pyufunc.size_of_dir">size_of_dir() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.size_of_file.html#pyufunc.size_of_file">size_of_file() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.skeletonize.html#pyufunc.skeletonize">skeletonize() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.slugify_text.html#pyufunc.slugify_text">slugify_text() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.str_digit_to_float.html#pyufunc.str_digit_to_float">str_digit_to_float() (in module pyufunc)</a>
 </li>
@@ -836,13 +1000,37 @@
 </li>
       <li><a href="reference/api/pyufunc.time_str_to_seconds.html#pyufunc.time_str_to_seconds">time_str_to_seconds() (in module pyufunc)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.time_unit_converter.html#pyufunc.time_unit_converter">time_unit_converter() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.timeout.html#pyufunc.timeout">timeout() (in module pyufunc)</a>
 </li>
       <li><a href="reference/api/pyufunc.timeout_linux.html#pyufunc.timeout_linux">timeout_linux() (in module pyufunc)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.toolz_count_frequencies.html#pyufunc.toolz_count_frequencies">toolz_count_frequencies() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.toolz_groupby_key.html#pyufunc.toolz_groupby_key">toolz_groupby_key() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.toolz_merge_dicts.html#pyufunc.toolz_merge_dicts">toolz_merge_dicts() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.toolz_pipe_call.html#pyufunc.toolz_pipe_call">toolz_pipe_call() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.toolz_sliding_window.html#pyufunc.toolz_sliding_window">toolz_sliding_window() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.translate.html#pyufunc.translate">translate() (in module pyufunc)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.update_dict_keys.html#pyufunc.update_dict_keys">update_dict_keys() (in module pyufunc)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.url_to_image.html#pyufunc.url_to_image">url_to_image() (in module pyufunc)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -854,6 +1042,8 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.Version.html#pyufunc.Version">Version() (in module pyufunc)</a>
+</li>
       <li><a href="reference/api/pyufunc.virtual_memory.html#pyufunc.virtual_memory">virtual_memory() (in module pyufunc)</a>
 </li>
   </ul></td>
@@ -862,7 +1052,13 @@
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/pyufunc.wgs84_to_osgb36.html#pyufunc.wgs84_to_osgb36">wgs84_to_osgb36() (in module pyufunc)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/pyufunc.with_argparse.html#pyufunc.with_argparse">with_argparse() (in module pyufunc)</a>
+</li>
+      <li><a href="reference/api/pyufunc.with_file_lock.html#pyufunc.with_file_lock">with_file_lock() (in module pyufunc)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -896,8 +1092,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">

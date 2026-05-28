@@ -8,7 +8,7 @@
 pyufunc documentation
 *********************
 
-**A set of utility functions that keep Python sweet**
+**A categorized collection of Python utility functions**
 
 **Date**: |today| **Version**: |version|
 
@@ -20,9 +20,10 @@ pyufunc documentation
 `Source Repository <https://github.com/xyluo25/pyufunc>`__ |
 `Issues & Ideas <https://github.com/xyluo25/pyufunc/issues>`__ |
 
-:mod:`pyufunc` is an open source, MIT-licensed library providing high-performance,
-easy-to-use utility function tools for the `Python <https://www.python.org/>`__
-programming language.
+:mod:`pyufunc` is an open source, MIT-licensed library that provides categorized
+utility functions for the `Python <https://www.python.org/>`__ programming
+language. The package includes general helpers and selected wrappers around
+third-party utility packages.
 
 .. grid:: 1 2 2 2
     :gutter: 4

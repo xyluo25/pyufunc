@@ -1,0 +1,5 @@
+{
+    "alphavector/all": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ]
+}

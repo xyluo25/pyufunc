@@ -7,6 +7,7 @@
 
 from __future__ import absolute_import
 from collections.abc import Callable
+from functools import wraps
 from typing import Any, TypeVar, cast
 
 from pyufunc.util_magic._import_package import is_module_importable, import_package
@@ -16,52 +17,34 @@ F = TypeVar("F", bound=Callable[..., Any])
 
 # decorator with extra arguments
 def requires(*args, **kwargs) -> Callable[[F], F]:
-    """
-    Wrap a function with extra dependency checks.
+    """Wrap a function with extra dependency checks.
 
     If the dependencies are not available, the function will not run.
 
     Args:
-        args: the required dependencies to run the function.
-            - if argument is a string, indicate the module and import are the same.
-            - if argument is a tuple or list with two elements, the:
-                first element is the module name, for pip or conda installation;
-                second element is the import name, for import the module;
-
-        kwargs: the optional arguments, including verbose and auto_install:
-
-            - verbose (bool): print out the processing message. Defaults to True.
-
-            - auto_install (bool): install the missing dependencies automatically. Defaults to False.
+        *args: Required dependency specifications. Each value can be a package
+            name string, or a two-item tuple/list of
+            ``(install_name, import_name)`` when the installation name differs
+            from the import name.
+        **kwargs: Optional decorator settings. Supported keys are ``verbose``
+            for printing dependency messages and ``auto_install`` for explicitly
+            installing missing packages. ``verbose`` defaults to ``True`` and
+            ``auto_install`` defaults to ``False``.
 
     Notes:
-        - user can parse the verbose and auto_install options to control the behavior of the decorator.
-        - verbose: print the error message if the dependencies are not available. Default is True.
-        - auto_install: install the missing dependencies automatically. Default is False.
-            - eg: @requires("numpy", "pandas", verbose=False)
-            - eg: @requires("numpy", "pandas", verbose=True, auto_install=True)
-            - eg: @requires("numpy", "pandas", verbose=False, auto_install=True)
-            - eg: @requires(("pillow", "PIL"), "pandas", verbose=True, auto_install=True)
+        Missing dependencies are reported and the wrapped function is skipped.
+        Dependencies are installed only when ``auto_install=True`` is passed
+        explicitly.
 
     Examples:
-        >>> # Example 1: the function will not run if the dependencies are not available
-        >>> @requires("numpy", "pandas", "unknown_module", verbose=True, auto_install=False)
-        >>> def my_function():
-        >>>     return "I'm running!"
+        >>> @requires("numpy", "pandas", verbose=False)
+        ... def my_function():
+        ...     return "I'm running!"
         >>> my_function()
-        >>> Error: missing dependencies: ['numpy', 'pandas'], please install them first.
-        >>> not running the function: my_function
-
-        >>> # Example 2: the function will run if the dependencies are available
-        >>> @requires("numpy", "pandas", verbose=True, auto_install=True)
-        >>> def my_function():
-        >>>    return "I'm running!"
-        >>> my_function()
-        >>> "I'm running!"
+        "I'm running!"
 
     Returns:
-        object: the decorated function.
-
+        The decorated function wrapper.
     """
     # get the verbose option, default is True
     # the verbose option is used to print the error message
@@ -108,6 +91,7 @@ def requires(*args, **kwargs) -> Callable[[F], F]:
             if all(available):
                 return function
 
+        @wraps(function)
         def passer(*args, **kwargs):
             if verbose:
                 print(

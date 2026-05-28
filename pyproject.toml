@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyufunc"
-version = "0.4.5"
-description = "pyufunc consolidates frequently used utility functions into one cohesive package"
+version = "0.5.1"
+description = "pyufunc provides categorized utility functions in one package"
 authors = [
     {name = "Xiangyong Luo", email = "luoxiangyong01@gmail.com"},
     {name = "Xuesong Simon Zhou", email = "xzhou74@asu.com"},
@@ -33,12 +33,13 @@ keywords = ["pyufunc", "utility functions", "utility-library", "python-utilities
 
 dynamic = ["dependencies"]
 
-license-files=["LICENSE"]
+license-files=["LICENSE", "THIRD_PARTY_LICENSES.md"]
 
 [project.urls]
 "Homepage" = 'https://github.com/xyluo25/pyufunc'
 'Bug Tracker' = 'https://github.com/xyluo25/pyufunc/issues'
 'License' = 'https://github.com/xyluo25/pyufunc/blob/main/LICENSE'
+'Third-party Licenses' = 'https://github.com/xyluo25/pyufunc/blob/main/THIRD_PARTY_LICENSES.md'
 'Contact' = 'https://github.com/xyluo25'
 
 # Documentation = 'https://github.com/xyluo25/grid2demand'
@@ -61,12 +62,6 @@ py-modules = []
 
 [tool.setuptools.package-data]
 pyufunc = ['**/*.txt', '*.xls', '*.xlsx', '*.csv', '*.json', '**/*.json']
-
-[[tool.uv.index]]
-name = "testpypi"
-url = "https://test.pypi.org/simple/"
-publish-url = "https://test.pypi.org/legacy/"
-explicit = true
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -207,3 +202,10 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["pyufunc"]
+
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true

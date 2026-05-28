@@ -1,0 +1,82 @@
+{
+    "neuralmagic/tokenspeed": [
+        "virtual_memory",
+        "Process",
+        "Process"
+    ],
+    "Monster-Spawned-Studios/ComfyUI-MSS-Login": [],
+    "lsmc-bio/daylily-ursa": [],
+    "xinetzone/tao": [
+        "virtual_memory"
+    ],
+    "hadriansecurity/airbyte-connectors-fork": [],
+    "Ajou-Ajna/SmartAD": [
+        "cpu_percent"
+    ],
+    "open-telemetry/sig-profiling": [],
+    "cddlab/alphafold3_tools": [],
+    "drguilhermepacker/RuView": [
+        "sensors_temperatures",
+        "Process",
+        "disk_usage",
+        "cpu_count",
+        "net_io_counters",
+        "cpu_percent",
+        "getloadavg",
+        "virtual_memory",
+        "os.uname",
+        "Process",
+        "disk_usage",
+        "cpu_count",
+        "boot_time",
+        "swap_memory",
+        "net_io_counters",
+        "cpu_percent",
+        "virtual_memory",
+        "cpu_percent",
+        "net_io_counters",
+        "disk_usage",
+        "virtual_memory",
+        "cpu_freq",
+        "disk_io_counters",
+        "disk_usage",
+        "cpu_count",
+        "swap_memory",
+        "net_io_counters",
+        "cpu_percent",
+        "virtual_memory"
+    ],
+    "YongbinBaek/llm-from-scratch": [
+        "process_iter"
+    ],
+    "7rikazhexde/mkdocs-macros-utils": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "SINHASantos/salt": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "soloinovator/salt": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "anglerond/voxxy": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "InseeFrLab/ssphub": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "tahiri-lab/ClonalTreeClustering": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "reemHasan/model_scoring_credit": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "Spencerx/salt": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "HermesNdjeng/project_ai_health": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ],
+    "vandeplaslab/image2image-reg": [
+        "__ERROR__: RuntimeError: GitHub returned 403. You may be rate limited. Set GITHUB_TOKEN to increase the rate limit."
+    ]
+}

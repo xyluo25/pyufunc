@@ -1,0 +1,5 @@
+{
+    "__ERROR__": [
+        "RuntimeError: GitHub returned 404 for: https://github.com/linjonh/pripy-utils/network/dependents"
+    ]
+}

@@ -10,7 +10,7 @@ pyufunc documentation
 
 **Date**: |today| **Version**: |version|
 
-**Previous versions**: Documentation of previous pandas versions is available at
+**Previous versions**: Documentation of previous pyufunc versions is available at
 `pyufunc <https://github.com/xyluo25/pyufunc/>`__.
 
 **Useful links**:
@@ -18,9 +18,10 @@ pyufunc documentation
 `Source Repository <https://github.com/xyluo25/pyufunc>`__ |
 `Issues & Ideas <https://github.com/xyluo25/pyufunc/issues>`__ |
 
-:mod:`pyufunc` is an open source, MIT-licensed library providing high-performance,
-easy-to-use utility function tools for the `Python <https://www.python.org/>`__
-programming language.
+:mod:`pyufunc` is an open source, MIT-licensed library that provides categorized
+utility functions for the `Python <https://www.python.org/>`__ programming
+language. The package includes general helpers and selected wrappers around
+third-party utility packages.
 
 {% if not single_doc or single_doc == "index.rst" -%}
 .. grid:: 1 2 2 2
@@ -46,23 +47,23 @@ programming language.
 
             To getting started guides
 
-    .. grid-item-card::  User guide
-        :img-top: _static/index_user_guide.svg
+    .. grid-item-card::  Release notes
+        :img-top: _static/index_release_notes.svg
         :class-card: intro-card
         :shadow: md
 
-        The user guide provides in-depth information on the
-        key concepts of pyufunc with useful background information and explanation.
+        The release notes describe changes in each pyufunc release. Check them
+        when updating pyufunc to a new version.
 
         +++
 
-        .. button-ref:: user_guide
+        .. button-ref:: release
             :ref-type: ref
             :click-parent:
             :color: secondary
             :expand:
 
-            To user guide
+            To release notes
 
     .. grid-item-card::  API reference
         :img-top: _static/index_api.svg
@@ -129,12 +130,11 @@ programming language.
 {% endif %}
 {% if not single_doc %}
     getting_started/index
-    user_guide/index
     {% endif -%}
     {% if include_api -%}
     reference/index
     {% endif -%}
     {% if not single_doc -%}
     development/index
-    whatsnew/index
+    release_notes/index
 {% endif %}
